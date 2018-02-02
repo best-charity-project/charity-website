@@ -1,0 +1,10 @@
+.footer{
+    background-color: #A4A4A4;
+    display: flex;
+    flex-direction: column;
+    }
+.logo{
+        background-image: url("logo.jpg");
+        height: 5em;
+        background-repeat: no-repeat;
+    }
