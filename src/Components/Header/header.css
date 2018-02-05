@@ -5,21 +5,3 @@
 .top_img{
     display: flex;
 }
- /* @media (max-width: 850px){
-    .header{     
-        flex-direction: column;
-    }
-    .header-left{
-        width: 100vw;
-        height: 45vh;
-    }
-    .header-right{
-        width: 100vw;
-        height: 45vh;
-    }
-}
-@media (max-height: 650px){
-    .header{     
-        flex-direction: column;
-    }
-}*/
