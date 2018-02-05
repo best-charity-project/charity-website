@@ -4,9 +4,6 @@
     flex-direction: column;
     position: relative;
     top: 6vh;
-    }
-.logo{
-        background-image: url("logo.jpg");
-        height: 5em;
-        background-repeat: no-repeat;
+    padding: 1em;
+    text-align: justify;
     }

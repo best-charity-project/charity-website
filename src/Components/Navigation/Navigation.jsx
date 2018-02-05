@@ -23,14 +23,14 @@ class Navigation extends React.Component {
                 <Link to="/" className="ham-menu">Home</Link>
                 <Link to="/admin" className="ham-menu">Admin</Link>
                 <Link to="/about" className="ham-menu">About</Link>
-                <Link to="/news" className="ham-menu">News</Link>
+                <Link to="/news" className="ham-menu">News</Link> 
             </div>    
-                <ul className="nav-menu">
-                    <li className="nav-element"><Link to="/" className="link-menu">Home</Link></li>
-                    <li className="nav-element"><Link to="/admin" className="link-menu">Admin</Link></li>
-                    <li className="nav-element"><Link to="/about" className="link-menu">About</Link></li>
-                    <li className="nav-element"><Link to="/news" className="link-menu">News</Link></li>
-                </ul>
+            <div className="nav-menu">
+                <Link to="/" className="nav-element">Home</Link>
+                <Link to="/admin" className="nav-element">Admin</Link>
+                <Link to="/about" className="nav-element">About</Link>
+                <Link to="/news" className="nav-element">News</Link>
+            </div>  
             </nav>
         );
     }
