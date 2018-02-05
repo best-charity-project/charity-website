@@ -19,7 +19,7 @@
     margin-right: 1em;
 
 }
-a{
+.link-menu{
     color: rgb(51, 51, 51);
     border: 1px solid #ECEFF1;
     border-radius: 5px;
@@ -28,7 +28,7 @@ a{
     font-size: 2em;
     transition: .5s all ease;
 }
-a:hover{
+.link-menu:hover{
     color: aliceblue;
     transition: .3s all ease;
     background-color: #A4A4A4;
@@ -41,7 +41,7 @@ a:hover{
     display: none;
     flex-direction: column;
 }
-.gam-nemu{
+.ham-menu{
     display: block;
     position: relative;
     background-color: #ECEFF1;
@@ -52,10 +52,10 @@ a:hover{
     flex-direction: column;
     align-items: flex-end;
 }
-.nav-bar .gam-nemu{
+.nav-bar .ham-menu{
     display: none;
 }
-.gam-bar.nav-bar  .gam-nemu{
+.gam-bar.nav-bar  .ham-menu{
     display: block;
     width: 100vw;
     border-radius: 0;

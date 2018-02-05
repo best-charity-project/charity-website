@@ -17,19 +17,19 @@ class Navigation extends React.Component {
     };
     render() {
         return (
-            <nav className="nav">
+            <nav className="nav Navigation">
             <div onClick={this.toggleClass} className={this.state.active ? 'gam-bar nav-bar': 'nav-bar'}>
                 <img className="img-bar" src={require('../img/NavMenu.png')} />
-                <Link to="/" className="gam-nemu">Home</Link>
-                <Link to="/admin" className="gam-nemu">Admin</Link>
-                <Link to="/about" className="gam-nemu">About</Link>
-                <Link to="/news" className="gam-nemu">News</Link>
+                <Link to="/" className="ham-menu">Home</Link>
+                <Link to="/admin" className="ham-menu">Admin</Link>
+                <Link to="/about" className="ham-menu">About</Link>
+                <Link to="/news" className="ham-menu">News</Link>
             </div>    
                 <ul className="nav-menu">
-                    <li className="nav-element"><Link to="/" className="link-nemu">Home</Link></li>
-                    <li className="nav-element"><Link to="/admin" className="link-nemu">Admin</Link></li>
-                    <li className="nav-element"><Link to="/about" className="link-nemu">About</Link></li>
-                    <li className="nav-element"><Link to="/news" className="link-nemu">News</Link></li>
+                    <li className="nav-element"><Link to="/" className="link-menu">Home</Link></li>
+                    <li className="nav-element"><Link to="/admin" className="link-menu">Admin</Link></li>
+                    <li className="nav-element"><Link to="/about" className="link-menu">About</Link></li>
+                    <li className="nav-element"><Link to="/news" className="link-menu">News</Link></li>
                 </ul>
             </nav>
         );

@@ -5,11 +5,11 @@ import './header.css';
 class Header extends React.Component {
     render() {
         return (
-            <header>
+            <header  className="Header">
                 <Navigation />
-                <div className="top_img">
+                {/* <div className="top_img">
                     <img src={require('../img/front.jpg')}  className="header"/>    
-                </div>    
+                </div>     */}
             </header>
         );
     }

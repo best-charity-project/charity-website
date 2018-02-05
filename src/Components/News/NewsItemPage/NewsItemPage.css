@@ -1,0 +1,7 @@
+.single-news {
+    max-width:80em;
+    margin:0 auto;
+    position: relative;
+    top: 6vh;
+    flex-grow: 1;
+}

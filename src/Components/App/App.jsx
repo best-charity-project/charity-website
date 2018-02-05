@@ -6,12 +6,14 @@ import About from '../About/About';
 import Home from '../Home/Home';
 import Footer from '../Footer/Footer';
 import News from '../News/News';
+import NewsItemPage from '../News/NewsItemPage/NewsItemPage';
 import './style.css';
+
 
 class App extends React.Component {
   render() {
     return (
-      <div className="body">
+      <div className="App body">
         <Header />
         <div/>
         <Switch>
@@ -19,6 +21,7 @@ class App extends React.Component {
           <Route path="/admin" component={Admin}/>
           <Route path="/about" component={About}/>
           <Route path="/news" component={News}/>
+          <Route path="/newsItemPage" component={NewsItemPage}/>
           <Redirect to="/"/>
         </Switch>
         <Footer />
