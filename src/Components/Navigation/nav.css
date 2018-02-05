@@ -41,6 +41,7 @@
     transition: .3s all ease;
 }
 .nav-bar{
+    display: none;
 }
 .gam-bar{
     flex-direction: column;
