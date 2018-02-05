@@ -11,7 +11,7 @@ import News from '../News/News';
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <div className="App">
         <Header />
         <Navigation />
         <Switch>

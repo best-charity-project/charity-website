@@ -1,9 +1,9 @@
 import React from 'react';
 
 export default () => (
-    <div>
+    <div className="About">
         <h2>
-            Admin
+            About
         </h2>
     </div>
 );

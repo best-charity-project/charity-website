@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 class Navigation extends React.Component {
     render() {
         return (
-            <nav>
+            <nav className="Navigation">
                 <ul>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/admin">Admin</Link></li>
