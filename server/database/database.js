@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
-const { user, password, port, dbName } = require('../configs/config');
+const { user, password, port, dbName } = require('../configs/config.json');
 
 class DB {
 	constructor() {

@@ -6,9 +6,6 @@
 # testing
 /coverage
 
-# ignore folder named 'configs'
-configs/
-
 # production
 /build
 
