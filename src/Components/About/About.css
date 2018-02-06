@@ -1,0 +1,18 @@
+.about-us {
+   max-width:80em;
+   display:flex;
+   flex-direction: column;
+   margin:2em;
+   padding:7em 1em;
+   margin:0 auto;
+}
+.heading-about-us {
+    text-align: center;
+    font-size:2em;
+    margin-bottom: 1em;
+}
+.text-about-us {
+    text-indent: 2em;
+    margin-bottom: 5em;
+    text-align: justify;
+}
