@@ -7,13 +7,13 @@ import Home from '../Home/Home';
 import Footer from '../Footer/Footer';
 import News from '../News/News';
 import NewsItemPage from '../News/NewsItemPage/NewsItemPage';
-import './style.css';
+import './App.css';
 
 
 class App extends React.Component {
   render() {
     return (
-      <div className="App body">
+      <div className="app">
         <Header />
         <div/>
         <Switch>

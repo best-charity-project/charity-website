@@ -1,6 +1,7 @@
-.nav{
+.navigation{
     background-color: #ECEFF1;
-    min-height: 6vh;
+    height: 6vh;
+    min-height: 50px;
     width: 100vw;
     display: flex;
     justify-content: flex-end;
@@ -8,19 +9,6 @@
     align-items: center;
     z-index: 100;
     }
-.nav-element{
-    position: relative;
-    text-align: center;
-    color: rgb(51, 51, 51);
-    border: 1px solid #ECEFF1;
-    padding: .2em;
-    text-decoration: none;
-    font-size: 2em;
-    transition: .5s all ease;
-
-    margin-right: .5em;
-    border-radius: 5px;
-}
 .ham-menu{
     position: relative;
     text-align: center;
@@ -31,62 +19,69 @@
     font-size: 2em;
     transition: .5s all ease;
 }
-.nav-element:hover{
+.ham-menu:hover{
     color: aliceblue;
-    transition: .3s all ease;
+    transition: .5s all ease;
     background-color: #A4A4A4;
 }
 .img-bar{
+    margin-top: 12.5px;
+    margin-bottom: 12.5px;
+    align-self: flex-end;
+    display: none;
     max-width: max-content;
     transition: .3s all ease;
-}
-.nav-bar{
-    display: none;
-}
-.gam-bar{
+    height: 25px;
+    margin-right: 1em;
     flex-direction: column;
-    width: auto;
     align-items: flex-end;
+    top: 0;
+    background-color: #ECEFF1;
 }
-.ham-menu{
-    display: none;
+.navigation-bar{
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    position: absolute;
 }
-.gam-bar .ham-menu{
+.gam-bar.img-bar~.ham-menu{
     display: block;
     width: 100vw;
     border-radius: 0;
     border-color: #2E2E2E;
+    background-color: #ECEFF1;
+    margin: 0;
 }
-.gam-bar.nav-bar .img-bar{
+.img-bar.gam-bar{
     transform: rotate(90deg);
     transition: .3s all ease;
 }
-
-@media (max-width: 750px){
-    .link-nemu{
-        font-size: 4vh;
-    }
-} 
 @media (max-width: 500px){
     .link-nemu{
         display: none;
     }
-    .nav-bar{
+    .img-bar{
         display: flex;
     }
-    .nav-menu{
+    .navigation-menu{
         display: none;
+    }
+    .ham-menu{
+        display: none;
+        position: relative;
+        text-align: center;
+        color: rgb(51, 51, 51);
+        border: 1px solid #ECEFF1;
+        padding: .2em;
+        text-decoration: none;
+        font-size: 2em;
+        transition: .5s all ease;
+        margin-right: .5em;
+        border-radius: 5px;
     }
 }
-@media (max-height: 650px){
-    .link-nemu{
-        display: none;
-    }
-    .nav-bar{
-        display: flex;
-    }
-    .nav-menu{
-        display: none;
+@media (min-width: 501px){
+    .navigation-bar{
+        flex-direction: row;
     }
 }
-

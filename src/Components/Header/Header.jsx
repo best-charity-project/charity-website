@@ -1,15 +1,12 @@
 import React from 'react';
 import Navigation from '../Navigation/Navigation';
-import './header.css';
+import './Header.css';
 
 class Header extends React.Component {
     render() {
         return (
-            <header  className="Header">
+            <header  className="header">
                 <Navigation />
-                {/* <div className="top_img">
-                    <img src={require('../img/front.jpg')}  className="header"/>    
-                </div>     */}
             </header>
         );
     }
