@@ -5,9 +5,9 @@ const URI = `mongodb://${config.user}:${config.password}@ds119258.mlab.com:${con
 
 // The MongoDB database connection
 function DB() {
-    this.URI = URI;
-    this.db = null;
-    this.dbClient = null;
+	this.URI = URI;
+	this.db = null;
+	this.dbClient = null;
 }
 
 DB.prototype.connect = function(uri) {
@@ -18,9 +18,9 @@ DB.prototype.connect = function(uri) {
 			MongoClient.connect(uri)
 			.then(
 				(database) => {
-                    this.db = database.db('charity_project');
-                    this.dbClient = database;
-                    console.log('Connected to database!');
+					this.db = database.db('charity_project');
+					this.dbClient = database;
+					console.log('Connected to database!');
 					resolve();
 				},
 				(err) => {
@@ -37,8 +37,8 @@ DB.prototype.close = function() {
 		this.dbClient.close()
 		.then(
 			function() {
-                console.log('Connection closed');
-            },
+				console.log('Connection closed');
+			},
 			function(error) {
 				console.log("Failed to close the database: " + error.message)
 			}
