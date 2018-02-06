@@ -1,25 +1,28 @@
 .homepage-news {
     display: flex;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     justify-content: center;
     background-color: #F4F4F4;
 }
+
 .homepage-news--box {
     max-width: 22em;
-    height:15em;
+    height: 15em;
     border-radius: 5px;
-    padding-top:2em;
-    margin:2em;
+    padding-top: 2em;
+    margin: 2em;
     box-shadow: 0 .5em 1em #777;
     overflow: hidden;
     background-color: #fff;
 }
+
 .homepage-news--box:hover {
-    cursor:pointer;
+    cursor: pointer;
 }
+
 .news-box--heading {
-    font-size:2em;
+    font-size: 2em;
     text-align: center;
     background-color: #F4F4F4;
-    padding-top:2em;
+    padding-top: 2em;
 }

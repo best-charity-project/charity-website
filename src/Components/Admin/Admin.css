@@ -1,24 +1,32 @@
 .admin {
-   display:flex;
-   flex-direction: column;
-   margin:2em;
-   padding:7em 0;
+    display: flex;
+    flex-direction: column;
+    margin: 2em;
+    padding: 7em 0;
 }
+
 .admin--heading {
     font-size: 2em;
- }
-.admin--current-date {
-    margin:2em 0 0 0;
 }
+
+.admin--current-date {
+    margin: 2em 0 0 0;
+}
+
 .admin--textarea {
     border-radius: 5px;
     margin: 1em 0;
-    box-shadow: 0 1em 2em rgba(0,0,0,.2);
-    font-family:inherit;
-    font-size:inherit;
-    color:#777;
-    width:80vw;
+    box-shadow: 0 1em 2em rgba(0, 0, 0, .2);
+    font-family: inherit;
+    font-size: inherit;
+    color: #777;
+    width: 80vw;
 }
+
+.admin--button {
+    text-align: center;
+}
+
 .admin--button:link,
 .admin--button:visited {
     text-transform: uppercase;
@@ -26,16 +34,18 @@
     color: rgb(0, 0, 0);
     background-color: rgba(86, 118, 189, 0.644);
     padding: 1em 2em;
-    max-width:14em;
-    display:inline-block;
+    max-width: 14em;
+    display: inline-block;
     color: #fff;
     transition: all .2s;
 }
+
 .admin--button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 1em 2em rgba(0,0,0,.2);
-    background-color:  rgba(18, 18, 145, 0.644);
+    box-shadow: 0 1em 2em rgba(0, 0, 0, .2);
+    background-color: rgba(18, 18, 145, 0.644);
 }
+
 .admin--button:active {
     transform: translateY(-1px);
 }

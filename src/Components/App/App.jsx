@@ -6,28 +6,24 @@ import About from '../About/About';
 import Home from '../Home/Home';
 import Footer from '../Footer/Footer';
 import News from '../News/News';
-import NewsItemPage from '../News/NewsItemPage/NewsItemPage';
+import NewsItem from '../News/NewsItem/NewsItem';
 import './style.css';
 
-
-class App extends React.Component {
+export default class App extends React.Component {
   render() {
     return (
-      <div className="App body">
+      <div className="app">
         <Header />
-        <div/>
         <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route path="/admin" component={Admin}/>
-          <Route path="/about" component={About}/>
-          <Route path="/news" component={News}/>
-          <Route path="/newsItemPage" component={NewsItemPage}/>
-          <Redirect to="/"/>
+          <Route exact path="/" component={Home} />
+          <Route path="/admin" component={Admin} />
+          <Route path="/about" component={About} />
+          <Route path="/news" component={News} />
+          <Route path="/news/:id" component={NewsItem} />
+          <Redirect to="/" />
         </Switch>
         <Footer />
       </div>
     )
   }
 }
-
-export default App

@@ -1,14 +1,12 @@
 import React from 'react';
 import './footer.css';
 
-class Footer extends React.Component {
+export default class Footer extends React.Component {
     render() {
         return (
-            <div className="footer Footer">>
-                <div className="logo"></div>
+            <div className="footer">
+                <div className="logo" />
             </div>
         );
     }
 }
-
-export default Footer

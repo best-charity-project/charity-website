@@ -1,11 +1,12 @@
-.news-item-page {
-    max-width:80em;
-    margin:0 auto;
+.news-item {
+    max-width: 80em;
+    margin: 0 auto;
     position: relative;
     top: 6vh;
     flex-grow: 1;
-    padding:7em 0;
+    padding: 7em 0;
 }
+
 .text {
     text-align: justify;
 }

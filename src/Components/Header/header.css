@@ -1,7 +1,8 @@
-.header{
+.header {
     width: 100%;
     height: 100%;
 }
-.top_img{
+
+.top_img {
     display: flex;
 }
