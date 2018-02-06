@@ -1,6 +1,6 @@
 import React from 'react';
-import './newsList.css'
-class NewsList extends React.Component {
+import './newsListItem.css'
+class NewsListItem extends React.Component {
     render() {
         return (
             <li className="news-list">
