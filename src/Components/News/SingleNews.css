@@ -1,3 +1,21 @@
 .text{
     text-align: justify;
 }
+.news-title {
+    font-size:2em;
+    text-align:center;
+    margin-top: 1em;
+    color: rgb(47, 179, 219);
+    font-weight: bold;
+}
+.news-title:hover {
+    cursor:pointer;
+    color:rgb(45, 96, 163);
+}
+.news-text {
+    padding: 1em;
+    line-height: 1.5;
+    text-indent: 2em;
+    height:55%;
+    overflow: hidden;
+}

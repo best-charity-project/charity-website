@@ -1,4 +1,4 @@
-.news1 {
+.news--list-news {
     display: flex;
     flex-wrap:wrap;
     flex-direction:column;
@@ -6,7 +6,7 @@
     background-color: #F4F4F4;
     padding:7em 0;
 }
-.news-box1 {
+.news--single-box {
     max-width: 80em;
     height:15em;
     border-radius: 5px;
@@ -20,13 +20,13 @@
     text-indent: 3em;
     background-color: #fff;
 }
-.news-box1:hover {
+.news--single-box:hover {
     cursor:pointer;
 }
-.link {
+.news--link {
     text-decoration: none;
     color:rgb(0, 0, 0);
 }
-.news-heading {
+.news--heading {
     font-size:2em;
 }

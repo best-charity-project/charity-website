@@ -2,6 +2,7 @@
 import React from 'react';
 import ThreeNews from './ThreeNews';
 import './Home.css';
+import './ThreeNews.css';
 import './main.css';
 
 function Home() {
@@ -14,11 +15,5 @@ function Home() {
         </div>
     );
 }
-  
-       
-    
-
-
-
-
+ 
 export default Home 

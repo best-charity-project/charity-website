@@ -4,13 +4,13 @@
    margin:2em;
    padding:7em 0;
 }
-.heading-admin {
+.admin--heading {
     font-size: 2em;
  }
-.date {
+.admin--current-date {
     margin:2em 0 0 0;
 }
-.textarea {
+.admin--textarea {
     border-radius: 5px;
     margin: 1em 0;
     box-shadow: 0 1em 2em rgba(0,0,0,.2);
@@ -19,8 +19,8 @@
     color:#777;
     width:80vw;
 }
-.btn:link,
-.btn:visited {
+.admin--button:link,
+.admin--button:visited {
     text-transform: uppercase;
     text-decoration: none;
     color: rgb(0, 0, 0);
@@ -31,11 +31,11 @@
     color: #fff;
     transition: all .2s;
 }
-.btn:hover {
+.admin--button:hover {
     transform: translateY(-3px);
     box-shadow: 0 1em 2em rgba(0,0,0,.2);
     background-color:  rgba(18, 18, 145, 0.644);
 }
-.btn:active {
+.admin--button:active {
     transform: translateY(-1px);
 }

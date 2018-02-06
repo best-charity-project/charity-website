@@ -6,8 +6,8 @@ class SingleNews extends React.Component {
         const {className, title, text} = this.props;
         return (
            <div className = {className}>
-               <h2 className='title'>{title}</h2>
-               <p className='text'>{text}</p>
+               <h2 className='news-title'>{title}</h2>
+               <p className='news-text'>{text}</p>
             </div>
        );
    }
