@@ -7,13 +7,13 @@
     padding: 7em 1em;
 }
 
-.heading-about-us {
+.about-us--heading {
     font-size: 2em;
     margin-bottom: 1em;
     text-align: center;
 }
 
-.text-about-us {
+.about-us--text {
     margin-bottom: 5em;
     text-align: justify;
     text-indent: 2em;

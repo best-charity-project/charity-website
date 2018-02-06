@@ -14,11 +14,11 @@ export default class App extends React.Component {
     return (
       <div className="app">
         <Header />
-        <Switch>
+          <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/admin" component={Admin} />
           <Route path="/about" component={About} />
-          <Route path="/news" component={News} />
+          <Route exact path="/news" component={News} />
           <Route path="/news/:id" component={NewsItem} />
           <Redirect to="/" />
         </Switch>

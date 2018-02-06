@@ -1,10 +1,10 @@
 import React from 'react';
-import ThreeNews from './ThreeNews';
+import ThreeNews from '../News/ThreeNews';
 import './Home.css';
-import './ThreeNews.css';
+import '../News/ThreeNews.css';
 import './main.css';
 
-function Home() {
+export default () => {
     return (
         <div className='main Home'>
             <div className="top_img">
@@ -15,4 +15,3 @@ function Home() {
     );
 }
 
-export default Home 

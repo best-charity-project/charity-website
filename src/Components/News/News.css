@@ -8,7 +8,7 @@
 }
 
 .news--single-box {
-    max-width: 80em;
+    width: 80em;
     height: 15em;
     border-radius: 5px;
     padding-top: 1em;
