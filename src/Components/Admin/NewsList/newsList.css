@@ -1,0 +1,12 @@
+[class*="news-list--"] {
+    display: inline;
+    margin-right: 15px;
+}
+
+.news-list{
+    padding: 5px;
+    list-style-type: none;
+    border: 1px solid black;
+    margin-top: 10px;
+    width: 35%;
+}
