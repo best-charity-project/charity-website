@@ -35,13 +35,8 @@ DB.prototype.connect = function(uri) {
 DB.prototype.close = function() {
 	if (this.db) {
 		this.dbClient.close()
-		.then(
-			function() {
-				console.log('Connection closed');
-			},
-			function(error) {
-				console.log("Failed to close the database: " + error.message)
-			}
+			.then(() => console.log('Connection closed'))
+			.catch(err => console.error("Failed to close the database: " + err.message)
 		);
 	}
 }
