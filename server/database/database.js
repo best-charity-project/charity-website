@@ -11,24 +11,21 @@ function DB() {
 }
 
 DB.prototype.connect = function(uri) {
-    return new Promise((resolve, reject) => {
-		if (this.db) {
-			resolve();
-		} else {
-			MongoClient.connect(uri)
-			.then(
-				(database) => {
-					this.db = database.db('charity_project');
-					this.dbClient = database;
-					console.log('Connected to database!');
-					resolve();
-				},
-				(err) => {
-					console.log("Error connecting: " + err.message);
-					reject(err.message);
-				}
-			)
-		}
+	if (this.db) {
+		return Promise.resolve(this.db);
+	}
+	return new Promise((resolve, reject) => {
+		MongoClient.connect(uri)
+			.then((database) => {
+				this.db = database.db('charity_project');
+				this.dbClient = database;
+				console.log('Connected to database!');
+				resolve(database);
+			})
+			.catch(err => {
+				console.error("Error connecting: " + err.message);
+				reject(err.message);
+			});
 	});
 }
 
