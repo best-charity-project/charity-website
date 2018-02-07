@@ -6,7 +6,7 @@ import data from '../../Database/News.json';
 
 export default () => {
     return (
-        <div className = 'news-list main'>
+        <div className = 'news-list'>
              <p className = 'news--heading'>Latest News</p>
              <div className = 'news--list-news'>
             {

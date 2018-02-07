@@ -35,7 +35,7 @@ class Admin extends React.Component {
       }
     render() {
         return (
-            <div className='admin main' >
+            <div className='admin' >
                 <p className='admin--heading'>Добавление новости</p>
                 <p className='admin--current-date'>Текущая дата:  <Time /> </p>
                 <form onSubmit={this.handleSubmit} className = 'admin--form'>
