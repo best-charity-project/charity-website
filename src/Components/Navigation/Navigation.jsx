@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './nav.css';
 import classnames from 'classnames'; 
-
+import './nav.css';
 
 class Navigation extends React.Component {
     constructor(props) {
@@ -36,4 +35,5 @@ class Navigation extends React.Component {
         );
     }
 } 
+
 export default Navigation

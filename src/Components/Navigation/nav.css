@@ -1,4 +1,4 @@
-.navigation{
+.navigation {
     background-color: #ECEFF1;
     height: 6vh;
     min-height: 50px;
@@ -8,8 +8,9 @@
     position: fixed;
     align-items: center;
     z-index: 100;
-    }
-.navigation--menu-element_style{
+}
+
+.navigation--menu-element_style {
     position: relative;
     text-align: center;
     color: rgb(51, 51, 51);
@@ -19,12 +20,14 @@
     font-size: 2em;
     transition: .5s all ease;
 }
-.navigation--menu-element_style:hover{
+
+.navigation--menu-element_style:hover {
     color: aliceblue;
     transition: .5s all ease;
-    background-color: #A4A4A4!important;
+    background-color: #A4A4A4 !important;
 }
-.navigation--menu-image_close{
+
+.navigation--menu-image_close {
     margin-top: 1vh;
     margin-bottom: calc(5vh - 25px);
     align-self: flex-end;
@@ -38,7 +41,8 @@
     top: 0;
     background-color: #ECEFF1;
 }
-.navigation--menu{
+
+.navigation--menu {
     display: flex;
     flex-direction: column;
     top: 0;
@@ -47,22 +51,24 @@
     height: 6vh;
     min-height: 50px;
 }
-.navigation--menu .navigation--menu-element_style{
+
+.navigation--menu .navigation--menu-element_style {
     border-radius: 5px;
 }
 
-.navigation--menu-image_close.navigation--menu-image_open{
+.navigation--menu-image_close.navigation--menu-image_open {
     transform: rotate(90deg);
     transition: .3s all ease;
 }
-@media (max-width: 500px){
-    .navigation--menu-image_close{
+
+@media (max-width: 500px) {
+    .navigation--menu-image_close {
         display: flex;
     }
-    .navigation-menu{
+    .navigation-menu {
         display: none;
     }
-    .navigation--menu-element_style{
+    .navigation--menu-element_style {
         display: none;
         position: relative;
         text-align: center;
@@ -75,10 +81,10 @@
         margin-right: .5em;
         border-radius: 5px;
     }
-    .navigation--menu-image_close+.navigation--menu-element_style{
-        border-top: 1px solid #2E2E2E!important;
+    .navigation--menu-image_close+.navigation--menu-element_style {
+        border-top: 1px solid #2E2E2E !important;
     }
-    .navigation--menu-image_open.navigation--menu-image_close~.navigation--menu-element_style{
+    .navigation--menu-image_open.navigation--menu-image_close~.navigation--menu-element_style {
         display: block;
         width: 100vw;
         border-radius: 0;
@@ -88,8 +94,9 @@
         border-top-width: 0;
     }
 }
-@media (min-width: 501px){
-    .navigation--menu{
+
+@media (min-width: 501px) {
+    .navigation--menu {
         flex-direction: row;
     }
 }

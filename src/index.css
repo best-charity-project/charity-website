@@ -1,13 +1,15 @@
 body {
   font-family: 'Play', sans-serif;
 }
-.indent{
+
+.indent {
   flex-grow: 1;
   position: relative;
   margin-left: auto;
   margin-right: auto;
 }
-.indent::before{
+
+.indent::before {
   height: 6vh;
   min-height: 50px;
   display: block;
