@@ -2,7 +2,7 @@ import React from 'react';
 import SingleNews from './SingleNews';
 import { Link } from 'react-router-dom';
 import './News.css'
-import data from '../Database/News.json';
+import data from '../../Database/News.json';
 
 export default () => {
     return (
