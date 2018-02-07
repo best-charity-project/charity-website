@@ -1,7 +1,6 @@
 
 import React from 'react';
 import './Home.css';
-import ThreeNews from './ThreeNews';
 
 class Home extends React.Component {
     render() {
@@ -10,7 +9,6 @@ class Home extends React.Component {
                 <div className='home--image-wrapper'>
                     <img src={require('../img/front.jpg')}  className='home--image_big'/>    
                 </div> 
-               <ThreeNews />
             </div>
         );
     }
