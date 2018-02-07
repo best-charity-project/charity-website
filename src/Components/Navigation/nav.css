@@ -43,6 +43,7 @@
 }
 
 .navigation--menu {
+    margin-right: 1em;
     display: flex;
     flex-direction: column;
     top: 0;
