@@ -1,16 +1,5 @@
-.home{
-    flex-grow: 1;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-}
-.home::before{
-    height: 6vh;
-    min-height: 50px;
-    display: block;
-    content: " ";
-}
-.home--image-big{
+
+.home--image_big{
     width: 100%;
     height: 100%;
 }

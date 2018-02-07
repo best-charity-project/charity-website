@@ -5,7 +5,7 @@ class Admin extends React.Component {
     
     render() {
           return (
-            <div className = 'admin main'>
+            <div className = 'admin indent'>
                 <p className = 'heading-admin'>Добавление новости</p>
                 <p className = 'date'>Текущая дата: </p>
                 <Time />
