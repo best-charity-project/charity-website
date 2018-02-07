@@ -1,10 +1,10 @@
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
-const { user, password, port, dbName } = require('../configs/config.json');
+const { user, password, port, dbName, host } = require('../configs/config.json');
 
 class DB {
 	constructor() {
-		this.URI = `mongodb://${user}:${password}@ds119258.mlab.com:${port}/${dbName}`;
+		this.URI = `mongodb://${user}:${password}@${host}:${port}/${dbName}`;
 		this.db = null;
 		this.dbClient = null;
 	}

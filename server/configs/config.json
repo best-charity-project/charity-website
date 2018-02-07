@@ -3,5 +3,5 @@
 	"user": "",
 	"password": "",
 	"dbName": "",
-	"host": "mongodb://<user>:<password>@ds119258.mlab.com:<port>/"
+	"host": ""
 }
