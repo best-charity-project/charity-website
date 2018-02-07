@@ -8,22 +8,19 @@ class DB {
 		this.db = null;
 		this.dbClient = null;
 	}
-	connect(uri) {
+	connect() {
 		if (this.db) {
 			return Promise.resolve(this.db);
 		}
 		return new Promise((resolve, reject) => {
-			MongoClient.connect(uri)
+			MongoClient.connect(this.URI)
 				.then((database) => {
 					this.db = database.db(dbName);
 					this.dbClient = database;
 					console.log('Connected to database!');
 					resolve(database);
 				})
-				.catch(err => {
-					console.error("Error connecting: " + err.message);
-					reject(err.message);
-				});
+				.catch(err => reject(err.message));
 		});
 	}
 
@@ -31,8 +28,7 @@ class DB {
 		if (this.db) {
 			this.dbClient.close()
 				.then(() => console.log('Connection closed'))
-				.catch(err => console.error("Failed to close the database: " + err.message)
-			);
+				.catch(err => {throw err});
 		}
 	}
 }
