@@ -9,19 +9,14 @@ class DB {
 		this.dbClient = null;
 	}
 	connect() {
-		if (this.db) {
-			return Promise.resolve(this.db);
-		}
-		return new Promise((resolve, reject) => {
-			MongoClient.connect(this.URI)
-				.then((database) => {
-					this.db = database.db(dbName);
-					this.dbClient = database;
-					console.log('Connected to database!');
-					resolve(database);
+		return MongoClient.connect(this.URI)
+				.then((client) => {
+					this.db = client.db(dbName);
+					this.dbClient = client;
+					console.log('Connected to database');
+					return db;
 				})
-				.catch(err => reject(err.message));
-		});
+				.catch(err => {throw err});
 	}
 
 	close() {
