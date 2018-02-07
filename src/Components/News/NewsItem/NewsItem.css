@@ -1,12 +1,11 @@
 .news-item {
     max-width: 80em;
-    margin: 0 auto;
-    position: relative;
-    top: 6vh;
+    margin: 6em auto;
     flex-grow: 1;
-    padding: 7em 0;
+    padding: 1em;
+    background-color: #fff;
 }
 
-.text {
+.news-text {
     text-align: justify;
 }

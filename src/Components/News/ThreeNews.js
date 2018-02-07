@@ -14,6 +14,7 @@ export default () => {
                     news.map((item, i) => 
                     <Link to='/news/1' className='news--link' key  = {item.id}>
                         <SingleNews className='homepage-news--box' key  = {item.id} title = {item.title} text= {item.text} />
+                         
                     </Link>   
                 )
                 } 

@@ -8,7 +8,8 @@ class SingleNews extends React.Component {
             <div className={className}>
                 <h2 className='news-title'>{title}</h2>
                 <p className='news-text'>{text}</p>
-            </div>
+                <button href='' className='news--button'>Подробнее</button>
+             </div>
         );
     }
 }
