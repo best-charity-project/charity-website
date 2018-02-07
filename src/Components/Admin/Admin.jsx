@@ -1,9 +1,7 @@
 import React from 'react';
-
+import NewsList from './NewsList/NewsList.jsx';
 export default () => (
     <div className="Admin">
-        <h2>
-            Admin
-        </h2>
+        <NewsList />
     </div>
 );
