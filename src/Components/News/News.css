@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap:wrap;
-    
+    justify-content: space-around;
 }
 
 .news--single-box {
@@ -35,7 +35,7 @@
     font-size: 2em;
     padding-top:2em;
     text-align: center;
-    color: #3EE8C8;
+
 }
 .news--single-box .news--button{
     display: block;

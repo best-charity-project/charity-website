@@ -6,7 +6,7 @@
 }
 
 .homepage-news--box {
-    max-width: 22em;
+    width: 22em;
     height: 25em;
     border-radius: 5px;
     padding-top: 2em;
@@ -23,9 +23,24 @@
     font-size: 2em;
     text-align: center;
     padding-top: 2em;
-    color: rgb(62, 232, 200);
+  
 }
 
 .homepage-news--box .news--button{
     display: block;
 }
+
+@media (max-width:1150px){
+    .homepage-news{
+        flex-direction: column;
+    }
+    .homepage-news--box {
+        height: 23em;
+        width: 100%;
+    }
+    .news--link{
+        max-width: 75%;
+        margin: 0 auto;
+    }
+}
+

@@ -4,7 +4,6 @@ import Header from '../Header/Header';
 import Admin from '../Admin/Admin';
 import About from '../About/About';
 import Home from '../Home/Home';
-import Footer from '../Footer/Footer';
 import News from '../News/News';
 import NewsItem from '../News/NewsItem/NewsItem';
 import './style.css';
@@ -22,8 +21,7 @@ export default class App extends React.Component {
           <Route path="/news/:id" component={NewsItem} />
           <Redirect to="/" />
         </Switch>
-        <Footer />
-      </div>
+        </div>
     )
   }
 }

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './ThreeNews.css';
 import '../News/SingleNews.css';
 import data from '../../Database/News.json';
+
 var news = data.slice(0, 3);
 export default () => {
     return (
