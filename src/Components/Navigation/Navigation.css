@@ -11,16 +11,17 @@
 .navigation--menu-element_style {
     color: rgb(51, 51, 51);
     border: 1px solid #ECEFF1;
-    padding: .2em;
+    padding: 0.5em;
     text-decoration: none;
-    font-size: 2em;
+    font-size: 20px;
     transition: .5s all ease;
+    font-family: 'roboto', sans-serif;
 }
 
 .navigation--menu-element_style:hover {
     color: aliceblue;
     transition: .5s all ease;
-    background-color: #A4A4A4 !important;
+    background-color: #A4A4A4;
 }
 
 .navigation--menu-image_close {
@@ -61,26 +62,20 @@
     .navigation--menu-element_style {
         display: none;
         text-align: center;
-        color: rgb(51, 51, 51);
-        border: 1px solid #ECEFF1;
-        padding: .2em;
-        text-decoration: none;
-        font-size: 2em;
+        -webkit-transition: .5s all ease;
+        -o-transition: .5s all ease;
         transition: .5s all ease;
-        margin-right: .5em;
-        border-radius: 5px;
     }
     .navigation--menu-image_close+.navigation--menu-element_style {
-        border-top: 1px solid #2E2E2E !important;
+        border-top: 1px solid #2E2E2E;
     }
     .navigation--menu-image_open.navigation--menu-image_close~.navigation--menu-element_style {
         display: block;
-        width: -webkit-fill-available;
+        width: inherit;
         border-radius: 0;
-        border-color: #2E2E2E;
+        border-bottom-color: #2E2E2E;
         background-color: #ECEFF1;
         margin: 0;
-        border-top-width: 0;
     }
 }
 

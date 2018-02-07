@@ -1,5 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto&subset=cyrillic');
 body {
-  font-family: 'Play', sans-serif;
+  font-family: 'Open-sans', sans-serif;
   background-color: #F4F4F4;
 }
 

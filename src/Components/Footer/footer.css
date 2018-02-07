@@ -1,8 +1,10 @@
 .footer{
-    background-color: #A4A4A4;
+    background-color: #f8f8f8;
     display: flex;
     flex-direction: column;
     position: relative;
-    padding: 1em;
+    padding: 30px 15px;
+    line-height: 22px;
+    letter-spacing: .4px;
     text-align: justify;
 }

@@ -1,6 +1,4 @@
 .app {
     display: flex;
     flex-direction: column;
-    font-family: 'Play', sans-serif;
-    min-height: -webkit-fill-available;
 }
