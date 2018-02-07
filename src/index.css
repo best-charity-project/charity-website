@@ -1,17 +1,16 @@
 body {
   font-family: 'Play', sans-serif;
+  background-color: #F4F4F4;
 }
 
 .indent {
   flex-grow: 1;
   position: relative;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
 }
 
 .indent::before {
-  height: 6vh;
-  min-height: 50px;
+  height: 4em;
   display: block;
   content: " ";
 }
