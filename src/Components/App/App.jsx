@@ -6,7 +6,6 @@ import About from '../About/About';
 import Home from '../Home/Home';
 import News from '../News/News';
 import NewsItem from '../News/NewsItem/NewsItem';
-import './style.css';
 
 export default class App extends React.Component {
   render() {
