@@ -23,24 +23,22 @@
     font-size: 2em;
     text-align: center;
     padding-top: 2em;
-  
 }
 
-.homepage-news--box .news--button{
+.homepage-news--box .news--button {
     display: block;
 }
 
-@media (max-width:1150px){
-    .homepage-news{
+@media (max-width:1150px) {
+    .homepage-news {
         flex-direction: column;
     }
     .homepage-news--box {
         height: 23em;
         width: 100%;
     }
-    .news--link{
+    .news--link {
         max-width: 75%;
         margin: 0 auto;
     }
 }
-

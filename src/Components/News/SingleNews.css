@@ -24,24 +24,26 @@
     text-decoration: none;
     color: rgb(0, 0, 0);
     background-color: rgb(35, 226, 244);
-    border:none;
+    border: none;
     padding: 1em 2em;
     max-width: 18em;
     display: inline-block;
     color: #fff;
     transition: all .2s;
-    margin:1em auto;
+    margin: 1em auto;
 }
+
 .news--button:hover {
     transform: translateY(-3px);
     box-shadow: 0 1em 2em rgba(0, 0, 0, .2);
     background-color: rgb(16, 163, 177);
-    cursor:pointer;
-} 
+    cursor: pointer;
+}
 
 .news--button:active {
     transform: translateY(-1px);
 }
-.news--button{
+
+.news--button {
     display: none;
 }

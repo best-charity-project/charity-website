@@ -13,10 +13,9 @@ export default () => {
                 {
                     data.slice(0, 3).map((item) => 
                     <Link to='/news/1' className='news--link' key  = {item.id}>
-                        <SingleNews className='homepage-news--box' key  = {item.id} title = {item.title} text= {item.text} />
-                         
+                        <SingleNews className='homepage-news--box' key  = {item.id} title = {item.title} text= {item.text} />    
                     </Link>   
-                )
+                    )
                 } 
             </div>
         </div>

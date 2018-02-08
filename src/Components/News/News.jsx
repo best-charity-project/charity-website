@@ -10,7 +10,7 @@ export default () => {
              <p className = 'news--heading'>Latest News</p>
              <div className = 'news--list-news'>
             {
-                data.map ((item, i) => 
+                data.map ((item) => 
                 <Link to='/news/1' className = 'news--link' key  = {item.id} >
                 <SingleNews className = 'news--single-box'  key  = {item.id} title = {item.title} text= {item.text}/>
                 </Link>

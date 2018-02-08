@@ -1,14 +1,14 @@
 .news--list-news {
     max-width: 80em;
-    margin:0 auto;
+    margin: 0 auto;
     display: flex;
     flex-direction: row;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     justify-content: space-around;
 }
 
 .news--single-box {
-    width:30em;
+    width: 30em;
     height: 21em;
     border-radius: 5px;
     padding-top: 1em;
@@ -33,15 +33,16 @@
 
 .news--heading {
     font-size: 2em;
-    padding-top:2em;
+    padding-top: 2em;
     text-align: center;
-
 }
-.news--single-box .news--button{
+
+.news--single-box .news--button {
     display: block;
 }
-@media (max-width: 1090px){
+
+@media (max-width: 1090px) {
     .news--single-box {
-       width:90%;
+        width: 90%;
     }
-} 
+}
