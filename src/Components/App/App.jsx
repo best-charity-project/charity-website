@@ -8,21 +8,21 @@ import './App.css';
 class App extends React.Component {
   render() {
     return (
-      <div className="app">
+      <div className='app'>
         <Header />
-        <div/>
+        <div />
         <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route path="/" component={Home}/>
-          <Route path="/" component={Home}/>
-          <Route path="/" component={Home}/>
-          <Route path="/" component={Home}/>
-          <Redirect to="/"/>
+          <Route exact path='/' component={Home} />
+          <Route path='/' component={Home} />
+          <Route path='/' component={Home} />
+          <Route path='/' component={Home} />
+          <Route path='/' component={Home} />
+          <Redirect to='/' />
         </Switch>
         <Footer />
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;
