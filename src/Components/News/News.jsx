@@ -7,7 +7,7 @@ import data from '../../Database/News.json';
 export default () => {
     return (
         <div className = 'news-list'>
-             <p className = 'news--heading'>Latest News</p>
+             <h1 className = 'news--heading'>Latest News</h1>
              <div className = 'news--list-news'>
             {
                 data.map ((item) => 

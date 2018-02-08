@@ -8,7 +8,7 @@ import data from '../../Database/News.json';
 export default () => {
     return (
         <div className='news-box'>
-            <p className='news-box--heading'>Latest News</p>
+            <h1 className='news-box--heading'>Latest News</h1>
             <div className='homepage-news'>
                 {
                     data.slice(0, 3).map((item) => 
