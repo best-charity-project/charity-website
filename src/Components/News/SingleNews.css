@@ -36,3 +36,7 @@
 .single-news--button:active {
     transform: translateY(-1px);
 }
+
+.single-news-link {
+    text-decoration: none;
+}
