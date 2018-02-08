@@ -19,7 +19,7 @@ class Navigation extends React.Component {
             this.setState({ active: !currentState });
         } 
     };
-    
+
     render() {
         const navigationClassNames = classnames('navigation--menu-image_close', {'navigation--menu-image_open' : this.state.active});
         return (
