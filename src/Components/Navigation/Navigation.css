@@ -28,7 +28,6 @@
     margin: 1em 1em 1em 0;
     align-self: flex-end;
     display: none;
-    max-width: max-content;
     transition: .3s all ease;
     height: 2em;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
+import navMenuPicture from '../img/NavMenu.svg';
 import "./Navigation.css";
 
 class Navigation extends React.Component {
@@ -21,7 +22,7 @@ class Navigation extends React.Component {
         return (
             <nav className="navigation">
                 <div className='navigation--menu' onClick={this.toggleClass}>
-                        <img className={navigationClassNames} src={require('../img/NavMenu.svg')}/>
+                        <img className={navigationClassNames} src={navMenuPicture}/>
                         <Link to="/" className="navigation--menu-element">Home</Link>
                         <Link to="/admin" className="navigation--menu-element">Admin</Link>
                         <Link to="/about" className="navigation--menu-element">About</Link> 

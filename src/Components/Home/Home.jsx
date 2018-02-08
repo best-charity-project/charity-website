@@ -1,10 +1,11 @@
 import React from 'react';
+import BigImage from '../img/front.jpg';
 import './Home.css';
 
 export default () => (
             <div className = 'home indent'>
                 <div className='home--image-wrapper'>
-                    <img src={require('../img/front.jpg')}  className='home--image_big'/>    
+                    <img src={BigImage}  className='home--image_big'/>    
                 </div> 
             </div>
 );
