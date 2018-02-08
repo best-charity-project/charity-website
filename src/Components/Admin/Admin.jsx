@@ -41,7 +41,7 @@ class Admin extends React.Component {
         <div className='form--add-news'>
           <h1 className='form--heading'>Добавление новости</h1>
           <p className='form--current-date'>
-            Текущая дата: <Time />{' '}
+            Текущая дата: <Time />
           </p>
           <form onSubmit={this.handleSubmit} className='form--form'>
             <label>
