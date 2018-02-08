@@ -1,9 +1,9 @@
 import React from 'react';
-import SingleNews from '../News/SingleNews';
 import { Link } from 'react-router-dom';
+import SingleNews from '../News/SingleNews';
+import data from '../../Database/News.json';
 import './ThreeNews.css';
 import '../News/SingleNews.css';
-import data from '../../Database/News.json';
 
 export default () => {
     return (

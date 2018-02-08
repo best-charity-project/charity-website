@@ -1,8 +1,8 @@
 import React from 'react';
-import SingleNews from './SingleNews';
 import { Link } from 'react-router-dom';
-import './News.css'
+import SingleNews from './SingleNews';
 import data from '../../Database/News.json';
+import './News.css'
 
 export default () => {
     return (

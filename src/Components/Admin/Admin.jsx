@@ -1,5 +1,5 @@
 import React from 'react';
-import Time from '../Time/Time'
+import Time from '../Time/Time';
 import './Admin.css';
 
 class Admin extends React.Component {
@@ -36,6 +36,7 @@ class Admin extends React.Component {
     render() {
         return (
             <div className='admin' >
+                <div className='admin--add-news'>
                 <h1 className='admin--heading'>Добавление новости</h1>
                 <p className='admin--current-date'>Текущая дата:  <Time /> </p>
                 <form onSubmit={this.handleSubmit} className = 'admin--form'>
@@ -55,9 +56,8 @@ class Admin extends React.Component {
                     <br />
                     <button href='' className='admin--button'>Добавить новость</button> 
                 </form>
-               
-                
-            </div>
+                </div>
+            </div>         
         );
     }
 }
