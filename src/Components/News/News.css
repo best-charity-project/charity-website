@@ -9,7 +9,7 @@
 
 .news--single-box {
     width: 30em;
-    height: 21em;
+    height: 24em;
     border-radius: 5px;
     padding-top: 1em;
     margin: 1em;
@@ -33,7 +33,7 @@
 
 .news--heading {
     font-size: 2em;
-    padding-top: 2em;
+    margin: 2em 0;
     text-align: center;
 }
 

@@ -7,7 +7,7 @@
 
 .homepage-news--box {
     width: 22em;
-    height: 25em;
+    height: 26em;
     border-radius: 5px;
     padding-top: 2em;
     margin: 1em;
@@ -22,7 +22,7 @@
 .news-box--heading {
     font-size: 2em;
     text-align: center;
-    padding-top: 2em;
+    margin: 2em 0;
 }
 
 .homepage-news--box .news--button {
