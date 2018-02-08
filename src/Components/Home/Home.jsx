@@ -2,11 +2,8 @@ import React from 'react';
 import ThreeNews from '../News/ThreeNews';
 import '../News/ThreeNews.css';
 
-export default () => {
-    return (
-        <div className='Home'>
-             <ThreeNews />
-        </div>
-    );
-}
-
+export default () => (
+  <div className='Home'>
+    <ThreeNews />
+  </div>
+);
