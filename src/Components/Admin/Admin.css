@@ -1,3 +1,7 @@
+.admin {
+    display: flex;
+}
+
 .form--add-news {
     display: flex;
     flex-direction: column;
