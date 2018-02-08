@@ -26,6 +26,23 @@ class DB {
 				.catch(err => {throw err});
 		}
 	}
+
+	addOneNews(news) {
+		return this.db.collection('news').insertOne(news)
+			.then(() => {
+				console.log('News successfully inserted');
+			})
+			.catch(err => {throw err});
+	}
+
+	getAllNews() {
+		return this.db.collection('news').find().toArray()
+			.then((result) => {
+				console.log('News were received successfully');
+				return result;
+			})
+			.catch(err => {throw err});
+	}
 }
 
 module.exports = DB;
