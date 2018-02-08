@@ -5,10 +5,7 @@ import './Admin.css';
 
 export default () => (
   <div className='admin'>
-    <div className='form--add-news'>
-      <h1 className='form--heading'>Добавление новости</h1>
-      <Time />
-      <Form />
-    </div>
+    <Time />
+    <Form />
   </div>
 );
