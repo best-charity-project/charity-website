@@ -36,25 +36,25 @@ class Admin extends React.Component {
     render() {
         return (
             <div className='admin' >
-                <div className='admin--add-news'>
-                <h1 className='admin--heading'>Добавление новости</h1>
-                <p className='admin--current-date'>Текущая дата:  <Time /> </p>
-                <form onSubmit={this.handleSubmit} className = 'admin--form'>
+                <div className='form--add-news'>
+                <h1 className='form--heading'>Добавление новости</h1>
+                <p className='form--current-date'>Текущая дата:  <Time /> </p>
+                <form onSubmit={this.handleSubmit} className = 'form--form'>
                     <label>
-                        <p className = 'admin--label'>Заглавие:</p>
-                        <input value={this.state.title} onChange={this.handleChangeTitle} type = 'text' className = 'admin--title' placeholder = 'Type heading here'></input>
+                        <p className = 'form--label'>Заглавие:</p>
+                        <input value={this.state.title} onChange={this.handleChangeTitle} type = 'text' className = 'form--short-description' placeholder = 'Type heading here'></input>
                     </label>
                     <label>
-                        <p className = 'admin--label'>Краткое описание:</p>
-                        <input value={this.state.description} onChange={this.handleChangeDescription} type = 'text' className = 'admin--description' placeholder = 'Short description'></input>
+                        <p className = 'form--label'>Краткое описание:</p>
+                        <input value={this.state.description} onChange={this.handleChangeDescription} type = 'text' className = 'form--short-description' placeholder = 'Short description'></input>
                     </label>
                     <label>
-                        <p className = 'admin--label'>Текст новости:</p>
-                        <textarea value={this.state.value} onChange={this.handleChangeNewsText} className="admin--textarea" placeholder = 'Type your news here' rows="10" cols="100" >
+                        <p className = 'form--label'>Текст новости:</p>
+                        <textarea value={this.state.value} onChange={this.handleChangeNewsText} className="form--textarea" placeholder = 'Type your news here' rows="10" cols="100" >
                         </textarea>
                     </label>
                     <br />
-                    <button href='' className='admin--button'>Добавить новость</button> 
+                    <button className='form--button'>Добавить новость</button> 
                 </form>
                 </div>
             </div>         

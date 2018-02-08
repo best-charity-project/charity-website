@@ -1,8 +1,9 @@
 import React from 'react';
 
 export default () => {
+        let date = new Date();
            return (
-            <span>{`${new Date().getDate()}-${new Date().getMonth() + 1}-${new Date().getFullYear()}`}</span>
+             <span>{`${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`}</span>
         );
 }
 

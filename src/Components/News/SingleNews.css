@@ -1,4 +1,4 @@
-.news-title {
+.single-news--title {
     font-size: 2em;
     text-align: center;
     margin-top: 1em;
@@ -6,44 +6,34 @@
     font-weight: bold;
 }
 
-.news-title:hover {
-    cursor: pointer;
-    color: rgb(45, 96, 163);
-}
-
-.news-text {
+.single-news--text {
     padding: 1em;
     line-height: 1.5;
     text-indent: 2em;
     height: 55%;
     overflow: hidden;
+    text-align: justify;
 }
 
-.news--button {
+.single-news--button {
     text-transform: uppercase;
     text-decoration: none;
-    color: rgb(0, 0, 0);
     background-color: rgb(35, 226, 244);
     border: none;
     padding: 1em 2em;
-    max-width: 18em;
-    display: inline-block;
     color: #fff;
     transition: all .2s;
-    margin: 2em auto;
+    display: none;
+    margin:2em auto;
 }
 
-.news--button:hover {
+.single-news--button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 1em 2em rgba(0, 0, 0, .2);
     background-color: rgb(16, 163, 177);
     cursor: pointer;
 }
 
-.news--button:active {
+.single-news--button:active {
     transform: translateY(-1px);
 }
 
-.news--button {
-    display: none;
-}

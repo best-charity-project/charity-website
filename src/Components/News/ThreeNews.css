@@ -15,17 +15,13 @@
     background-color: #fff;
 }
 
-.homepage-news--box:hover {
-    cursor: pointer;
-}
-
 .news-box--heading {
     font-size: 2em;
     text-align: center;
     margin: 2em 0;
 }
 
-.homepage-news--box .news--button {
+.homepage-news--box .single-news--button {
     display: block;
 }
 
@@ -37,8 +33,5 @@
         height: 23em;
         width: 100%;
     }
-    .news--link {
-        max-width: 75%;
-        margin: 0 auto;
-    }
+    
 }
