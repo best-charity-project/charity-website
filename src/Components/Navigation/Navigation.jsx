@@ -17,24 +17,27 @@ class Navigation extends React.Component {
     this.setState({ active: !currentState });
   }
 
-  render() {
-    const navigationClassNames = classnames('navigation--menu-image', {
-      'navigation--menu-open': this.state.active,
+  anyfunc() {
+    return classnames('navigation--menu-image', {
+      'navigation--menu-image--open': this.state.active,
     });
+  }
+
+  render() {
     return (
       <nav className='navigation'>
-        <div className='navigation--menu' onClick={this.toggleClass}>
-          <img className={navigationClassNames} src={navMenuPicture} />
-          <Link to='/' className='navigation--menu-element'>
+        <div className='navigation--menu' onClick={this.ToggleClass}>
+          <img className={this.anyfunc()} src={navMenuPicture} />
+          <Link to='/' className='navigation--menu--menu-element'>
             Home
           </Link>
-          <Link to='/admin' className='navigation--menu-element'>
+          <Link to='/admin' className='navigation--menu--menu-element'>
             Admin
           </Link>
-          <Link to='/about' className='navigation--menu-element'>
+          <Link to='/about' className='navigation--menu--menu-element'>
             About
           </Link>
-          <Link to='/news' className='navigation--menu-element'>
+          <Link to='/news' className='navigation--menu--menu-element'>
             News
           </Link>
         </div>

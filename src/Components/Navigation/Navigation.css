@@ -2,13 +2,14 @@
     background-color: #ECEFF1;
     height: 4em;
     width: 100%;
+    z-index: 1;
     display: flex;
     justify-content: flex-end;
     position: fixed;
     align-items: center;
 }
 
-.navigation--menu-element {
+.navigation--menu--menu-element {
     color: rgb(51, 51, 51);
     border: 1px solid #ECEFF1;
     padding: 0.5em;
@@ -18,7 +19,7 @@
     font-family: 'roboto', sans-serif;
 }
 
-.navigation--menu-element:hover {
+.navigation--menu--menu-element:hover {
     color: aliceblue;
     transition: .5s all ease;
     background-color: #A4A4A4;
@@ -42,11 +43,11 @@
     height: 100%;
 }
 
-.navigation--menu .navigation--menu-element {
+.navigation--menu .navigation--menu--menu-element {
     border-radius: 5px;
 }
 
-.navigation--menu-image.navigation--menu-open {
+.navigation--menu-image.navigation--menu-image--open {
     transform: rotate(90deg);
     transition: .3s all ease;
 }
@@ -58,15 +59,15 @@
     .navigation-menu {
         display: none;
     }
-    .navigation--menu-element {
+    .navigation--menu--menu-element {
         display: none;
         text-align: center;
         transition: .5s all ease;
     }
-    .navigation--menu-image+.navigation--menu-element {
+    .navigation--menu-image+.navigation--menu--menu-element {
         border-top: 1px solid #2E2E2E;
     }
-    .navigation--menu-open.navigation--menu-image~.navigation--menu-element {
+    .navigation--menu-image--open.navigation--menu-image~.navigation--menu--menu-element {
         display: block;
         width: inherit;
         border-radius: 0;
