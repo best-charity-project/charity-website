@@ -10,20 +10,19 @@ class DB {
 	}
 	connect() {
 		return MongoClient.connect(this.URI)
-				.then((client) => {
-					this.db = client.db(dbName);
-					this.dbClient = client;
-					console.log('Connected to database');
-					return db;
-				})
-				.catch(err => {throw err});
+			.then((client) => {
+				this.db = client.db(dbName);
+				this.dbClient = client;
+				console.log('Connected to database');
+			})
+			.catch(err => { throw err });
 	}
 
 	close() {
 		if (this.db) {
 			this.dbClient.close()
 				.then(() => console.log('Connection closed'))
-				.catch(err => {throw err});
+				.catch(err => { throw err });
 		}
 	}
 
@@ -32,7 +31,7 @@ class DB {
 			.then(() => {
 				console.log('News successfully inserted');
 			})
-			.catch(err => {throw err});
+			.catch(err => { throw err });
 	}
 
 	getAllNews() {
@@ -41,7 +40,7 @@ class DB {
 				console.log('News were received successfully');
 				return result;
 			})
-			.catch(err => {throw err});
+			.catch(err => { throw err });
 	}
 }
 
