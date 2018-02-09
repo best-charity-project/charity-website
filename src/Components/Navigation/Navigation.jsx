@@ -22,7 +22,7 @@ class Navigation extends React.Component {
   }
 
   keyDownAction(event) {
-    if (event.ctrlKey === true && event.keyCode === keysValue.spaceScanCode) {
+    if (event.ctrlKey && event.keyCode === keysValue.spaceScanCode) {
       this.toggleClass();
     }
   }

@@ -7,7 +7,7 @@ import '../News/ThreeNews.css';
 export default () => (
   <div className='home indent'>
     <div className='home--image-wrapper'>
-      <img src={BigImage} className='home--image_big' alt='front pictyre' />
+      <img src={BigImage} className='home--image_big' alt='front picture' />
       <ThreeNews />
     </div>
   </div>
