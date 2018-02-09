@@ -1,4 +1,5 @@
 import React from 'react';
+import Time from '../../Time/Time';
 import './Form.css';
 
 class Form extends React.Component {
@@ -37,7 +38,8 @@ class Form extends React.Component {
   render() {
     return (
       <div className='form--add-news'>
-        <h1 className='form--heading'>Добавление новости</h1>
+      <h1 className='form--heading'>Добавление новости</h1>
+      <Time />
         <form onSubmit={this.handleSubmit} className='form--form'>
           <label>
             <p className='form--label'>Заглавие:</p>
@@ -73,7 +75,7 @@ class Form extends React.Component {
           <br />
           <button className='form--button'>Добавить новость</button>
         </form>
-      </div>
+ </div>
     );
   }
 }

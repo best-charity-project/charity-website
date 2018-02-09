@@ -9,16 +9,11 @@
 
 .news-list--single-box {
     width: 30em;
-    height: 23em;
+    height: 24em;
     border-radius: 5px;
     padding-top: 1em;
     margin: 1em;
     box-shadow: 0 .5em 1em rgb(238, 235, 235);
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    overflow: hidden;
-    text-indent: 3em;
     background-color: #fff;
 }
 
@@ -29,11 +24,12 @@
 }
 
 .news-list--single-box .single-news--button {
-    display: inline-block;
+    display: block;
 }
 
-@media (max-width: 1090px) {
-    .news--single-box {
-        width: 90%;
+@media (max-width: 1030px) {
+    .news-list--single-box {
+        width: 95%;
+        margin: .5em;
     }
 }

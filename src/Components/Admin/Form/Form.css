@@ -49,8 +49,21 @@
 .form--button:hover {
     transform: translateY(-3px);
     background-color: rgba(18, 18, 145, 0.644);
+    cursor: pointer;
 }
 
 .form--button:active {
     transform: translateY(-1px);
+}
+
+@media (max-width: 500px) {
+    .form--add-news {
+        padding: .5em;
+    }
+    .form--short-description {
+        width: 95%;
+    }
+    .form--textarea {
+        width: 95%;
+    }
 }

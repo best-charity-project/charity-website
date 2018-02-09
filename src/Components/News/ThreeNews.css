@@ -1,13 +1,13 @@
-.homepage-news {
+.news-box--homepage-news {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     background-color: #F4F4F4;
 }
 
-.homepage-news--box {
+.news-box--single-item {
     width: 22em;
-    height: 26em;
+    height: 25em;
     border-radius: 5px;
     padding-top: 2em;
     margin: 1em;
@@ -21,16 +21,17 @@
     margin: 2em 0;
 }
 
-.homepage-news--box .single-news--button {
+.news-box--single-item .single-news--button {
     display: block;
 }
 
 @media (max-width:1150px) {
-    .homepage-news {
+    .news-box--homepage-news {
         flex-direction: column;
     }
-    .homepage-news--box {
-        height: 23em;
-        width: 100%;
+    .news-box--single-item {
+        height: 21em;
+        width: 95%;
+        margin: .5em;
     }
 }

@@ -5,7 +5,7 @@ import './News.css';
 
 export default () => (
   <div className='news-list'>
-    <h1 className='news-list--heading'>Latest News</h1>
+    <h1 className='news-list--heading'>Новости</h1>
     <div className='news-list--text'>
       {data.map(item => (
         <SingleNews
