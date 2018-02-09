@@ -5,7 +5,7 @@ import './Home.css';
 export default () => (
   <div className='home indent'>
     <div className='home--image-wrapper'>
-      <img src={BigImage} className='home--image_big' />
+      <img src={BigImage} className='home--image_big' alt='front pictyre' />
     </div>
   </div>
 );

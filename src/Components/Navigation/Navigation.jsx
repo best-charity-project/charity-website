@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import KeysValue from '../../config/KeysValue';
+import keysValue from '../../config/keysValue.json';
 import navMenuPicture from '../img/NavMenu.svg';
 import './Navigation.css';
 
@@ -14,17 +14,17 @@ class Navigation extends React.Component {
       active: false,
     };
   }
-  keyDownAction(event) {
-    if (event.ctrlKey === true && event.keyCode === KeysValue.SpaceScanCode) {
-      console.log(event.keyCode);
-      this.toggleClass();
-    }
-  }
 
   getImageClass() {
-    return classnames('navigation--menu-image', {
-      'navigation--menu-image--open': this.state.active,
+    return classnames('menu-image', {
+      'menu-image-open': this.state.active,
     });
+  }
+
+  keyDownAction(event) {
+    if (event.ctrlKey === true && event.keyCode === keysValue.spaceScanCode) {
+      this.toggleClass();
+    }
   }
 
   toggleClass() {
@@ -36,7 +36,7 @@ class Navigation extends React.Component {
     return (
       <nav className='navigation'>
         <div
-          title='&quot;ctrl+space&quot; for open nemu'
+          title='&quot;ctrl+space&quot; for open menu'
           className='navigation--menu'
           onClick={this.toggleClass}
           onKeyUp={this.keyDownAction}
@@ -44,16 +44,16 @@ class Navigation extends React.Component {
           role='button'
         >
           <img className={this.getImageClass()} src={navMenuPicture} alt='Menu' />
-          <Link to='/' className='navigation--menu--menu-element'>
+          <Link to='/' className='menu--element'>
             Home
           </Link>
-          <Link to='/admin' className='navigation--menu--menu-element'>
+          <Link to='/admin' className='menu--element'>
             Admin
           </Link>
-          <Link to='/about' className='navigation--menu--menu-element'>
+          <Link to='/about' className='menu--element'>
             About
           </Link>
-          <Link to='/news' className='navigation--menu--menu-element'>
+          <Link to='/news' className='menu--element'>
             News
           </Link>
         </div>
