@@ -8,6 +8,7 @@ class DB {
 		this.db = null;
 		this.dbClient = null;
 	}
+
 	connect() {
 		return MongoClient.connect(this.URI)
 			.then((client) => {
