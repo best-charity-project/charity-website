@@ -3,10 +3,7 @@
     height: 4em;
     width: 100%;
     z-index: 1;
-    display: flex;
-    justify-content: flex-end;
     position: fixed;
-    align-items: center;
 }
 
 .navigation--menu--menu-element {
@@ -32,6 +29,9 @@
     transition: .3s all ease;
     height: 2em;
 }
+.navigation--menu-image:hover::after { 
+    content: 'ffff'; 
+   }
 
 .navigation--menu {
     width: 100%;
