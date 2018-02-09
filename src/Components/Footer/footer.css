@@ -1,0 +1,14 @@
+.footer {
+    background-color: #f8f8f8;
+    margin-left: 1em;
+    line-height: 22px;
+    letter-spacing: .4px;
+}
+
+.footer--content {
+    text-decoration: none;
+    font-family: 'roboto', sans-serif;
+    color: rgb(51, 51, 51);
+    display: block;
+    text-align: right;
+}

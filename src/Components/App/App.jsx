@@ -1,13 +1,17 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import Home from '../Home/Home';
 import Admin from '../Admin/Admin';
 import About from '../About/About';
-import Home from '../Home/Home';
 import News from '../News/News';
 import NewsItem from '../News/NewsItem/NewsItem';
+import './App.css';
 
 export default () => (
   <div className='app'>
+    <Header />
     <Switch>
       <Route exact path='/' component={Home} />
       <Route path='/admin' component={Admin} />
@@ -16,5 +20,6 @@ export default () => (
       <Route path='/news/:id' component={NewsItem} />
       <Redirect to='/' />
     </Switch>
+    <Footer />
   </div>
 );

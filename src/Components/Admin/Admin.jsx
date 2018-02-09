@@ -3,7 +3,7 @@ import Form from './Form/Form';
 import './Admin.css';
 
 export default () => (
-  <div className='admin'>
+  <div className='admin indent'>
     <Form />
   </div>
 );

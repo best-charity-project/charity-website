@@ -4,7 +4,7 @@ import data from '../../Database/News.json';
 import './News.css';
 
 export default () => (
-  <div className='news-list'>
+  <div className='news-list indent'>
     <h1 className='news-list--heading'>Новости</h1>
     <div className='news-list--text'>
       {data.map(item => (

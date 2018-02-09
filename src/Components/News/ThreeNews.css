@@ -2,7 +2,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: #F4F4F4;
 }
 
 .news-box--single-item {

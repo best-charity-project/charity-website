@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto&subset=cyrillic');
+body {
+    font-family: 'Open-sans', sans-serif;
+    background-color: #F4F4F4;
+}
+
+.indent {
+    flex-grow: 1;
+    position: relative;
+    margin: 0 auto;
+}
+
+.indent::before {
+    height: 4em;
+    display: block;
+    content: " ";
+}
