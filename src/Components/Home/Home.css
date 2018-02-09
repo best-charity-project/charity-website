@@ -5,4 +5,9 @@
 
 .home--image-wrapper {
     display: flex;
+    flex-direction: column;
+}
+
+.navigation .navigation-under-box {
+    display: none;
 }

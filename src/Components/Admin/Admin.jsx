@@ -1,8 +1,9 @@
 import React from 'react';
-import NewsList from './NewsList/NewsList.jsx';
+import Form from './Form/Form';
+import './Admin.css';
 
 export default () => (
-  <div className='Admin indent'>
-    <NewsList />
+  <div className='admin indent'>
+    <Form />
   </div>
 );

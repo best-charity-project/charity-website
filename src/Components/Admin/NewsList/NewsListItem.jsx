@@ -1,5 +1,5 @@
 import React from 'react';
-import './newsListItem.css';
+import './NewsListItem.css';
 
 class NewsListItem extends React.Component {
   render() {
