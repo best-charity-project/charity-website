@@ -66,7 +66,7 @@
     .menu-image+.menu--element {
         border-top: 1px solid #2E2E2E;
     }
-    .menu-image-open.menu-image~.menu--element {
+    .menu-image.menu-image-open~.menu--element {
         display: block;
         width: inherit;
         border-radius: 0;
