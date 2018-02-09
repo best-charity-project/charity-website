@@ -1,30 +1,24 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Header from '../Header/Header';
-import Navigation from '../Navigation/Navigation';
+import Footer from '../Footer/Footer';
+import Home from '../Home/Home';
 import Admin from '../Admin/Admin';
 import About from '../About/About';
-import Home from '../Home/Home';
-import Footer from '../Footer/Footer';
 import News from '../News/News';
+import './App.css';
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <Header />
-        <Navigation />
-        <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route path="/admin" component={Admin}/>
-          <Route path="/about" component={About}/>
-          <Route path="/news" component={News}/>
-          <Redirect to="/"/>
-        </Switch>
-        <Footer />
-      </div>
-    )
-  }
-}
-
-export default App
+export default () => (
+  <div className='app'>
+    <Header />
+    <Switch>
+      <Route exact path='/' component={Home} />
+      <Route path='/admin' component={Admin} />
+      <Route path='/about' component={About} />
+      <Route path='/news' component={News} />
+      <Redirect to='/' />
+      <Redirect to='/' />
+    </Switch>
+    <Footer />
+  </div>
+);

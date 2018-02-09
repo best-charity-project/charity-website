@@ -1,13 +1,5 @@
 import React from 'react';
+import Navigation from '../Navigation/Navigation';
+import './Header.css';
 
-class Header extends React.Component {
-    render() {
-        return (
-            <header className="Header">
-                Logo here
-            </header>
-        );
-    }
-}
-
-export default Header
+export default () => <Navigation />;
