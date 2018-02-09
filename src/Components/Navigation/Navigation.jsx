@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
+import KeysValue from '../../config/KeysValue';
 import navMenuPicture from '../img/NavMenu.svg';
 import './Navigation.css';
 
@@ -14,7 +15,7 @@ class Navigation extends React.Component {
     };
   }
   keyDownAction(event) {
-    if (event.ctrlKey == true && event.keyCode == 32) {
+    if (event.ctrlKey === true && event.keyCode === KeysValue.SpaceScanCode) {
       console.log(event.keyCode);
       this.toggleClass();
     }
