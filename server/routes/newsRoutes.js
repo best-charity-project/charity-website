@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const DB = require('../database/database');
+const database = new DB();
 
 router.route('/news')
-
-	// get all news
 	.get((req, res) => {
-		const database = new DB();
 		database.connect(database.URI)
 			.then(() => {
 				return database.getAllNews();
@@ -17,9 +15,7 @@ router.route('/news')
 			})
 			.catch((err) => { throw err });
 	})
-	// add one news
 	.post((req, res) => {
-		const database = new DB();
 		database.connect(database.URI)
 			.then(() => {
 				const news = req.body;
