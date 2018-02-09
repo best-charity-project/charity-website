@@ -35,6 +35,7 @@ class Navigation extends React.Component {
     return (
       <nav className='navigation'>
         <div
+          title='&quot;ctrl+space&quot; for open nemu'
           className='navigation--menu'
           onClick={this.toggleClass}
           onKeyUp={this.keyDownAction}
