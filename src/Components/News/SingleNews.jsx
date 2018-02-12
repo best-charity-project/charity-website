@@ -7,7 +7,7 @@ const SingleNews = function SingleNews(props) {
   return (
     <div className={props.className}>
       <h2 className='single-news--title'>{props.title}</h2>
-      <p className='single-news--text'>{props.text}</p>
+      <p className='single-news--text'>{props.shortDescription}</p>
       <Link to='/news/1' className='single-news-link'>
         <button className='single-news--button'>Подробнее</button>
       </Link>

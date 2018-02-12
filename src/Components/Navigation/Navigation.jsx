@@ -34,7 +34,7 @@ class Navigation extends React.Component {
 
   render() {
     return (
-      <nav className='navigation'>
+      <nav className='navigation' onFocus>
         <div
           title='&quot;ctrl+space&quot; for open menu'
           className='navigation--menu'

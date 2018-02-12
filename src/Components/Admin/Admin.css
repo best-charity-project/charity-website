@@ -1,4 +1,12 @@
 .admin {
     max-width: 80em;
     margin: 0 auto;
+    height: calc(100vh - 4em);
+}
+
+@media (max-width: 800px) {
+    .admin {
+        width: 95%;
+        margin: .5em;
+    }
 }
