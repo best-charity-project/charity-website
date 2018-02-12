@@ -1,0 +1,13 @@
+.home--image_big {
+    width: 100%;
+    height: 100%;
+}
+
+.home--image-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.navigation .navigation-under-box {
+    display: none;
+}

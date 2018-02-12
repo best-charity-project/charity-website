@@ -1,19 +1,65 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import classnames from 'classnames';
+import KeysValue from '../../config/KeysValue';
+import navMenuPicture from '../img/NavMenu.svg';
+import './Navigation.css';
 
 class Navigation extends React.Component {
-    render() {
-        return (
-            <nav className="Navigation">
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/admin">Admin</Link></li>
-                    <li><Link to="/about">About</Link></li>
-                    <li><Link to="/news">News</Link></li>
-                </ul>
-            </nav>
-        );
+  constructor(props) {
+    super(props);
+    this.toggleClass = this.toggleClass.bind(this);
+    this.keyDownAction = this.keyDownAction.bind(this);
+    this.state = {
+      active: false,
+    };
+  }
+  keyDownAction(event) {
+    if (event.ctrlKey === true && event.keyCode === KeysValue.SpaceScanCode) {
+      console.log(event.keyCode);
+      this.toggleClass();
     }
+  }
+
+  getImageClass() {
+    return classnames('navigation--menu-image', {
+      'navigation--menu-image--open': this.state.active,
+    });
+  }
+
+  toggleClass() {
+    const currentState = this.state.active;
+    this.setState({ active: !currentState });
+  }
+
+  render() {
+    return (
+      <nav className='navigation'>
+        <div
+          title='&quot;ctrl+space&quot; for open nemu'
+          className='navigation--menu'
+          onClick={this.toggleClass}
+          onKeyUp={this.keyDownAction}
+          tabIndex='0'
+          role='button'
+        >
+          <img className={this.getImageClass()} src={navMenuPicture} alt='Menu' />
+          <Link to='/' className='navigation--menu--menu-element'>
+            Home
+          </Link>
+          <Link to='/admin' className='navigation--menu--menu-element'>
+            Admin
+          </Link>
+          <Link to='/about' className='navigation--menu--menu-element'>
+            About
+          </Link>
+          <Link to='/news' className='navigation--menu--menu-element'>
+            News
+          </Link>
+        </div>
+      </nav>
+    );
+  }
 }
 
-export default Navigation
+export default Navigation;
