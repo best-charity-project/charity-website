@@ -30,16 +30,17 @@ class Form extends React.Component {
       url: event.target.value,
     });
   }
-  handleSubmit(event) {
-    event.preventDefault();
+
+  handleSubmit() {
+    this.event.preventDefault();
   }
   render() {
     return (
       <div className='form--add-news'>
         <h1 className='form--heading'>Добавление новости</h1>
         <Time />
-        <form onSubmit={this.handleSubmit} className='form--form'>
-          <label>
+        <form name='addNews' onSubmit={this.handleSubmit} className='form--form'>
+          <label htmlFor='addNews'>
             <p className='form--label'>Заглавие:</p>
             <input
               value={this.state.title}
@@ -49,7 +50,7 @@ class Form extends React.Component {
               placeholder='Type heading here'
             />
           </label>
-          <label>
+          <label htmlFor='addNews'>
             <p className='form--label'>Краткое описание:</p>
             <textarea
               value={this.state.shortDescription}
@@ -59,7 +60,7 @@ class Form extends React.Component {
               placeholder='Short description'
             />
           </label>
-          <label>
+          <label htmlFor='addNews'>
             <p className='form--label'>Ссылка на новость:</p>
             <input
               value={this.state.url}

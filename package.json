@@ -7,18 +7,21 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.0",
-    "reset-css": "^2.2.1"
+    "react-scripts": "1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "jsdomtest": "react-scripts test --env=jsdom",
+    "test": "eslint ./",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
     "eslint": "^4.17.0",
     "eslint-config-airbnb": "^16.1.0",
-    "prettier": "^1.10.2"
+    "husky": "^0.15.0-rc.8"
+  },
+  "husky": {
+    "hooks": {}
   }
 }
