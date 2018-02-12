@@ -34,3 +34,8 @@
         margin: .5em;
     }
 }
+@media (max-width: 800px) {
+    .news-box--heading{
+        margin: 1em 0;
+    }
+    }
