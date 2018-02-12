@@ -10,9 +10,13 @@ class Navigation extends React.Component {
     super(props);
     this.toggleClass = this.toggleClass.bind(this);
     this.keyDownAction = this.keyDownAction.bind(this);
+    this.setStateToFalse = this.setStateToFalse.bind(this);
     this.state = {
       active: false,
     };
+  }
+  setStateToFalse() {
+    this.setState({ active: false });
   }
 
   getImageClass() {
@@ -35,25 +39,26 @@ class Navigation extends React.Component {
   render() {
     return (
       <nav className='navigation'>
-        <div
-          title='&quot;ctrl+space&quot; for open menu'
-          className='navigation--menu'
-          onClick={this.toggleClass}
-          onKeyUp={this.keyDownAction}
-          tabIndex='0'
-          role='button'
-        >
-          <img className={this.getImageClass()} src={navMenuPicture} alt='Menu' />
-          <Link to='/' className='menu--element'>
+        <div title='&quot;ctrl+space&quot; for open menu' className='navigation--menu'>
+          <img
+            className={this.getImageClass()}
+            onClick={this.toggleClass}
+            onKeyUp={this.keyDownAction}
+            src={navMenuPicture}
+            alt='Menu'
+            tabIndex='0'
+            role='button'
+          />
+          <Link onClick={this.setStateToFalse} to='/' className='menu--element'>
             Home
           </Link>
-          <Link to='/admin' className='menu--element'>
+          <Link onClick={this.setStateToFalse} to='/admin' className='menu--element'>
             Admin
           </Link>
-          <Link to='/about' className='menu--element'>
+          <Link onClick={this.setStateToFalse} to='/about' className='menu--element'>
             About
           </Link>
-          <Link to='/news' className='menu--element'>
+          <Link onClick={this.setStateToFalse} to='/news' className='menu--element'>
             News
           </Link>
         </div>
