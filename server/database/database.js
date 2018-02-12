@@ -14,23 +14,19 @@ class DB {
 			.then((client) => {
 				this.db = client.db(dbName);
 				this.dbClient = client;
-				console.log('Connected to database');
 			})
 			.catch(err => { throw err });
 	}
 
 	close() {
 		if (this.db) {
-			this.dbClient.close()
-				.then(() => console.log('Connection closed'))
-				.catch(err => { throw err });
+			this.dbClient.close();
 		}
 	}
 
 	addOneNews(news) {
 		return this.db.collection('news').insertOne(news)
 			.then(() => {
-				console.log('News successfully inserted');
 			})
 			.catch(err => { throw err });
 	}
@@ -38,7 +34,6 @@ class DB {
 	getAllNews() {
 		return this.db.collection('news').find().toArray()
 			.then((result) => {
-				console.log('News were received successfully');
 				return result;
 			})
 			.catch(err => { throw err });
