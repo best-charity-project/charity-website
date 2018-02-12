@@ -15,7 +15,7 @@ export default () => (
             className='news-box--single-item'
             key={item.id}
             title={item.title}
-            text={item.text}
+            shortDescription={item.shortDescription}
           />
         ))}
     </div>

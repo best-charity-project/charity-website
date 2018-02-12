@@ -12,7 +12,7 @@ export default () => (
           className='news-list--single-box'
           key={item.id}
           title={item.title}
-          text={item.text}
+          shortDescription={item.shortDescription}
         />
       ))}
     </div>
