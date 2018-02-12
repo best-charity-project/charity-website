@@ -18,7 +18,7 @@ const SingleNews = function SingleNews(props) {
 SingleNews.propTypes = {
   className: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  shortDescription: PropTypes.string.isRequired,
 };
 
 export default SingleNews;
