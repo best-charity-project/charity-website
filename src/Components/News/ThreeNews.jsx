@@ -7,6 +7,7 @@ import '../News/SingleNews.css';
 export default () => (
   <div className='news-box'>
     <h1 className='news-box--heading'>Свежие новости</h1>
+    <hr className='heading-underline' />
     <div className='news-box--homepage-news'>
       {data
         .slice(0, 3)
