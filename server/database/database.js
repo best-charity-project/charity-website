@@ -11,7 +11,7 @@ class DB {
 
 	connect() {
 		return MongoClient.connect(this.URI)
-			.then((client) => {
+			.then(client => {
 				this.db = client.db(dbName);
 				this.dbClient = client;
 			})
@@ -25,15 +25,12 @@ class DB {
 	}
 
 	addOneNews(news) {
-		return this.db.collection('news').insertOne(news)
-			.then(() => {
-			})
-			.catch(err => { throw err });
+		return this.db.collection('news').insertOne(news);
 	}
 
 	getAllNews() {
 		return this.db.collection('news').find().toArray()
-			.then((result) => {
+			.then(result => {
 				return result;
 			})
 			.catch(err => { throw err });

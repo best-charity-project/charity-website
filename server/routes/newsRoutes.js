@@ -9,11 +9,11 @@ router.route('/news')
 			.then(() => {
 				return database.getAllNews();
 			})
-			.then((result) => {
+			.then(result => {
 				res.json(result);
 				database.close();
 			})
-			.catch((err) => { throw err });
+			.catch(err => { throw err });
 	})
 	.post((req, res) => {
 		database.connect(database.URI)
@@ -25,7 +25,7 @@ router.route('/news')
 				res.json({ message: 'News was created successfully!' });
 				database.close();
 			})
-			.catch((err) => { throw err });
+			.catch(err => { throw err });
 	});
 
 module.exports = router;
