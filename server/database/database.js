@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb').MongoClient; // eslint-disable-line import/no-unresolved
+const { MongoClient } = require('mongodb').MongoClient;
 const {
   user, password, port, dbName, host,
 } = require('../configs/config.json');

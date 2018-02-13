@@ -20,8 +20,8 @@ class Navigation extends React.Component {
   }
 
   getImageClass() {
-    return classnames('menu-image', {
-      'menu-image-open': this.state.active,
+    return classnames('menu-image-wrapper', {
+      'image-wrapper-open': this.state.active,
     });
   }
 
@@ -40,16 +40,15 @@ class Navigation extends React.Component {
     return (
       <nav className='navigation'>
         <div title='&quot;ctrl+space&quot; for open menu' className='navigation--menu'>
-          <img
+          <div
             className={this.getImageClass()}
             onClick={this.toggleClass}
             onKeyUp={this.keyDownAction}
-            src={navMenuPicture}
-            alt='Menu'
             tabIndex='0'
-            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
             role='button'
-          />
+          >
+            <img src={navMenuPicture} alt='Menu' className='menu-image' />
+          </div>
           <Link onClick={this.setStateToFalse} to='/' className='menu--element'>
             Главная
           </Link>
