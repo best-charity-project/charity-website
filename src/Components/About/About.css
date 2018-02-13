@@ -20,3 +20,9 @@
     text-align: justify;
     text-indent: 2em;
 }
+
+@media (max-width: 800px) {
+    .about-us--heading {
+        padding-top: 1em;
+    }
+}

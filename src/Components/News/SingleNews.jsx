@@ -1,29 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './SingleNews.css';
+import shortenText from './ShortenText';
 
-export default class SingleNews extends React.Component {
-  static shortenText(short) {
-    let result = short;
-    const size = 240;
-    if (result.length > size) {
-      result = `${result.slice(0, size)} ...`;
-    }
-    return result;
-  }
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    return (
-      <div className={this.props.className}>
-        <h2 className='single-news--title'>{this.props.title}</h2>
-        <p className='single-news--text'>{SingleNews.shortenText(this.props.shortDescription)}</p>
-        <Link to='/news/1' className='single-news-link'>
-          <button className='single-news--button'>Подробнее</button>
-        </Link>
-      </div>
-    );
-  }
-}
+const SingleNews = function SingleNews(props) {
+  return (
+    <div className={props.className}>
+      <h2 className='single-news--title'>{props.title}</h2>
+      <p className='single-news--text'>{shortenText(props.shortDescription)}</p>
+      <Link to='/news/1' className='single-news-link'>
+        <button className='single-news--button'>Подробнее</button>
+      </Link>
+    </div>
+  );
+};
+
+SingleNews.propTypes = {
+  className: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  shortDescription: PropTypes.string.isRequired,
+};
+
+export default SingleNews;
