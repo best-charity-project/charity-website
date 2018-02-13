@@ -7,7 +7,10 @@
     position: fixed;
 }
 
-
+.menu-image {
+    width: 2em;
+    height: 2em;
+}
 .navigation--menu {
     width: 100%;
     display: flex;
@@ -34,8 +37,8 @@
     background-color: #A4A4A4;
 }
 
-.menu-image {
-    margin: 1em 1em 1em 0;
+.menu-image-wrapper {
+    margin: 1em;
     align-self: flex-end;
     display: none;
     transition: .3s all ease;
@@ -46,14 +49,14 @@
     border-radius: 5px;
 }
 
-.menu-image.menu-image-open {
+.menu-image-wrapper.image-wrapper-open {
     transform: rotate(90deg);
     transition: .3s all ease;
 }
 
 @media (max-width: 400px) {
-    .menu-image {
-        display: flex;
+    .menu-image-wrapper {
+        display: block;
     }
     .navigation-menu {
         display: none;
@@ -63,10 +66,10 @@
         text-align: center;
         transition: .5s all ease;
     }
-    .menu-image+.menu--element {
+    .menu-image-wrapper+.menu--element {
         border-top: 1px solid #2E2E2E;
     }
-    .menu-image.menu-image-open~.menu--element {
+    .menu-image-wrapper.image-wrapper-open~.menu--element {
         display: block;
         width: inherit;
         border-radius: 0;
