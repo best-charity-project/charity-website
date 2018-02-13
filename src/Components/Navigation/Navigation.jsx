@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
@@ -48,7 +47,8 @@ class Navigation extends React.Component {
             src={navMenuPicture}
             alt='Menu'
             tabIndex='0'
-            role='button' // eslint-disable-line jsx-a11y/no-noninteractive-element-to-interactive-role
+            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+            role='button'
           />
           <Link onClick={this.setStateToFalse} to='/' className='menu--element'>
             Главная
