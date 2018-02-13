@@ -13,7 +13,7 @@
     margin: 2em 0;
 }
 
-.form--short-description {
+.form--input {
     width: 30em;
     height: 2em;
     color: #777;
@@ -60,7 +60,7 @@
     .form--add-news {
         padding: .5em;
     }
-    .form--short-description {
+    .form--input {
         width: 95%;
     }
     .form--textarea {

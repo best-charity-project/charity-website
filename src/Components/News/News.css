@@ -32,3 +32,8 @@
         margin: .5em;
     }
 }
+@media (max-width: 800px) {
+    .news-list--heading{
+        margin: 1em 0;
+    }
+    }

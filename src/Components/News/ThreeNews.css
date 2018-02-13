@@ -14,10 +14,21 @@
     background-color: #fff;
 }
 
+.heading-underline {
+    width: 500px; 
+    border-color: rgb(47, 179, 219);
+    margin-bottom: 3em;
+}
+
 .news-box--heading {
-    font-size: 2em;
     text-align: center;
-    margin: 2em 0;
+    margin: 1em 0 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 50px;
+    color: #23E2F4;
+    letter-spacing: 5px;
+    text-transform: uppercase;
 }
 
 .news-box--single-item .single-news--button {

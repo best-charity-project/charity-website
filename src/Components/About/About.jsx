@@ -2,7 +2,7 @@ import React from 'react';
 import './About.css';
 
 export default () => (
-  <div className='about-us'>
+  <div className='about-us indent'>
     <h1 className='about-us--heading'>О нас </h1>
     <p className='about-us--text'>
       Чтобы разобраться в ситуации, возникающей вокруг человека с особыми потребностями, на данный
