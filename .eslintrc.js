@@ -12,7 +12,8 @@ module.exports = {
     'jsx-quotes': ['error', 'prefer-single'],
     'linebreak-style': [2, 'windows'],
     'jsx-a11y/no-noninteractive-tabindex': 0,
-    'react/jsx-filename-extension': 0,
-    'jsx-a11y/no-noninteractive-element-to-interactive-role': 0,
   },
 };
+eslint: {
+  ignorePath: '.eslintignore';
+}
