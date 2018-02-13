@@ -6,7 +6,7 @@ export default () => (
   <div className='about-us indent'>
     <h1 className='about-us--heading'>О нас </h1>
     <div className='about-us--main'>
-      <img src={AboutUs} className='main--image' alt='here should be a pictur' />
+      <img src={AboutUs} className='main--image' alt='here should be a pic' />
       <div className='main--content'>
         <p className='content--text'>
           Не следует, однако забывать, что новая модель организационной деятельности представляет
@@ -29,15 +29,9 @@ export default () => (
         </p>
         <h2 className='content--heading'>Контакты:</h2>
         <div className='content--text'>
-          <div>
-            <span className='text--item'>Телефон: </span>+375-29-3829082
-          </div>
-          <div>
-            <span className='text--item'>Email: </span>lovethyneighbor@gmail.com
-          </div>
-          <div>
-            <span className='text--item'>Адрес: </span>г.Минск, ул.Гая, 14
-          </div>
+          <span className='text--item'>Телефон: </span>+375-29-3829082 <br />
+          <span className='text--item'>Email: </span>lovethyneighbor@gmail.com <br />
+          <span className='text--item'>Адрес: </span>г.Минск, ул.Гая, 14 <br />
         </div>
       </div>
     </div>
