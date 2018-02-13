@@ -13,7 +13,7 @@ export default () => (
           title={item.title}
           shortDescription={item.shortDescription}
         />
-        <button className='form--button news-admin--button'>Редактировать новость</button>
+        <button className='form--button news-admin--button'>Редактировать</button>
         <button className='form--button news-admin--button'>Удалить</button>
       </div>
     ))}
