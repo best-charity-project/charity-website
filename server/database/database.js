@@ -8,23 +8,32 @@ class DB {
 		this.db = null;
 		this.dbClient = null;
 	}
+
 	connect() {
 		return MongoClient.connect(this.URI)
-				.then((client) => {
-					this.db = client.db(dbName);
-					this.dbClient = client;
-					console.log('Connected to database');
-					return db;
-				})
-				.catch(err => {throw err});
+			.then(client => {
+				this.db = client.db(dbName);
+				this.dbClient = client;
+			})
+			.catch(err => { throw err });
 	}
 
 	close() {
 		if (this.db) {
-			this.dbClient.close()
-				.then(() => console.log('Connection closed'))
-				.catch(err => {throw err});
+			this.dbClient.close();
 		}
+	}
+
+	addOneNews(news) {
+		return this.db.collection('news').insertOne(news);
+	}
+
+	getAllNews() {
+		return this.db.collection('news').find().toArray()
+			.then(result => {
+				return result;
+			})
+			.catch(err => { throw err });
 	}
 }
 

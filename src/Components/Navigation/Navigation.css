@@ -7,33 +7,6 @@
     position: fixed;
 }
 
-.navigation--menu--menu-element {
-    color: rgb(51, 51, 51);
-    border: 1px solid #ECEFF1;
-    padding: 0.5em;
-    text-decoration: none;
-    font-size: 20px;
-    transition: .5s all ease;
-    font-family: 'roboto', sans-serif;
-}
-
-.navigation--menu--menu-element:hover {
-    color: aliceblue;
-    transition: .5s all ease;
-    background-color: #A4A4A4;
-}
-
-.navigation--menu-image {
-    margin: 1em 1em 1em 0;
-    align-self: flex-end;
-    display: none;
-    transition: .3s all ease;
-    height: 2em;
-}
-
-.navigation--menu-image:hover::after {
-    content: 'ffff';
-}
 
 .navigation--menu {
     width: 100%;
@@ -45,31 +18,55 @@
     height: 100%;
 }
 
-.navigation--menu .navigation--menu--menu-element {
+.menu--element {
+    color: rgb(51, 51, 51);
+    border: 1px solid #ECEFF1;
+    padding: 0.5em;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: .5s all ease;
+    font-family: 'roboto', sans-serif;
+}
+
+.menu--element:hover {
+    color: aliceblue;
+    transition: .5s all ease;
+    background-color: #A4A4A4;
+}
+
+.menu-image {
+    margin: 1em 1em 1em 0;
+    align-self: flex-end;
+    display: none;
+    transition: .3s all ease;
+    height: 2em;
+}
+
+.navigation--menu .menu--element {
     border-radius: 5px;
 }
 
-.navigation--menu-image.navigation--menu-image--open {
+.menu-image.menu-image-open {
     transform: rotate(90deg);
     transition: .3s all ease;
 }
 
-@media (max-width: 500px) {
-    .navigation--menu-image {
+@media (max-width: 400px) {
+    .menu-image {
         display: flex;
     }
     .navigation-menu {
         display: none;
     }
-    .navigation--menu--menu-element {
+    .menu--element {
         display: none;
         text-align: center;
         transition: .5s all ease;
     }
-    .navigation--menu-image+.navigation--menu--menu-element {
+    .menu-image+.menu--element {
         border-top: 1px solid #2E2E2E;
     }
-    .navigation--menu-image--open.navigation--menu-image~.navigation--menu--menu-element {
+    .menu-image.menu-image-open~.menu--element {
         display: block;
         width: inherit;
         border-radius: 0;
@@ -79,7 +76,7 @@
     }
 }
 
-@media (min-width: 501px) {
+@media (min-width: 401px) {
     .navigation--menu {
         flex-direction: row;
         justify-content: flex-end;

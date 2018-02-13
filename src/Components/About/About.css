@@ -3,18 +3,26 @@
     flex-direction: column;
     max-width: 80em;
     margin: 6em auto;
-    padding: 1em;
+    padding: 0 1em;
     background-color: #fff;
+    height: calc(100vh - 4em);
 }
 
 .about-us--heading {
     font-size: 2em;
     margin-bottom: 1em;
     text-align: center;
+    padding-top: 3em;
 }
 
 .about-us--text {
     margin-bottom: 5em;
     text-align: justify;
     text-indent: 2em;
+}
+
+@media (max-width: 800px) {
+    .about-us--heading {
+        padding-top: 1em;
+    }
 }

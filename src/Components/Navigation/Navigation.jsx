@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import KeysValue from '../../config/KeysValue';
+import keysValue from '../../config/keysValue.json';
 import navMenuPicture from '../img/NavMenu.svg';
 import './Navigation.css';
 
@@ -10,21 +10,25 @@ class Navigation extends React.Component {
     super(props);
     this.toggleClass = this.toggleClass.bind(this);
     this.keyDownAction = this.keyDownAction.bind(this);
+    this.setStateToFalse = this.setStateToFalse.bind(this);
     this.state = {
       active: false,
     };
   }
-  keyDownAction(event) {
-    if (event.ctrlKey === true && event.keyCode === KeysValue.SpaceScanCode) {
-      console.log(event.keyCode);
-      this.toggleClass();
-    }
+  setStateToFalse() {
+    this.setState({ active: false });
   }
 
   getImageClass() {
-    return classnames('navigation--menu-image', {
-      'navigation--menu-image--open': this.state.active,
+    return classnames('menu-image', {
+      'menu-image-open': this.state.active,
     });
+  }
+
+  keyDownAction(event) {
+    if (event.ctrlKey && event.keyCode === keysValue.spaceScanCode) {
+      this.toggleClass();
+    }
   }
 
   toggleClass() {
@@ -35,26 +39,27 @@ class Navigation extends React.Component {
   render() {
     return (
       <nav className='navigation'>
-        <div
-          title='&quot;ctrl+space&quot; for open nemu'
-          className='navigation--menu'
-          onClick={this.toggleClass}
-          onKeyUp={this.keyDownAction}
-          tabIndex='0'
-          role='button'
-        >
-          <img className={this.getImageClass()} src={navMenuPicture} alt='Menu' />
-          <Link to='/' className='navigation--menu--menu-element'>
-            Home
+        <div title='&quot;ctrl+space&quot; for open menu' className='navigation--menu'>
+          <img
+            className={this.getImageClass()}
+            onClick={this.toggleClass}
+            onKeyUp={this.keyDownAction}
+            src={navMenuPicture}
+            alt='Menu'
+            tabIndex='0'
+            role='button'
+          />
+          <Link onClick={this.setStateToFalse} to='/' className='menu--element'>
+            Главная
           </Link>
-          <Link to='/admin' className='navigation--menu--menu-element'>
+          <Link onClick={this.setStateToFalse} to='/admin' className='menu--element'>
             Admin
           </Link>
-          <Link to='/about' className='navigation--menu--menu-element'>
-            About
+          <Link onClick={this.setStateToFalse} to='/about' className='menu--element'>
+            О нас
           </Link>
-          <Link to='/news' className='navigation--menu--menu-element'>
-            News
+          <Link onClick={this.setStateToFalse} to='/news' className='menu--element'>
+            Новости
           </Link>
         </div>
       </nav>
