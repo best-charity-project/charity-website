@@ -28,8 +28,6 @@
 }
 
 .main--content {
-    display: flex;
-    flex-direction: column;
     padding: 0 2em;
 }
 
@@ -37,7 +35,7 @@
     margin-bottom: 3em;
     text-align: justify;
     text-indent: 2em;
-    line-height: 1.5;
+    line-height: 1.5em;
 }
 
 .content--heading {
