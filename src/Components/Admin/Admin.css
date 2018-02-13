@@ -1,10 +1,10 @@
 .admin {
     max-width: 80em;
     margin: 0 auto;
-    height: calc(100vh - 4em);
+    display: flex;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     .admin {
         width: 95%;
         margin: .5em;

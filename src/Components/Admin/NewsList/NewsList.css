@@ -1,0 +1,25 @@
+.news-admin--news-heading {
+    margin: 2em 0;
+    font-size: 2em;
+    text-align: center;
+}
+
+.news-admin--list {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 1em;
+    margin: 1em;
+}
+
+.news-admin--button {
+    margin: 5px;
+}
+
+@media (max-width: 992px) {
+    .admin {
+        flex-direction: column;
+    }
+    .form--add-news {
+        padding-bottom: 0;
+    }
+}

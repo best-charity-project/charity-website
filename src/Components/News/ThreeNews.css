@@ -15,7 +15,7 @@
 }
 
 .heading-underline {
-    width: 500px; 
+    width: 500px;
     border-color: rgb(47, 179, 219);
     margin-bottom: 3em;
 }
@@ -35,12 +35,12 @@
     display: block;
 }
 
-@media (max-width:1150px) {
+@media (max-width:1200px) {
     .news-box--homepage-news {
         flex-direction: column;
     }
     .news-box--single-item {
-        height: 21em;
+        height: unset;
         width: 95%;
         margin: .5em;
     }
