@@ -40,7 +40,6 @@
         flex-direction: column;
     }
     .news-box--single-item {
-        height: unset;
         width: 95%;
         margin: .5em;
     }
