@@ -54,7 +54,7 @@
     transition: .3s all ease;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 576px) {
     .menu-image-wrapper {
         display: block;
     }
@@ -79,7 +79,7 @@
     }
 }
 
-@media (min-width: 401px) {
+@media (min-width: 576px) {
     .navigation--menu {
         flex-direction: row;
         justify-content: flex-end;
