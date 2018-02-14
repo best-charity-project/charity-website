@@ -45,6 +45,7 @@ class Navigation extends React.Component {
             onClick={this.toggleClass}
             onKeyUp={this.keyDownAction}
             tabIndex='0'
+            role='button'
           >
             <img src={navMenuPicture} alt='Menu' className='menu-image' />
           </div>
