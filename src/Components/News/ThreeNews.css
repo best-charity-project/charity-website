@@ -15,7 +15,7 @@
 }
 
 .heading-underline {
-    width: 35%; 
+    width: 35%;
     border-color: rgb(47, 179, 219);
     margin-bottom: 3em;
 }
@@ -41,13 +41,8 @@
     display: block;
 }
 
-@media (max-width:1150px) {
-    .news-box--homepage-news {
-        flex-direction: column;
-    }
+@media (max-width:1200px) {
     .news-box--single-item {
-        height: 21em;
         width: 95%;
-        margin: .5em;
     }
 }

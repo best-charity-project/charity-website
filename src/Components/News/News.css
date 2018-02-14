@@ -8,7 +8,7 @@
 
 .news-list--single-box {
     width: 30em;
-    height: 24em;
+    height: 21em;
     border-radius: 5px;
     padding-top: 1em;
     margin: 1em;
@@ -31,14 +31,14 @@
     display: block;
 }
 
-@media (max-width: 1030px) {
+@media (max-width: 992px) {
     .news-list--single-box {
         width: 95%;
-        margin: .5em;
     }
 }
-@media (max-width: 800px) {
-    .news-list--heading{
+
+@media (max-width: 768px) {
+    .news-list--heading {
         margin: 1em 0;
     }
-    }
+}

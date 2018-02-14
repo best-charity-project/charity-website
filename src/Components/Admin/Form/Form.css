@@ -1,7 +1,7 @@
 .form--add-news {
     display: flex;
     flex-direction: column;
-    margin: 1em;
+    margin: 1em 6em 1em 1em;
     padding: 7em 0;
 }
 
@@ -40,7 +40,7 @@
     background-color: rgba(86, 118, 189, 0.644);
     border: none;
     padding: 1em 2em;
-    max-width: 18em;
+    width: 17em;
     display: inline-block;
     color: #fff;
     transition: all .2s;
@@ -56,7 +56,7 @@
     transform: translateY(-1px);
 }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
     .form--add-news {
         padding: .5em;
     }
