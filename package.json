@@ -28,7 +28,7 @@
   "husky": {
     "hooks": {
       "precommit": "test",
-      "prepush": "npm test"
+      "prepush": "test"
     }
   }
 }
