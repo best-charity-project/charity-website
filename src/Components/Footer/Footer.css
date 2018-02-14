@@ -1,6 +1,5 @@
 .footer {
     background-color: #f8f8f8;
-    margin-left: 1em;
     line-height: 22px;
     letter-spacing: .4px;
     height: 4em;
@@ -11,4 +10,5 @@
     font-family: 'roboto', sans-serif;
     color: rgb(51, 51, 51);
     text-align: right;  
+    padding-right: 1em;
 }

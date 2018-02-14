@@ -15,9 +15,15 @@
 }
 
 .heading-underline {
-    width: 500px;
+    width: 35%;
     border-color: rgb(47, 179, 219);
     margin-bottom: 3em;
+}
+
+@media (max-width:1450px) {
+    .heading-underline {
+        width: 75%;
+    }
 }
 
 .news-box--heading {
