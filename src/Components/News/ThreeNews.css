@@ -20,7 +20,7 @@
     margin-bottom: 3em;
 }
 
-@media (max-width:1450px) {
+@media (max-width:960px) {
     .heading-underline {
         width: 75%;
     }
