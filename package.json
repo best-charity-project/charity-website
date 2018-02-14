@@ -14,7 +14,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "jsdomtest": "react-scripts test --env=jsdom",
-    "test": "eslint ./",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
@@ -23,6 +22,8 @@
     "husky": "^0.15.0-rc.8"
   },
   "husky": {
-    "hooks": {}
+    "hooks": {
+      "pre-commit": "npm test"
+    }
   }
 }
