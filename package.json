@@ -15,7 +15,9 @@
     "build": "react-scripts build",
     "jsdomtest": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "test": "eslint ./"
+    "test": "eslint ./",
+    "precommit": "npm test",
+    "prepush": "npm test"
   },
   "devDependencies": {
     "@ljharb/eslint-config": "^12.2.1",
@@ -27,7 +29,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "test"
+      "precommit": "test"
     }
   }
 }
