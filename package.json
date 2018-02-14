@@ -14,17 +14,20 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "jsdomtest": "react-scripts test --env=jsdom",
-
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test": "eslint ./"
   },
   "devDependencies": {
+    "@ljharb/eslint-config": "^12.2.1",
     "eslint": "^4.17.0",
     "eslint-config-airbnb": "^16.1.0",
-    "husky": "^0.15.0-rc.8"
+    "eslint-plugin-prettier": "^2.6.0",
+    "husky": "^0.15.0-rc.8",
+    "prettier": "^1.10.2"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test"
+      "pre-commit": "test"
     }
   }
 }
