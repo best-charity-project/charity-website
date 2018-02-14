@@ -42,11 +42,7 @@
 }
 
 @media (max-width:1200px) {
-    .news-box--homepage-news {
-        flex-direction: column;
-    }
     .news-box--single-item {
         width: 95%;
-        margin: .5em;
     }
 }
