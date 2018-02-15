@@ -4,25 +4,18 @@ import Form from './Form/Form';
 import './Admin.css';
 import NewsList from './NewsList/NewsList';
 
-export default class Admin extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleNewsSubmit = this.handleNewsSubmit.bind(this);
-  }
-
+export default () => {
   // eslint-disable-next-line class-methods-use-this
-  handleNewsSubmit(news) {
+  function handleNewsSubmit(news) {
     axios.post('https://charity-server.herokuapp.com/api/news', news).catch((err) => {
       throw err;
     });
   }
 
-  render() {
-    return (
-      <div className='admin indent'>
-        <Form onNewsSubmit={this.handleNewsSubmit} />
-        <NewsList />
-      </div>
-    );
-  }
-}
+  return (
+    <div className='admin indent'>
+      <Form onNewsSubmit={handleNewsSubmit} />
+      <NewsList />
+    </div>
+  );
+};
