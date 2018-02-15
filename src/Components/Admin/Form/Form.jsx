@@ -10,24 +10,11 @@ export default class Form extends React.Component {
       title: '',
       shortDescription: '',
       url: '',
-      date: '',
     };
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeUrl = this.handleChangeUrl.bind(this);
-  }
-
-  setDate() {
-    const newDate = new Date();
-    return new Promise((resolve) => {
-      this.setState(
-        {
-          date: `${newDate.getDate()}-${newDate.getMonth() + 1}-${newDate.getFullYear()}`,
-        },
-        () => resolve(),
-      );
-    });
   }
 
   handleChangeTitle(event) {
@@ -56,10 +43,13 @@ export default class Form extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.setDate().then(() => {
-      this.props.onNewsSubmit({ ...this.state });
-      this.clearFields();
+    const newDate = new Date();
+    const date = `${newDate.getDate()}-${newDate.getMonth() + 1}-${newDate.getFullYear()}`;
+    this.props.onNewsSubmit({
+      ...this.state,
+      date,
     });
+    this.clearFields();
   }
 
   render() {
