@@ -1,18 +1,33 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Time from '../../Time/Time';
 import './Form.css';
 
-class Form extends React.Component {
+export default class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       title: '',
       shortDescription: '',
       url: '',
+      date: '',
     };
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeUrl = this.handleChangeUrl.bind(this);
+  }
+
+  setDate() {
+    const newDate = new Date();
+    return new Promise((resolve) => {
+      this.setState(
+        {
+          date: `${newDate.getDate()}-${newDate.getMonth() + 1}-${newDate.getFullYear()}`,
+        },
+        () => resolve(),
+      );
+    });
   }
 
   handleChangeTitle(event) {
@@ -20,20 +35,33 @@ class Form extends React.Component {
       title: event.target.value,
     });
   }
+
   handleChangeDescription(event) {
     this.setState({
       shortDescription: event.target.value,
     });
   }
-  handlerChangeUrl(event) {
+
+  handleChangeUrl(event) {
     this.setState({
       url: event.target.value,
     });
   }
 
-  handleSubmit() {
-    this.event.preventDefault();
+  clearFields() {
+    this.setState({
+      title: '', shortDescription: '', url: '', date: '',
+    });
   }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.setDate().then(() => {
+      this.props.onNewsSubmit({ ...this.state });
+      this.clearFields();
+    });
+  }
+
   render() {
     return (
       <div className='form--add-news'>
@@ -65,16 +93,19 @@ class Form extends React.Component {
             <input
               value={this.state.url}
               onChange={this.handleChangeUrl}
-              type='text'
+              type='url'
               className='form--input'
               placeholder='url'
             />
           </label>
           <br />
-          <button className='form--button'>Добавить новость</button>
+          <input type='submit' className='form--button' value='Добавить новость' />
         </form>
       </div>
     );
   }
 }
-export default Form;
+
+Form.propTypes = {
+  onNewsSubmit: PropTypes.func.isRequired,
+};
