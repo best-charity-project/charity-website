@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Form from './Form/Form';
 import './Admin.css';
+import NewsList from './NewsList/NewsList';
 
 export default class Admin extends React.Component {
   constructor(props) {
@@ -20,6 +21,7 @@ export default class Admin extends React.Component {
     return (
       <div className='admin indent'>
         <Form onNewsSubmit={this.handleNewsSubmit} />
+        <NewsList />
       </div>
     );
   }
