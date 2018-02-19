@@ -38,7 +38,7 @@ router.route('/news/:_id').put((req, res) => {
   database
     .connect(database.URI)
     .then(() => {
-      const id = req.params;
+      const id = req.params._id; // eslint-disable-line no-underscore-dangle
       const updatedNews = req.body;
       return database.updateNews(id, updatedNews);
     })

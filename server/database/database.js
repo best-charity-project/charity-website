@@ -47,7 +47,7 @@ class DB {
       .collection('news')
       .findOneAndUpdate(
         {
-          _id: new ObjectId(id._id), // eslint-disable-line no-underscore-dangle
+          _id: new ObjectId(id), // eslint-disable-line no-underscore-dangle
         },
         {
           $set: {
