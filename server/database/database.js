@@ -44,7 +44,7 @@ class DB {
   }
   updateNews(id, updatedNews) {
     return this.db
-      .collection('newsList')
+      .collection('news')
       .findOneAndUpdate(
         {
           _id: new ObjectId(id._id), // eslint-disable-line no-underscore-dangle
