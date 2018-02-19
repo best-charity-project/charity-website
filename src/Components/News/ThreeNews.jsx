@@ -9,16 +9,14 @@ export default () => (
     <h1 className='news-box--heading'>Свежие новости</h1>
     <hr className='heading-underline' />
     <div className='news-box--homepage-news'>
-      {data
-        .slice(0, 3)
-        .map(item => (
-          <SingleNews
-            className='news-box--single-item'
-            key={item.id}
-            title={item.title}
-            shortDescription={item.shortDescription}
-          />
-        ))}
+      {data.slice(0, 3).map(item => (
+        <SingleNews
+          // className='news-box--single-item'
+          key={item.id}
+          title={item.title}
+          shortDescription={item.shortDescription}
+        />
+      ))}
     </div>
   </div>
 );
