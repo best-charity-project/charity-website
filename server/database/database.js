@@ -1,4 +1,5 @@
 const { MongoClient } = require('mongodb').MongoClient;
+const { ObjectId } = require('mongodb').ObjectId;
 const {
   user, password, port, dbName, host,
 } = require('../configs/config.json');
@@ -36,6 +37,27 @@ class DB {
       .collection('news')
       .find()
       .toArray()
+      .then(result => result)
+      .catch((err) => {
+        throw err;
+      });
+  }
+  updateNews(id, updatedNews) {
+    return this.db
+      .collection('newsList')
+      .findOneAndUpdate(
+        {
+          _id: new ObjectId(id._id), // eslint-disable-line no-underscore-dangle
+        },
+        {
+          $set: {
+            title: updatedNews.title,
+            shortDescription: updatedNews.shortDescription,
+            url: updatedNews.url,
+            date: updatedNews.date,
+          },
+        },
+      )
       .then(result => result)
       .catch((err) => {
         throw err;
