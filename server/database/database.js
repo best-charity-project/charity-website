@@ -58,7 +58,6 @@ class DB {
           },
         },
       )
-      .then(result => result)
       .catch((err) => {
         throw err;
       });
