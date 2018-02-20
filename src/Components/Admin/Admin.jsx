@@ -5,7 +5,7 @@ import './Admin.css';
 import SingleNews from '../News/SingleNews/SingleNews';
 import data from '../../Database/News.json';
 import ControlButton from '../Controls/ControlButton';
-import DetailsButton from '../Controls/DetailsButton';
+import DetailsButton from '../DetailsButton/DetailsButton';
 
 export default () => {
   function handleNewsSubmit(news) {

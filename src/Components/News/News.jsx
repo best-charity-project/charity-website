@@ -2,7 +2,7 @@ import React from 'react';
 import SingleNews from './SingleNews/SingleNews';
 import data from '../../Database/News.json';
 import './News.css';
-import DetailsButton from '../Controls/DetailsButton';
+import DetailsButton from '../DetailsButton/DetailsButton';
 
 export default () => (
   <div className='news indent'>

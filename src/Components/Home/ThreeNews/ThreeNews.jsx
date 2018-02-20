@@ -2,7 +2,7 @@ import React from 'react';
 import SingleNews from '../../News/SingleNews/SingleNews';
 import data from '../../../Database/News.json';
 import './ThreeNews.css';
-import DetailsButton from '../../Controls/DetailsButton';
+import DetailsButton from '../../DetailsButton/DetailsButton';
 
 const LatestNews = () => (
   <div className='latest-news'>
