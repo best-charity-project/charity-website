@@ -1,8 +1,8 @@
 import React from 'react';
 import BigImage from '../img/front.jpg';
-import ThreeNews from '../News/ThreeNews';
+import ThreeNews from './ThreeNews/ThreeNews';
 import './Home.css';
-import '../News/ThreeNews.css';
+import './ThreeNews/ThreeNews.css';
 
 export default () => (
   <div className='home indent'>

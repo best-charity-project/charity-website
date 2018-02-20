@@ -1,5 +1,5 @@
 import React from 'react';
-import SingleNews from '../../News/SingleNews';
+import SingleNews from '../../News/SingleNews/SingleNews';
 import data from '../../../Database/News.json';
 import './NewsList.css';
 

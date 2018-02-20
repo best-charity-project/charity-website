@@ -3,8 +3,10 @@ import axios from 'axios';
 import Form from './Form/Form';
 import './Admin.css';
 // import NewsList from './NewsList/NewsList';
-import SingleNews from '../News/SingleNews';
+import SingleNews from '../News/SingleNews/SingleNews';
 import data from '../../Database/News.json';
+import ControlButton from '../Controls/ControlButton';
+import DetailsButton from '../Controls/DetailsButton';
 
 export default () => {
   function handleNewsSubmit(news) {
@@ -21,8 +23,9 @@ export default () => {
         {data.map(item => (
           <div className='news-list' key={item.id}>
             <SingleNews title={item.title} shortDescription={item.shortDescription} />
-            <button className='form--button news-admin--button'>Редактировать</button>
-            <button className='form--button news-admin--button'>Удалить</button>
+            <ControlButton text='Редактировать' />
+            <ControlButton text='Удалить' />
+            <DetailsButton text='ПОДРОБНЕЕ' url='https://tut.by' />
           </div>
         ))}
       </div>

@@ -8,14 +8,6 @@ const SingleNews = function SingleNews(props) {
     <div className='single-news'>
       <h2 className='single-news--title'>{props.title}</h2>
       <p className='single-news--text'>{shortenText(props.shortDescription)}</p>
-      <a
-        href='https://tut.by'
-        target='_blank'
-        rel='noopener noreferrer'
-        className='single-news--link'
-      >
-        Подробнее
-      </a>
     </div>
   );
 };
