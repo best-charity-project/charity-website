@@ -1,6 +1,6 @@
 import React from 'react';
 import BigImage from '../img/front.jpg';
-import NewsGetter from '../../newsGetter';
+import getNews from '../../newsMethods';
 import ThreeNews from '../News/ThreeNews';
 import './Home.css';
 import '../News/ThreeNews.css';
@@ -16,7 +16,7 @@ class Home extends React.Component {
     this.setNews();
   }
   setNews() {
-    NewsGetter.getNews().then(news => this.setState({ news }));
+    getNews().then(news => this.setState({ news }));
   }
   render() {
     return (

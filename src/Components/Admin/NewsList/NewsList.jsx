@@ -1,5 +1,5 @@
 import React from 'react';
-import NewsGetter from '../../../newsGetter';
+import getNews from '../../../newsMethods';
 import SingleNews from '../../News/SingleNews';
 import './NewsList.css';
 
@@ -14,7 +14,7 @@ class NewsList extends React.Component {
     this.setNews();
   }
   setNews() {
-    NewsGetter.getNews().then(news => this.setState({ news }));
+    getNews().then(news => this.setState({ news }));
   }
   render() {
     return (
