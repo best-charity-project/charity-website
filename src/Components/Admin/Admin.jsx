@@ -4,7 +4,7 @@ import Form from './Form/Form';
 import './Admin.css';
 import SingleNews from '../News/SingleNews/SingleNews';
 import data from '../../Database/News.json';
-import ControlButton from '../Controls/ControlButton';
+import ControlButton from '../ControlButton/ControlButton';
 import DetailsButton from '../DetailsButton/DetailsButton';
 
 export default () => {
