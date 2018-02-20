@@ -1,24 +1,34 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SingleNews from '../News/SingleNews';
-import data from '../../Database/News.json';
 import './ThreeNews.css';
 import '../News/SingleNews.css';
 
-export default () => (
+const ThreeNews = props => (
   <div className='news-box'>
     <h1 className='news-box--heading'>Свежие новости</h1>
     <hr className='heading-underline' />
     <div className='news-box--homepage-news'>
-      {data
+      {props.news
         .slice(0, 3)
-        .map(item => (
+        .map(newsItem => (
           <SingleNews
             className='news-box--single-item'
-            key={item.id}
-            title={item.title}
-            shortDescription={item.shortDescription}
+            key={newsItem._id}
+            title={newsItem.title}
+            shortDescription={newsItem.shortDescription}
           />
         ))}
     </div>
   </div>
 );
+
+export default ThreeNews;
+
+ThreeNews.propTypes = {
+  news: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.objectOf({
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    shortDescription: PropTypes.string.isRequired,
+  }), PropTypes.object])).isRequired,
+};
