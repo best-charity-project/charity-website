@@ -8,7 +8,7 @@ export default () => (
   <div className='latest-news'>
     <h1 className='latest-news--heading'>Свежие новости</h1>
     <hr className='heading-underline' />
-    <div className='latest-news--news'>
+    <div className='news-list'>
       {data
         .slice(0, 3)
         .map(item => (

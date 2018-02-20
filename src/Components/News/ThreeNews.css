@@ -1,9 +1,3 @@
-.latest-news--news {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
 .heading-underline {
   width: 35%;
   border-color: rgb(47, 179, 219);
@@ -16,7 +10,7 @@
   }
 }
 
-.latest-news--news .single-news {
+.news-list .single-news {
   width: 22em;
   height: 25em;
   border-radius: 5px;

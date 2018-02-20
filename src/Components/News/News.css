@@ -1,4 +1,4 @@
-.news-list--text {
+.news-list {
   max-width: 80em;
   margin: 0 auto;
   display: flex;
@@ -16,7 +16,7 @@
   background-color: #fff;
 }
 
-.news-list--heading {
+.news--heading {
   text-align: center;
   margin: 1em 0;
   font-family: 'Roboto', sans-serif;
