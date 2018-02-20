@@ -22,7 +22,7 @@ class Home extends React.Component {
     return (
       <div className='home indent'>
         <div className='home--image-wrapper'>
-          <img src={BigImage} className='home--image_big' alt='home_image' />
+          <img src={BigImage} className='home--image_big' alt='Фоновая картинка' />
           <ThreeNews news={this.state.news} />
         </div>
       </div>
