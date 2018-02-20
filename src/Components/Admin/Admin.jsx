@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import Form from './Form/Form';
 import './Admin.css';
-// import NewsList from './NewsList/NewsList';
 import SingleNews from '../News/SingleNews/SingleNews';
 import data from '../../Database/News.json';
 import ControlButton from '../Controls/ControlButton';
