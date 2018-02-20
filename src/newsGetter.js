@@ -1,10 +1,10 @@
 import API from './api';
 
-let news = 0;
+let news;
 
 const NewsGetter = {
   getNews: () => {
-    if (news === 0) {
+    if (!news) {
       return API.get('news')
         .then((response) => {
           news = response.data;
