@@ -17,16 +17,18 @@ export default () => {
   return (
     <div className='admin indent'>
       <Form onNewsSubmit={handleNewsSubmit} />
-      <div className='news-admin indent'>
+      <div className='news-admin'>
         <h2 className='news-admin--news-heading'>Список всех новостей</h2>
-        {data.map(item => (
-          <div className='news-list' key={item.id}>
-            <SingleNews title={item.title} shortDescription={item.shortDescription} />
-            <ControlButton text='Редактировать' />
-            <ControlButton text='Удалить' />
-            <DetailsButton text='ПОДРОБНЕЕ' url='https://tut.by' />
-          </div>
-        ))}
+        <div className='news-list'>
+          {data.map(item => (
+            <div className='news-list--item' key={item.id}>
+              <SingleNews title={item.title} shortDescription={item.shortDescription} />
+              <ControlButton text='Редактировать' />
+              <ControlButton text='Удалить' />
+              <DetailsButton text='ПОДРОБНЕЕ' url='https://tut.by' />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

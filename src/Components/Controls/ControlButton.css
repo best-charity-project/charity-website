@@ -1,3 +1,30 @@
 .control-button {
+  width: 12em;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: rgba(86, 118, 189, 0.644);
+  border: none;
+  padding: 0.8em 2em;
+  color: #fff;
+  transition: all 0.2s;
+  display: inline-block;
   margin: 5px;
+}
+
+.control-button:hover {
+  transform: translateY(-3px);
+  background-color: rgba(18, 18, 145, 0.644);
+  cursor: pointer;
+}
+
+.control-button:active {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .control-button {
+    margin: 0.5em auto;
+    display: block;
+  }
 }

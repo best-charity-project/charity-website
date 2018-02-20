@@ -10,36 +10,6 @@
   text-align: center;
 }
 
-.admin .news-list {
-  display: block;
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 1em;
-  margin: 1em;
-}
-
-.admin .news-list .single-news {
-  width: 100%;
-  padding: 0;
-  height: auto;
-  margin: 0;
-  display: block;
-  padding-top: 0;
-  box-shadow: none;
-}
-
-.admin .single-news--text {
-  padding: 0 1em;
-}
-
-.admin .single-news--link {
-  margin: 1em auto;
-}
-
-.news-admin--button {
-  margin: 5px;
-}
-
 @media (max-width: 992px) {
   .admin {
     flex-direction: column;
