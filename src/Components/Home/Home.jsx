@@ -1,6 +1,6 @@
 import React from 'react';
 import BigImage from '../img/front.jpg';
-import getNews from '../../newsMethods';
+import getNews from '../../newsCalls';
 import ThreeNews from '../News/ThreeNews';
 import './Home.css';
 import '../News/ThreeNews.css';
