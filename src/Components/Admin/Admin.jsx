@@ -1,18 +1,24 @@
 import React from 'react';
-import { getNews, addNews } from '../../newsCalls';
+import { getNews, addNews, updateNews } from '../../newsCalls';
 import Form from './Form/Form';
 import './Admin.css';
-import SingleNews from '../News/SingleNews/SingleNews';
-import ControlButton from '../ControlButton/ControlButton';
-import DetailsButton from '../DetailsButton/DetailsButton';
+import AdminNewsItem from './AdminNewsItem';
 
 class Admin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       news: [],
+      newsToUpdate: {
+        id: '',
+        title: '',
+        shortDescription: '',
+        url: '',
+        date: '',
+      },
     };
     this.handleNewsSubmit = this.handleNewsSubmit.bind(this);
+    this.handleNewsEdit = this.handleNewsEdit.bind(this);
   }
 
   componentDidMount() {
@@ -27,20 +33,27 @@ class Admin extends React.Component {
     addNews(news);
   }
 
+  handleNewsEdit(news) {
+    // updateNews(news);
+    this.setState({ newsToUpdate: news });
+  }
+
   render() {
     return (
       <div className='admin indent'>
-        <Form onNewsSubmit={this.handleNewsSubmit} />
+        <Form
+          onNewsSubmit={this.handleNewsSubmit}
+          id={this.state.newsToUpdate.id}
+          title={this.state.newsToUpdate.title}
+          shortDescription={this.state.newsToUpdate.shortDescription}
+          url={this.state.newsToUpdate.url}
+          date={this.state.newsToUpdate.date}
+        />
         <div className='news-admin'>
           <h2 className='news-admin--news-heading'>Список всех новостей</h2>
           <div className='news-list'>
             {this.state.news.map(item => (
-              <div className='news-list--item' key={item._id}>
-                <SingleNews title={item.title} shortDescription={item.shortDescription} />
-                <ControlButton text='Редактировать' />
-                <ControlButton text='Удалить' />
-                <DetailsButton text='ПОДРОБНЕЕ' url='https://tut.by' />
-              </div>
+              <AdminNewsItem key={item._id} {...item} onNewsUpdate={this.handleNewsEdit} />
             ))}
           </div>
         </div>

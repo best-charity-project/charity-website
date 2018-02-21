@@ -17,6 +17,15 @@ export default class Form extends React.Component {
     this.handleChangeUrl = this.handleChangeUrl.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('Props changed');
+    this.setState({
+      title: nextProps.title,
+      shortDescription: nextProps.shortDescription,
+      url: nextProps.url,
+    });
+  }
+
   handleChangeTitle(event) {
     this.setState({
       title: event.target.value,
