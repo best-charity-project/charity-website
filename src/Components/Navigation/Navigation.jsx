@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import keysValue from '../../config/keysValue.json';
 import navMenuPicture from '../img/NavMenu.svg';
 import './Navigation.css';
 
@@ -9,7 +8,6 @@ class Navigation extends React.Component {
   constructor(props) {
     super(props);
     this.toggleClass = this.toggleClass.bind(this);
-    this.keyDownAction = this.keyDownAction.bind(this);
     this.setStateToFalse = this.setStateToFalse.bind(this);
     this.state = {
       active: false,
@@ -25,12 +23,6 @@ class Navigation extends React.Component {
     });
   }
 
-  keyDownAction(event) {
-    if (event.ctrlKey && event.keyCode === keysValue.spaceScanCode) {
-      this.toggleClass();
-    }
-  }
-
   toggleClass() {
     const currentState = this.state.active;
     this.setState({ active: !currentState });
@@ -39,11 +31,11 @@ class Navigation extends React.Component {
   render() {
     return (
       <nav className='navigation'>
-        <div title='&quot;ctrl+space&quot; for open menu' className='navigation--menu'>
+        <div className='navigation--menu'>
           <div
             className={this.getImageClass()}
             onClick={this.toggleClass}
-            onKeyUp={this.keyDownAction}
+            onKeyUp=''
             tabIndex='0'
             role='button'
           >

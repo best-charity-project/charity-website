@@ -10,6 +10,7 @@ class ElementDataTypeList extends React.Component {
         <p className='ElementDataType'>Видео</p>
         <p className='ElementDataType'>Статьи</p>
         <p className='ElementDataType'>Учебные материалы</p>
+        <p className='ElementDataType'>Всё</p>
       </div>
     );
   }
