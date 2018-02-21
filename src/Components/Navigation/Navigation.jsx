@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
@@ -35,7 +36,6 @@ class Navigation extends React.Component {
           <div
             className={this.getImageClass()}
             onClick={this.toggleClass}
-            onKeyUp=''
             tabIndex='0'
             role='button'
           >
