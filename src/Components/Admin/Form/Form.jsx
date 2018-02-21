@@ -69,6 +69,7 @@ export default class Form extends React.Component {
               type='text'
               className='form--input'
               placeholder='Type heading here'
+              required
             />
           </label>
           <label htmlFor='addNews'>
@@ -79,6 +80,7 @@ export default class Form extends React.Component {
               type='text'
               className='form--textarea'
               placeholder='Short description'
+              required
             />
           </label>
           <label htmlFor='addNews'>
@@ -89,6 +91,7 @@ export default class Form extends React.Component {
               type='url'
               className='form--input'
               placeholder='url'
+              required
             />
           </label>
           <br />

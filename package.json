@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@ljharb/eslint-config": "^12.2.1",
-    "eslint": "^4.17.0",
+    "eslint": "^4.18.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-html": "^4.0.2",
     "eslint-plugin-json": "^1.2.0",
