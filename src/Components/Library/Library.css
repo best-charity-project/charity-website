@@ -1,0 +1,13 @@
+.library-heading{
+  text-align: center;
+  margin: 1em 0 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 50px;
+  color: #1d6e87;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+.CategoriesList--heading{
+  margin-left: 1em;
+}

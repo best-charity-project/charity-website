@@ -52,14 +52,17 @@ class Navigation extends React.Component {
           <Link onClick={this.setStateToFalse} to='/' className='menu--element'>
             Главная
           </Link>
-          <Link onClick={this.setStateToFalse} to='/admin' className='menu--element'>
-            Admin
+          <Link onClick={this.setStateToFalse} to='/Library' className='menu--element'>
+            Библиотека
+          </Link>
+          <Link onClick={this.setStateToFalse} to='/news' className='menu--element'>
+            Новости
           </Link>
           <Link onClick={this.setStateToFalse} to='/about' className='menu--element'>
             О нас
           </Link>
-          <Link onClick={this.setStateToFalse} to='/news' className='menu--element'>
-            Новости
+          <Link onClick={this.setStateToFalse} to='/admin' className='menu--element'>
+            Admin
           </Link>
         </div>
       </nav>
