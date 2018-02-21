@@ -1,6 +1,5 @@
 import React from 'react';
-import axios from 'axios';
-import getNews from '../../newsCalls';
+import { getNews, addNews } from '../../newsCalls';
 import Form from './Form/Form';
 import './Admin.css';
 import SingleNews from '../News/SingleNews/SingleNews';
@@ -13,19 +12,21 @@ class Admin extends React.Component {
     this.state = {
       news: [],
     };
+    this.handleNewsSubmit = this.handleNewsSubmit.bind(this);
   }
+
   componentDidMount() {
     this.setNews();
   }
+
   setNews() {
     getNews().then(news => this.setState({ news }));
   }
   // eslint-disable-next-line
   handleNewsSubmit(news) {
-    axios.post('https://charity-server.herokuapp.com/api/news', news).catch((err) => {
-      throw err;
-    });
+    addNews(news);
   }
+
   render() {
     return (
       <div className='admin indent'>

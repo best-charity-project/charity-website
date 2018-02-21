@@ -1,20 +1,28 @@
 import API from './api';
 
-let news;
+let newsCache;
 
 const getNews = () => {
-  if (!news) {
+  if (!newsCache) {
     return API.get('news')
       .then((response) => {
-        news = response.data;
+        newsCache = response.data;
         return response.data;
       })
       .catch((error) => {
         throw error;
       });
   }
-  return Promise.resolve(news);
+  return Promise.resolve(newsCache);
 };
 
+const addNews = (news) => {
+  API.post('news', news).catch((err) => {
+    throw err;
+  });
+};
 
-export default getNews;
+export {
+  getNews,
+  addNews,
+};

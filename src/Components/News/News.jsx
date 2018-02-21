@@ -1,5 +1,5 @@
 import React from 'react';
-import getNews from '../../newsCalls';
+import { getNews } from '../../newsCalls';
 import SingleNews from './SingleNews/SingleNews';
 import './News.css';
 import DetailsButton from '../DetailsButton/DetailsButton';
