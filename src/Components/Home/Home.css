@@ -1,12 +1,12 @@
 .home--image_big {
-    width: 100%;
+  width: 100%;
 }
 
 .home--image-wrapper {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .navigation .navigation-under-box {
-    display: none;
+  display: none;
 }

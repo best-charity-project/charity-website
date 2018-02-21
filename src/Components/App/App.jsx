@@ -6,7 +6,6 @@ import Home from '../Home/Home';
 import Admin from '../Admin/Admin';
 import About from '../About/About';
 import News from '../News/News';
-import NewsItem from '../News/NewsItem/NewsItem';
 import './App.css';
 
 export default () => (
@@ -17,7 +16,6 @@ export default () => (
       <Route path='/admin' component={Admin} />
       <Route path='/about' component={About} />
       <Route exact path='/news' component={News} />
-      <Route path='/news/:id' component={NewsItem} />
       <Redirect to='/' />
     </Switch>
     <Footer />

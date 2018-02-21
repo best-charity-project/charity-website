@@ -1,9 +1,9 @@
 import React from 'react';
 import BigImage from '../img/front.jpg';
 import getNews from '../../newsCalls';
-import ThreeNews from '../News/ThreeNews';
+import ThreeNews from './ThreeNews/ThreeNews';
 import './Home.css';
-import '../News/ThreeNews.css';
+import './ThreeNews/ThreeNews.css';
 
 class Home extends React.Component {
   constructor(props) {

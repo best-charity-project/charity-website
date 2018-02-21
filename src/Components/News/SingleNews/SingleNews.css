@@ -1,0 +1,21 @@
+.single-news {
+  display: block;
+}
+
+.single-news--title {
+  font-size: 1.5em;
+  text-align: center;
+  color: rgb(47, 179, 219);
+  font-weight: bold;
+  height: 2.5em;
+  padding: 0 1em;
+}
+
+.single-news--text {
+  padding: 1em;
+  line-height: 1.5;
+  text-indent: 2em;
+  height: 12em;
+  overflow: hidden;
+  text-align: justify;
+}
