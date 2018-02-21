@@ -5,7 +5,7 @@ export default () => {
   return (
     <p className='form--current-date'>
       Текущая дата:
-      <span>{`${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`}</span>
+      <span>{` ${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`}</span>
     </p>
   );
 };

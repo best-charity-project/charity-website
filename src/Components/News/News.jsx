@@ -1,7 +1,9 @@
 import React from 'react';
-import NewsGetter from '../../newsGetter';
-import SingleNews from './SingleNews';
+import { getNews } from '../../newsCalls';
+import SingleNews from './SingleNews/SingleNews';
 import './News.css';
+import DetailsButton from '../DetailsButton/DetailsButton';
+
 
 class News extends React.Component {
   constructor(props) {
@@ -14,20 +16,18 @@ class News extends React.Component {
     this.setNews();
   }
   setNews() {
-    NewsGetter.getNews().then(news => this.setState({ news }));
+    getNews().then(news => this.setState({ news }));
   }
   render() {
     return (
-      <div className='news-list indent'>
-        <h1 className='news-list--heading'>Новости</h1>
-        <div className='news-list--text'>
+      <div className='news indent'>
+        <h1 className='news--heading'>Новости</h1>
+        <div className='news-list'>
           {this.state.news.map(item => (
-            <SingleNews
-              className='news-list--single-box'
-              key={item._id}
-              title={item.title}
-              shortDescription={item.shortDescription}
-            />
+            <div className='news-list--item' key={item._id}>
+              <SingleNews title={item.title} shortDescription={item.shortDescription} />
+              <DetailsButton text='ПОДРОБНЕЕ' url='https://tut.by' />
+            </div>
           ))}
         </div>
       </div>

@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import NewsGetter from '../../../newsGetter';
+import NewsGetter from '../../../newsGetter'; // eslint-disable-line
 import NewsItem from './NewsItem';
-import './NewsList.css';
+import './NewsList.css'; // eslint-disable-line
 
 class NewsList extends React.Component {
   constructor(props) {

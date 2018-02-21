@@ -1,9 +1,9 @@
 import React from 'react';
 import BigImage from '../img/front.jpg';
-import NewsGetter from '../../newsGetter';
-import ThreeNews from '../News/ThreeNews';
+import { getNews } from '../../newsCalls';
+import ThreeNews from './ThreeNews/ThreeNews';
 import './Home.css';
-import '../News/ThreeNews.css';
+import './ThreeNews/ThreeNews.css';
 
 class Home extends React.Component {
   constructor(props) {
@@ -12,12 +12,15 @@ class Home extends React.Component {
       news: [],
     };
   }
+
   componentDidMount() {
     this.setNews();
   }
+
   setNews() {
-    NewsGetter.getNews().then(news => this.setState({ news }));
+    getNews().then(news => this.setState({ news }));
   }
+
   render() {
     return (
       <div className='home indent'>

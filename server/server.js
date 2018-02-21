@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require('express'); // eslint-disable-line
 
 const app = express();
-const bodyParser = require('body-parser');
-const router = require('./routes/newsRoutes');
+const bodyParser = require('body-parser'); // eslint-disable-line
+const router = require('./routes/newsRoutes'); // eslint-disable-line
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
