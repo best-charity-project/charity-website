@@ -1,6 +1,7 @@
 import React from 'react';
+import axios from 'axios';
 import NewsGetter from '../../../newsGetter';
-import SingleNews from '../../News/SingleNews';
+import NewsItem from './NewsItem';
 import './NewsList.css';
 
 class NewsList extends React.Component {
@@ -9,6 +10,7 @@ class NewsList extends React.Component {
     this.state = {
       news: [],
     };
+    this.deleteNews = this.deleteNews.bind(this);
   }
   componentDidMount() {
     this.setNews();
@@ -16,19 +18,23 @@ class NewsList extends React.Component {
   setNews() {
     NewsGetter.getNews().then(news => this.setState({ news }));
   }
+  // eslint-disable-next-line
+  deleteNews(id) {
+    axios.delete(`http://charity-server.herokuapp.com/api/news/${id}`).then(response => response);
+  }
   render() {
     return (
       <div className='news-admin indent'>
         <h2 className='news-admin--news-heading'>Список всех новостей</h2>
         {this.state.news.map(item => (
           <div className='news-admin--list' key={item._id}>
-            <SingleNews
+            <NewsItem
+              onDelete={this.deleteNews}
+              id={item._id}
               className='list--news-item'
               title={item.title}
               shortDescription={item.shortDescription}
             />
-            <button className='form--button news-admin--button'>Редактировать</button>
-            <button className='form--button news-admin--button'>Удалить</button>
           </div>
         ))}
       </div>
