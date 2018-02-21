@@ -1,5 +1,5 @@
 import React from 'react';
-import { getNews, addNews, updateNews } from '../../newsCalls';
+import { getNews, addNews } from '../../newsCalls';
 import Form from './Form/Form';
 import './Admin.css';
 import AdminNewsItem from './AdminNewsItem';
@@ -16,6 +16,7 @@ class Admin extends React.Component {
         url: '',
         date: '',
       },
+      showSaveButton: false,
     };
     this.handleNewsSubmit = this.handleNewsSubmit.bind(this);
     this.handleNewsEdit = this.handleNewsEdit.bind(this);
@@ -34,8 +35,7 @@ class Admin extends React.Component {
   }
 
   handleNewsEdit(news) {
-    // updateNews(news);
-    this.setState({ newsToUpdate: news });
+    this.setState({ newsToUpdate: news, showSaveButton: true });
   }
 
   render() {
@@ -48,6 +48,7 @@ class Admin extends React.Component {
           shortDescription={this.state.newsToUpdate.shortDescription}
           url={this.state.newsToUpdate.url}
           date={this.state.newsToUpdate.date}
+          showSaveButton={this.state.showSaveButton}
         />
         <div className='news-admin'>
           <h2 className='news-admin--news-heading'>Список всех новостей</h2>
