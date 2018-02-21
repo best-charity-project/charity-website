@@ -10,6 +10,7 @@ const controlButton = props => (
 
 controlButton.propTypes = {
   text: PropTypes.string.isRequired,
+  onButtonClick: PropTypes.func.isRequired,
 };
 
 export default controlButton;

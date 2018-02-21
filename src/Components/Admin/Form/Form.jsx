@@ -1,28 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { updateNews } from '../../../newsCalls';
 import Time from './Time';
 import './Form.css';
+import ControlButton from '../../ControlButton/ControlButton';
 
 export default class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: '',
       title: '',
       shortDescription: '',
       url: '',
+      showSaveButton: false,
     };
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeUrl = this.handleChangeUrl.bind(this);
+    this.handleUpdateNews = this.handleUpdateNews.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('Props changed');
     this.setState({
       title: nextProps.title,
       shortDescription: nextProps.shortDescription,
       url: nextProps.url,
+      id: nextProps.id,
+      showSaveButton: nextProps.showSaveButton,
     });
   }
 
@@ -49,7 +55,6 @@ export default class Form extends React.Component {
       title: '',
       shortDescription: '',
       url: '',
-      date: '',
     });
   }
 
@@ -57,8 +62,28 @@ export default class Form extends React.Component {
     event.preventDefault();
     const newDate = new Date();
     const date = `${newDate.getDate()}-${newDate.getMonth() + 1}-${newDate.getFullYear()}`;
+    const { title, shortDescription, url } = this.state;
     this.props.onNewsSubmit({
-      ...this.state,
+      title,
+      shortDescription,
+      url,
+      date,
+    });
+    this.clearFields();
+  }
+
+  handleUpdateNews() {
+    const newDate = new Date();
+    const date = `${newDate.getDate()}-${newDate.getMonth() + 1}-${newDate.getFullYear()}`;
+    const {
+      id, title, shortDescription, url,
+    } = this.state;
+
+    updateNews({
+      id,
+      title,
+      shortDescription,
+      url,
       date,
     });
     this.clearFields();
@@ -104,13 +129,23 @@ export default class Form extends React.Component {
             />
           </label>
           <br />
-          <input type='submit' className='form--button' value='Добавить новость' />
+          {!this.state.showSaveButton && (
+            <input type='submit' className='form--button' value='Добавить новость' />
+          )}
         </form>
+        {this.state.showSaveButton && (
+          <ControlButton text='Сохранить' onButtonClick={this.handleUpdateNews} />
+        )}
       </div>
     );
   }
 }
 
 Form.propTypes = {
+  id: PropTypes.string.isRequired,
   onNewsSubmit: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  shortDescription: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  showSaveButton: PropTypes.bool.isRequired,
 };
