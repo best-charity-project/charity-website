@@ -22,7 +22,15 @@ const addNews = (news) => {
   });
 };
 
-export {
-  getNews,
-  addNews,
+const updateNews = (news) => {
+  const {
+    id, title, shortDescription, url, date,
+  } = news;
+  API.put(`news/${id}`, {
+    title,
+    shortDescription,
+    url,
+    date,
+  });
 };
+export { getNews, addNews, updateNews };
