@@ -9,16 +9,16 @@ class Category extends React.Component {
     this.state = {
       Display: false,
     };
-    this.changeClass = this.changeClass.bind(this);
+    this.changeState = this.changeState.bind(this);
   }
-  changeClass(event) {
+  changeState(event) {
     event.preventDefault();
     this.setState({ Display: !this.state.Display });
   }
   render() {
     return (
       <div className='CategoriesList'>
-        <h1 role='button' className='CategoriesList--heading' onClick={this.changeClass}>
+        <h1 role='button' className='CategoriesList--element' onClick={this.changeState}>
           Категория
         </h1>
         {this.state.Display && <ElementDataTypeList />}

@@ -5,7 +5,7 @@ import './ElementDataTypeList.css';
 class ElementDataTypeList extends React.Component {
   render() {
     return (
-      <div className='ElementDataType-List'>
+      <div className='ElementDataType-list'>
         <p className='ElementDataType'>Литература</p>
         <p className='ElementDataType'>Видео</p>
         <p className='ElementDataType'>Статьи</p>
