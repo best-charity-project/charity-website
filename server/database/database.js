@@ -62,6 +62,16 @@ class DB {
         throw err;
       });
   }
+  deleteNews(id) {
+    return this.db
+      .collection('news')
+      .deleteOne({
+        _id: new ObjectId(id),
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
 }
 
 module.exports = DB;
