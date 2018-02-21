@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Time from '../../Time/Time';
+import Time from './Time';
 import './Form.css';
 
 export default class Form extends React.Component {
@@ -37,7 +37,10 @@ export default class Form extends React.Component {
 
   clearFields() {
     this.setState({
-      title: '', shortDescription: '', url: '', date: '',
+      title: '',
+      shortDescription: '',
+      url: '',
+      date: '',
     });
   }
 
