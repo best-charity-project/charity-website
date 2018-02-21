@@ -1,8 +1,8 @@
 import React from 'react';
-import { getNews, addNews } from '../../newsCalls';
+import { getNews, addNews, deleteNews } from '../../newsCalls';
 import Form from './Form/Form';
 import './Admin.css';
-import SingleNews from '../News/SingleNews/SingleNews';
+import NewsItem from './NewsList/NewsItem';
 import ControlButton from '../ControlButton/ControlButton';
 import DetailsButton from '../DetailsButton/DetailsButton';
 
@@ -26,7 +26,10 @@ class Admin extends React.Component {
   handleNewsSubmit(news) {
     addNews(news);
   }
-
+  // eslint-disable-next-line
+  delete(id) {
+    deleteNews(id);
+  }
   render() {
     return (
       <div className='admin indent'>
@@ -36,9 +39,14 @@ class Admin extends React.Component {
           <div className='news-list'>
             {this.state.news.map(item => (
               <div className='news-list--item' key={item._id}>
-                <SingleNews title={item.title} shortDescription={item.shortDescription} />
+                <NewsItem
+                  className=''
+                  onDelete={this.delete}
+                  id={item._id}
+                  title={item.title}
+                  shortDescription={item.shortDescription}
+                />
                 <ControlButton text='Редактировать' />
-                <ControlButton text='Удалить' />
                 <DetailsButton text='ПОДРОБНЕЕ' url='https://tut.by' />
               </div>
             ))}
