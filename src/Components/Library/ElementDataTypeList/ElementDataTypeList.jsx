@@ -1,19 +1,12 @@
 import React from 'react';
 import './ElementDataTypeList.css';
 
-// eslint-disable-next-line react/prefer-stateless-function
-class ElementDataTypeList extends React.Component {
-  render() {
-    return (
-      <div className='ElementDataType-list'>
-        <p className='ElementDataType'>Литература</p>
-        <p className='ElementDataType'>Видео</p>
-        <p className='ElementDataType'>Статьи</p>
-        <p className='ElementDataType'>Учебные материалы</p>
-        <p className='ElementDataType'>Всё</p>
-      </div>
-    );
-  }
-}
-
-export default ElementDataTypeList;
+export default () => (
+  <div className='elementDataType-list'>
+    <p className='elementDataType'>Литература</p>
+    <p className='elementDataType'>Видео</p>
+    <p className='elementDataType'>Статьи</p>
+    <p className='elementDataType'>Учебные материалы</p>
+    <p className='elementDataType'>Всё</p>
+  </div>
+);

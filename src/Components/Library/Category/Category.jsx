@@ -7,21 +7,21 @@ class Category extends React.Component {
   constructor() {
     super();
     this.state = {
-      Display: false,
+      display: false,
     };
     this.changeState = this.changeState.bind(this);
   }
   changeState(event) {
     event.preventDefault();
-    this.setState({ Display: !this.state.Display });
+    this.setState({ display: !this.state.display });
   }
   render() {
     return (
-      <div className='CategoriesList'>
-        <h1 role='button' className='CategoriesList--element' onClick={this.changeState}>
+      <div className='category'>
+        <h1 role='button' className='category-element' onClick={this.changeState}>
           Категория
         </h1>
-        {this.state.Display && <ElementDataTypeList />}
+        {this.state.display && <ElementDataTypeList />}
       </div>
     );
   }

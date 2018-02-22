@@ -17,7 +17,7 @@ export default () => (
       <Route path='/admin' component={Admin} />
       <Route path='/about' component={About} />
       <Route path='/news' component={News} />
-      <Route path='/Library' component={Library} />
+      <Route path='/library' component={Library} />
       <Redirect to='/' />
     </Switch>
     <Footer />

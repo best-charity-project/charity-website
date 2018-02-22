@@ -1,6 +1,6 @@
 .library-heading{
   text-align: center;
-  margin: 1em 0 0;
+  margin: 1em 0;
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
   font-size: 50px;
@@ -8,6 +8,4 @@
   letter-spacing: 5px;
   text-transform: uppercase;
 }
-.CategoriesList--heading{
-  margin-left: 1em;
-}
+
