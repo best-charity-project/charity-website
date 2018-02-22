@@ -1,0 +1,23 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import './ModalWindow.css';
+
+const Modal = props => (
+  <div className='modal-backdrop'>
+    <div className='modal-window'>
+      <p className='modal-question'>Хотите удалить новость?</p>
+      <button className='control-button' onClick={props.onConfirm}>
+        Удалить
+      </button>
+      <button className='control-button' onClick={props.toggle}>
+        Отмена
+      </button>
+    </div>
+  </div>
+);
+
+Modal.propTypes = {
+  onConfirm: PropTypes.func.isRequired,
+  toggle: PropTypes.func.isRequired,
+};
+export default Modal;
