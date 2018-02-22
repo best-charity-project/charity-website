@@ -22,7 +22,9 @@ const addNews = (news) => {
   });
 };
 
-export {
-  getNews,
-  addNews,
+const deleteNews = (id) => {
+  API.delete(`news/${id}`).catch((err) => {
+    throw err;
+  });
 };
+export { getNews, addNews, deleteNews };
