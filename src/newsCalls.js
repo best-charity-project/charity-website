@@ -31,6 +31,9 @@ const updateNews = (news) => {
     shortDescription,
     url,
     date,
+  }).catch((err) => {
+    throw err;
   });
 };
+
 export { getNews, addNews, updateNews };
