@@ -1,8 +1,7 @@
 import React from 'react';
-import ElementDataTypeList from '../ElementDataTypeList/ElementDataTypeList';
+import TypeList from '../TypeList/TypeList';
+import './Category.css';
 
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 class Category extends React.Component {
   constructor() {
     super();
@@ -17,11 +16,17 @@ class Category extends React.Component {
   }
   render() {
     return (
-      <div className='category'>
-        <h1 role='button' className='category-element' onClick={this.changeState}>
+      <div className='category--box'>
+        <div
+          role='button'
+          tabIndex='0'
+          className='category-element'
+          onKeyDown=''
+          onClick={this.changeState}
+        >
           Категория
-        </h1>
-        {this.state.display && <ElementDataTypeList />}
+        </div>
+        {this.state.display && <TypeList />}
       </div>
     );
   }

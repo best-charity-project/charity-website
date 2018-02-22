@@ -4,7 +4,7 @@ import './CategoriesList.css';
 
 export default () => (
   <div className='categories-list'>
-    <h1 className='categories-list--heading'>Список категорий: </h1>
+    <h1 className='list-heading'>Список категорий: </h1>
     <div className='list'>
       <Category />
       <Category />

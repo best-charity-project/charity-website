@@ -43,6 +43,7 @@
     display: none;
     transition: .3s all ease;
     height: 2em;
+    outline: none;
 }
 
 .navigation--menu .menu--element {
