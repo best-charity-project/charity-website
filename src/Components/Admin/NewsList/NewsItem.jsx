@@ -24,7 +24,7 @@ class NewsItem extends React.Component {
   }
   render() {
     return (
-      <div className={this.props.className}>
+      <div>
         <h2 className='single-news--title'>{this.props.title}</h2>
         <p className='single-news--text'>{this.props.shortDescription}</p>
         <ControlButton text='Удалить' onButtonClick={this.toggleModal} />
@@ -35,7 +35,6 @@ class NewsItem extends React.Component {
 }
 
 NewsItem.propTypes = {
-  className: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   shortDescription: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,

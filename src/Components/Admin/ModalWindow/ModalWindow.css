@@ -1,4 +1,4 @@
-.modal-backdrop {
+.modal {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -8,7 +8,7 @@
     padding: 5em;
 }
 
-.modal-window {
+.modal--window {
     background-color: #fff;
     border-radius: 5px;
     max-width: 22em;
@@ -16,7 +16,7 @@
     padding: 3em;
 }
 
-.modal-question {
+.modal-window--question {
     font-weight: 600;
     margin-bottom: 2em;
 }

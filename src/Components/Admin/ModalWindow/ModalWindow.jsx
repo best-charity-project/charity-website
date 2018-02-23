@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import './ModalWindow.css';
 
 const Modal = props => (
-  <div className='modal-backdrop'>
-    <div className='modal-window'>
-      <p className='modal-question'>Хотите удалить новость?</p>
+  <div className='modal'>
+    <div className='modal--window'>
+      <p className='modal-window--question'>Хотите удалить новость?</p>
       <button className='control-button' onClick={props.onConfirm}>
         Удалить
       </button>
