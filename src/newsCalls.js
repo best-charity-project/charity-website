@@ -23,8 +23,6 @@ const addNews = (news) => {
 };
 
 const deleteNews = (id) => {
-  API.delete(`news/${id}`).catch((err) => {
-    throw err;
-  });
+  API.delete(`news/${id}`);
 };
 export { getNews, addNews, deleteNews };
