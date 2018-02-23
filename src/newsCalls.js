@@ -22,9 +22,9 @@ const addNews = (news) => {
   });
 };
 
-const updateNews = (news) => {
+const updateNews = (id, news) => {
   const {
-    id, title, shortDescription, url, date,
+    title, shortDescription, url, date,
   } = news;
   API.put(`news/${id}`, {
     title,
@@ -36,4 +36,11 @@ const updateNews = (news) => {
   });
 };
 
-export { getNews, addNews, updateNews };
+const getNewsByID = id =>
+  API.get(`news/${id}`)
+    .then(response => response.data)
+    .catch((error) => {
+      throw error;
+    });
+
+export { getNews, addNews, updateNews, getNewsByID };
