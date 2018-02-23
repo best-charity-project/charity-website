@@ -1,7 +1,7 @@
-.categories-list{
+.categories-list--heading {
   margin-left: 1em;
 }
 
-.list{
+.categories-list--element {
   margin-left: 1em;
 }

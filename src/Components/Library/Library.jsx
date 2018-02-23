@@ -5,7 +5,7 @@ import './Library.css';
 
 export default () => (
   <div className='library indent'>
-    <h1 className='library-heading'>Библиотека</h1>
+    <h1 className='library--heading'>Библиотека</h1>
     <Search />
     <CategoriesList />
   </div>

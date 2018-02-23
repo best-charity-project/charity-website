@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import navMenuPicture from '../img/NavMenu.svg';
 import './Navigation.css';
 
 class Navigation extends React.Component {
@@ -18,8 +17,8 @@ class Navigation extends React.Component {
   }
 
   getImageClass() {
-    return classnames('menu-image-wrapper', {
-      'image-wrapper-open': this.state.active,
+    return classnames('navigation--button', {
+      'navigation--button-open': this.state.active,
     });
   }
 
@@ -31,32 +30,34 @@ class Navigation extends React.Component {
   render() {
     return (
       <nav className='navigation'>
-        <div className='navigation--menu'>
-          <div
-            className={this.getImageClass()}
-            onClick={this.toggleClass}
-            onKeyDown=''
-            tabIndex='0'
-            role='button'
-          >
-            <img src={navMenuPicture} alt='Menu' className='menu-image' />
-          </div>
-          <Link onClick={this.setStateToFalse} to='/' className='menu--element'>
-            Главная
-          </Link>
-          <Link onClick={this.setStateToFalse} to='/Library' className='menu--element'>
-            Библиотека
-          </Link>
-          <Link onClick={this.setStateToFalse} to='/news' className='menu--element'>
-            Новости
-          </Link>
-          <Link onClick={this.setStateToFalse} to='/about' className='menu--element'>
-            О нас
-          </Link>
-          <Link onClick={this.setStateToFalse} to='/admin' className='menu--element'>
-            Admin
-          </Link>
-        </div>
+        <ul className='navigation--menu'>
+          <button className={this.getImageClass()} onClick={this.toggleClass} />
+          <li>
+            <Link onClick={this.setStateToFalse} to='/' className='navigation--element'>
+              Главная
+            </Link>
+          </li>
+          <li>
+            <Link onClick={this.setStateToFalse} to='/Library' className='navigation--element'>
+              Библиотека
+            </Link>
+          </li>
+          <li>
+            <Link onClick={this.setStateToFalse} to='/news' className='navigation--element'>
+              Новости
+            </Link>
+          </li>
+          <li>
+            <Link onClick={this.setStateToFalse} to='/about' className='navigation--element'>
+              О нас
+            </Link>
+          </li>
+          <li>
+            <Link onClick={this.setStateToFalse} to='/admin' className='navigation--element'>
+              Администратор
+            </Link>
+          </li>
+        </ul>
       </nav>
     );
   }

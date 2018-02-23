@@ -2,11 +2,11 @@ import React from 'react';
 import './TypeList.css';
 
 export default () => (
-  <div className='type-list'>
-    <p className='type'>Литература</p>
-    <p className='type'>Видео</p>
-    <p className='type'>Статьи</p>
-    <p className='type'>Учебные материалы</p>
-    <p className='type'>Всё</p>
-  </div>
+  <ul className='category--subcategory'>
+    <li>Литература</li>
+    <li>Видео</li>
+    <li>Статьи</li>
+    <li>Учебные материалы</li>
+    <li>Всё</li>
+  </ul>
 );

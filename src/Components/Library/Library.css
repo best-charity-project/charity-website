@@ -1,4 +1,4 @@
-.library-heading{
+.library--heading {
   text-align: center;
   margin: 1em 0;
   font-family: 'Roboto', sans-serif;
@@ -8,4 +8,3 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
-

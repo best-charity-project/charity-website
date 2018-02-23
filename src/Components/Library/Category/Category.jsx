@@ -6,28 +6,24 @@ class Category extends React.Component {
   constructor() {
     super();
     this.state = {
-      display: false,
+      isDisplayed: false,
     };
     this.changeState = this.changeState.bind(this);
   }
+
   changeState(event) {
     event.preventDefault();
-    this.setState({ display: !this.state.display });
+    this.setState({ isDisplayed: !this.state.isDisplayed });
   }
+
   render() {
     return (
-      <div className='category--box'>
-        <div
-          role='button'
-          tabIndex='0'
-          className='category-element'
-          onKeyDown=''
-          onClick={this.changeState}
-        >
+      <ul className='category'>
+        <button className='category--title' onClick={this.changeState}>
           Категория
-        </div>
-        {this.state.display && <TypeList />}
-      </div>
+        </button>
+        {this.state.isDisplayed && <TypeList />}
+      </ul>
     );
   }
 }

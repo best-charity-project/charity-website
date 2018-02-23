@@ -1,3 +1,6 @@
-.category-element{
+.category--title {
   outline: none;
+  border: none;
+  background-color: inherit;
+  font: inherit;
 }

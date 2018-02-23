@@ -3,14 +3,19 @@ import Category from '../Category/Category';
 import './CategoriesList.css';
 
 export default () => (
-  <div className='categories-list'>
-    <h1 className='list-heading'>Список категорий: </h1>
-    <div className='list'>
+  <ul className='categories-list'>
+    <span className='categories-list--heading'>Список категорий: </span>
+    <li className='categories-list--element'>
       <Category />
+    </li>
+    <li className='categories-list--element'>
       <Category />
+    </li>
+    <li className='categories-list--element'>
       <Category />
+    </li>
+    <li className='categories-list--element'>
       <Category />
-      <Category />
-    </div>
-  </div>
+    </li>
+  </ul>
 );
