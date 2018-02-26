@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import NavigationList from './NavigationLIst';
+import NavigationList from './NavigationList';
 
 class Navigation extends React.Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import navigationElements from './NavigationPath.json';
+import navigationElements from './NavigationPaths.json';
 import './Navigation.css';
 
 function NavigationList(props) {
