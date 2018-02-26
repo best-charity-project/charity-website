@@ -1,25 +1,34 @@
 .admin--link {
-  display: block;
-  margin: 3em 1em;
+    display: block;
+    margin: 3em 1em;
 }
 
 .news-admin--news-heading {
-  margin: 2em 0;
-  font-size: 2em;
-  text-align: center;
+    margin: 2em 0;
+    font-size: 2em;
+    text-align: center;
+}
+
+.news-list--single-item {
+    width: 90%;
+    border-radius: 5px;
+    padding: 2em 0 0 0;
+    margin: 1em;
+    box-shadow: 0 0.5em 1em rgb(238, 235, 235);
+    background-color: #fff;
 }
 
 @media (max-width: 992px) {
-  .admin {
-    flex-direction: column;
-  }
-  .form--add-news {
-    padding-bottom: 0;
-  }
+    .admin {
+        flex-direction: column;
+    }
+    .form--add-news {
+        padding-bottom: 0;
+    }
 }
 
 @media (max-width: 768px) {
-  .admin {
-    width: 95%;
-  }
+    .admin {
+        width: 95%;
+    }
 }

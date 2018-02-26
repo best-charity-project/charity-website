@@ -1,7 +1,6 @@
 import API from './api';
 
 let newsCache;
-
 const getNews = () => {
   if (!newsCache) {
     return API.get('news')
@@ -35,7 +34,6 @@ const updateNews = (id, news) => {
     throw err;
   });
 };
-
 const getNewsById = id =>
   API.get(`news/${id}`)
     .then(response => response.data)
@@ -43,4 +41,7 @@ const getNewsById = id =>
       throw error;
     });
 
-export { getNews, addNews, updateNews, getNewsById };
+const deleteNews = (id) => {
+  API.delete(`news/${id}`);
+};
+export { getNews, addNews, updateNews, getNewsById, deleteNews };

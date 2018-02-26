@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './ControlButton.css';
 
 const controlButton = props => (
-  <button className='control-button' onClick={props.onButtonClick}>
+  <button className={props.className} onClick={props.onButtonClick}>
     {props.text}
   </button>
 );
@@ -11,6 +11,7 @@ const controlButton = props => (
 controlButton.propTypes = {
   text: PropTypes.string.isRequired,
   onButtonClick: PropTypes.func.isRequired,
+  className: PropTypes.string.isRequired,
 };
 
 export default controlButton;

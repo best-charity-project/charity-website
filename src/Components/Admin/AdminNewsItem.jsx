@@ -2,24 +2,55 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Admin.css';
+import { deleteNews } from '../../newsCalls';
 import SingleNews from '../News/SingleNews/SingleNews';
 import ControlButton from '../ControlButton/ControlButton';
 import DetailsButton from '../DetailsButton/DetailsButton';
+import Modal from './ModalWindow/ModalWindow';
+import './AdminNewsItem.css';
 
-const AdminNewsItem = (props) => {
-  function handleEditClick() {
-    props.history.push(`${props.match.url}/edit/${props._id}`);
+class AdminNewsItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false,
+    };
+    this.deleteHandler = this.deleteHandler.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
   }
-
-  return (
-    <div className='news-list--item'>
-      <SingleNews title={props.title} shortDescription={props.shortDescription} />
-      <ControlButton text='Редактировать' onButtonClick={handleEditClick} />
-      <DetailsButton text='ПОДРОБНЕЕ' url={props.url} />
-    </div>
-  );
-};
-
+  handleEditClick() {
+    this.props.history.push(`${this.props.match.url}/edit/${this.props._id}`);
+  }
+  toggleModal() {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    });
+  }
+  deleteHandler() {
+    deleteNews(this.props._id);
+    this.toggleModal();
+  }
+  render() {
+    return (
+      <div className='news-list--item'>
+        <SingleNews title={this.props.title} shortDescription={this.props.shortDescription} />
+        <ControlButton
+          text='Редактировать'
+          className='control-button control-button--green'
+          onButtonClick={this.handleEditClick}
+        />
+        <ControlButton
+          text='Удалить'
+          className='control-button control-button--red'
+          onButtonClick={this.toggleModal}
+        />
+        {this.state.isOpen && <Modal onConfirm={this.deleteHandler} toggle={this.toggleModal} />}
+        <DetailsButton text='ПОДРОБНЕЕ' url={this.props.url} />
+      </div>
+    );
+  }
+}
 export default withRouter(AdminNewsItem);
 
 AdminNewsItem.propTypes = {
