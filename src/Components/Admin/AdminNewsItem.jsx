@@ -15,8 +15,7 @@ const AdminNewsItem = (props) => {
     <div className='news-list--item'>
       <SingleNews title={props.title} shortDescription={props.shortDescription} />
       <ControlButton text='Редактировать' onButtonClick={handleEditClick} />
-      <ControlButton text='Удалить' onButtonClick={() => {}} />
-      <DetailsButton text='ПОДРОБНЕЕ' url='https://tut.by' />
+      <DetailsButton text='ПОДРОБНЕЕ' url={props.url} />
     </div>
   );
 };
