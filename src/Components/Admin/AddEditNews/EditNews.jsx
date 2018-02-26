@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Form from '../Form/Form';
-import { updateNews, getNewsByID } from '../../../newsCalls';
+import { updateNews, getNewsById } from '../../../newsCalls';
 import './AddEditNews.css';
 
 class EditNews extends React.Component {
@@ -19,7 +19,7 @@ class EditNews extends React.Component {
 
   getNews() {
     const { id } = this.props.match.params;
-    getNewsByID(id).then((news) => {
+    getNewsById(id).then((news) => {
       this.setState({ newsToEdit: news });
     });
   }

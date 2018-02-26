@@ -36,11 +36,11 @@ const updateNews = (id, news) => {
   });
 };
 
-const getNewsByID = id =>
+const getNewsById = id =>
   API.get(`news/${id}`)
     .then(response => response.data)
     .catch((error) => {
       throw error;
     });
 
-export { getNews, addNews, updateNews, getNewsByID };
+export { getNews, addNews, updateNews, getNewsById };
