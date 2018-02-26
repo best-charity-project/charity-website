@@ -22,7 +22,25 @@ const addNews = (news) => {
   });
 };
 
-export {
-  getNews,
-  addNews,
+const updateNews = (id, news) => {
+  const {
+    title, shortDescription, url, date,
+  } = news;
+  API.put(`news/${id}`, {
+    title,
+    shortDescription,
+    url,
+    date,
+  }).catch((err) => {
+    throw err;
+  });
 };
+
+const getNewsById = id =>
+  API.get(`news/${id}`)
+    .then(response => response.data)
+    .catch((error) => {
+      throw error;
+    });
+
+export { getNews, addNews, updateNews, getNewsById };

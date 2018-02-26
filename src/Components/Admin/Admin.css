@@ -1,7 +1,6 @@
-.admin {
-  max-width: 80em;
-  margin: 0 auto;
-  display: flex;
+.admin--link {
+  display: block;
+  margin: 3em 1em;
 }
 
 .news-admin--news-heading {
