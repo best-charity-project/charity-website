@@ -11,7 +11,10 @@ const LatestNews = props => (
     <div className='news-list'>
       {props.news.slice(0, 3).map(item => (
         <div className='news-list--item' key={item._id}>
-          <SingleNews title={item.title} shortDescription={item.shortDescription} />
+          <SingleNews
+            title={item.title}
+            shortDescription={item.shortDescription}
+          />
           <DetailsButton text='ПОДРОБНЕЕ' url='https://tut.by' />
         </div>
       ))}
@@ -22,9 +25,12 @@ const LatestNews = props => (
 export default LatestNews;
 
 LatestNews.propTypes = {
-  news: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.objectOf({
-    _id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    shortDescription: PropTypes.string.isRequired,
-  }), PropTypes.object])).isRequired,
+  news: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.objectOf({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      shortDescription: PropTypes.string.isRequired,
+    }),
+    PropTypes.object,
+  ])).isRequired,
 };

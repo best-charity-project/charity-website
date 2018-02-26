@@ -8,22 +8,22 @@ class Navigation extends React.Component {
     this.toggleClass = this.toggleClass.bind(this);
     this.setStateToFalse = this.setStateToFalse.bind(this);
     this.state = {
-      active: false,
+      isActive: false,
     };
   }
   setStateToFalse() {
-    this.setState({ active: false });
+    this.setState({ isActive: false });
   }
 
   getImageClass() {
     return classnames('navigation--button', {
-      'navigation--button-open': this.state.active,
+      'navigation--button-open': this.state.isActive,
     });
   }
 
   toggleClass() {
-    const currentState = this.state.active;
-    this.setState({ active: !currentState });
+    const currentState = this.state.isActive;
+    this.setState({ isActive: !currentState });
   }
 
   render() {

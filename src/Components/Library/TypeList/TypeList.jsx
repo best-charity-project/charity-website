@@ -2,7 +2,7 @@ import React from 'react';
 import './TypeList.css';
 
 export default () => (
-  <ul className='category--subcategory'>
+  <ul className='type-list'>
     <li>Литература</li>
     <li>Видео</li>
     <li>Статьи</li>

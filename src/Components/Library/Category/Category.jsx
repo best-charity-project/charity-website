@@ -18,12 +18,12 @@ class Category extends React.Component {
 
   render() {
     return (
-      <ul className='category'>
+      <div className='category'>
         <button className='category--title' onClick={this.changeState}>
           Категория
         </button>
         {this.state.isDisplayed && <TypeList />}
-      </ul>
+      </div>
     );
   }
 }
