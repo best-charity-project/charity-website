@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import './Navigation.css';
+import NavigationList from './NavigationLIst';
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -32,31 +31,7 @@ class Navigation extends React.Component {
       <nav className='navigation'>
         <ul className='navigation--menu'>
           <button className={this.getImageClass()} onClick={this.toggleClass} />
-          <li>
-            <Link onClick={this.setStateToFalse} to='/' className='navigation--element'>
-              Главная
-            </Link>
-          </li>
-          <li>
-            <Link onClick={this.setStateToFalse} to='/Library' className='navigation--element'>
-              Библиотека
-            </Link>
-          </li>
-          <li>
-            <Link onClick={this.setStateToFalse} to='/news' className='navigation--element'>
-              Новости
-            </Link>
-          </li>
-          <li>
-            <Link onClick={this.setStateToFalse} to='/about' className='navigation--element'>
-              О нас
-            </Link>
-          </li>
-          <li>
-            <Link onClick={this.setStateToFalse} to='/admin' className='navigation--element'>
-              Администратор
-            </Link>
-          </li>
+          <NavigationList onClick={this.setStateToFalse} />
         </ul>
       </nav>
     );
