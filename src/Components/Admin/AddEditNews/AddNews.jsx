@@ -5,7 +5,7 @@ import './AddEditNews.css';
 
 export default () => (
   <div>
-    <h1 className='addEditNews--heading'>Добавление новости</h1>
+    <h1 className='add-edit-news--heading'>Добавление новости</h1>
     <Form onSubmit={addNews} buttonText='Добавить новость' />
   </div>
 );

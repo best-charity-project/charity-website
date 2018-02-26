@@ -14,11 +14,13 @@ const getNews = () => {
   }
   return Promise.resolve(newsCache);
 };
+
 const addNews = (news) => {
   API.post('news', news).catch((err) => {
     throw err;
   });
 };
+
 const updateNews = (id, news) => {
   const {
     title, shortDescription, url, date,
@@ -32,13 +34,14 @@ const updateNews = (id, news) => {
     throw err;
   });
 };
-const getNewsByID = id =>
+const getNewsById = id =>
   API.get(`news/${id}`)
     .then(response => response.data)
     .catch((error) => {
       throw error;
     });
+
 const deleteNews = (id) => {
   API.delete(`news/${id}`);
 };
-export { getNews, addNews, updateNews, getNewsByID, deleteNews };
+export { getNews, addNews, updateNews, getNewsById, deleteNews };
