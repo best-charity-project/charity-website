@@ -38,18 +38,18 @@ class AdminNewsItem extends React.Component {
         <div className='item--buttons'>
           <ControlButton
             text='Редактировать'
-            className='control-button control-button--green'
+            className='control-button control-button--green control-button--small'
             onButtonClick={this.handleEditClick}
           />
           <ControlButton
             text='Удалить'
-            className='control-button control-button--red'
+            className='control-button control-button--red control-button--small'
             onButtonClick={this.toggleModal}
           />
           {this.state.isOpen && <Modal onConfirm={this.deleteHandler} toggle={this.toggleModal} />}
           <DetailsButton
             text='Подробнее'
-            className='control-button control-button--blue'
+            className='control-button control-button--blue control-button--small'
             url={this.props.url}
           />
         </div>

@@ -3,7 +3,7 @@
 }
 
 .control-button {
-    width: 14em;
+    width: 12em;
     text-align: center;
     text-transform: uppercase;
     text-decoration: none;
@@ -11,8 +11,8 @@
     padding: 0.8em 0;
     color: #fff;
     transition: all 0.2s;
-    display: inline-block;
-    margin: .2em;
+    display: block;
+    margin: .5em auto;
     font: inherit;
 }
 
@@ -43,6 +43,12 @@
 
 .control-button--red:hover {
     background-color: rgb(218, 137, 144);
+}
+
+.control-button--small {
+    font-size: 0.8em;
+    display: inline-block;
+    margin: .3em;
 }
 
 @media (max-width: 768px) {
