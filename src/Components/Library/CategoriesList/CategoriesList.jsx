@@ -8,14 +8,5 @@ export default () => (
     <li className='categories-list--element'>
       <Category />
     </li>
-    <li className='categories-list--element'>
-      <Category />
-    </li>
-    <li className='categories-list--element'>
-      <Category />
-    </li>
-    <li className='categories-list--element'>
-      <Category />
-    </li>
   </ul>
 );
