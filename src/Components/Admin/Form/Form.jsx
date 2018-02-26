@@ -17,6 +17,16 @@ export default class Form extends React.Component {
     this.handleChangeUrl = this.handleChangeUrl.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { title, shortDescription, url } = nextProps.news;
+
+    this.setState({
+      title,
+      shortDescription,
+      url,
+    });
+  }
+
   handleChangeTitle(event) {
     this.setState({
       title: event.target.value,
@@ -40,7 +50,6 @@ export default class Form extends React.Component {
       title: '',
       shortDescription: '',
       url: '',
-      date: '',
     });
   }
 
@@ -48,8 +57,11 @@ export default class Form extends React.Component {
     event.preventDefault();
     const newDate = new Date();
     const date = `${newDate.getDate()}-${newDate.getMonth() + 1}-${newDate.getFullYear()}`;
-    this.props.onNewsSubmit({
-      ...this.state,
+    const { title, shortDescription, url } = this.state;
+    this.props.onSubmit({
+      title,
+      shortDescription,
+      url,
       date,
     });
     this.clearFields();
@@ -58,7 +70,6 @@ export default class Form extends React.Component {
   render() {
     return (
       <div className='form--add-news'>
-        <h1 className='form--heading'>Добавление новости</h1>
         <Time />
         <form name='addNews' onSubmit={this.handleSubmit} className='form--form'>
           <label htmlFor='addNews'>
@@ -95,13 +106,27 @@ export default class Form extends React.Component {
             />
           </label>
           <br />
-          <input type='submit' className='form--button' value='Добавить новость' />
+          <input type='submit' className='form--button' value={this.props.buttonText} />
         </form>
       </div>
     );
   }
 }
 
+Form.defaultProps = {
+  news: {
+    title: '',
+    shortDescription: '',
+    url: '',
+  },
+};
+
 Form.propTypes = {
-  onNewsSubmit: PropTypes.func.isRequired,
+  news: PropTypes.shape({
+    title: PropTypes.string,
+    shortDescription: PropTypes.string,
+    url: PropTypes.string,
+  }),
+  onSubmit: PropTypes.func.isRequired,
+  buttonText: PropTypes.string.isRequired,
 };

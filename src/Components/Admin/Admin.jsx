@@ -1,54 +1,31 @@
 import React from 'react';
-import { getNews, addNews, deleteNews } from '../../newsCalls';
-import Form from './Form/Form';
+import { Route, Switch, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './Admin.css';
-import NewsItem from './NewsList/NewsItem';
-import DetailsButton from '../DetailsButton/DetailsButton';
+import AdminNews from './AdminNews';
+import EditNews from './AddEditNews/EditNews';
+import AddNews from './AddEditNews/AddNews';
 
-class Admin extends React.Component {
-  static delete(id) {
-    deleteNews(id);
-  }
-  static handleNewsSubmit(news) {
-    addNews(news);
-  }
-  constructor(props) {
-    super(props);
-    this.state = {
-      news: [],
-    };
-  }
-  componentDidMount() {
-    this.setNews();
-  }
-
-  setNews() {
-    getNews().then(news => this.setState({ news }));
-  }
-
-  render() {
-    return (
-      <div className='admin indent'>
-        <Form onNewsSubmit={Admin.handleNewsSubmit} />
-        <div className='news-admin'>
-          <h2 className='news-admin--news-heading'>Список всех новостей</h2>
-          <div className='news-list'>
-            {this.state.news.map(item => (
-              <div className='news-list--single-item' key={item._id}>
-                <NewsItem
-                  onDelete={Admin.delete}
-                  id={item._id}
-                  title={item.title}
-                  shortDescription={item.shortDescription}
-                />
-                <DetailsButton text='ПОДРОБНЕЕ' url='https://tut.by' />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+const Admin = ({ match }) => (
+  <div className='admin indent'>
+    <Link to={`${match.url}/news`} className='admin--link'>
+      Посмотреть все новости
+    </Link>
+    <Link to={`${match.url}/addNews`} className='admin--link'>
+      Добавить новость
+    </Link>
+    <Switch>
+      <Route exact path={`${match.url}/news`} component={AdminNews} />
+      <Route path={`${match.url}/addNews`} component={AddNews} />
+      <Route path={`${match.url}/news/edit/:id`} component={EditNews} />
+    </Switch>
+  </div>
+);
 
 export default Admin;
+
+Admin.propTypes = {
+  match: PropTypes.shape({
+    url: PropTypes.string,
+  }).isRequired,
+};
