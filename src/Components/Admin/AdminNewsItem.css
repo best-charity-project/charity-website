@@ -1,20 +1,23 @@
+.item--buttons {
+    text-align: center;
+}
+
 .control-button {
-    width: 12em;
+    width: 14em;
     text-align: center;
     text-transform: uppercase;
     text-decoration: none;
     border: none;
-    padding: 0.8em 2em;
+    padding: 0.8em 0;
     color: #fff;
     transition: all 0.2s;
     display: inline-block;
-    margin: 5px;
+    margin: .2em;
     font: inherit;
 }
 
 .control-button:hover {
     transform: translateY(-3px);
-    background-color: rgba(18, 18, 145, 0.644);
     cursor: pointer;
 }
 
@@ -27,6 +30,18 @@
 }
 
 .control-button--red {
+    background-color: rgb(238, 169, 174);
+}
+
+.control-button--blue {
+    background-color: #37B3D8;
+}
+
+.control-button--green:hover {
+    background-color: rgb(92, 185, 120);
+}
+
+.control-button--red:hover {
     background-color: rgb(218, 137, 144);
 }
 

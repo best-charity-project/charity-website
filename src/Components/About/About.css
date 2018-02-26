@@ -1,68 +1,68 @@
 .about-us {
-  max-width: 80em;
-  margin: 6em auto;
-  padding: 0 1em;
-  background-color: #fff;
-  min-height: calc(100vh - 4em);
+    max-width: 80em;
+    margin: 6em auto;
+    padding: 0 1em;
+    background-color: #fff;
+    min-height: calc(100vh - 4em);
 }
 
 .about-us--heading {
-  margin-bottom: 0.5em;
-  text-align: center;
-  padding-top: 2em;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 100;
-  font-size: 50px;
-  color: #23e2f4;
-  letter-spacing: 5px;
-  text-transform: uppercase;
+    margin-bottom: 0.5em;
+    text-align: center;
+    padding-top: 2em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 50px;
+    color: #23e2f4;
+    letter-spacing: 5px;
+    text-transform: uppercase;
 }
 
 .about-us--main {
-  display: flex;
+    display: flex;
 }
 
 .main--image {
-  max-width: 30em;
-  max-height: 40em;
+    max-width: 30em;
+    max-height: 40em;
 }
 
 .main--content {
-  padding: 0 1em;
-  line-height: 1.5em;
+    padding: 0 1em;
+    line-height: 1.5em;
 }
 
 .content--text {
-  margin-bottom: 3em;
-  text-align: justify;
-  text-indent: 2em;
+    margin-bottom: 3em;
+    text-align: justify;
+    text-indent: 2em;
 }
 
 .content--heading {
-  font-size: 1.2em;
-  text-indent: 1.7em;
-  color: #3ab571;
-  text-transform: uppercase;
-  margin-bottom: 0.5em;
+    font-size: 1.2em;
+    text-indent: 1.7em;
+    color: rgb(88, 146, 105);
+    text-transform: uppercase;
+    margin-bottom: 0.5em;
 }
 
 .content--text {
-  margin-bottom: 2em;
-  text-indent: unset;
+    margin-bottom: 2em;
+    text-indent: unset;
 }
 
 .text--item {
-  color: #777;
+    color: #777;
 }
 
 @media (max-width: 992px) {
-  .main--image {
-    display: none;
-  }
+    .main--image {
+        display: none;
+    }
 }
 
 @media (max-width: 768px) {
-  .about-us--heading {
-    padding-top: 1em;
-  }
+    .about-us--heading {
+        padding-top: 1em;
+    }
 }

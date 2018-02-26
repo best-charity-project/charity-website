@@ -6,10 +6,10 @@ const Modal = props => (
   <div className='modal'>
     <div className='modal--window'>
       <p className='modal-window--question'>Хотите удалить новость?</p>
-      <button className='control-button' onClick={props.onConfirm}>
+      <button className='control-button control-button--red' onClick={props.onConfirm}>
         Удалить
       </button>
-      <button className='control-button' onClick={props.toggle}>
+      <button className='control-button control-button--green' onClick={props.toggle}>
         Отмена
       </button>
     </div>
