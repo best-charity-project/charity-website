@@ -1,36 +1,36 @@
 .heading-underline {
-  width: 35%;
-  border-color: rgb(47, 179, 219);
-  margin-bottom: 3em;
+    width: 35%;
+    border-color: rgb(47, 179, 219);
+    margin-bottom: 3em;
 }
 
 .news-list--item {
-  width: 22em;
-  border-radius: 5px;
-  padding: 2em 0;
-  margin: 1em;
-  box-shadow: 0 0.5em 1em rgb(238, 235, 235);
-  background-color: #fff;
+    width: 24em;
+    border-radius: 5px;
+    padding: 2em 0;
+    margin: 1em;
+    box-shadow: 0 0.5em 1em rgb(238, 235, 235);
+    background-color: #fff;
 }
 
 .latest-news--heading {
-  text-align: center;
-  margin: 1em 0 0;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 100;
-  font-size: 50px;
-  color: #1d6e87;
-  letter-spacing: 5px;
-  text-transform: uppercase;
+    text-align: center;
+    margin: 1em 0 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 50px;
+    color: #1d6e87;
+    letter-spacing: 5px;
+    text-transform: uppercase;
 }
 
 .news-list--item .details-button {
-  margin: 0 auto;
-  display: block;
+    margin: 0 auto;
+    display: block;
 }
 
 @media (max-width: 960px) {
-  .heading-underline {
-    width: 75%;
-  }
+    .heading-underline {
+        width: 75%;
+    }
 }
