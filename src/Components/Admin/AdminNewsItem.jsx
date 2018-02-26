@@ -7,6 +7,7 @@ import SingleNews from '../News/SingleNews/SingleNews';
 import ControlButton from '../ControlButton/ControlButton';
 import DetailsButton from '../DetailsButton/DetailsButton';
 import Modal from './ModalWindow/ModalWindow';
+import './AdminNewsItem.css';
 
 class AdminNewsItem extends React.Component {
   constructor(props) {
@@ -34,8 +35,16 @@ class AdminNewsItem extends React.Component {
     return (
       <div className='news-list--item'>
         <SingleNews title={this.props.title} shortDescription={this.props.shortDescription} />
-        <ControlButton text='Редактировать' onButtonClick={this.handleEditClick} />
-        <ControlButton text='Удалить' onButtonClick={this.toggleModal} />
+        <ControlButton
+          text='Редактировать'
+          className='control-button control-button--green'
+          onButtonClick={this.handleEditClick}
+        />
+        <ControlButton
+          text='Удалить'
+          className='control-button control-button--red'
+          onButtonClick={this.toggleModal}
+        />
         {this.state.isOpen && <Modal onConfirm={this.deleteHandler} toggle={this.toggleModal} />}
         <DetailsButton text='ПОДРОБНЕЕ' url={this.props.url} />
       </div>
