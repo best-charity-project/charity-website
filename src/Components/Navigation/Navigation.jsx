@@ -22,8 +22,7 @@ class Navigation extends React.Component {
   }
 
   toggleClass() {
-    const currentState = this.state.isActive;
-    this.setState({ isActive: !currentState });
+    this.setState({ isActive: !this.state.isActive });
   }
 
   render() {
