@@ -1,4 +1,7 @@
-.form-field {
+.form-library--field {
   width: 21em;
   margin: 0.3em;
+}
+.form-library--button {
+  display: block;
 }

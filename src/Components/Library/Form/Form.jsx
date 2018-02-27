@@ -8,9 +8,9 @@ export default () => (
       <label htmlFor='addCategory'>
         Выбор методики
         <p>
-          <select className='form-field'>
+          <select className='form-library--field'>
             <option>Прикладной анализ поведения</option>
-            <option selected>Сенсорная интеграция</option>
+            <option>Сенсорная интеграция</option>
             <option>Нейрокоррекция</option>
             <option>Медицина (традиционные и нетрадиционные методы)</option>
             <option>Игротерапия</option>
@@ -22,8 +22,8 @@ export default () => (
       <label htmlFor='addCategory'>
         Выбор категории
         <p>
-          <select className='form-field'>
-            <option selected>Литература</option>
+          <select className='form-library--field'>
+            <option>Литература</option>
             <option>Видео</option>
             <option>Статьи</option>
             <option>Учебные материалы</option>
@@ -33,23 +33,22 @@ export default () => (
       <label htmlFor='addCategory'>
         Название документа
         <p>
-          <input type='text' placeholder='Название' className='form-field' />
+          <input type='text' placeholder='Название' className='form-library--field' />
         </p>
       </label>
       <label htmlFor='addCategory'>
         Краткое описание
         <p>
-          <textarea type='text' placeholder='Описание документа' className='form-field' />
+          <textarea type='text' placeholder='Описание документа' className='form-library--field' />
         </p>
       </label>
       <label htmlFor='addCategory'>
         Ссылка на источник
         <p>
-          <input type='url' placeholder='https://....' className='form-field' />
+          <input type='url' placeholder='https://....' className='form-library--field' />
         </p>
       </label>
-      <br />
-      <input type='submit' value='Добавить' />
+      <input type='submit' value='Добавить' className='form-library--button' />
     </form>
   </div>
 );
