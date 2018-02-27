@@ -39,7 +39,7 @@ export default () => (
       <label htmlFor='addCategory'>
         Краткое описание
         <p>
-          <input type='text' placeholder='Описание документа' className='form-field' />
+          <textarea type='text' placeholder='Описание документа' className='form-field' />
         </p>
       </label>
       <label htmlFor='addCategory'>
