@@ -13,11 +13,11 @@ class Search extends React.Component {
   }
   handleChangeOfText(event) {
     this.setState({ searchText: event.target.value });
-    console.log(this.state.searchText);
+    //   console.log(this.state.searchText);
   }
   handleChangeOfCheckboxes(event) {
     this.setState({ checkedTypes: [...this.state.checkedTypes, event.target.value] });
-    console.log(this.state.checkedTypes);
+    //  console.log(this.state.checkedTypes);
   }
   render() {
     return (
