@@ -11,17 +11,24 @@ class Search extends React.Component {
     this.handleChangeOfText = this.handleChangeOfText.bind(this);
     this.handleChangeOfCheckboxes = this.handleChangeOfCheckboxes.bind(this);
   }
+
   handleChangeOfText(event) {
     this.setState({ searchText: event.target.value });
-    //   console.log(this.state.searchText);
   }
+
   handleChangeOfCheckboxes(event) {
-    this.setState({ checkedTypes: [...this.state.checkedTypes, event.target.value] });
-    //  console.log(this.state.checkedTypes);
+    const index = this.state.checkedTypes.indexOf(event.target.value);
+    if (index === -1) {
+      this.setState({ checkedTypes: [...this.state.checkedTypes, event.target.value] });
+    } else {
+      this.state.checkedTypes.splice(index, 1);
+      this.setState({ checkedTypes: this.state.checkedTypes });
+    }
   }
+
   render() {
     return (
-      <form role='search'>
+      <form role='search' >
         <div>
           <input
             type='search'
@@ -32,7 +39,7 @@ class Search extends React.Component {
           />
           <button>Поиск</button>
         </div>
-        <div className='search'>
+        <div className='search--checkbox'>
           <div>
             <input
               type='checkbox'
@@ -81,7 +88,7 @@ class Search extends React.Component {
               value='all'
               onChange={this.handleChangeOfCheckboxes}
             />
-            <label htmlFor='all'>Везде</label>
+            <label htmlFor='all'>Все</label>
           </div>
         </div>
       </form>

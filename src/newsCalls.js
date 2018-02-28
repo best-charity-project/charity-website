@@ -16,6 +16,7 @@ const getNews = () => {
 };
 
 const addNews = (news) => {
+  console.log(news)
   API.post('news', news).catch((err) => {
     throw err;
   });

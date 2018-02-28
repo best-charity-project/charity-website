@@ -1,7 +1,7 @@
-.search>div {
+.search--checkbox>div {
     display: inline;
 }
 
-.search {
+.search--checkbox {
     margin: 10px;
 }

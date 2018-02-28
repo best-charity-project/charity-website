@@ -1,5 +1,5 @@
 import React from 'react';
-import getLibraryCategories from '../../../libraryCalls';
+import { getLibraryCategories } from '../../../libraryCalls';
 import Category from '../Category/Category';
 import './CategoriesList.css';
 
@@ -23,7 +23,7 @@ class CategoriesList extends React.Component {
         <ul className='categories-list'>
           {this.state.categories.map(item => (
             <li className='categories-list--element'>
-              <Category name={item.name} />
+              <Category name={item.title} />
             </li>
           ))}
         </ul>
