@@ -30,11 +30,3 @@ class CategoriesList extends React.Component {
   }
 }
 export default CategoriesList;
-// export default () => (
-//   <ul className='categories-list'>
-//     <span className='categories-list--heading'>Список категорий: </span>
-//     <li className='categories-list--element'>
-//       <Category />
-//     </li>
-//   </ul>
-// );
