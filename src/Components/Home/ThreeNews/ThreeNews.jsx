@@ -11,11 +11,12 @@ const LatestNews = props => (
     <div className='news-list'>
       {props.news.slice(0, 3).map(item => (
         <div className='news-list--item' key={item._id}>
-          <SingleNews
-            title={item.title}
-            shortDescription={item.shortDescription}
+          <SingleNews title={item.title} shortDescription={item.shortDescription} />
+          <DetailsButton
+            className='control-button control-button--blue'
+            text='Подробнее'
+            url={item.url}
           />
-          <DetailsButton text='ПОДРОБНЕЕ' url='https://tut.by' />
         </div>
       ))}
     </div>

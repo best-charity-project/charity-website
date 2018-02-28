@@ -30,8 +30,8 @@ class EditNews extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1 className='add-edit-news--heading'>Редактирование новости</h1>
+      <div className='admin-form-news'>
+        <h1 className='admin-form-news--heading'>Редактирование новости</h1>
         <Form
           news={this.state.newsToEdit}
           onSubmit={this.handleNewsUpdate}

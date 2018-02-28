@@ -35,18 +35,24 @@ class AdminNewsItem extends React.Component {
     return (
       <div className='news-list--item'>
         <SingleNews title={this.props.title} shortDescription={this.props.shortDescription} />
-        <ControlButton
-          text='Редактировать'
-          className='control-button control-button--green'
-          onButtonClick={this.handleEditClick}
-        />
-        <ControlButton
-          text='Удалить'
-          className='control-button control-button--red'
-          onButtonClick={this.toggleModal}
-        />
-        {this.state.isOpen && <Modal onConfirm={this.deleteHandler} toggle={this.toggleModal} />}
-        <DetailsButton text='ПОДРОБНЕЕ' url={this.props.url} />
+        <div className='item--buttons'>
+          <ControlButton
+            text='Редактировать'
+            className='control-button control-button--green control-button--small'
+            onButtonClick={this.handleEditClick}
+          />
+          <ControlButton
+            text='Удалить'
+            className='control-button control-button--red control-button--small'
+            onButtonClick={this.toggleModal}
+          />
+          {this.state.isOpen && <Modal onConfirm={this.deleteHandler} toggle={this.toggleModal} />}
+          <DetailsButton
+            text='Подробнее'
+            className='control-button control-button--blue control-button--small'
+            url={this.props.url}
+          />
+        </div>
       </div>
     );
   }
