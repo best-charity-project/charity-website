@@ -28,7 +28,7 @@ class News extends React.Component {
               <DetailsButton
                 className='control-button control-button--blue'
                 text='Подробнее'
-                url='https://tut.by'
+                url={item.url}
               />
             </div>
           ))}
