@@ -50,10 +50,3 @@
   display: inline-block;
   margin: 0.3em;
 }
-
-@media (max-width: 768px) {
-  .control-button {
-    margin: 0.5em auto;
-    display: block;
-  }
-}

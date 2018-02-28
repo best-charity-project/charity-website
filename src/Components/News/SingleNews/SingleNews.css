@@ -19,3 +19,8 @@
   overflow: hidden;
   text-align: justify;
 }
+@media (max-width: 1024px) {
+  .single-news--text {
+    height: auto;
+  }
+}
