@@ -18,14 +18,16 @@ class CategoriesList extends React.Component {
   }
   render() {
     return (
-      <ul className='categories-list'>
-        <span className='categories-list--heading'>Список категорий: </span>
-        {this.state.categories.map(item => (
-          <li className='categories-list--element'>
-            <Category name={item.name} />
-          </li>
-        ))}
-      </ul>
+      <div>
+        <h2 className='categories-list--heading'>Список категорий: </h2>
+        <ul className='categories-list'>
+          {this.state.categories.map(item => (
+            <li className='categories-list--element'>
+              <Category name={item.name} />
+            </li>
+          ))}
+        </ul>
+      </div>
     );
   }
 }
