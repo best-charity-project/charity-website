@@ -4,7 +4,6 @@ import SingleNews from './SingleNews/SingleNews';
 import './News.css';
 import DetailsButton from '../DetailsButton/DetailsButton';
 
-
 class News extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +25,11 @@ class News extends React.Component {
           {this.state.news.map(item => (
             <div className='news-list--item' key={item._id}>
               <SingleNews title={item.title} shortDescription={item.shortDescription} />
-              <DetailsButton text='ПОДРОБНЕЕ' url='https://tut.by' />
+              <DetailsButton
+                className='control-button control-button--blue'
+                text='Подробнее'
+                url={item.url}
+              />
             </div>
           ))}
         </div>

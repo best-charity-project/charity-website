@@ -4,8 +4,8 @@ import { addNews } from '../../../newsCalls';
 import './AddEditNews.css';
 
 export default () => (
-  <div>
-    <h1 className='add-edit-news--heading'>Добавление новости</h1>
+  <div className='admin-form-news'>
+    <h1 className='admin-form-news--heading'>Добавление новости</h1>
     <Form onSubmit={addNews} buttonText='Добавить новость' />
   </div>
 );
