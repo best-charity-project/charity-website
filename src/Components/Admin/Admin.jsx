@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch, Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Admin.css';
 import AdminNews from './AdminNews';
@@ -21,6 +21,7 @@ const Admin = ({ match }) => (
         <Route exact path={`${match.url}/news`} component={AdminNews} />
         <Route path={`${match.url}/addNews`} component={AddNews} />
         <Route path={`${match.url}/news/edit/:id`} component={EditNews} />
+        <Redirect to={`${match.url}/news`} />
       </Switch>
     </div>
   </div>

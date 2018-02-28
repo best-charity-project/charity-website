@@ -48,9 +48,6 @@
   .admin {
     flex-direction: column;
   }
-  .form--add-news {
-    padding-bottom: 0;
-  }
   .admin--box {
     flex-direction: column;
   }
