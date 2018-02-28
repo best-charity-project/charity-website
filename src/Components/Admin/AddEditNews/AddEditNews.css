@@ -1,13 +1,13 @@
-.add-edit-news {
+.admin-form-news {
   padding: 3em;
 }
 
-.add-edit-news--heading {
+.admin-form-news--heading {
   font-size: 2em;
 }
 
 @media (max-width: 992px) {
-  .add-edit-news {
+  .aadmin-form-news {
     padding: 1em 0;
   }
 }
