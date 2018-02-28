@@ -1,38 +1,38 @@
 .control-button {
-    width: 12em;
-    text-align: center;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: none;
-    padding: 0.8em 2em;
-    color: #fff;
-    transition: all 0.2s;
-    display: inline-block;
-    margin: 5px;
-    font: inherit;
+  width: 12em;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  padding: 0.8em 2em;
+  color: #fff;
+  transition: all 0.2s;
+  display: inline-block;
+  margin: 5px;
+  font: inherit;
 }
 
 .control-button:hover {
-    transform: translateY(-3px);
-    background-color: rgba(18, 18, 145, 0.644);
-    cursor: pointer;
+  transform: translateY(-3px);
+  background-color: rgba(18, 18, 145, 0.644);
+  cursor: pointer;
 }
 
 .control-button:active {
-    transform: translateY(-1px);
+  transform: translateY(-1px);
 }
 
 .control-button--green {
-    background-color: rgb(92, 185, 120);
+  background-color: rgb(92, 185, 120);
 }
 
 .control-button--red {
-    background-color: rgb(218, 137, 144);
+  background-color: rgb(218, 137, 144);
 }
 
 @media (max-width: 768px) {
-    .control-button {
-        margin: 0.5em auto;
-        display: block;
-    }
+  .control-button {
+    margin: 0.5em auto;
+    display: block;
+  }
 }
