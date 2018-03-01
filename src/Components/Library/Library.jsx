@@ -1,5 +1,6 @@
 import React from 'react';
 import Search from './Search/Search';
+import LibraryItemsList from './LibraryItemsList/LibraryItemsList';
 import CategoriesList from './CategoriesList/CategoriesList';
 import Form from './Form/Form';
 import './Library.css';
@@ -10,5 +11,6 @@ export default () => (
     <Search />
     <CategoriesList />
     <Form />
+    <LibraryItemsList />
   </div>
 );

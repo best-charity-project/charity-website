@@ -6,4 +6,10 @@ const getLibraryCategories = () =>
     .catch((error) => {
       throw error;
     });
-export default getLibraryCategories;
+const getLibraryItems = () =>
+  API.get('/libraryItems')
+    .then(response => response.data)
+    .catch((error) => {
+      throw error;
+    });
+export { getLibraryCategories, getLibraryItems };
