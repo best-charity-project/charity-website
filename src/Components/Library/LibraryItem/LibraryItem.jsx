@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import BookIcon from '../../icons/book.svg';
 import ArticleIcon from '../../icons/article.svg';
 import VideoIcon from '../../icons/video.svg';
-import EducMaterialIcon from '../../icons/educMaterial.svg';
+import EducMaterialIcon from '../../icons/study.svg';
 import './LibraryItem.css';
 
 class LibraryItem extends React.Component {
@@ -38,14 +38,14 @@ class LibraryItem extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>{this.props.title}</h2>
-        <p>{this.props.type}</p>
+      <div className='library-item'>
+        <h2 className='library-item--title'>{this.props.title}</h2>
+        <p className='library-item--type'>{this.props.type}</p>
         <p>
-          <img src={this.state.icon} alt='Icon' />
+          <img src={this.state.icon} alt='Icon' className='library-item--icon' />
         </p>
-        <p>{this.props.description}</p>
-        <p>{this.props.url}</p>
+        <p className='library-item--description'>{this.props.description}</p>
+        <p className='library-item--url'>{this.props.url}</p>
       </div>
     );
   }
