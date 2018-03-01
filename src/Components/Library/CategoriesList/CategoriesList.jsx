@@ -22,8 +22,8 @@ class CategoriesList extends React.Component {
         <h2 className='categories-list--heading'>Список категорий: </h2>
         <ul className='categories-list'>
           {this.state.categories.map(item => (
-            <li className='categories-list--element'>
-              <Category name={item.name} />
+            <li className='categories-list--element' key={item._id}>
+              <Category title={item.title} />
             </li>
           ))}
         </ul>
