@@ -7,8 +7,8 @@ class Form extends React.Component {
     super(props);
     this.state = {
       categories: [],
-      category_tag: 'nothing',
-      type: 'literature',
+      categoryTag: 'nothing',
+      type: 'nothing',
       title: '',
       description: '',
       url: '',
@@ -30,7 +30,7 @@ class Form extends React.Component {
   }
 
   handleChangeCategory(event) {
-    this.setState({ category_tag: event.target.value });
+    this.setState({ categoryTag: event.target.value });
   }
 
   handleChangeType(event) {
@@ -49,12 +49,13 @@ class Form extends React.Component {
     this.setState({ url: event.target.value });
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
+    event.preventDefault();
     const {
-      category_tag, type, title, description, url,
+      categoryTag, type, title, description, url,
     } = this.state;
     addLibraryItem({
-      category_tag,
+      categoryTag,
       type,
       title,
       description,
@@ -70,54 +71,58 @@ class Form extends React.Component {
           <label htmlFor='addCategory'>
             Выбор категории
         <p>
-              <select className='form-library--field' onChange={this.handleChangeCategory}>
-                <option value=''>---</option>
-                {this.state.categories.map(item => (
-                  <option value={item.tag} key={item._id}>{item.title}</option>
-                ))}
-              </select>
-            </p>
+          <select className='form-library--field' onChange={this.handleChangeCategory}>
+            <option value='nothing' disabled='disabled' selected>---</option>
+            {this.state.categories.map(item => (
+              <option value={item.tag} key={item._id}>{item.title}</option>
+            ))}
+          </select>
+        </p>
           </label>
           <label htmlFor='addCategory'>
             Выбор типа материала
         <p>
-              <select className='form-library--field' onChange={this.handleChangeType}>
-                <option value='literature'>Литература</option>
-                <option value='video'>Видео</option>
-                <option value='articles'>Статьи</option>
-                <option value='study_material'>Учебные материалы</option>
-              </select>
-            </p>
+          <select className='form-library--field' onChange={this.handleChangeType}>
+            <option value='nothing' disabled='disabled' selected>---</option>
+            <option value='literature'>Литература</option>
+            <option value='video'>Видео</option>
+            <option value='articles'>Статьи</option>
+            <option value='study_material'>Учебные материалы</option>
+          </select>
+        </p>
           </label>
           <label htmlFor='addCategory'>
             Название документа
         <p>
-              <input
-                type='text'
-                placeholder='Название'
-                className='form-library--field'
-                onChange={this.handleChangeTitle} />
-            </p>
+          <input
+            type='text'
+            placeholder='Название'
+            className='form-library--field'
+            onChange={this.handleChangeTitle}
+          />
+        </p>
           </label>
           <label htmlFor='addCategory'>
             Краткое описание
         <p>
-              <textarea
-                type='text'
-                placeholder='Описание документа'
-                className='form-library--field'
-                onChange={this.handleChangeDescription} />
-            </p>
+          <textarea
+            type='text'
+            placeholder='Описание документа'
+            className='form-library--field'
+            onChange={this.handleChangeDescription}
+          />
+        </p>
           </label>
           <label htmlFor='addCategory'>
             Ссылка на источник
         <p>
-              <input
-                type='url'
-                placeholder='https://....'
-                className='form-library--field'
-                onChange={this.handleChangeUrl} />
-            </p>
+          <input
+            type='url'
+            placeholder='https://....'
+            className='form-library--field'
+            onChange={this.handleChangeUrl}
+          />
+        </p>
           </label>
           <input type='submit' value='Добавить' className='form-library--button' />
         </form>
