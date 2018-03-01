@@ -23,7 +23,7 @@ class CategoriesList extends React.Component {
         <ul className='categories-list'>
           {this.state.categories.map(item => (
             <li className='categories-list--element' key={item._id}>
-              <Category name={item.title} />
+              <Category title={item.title} />
             </li>
           ))}
         </ul>
