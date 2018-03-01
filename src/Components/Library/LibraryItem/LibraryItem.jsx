@@ -4,6 +4,7 @@ import BookIcon from '../../icons/book.svg';
 import ArticleIcon from '../../icons/article.svg';
 import VideoIcon from '../../icons/video.svg';
 import EducMaterialIcon from '../../icons/educMaterial.svg';
+import './LibraryItem.css';
 
 class LibraryItem extends React.Component {
   constructor(props) {
