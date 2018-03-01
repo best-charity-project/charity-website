@@ -7,8 +7,8 @@ class Form extends React.Component {
     super(props);
     this.state = {
       categories: [],
-      categoryTag: 'nothing',
-      type: 'nothing',
+      categoryTag: '',
+      type: '',
       title: '',
       description: '',
       url: '',
@@ -68,62 +68,59 @@ class Form extends React.Component {
       <div>
         <h2>Добавить информацию</h2>
         <form name='addCategory' onSubmit={this.handleSubmit} >
-          <label htmlFor='addCategory'>
-            Выбор категории
-        <p>
-          <select className='form-library--field' onChange={this.handleChangeCategory}>
-            <option value='nothing' disabled='disabled' selected>---</option>
+          <label htmlFor='category'>Выбор категории</label>
+          <select
+            id='category'
+            className='form-library--field'
+            onChange={this.handleChangeCategory}
+            required
+          >
+            <option value='' disabled selected>---</option>
             {this.state.categories.map(item => (
               <option value={item.tag} key={item._id}>{item.title}</option>
             ))}
           </select>
-        </p>
-          </label>
-          <label htmlFor='addCategory'>
-            Выбор типа материала
-        <p>
-          <select className='form-library--field' onChange={this.handleChangeType}>
-            <option value='nothing' disabled='disabled' selected>---</option>
+
+
+          <label htmlFor='type'>Выбор типа материала</label>
+          <select id='type' className='form-library--field' onChange={this.handleChangeType} required >
+            <option value='' disabled selected>---</option>
             <option value='literature'>Литература</option>
             <option value='video'>Видео</option>
             <option value='articles'>Статьи</option>
             <option value='study_material'>Учебные материалы</option>
           </select>
-        </p>
-          </label>
-          <label htmlFor='addCategory'>
-            Название документа
-        <p>
+
+          <label htmlFor='title'>Название документа</label>
           <input
+            id='title'
             type='text'
             placeholder='Название'
             className='form-library--field'
             onChange={this.handleChangeTitle}
+            required
           />
-        </p>
-          </label>
-          <label htmlFor='addCategory'>
-            Краткое описание
-        <p>
+
+
+          <label htmlFor='descripton'>Краткое описание</label>
           <textarea
+            id='description'
             type='text'
             placeholder='Описание документа'
             className='form-library--field'
             onChange={this.handleChangeDescription}
+            required
           />
-        </p>
-          </label>
-          <label htmlFor='addCategory'>
-            Ссылка на источник
-        <p>
+
+          <label htmlFor='url'> Ссылка на источник</label>
           <input
+            id='url'
             type='url'
             placeholder='https://....'
             className='form-library--field'
             onChange={this.handleChangeUrl}
+            required
           />
-        </p>
-          </label>
           <input type='submit' value='Добавить' className='form-library--button' />
         </form>
       </div>
