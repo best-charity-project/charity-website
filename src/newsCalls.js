@@ -1,6 +1,7 @@
 import API from './api';
 
 let newsCache;
+
 const getNews = () => {
   if (!newsCache) {
     return API.get('news')
@@ -16,7 +17,6 @@ const getNews = () => {
 };
 
 const addNews = (news) => {
-  console.log(news)
   API.post('news', news).catch((err) => {
     throw err;
   });
@@ -45,4 +45,5 @@ const getNewsById = id =>
 const deleteNews = (id) => {
   API.delete(`news/${id}`);
 };
+
 export { getNews, addNews, updateNews, getNewsById, deleteNews };
