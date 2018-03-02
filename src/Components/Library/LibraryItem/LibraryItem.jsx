@@ -34,9 +34,9 @@ const LibraryItem = ({
       <a href={url} className='library-item--link'>
         <h2 className='link--title'>{title}</h2>
       </a>
-      <div className='library-item--type'>
-        <img src={iconHandler()} alt='Иконка' className='type--icon' />
-      </div>
+
+      <img src={iconHandler()} alt='Иконка' className='type--icon' />
+
       <p className='library-item--description'>{description}</p>
     </div>
   );

@@ -65,13 +65,15 @@ class Form extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>Добавить информацию</h2>
+      <div className='form-library'>
+        <h2 className='form-library--heading'>Добавить информацию</h2>
         <form name='addCategory' onSubmit={this.handleSubmit}>
-          <label htmlFor='category'>Выбор категории</label>
+          <p className='form-library--comment'>
+            <label htmlFor='category'>Выбор категории</label>
+          </p>
           <select
             id='category'
-            className='form-library--field'
+            className='form-library--field field--select'
             onChange={this.handleChangeCategory}
             required
           >
@@ -84,10 +86,12 @@ class Form extends React.Component {
               </option>
             ))}
           </select>
-          <label htmlFor='type'>Выбор типа материала</label>
+          <p className='form-library--comment'>
+            <label htmlFor='type'>Выбор типа материала</label>
+          </p>
           <select
             id='type'
-            className='form-library--field'
+            className='form-library--field field--select'
             onChange={this.handleChangeType}
             required
           >
@@ -99,7 +103,9 @@ class Form extends React.Component {
             <option value='article'>Статьи</option>
             <option value='studyMaterial'>Учебные материалы</option>
           </select>
-          <label htmlFor='title'>Название документа</label>
+          <p className='form-library--comment'>
+            <label htmlFor='title'>Название документа</label>
+          </p>
           <input
             id='title'
             type='text'
@@ -108,7 +114,9 @@ class Form extends React.Component {
             onChange={this.handleChangeTitle}
             required
           />
-          <label htmlFor='descripton'>Краткое описание</label>
+          <p className='form-library--comment'>
+            <label htmlFor='descripton'>Краткое описание</label>
+          </p>
           <textarea
             id='description'
             type='text'
@@ -117,7 +125,9 @@ class Form extends React.Component {
             onChange={this.handleChangeDescription}
             required
           />
-          <label htmlFor='url'> Ссылка на источник</label>
+          <p className='form-library--comment'>
+            <label htmlFor='url'> Ссылка на источник</label>
+          </p>
           <input
             id='url'
             type='url'
@@ -126,7 +136,11 @@ class Form extends React.Component {
             onChange={this.handleChangeUrl}
             required
           />
-          <input type='submit' value='Добавить' className='form-library--button' />
+          <input
+            type='submit'
+            value='Добавить'
+            className='form-library--button control-button control-button--blue'
+          />
         </form>
       </div>
     );

@@ -15,20 +15,10 @@
 .link--title:hover {
   color: rgb(23, 94, 116);
 }
-.library-item--type {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 2em 0;
-}
 .type--icon {
   width: 2em;
-  height: 2em;
-}
-.type--text {
-  font-size: 0.9em;
-  color: #777;
-  margin-left: 0.5em;
+  display: block;
+  margin: 1em auto;
 }
 .library-item--description {
   line-height: 1.5em;
