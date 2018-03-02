@@ -23,13 +23,13 @@ class Category extends React.Component {
         <button className='category--title' onClick={this.changeState}>
           {this.props.title}
         </button>
-        {this.state.isDisplayed && <TypeList categoryTag={this.props.tagOfCategory} />}
+        {this.state.isDisplayed && <TypeList categoryTag={this.props.categoryTag} />}
       </div>
     );
   }
 }
 Category.propTypes = {
   title: PropTypes.string.isRequired,
-  tagOfCategory: PropTypes.string.isRequired,
+  categoryTag: PropTypes.string.isRequired,
 };
 export default Category;
