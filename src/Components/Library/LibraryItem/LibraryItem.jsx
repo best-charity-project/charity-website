@@ -6,17 +6,12 @@ import VideoIcon from '../../icons/video.svg';
 import EducationalMaterialIcon from '../../icons/study.svg';
 import './LibraryItem.css';
 
-class LibraryItem extends React.Component {
-  constructor(props) {
-    super(props);
-    this.iconHandler = this.iconHandler.bind(this);
-  }
-  componentDidMount() {
-    this.iconHandler();
-  }
-  iconHandler() {
+const LibraryItem = ({
+  title, url, description, type,
+}) => {
+  function iconHandler() {
     let icon;
-    switch (this.props.type) {
+    switch (type) {
       case 'article':
         icon = ArticleIcon;
         break;
@@ -34,26 +29,24 @@ class LibraryItem extends React.Component {
     }
     return icon;
   }
+  return (
+    <div className='library-item'>
+      <a href={url} className='library-item--link'>
+        <h2 className='link--title'>{title}</h2>
+      </a>
 
-  render() {
-    return (
-      <div className='library-item'>
-        <a href={this.props.url} className='library-item--link'>
-          <h2 className='link--title'>{this.props.title}</h2>
-        </a>
-        <div className='library-item--type'>
-          <img src={this.iconHandler()} alt='Иконка' className='type--icon' />
-          <p className='type--text'>{this.props.type}</p>
-        </div>
-        <p className='library-item--description'>{this.props.description}</p>
-      </div>
-    );
-  }
-}
+      <img src={iconHandler()} alt='Иконка' className='type--icon' />
+
+      <p className='library-item--description'>{description}</p>
+    </div>
+  );
+};
+
+export default LibraryItem;
+
 LibraryItem.propTypes = {
   title: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
-export default LibraryItem;

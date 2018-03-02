@@ -1,12 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './TypeList.css';
+import types from './types.json';
+import Type from './Type/Type';
 
-export default () => (
+const TypeList = ({ categoryTag }) => (
   <ul className='type-list'>
-    <li>Литература</li>
-    <li>Видео</li>
-    <li>Статьи</li>
-    <li>Учебные материалы</li>
-    <li>Всё</li>
+    {types.map(item => (
+      <li key={item.typeTag}>
+        <Type type={item.typeTag} category={categoryTag} text={item.text} />
+      </li>
+    ))}
   </ul>
 );
+
+export default TypeList;
+
+TypeList.propTypes = {
+  categoryTag: PropTypes.string.isRequired,
+};

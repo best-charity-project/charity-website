@@ -1,8 +1,9 @@
 import API from './api';
 
-const getLibraryCategories = () => API.get('/categories').then(response => response.data);
-const getLibraryItems = () => API.get('/libraryItems').then(response => response.data);
+const getCategoryItems = (categoryTag, type) =>
+  API.get(`categories/${categoryTag}/libraryItems/${type}`).then(response => response.data);
 
+const getLibraryCategories = () => API.get('/categories').then(response => response.data);
 const addLibraryItem = libraryItem => API.post('libraryItems', libraryItem);
 
-export { getLibraryCategories, addLibraryItem, getLibraryItems };
+export { getLibraryCategories, addLibraryItem, getCategoryItems };
