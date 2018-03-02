@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Search from './Search/Search';
 import CategoriesList from './CategoriesList/CategoriesList';
 import Form from './Form/Form';
+import LibraryItemList from './LibraryItemsList/LibraryItemsList';
 import './Library.css';
 
 const Library = ({ match }) => (
@@ -19,6 +20,10 @@ const Library = ({ match }) => (
     <Switch>
       <Route exact path={`${match.url}/categories`} component={CategoriesList} />
       <Route path={`${match.url}/addToLibrary`} component={Form} />
+      <Route
+        path={`${match.url}/categories/:category/libraryItems/:type`}
+        component={LibraryItemList}
+      />
       <Redirect to={`${match.url}/categories`} />
     </Switch>
   </div>
