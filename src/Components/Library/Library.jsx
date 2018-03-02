@@ -17,9 +17,6 @@ const Library = ({ match }) => (
     <Link to={`${match.url}/categories`} className='library--link'>
       Категории
     </Link>
-    <Link to={`${match.url}/libraryItems`} className='library--link'>
-      Все элементы библиотеки
-    </Link>
     <Switch>
       <Route exact path={`${match.url}/categories`} component={CategoriesList} />
       <Route path={`${match.url}/addToLibrary`} component={Form} />

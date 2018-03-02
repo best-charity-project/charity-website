@@ -3,12 +3,21 @@
 }
 .search--input {
   width: 30em;
-  height: 2em;
+  height: 3em;
+  border: none;
+  padding: 10px;
+  box-shadow: 0 0.5em 1em rgb(238, 235, 235);
 }
 .search--button {
-  background: none;
-  color: inherit;
+  background-color: rgb(47, 179, 219);
+  box-shadow: 0 0.5em 1em rgb(238, 235, 235);
+  color: white;
   text-transform: uppercase;
-  border: 1px solid black;
-  height: 2em;
+  border: none;
+  height: 3em;
+  width: 10em;
+}
+
+.search--button:hover {
+  background-color: #1d6e87;
 }
