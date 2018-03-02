@@ -65,8 +65,8 @@ class Form extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>Добавить информацию</h2>
+      <div className='form-library'>
+        <h2 className='form-library--heading'>Добавить информацию</h2>
         <form name='addCategory' onSubmit={this.handleSubmit} >
           <label htmlFor='category'>Выбор категории</label>
           <select
