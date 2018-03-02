@@ -10,7 +10,7 @@ class LibraryItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: ['article', 'video', 'literature', 'studyMaterial'],
+      type: ['Статьи', 'Видео', 'Литература', 'Учебные материалы'],
       icon: '',
     };
   }
@@ -32,7 +32,7 @@ class LibraryItem extends React.Component {
         this.setState({ icon: EducMaterialIcon });
         break;
       default:
-        this.setState({ icon: 'qqq' });
+        this.setState({ icon: '' });
     }
   }
 
@@ -40,10 +40,10 @@ class LibraryItem extends React.Component {
     return (
       <div className='library-item'>
         <h2 className='library-item--title'>{this.props.title}</h2>
-        <p className='library-item--type'>{this.props.type}</p>
-        <p>
-          <img src={this.state.icon} alt='Icon' className='library-item--icon' />
-        </p>
+        <div className='library-item--type'>
+          <img src={this.state.icon} alt='Icon' className='type--icon' />
+          <p className='type--text'>{this.props.type}</p>
+        </div>
         <p className='library-item--description'>{this.props.description}</p>
         <p className='library-item--url'>{this.props.url}</p>
       </div>

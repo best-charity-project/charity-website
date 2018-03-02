@@ -1,3 +1,30 @@
-.library-item--icon {
-  max-width: 3em;
+.library-item {
+  max-width: 80em;
+  margin: 2em auto;
+  padding-bottom: 2em;
+  border-bottom: 1px solid rgb(231, 225, 225);
+}
+.library-item--title {
+  color: rgb(47, 179, 219);
+  font-size: 1.5em;
+  text-align: center;
+}
+.library-item--type {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 2em;
+}
+.type--icon {
+  width: 2em;
+  height: 2em;
+}
+.type--text {
+  font-size: 0.9em;
+  color: #777;
+  margin-left: 0.5em;
+}
+.library-item--description {
+  line-height: 1.5em;
+  text-indent: 3em;
 }
