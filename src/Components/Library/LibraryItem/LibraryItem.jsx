@@ -39,13 +39,14 @@ class LibraryItem extends React.Component {
   render() {
     return (
       <div className='library-item'>
-        <h2 className='library-item--title'>{this.props.title}</h2>
+        <a href={this.props.url} className='library-item--link'>
+          <h2 className='link--title'>{this.props.title}</h2>
+        </a>
         <div className='library-item--type'>
           <img src={this.state.icon} alt='Icon' className='type--icon' />
           <p className='type--text'>{this.props.type}</p>
         </div>
         <p className='library-item--description'>{this.props.description}</p>
-        <p className='library-item--url'>{this.props.url}</p>
       </div>
     );
   }

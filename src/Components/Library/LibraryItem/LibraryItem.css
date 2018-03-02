@@ -4,10 +4,16 @@
   padding-bottom: 2em;
   border-bottom: 1px solid rgb(231, 225, 225);
 }
-.library-item--title {
+.library-item--link {
+  text-decoration: none;
+}
+.link--title {
   color: rgb(47, 179, 219);
   font-size: 1.5em;
   text-align: center;
+}
+.link--title:hover {
+  color: rgb(23, 94, 116);
 }
 .library-item--type {
   display: flex;
