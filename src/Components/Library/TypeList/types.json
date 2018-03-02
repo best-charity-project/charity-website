@@ -1,1 +1,18 @@
-["Литература", "Видео", "Статьи", "Учебные материалы"]
+[
+  {
+    "text": "Литература",
+    "typeTag": "literature"
+  },
+  {
+    "text": "Видео",
+    "typeTag": "video"
+  },
+  {
+    "text": "Учебные материалы",
+    "typeTag": "studyMaterial"
+  },
+  {
+    "text": "Статьи",
+    "typeTag": "article"
+  }
+]
