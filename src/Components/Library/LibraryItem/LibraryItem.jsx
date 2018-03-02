@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import BookIcon from '../../icons/book.svg';
 import ArticleIcon from '../../icons/article.svg';
 import VideoIcon from '../../icons/video.svg';
-import EducMaterialIcon from '../../icons/study.svg';
+import EducationalMaterialIcon from '../../icons/study.svg';
 import './LibraryItem.css';
 
 class LibraryItem extends React.Component {
@@ -27,7 +27,7 @@ class LibraryItem extends React.Component {
         icon = BookIcon;
         break;
       case 'studyMaterial':
-        icon = EducMaterialIcon;
+        icon = EducationalMaterialIcon;
         break;
       default:
         icon = '';
