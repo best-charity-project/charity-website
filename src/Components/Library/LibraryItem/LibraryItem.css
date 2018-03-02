@@ -1,7 +1,7 @@
 .library-item {
   max-width: 80em;
   margin: 2em auto;
-  padding-bottom: 2em;
+  padding: 1em 1em 2em 1em;
   border-bottom: 1px solid rgb(231, 225, 225);
 }
 .library-item--link {
@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 2em;
+  margin: 2em 0;
 }
 .type--icon {
   width: 2em;
