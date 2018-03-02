@@ -10,6 +10,7 @@ import './Library.css';
 const Library = ({ match }) => (
   <div className='library indent'>
     <h1 className='library--heading'>Библиотека</h1>
+    <Search />
     <Link to={`${match.url}/addToLibrary`} className='library--link'>
       Добавить информацию в библиотеку
     </Link>
@@ -19,7 +20,6 @@ const Library = ({ match }) => (
     <Link to={`${match.url}/libraryItems`} className='library--link'>
       Все элементы библиотеки
     </Link>
-    <Search />
     <Switch>
       <Route exact path={`${match.url}/categories`} component={CategoriesList} />
       <Route path={`${match.url}/addToLibrary`} component={Form} />

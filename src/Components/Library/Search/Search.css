@@ -1,0 +1,14 @@
+.search {
+  text-align: center;
+}
+.search--input {
+  width: 30em;
+  height: 2em;
+}
+.search--button {
+  background: none;
+  color: inherit;
+  text-transform: uppercase;
+  border: 1px solid black;
+  height: 2em;
+}
