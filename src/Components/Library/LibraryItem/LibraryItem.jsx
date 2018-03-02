@@ -9,31 +9,30 @@ import './LibraryItem.css';
 class LibraryItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      type: ['Статьи', 'Видео', 'Литература', 'Учебные материалы'],
-      icon: '',
-    };
+    this.iconHandler = this.iconHandler.bind(this);
   }
   componentDidMount() {
     this.iconHandler();
   }
   iconHandler() {
+    let icon;
     switch (this.props.type) {
-      case this.state.type[0]:
-        this.setState({ icon: ArticleIcon });
+      case 'article':
+        icon = ArticleIcon;
         break;
-      case this.state.type[1]:
-        this.setState({ icon: VideoIcon });
+      case 'video':
+        icon = VideoIcon;
         break;
-      case this.state.type[2]:
-        this.setState({ icon: BookIcon });
+      case 'literature':
+        icon = BookIcon;
         break;
-      case this.state.type[3]:
-        this.setState({ icon: EducMaterialIcon });
+      case 'studyMaterial':
+        icon = EducMaterialIcon;
         break;
       default:
-        this.setState({ icon: '' });
+        icon = '';
     }
+    return icon;
   }
 
   render() {
@@ -43,7 +42,7 @@ class LibraryItem extends React.Component {
           <h2 className='link--title'>{this.props.title}</h2>
         </a>
         <div className='library-item--type'>
-          <img src={this.state.icon} alt='Icon' className='type--icon' />
+          <img src={this.iconHandler()} alt='Icon' className='type--icon' />
           <p className='type--text'>{this.props.type}</p>
         </div>
         <p className='library-item--description'>{this.props.description}</p>
