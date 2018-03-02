@@ -1,3 +1,27 @@
 .type-list {
-  margin-left: 2em;
+  width: 95%;
+  margin: 0 auto .25em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: all .3s ease;
+  max-height: 0;
+  z-index: 1;
+}
+
+.type-list li {
+  max-height: inherit;
+  padding-left: 5em;
+  transition: all .3s ease;
+}
+
+.category--line-open~.type-list {
+  max-height: 200px;
+  opacity: 1;
+  transition-property: max-height, opacity;
+  transition-duration: .5s;
+}
+
+.category--line-open~.type-list>li {
+  transition-property: opacity;
+  transition-duration: .5s;
 }

@@ -1,6 +1,24 @@
-.category--title {
+.category--line {
+  font-family: 'Roboto', sans-serif;
+  color: black;
   outline: none;
   border: none;
-  background-color: inherit;
   font: inherit;
+  display: inline-block;
+  margin: 0.25em 3em;
+  text-transform: uppercase;
+  padding: .5em .5em;
+  width: 40em;
+  background-color: inherit;
+  text-align: left;
+  letter-spacing: 0.1em;
+  line-height: normal;
+}
+
+.category-arrow {
+  background-image: url(/static/media/arrow-angle.1ddf501a.svg);
+  background-size: 1.5em;
+  width: 1.5em;
+  height: 1.5em;
+  display: inline-block;
 }
