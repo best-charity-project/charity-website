@@ -5,7 +5,7 @@ const getLibraryCategories = () =>
     .then(response => response.data);
 
 const addLibraryItem = libraryItem =>
-  API.post('libraryItemss', libraryItem);
+  API.post('libraryItems', libraryItem);
 
 export {
   getLibraryCategories,
