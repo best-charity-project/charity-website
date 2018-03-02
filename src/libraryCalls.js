@@ -1,7 +1,7 @@
 import API from './api';
 
 const getLibraryCategories = () =>
-  API.get('/Library/categories')
+  API.get('categories')
     .then(response => response.data);
 
 const addLibraryItem = libraryItem =>
