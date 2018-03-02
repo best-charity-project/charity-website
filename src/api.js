@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: 'http://charity-server.herokuapp.com/api/',
+  baseURL: 'https://charity-server.herokuapp.com/api/',
 });
