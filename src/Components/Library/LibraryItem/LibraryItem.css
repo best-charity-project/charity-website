@@ -1,0 +1,36 @@
+.library-item {
+  max-width: 80em;
+  margin: 2em auto;
+  padding: 1em 1em 2em 1em;
+  border-bottom: 1px solid rgb(231, 225, 225);
+}
+.library-item--link {
+  text-decoration: none;
+}
+.link--title {
+  color: rgb(47, 179, 219);
+  font-size: 1.5em;
+  text-align: center;
+}
+.link--title:hover {
+  color: rgb(23, 94, 116);
+}
+.library-item--type {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 2em 0;
+}
+.type--icon {
+  width: 2em;
+  height: 2em;
+}
+.type--text {
+  font-size: 0.9em;
+  color: #777;
+  margin-left: 0.5em;
+}
+.library-item--description {
+  line-height: 1.5em;
+  text-indent: 3em;
+}
