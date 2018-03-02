@@ -1,3 +1,12 @@
+.library--box {
+  display: flex;
+}
+
+.library--sidebar {
+  min-width: 23em;
+  background-color: #fff;
+  padding-top: 2em;
+}
 .library--heading {
   text-align: center;
   margin: 1em 0;
@@ -12,4 +21,24 @@
 .library--link {
   display: block;
   margin: 2em 0;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 1em 3em;
+}
+.library--link:hover {
+  color: #fff;
+  background-color: #37b3d8;
+}
+@media (max-width: 992px) {
+  .library {
+    flex-direction: column;
+  }
+  .library--box {
+    flex-direction: column;
+  }
+  .library--sidebar {
+    min-width: 100%;
+  }
 }

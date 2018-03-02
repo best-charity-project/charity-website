@@ -10,22 +10,26 @@ import './Library.css';
 const Library = ({ match }) => (
   <div className='library indent'>
     <h1 className='library--heading'>Библиотека</h1>
-    <Link to={`${match.url}/addToLibrary`} className='library--link'>
-      Добавить информацию в библиотеку
-    </Link>
-    <Link to={`${match.url}/categories`} className='library--link'>
-      Категории
-    </Link>
-    <Search />
-    <Switch>
-      <Route exact path={`${match.url}/categories`} component={CategoriesList} />
-      <Route path={`${match.url}/addToLibrary`} component={Form} />
-      <Route
-        path={`${match.url}/categories/:category/libraryItems/:type`}
-        component={LibraryItemsList}
-      />
-      <Redirect to={`${match.url}/categories`} />
-    </Switch>
+    <div className='library--box'>
+      <div className='library--sidebar'>
+        <Link to={`${match.url}/addToLibrary`} className='library--link'>
+          Добавить информацию в библиотеку
+        </Link>
+        <Link to={`${match.url}/categories`} className='library--link'>
+          Категории
+        </Link>
+        <Search />
+      </div>
+      <Switch>
+        <Route exact path={`${match.url}/categories`} component={CategoriesList} />
+        <Route path={`${match.url}/addToLibrary`} component={Form} />
+        <Route
+          path={`${match.url}/categories/:category/libraryItems/:type`}
+          component={LibraryItemsList}
+        />
+        <Redirect to={`${match.url}/categories`} />
+      </Switch>
+    </div>
   </div>
 );
 
