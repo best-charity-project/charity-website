@@ -80,17 +80,19 @@ class Form extends React.Component {
               <option value={item.tag} key={item._id}>{item.title}</option>
             ))}
           </select>
-
-
           <label htmlFor='type'>Выбор типа материала</label>
-          <select id='type' className='form-library--field' onChange={this.handleChangeType} required >
+          <select
+            id='type'
+            className='form-library--field'
+            onChange={this.handleChangeType}
+            required
+          >
             <option value='' disabled selected>---</option>
             <option value='literature'>Литература</option>
             <option value='video'>Видео</option>
             <option value='articles'>Статьи</option>
             <option value='study_material'>Учебные материалы</option>
           </select>
-
           <label htmlFor='title'>Название документа</label>
           <input
             id='title'
@@ -100,8 +102,6 @@ class Form extends React.Component {
             onChange={this.handleChangeTitle}
             required
           />
-
-
           <label htmlFor='descripton'>Краткое описание</label>
           <textarea
             id='description'
@@ -111,7 +111,6 @@ class Form extends React.Component {
             onChange={this.handleChangeDescription}
             required
           />
-
           <label htmlFor='url'> Ссылка на источник</label>
           <input
             id='url'
