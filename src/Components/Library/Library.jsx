@@ -23,7 +23,10 @@ const Library = ({ match }) => (
     <Switch>
       <Route exact path={`${match.url}/categories`} component={CategoriesList} />
       <Route path={`${match.url}/addToLibrary`} component={Form} />
-      <Route path={`${match.url}/libraryItems`} component={LibraryItemsList} />
+      <Route
+        path={`${match.url}/categories/:category/libraryItems/:type`}
+        component={LibraryItemsList}
+      />
       <Redirect to={`${match.url}/categories`} />
     </Switch>
   </div>
