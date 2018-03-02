@@ -67,7 +67,7 @@ class Form extends React.Component {
     return (
       <div>
         <h2>Добавить информацию</h2>
-        <form name='addCategory' onSubmit={this.handleSubmit} >
+        <form name='addCategory' onSubmit={this.handleSubmit}>
           <label htmlFor='category'>Выбор категории</label>
           <select
             id='category'
@@ -75,9 +75,13 @@ class Form extends React.Component {
             onChange={this.handleChangeCategory}
             required
           >
-            <option value='' disabled selected>---</option>
+            <option value='' disabled selected>
+              ---
+            </option>
             {this.state.categories.map(item => (
-              <option value={item.tag} key={item._id}>{item.title}</option>
+              <option value={item.tag} key={item._id}>
+                {item.title}
+              </option>
             ))}
           </select>
           <label htmlFor='type'>Выбор типа материала</label>
@@ -87,7 +91,9 @@ class Form extends React.Component {
             onChange={this.handleChangeType}
             required
           >
-            <option value='' disabled selected>---</option>
+            <option value='' disabled selected>
+              ---
+            </option>
             <option value='literature'>Литература</option>
             <option value='video'>Видео</option>
             <option value='articles'>Статьи</option>
