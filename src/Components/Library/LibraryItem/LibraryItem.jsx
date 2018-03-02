@@ -42,7 +42,7 @@ class LibraryItem extends React.Component {
           <h2 className='link--title'>{this.props.title}</h2>
         </a>
         <div className='library-item--type'>
-          <img src={this.iconHandler()} alt='Icon' className='type--icon' />
+          <img src={this.iconHandler()} alt='Иконка' className='type--icon' />
           <p className='type--text'>{this.props.type}</p>
         </div>
         <p className='library-item--description'>{this.props.description}</p>
