@@ -96,8 +96,8 @@ class Form extends React.Component {
             </option>
             <option value='literature'>Литература</option>
             <option value='video'>Видео</option>
-            <option value='articles'>Статьи</option>
-            <option value='study_material'>Учебные материалы</option>
+            <option value='article'>Статьи</option>
+            <option value='studyMaterial'>Учебные материалы</option>
           </select>
           <label htmlFor='title'>Название документа</label>
           <input
