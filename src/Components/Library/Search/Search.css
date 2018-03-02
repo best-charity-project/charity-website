@@ -9,7 +9,8 @@
   box-shadow: 0 0.5em 1em rgb(238, 235, 235);
 }
 .search--button {
-  background-color: rgb(47, 179, 219);
+  background-color: #1d6e87;
+  opacity: 0.8;
   box-shadow: 0 0.5em 1em rgb(238, 235, 235);
   color: white;
   text-transform: uppercase;
@@ -19,5 +20,5 @@
 }
 
 .search--button:hover {
-  background-color: #1d6e87;
+  opacity: 1;
 }
