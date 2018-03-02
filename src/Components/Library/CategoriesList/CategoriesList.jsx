@@ -1,5 +1,5 @@
 import React from 'react';
-import getLibraryCategories from '../../../libraryCalls';
+import { getLibraryCategories } from '../../../libraryCalls';
 import Category from '../Category/Category';
 import './CategoriesList.css';
 

@@ -1,9 +1,13 @@
 import API from './api';
 
 const getLibraryCategories = () =>
-  API.get('/Library/categories')
-    .then(response => response.data)
-    .catch((error) => {
-      throw error;
-    });
-export default getLibraryCategories;
+  API.get('categories')
+    .then(response => response.data);
+
+const addLibraryItem = libraryItem =>
+  API.post('libraryItemss', libraryItem);
+
+export {
+  getLibraryCategories,
+  addLibraryItem,
+};

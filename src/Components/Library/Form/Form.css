@@ -1,6 +1,7 @@
 .form-library--field {
   width: 21em;
   margin: 0.3em;
+  display: block;
 }
 .form-library--button {
   display: block;
