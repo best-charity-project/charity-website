@@ -2,9 +2,9 @@ import React from 'react';
 import { Route, Switch, Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Search from './Search/Search';
+import LibraryItemsList from './LibraryItemsList/LibraryItemsList';
 import CategoriesList from './CategoriesList/CategoriesList';
 import Form from './Form/Form';
-import LibraryItemList from './LibraryItemsList/LibraryItemsList';
 import './Library.css';
 
 const Library = ({ match }) => (
@@ -22,7 +22,7 @@ const Library = ({ match }) => (
       <Route path={`${match.url}/addToLibrary`} component={Form} />
       <Route
         path={`${match.url}/categories/:category/libraryItems/:type`}
-        component={LibraryItemList}
+        component={LibraryItemsList}
       />
       <Redirect to={`${match.url}/categories`} />
     </Switch>

@@ -18,16 +18,14 @@ class LibraryItemsList extends React.Component {
 
   render() {
     return (
-      <div>
+      <ul>
         <h2>Список документов библиотеки: </h2>
-        <ul>
-          {this.state.libraryItems.map(item => (
-            <li key={item._id}>
-              <LibraryItem {...item} />
-            </li>
-          ))}
-        </ul>
-      </div>
+        {this.state.libraryItems.map(item => (
+          <li key={item._id}>
+            <LibraryItem {...item} />
+          </li>
+        ))}
+      </ul>
     );
   }
 }

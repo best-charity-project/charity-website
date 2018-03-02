@@ -31,4 +31,5 @@ class CategoriesList extends React.Component {
     );
   }
 }
+
 export default CategoriesList;
