@@ -8,7 +8,6 @@
   margin: 0.25em 3em;
   text-transform: uppercase;
   padding: .5em .5em;
-  width: 40em;
   background-color: inherit;
   text-align: left;
   letter-spacing: 0.1em;
@@ -16,9 +15,22 @@
 }
 
 .category-arrow {
-  background-image: url(/static/media/arrow-angle.1ddf501a.svg);
+  background-image: url(../../img/arrow-angle.svg);
   background-size: 1.5em;
   width: 1.5em;
   height: 1.5em;
   display: inline-block;
+  transform: rotate(180deg);
+  transition: all .3s ease;
+}
+
+.category--line-open .category-arrow {
+  transform: rotate(0deg);
+}
+
+.category-title {
+  display: inline-block;
+  margin-left: .5em;
+  font-size: 1em;
+  vertical-align: super;
 }
