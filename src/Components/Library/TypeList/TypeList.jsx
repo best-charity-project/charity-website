@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './TypeList.css';
 import types from './types.json';
 import Type from './Type/Type';
+import './TypeList.css';
 
 const TypeList = ({ categoryTag }) => (
   <ul className='type-list'>
