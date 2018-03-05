@@ -5,22 +5,27 @@
   background-color: #fff;
   box-shadow: 0 0.5em 1em rgb(238, 235, 235);
 }
+
 .library-item--link {
   text-decoration: none;
 }
+
 .link--title {
   color: rgb(47, 179, 219);
   font-size: 1.5em;
   text-align: center;
 }
+
 .link--title:hover {
   color: rgb(23, 94, 116);
 }
+
 .type--icon {
   width: 2em;
   display: block;
   margin: 1em auto;
 }
+
 .library-item--description {
   line-height: 1.5em;
   text-indent: 3em;
