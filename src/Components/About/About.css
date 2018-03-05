@@ -7,14 +7,13 @@
 }
 
 .about-us--heading {
-  margin-bottom: 0.5em;
   text-align: center;
-  padding-top: 2em;
+  margin: 1em 0;
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
-  font-size: 50px;
-  color: #23e2f4;
-  letter-spacing: 5px;
+  font-size: 3em;
+  color: #1d6e87;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 

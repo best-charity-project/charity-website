@@ -46,3 +46,9 @@
     min-width: 100%;
   }
 }
+
+@media (max-width: 414px) {
+  .library--heading {
+    font-size: 2em;
+  }
+}
