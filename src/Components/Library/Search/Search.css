@@ -3,7 +3,7 @@
 }
 .search--input {
   width: 30em;
-  height: 3em;
+  font-size: 1em;
   border: none;
   padding: 10px;
   box-shadow: 0 0.5em 1em rgb(238, 235, 235);
@@ -15,8 +15,9 @@
   color: white;
   text-transform: uppercase;
   border: none;
-  height: 3em;
   width: 10em;
+  font-size: 1em;
+  padding: 10px;
 }
 
 .search--button:hover {
