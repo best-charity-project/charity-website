@@ -14,12 +14,12 @@ export default class Category extends React.Component {
   }
 
   getLibraryClass() {
-    return classnames('category-line', {
+    return classnames('category--item', {
       open: this.state.isActive,
     });
   }
 
-  setStateToFalse() {
+  setActiveToFalse() {
     this.setState({ isActive: false });
   }
 
@@ -32,9 +32,10 @@ export default class Category extends React.Component {
     return (
       <div className='category'>
         <button className={this.getLibraryClass()} onClick={this.changeState}>
-          <div className='category-arrow' /><div className='category-title'>{this.props.title}</div>
+          <div className='category-arrow' />
+          <div className='category-title'>{this.props.title}</div>
         </button>
-        {<TypeList onClick={this.setStateToFalse} />}
+        {<TypeList onClick={this.setActiveToFalse} />}
       </div>
     );
   }
