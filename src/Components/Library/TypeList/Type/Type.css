@@ -1,0 +1,8 @@
+.type-list--link {
+  font-size: 1em;
+  color: #333333;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-top: .3em;
+  display: block;
+}

@@ -8,10 +8,13 @@
   z-index: 1;
 }
 
-.type-list li {
-  max-height: inherit;
-  padding-left: 5em;
+.type-list .type-list--link {
+  visibility: hidden;
   transition: all .3s ease;
+}
+
+.category--line-open~.type-list .type-list--link {
+  visibility: visible;
 }
 
 .category--line-open~.type-list {
@@ -24,4 +27,10 @@
 .category--line-open~.type-list>li {
   transition-property: opacity;
   transition-duration: .5s;
+}
+
+.type-list li {
+  max-height: inherit;
+  padding-left: 5em;
+  transition: all .3s ease;
 }
