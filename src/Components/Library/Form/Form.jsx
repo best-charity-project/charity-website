@@ -1,6 +1,7 @@
 import React from 'react';
 import './Form.css';
 import { getLibraryCategories, addLibraryItem } from '../../../libraryCalls';
+import ConfirmMessage from './ConfirmMessage/ConfirmMessage';
 
 class Form extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class Form extends React.Component {
       title: '',
       description: '',
       url: '',
+      isOpen: false,
     };
     this.handleChangeCategory = this.handleChangeCategory.bind(this);
     this.handleChangeType = this.handleChangeType.bind(this);
@@ -19,6 +21,7 @@ class Form extends React.Component {
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleChangeUrl = this.handleChangeUrl.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleConfirmMessage = this.toggleConfirmMessage.bind(this);
   }
 
   componentDidMount() {
@@ -63,9 +66,16 @@ class Form extends React.Component {
     });
   }
 
+  toggleConfirmMessage() {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    });
+  }
+
   render() {
     return (
       <div className='form-library'>
+        {this.state.isOpen && <ConfirmMessage />}
         <h2 className='form-library--heading'>Добавить информацию</h2>
         <form name='addCategory' onSubmit={this.handleSubmit}>
           <p className='form-library--comment'>
@@ -140,6 +150,7 @@ class Form extends React.Component {
             type='submit'
             value='Добавить'
             className='form-library--button control-button control-button--blue'
+            onClick={this.toggleConfirmMessage}
           />
         </form>
       </div>
