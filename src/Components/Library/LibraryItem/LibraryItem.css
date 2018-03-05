@@ -1,8 +1,9 @@
 .library-item {
   max-width: 80em;
-  margin: 2em auto;
+  margin: 2em;
   padding: 1em 1em 2em 1em;
-  border-bottom: 1px solid rgb(231, 225, 225);
+  background-color: #fff;
+  box-shadow: 0 0.5em 1em rgb(238, 235, 235);
 }
 .library-item--link {
   text-decoration: none;
@@ -23,4 +24,5 @@
 .library-item--description {
   line-height: 1.5em;
   text-indent: 3em;
+  text-align: justify;
 }
