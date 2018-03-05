@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import './Type.css';
 
 const Type = ({ category, type, text }) => (
-  <Link className='type-list--link' to={`/Library/categories/${category}/libraryItems/${type}`}>{text}</Link>
+  <Link className='type-list--link' to={`/library/${category}/${type}`}>
+    {text}
+  </Link>
 );
 
 export default Type;
