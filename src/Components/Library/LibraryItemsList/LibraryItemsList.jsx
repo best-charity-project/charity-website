@@ -14,6 +14,10 @@ class LibraryItemsList extends React.Component {
   }
 
   componentDidMount() {
+    this.setLibraryItems();
+  }
+
+  setLibraryItems() {
     const { category, type } = this.props.match.params;
     getCategoryItems(category, type).then(libraryItems => this.setState({ libraryItems }));
   }
