@@ -55,14 +55,11 @@ export default class Form extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const newDate = new Date();
-    const date = `${newDate.getDate()}-${newDate.getMonth() + 1}-${newDate.getFullYear()}`;
     const { title, shortDescription, url } = this.state;
     this.props.onSubmit({
       title,
       shortDescription,
       url,
-      date,
     });
     this.clearFields();
   }

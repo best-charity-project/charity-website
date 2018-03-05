@@ -35,12 +35,13 @@ export default class Category extends React.Component {
           <div className='category-arrow' />
           <div className='category-title'>{this.props.title}</div>
         </button>
-        {<TypeList categoryTag={this.props.tagOfCategory} onClick={this.setActiveToFalse} />}
+        {<TypeList categoryTag={this.props.categoryTag} onClick={this.setActiveToFalse} />}
       </div>
     );
   }
 }
+
 Category.propTypes = {
   title: PropTypes.string.isRequired,
-  tagOfCategory: PropTypes.string.isRequired,
+  categoryTag: PropTypes.string.isRequired,
 };
