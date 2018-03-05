@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getCategoryItems } from '../../../libraryCalls';
 import LibraryItem from '../LibraryItem/LibraryItem';
+import DetailsButton from '../../DetailsButton/DetailsButton';
+import './LibraryItemList.css';
 
 class LibraryItemsList extends React.Component {
   constructor(props) {
@@ -20,8 +22,13 @@ class LibraryItemsList extends React.Component {
     return (
       <ul>
         {this.state.libraryItems.map(item => (
-          <li key={item._id}>
+          <li key={item._id} className='library-item'>
             <LibraryItem {...item} />
+            <DetailsButton
+              className='control-button control-button--blue'
+              text='Подробнее'
+              url={item.url}
+            />
           </li>
         ))}
       </ul>
