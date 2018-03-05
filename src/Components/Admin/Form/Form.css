@@ -13,7 +13,7 @@
 }
 
 .form--current-date {
-  margin: 2em 0;
+  margin: 2em 0 2em 1em;
 }
 
 .form--input {
@@ -38,7 +38,8 @@
 }
 
 .form--label {
-  margin-bottom: 0.5em;
+  margin: 1em 0 0.5em 0;
+  text-indent: 1em;
 }
 
 .form--button {
@@ -68,10 +69,8 @@
   .form--add-news {
     padding: 0.5em;
   }
-  .form--input {
-    width: 95%;
-  }
+  .form--input,
   .form--textarea {
-    width: 95%;
+    width: 85%;
   }
 }
