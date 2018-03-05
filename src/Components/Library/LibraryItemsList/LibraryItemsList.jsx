@@ -19,7 +19,6 @@ class LibraryItemsList extends React.Component {
   render() {
     return (
       <ul>
-        <h2>Список документов библиотеки: </h2>
         {this.state.libraryItems.map(item => (
           <li key={item._id}>
             <LibraryItem {...item} />
