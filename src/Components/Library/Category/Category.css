@@ -1,4 +1,4 @@
-.category--line {
+.category-line {
   font-family: 'Roboto', sans-serif;
   color: black;
   outline: none;
@@ -24,7 +24,7 @@
   transition: all .3s ease;
 }
 
-.category--line-open .category-arrow {
+.category-line-open .category-arrow {
   transform: rotate(0deg);
 }
 

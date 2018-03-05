@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import TypeList from '../TypeList/TypeList';
 import './Category.css';
 
-class Category extends React.Component {
+export default class Category extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,8 +14,8 @@ class Category extends React.Component {
   }
 
   getLibraryClass() {
-    return classnames('category--line', {
-      'category--line-open': this.state.isActive,
+    return classnames('category-line', {
+      open: this.state.isActive,
     });
   }
 
@@ -27,7 +27,6 @@ class Category extends React.Component {
     event.preventDefault();
     this.setState({ isActive: !this.state.isActive });
   }
-
 
   render() {
     return (
@@ -43,4 +42,3 @@ class Category extends React.Component {
 Category.propTypes = {
   title: PropTypes.string.isRequired,
 };
-export default Category;

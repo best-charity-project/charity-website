@@ -12,18 +12,18 @@
   transition: all .3s ease;
 }
 
-.category--line-open~.type-list .type-list--link {
+.open~.type-list .type-list--link {
   visibility: visible;
 }
 
-.category--line-open~.type-list {
+.open~.type-list {
   max-height: 200px;
   opacity: 1;
   transition-property: max-height, opacity;
   transition-duration: .5s;
 }
 
-.category--line-open~.type-list>li {
+.open~.type-list>li {
   transition-property: opacity;
   transition-duration: .5s;
 }
