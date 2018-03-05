@@ -1,10 +1,16 @@
 import React from 'react';
+import './Search.css';
 
 export default () => (
-  <form role='search'>
-    <div>
-      <input type='search' id='search' placeholder='Поиск по категории...' />
-      <button>Поиск</button>
-    </div>
-  </form>
+  <div className='search'>
+    <form role='search'>
+      <input
+        type='search'
+        id='search'
+        placeholder='Поиск по категории...'
+        className='search--input'
+      />
+      <button className='search--button'>Поиск</button>
+    </form>
+  </div>
 );

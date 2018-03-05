@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getCategoryItems } from '../../../libraryCalls';
 import LibraryItem from '../LibraryItem/LibraryItem';
-import './LibraryItemsList.css';
 
 class LibraryItemsList extends React.Component {
   constructor(props) {
@@ -20,7 +19,6 @@ class LibraryItemsList extends React.Component {
   render() {
     return (
       <ul>
-        <h2 className='library-items--heading'>Список документов библиотеки: </h2>
         {this.state.libraryItems.map(item => (
           <li key={item._id}>
             <LibraryItem {...item} />

@@ -17,10 +17,10 @@ const Library = ({ match }) => (
         <Link to={`${match.url}/categories`} className='library--link'>
           Категории
         </Link>
-        <Search />
       </div>
       <div>
         <h1 className='library--heading'>Библиотека</h1>
+        <Search />
         <Switch>
           <Route exact path={`${match.url}/categories`} component={CategoriesList} />
           <Route path={`${match.url}/addToLibrary`} component={Form} />
