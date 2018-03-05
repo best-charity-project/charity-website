@@ -22,11 +22,8 @@
 }
 
 @media (max-width: 415px) {
-  .modal-backdrop {
+  .modal {
     padding: 0.5em;
     margin-top: 3em;
-  }
-  .modal-window {
-    width: 70%;
   }
 }
