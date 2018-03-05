@@ -1,6 +1,7 @@
 .search {
   text-align: center;
 }
+
 .search--input {
   width: 30em;
   font-size: 1em;
@@ -8,6 +9,7 @@
   padding: 10px;
   box-shadow: 0 0.5em 1em rgb(238, 235, 235);
 }
+
 .search--button {
   background-color: #1d6e87;
   opacity: 0.8;
