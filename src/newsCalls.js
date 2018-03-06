@@ -26,7 +26,7 @@ const updateNews = (id, news) => {
   });
 };
 
-const getNewsById = id => API.get(`news/${id}`).then(response => response.data);
+const getNewsById = id => API.get(`news/?_id=${id}`).then(response => response.data[0]);
 
 const deleteNews = (id) => {
   API.delete(`news/${id}`);
