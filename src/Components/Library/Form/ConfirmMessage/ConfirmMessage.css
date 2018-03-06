@@ -11,6 +11,7 @@
   padding-top: 0.5em;
   animation: message 2s;
 }
+
 @keyframes message {
   from {
     top: 0px;
