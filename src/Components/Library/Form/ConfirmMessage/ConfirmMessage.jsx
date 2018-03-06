@@ -1,5 +1,6 @@
 import React from 'react';
 import './ConfirmMessage.css';
+import Timer from '../../../../configs/config.json';
 
 class ConfirmMessage extends React.Component {
   constructor(props) {
@@ -17,8 +18,9 @@ class ConfirmMessage extends React.Component {
   setTimer() {
     setTimeout(() => {
       this.setState({ visible: false });
-    }, 3000);
+    }, Timer.timer);
   }
+
   render() {
     return this.state.visible ? (
       <div className='confirm-message'>Документ был добавлен в библиотеку</div>
