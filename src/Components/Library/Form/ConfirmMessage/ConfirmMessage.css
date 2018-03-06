@@ -1,11 +1,21 @@
 .confirm-message {
-  width: 100%;
+  width: 20em;
   height: 2em;
-  background-color: #d4edda;
+  background-color: #2ccb71;
   position: absolute;
-  top: 4em;
+  top: 6em;
   right: 0;
   color: #1e4b28;
+  border-radius: 5px;
   text-align: center;
   padding-top: 0.5em;
+  animation: message 2s;
+}
+@keyframes message {
+  from {
+    top: 0px;
+  }
+  to {
+    top: 6em;
+  }
 }
