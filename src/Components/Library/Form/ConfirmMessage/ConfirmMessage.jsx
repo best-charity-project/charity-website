@@ -1,6 +1,6 @@
 import React from 'react';
 import './ConfirmMessage.css';
-import Timer from '../../../../configs/config.json';
+import { timer } from '../../../../configs/config.json';
 
 class ConfirmMessage extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class ConfirmMessage extends React.Component {
   setTimer() {
     setTimeout(() => {
       this.setState({ visible: false });
-    }, Timer.timer);
+    }, timer);
   }
 
   render() {
