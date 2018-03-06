@@ -30,11 +30,13 @@ const LibraryItem = ({
     return icon;
   }
   return (
-    <div className='library-item'>
-      <a href={url} className='library-item--link'>
-        <h2 className='link--title'>{title}</h2>
-      </a>
-      <img src={iconHandler()} alt='Иконка' className='type--icon' />
+    <div>
+      <div className='library-item--heading'>
+        <img src={iconHandler()} alt='Иконка' className='heading--icon' />
+        <a href={url} className='heading--link'>
+          <h2 className='link--title'>{title}</h2>
+        </a>
+      </div>
       <p className='library-item--description'>{description}</p>
     </div>
   );

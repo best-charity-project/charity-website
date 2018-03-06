@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getCategoryItems } from '../../../libraryCalls';
 import LibraryItem from '../LibraryItem/LibraryItem';
+import DetailsButton from '../../DetailsButton/DetailsButton';
 
 class LibraryItemsList extends React.Component {
   constructor(props) {
@@ -41,7 +42,14 @@ class LibraryItemsList extends React.Component {
     return (
       <div>
         {this.state.libraryItems.map(item => (
-          <LibraryItem {...item} key={item._id} />
+          <div key={item._id} className='library-item'>
+            <LibraryItem {...item} />
+            <DetailsButton
+              className='control-button control-button--blue'
+              text='Подробнее'
+              url={item.url}
+            />
+          </div>
         ))}
       </div>
     );
