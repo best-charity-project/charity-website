@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getCategoryItems } from '../../../libraryCalls';
 import LibraryItem from '../LibraryItem/LibraryItem';
-import './LibraryItemsList.css';
 
 class LibraryItemsList extends React.Component {
   constructor(props) {
