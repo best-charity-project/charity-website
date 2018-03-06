@@ -7,7 +7,7 @@ class LibraryItemsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      libraryItems: [],
+      libraryItems: [], locale: true,
     };
   }
 
@@ -15,8 +15,25 @@ class LibraryItemsList extends React.Component {
     this.setLibraryItems();
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (this.props.location.pathname !== nextProps.location.pathname) {
+      this.renderLibraryItems(nextProps);
+      this.setState({
+        locale: !this.state.locale,
+      });
+    }
+
+    return true;
+  }
+
+
   setLibraryItems() {
     const { category, type } = this.props.match.params;
+    getCategoryItems(category, type).then(libraryItems => this.setState({ libraryItems }));
+  }
+
+  renderLibraryItems(nextProps) {
+    const { category, type } = nextProps.match.params;
     getCategoryItems(category, type).then(libraryItems => this.setState({ libraryItems }));
   }
 
@@ -34,8 +51,10 @@ class LibraryItemsList extends React.Component {
 }
 
 export default LibraryItemsList;
-
 LibraryItemsList.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       category: PropTypes.string.isRequired,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Link, Redirect } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Search from './Search/Search';
 import LibraryItemsList from './LibraryItemsList/LibraryItemsList';
@@ -14,18 +14,14 @@ const Library = ({ match }) => (
         <Link to={`${match.url}/addToLibrary`} className='library--link'>
           Добавить информацию в библиотеку
         </Link>
-        <Link to={`${match.url}/categories`} className='library--link'>
-          Категории
-        </Link>
+        <CategoriesList />
       </div>
       <div>
         <h1 className='library--heading'>Библиотека</h1>
         <Search />
         <Switch>
-          <Route exact path={`${match.url}/categories`} component={CategoriesList} />
           <Route path={`${match.url}/addToLibrary`} component={Form} />
           <Route path={`${match.url}/:category/:type`} component={LibraryItemsList} />
-          <Redirect to={`${match.url}/categories`} />
         </Switch>
       </div>
     </div>
