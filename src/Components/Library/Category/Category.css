@@ -5,32 +5,36 @@
   border: none;
   font: inherit;
   display: inline-block;
-  margin: 0.25em 3em;
   text-transform: uppercase;
-  padding: .5em;
   background-color: inherit;
   text-align: left;
-  letter-spacing: 0.1em;
   line-height: normal;
+  width: 100%;
+  padding: .25em;
+  text-decoration: none;
 }
 
-.category-arrow {
-  background-image: url(../../img/arrow-angle.svg);
-  background-size: 1.5em;
-  width: 1.5em;
-  height: 1.5em;
-  display: inline-block;
-  transform: rotate(180deg);
-  transition: all .3s ease;
+.category--item:hover {
+  background-color: #37b3d8;
+  color: #fff;
+  transition: background-color .2s, color .2s ease;
 }
 
-.open .category-arrow {
-  transform: rotate(0deg);
-}
-
-.category-title {
-  display: inline-block;
+.category--title {
+  cursor: pointer;
+  display: flex;
   margin-left: .5em;
+  text-transform: capitalize;
+}
+
+.category--title:before {
+  content: '+';
   font-size: 1.2em;
-  vertical-align: super;
+  padding-right: .3em;
+  color: #1d6e87;
+  font-weight: bold;
+}
+
+.open .category--title:before {
+  content: '\2013';
 }

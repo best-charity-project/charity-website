@@ -1,6 +1,7 @@
 .search {
-  text-align: center;
-  margin-bottom: 1em;
+  display: inline-block;
+  margin: 2em;
+  cursor: pointer;
 }
 
 .search--input {
@@ -19,7 +20,7 @@
   text-transform: uppercase;
   border: none;
   width: 10em;
-  font-size: 1em;
+  font: inherit;
   padding: 0.6em;
 }
 

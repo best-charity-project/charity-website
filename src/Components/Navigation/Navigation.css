@@ -17,10 +17,15 @@
   height: 100%;
 }
 
+.navigation--element.active {
+  background-color: #1d6e87;
+  opacity: .7;
+  color: white;
+}
+
 .navigation--element {
   color: rgb(51, 51, 51);
-  border: 1px solid #ECEFF1;
-  padding: 0.5em;
+  padding: 1em 0.5em;
   text-decoration: none;
   font-size: 1.2em;
   transition: .5s all ease;
@@ -38,10 +43,6 @@
   border: none;
   background-color: inherit;
   display: none;
-}
-
-.navigation--menu .navigation--element {
-  border-radius: 5px;
 }
 
 .navigation--button.navigation--button-open {
@@ -70,10 +71,13 @@
   .navigation--button.navigation--button-open~li .navigation--element {
     display: block;
     width: inherit;
-    border-radius: 0;
-    border-bottom-color: #2E2E2E;
     background-color: #ECEFF1;
     margin: 0;
+  }
+  .navigation--button.navigation--button-open~li .navigation--element.active {
+    background-color: #1d6e87;
+    opacity: 1;
+    color: white;
   }
 }
 
@@ -81,13 +85,5 @@
   .navigation--menu {
     flex-direction: row;
     justify-content: flex-end;
-  }
-}
-
-@media (hover: hover) {
-  .navigation--element:hover {
-    color: aliceblue;
-    transition: .5s all ease;
-    background-color: #A4A4A4;
   }
 }

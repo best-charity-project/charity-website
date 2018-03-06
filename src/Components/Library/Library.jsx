@@ -11,14 +11,15 @@ const Library = ({ match }) => (
   <div className='library indent'>
     <div className='library--box'>
       <div className='library--sidebar'>
-        <Link to={`${match.url}/addToLibrary`} className='library--link'>
-          Добавить информацию в библиотеку
-        </Link>
         <CategoriesList />
       </div>
-      <div>
-        <h1 className='library--heading'>Библиотека</h1>
-        <Search />
+      <div className='library--board'>
+        <div className='library--header'>
+          <Search />
+          <Link to={`${match.url}/addToLibrary`} className='library--add'>
+            Добавить
+          </Link>
+        </div>
         <Switch>
           <Route path={`${match.url}/addToLibrary`} component={Form} />
           <Route path={`${match.url}/:category/:type`} component={LibraryItemsList} />

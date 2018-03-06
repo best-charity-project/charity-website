@@ -13,12 +13,12 @@ export default () => (
   <div className='app'>
     <Header />
     <Switch>
-      <Route exact path='/' component={Home} />
+      <Route exact path='/home' component={Home} />
       <Route path='/admin' component={Admin} />
       <Route path='/about' component={About} />
       <Route path='/news' component={News} />
       <Route path='/library' component={Library} />
-      <Redirect to='/' />
+      <Redirect to='/home' />
     </Switch>
     <Footer />
   </div>

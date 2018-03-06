@@ -1,9 +1,21 @@
 .library-item {
-  max-width: 60em;
-  margin: 2em;
+  width: 45em;
+  margin: 2em auto;
   padding: 1em 1em 2em 1em;
   background-color: #fff;
   box-shadow: 0 0.5em 1em rgb(238, 235, 235);
+}
+
+@media (max-width: 1200px) {
+  .library-item {
+    width: 30em;
+  }
+}
+
+@media (max-width: 992px) {
+  .library-item {
+    width: 80%;
+  }
 }
 
 .library-item--link {
