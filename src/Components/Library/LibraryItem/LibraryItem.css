@@ -1,12 +1,19 @@
 .library-item {
   max-width: 60em;
   margin: 2em;
-  padding: 1em 1em 2em 1em;
+  padding: 1em;
   background-color: #fff;
   box-shadow: 0 0.5em 1em rgb(238, 235, 235);
 }
 
-.library-item--link {
+.library-item--heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.heading--link {
   text-decoration: none;
 }
 
@@ -20,10 +27,10 @@
   color: rgb(23, 94, 116);
 }
 
-.type--icon {
+.heading--icon {
   width: 2em;
-  display: block;
-  margin: 1em auto;
+  height: 2em;
+  margin-right: 0.5em;
 }
 
 .library-item--description {
