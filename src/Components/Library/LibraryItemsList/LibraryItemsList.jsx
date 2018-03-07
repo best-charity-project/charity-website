@@ -13,35 +13,42 @@ class LibraryItemsList extends React.Component {
   }
 
   componentDidMount() {
-    this.setLibraryItems();
+    this.setLibraryItems(this.props.match.params);
   }
 
-  setLibraryItems() {
-    const { category, type } = this.props.match.params;
+  componentWillReceiveProps(nextProps) {
+    if (this.props.location.pathname !== nextProps.location.pathname) {
+      this.setLibraryItems(nextProps.match.params);
+    }
+  }
+
+  setLibraryItems({ category, type }) {
     getCategoryItems(category, type).then(libraryItems => this.setState({ libraryItems }));
   }
 
   render() {
     return (
-      <ul>
+      <div>
         {this.state.libraryItems.map(item => (
-          <li key={item._id} className='library-item'>
+          <div key={item._id} className='library-item'>
             <LibraryItem {...item} />
             <DetailsButton
               className='control-button control-button--blue'
               text='Подробнее'
               url={item.url}
             />
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     );
   }
 }
 
 export default LibraryItemsList;
-
 LibraryItemsList.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       category: PropTypes.string.isRequired,

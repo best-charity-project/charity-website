@@ -24,12 +24,13 @@
 }
 
 .open~.type-list>li {
+  margin: .5em;
   transition-property: opacity;
   transition-duration: .5s;
 }
 
 .type-list li {
   max-height: inherit;
-  padding-left: 5em;
+  padding-left: 3em;
   transition: all .3s ease;
 }
