@@ -32,6 +32,17 @@
   font-family: 'roboto', sans-serif;
 }
 
+@media (hover: hover) {
+  .navigation--element.active:hover {
+    opacity: .7;
+  }
+  .navigation--element:hover {
+    background-color: #1d6e87;
+    opacity: .35;
+    color: white;
+  }
+}
+
 .navigation--button {
   background-image: url('../img/NavMenu.svg');
   background-size: 2em;
