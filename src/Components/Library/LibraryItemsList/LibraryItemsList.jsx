@@ -18,7 +18,7 @@ class LibraryItemsList extends React.Component {
 
   shouldComponentUpdate(nextProps) {
     if (this.props.location.pathname !== nextProps.location.pathname) {
-      this.renderLibraryItems(nextProps);
+      this.setNewLibraryItems(nextProps);
       this.setState({
         locale: !this.state.locale,
       });
@@ -27,13 +27,12 @@ class LibraryItemsList extends React.Component {
     return true;
   }
 
-
   setLibraryItems() {
     const { category, type } = this.props.match.params;
     getCategoryItems(category, type).then(libraryItems => this.setState({ libraryItems }));
   }
 
-  renderLibraryItems(nextProps) {
+  setNewLibraryItems(nextProps) {
     const { category, type } = nextProps.match.params;
     getCategoryItems(category, type).then(libraryItems => this.setState({ libraryItems }));
   }
