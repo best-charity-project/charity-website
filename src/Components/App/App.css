@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto&subset=cyrillic');
-
 @import url('https://fonts.googleapis.com/css?family=Roboto:300&subset=cyrillic');
-
 body {
   font-family: 'Open-sans', sans-serif;
   background-color: #f4f4f4;
@@ -11,6 +9,7 @@ body {
   flex-grow: 1;
   position: relative;
   margin: 0 auto;
+  min-height: calc(100vh - 4em);
 }
 
 .indent::before {

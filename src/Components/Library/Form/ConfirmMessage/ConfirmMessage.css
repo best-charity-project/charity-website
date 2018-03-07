@@ -2,7 +2,7 @@
   width: 20em;
   height: 2em;
   background-color: #2ccb71;
-  position: absolute;
+  position: fixed;
   top: 6em;
   right: 0;
   color: #1e4b28;

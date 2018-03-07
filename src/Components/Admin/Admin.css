@@ -42,6 +42,9 @@
   .news-list--item {
     width: 90%;
   }
+  .library--header {
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 992px) {
