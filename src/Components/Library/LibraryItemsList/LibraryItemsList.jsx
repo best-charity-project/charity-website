@@ -13,18 +13,16 @@ class LibraryItemsList extends React.Component {
   }
 
   componentDidMount() {
-    this.setLibraryItems();
+    this.setLibraryItems(this.props.match.params);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.location.pathname !== nextProps.location.pathname) {
-      const { category, type } = nextProps.match.params;
-      getCategoryItems(category, type).then(libraryItems => this.setState({ libraryItems }));
+      this.setLibraryItems(nextProps.match.params);
     }
   }
 
-  setLibraryItems() {
-    const { category, type } = this.props.match.params;
+  setLibraryItems({ category, type }) {
     getCategoryItems(category, type).then(libraryItems => this.setState({ libraryItems }));
   }
 
