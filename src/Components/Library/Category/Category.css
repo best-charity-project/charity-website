@@ -37,4 +37,5 @@
 
 .open .category--title:before {
   content: '\2013';
+  /* минус из аккордеона */
 }
