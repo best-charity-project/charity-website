@@ -50,7 +50,7 @@
 @media (max-width: 1200px) {
   .library--add {
     align-self: flex-start;
-    margin-left: 2em;
+    margin: 2em auto;
   }
 }
 
