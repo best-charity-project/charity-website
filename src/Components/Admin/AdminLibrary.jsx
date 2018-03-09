@@ -11,7 +11,7 @@ const AdminLibrary = ({ match }) => (
       Pending Items
     </NavLink>
     <NavLink to={`${match.url}/libraryItems`} className='admin-library-link'>
-      Все документы библиотеки
+      Документы библиотеки
     </NavLink>
     <div className='admin-library'>
       <Switch>
