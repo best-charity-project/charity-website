@@ -1,6 +1,6 @@
 import React from 'react';
 import BigImage from '../img/front.jpg';
-import EducationRoute from '../EducationRoute/EducationRoute';
+import EducationRoute from '../EducationRoute/EducationRouteSection/EducationRouteSection';
 import { getNews } from '../../newsCalls';
 import ThreeNews from './ThreeNews/ThreeNews';
 import './Home.css';
