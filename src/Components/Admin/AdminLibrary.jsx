@@ -11,13 +11,15 @@ const AdminLibrary = ({ match }) => (
       Pending Items
     </NavLink>
     <NavLink to={`${match.url}/libraryItems`} className='admin-library-link'>
-      Library Items
+      Все документы библиотеки
     </NavLink>
-    <Switch>
-      <Route path={`${match.url}/pendingItems`} component={PendingItems} />
-      <Route path={`${match.url}/libraryItems`} component={AdminLibraryList} />
-      <Redirect to={`${match.url}/libraryItems`} />
-    </Switch>
+    <div className='admin-library'>
+      <Switch>
+        <Route path={`${match.url}/pendingItems`} component={PendingItems} />
+        <Route path={`${match.url}/libraryItems`} component={AdminLibraryList} />
+        <Redirect to={`${match.url}/libraryItems`} />
+      </Switch>
+    </div>
   </div>
 );
 
