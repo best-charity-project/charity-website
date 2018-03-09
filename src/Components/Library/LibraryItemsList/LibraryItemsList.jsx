@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getCategoryItems } from '../../../libraryCalls';
+import { getLibraryItems } from '../../../libraryCalls';
 import LibraryItem from '../LibraryItem/LibraryItem';
 import DetailsButton from '../../DetailsButton/DetailsButton';
 
@@ -23,7 +23,7 @@ class LibraryItemsList extends React.Component {
   }
 
   setLibraryItems({ category, type }) {
-    getCategoryItems(category, type).then(libraryItems => this.setState({ libraryItems }));
+    getLibraryItems(category, type).then(libraryItems => this.setState({ libraryItems }));
   }
 
   render() {
