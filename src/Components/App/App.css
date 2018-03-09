@@ -17,8 +17,3 @@ body {
   display: block;
   content: ' ';
 }
-@media (max-width: 992px) {
-  .indent {
-    margin: 0;
-  }
-}
