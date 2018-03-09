@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getCategoryItems } from '../../../libraryCalls';
 import LibraryItem from '../LibraryItem/LibraryItem';
+import DetailsButton from '../../DetailsButton/DetailsButton';
 
 class LibraryItemsList extends React.Component {
   constructor(props) {
@@ -12,30 +13,42 @@ class LibraryItemsList extends React.Component {
   }
 
   componentDidMount() {
-    this.setLibraryItems();
+    this.setLibraryItems(this.props.match.params);
   }
 
-  setLibraryItems() {
-    const { category, type } = this.props.match.params;
+  componentWillReceiveProps(nextProps) {
+    if (this.props.location.pathname !== nextProps.location.pathname) {
+      this.setLibraryItems(nextProps.match.params);
+    }
+  }
+
+  setLibraryItems({ category, type }) {
     getCategoryItems(category, type).then(libraryItems => this.setState({ libraryItems }));
   }
 
   render() {
     return (
-      <ul>
+      <div>
         {this.state.libraryItems.map(item => (
-          <li key={item._id}>
+          <div key={item._id} className='library-item'>
             <LibraryItem {...item} />
-          </li>
+            <DetailsButton
+              className='control-button control-button--blue'
+              text='Подробнее'
+              url={item.url}
+            />
+          </div>
         ))}
-      </ul>
+      </div>
     );
   }
 }
 
 export default LibraryItemsList;
-
 LibraryItemsList.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       category: PropTypes.string.isRequired,

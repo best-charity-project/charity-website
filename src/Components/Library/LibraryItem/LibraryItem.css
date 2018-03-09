@@ -1,12 +1,31 @@
 .library-item {
-  max-width: 60em;
-  margin: 2em;
+  width: 45em;
+  margin: 2em auto;
   padding: 1em 1em 2em 1em;
   background-color: #fff;
   box-shadow: 0 0.5em 1em rgb(238, 235, 235);
 }
 
-.library-item--link {
+.library-item--heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+@media (max-width: 1200px) {
+  .library-item {
+    width: 30em;
+  }
+}
+
+@media (max-width: 992px) {
+  .library-item {
+    width: 80%;
+  }
+}
+
+.heading--link {
   text-decoration: none;
 }
 
@@ -20,10 +39,10 @@
   color: rgb(23, 94, 116);
 }
 
-.type--icon {
+.heading--icon {
   width: 2em;
-  display: block;
-  margin: 1em auto;
+  height: 2em;
+  margin-right: 0.5em;
 }
 
 .library-item--description {

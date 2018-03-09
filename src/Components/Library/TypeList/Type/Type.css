@@ -1,8 +1,12 @@
 .type-list--link {
   font-size: 1em;
-  color: #333333;
-  text-transform: uppercase;
+  color: #333;
+  text-transform: capitalize;
   text-decoration: none;
   margin-top: .3em;
   display: block;
+}
+
+.type-list--link:hover {
+  color: rgb(23, 94, 116);
 }

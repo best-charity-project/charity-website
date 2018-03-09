@@ -1,8 +1,12 @@
+.categories-list {
+  margin: 1em 0;
+}
+
 .categories-list--heading {
-  margin: 1em 2em;
+  margin: 1em .75em;
   font-family: 'Roboto', sans-serif;
   font-weight: 900;
-  font-size: 1.5em;
+  font-size: 1.25em;
   color: #1d6e87;
   letter-spacing: 0.1em;
   text-transform: uppercase;

@@ -19,10 +19,6 @@ export default class Category extends React.Component {
     });
   }
 
-  setActiveToFalse() {
-    this.setState({ isActive: false });
-  }
-
   changeState(event) {
     event.preventDefault();
     this.setState({ isActive: !this.state.isActive });
@@ -32,10 +28,11 @@ export default class Category extends React.Component {
     return (
       <div className='category'>
         <button className={this.getLibraryClass()} onClick={this.changeState}>
-          <div className='category-arrow' />
-          <div className='category-title'>{this.props.title}</div>
+          <div className='category--title'>
+            <span>{this.props.title}</span>
+          </div>
         </button>
-        {<TypeList categoryTag={this.props.categoryTag} onClick={this.setActiveToFalse} />}
+        {<TypeList categoryTag={this.props.categoryTag} />}
       </div>
     );
   }
