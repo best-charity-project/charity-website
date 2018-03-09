@@ -1,5 +1,6 @@
 import React from 'react';
 import BigImage from '../img/front.jpg';
+import EducationRoute from '../EducationRoute/EducationRoute';
 import { getNews } from '../../newsCalls';
 import ThreeNews from './ThreeNews/ThreeNews';
 import './Home.css';
@@ -28,6 +29,7 @@ class Home extends React.Component {
           <img src={BigImage} className='home--image_big' alt='Фоновая картинка' />
           <ThreeNews news={this.state.news} />
         </div>
+        <EducationRoute />
       </div>
     );
   }

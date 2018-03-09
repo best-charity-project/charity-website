@@ -6,6 +6,7 @@ body {
 }
 
 .indent {
+  color: #646464;
   flex-grow: 1;
   position: relative;
   margin: 0 auto;
