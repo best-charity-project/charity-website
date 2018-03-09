@@ -4,6 +4,6 @@ import './LibraryDefault.css';
 
 export default () => (
   <div>
-    <img src={libraryPic} className='library--image-default' alt='here should be a pic' />
+    <img src={libraryPic} className='library--image-default' alt='Библиотека' />
   </div>
 );
