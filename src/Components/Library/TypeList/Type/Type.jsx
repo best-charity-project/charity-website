@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Type.css';
 
-const Type = ({ category, type, text }) => (
-  <Link className='type-list--link' to={`/library/${category}/${type}`}>
+const Type = ({
+  categoryTag, typeTag, text, match,
+}) => (
+  <Link className='type-list--link' to={`${match.url}/${categoryTag}/${typeTag}`}>
     {text}
   </Link>
 );
@@ -12,7 +14,10 @@ const Type = ({ category, type, text }) => (
 export default Type;
 
 Type.propTypes = {
-  category: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  categoryTag: PropTypes.string.isRequired,
+  typeTag: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    url: PropTypes.string,
+  }).isRequired,
 };

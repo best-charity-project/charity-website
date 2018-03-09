@@ -11,7 +11,7 @@ const Library = ({ match }) => (
   <div className='library indent'>
     <div className='library--box'>
       <div className='library--sidebar'>
-        <CategoriesList />
+        <CategoriesList match={match} />
       </div>
       <div className='library--board'>
         <div className='library--header'>

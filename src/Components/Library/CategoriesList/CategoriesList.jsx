@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getLibraryCategories } from '../../../libraryCalls';
 import Category from '../Category/Category';
 import './CategoriesList.css';
@@ -23,7 +24,11 @@ class CategoriesList extends React.Component {
         <ul className='categories-list'>
           {this.state.categories.map(category => (
             <li className='categories-list--element' key={category._id}>
-              <Category title={category.title} categoryTag={category.tag} />
+              <Category
+                match={this.props.match}
+                title={category.title}
+                categoryTag={category.tag}
+              />
             </li>
           ))}
         </ul>
@@ -33,3 +38,9 @@ class CategoriesList extends React.Component {
 }
 
 export default CategoriesList;
+
+CategoriesList.propTypes = {
+  match: PropTypes.shape({
+    url: PropTypes.string,
+  }).isRequired,
+};

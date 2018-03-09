@@ -5,7 +5,7 @@ import './Admin.css';
 import AdminNews from './AdminNews';
 import EditNews from './AddEditNews/EditNews';
 import AddNews from './AddEditNews/AddNews';
-import AdminLibraryList from './AdminLibraryList';
+import AdminLibrary from './AdminLibrary';
 
 const Admin = ({ match }) => (
   <div className='admin indent'>
@@ -18,14 +18,14 @@ const Admin = ({ match }) => (
           Добавить новость
         </Link>
         <Link to={`${match.url}/library`} className='admin--link'>
-          Посмотреть все элементы библиотеки
+          Библиотека
         </Link>
       </div>
       <Switch>
         <Route exact path={`${match.url}/news`} component={AdminNews} />
         <Route path={`${match.url}/addNews`} component={AddNews} />
         <Route path={`${match.url}/news/edit/:id`} component={EditNews} />
-        <Route exact path={`${match.url}/library`} component={AdminLibraryList} />
+        <Route path={`${match.url}/library`} component={AdminLibrary} />
         <Redirect to={`${match.url}/news`} />
       </Switch>
     </div>
