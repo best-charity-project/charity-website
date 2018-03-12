@@ -1,5 +1,5 @@
 import React from 'react';
 
-const PendingItems = () => <div>List of Pending Items</div>;
+const PendingItems = () => <div />;
 
 export default PendingItems;
