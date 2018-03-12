@@ -10,6 +10,6 @@ export default () => (
       объединение родителей для дальнейшего выстраивания образовательного маршрута
       детей с особыми образовательными потребностями.
     </p>
-    <Link to='education-route' className='education-route--link'>Перейти</Link>
+    <Link to='education-route' className='card--link'>Перейти</Link>
   </div>
 );

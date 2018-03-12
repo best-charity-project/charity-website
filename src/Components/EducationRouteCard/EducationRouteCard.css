@@ -39,7 +39,7 @@
   }
 }
 
-.education-route--link {
+.card--link {
   text-decoration: none;
   color: #70ea88;
   width: 12em;
@@ -53,7 +53,7 @@
 }
 
 @media (hover: hover) {
-  .education-route--link:hover {
+  .card--link:hover {
     color: #fff;
     background-color: #70ea88;
   }
