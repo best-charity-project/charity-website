@@ -1,0 +1,20 @@
+.education-route {
+  background-color: #fff;
+  padding: 2em;
+  justify-content: center;
+  display: flex;
+  margin: 1em 0;
+}
+
+.education-route--image {
+  height: 400px;
+  max-width: 25em;
+  margin-right: 2em;
+  opacity: .8;
+}
+
+@media (max-width: 1200px) {
+  .education-route--image {
+    display: none;
+  }
+}
