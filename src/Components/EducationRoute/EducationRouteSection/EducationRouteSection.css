@@ -2,6 +2,7 @@
   width: 100%;
   max-width: 25em;
   margin-right: 2em;
+  opacity: .8;
 }
 
 @media (max-width: 1200px) {
