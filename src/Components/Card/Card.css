@@ -1,4 +1,4 @@
-.education-route--card {
+.card {
   width: 30%;
 }
 
@@ -10,7 +10,7 @@
 }
 
 @media (max-width: 1200px) {
-  .education-route--card {
+  .card {
     width: 80%;
   }
   .card--text {
@@ -34,7 +34,7 @@
     text-indent: 0;
     padding: 1em 0;
   }
-  .education-route--card {
+  .card {
     width: 100%;
   }
 }
