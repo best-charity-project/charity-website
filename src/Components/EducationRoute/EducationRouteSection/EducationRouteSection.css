@@ -4,78 +4,8 @@
   margin-right: 2em;
 }
 
-.home--education-route {
-  background-color: #fff;
-  padding: 2em;
-  margin: 0 auto;
-  justify-content: center;
-  display: flex;
-}
-
-.education-route--card {
-  width: 30%;
-}
-
-.card--text {
-  text-align: justify;
-  padding: 0 2em;
-  line-height: 1.5;
-  text-indent: 2em;
-}
-
-.education-route--link {
-  text-decoration: none;
-  color: #70ea88;
-  width: 12em;
-  text-align: center;
-  text-transform: uppercase;
-  padding: 0.8em 0;
-  transition: all 0.2s;
-  display: block;
-  border: 1px solid #70ea88;
-  margin: 0.5em auto;
-}
-
-@media (hover: hover) {
-  .education-route--link:hover {
-    color: #fff;
-    background-color: #70ea88;
-  }
-}
-
-.card--text {
-  padding: .5em 2em;
-}
-
-.card--heading {
-  font-size: 1.8em;
-  padding: 1em;
-  font-family: "Roboto", sans-serif;
-  text-align: center;
-  font-weight: 100;
-}
-
 @media (max-width: 1200px) {
   .education-route--image {
     display: none;
-  }
-  .education-route--card {
-    width: 80%;
-  }
-  .card--text {
-    width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .card--heading {
-    padding: 0;
-  }
-  .card--text {
-    text-indent: 0;
-    padding: 1em 0;
-  }
-  .education-route--card {
-    width: 100%;
   }
 }
