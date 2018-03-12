@@ -6,6 +6,7 @@
   min-width: 23em;
   background-color: #fff;
   padding-top: 2em;
+  min-height: calc(100vh - 10em);
 }
 
 .admin--link {
@@ -56,6 +57,6 @@
   }
   .admin--sidebar {
     min-width: 100%;
+    min-height: auto;
   }
 }
-

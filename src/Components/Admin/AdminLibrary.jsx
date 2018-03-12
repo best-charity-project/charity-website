@@ -6,7 +6,7 @@ import PendingItems from './AdminLibrary/PendingItems';
 import './AdminLibrary.css';
 
 const AdminLibrary = ({ match }) => (
-  <div className='library indent'>
+  <div className='library'>
     <NavLink to={`${match.url}/pendingItems`} className='admin-library-link'>
       Pending Items
     </NavLink>
