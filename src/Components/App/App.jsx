@@ -7,6 +7,7 @@ import Admin from '../Admin/Admin';
 import About from '../About/About';
 import News from '../News/News';
 import Library from '../Library/Library';
+import EducationRoute from '../EducationRoute/EducationRoute';
 import './App.css';
 
 export default () => (
@@ -18,6 +19,7 @@ export default () => (
       <Route path='/about' component={About} />
       <Route path='/news' component={News} />
       <Route path='/library' component={Library} />
+      <Route path='/education-route' component={EducationRoute} />
       <Redirect to='/home' />
     </Switch>
     <Footer />

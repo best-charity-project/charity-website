@@ -5,14 +5,11 @@ import './Type.css';
 
 const Type = ({
   categoryTag, typeTag, text, match,
-}) => {
-  const url = `${match.url}/${categoryTag}/${typeTag}`;
-  return (
-    <Link className='type-list--link' to={url}>
-      {text}
-    </Link>
-  );
-};
+}) => (
+  <Link className='type-list--link' to={`${match.url}/${categoryTag}/${typeTag}`}>
+    {text}
+  </Link>
+);
 
 export default Type;
 
