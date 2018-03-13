@@ -32,7 +32,7 @@ export default class Category extends React.Component {
             <span>{this.props.title}</span>
           </div>
         </button>
-        {<TypeList match={this.props.match} categoryTag={this.props.categoryTag} />}
+        {<TypeList {...this.props} />}
       </div>
     );
   }
