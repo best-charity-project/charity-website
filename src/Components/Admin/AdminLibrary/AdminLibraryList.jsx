@@ -5,7 +5,7 @@ import CategoriesList from '../../Library/CategoriesList/CategoriesList';
 import LibraryItemsList from '../../Library/LibraryItemsList/LibraryItemsList';
 
 const AdminLibraryList = ({ match }) => (
-  <div className='library'>
+  <div className='admin-library'>
     <Switch>
       <Route exact path={`${match.url}`} component={CategoriesList} />
       <Route path={`${match.url}/:category/:type`} component={LibraryItemsList} />

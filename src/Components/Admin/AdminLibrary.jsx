@@ -6,14 +6,14 @@ import PendingItems from './AdminLibrary/PendingItems';
 import './AdminLibrary.css';
 
 const AdminLibrary = ({ match }) => (
-  <div className='library'>
-    <NavLink to={`${match.url}/pendingItems`} className='admin-library-link'>
+  <div className='library--admin'>
+    <NavLink to={`${match.url}/pendingItems`} className='admin-library--link'>
       Pending Items
     </NavLink>
-    <NavLink to={`${match.url}/libraryItems`} className='admin-library-link'>
+    <NavLink to={`${match.url}/libraryItems`} className='admin-library--link'>
       Документы библиотеки
     </NavLink>
-    <div className='admin-library'>
+    <div className='admin-library--items'>
       <Switch>
         <Route path={`${match.url}/pendingItems`} component={PendingItems} />
         <Route path={`${match.url}/libraryItems`} component={AdminLibraryList} />

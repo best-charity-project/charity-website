@@ -1,4 +1,4 @@
-.library {
+.library--admin {
   margin: 2em auto;
   width: 70%;
 }
@@ -14,11 +14,11 @@
   margin: 0;
 }
 
-.admin-library-link:first-child {
+.admin-library--link:first-child {
   margin-left: 1em;
 }
 
-.admin-library-link {
+.admin-library--link {
   text-decoration: none;
   padding: 1em;
   color: #5b94a6;
@@ -29,26 +29,26 @@
   border-radius: 5px 5px 0 0;
 }
 
-.admin-library-link:hover {
+.admin-library--link:hover {
   cursor: pointer;
 }
 
-.admin-library-link.active {
+.admin-library--link.active {
   cursor: pointer;
   background-color: #fff;
 }
 
 @media (max-width: 768px) {
-  .library {
+  .library--admin {
     width: 100%;
   }
 }
 
 @media (max-width: 576px) {
-  .admin-library-link {
+  .admin-library--link {
     font-size: 0.8em;
   }
-  .admin-library-link:first-child {
+  .admin-library--link:first-child {
     margin-left: 1.2em;
   }
   .admin-library {
