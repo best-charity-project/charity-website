@@ -2,18 +2,22 @@
   margin: 2em auto;
   width: 70%;
 }
+
 .admin-library {
   background-color: #fff;
   margin: 0 1em;
   padding: 1em;
   border-radius: 5px;
 }
+
 .admin-library .categories-list--heading {
   margin: 0;
 }
+
 .admin-library-link:first-child {
   margin-left: 1em;
 }
+
 .admin-library-link {
   text-decoration: none;
   padding: 1em;
