@@ -32,7 +32,7 @@ export default class Category extends React.Component {
             <span>{this.props.title}</span>
           </div>
         </button>
-        {<TypeList categoryTag={this.props.categoryTag} />}
+        {<TypeList {...this.props} />}
       </div>
     );
   }
@@ -41,4 +41,7 @@ export default class Category extends React.Component {
 Category.propTypes = {
   title: PropTypes.string.isRequired,
   categoryTag: PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    url: PropTypes.string,
+  }).isRequired,
 };

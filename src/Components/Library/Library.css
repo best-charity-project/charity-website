@@ -1,5 +1,6 @@
 .library--box {
   display: flex;
+  justify-content: center;
 }
 
 .library--board {

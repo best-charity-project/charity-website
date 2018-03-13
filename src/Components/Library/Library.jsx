@@ -13,9 +13,9 @@ const Library = ({ match }) => (
     <div className='library--box'>
       <div className='library--sidebar'>
         <Link to={`${match.url}/addToLibrary`} className='library--add'>
-          Добавить в библиотку
+          Добавить в библиотeку
         </Link>
-        <CategoriesList />
+        <CategoriesList match={match} />
       </div>
       <div className='library--board'>
         <div className='library--header'>
