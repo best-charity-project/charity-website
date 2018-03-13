@@ -32,7 +32,6 @@
 .admin-library-link.active {
   cursor: pointer;
   background-color: #fff;
-  border-radius: 5px 5px 0 0;
 }
 
 @media (max-width: 768px) {
