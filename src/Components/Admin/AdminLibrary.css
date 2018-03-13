@@ -43,6 +43,7 @@
     width: 100%;
   }
 }
+
 @media (max-width: 576px) {
   .admin-library-link {
     font-size: 0.8em;
