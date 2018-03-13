@@ -7,7 +7,7 @@ const TypeList = props => (
   <ul className='type-list'>
     {types.map(item => (
       <li key={item.typeTag}>
-        <Type {...props} typeTag={item.typeTag} text={item.text} />
+        <Type {...props} {...item} />
       </li>
     ))}
   </ul>
