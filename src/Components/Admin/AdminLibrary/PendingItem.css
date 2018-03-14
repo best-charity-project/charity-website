@@ -2,6 +2,9 @@
   border-bottom: 1px solid rgb(238, 230, 230);
   padding: 2em 0;
 }
+li:last-child .library-items--single-item {
+  border-bottom: none;
+}
 .single-item--link {
   color: rgb(47, 179, 219);
   text-decoration: none;
