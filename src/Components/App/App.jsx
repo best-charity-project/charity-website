@@ -19,7 +19,7 @@ export default () => (
       <Route path='/about' component={About} />
       <Route path='/news' component={News} />
       <Route path='/library' component={Library} />
-      <Route path='/education-route' component={EducationRoute} />
+      <Route path='/education_route' component={EducationRoute} />
       <Redirect to='/home' />
     </Switch>
     <Footer />

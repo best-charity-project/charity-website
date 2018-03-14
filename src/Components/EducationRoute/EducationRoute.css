@@ -3,7 +3,7 @@
   margin: 1em 0;
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
-  font-size: 3em;
+  font-size: 2em;
   color: #1d6e87;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -17,7 +17,11 @@
   width: 45em;
 }
 
-.form--education-route--title {
+.form--description {
+  text-align: center;
+}
+
+.form--title {
   color: #37b3d8;
   font-size: 1.5em;
   text-transform: uppercase;
@@ -25,52 +29,21 @@
   text-align: center;
 }
 
-.form--education-route--comment {
+.form--field-wrapper p span {
+  color: #8b0000;
+  padding-left: 2em;
+}
+
+.form--field-comment {
   text-align: center;
   margin: 1em 0 0.3em 0;
 }
 
-select.form--education-route--field {
+select.form--field {
   width: 42em;
 }
 
-.education-route--radio {
-  opacity: 0;
-}
-
-.checkmark {
-  display: inline-block;
-  height: 1.5em;
-  width: 1.5em;
-  background-color: #eee;
-  border-radius: 1em;
-}
-
-.education-route--radio-wrapper:hover .checkmark {
-  background-color: #ccc;
-}
-
-.checkmark:after {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: white;
-  display: none;
-  content: "";
-  margin-left: 0.5em;
-  margin-top: 0.5em;
-}
-
-.field-wrapper p span {
-  color: #8b0000;
-  margin-left: 2em;
-}
-
-.education-route--radio:checked+.checkmark:after {
-  display: block;
-}
-
-.form--education-route--field {
+.form--field {
   width: 40em;
   border: none;
   background-color: #F0F0F0;
@@ -79,12 +52,12 @@ select.form--education-route--field {
   margin: 0 auto;
 }
 
-.field-wrapper {
+.form--field-wrapper {
   width: 80%;
   margin: 0 auto;
 }
 
-.form--education-route--field:invalid+.validity:after {
+.form--field:invalid+.validity:after {
   position: absolute;
   content: '*';
   padding-left: 0.5em;
@@ -92,7 +65,7 @@ select.form--education-route--field {
   color: #8b0000;
 }
 
-.form--education-route--field:valid+.validity:after {
+.form--field:valid+.validity:after {
   position: absolute;
   content: '✓';
   padding-top: 0.75em;
