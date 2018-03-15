@@ -1,21 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { acceptPendingItems, rejectPendingItems } from '../../../libraryCalls';
+import ControlButton from '../../ControlButton/ControlButton';
+import Modal from '../ModalWindow/ModalWindow';
 import './PendingItem.css';
 
 class PendingItem extends React.Component {
   constructor(props) {
     super(props);
-    this.acceptItems = this.acceptItems.bind(this);
-    this.rejectItems = this.rejectItems.bind(this);
+    this.state = {
+      isOpen: false,
+    };
+    this.acceptItem = this.acceptItem.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.rejectItem = this.rejectItem.bind(this);
   }
 
-  acceptItems() {
+  acceptItem() {
     acceptPendingItems(this.props._id);
   }
 
-  rejectItems() {
+  toggleModal() {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    });
+  }
+
+  rejectItem() {
     rejectPendingItems(this.props._id);
+    this.toggleModal();
   }
 
   render() {
@@ -26,18 +39,17 @@ class PendingItem extends React.Component {
         </a>
         <p className='single-item--text'>{this.props.description}</p>
         <div className='item--buttons'>
-          <button
-            onClick={this.acceptItems}
+          <ControlButton
+            text='Одобрить заявку'
+            onButtonClick={this.acceptItem}
             className='control-button control-button--green control-button--small'
-          >
-            Одобрить заявку
-          </button>
-          <button
-            onClick={this.rejectItems}
+          />
+          <ControlButton
+            text='Удалить'
+            onButtonClick={this.toggleModal}
             className='control-button control-button--red control-button--small'
-          >
-            Удалить
-          </button>
+          />
+          {this.state.isOpen && <Modal onConfirm={this.rejectItem} toggle={this.toggleModal} />}
         </div>
       </div>
     );

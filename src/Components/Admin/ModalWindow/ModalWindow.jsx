@@ -1,17 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ControlButton from '../../ControlButton/ControlButton';
 import './ModalWindow.css';
 
 const Modal = props => (
   <div className='modal'>
     <div className='modal--window'>
-      <p className='modal-window--question'>Хотите удалить новость?</p>
-      <button className='control-button control-button--red' onClick={props.onConfirm}>
-        Удалить
-      </button>
-      <button className='control-button control-button--green' onClick={props.toggle}>
-        Отмена
-      </button>
+      <p className='modal-window--question'>Вы уверены, что хотите удалить документ?</p>
+      <ControlButton
+        text='Удалить'
+        className='control-button control-button--red'
+        onButtonClick={props.onConfirm}
+      />
+      <ControlButton
+        text='Отмена'
+        className='control-button control-button--green'
+        onButtonClick={props.toggle}
+      />
     </div>
   </div>
 );
