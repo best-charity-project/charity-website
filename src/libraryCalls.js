@@ -7,4 +7,17 @@ const getLibraryCategories = () => API.get('categories').then(response => respon
 
 const addLibraryItem = libraryItem => API.post('library', libraryItem);
 
-export { getLibraryCategories, addLibraryItem, getLibraryItems };
+const getPendingItems = () => API.get('library/pending').then(response => response.data);
+
+const acceptPendingItems = id => API.put(`library/${id}`);
+
+const rejectPendingItems = id => API.delete(`library/${id}`);
+
+export {
+  getLibraryCategories,
+  addLibraryItem,
+  getLibraryItems,
+  getPendingItems,
+  acceptPendingItems,
+  rejectPendingItems,
+};
