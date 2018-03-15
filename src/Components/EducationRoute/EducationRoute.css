@@ -1,74 +1,89 @@
-.education-route--heading {
-  text-align: center;
-  margin: 1em 0;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 100;
-  font-size: 2em;
-  color: #1d6e87;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
+  .education-route--heading {
+    text-align: center;
+    margin: 1em 0;
+    font-weight: 100;
+    font-size: 2em;
+    color: #1d6e87;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
 
-.education-route--education-form {
-  background-color: #fff;
-  box-shadow: 0 0.5em 1em rgb(238, 235, 235);
-  margin: 1em auto;
-  padding: 1em;
-  width: 45em;
-}
+  .education-route--education-form {
+    background-color: #fff;
+    box-shadow: 0 0.5em 1em rgb(238, 235, 235);
+    margin: 1em auto;
+    padding: 1em;
+    width: 45em;
+  }
 
-.education-form--description {
-  text-align: center;
-}
+  .education-form--description {
+    text-align: center;
+  }
 
-.education-form--title {
-  color: #37b3d8;
-  font-size: 1.5em;
-  text-transform: uppercase;
-  margin-bottom: 2em;
-  text-align: center;
-}
+  .education-form--title {
+    color: #37b3d8;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    margin-bottom: 2em;
+    text-align: center;
+  }
 
-.education-form--field-wrapper p span {
-  color: #8b0000;
-  padding-left: 2em;
-}
+  .education-form--field-wrapper p span {
+    color: #8b0000;
+    padding-left: 2em;
+  }
 
-.education-form--field-comment {
-  text-align: center;
-  margin: 1em 0 0.3em 0;
-}
+  .education-form--field-comment {
+    text-align: center;
+    margin: 1em 0 0.3em 0;
+  }
 
-select.education-form--field {
-  width: 42em;
-}
+  select.education-form--field {
+    width: 42em;
+  }
 
-.education-form--field {
-  width: 40em;
-  border: none;
-  background-color: #F0F0F0;
-  padding: 1em;
-  display: inline-block;
-  margin: 0 auto;
-}
+  .education-form--field {
+    width: 40em;
+    border: none;
+    background-color: #F0F0F0;
+    padding: 1em;
+    display: inline-block;
+    margin: 0 auto;
+  }
 
-.education-form--field-wrapper {
-  width: 80%;
-  margin: 0 auto;
-}
+  .education-form--field-wrapper {
+    width: 80%;
+    margin: 0 auto;
+  }
 
-.education-form--field:invalid+.validity:after {
-  position: absolute;
-  content: '*';
-  padding-left: 0.5em;
-  padding-top: 0.75em;
-  color: #8b0000;
-}
+  .education-form--field:invalid+.validity:after {
+    position: absolute;
+    content: '*';
+    padding-left: 0.5em;
+    padding-top: 0.75em;
+    color: #8b0000;
+  }
 
-.education-form--field:valid+.validity:after {
-  position: absolute;
-  content: '✓';
-  padding-top: 0.75em;
-  padding-left: 0.5em;
-  color: #009000;
-}
+  .education-form--field:valid+.validity:after {
+    position: absolute;
+    content: '✓';
+    padding-top: 0.75em;
+    padding-left: 0.5em;
+    color: #009000;
+  }
+
+  .education-form--submit {
+    background-color: #37b3d8;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    color: #fff;
+    transition: all 0.2s;
+    display: block;
+    margin: 0.5em auto;
+    font: inherit;
+    box-shadow: 0 0.5em 1em rgb(238, 235, 235);
+    width: 10em;
+    padding: 0.6em;
+  }

@@ -13,7 +13,7 @@ const Library = ({ match }) => (
     <div className='library--box'>
       <div className='library--sidebar'>
         <Link to={`${match.url}/addToLibrary`} className='library--add'>
-          Добавить в библиотку
+          Добавить в библиотеку
         </Link>
         <CategoriesList />
       </div>

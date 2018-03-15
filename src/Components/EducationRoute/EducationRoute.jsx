@@ -6,6 +6,7 @@ export default class Category extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isFormDisplayed: false,
       locations: [],
       locationsIndex: 0,
       districts: [],
@@ -102,6 +103,7 @@ export default class Category extends React.Component {
   }
 
   eddEducationRoute(event) {
+    this.setState({ isFormDisplayed: !this.state.isFormDisplayed });
     event.preventDefault();
     const {
       name, phone, email, region, regionDistrict, city, educationalInstitution, year, program,
@@ -128,13 +130,15 @@ export default class Category extends React.Component {
       year: '',
       program: '',
     });
+
+    console.log(this.state);
   }
 
   render() {
     return (
       <div className='education-route indent'>
         <h1 className='education-route--heading'>образовательный маршрут</h1>
-        <div className='education-route--education-form'>
+        <div className='education-route--education-form' >
           <h2 className='education-form--title'>
             Анкета
           </h2>
@@ -319,12 +323,12 @@ export default class Category extends React.Component {
             </div>
             <input
               type='submit'
-              className='control-button control-button--blue'
+              className='education-form--submit'
               value='Отправить'
             />
           </form>
         </div>
-      </div>
+      </div >
     );
   }
 }
