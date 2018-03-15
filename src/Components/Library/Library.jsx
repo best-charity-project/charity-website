@@ -15,7 +15,7 @@ const Library = ({ match }) => (
         <Link to={`${match.url}/addToLibrary`} className='library--add'>
           Добавить в библиотеку
         </Link>
-        <CategoriesList />
+        <CategoriesList match={match} />
       </div>
       <div className='library--board'>
         <div className='library--header'>
@@ -29,7 +29,7 @@ const Library = ({ match }) => (
         </Switch>
       </div>
     </div>
-  </div>
+  </div >
 );
 
 export default Library;
