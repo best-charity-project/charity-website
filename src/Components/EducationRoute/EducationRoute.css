@@ -9,7 +9,7 @@
   text-transform: uppercase;
 }
 
-.education-route--form {
+.education-route--education-form {
   background-color: #fff;
   box-shadow: 0 0.5em 1em rgb(238, 235, 235);
   margin: 1em auto;
@@ -17,11 +17,11 @@
   width: 45em;
 }
 
-.form--description {
+.education-form--description {
   text-align: center;
 }
 
-.form--title {
+.education-form--title {
   color: #37b3d8;
   font-size: 1.5em;
   text-transform: uppercase;
@@ -29,21 +29,21 @@
   text-align: center;
 }
 
-.form--field-wrapper p span {
+.education-form--field-wrapper p span {
   color: #8b0000;
   padding-left: 2em;
 }
 
-.form--field-comment {
+.education-form--field-comment {
   text-align: center;
   margin: 1em 0 0.3em 0;
 }
 
-select.form--field {
+select.education-form--field {
   width: 42em;
 }
 
-.form--field {
+.education-form--field {
   width: 40em;
   border: none;
   background-color: #F0F0F0;
@@ -52,12 +52,12 @@ select.form--field {
   margin: 0 auto;
 }
 
-.form--field-wrapper {
+.education-form--field-wrapper {
   width: 80%;
   margin: 0 auto;
 }
 
-.form--field:invalid+.validity:after {
+.education-form--field:invalid+.validity:after {
   position: absolute;
   content: '*';
   padding-left: 0.5em;
@@ -65,7 +65,7 @@ select.form--field {
   color: #8b0000;
 }
 
-.form--field:valid+.validity:after {
+.education-form--field:valid+.validity:after {
   position: absolute;
   content: '✓';
   padding-top: 0.75em;
