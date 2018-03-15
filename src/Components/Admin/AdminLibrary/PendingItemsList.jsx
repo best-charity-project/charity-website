@@ -10,12 +10,15 @@ class PendingItemsList extends React.Component {
       pendingItems: [],
     };
   }
+
   componentDidMount() {
     this.setCategories();
   }
+
   setCategories() {
     getPendingItems().then(pendingItems => this.setState({ pendingItems }));
   }
+
   render() {
     return (
       <div className='admin--library-items'>

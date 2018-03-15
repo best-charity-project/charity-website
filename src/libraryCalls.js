@@ -9,13 +9,9 @@ const addLibraryItem = libraryItem => API.post('library', libraryItem);
 
 const getPendingItems = () => API.get('library/pending').then(response => response.data);
 
-const acceptPendingItems = (id) => {
-  API.put(`library/${id}`);
-};
+const acceptPendingItems = id => API.put(`library/${id}`);
 
-const rejectPendingItems = (id) => {
-  API.delete(`library/${id}`);
-};
+const rejectPendingItems = id => API.delete(`library/${id}`);
 
 export {
   getLibraryCategories,
