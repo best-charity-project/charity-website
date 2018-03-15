@@ -130,8 +130,6 @@ export default class Category extends React.Component {
       year: '',
       program: '',
     });
-
-    console.log(this.state);
   }
 
   render() {
