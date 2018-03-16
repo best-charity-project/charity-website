@@ -264,23 +264,34 @@ export default class Category extends React.Component {
             </div>
             <div className='education-form--field-wrapper'>
               <p className='education-form--field-comment'>
-                <label htmlFor='cityDistrict'>Выберите учреждение образования</label>
+                <label htmlFor='school kindergarten'>Выберите учреждение образования</label>
               </p>
-              <select
-                id='regionDistrict'
-                value={this.state.educationalInstitution}
-                onChange={this.setEducationalInstitution}
-                title='Вы должны выбрать район города'
-                className='education-form--field'
-                required
-              >
-                <option value='' disabled selected>
-                  ---
-                </option>
-                <option value='Средняя школа'>Средняя школа</option>
-                <option value='Дошкольное детское учреждение'>Дошкольное детское учреждение</option>
-              </select>
-              <span className='validity' />
+              <div className='education-form--radio-wrapper'>
+                <label className='education-form--radio-description' htmlFor='school'>
+                  <input
+                    type='radio'
+                    id='school'
+                    className='education-form--radio'
+                    name='setEducationalInstitution'
+                    value='Дошкольное детское учреждение'
+                    onChange={this.setEducationalInstitution}
+                    required
+                  />
+                  Дошкольное детское учреждение
+                </label>
+                <label className='education-form--radio-description' htmlFor='kindergarten'>
+                  <input
+                    type='radio'
+                    className='education-form--radio'
+                    id='kindergarten'
+                    onChange={this.setEducationalInstitution}
+                    name='setEducationalInstitution'
+                    value='Средняя школа'
+                  />
+                  Средняя школа
+                  <span className='validity' />
+                </label>
+              </div>
             </div>
             <div className='education-form--field-wrapper'>
               <p className='education-form--field-comment'>
@@ -302,10 +313,10 @@ export default class Category extends React.Component {
             </div>
             <div className='education-form--field-wrapper'>
               <p className='education-form--field-comment'>
-                <label htmlFor='name'>Рекомендованная программа образования</label>
+                <label htmlFor='programm'>Рекомендованная программа образования</label>
               </p>
               <input
-                id='name'
+                id='programm'
                 value={this.state.program}
                 onChange={this.setProgram}
                 type='text'
