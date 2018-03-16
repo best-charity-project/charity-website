@@ -19,7 +19,7 @@ export default class Category extends React.Component {
       year: '',
       program: '',
     };
-    this.eddEducationRoute = this.eddEducationRoute.bind(this);
+    this.addEducationRoute = this.addEducationRoute.bind(this);
     this.setName = this.setName.bind(this);
     this.setPhone = this.setPhone.bind(this);
     this.setEmail = this.setEmail.bind(this);
@@ -149,7 +149,7 @@ export default class Category extends React.Component {
               родителей в Республике Беларусь и объединиться.
             </p>
           </div>
-          <form className='education-form' name='addName' onSubmit={this.eddEducationRoute}>
+          <form className='education-form' name='addName' onSubmit={this.addEducationRoute}>
             <div className='education-form--field-wrapper'>
               <p className='education-form--field-comment'>
                 <label htmlFor='name'>Имя</label>
