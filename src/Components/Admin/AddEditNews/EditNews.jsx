@@ -7,9 +7,7 @@ import './AddEditNews.css';
 class EditNews extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      newsToEdit: null,
-    };
+    this.state = { newsToEdit: null };
     this.handleNewsUpdate = this.handleNewsUpdate.bind(this);
   }
 
@@ -45,9 +43,5 @@ class EditNews extends React.Component {
 export default EditNews;
 
 EditNews.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string,
-    }),
-  }).isRequired,
+  match: PropTypes.shape({ params: PropTypes.shape({ id: PropTypes.string }) }).isRequired,
 };
