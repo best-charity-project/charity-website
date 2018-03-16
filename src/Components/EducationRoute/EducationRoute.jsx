@@ -27,9 +27,9 @@ export default class Category extends React.Component {
     this.setRegion = this.setRegion.bind(this);
     this.setRegionDistrict = this.setRegionDistrict.bind(this);
     this.setCity = this.setCity.bind(this);
-    this.seteducationalInstitution = this.seteducationalInstitution.bind(this);
+    this.setEducationalInstitution = this.setEducationalInstitution.bind(this);
     this.setYear = this.setYear.bind(this);
-    this.setprogram = this.setprogram.bind(this);
+    this.setProgram = this.setProgram.bind(this);
   }
 
   componentDidMount() {
@@ -42,63 +42,63 @@ export default class Category extends React.Component {
     });
   }
 
-  setName(element) {
+  setName(event) {
     this.setState({
-      name: element.target.value,
+      name: event.target.value,
     });
   }
 
-  setPhone(element) {
+  setPhone(event) {
     this.setState({
-      phone: element.target.value,
+      phone: event.target.value,
     });
   }
 
-  setEmail(element) {
+  setEmail(event) {
     this.setState({
-      email: element.target.value,
+      email: event.target.value,
     });
   }
 
-  setRegion(element) {
+  setRegion(event) {
     this.setState({
-      districts: this.state.locations[element.target.value].district,
+      districts: this.state.locations[event.target.value].district,
       region: this.state.locations[this.state.locationsIndex].name,
     });
-    if (element.target.value === '6') {
+    if (event.target.value === '6') {
       this.setState({ city: 'Минск' });
     } else {
       this.setState({ city: '' });
     }
   }
 
-  setRegionDistrict(element) {
+  setRegionDistrict(event) {
     this.setState({
-      regionDistrict: this.state.districts[element.target.value],
+      regionDistrict: this.state.districts[event.target.value],
     });
   }
 
-  setCity(element) {
+  setCity(event) {
     this.setState({
-      city: element.target.value,
+      city: event.target.value,
     });
   }
 
-  seteducationalInstitution(element) {
+  setEducationalInstitution(event) {
     this.setState({
-      educationalInstitution: element.target.value,
+      educationalInstitution: event.target.value,
     });
   }
 
-  setYear(element) {
+  setYear(event) {
     this.setState({
-      year: element.target.value,
+      year: event.target.value,
     });
   }
 
-  setprogram(element) {
+  setProgram(event) {
     this.setState({
-      program: element.target.value,
+      program: event.target.value,
     });
   }
 
@@ -271,7 +271,7 @@ export default class Category extends React.Component {
               <select
                 id='regionDistrict'
                 value={this.state.educationalInstitution}
-                onChange={this.seteducationalInstitution}
+                onChange={this.setEducationalInstitution}
                 title='Вы должны выбрать район города'
                 className='education-form--field'
                 required
@@ -309,7 +309,7 @@ export default class Category extends React.Component {
               <input
                 id='name'
                 value={this.state.program}
-                onChange={this.setprogram}
+                onChange={this.setProgram}
                 type='text'
                 maxLength='80'
                 placeholder='Программа обучения рекомендованная ЦКРОиР'
