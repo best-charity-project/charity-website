@@ -211,7 +211,7 @@ export default class Category extends React.Component {
               <select
                 id='region'
                 title='Вы должны выбрать свой регион'
-                className='education-form--field'
+                className='education-form--select education-form--field'
                 required
                 onChange={this.setRegion}
               >
@@ -231,7 +231,7 @@ export default class Category extends React.Component {
               <select
                 id='regionDistrict'
                 title='Вы должны выбрать областной район'
-                className='education-form--field'
+                className='education-form--field education-form--select'
                 onChange={this.setRegionDistrict}
                 required
               >
@@ -326,7 +326,12 @@ export default class Category extends React.Component {
               />
             </div>
             <div className='education-form--field-wrapper'>
-              <p><span>*</span> - поля, обязательные для заполнения</p>
+              <p>
+                <span className='field-wrapper--condition'>
+                  *
+                </span>
+                - поля, обязательные для заполнения
+              </p>
             </div>
             <input
               type='submit'

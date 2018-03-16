@@ -28,7 +28,7 @@
     text-align: center;
   }
 
-  .education-form--field-wrapper p span {
+  .field-wrapper--condition {
     color: #8b0000;
     padding-left: 2em;
   }
@@ -36,10 +36,6 @@
   .education-form--field-comment {
     text-align: center;
     margin: 1em 0 0.3em 0;
-  }
-
-  select.education-form--field {
-    width: 42em;
   }
 
   .education-form--field {
@@ -125,7 +121,6 @@
     content: '';
     display: block;
     position: relative;
-    z-index: 100;
   }
 
   .education-form--radio-wrapper {
@@ -151,4 +146,8 @@
     padding-top: 0.75em;
     padding-left: 2.5em;
     color: #009000;
+  }
+
+  .education-form--select {
+    width: 42em;
   }
