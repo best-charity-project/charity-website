@@ -6,7 +6,6 @@ export default class Category extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFormDisplayed: false,
       locations: [],
       locationsIndex: 0,
       districts: [],
@@ -102,8 +101,7 @@ export default class Category extends React.Component {
     });
   }
 
-  eddEducationRoute(event) {
-    this.setState({ isFormDisplayed: !this.state.isFormDisplayed });
+  addEducationRoute(event) {
     event.preventDefault();
     const {
       name, phone, email, region, regionDistrict, city, educationalInstitution, year, program,
@@ -326,7 +324,7 @@ export default class Category extends React.Component {
             />
           </form>
         </div>
-      </div >
+      </div>
     );
   }
 }
