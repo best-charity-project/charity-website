@@ -264,13 +264,13 @@ export default class Category extends React.Component {
             </div>
             <div className='education-form--field-wrapper'>
               <p className='education-form--field-comment'>
-                <label htmlFor='school kindergarten'>Выберите учреждение образования</label>
+                Выберите учреждение образования
               </p>
               <div className='education-form--radio-wrapper'>
-                <label className='education-form--radio-description' htmlFor='school'>
+                <label className='education-form--radio-description' htmlFor='kindergarten'>
                   <input
                     type='radio'
-                    id='school'
+                    id='kindergarten'
                     className='education-form--radio'
                     name='setEducationalInstitution'
                     value='Дошкольное детское учреждение'
@@ -279,11 +279,11 @@ export default class Category extends React.Component {
                   />
                   Дошкольное детское учреждение
                 </label>
-                <label className='education-form--radio-description' htmlFor='kindergarten'>
+                <label className='education-form--radio-description' htmlFor='school'>
                   <input
                     type='radio'
                     className='education-form--radio'
-                    id='kindergarten'
+                    id='school'
                     onChange={this.setEducationalInstitution}
                     name='setEducationalInstitution'
                     value='Средняя школа'
@@ -313,10 +313,10 @@ export default class Category extends React.Component {
             </div>
             <div className='education-form--field-wrapper'>
               <p className='education-form--field-comment'>
-                <label htmlFor='programm'>Рекомендованная программа образования</label>
+                <label htmlFor='program'>Рекомендованная программа образования</label>
               </p>
               <input
-                id='programm'
+                id='program'
                 value={this.state.program}
                 onChange={this.setProgram}
                 type='text'

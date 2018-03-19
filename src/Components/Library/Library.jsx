@@ -29,7 +29,7 @@ const Library = ({ match }) => (
         </Switch>
       </div>
     </div>
-  </div >
+  </div>
 );
 
 export default Library;
