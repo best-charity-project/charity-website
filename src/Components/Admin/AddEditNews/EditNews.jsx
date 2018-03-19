@@ -43,5 +43,9 @@ class EditNews extends React.Component {
 export default EditNews;
 
 EditNews.propTypes = {
-  match: PropTypes.shape({ params: PropTypes.shape({ id: PropTypes.string }) }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
 };

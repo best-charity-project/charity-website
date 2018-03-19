@@ -88,10 +88,11 @@ class Form extends React.Component {
   }
 
   render() {
+    const { isOpen } = this.state;
     return (
       <div className='form-library'>
         <form name='addCategory' onSubmit={this.handleSubmit}>
-          {this.state.isOpen && <ConfirmMessage message={this.props.message} />}
+          {isOpen && <ConfirmMessage message={this.props.message} />}
           <p className='form-library--comment'>
             <label htmlFor='category'>Выбор категории</label>
           </p>
