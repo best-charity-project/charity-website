@@ -110,7 +110,7 @@
   .education-form--radio:checked::before {
     width: 1.5em;
     position: absolute;
-    content: '\2714';
+    content: '✓';
     font-size: 1.5em;
     text-align: center;
     line-height: 1.5em;

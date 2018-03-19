@@ -1,4 +1,5 @@
 import React from 'react';
+import InputMask from 'react-input-mask';
 import { getLocations, addEducation } from '../../educationCalls';
 import './EducationRoute.css';
 
@@ -162,7 +163,6 @@ export default class Category extends React.Component {
                 maxLength='40'
                 placeholder='Имя по которому к Вам можно обратиться'
                 className='education-form--field'
-                pattern='^[А-Яа-яЁё\s]+$'
                 title='Имя должно содержать только буквы русского алфавита'
                 required
               />
@@ -172,14 +172,16 @@ export default class Category extends React.Component {
               <p className='education-form--field-comment'>
                 <label htmlFor='phone'>Номер телефона</label>
               </p>
-              <input
+              <InputMask
+                mask='+375(99)999-99-99'
+                pattern='\+375\([0-9]{2}\)[0-9]{3}(-[0-9]{2}){2}'
+                placeholder='+375(__)___-__-__'
+                maskChar='_'
+                id='phone'
+                title='Введите корректный контактный телефон'
                 value={this.state.phone}
                 onChange={this.setPhone}
-                id='phone'
-                pattern='[^А-Яа-яЁёA-Za-z]+$'
                 type='tel'
-                title='Введите корректный контактный телефон'
-                placeholder='+375-ХХ-ХХХ-ХХ-ХХ'
                 className='education-form--field'
                 maxLength='20'
                 required
@@ -193,13 +195,11 @@ export default class Category extends React.Component {
               <input
                 value={this.state.email}
                 onChange={this.setEmail}
-                maxLength='35'
                 id='email'
                 type='email'
                 title='адрес электронной почты должен иметь формат: имя_почты@email.com'
                 placeholder='имя_почты@email.com'
                 className='education-form--field'
-                pattern='.+@+*'
                 required
               />
               <span className='validity' />
@@ -239,7 +239,7 @@ export default class Category extends React.Component {
                   ---
                 </option>
                 {this.state.districts.map((districts, index) => (
-                  <option key={districts._id} value={index}>{districts}</option>
+                  <option key={districts} value={index}>{districts}</option>
                 ))}
               </select>
               <span className='validity' />
@@ -257,7 +257,6 @@ export default class Category extends React.Component {
                 title='Название города должно содержать только буквы русского алфавита'
                 placeholder='Ваш город'
                 className='education-form--field'
-                pattern='^[А-Яа-яЁё\s]+$'
                 required
               />
               <span className='validity' />
