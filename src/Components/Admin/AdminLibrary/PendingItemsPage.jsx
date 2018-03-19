@@ -1,7 +1,7 @@
 import React from 'react';
 import { getPendingItems } from '../../../libraryCalls';
 import PendingItem from './PendingItem';
-import './PendingItemsList.css';
+import './PendingItemsPage.css';
 
 class PendingItemsList extends React.Component {
   constructor(props) {
