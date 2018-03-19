@@ -11,7 +11,22 @@ const getPendingItems = () => API.get('library/pending').then(response => respon
 
 const acceptPendingItems = id => API.put(`library/${id}`);
 
-const rejectPendingItems = id => API.delete(`library/${id}`);
+const deleteLibraryItems = id => API.delete(`library/${id}`);
+
+const updateItem = (id, item) => {
+  const {
+    categoryTag, type, title, description, url,
+  } = item;
+  API.put(`library/edit/${id}`, {
+    categoryTag,
+    type,
+    title,
+    description,
+    url,
+  });
+};
+
+const getItemById = id => API.get(`library/${id}`).then(response => response.data);
 
 export {
   getLibraryCategories,
@@ -19,5 +34,7 @@ export {
   getLibraryItems,
   getPendingItems,
   acceptPendingItems,
-  rejectPendingItems,
+  deleteLibraryItems,
+  updateItem,
+  getItemById,
 };

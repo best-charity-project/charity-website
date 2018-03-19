@@ -1,6 +1,7 @@
 import React from 'react';
-import './ConfirmMessage.css';
+import PropTypes from 'prop-types';
 import { confirmMessageTimer } from '../../../../configs/config.json';
+import './ConfirmMessage.css';
 
 class ConfirmMessage extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class ConfirmMessage extends React.Component {
 
   render() {
     return this.state.visible ? (
-      <div className='confirm-message'>Документ был добавлен в библиотеку</div>
+      <div className='confirm-message'>{this.props.message}</div>
     ) : (
       <span />
     );
@@ -31,3 +32,7 @@ class ConfirmMessage extends React.Component {
 }
 
 export default ConfirmMessage;
+
+ConfirmMessage.propTypes = {
+  message: PropTypes.string.isRequired,
+};

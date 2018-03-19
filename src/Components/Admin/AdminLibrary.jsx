@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch, NavLink, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import AdminLibraryList from './AdminLibrary/AdminLibraryList';
-import PendingItemsList from './AdminLibrary/PendingItemsList';
+import AdminLibraryPage from './AdminLibrary/AdminLibraryPage';
+import PendingItemsPage from './AdminLibrary/PendingItemsPage';
 import './AdminLibrary.css';
 
 const AdminLibrary = ({ match }) => (
@@ -14,8 +14,8 @@ const AdminLibrary = ({ match }) => (
       Документы библиотеки
     </NavLink>
     <Switch>
-      <Route path={`${match.url}/pending`} component={PendingItemsList} />
-      <Route path={`${match.url}/libraryItems`} component={AdminLibraryList} />
+      <Route path={`${match.url}/pending`} component={PendingItemsPage} />
+      <Route path={`${match.url}/libraryItems`} component={AdminLibraryPage} />
       <Redirect to={`${match.url}/libraryItems`} />
     </Switch>
   </div>

@@ -1,23 +1,23 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { acceptPendingItems, deleteLibraryItems } from '../../../libraryCalls';
+import { deleteLibraryItems } from '../../../libraryCalls';
 import ControlButton from '../../ControlButton/ControlButton';
 import Modal from '../ModalWindow/ModalWindow';
-import './PendingItem.css';
 
-class PendingItem extends React.Component {
+class AdminLibraryItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isOpen: false,
     };
-    this.acceptItem = this.acceptItem.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
-    this.rejectItem = this.rejectItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
-  acceptItem() {
-    acceptPendingItems(this.props._id);
+  handleEditClick() {
+    this.props.history.push(`${this.props.match.url}/edit/${this.props._id}`);
   }
 
   toggleModal() {
@@ -26,7 +26,7 @@ class PendingItem extends React.Component {
     });
   }
 
-  rejectItem() {
+  deleteItem() {
     deleteLibraryItems(this.props._id);
     this.toggleModal();
   }
@@ -40,8 +40,8 @@ class PendingItem extends React.Component {
         <p className='single-item--text'>{this.props.description}</p>
         <div className='item--buttons'>
           <ControlButton
-            text='Одобрить заявку'
-            onButtonClick={this.acceptItem}
+            text='Редактировать'
+            onButtonClick={this.handleEditClick}
             className='control-button control-button--green control-button--small'
           />
           <ControlButton
@@ -49,18 +49,24 @@ class PendingItem extends React.Component {
             onButtonClick={this.toggleModal}
             className='control-button control-button--red control-button--small'
           />
-          {this.state.isOpen && <Modal onConfirm={this.rejectItem} toggle={this.toggleModal} />}
+          {this.state.isOpen && <Modal onConfirm={this.deleteItem} toggle={this.toggleModal} />}
         </div>
       </div>
     );
   }
 }
 
-export default PendingItem;
+export default withRouter(AdminLibraryItem);
 
-PendingItem.propTypes = {
+AdminLibraryItem.propTypes = {
   _id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    url: PropTypes.string,
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };

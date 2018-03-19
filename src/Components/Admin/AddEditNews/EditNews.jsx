@@ -7,9 +7,7 @@ import './AddEditNews.css';
 class EditNews extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      newsToEdit: null,
-    };
+    this.state = { newsToEdit: null };
     this.handleNewsUpdate = this.handleNewsUpdate.bind(this);
   }
 
