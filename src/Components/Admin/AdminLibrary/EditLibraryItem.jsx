@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import Form from '../../Library/Form/Form';
 import { updateItem, getItemById } from '../../../libraryCalls';
+import BackIcon from '../../icons/back.svg';
+import './EditLibraryItem.css';
 
 class EditLibraryItem extends React.Component {
   constructor(props) {
@@ -31,6 +34,10 @@ class EditLibraryItem extends React.Component {
   render() {
     return (
       <div>
+        <img src={BackIcon} alt='иконка' className='library-items--icon' />
+        <NavLink to='/admin/library/libraryItems' className='library-items--link'>
+          Вернуться к списку
+        </NavLink>
         <h1 className='form-library--heading'>Редактирование документа</h1>
         <Form
           item={this.state.libraryItem}

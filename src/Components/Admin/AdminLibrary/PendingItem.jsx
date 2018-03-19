@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { acceptPendingItems, rejectPendingItems } from '../../../libraryCalls';
+import { acceptPendingItems, deleteLibraryItems } from '../../../libraryCalls';
 import ControlButton from '../../ControlButton/ControlButton';
 import Modal from '../ModalWindow/ModalWindow';
 import './PendingItem.css';
@@ -27,7 +27,7 @@ class PendingItem extends React.Component {
   }
 
   rejectItem() {
-    rejectPendingItems(this.props._id);
+    deleteLibraryItems(this.props._id);
     this.toggleModal();
   }
 

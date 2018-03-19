@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import { getLibraryItems } from '../../../libraryCalls';
 import AdminLibraryItem from './AdminLibraryItem';
+import BackIcon from '../../icons/back.svg';
 
 class AdminLibraryList extends React.Component {
   constructor(props) {
@@ -22,6 +24,10 @@ class AdminLibraryList extends React.Component {
   render() {
     return (
       <div>
+        <img src={BackIcon} alt='иконка' className='library-items--icon' />
+        <NavLink to='/admin/library/libraryItems' className='library-items--link'>
+          Вернуться к списку
+        </NavLink>
         {this.state.libraryItems.map(item => <AdminLibraryItem {...item} key={item._id} />)}
       </div>
     );
