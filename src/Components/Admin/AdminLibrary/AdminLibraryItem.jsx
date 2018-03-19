@@ -13,7 +13,7 @@ class AdminLibraryItem extends React.Component {
     };
     this.handleEditClick = this.handleEditClick.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
-    this.deletetItem = this.deleteItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   handleEditClick() {
@@ -26,7 +26,7 @@ class AdminLibraryItem extends React.Component {
     });
   }
 
-  deletetItem() {
+  deleteItem() {
     deleteLibraryItems(this.props._id);
     this.toggleModal();
   }
