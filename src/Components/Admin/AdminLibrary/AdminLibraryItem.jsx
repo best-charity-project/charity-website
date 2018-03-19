@@ -13,7 +13,7 @@ class AdminLibraryItem extends React.Component {
     };
     this.handleEditClick = this.handleEditClick.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
-    this.rejectItem = this.rejectItem.bind(this);
+    this.deletetItem = this.deleteItem.bind(this);
   }
 
   handleEditClick() {
@@ -26,7 +26,7 @@ class AdminLibraryItem extends React.Component {
     });
   }
 
-  rejectItem() {
+  deletetItem() {
     deleteLibraryItems(this.props._id);
     this.toggleModal();
   }
@@ -49,7 +49,7 @@ class AdminLibraryItem extends React.Component {
             onButtonClick={this.toggleModal}
             className='control-button control-button--red control-button--small'
           />
-          {this.state.isOpen && <Modal onConfirm={this.rejectItem} toggle={this.toggleModal} />}
+          {this.state.isOpen && <Modal onConfirm={this.deleteItem} toggle={this.toggleModal} />}
         </div>
       </div>
     );
