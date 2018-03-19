@@ -37,9 +37,6 @@ class AdminLibraryList extends React.Component {
 export default AdminLibraryList;
 
 AdminLibraryList.propTypes = {
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       category: PropTypes.string.isRequired,
