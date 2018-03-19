@@ -190,8 +190,8 @@ Form.defaultProps = {
 
 Form.propTypes = {
   item: PropTypes.shape({
-    categoryTag: '',
-    type: '',
+    categoryTag: PropTypes.string,
+    type: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,
     url: PropTypes.string,
