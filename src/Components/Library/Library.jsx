@@ -5,8 +5,8 @@ import Search from './Search/Search';
 import LibraryItemsList from './LibraryItemsList/LibraryItemsList';
 import CategoriesList from './CategoriesList/CategoriesList';
 import LibrarySearchList from './LibrarySearchList/LibrarySearchList';
+import AddLibraryItem from './Form/AddLibraryItem';
 import LibraryDefault from './LibraryDefault/LibraryDefault';
-import Form from './Form/Form';
 import './Library.css';
 
 const Library = ({ match }) => (
@@ -25,7 +25,7 @@ const Library = ({ match }) => (
         <Switch>
           <Route exact path={`${match.url}/`} component={LibraryDefault} />
           <Route path={`${match.url}/search`} component={LibrarySearchList} />
-          <Route path={`${match.url}/addToLibrary`} component={Form} />
+          <Route path={`${match.url}/addToLibrary`} component={AddLibraryItem} />
           <Route path={`${match.url}/:category/:type`} component={LibraryItemsList} />
           <Redirect to={`${match.url}/`} />
         </Switch>

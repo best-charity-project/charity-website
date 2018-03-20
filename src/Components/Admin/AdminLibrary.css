@@ -7,7 +7,7 @@
   background-color: #fff;
   margin: 0 1em;
   padding: 1em;
-  border-radius: 5px;
+  border-radius: 0 5px 5px 5px;
 }
 
 .admin--library-items .categories-list--heading {
@@ -47,6 +47,9 @@
 @media (max-width: 576px) {
   .admin--library-link {
     font-size: 0.8em;
+    width: 38%;
+    line-height: 1.4em;
+    text-align: center;
   }
   .admin--library-link:first-child {
     margin-left: 1.2em;

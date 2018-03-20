@@ -24,9 +24,7 @@ export default class AdminNews extends React.Component {
         <div className='news-admin'>
           <h2 className='news-admin--news-heading'>Список всех новостей</h2>
           <div className='news-list'>
-            {this.state.news.map(item => (
-              <AdminNewsItem key={item._id} {...item} onNewsUpdate={this.handleNewsEdit} />
-            ))}
+            {this.state.news.map(item => <AdminNewsItem key={item._id} {...item} />)}
           </div>
         </div>
       </div>

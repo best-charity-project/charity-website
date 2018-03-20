@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import URLSearchParams from 'url-search-params';
 import { fullTextLibrarySearch } from '../../../libraryCalls';
 import LibraryItem from '../LibraryItem/LibraryItem';
 import DetailsButton from '../../DetailsButton/DetailsButton';
@@ -12,19 +13,17 @@ class LibrarySearchList extends React.Component {
     };
   }
   componentDidMount() {
-    const urlParams = new URLSearchParams(this.props.location.search);
-    this.searchText(urlParams);
+    this.searchText(this.props.location.search);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-    const urlParams = new URLSearchParams(nextProps.location.search);
-    this.searchText(urlParams);
+    this.searchText(nextProps.location.search);
   }
 
   searchText(urlParams) {
-    const textSearch = encodeURIComponent(urlParams.get('textSearch'));
-    const types = urlParams.get('types');
+    const urlParamsQuery = new URLSearchParams(urlParams);
+    const textSearch = encodeURIComponent(urlParamsQuery.get('textSearch'));
+    const types = urlParamsQuery.get('types');
     fullTextLibrarySearch(textSearch, types).then(libraryItems => this.setState({ libraryItems }));
   }
 

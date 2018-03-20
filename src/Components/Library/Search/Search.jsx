@@ -26,7 +26,7 @@ class Search extends React.Component {
 
   handleChangeOfCheckboxes(event) {
     const { checkedTypes } = this.state;
-    checkedTypes[event.target.value] = event.target.checked;
+    checkedTypes[event.target.value] = !checkedTypes[event.target.value];
     this.setState({ checkedTypes });
   }
 
