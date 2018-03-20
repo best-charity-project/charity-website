@@ -29,6 +29,18 @@
   opacity: 1;
 }
 
+.search--checkbox > div {
+  display: inline;
+}
+
+.search--checkbox {
+  margin-top: 0.5em;
+}
+
+.checkbox-item {
+  margin-right: 0.5em;
+}
+
 @media (max-width: 992px) {
   .search--input {
     max-width: 50%;

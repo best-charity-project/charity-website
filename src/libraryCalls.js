@@ -7,4 +7,7 @@ const getLibraryCategories = () => API.get('categories').then(response => respon
 
 const addLibraryItem = libraryItem => API.post('library', libraryItem);
 
-export { getLibraryCategories, addLibraryItem, getLibraryItems };
+const fullTextLibrarySearch = (textSearch, checkedTypes) =>
+  API.get(`library/search/?textSearch=${textSearch}&types=${checkedTypes}`).then(response => response.data);
+
+export { getLibraryCategories, addLibraryItem, getLibraryItems, fullTextLibrarySearch };
