@@ -102,12 +102,12 @@ export default class Form extends React.Component {
               onChange={this.handleChangeTitle}
               type='text'
               className='form--input'
-              placeholder='Type heading here'
+              placeholder='Заголовок новости'
               required
             />
           </label>
           <label htmlFor='addNews'>
-            <p className='form--label'>Текст новости:</p>
+            <p className='form--label'>Текст новости(краткое описание):</p>
             <textarea
               value={this.state.shortDescription}
               onChange={this.handleChangeDescription}
