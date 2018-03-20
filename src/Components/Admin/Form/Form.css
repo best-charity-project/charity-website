@@ -16,6 +16,10 @@
   margin: 2em 0 2em 1em;
 }
 
+.add-news--checkbox-text {
+  margin-bottom: 1em;
+}
+
 .form--input {
   width: 30em;
   margin: 0.3em;
@@ -28,7 +32,6 @@
 
 .form--textarea {
   width: 30em;
-  margin: 0.3em;
   border: none;
   background-color: #f6f6f6;
   padding: 1em;
@@ -63,6 +66,10 @@
 
 .form--button:active {
   transform: translateY(-1px);
+}
+
+.input-hidden {
+  display: none;
 }
 
 @media (max-width: 768px) {

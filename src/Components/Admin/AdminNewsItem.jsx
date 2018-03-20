@@ -19,19 +19,29 @@ class AdminNewsItem extends React.Component {
     this.toggleModal = this.toggleModal.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
   }
+
   handleEditClick() {
     this.props.history.push(`${this.props.match.url}/edit/${this.props._id}`);
   }
+
   toggleModal() {
     this.setState({
       isOpen: !this.state.isOpen,
     });
   }
+
   deleteHandler() {
     deleteNews(this.props._id);
     this.toggleModal();
   }
+
   render() {
+    let link;
+    if (this.props.url) {
+      link = this.props.url;
+    } else {
+      link = `/news/${this.props._id}`;
+    }
     return (
       <div className='news-list--item'>
         <SingleNews title={this.props.title} shortDescription={this.props.shortDescription} />
@@ -50,7 +60,7 @@ class AdminNewsItem extends React.Component {
           <DetailsButton
             text='Подробнее'
             className='control-button control-button--blue control-button--small'
-            url={this.props.url}
+            url={link}
           />
         </div>
       </div>

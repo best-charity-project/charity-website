@@ -9,16 +9,24 @@ const LatestNews = props => (
     <h1 className='latest-news--heading'>Свежие новости</h1>
     <hr className='heading-underline' />
     <div className='news-list'>
-      {props.news.slice(0, 3).map(item => (
-        <div className='news-list--item' key={item._id}>
-          <SingleNews title={item.title} shortDescription={item.shortDescription} />
-          <DetailsButton
-            className='control-button control-button--blue'
-            text='Подробнее'
-            url={item.url}
-          />
-        </div>
-      ))}
+      {props.news.slice(0, 3).map((item) => {
+        let link;
+        if (item.url) {
+          link = item.url;
+        } else {
+          link = `/news/${item._id}`;
+        }
+        return (
+          <div className='news-list--item' key={item._id}>
+            <SingleNews title={item.title} shortDescription={item.shortDescription} />
+            <DetailsButton
+              className='control-button control-button--blue'
+              text='Подробнее'
+              url={link}
+            />
+          </div>
+        );
+      })}
     </div>
   </div>
 );
