@@ -1,0 +1,11 @@
+.login-panel--logout-btn {
+  z-index: 2;
+  position: relative;
+  margin-left: 1em;
+}
+
+.login-panel {
+  display: flex;
+  height: inherit;
+  align-items: center;
+}
