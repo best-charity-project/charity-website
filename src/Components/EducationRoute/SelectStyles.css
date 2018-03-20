@@ -1,0 +1,70 @@
+.rc-select-selection__placeholder {
+  color: black;
+  top: 1em;
+  font-size: .55em;
+  float: right;
+  position: inherit;
+  margin-right: .5em;
+}
+
+.rc-select-selection--multiple .rc-select-selection__rendered .rc-select-selection__choice {
+  user-select: none;
+  line-height: inherit;
+  margin-right: .1em;
+  background-color: #37b3d8;
+  color: white;
+}
+
+.rc-select-focused .rc-select-selection.rc-select-selection--multiple {
+  border: 1px solid #1E90FF;
+  box-shadow: unset;
+}
+
+.rc-select-enabled .rc-select-selection:hover {
+  box-shadow: unset;
+}
+
+.rc-select .rc-select-selection__choice__remove {
+  color: black;
+}
+
+.rc-select-selection--multiple {
+  min-height: 28px;
+  width: 35em;
+  border-radius: 0;
+  border: none;
+  background-color: #F0F0F0;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.rc-select {
+  line-height: unset;
+}
+
+li.rc-select-dropdown-menu-item.rc-select-dropdown-menu-item-selected {
+  background-color: #1E90FF;
+  color: white;
+}
+
+.rc-select-dropdown {
+  border: 1px solid #1E90FF;
+}
+
+li.rc-select-dropdown-menu-item {
+  margin: 0;
+  position: relative;
+  display: block;
+  font-weight: 100;
+  color: black;
+  white-space: nowrap;
+  font-size: .9em;
+  font-family: arial;
+  padding: 0.1em 0 0.1em 1em;
+  background-color: #f0f0f0;
+}
+
+.rc-select-dropdown-menu-item:hover {
+  background-color: #1E90FF;
+  color: white;
+}

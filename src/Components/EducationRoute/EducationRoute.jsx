@@ -1,7 +1,9 @@
 import React from 'react';
-import InputMask from 'react-input-mask';
+import Select, { Option } from 'rc-select';
+import 'rc-select/assets/index.css';
 import { getLocations, addEducation } from '../../educationCalls';
 import './EducationRoute.css';
+import './SelectStyles.css';
 
 export default class Category extends React.Component {
   constructor(props) {
@@ -9,7 +11,6 @@ export default class Category extends React.Component {
     this.state = {
       locations: [],
       locationsIndex: 0,
-      districts: [],
       name: '',
       phone: '',
       email: '',
@@ -19,6 +20,7 @@ export default class Category extends React.Component {
       educationalInstitution: '',
       year: '',
       program: '',
+      children: [],
     };
     this.addEducationRoute = this.addEducationRoute.bind(this);
     this.setName = this.setName.bind(this);
@@ -62,9 +64,13 @@ export default class Category extends React.Component {
 
   setRegion(event) {
     this.setState({
-      districts: this.state.locations[event.target.value].district,
       region: this.state.locations[this.state.locationsIndex].name,
     });
+    this.state.children = [];
+    this.state.locations[event.target.value]
+      .district.map(district =>
+        this.state.children
+          .push(<Option key={district} title={district}>{district} </Option>));
     if (event.target.value === '6') {
       this.setState({ city: 'Минск' });
     } else {
@@ -74,7 +80,7 @@ export default class Category extends React.Component {
 
   setRegionDistrict(event) {
     this.setState({
-      regionDistrict: this.state.districts[event.target.value],
+      regionDistrict: event,
     });
   }
 
@@ -104,34 +110,44 @@ export default class Category extends React.Component {
 
   addEducationRoute(event) {
     event.preventDefault();
-    const {
-      name, phone, email, region, regionDistrict, city, educationalInstitution, year, program,
-    } = this.state;
-    addEducation({
-      name,
-      phone,
-      email,
-      region,
-      regionDistrict,
-      city,
-      educationalInstitution,
-      year,
-      program,
-    });
-    this.setState({
-      name: '',
-      phone: '',
-      email: '',
-      region: '',
-      regionDistrict: '',
-      city: '',
-      educationalInstitution: '',
-      year: '',
-      program: '',
-    });
+    if (this.state.regionDistrict.length === 0) {
+      console.log('NIT');
+    } else {
+      const {
+        name, phone, email, region, regionDistrict, city, educationalInstitution, year, program,
+      } = this.state;
+      addEducation({
+        name,
+        phone,
+        email,
+        region,
+        regionDistrict,
+        city,
+        educationalInstitution,
+        year,
+        program,
+      });
+      this.setState({
+        name: '',
+        phone: '',
+        email: '',
+        region: '',
+        regionDistrict: '',
+        city: '',
+        educationalInstitution: '',
+        year: '',
+        program: '',
+      });
+    }
   }
 
   render() {
+    const dropdownMenuStyle = {
+      maxHeight: 200,
+    };
+    const dropdownStyle = {
+      borderRadius: '0',
+    };
     return (
       <div className='education-route indent'>
         <h1 className='education-route--heading'>образовательный маршрут</h1>
@@ -163,6 +179,7 @@ export default class Category extends React.Component {
                 maxLength='40'
                 placeholder='Имя по которому к Вам можно обратиться'
                 className='education-form--field'
+                pattern='^[А-Яа-яЁё\s]+$'
                 title='Имя должно содержать только буквы русского алфавита'
                 required
               />
@@ -172,16 +189,14 @@ export default class Category extends React.Component {
               <p className='education-form--field-comment'>
                 <label htmlFor='phone'>Номер телефона</label>
               </p>
-              <InputMask
-                mask='+375(99)999-99-99'
-                pattern='\+375\([0-9]{2}\)[0-9]{3}(-[0-9]{2}){2}'
-                placeholder='+375(__)___-__-__'
-                maskChar='_'
-                id='phone'
-                title='Введите корректный контактный телефон'
+              <input
                 value={this.state.phone}
                 onChange={this.setPhone}
+                id='phone'
+                pattern='[^А-Яа-яЁёA-Za-z]+$'
                 type='tel'
+                title='Введите корректный контактный телефон'
+                placeholder='+375-ХХ-ХХХ-ХХ-ХХ'
                 className='education-form--field'
                 maxLength='20'
                 required
@@ -195,11 +210,13 @@ export default class Category extends React.Component {
               <input
                 value={this.state.email}
                 onChange={this.setEmail}
+                maxLength='35'
                 id='email'
                 type='email'
                 title='адрес электронной почты должен иметь формат: имя_почты@email.com'
                 placeholder='имя_почты@email.com'
                 className='education-form--field'
+                pattern='.+@+*'
                 required
               />
               <span className='validity' />
@@ -228,20 +245,20 @@ export default class Category extends React.Component {
               <p className='education-form--field-comment'>
                 <label htmlFor='regionDistrict'>Областной район</label>
               </p>
-              <select
+              <Select
                 id='regionDistrict'
                 title='Вы должны выбрать областной район'
-                className='education-form--field education-form--select'
+                choiceTransitionName='rc-select-selection__choice-zoom'
+                dropdownMenuStyle={dropdownMenuStyle}
+                multiple
+                allowClear
                 onChange={this.setRegionDistrict}
-                required
+                dropdownStyle={dropdownStyle}
+                notFoundContent='Пожалуйста, выберите регион проживания'
+                placeholder='▼'
               >
-                <option value='' disabled selected>
-                  ---
-                </option>
-                {this.state.districts.map((districts, index) => (
-                  <option key={districts} value={index}>{districts}</option>
-                ))}
-              </select>
+                {this.state.children}
+              </Select>
               <span className='validity' />
             </div>
             <div className='education-form--field-wrapper'>
@@ -257,6 +274,7 @@ export default class Category extends React.Component {
                 title='Название города должно содержать только буквы русского алфавита'
                 placeholder='Ваш город'
                 className='education-form--field'
+                pattern='^[А-Яа-яЁё\s]+$'
                 required
               />
               <span className='validity' />
