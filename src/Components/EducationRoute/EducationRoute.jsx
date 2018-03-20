@@ -10,7 +10,6 @@ export default class Category extends React.Component {
     super(props);
     this.state = {
       locations: [],
-      locationsIndex: 0,
       name: '',
       phone: '',
       email: '',
@@ -63,14 +62,18 @@ export default class Category extends React.Component {
   }
 
   setRegion(event) {
+    event.persist();
     this.setState({
-      region: this.state.locations[this.state.locationsIndex].name,
+      region: this.state.locations[0].name,
+    }, () => {
+      if (!(event.target.value === '')) {
+        this.state.locations[event.target.value]
+          .district.map(district =>
+            this.state.children
+              .push(<Option key={district} title={district}>{district} </Option>));
+      }
     });
-    this.state.children = [];
-    this.state.locations[event.target.value]
-      .district.map(district =>
-        this.state.children
-          .push(<Option key={district} title={district}>{district} </Option>));
+
     if (event.target.value === '6') {
       this.setState({ city: 'Минск' });
     } else {
@@ -232,7 +235,7 @@ export default class Category extends React.Component {
                 required
                 onChange={this.setRegion}
               >
-                <option value='' disabled selected>
+                <option value=''>
                   ---
                 </option>
                 {this.state.locations.map((region, index) => (
