@@ -6,6 +6,7 @@ import './Search.css';
 class Search extends React.Component {
   constructor(props) {
     super(props);
+    this.defaultQuery = ['video', 'literature', 'article', 'studyMaterial'];
     this.state = {
       searchText: '',
       checkedTypes: {
@@ -32,17 +33,18 @@ class Search extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const checkedTypesArray = [];
+    let checkedTypesArray = [];
     Object.keys(this.state.checkedTypes).forEach((key) => {
       if (this.state.checkedTypes[key] === true) {
         checkedTypesArray.push(key);
       }
     });
-    const textSearch = encodeURIComponent(this.state.searchText);
-    const checkedTypesString = JSON.stringify(checkedTypesArray);
+    if (checkedTypesArray.length === 0) {
+      checkedTypesArray = this.defaultQuery;
+    }
     this.props.history.push({
       pathname: `${this.props.match.url}/search`,
-      search: `textSearch=${textSearch}&types=${checkedTypesString}`,
+      search: `textSearch=${encodeURIComponent(this.state.searchText)}&types=${JSON.stringify(checkedTypesArray)}`,
     });
   }
 
