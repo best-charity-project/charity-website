@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { confirmMessageTimer } from '../../configs/config.json';
-import './ConfirmMessage.css';
+import './Message.css';
 
 class ConfirmMessage extends React.Component {
   constructor(props) {
@@ -14,6 +14,7 @@ class ConfirmMessage extends React.Component {
 
   componentDidMount() {
     this.setTimer();
+    this.whatType();
   }
 
   setTimer() {
@@ -22,11 +23,23 @@ class ConfirmMessage extends React.Component {
     }, confirmMessageTimer);
   }
 
+  whatType() {
+    let classname = '';
+    if (this.props.type === 'alert') { classname = 'message alert'; }
+    if (this.props.type === 'confirm') { classname = 'message confirm'; }
+    return classname;
+  }
+
   render() {
-    return this.state.visible ? (
-      <div className={this.props.classNames}>{this.props.message}</div>
-    ) : (
-      <span />
+    return (
+      <div className='confirm-wrapper' >
+        {this.state.visible &&
+          <div
+            className={this.whatType()}
+            type={this.props.type}
+          >{this.props.message}
+          </div>}
+      </div>
     );
   }
 }
@@ -34,6 +47,6 @@ class ConfirmMessage extends React.Component {
 export default ConfirmMessage;
 
 ConfirmMessage.propTypes = {
-  classNames: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };

@@ -3,7 +3,7 @@ import InputMask from 'react-input-mask';
 import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
 import { getLocations, addEducation } from '../../educationCalls';
-import ConfirmMessage from '../ConfirmMessage/ConfirmMessage';
+import Message from '../Message/Message';
 import './EducationRoute.css';
 import './SelectStyles.css';
 
@@ -12,6 +12,7 @@ export default class Category extends React.Component {
     super(props);
     this.state = {
       locations: [],
+      districts: [],
       name: '',
       phone: '',
       email: '',
@@ -21,8 +22,8 @@ export default class Category extends React.Component {
       educationalInstitution: '',
       year: '',
       program: '',
-      children: [],
-      isOpen: true,
+      isOpen: false,
+      isValid: false,
     };
     this.addEducationRoute = this.addEducationRoute.bind(this);
     this.setName = this.setName.bind(this);
@@ -34,6 +35,7 @@ export default class Category extends React.Component {
     this.setEducationalInstitution = this.setEducationalInstitution.bind(this);
     this.setYear = this.setYear.bind(this);
     this.setProgram = this.setProgram.bind(this);
+    this.isRegionDistrict = this.isRegionDistrict.bind(this);
   }
 
   componentDidMount() {
@@ -72,7 +74,7 @@ export default class Category extends React.Component {
       if (!(event.target.value === '')) {
         this.state.locations[event.target.value]
           .district.map(district =>
-            this.state.children
+            this.state.districts
               .push(<Option key={district} title={district}>{district} </Option>));
       }
     });
@@ -87,6 +89,12 @@ export default class Category extends React.Component {
   setRegionDistrict(event) {
     this.setState({
       regionDistrict: event,
+    }, () => {
+      if (this.state.regionDistrict.length === 0) {
+        this.setState({ isValid: false });
+      } else {
+        this.setState({ isValid: true });
+      }
     });
   }
 
@@ -114,9 +122,34 @@ export default class Category extends React.Component {
     });
   }
 
+  toggleMessageisOpen() {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    });
+  }
+
+  toggleIsValid() {
+    this.setState({
+      isValid: !this.state.isValid,
+    });
+  }
+
+  isRegionDistrict() {
+    if (((this.state.regionDistrict === 0) || (this.state.regionDistrict === ''))
+      && (this.state.name !== '')
+      && (this.state.phone.replace(/\+|\(|\)|\\-|\\_/g, '').length >= 12)
+      && (this.state.email !== '')
+      && (this.state.region !== '')
+    ) {
+      this.toggleMessageisOpen();
+    }
+  }
+
   addEducationRoute(event) {
     event.preventDefault();
-    if (!(this.state.regionDistrict.length === 0)) {
+    if (this.state.regionDistrict.length === 0) {
+      this.toggleMessageisOpen();
+    } else {
       const {
         name, phone, email, region, regionDistrict, city, educationalInstitution, year, program,
       } = this.state;
@@ -180,10 +213,8 @@ export default class Category extends React.Component {
                 onChange={this.setName}
                 id='name'
                 type='text'
-                maxLength='40'
                 placeholder='Имя по которому к Вам можно обратиться'
                 className='education-form--field'
-                pattern='^[А-Яа-яЁё\s]+$'
                 title='Имя должно содержать только буквы русского алфавита'
                 required
               />
@@ -197,7 +228,8 @@ export default class Category extends React.Component {
                 value={this.state.phone}
                 onChange={this.setPhone}
                 id='phone'
-                pattern='[^А-Яа-яЁёA-Za-z]+$'
+                placeholder='Введите контактный номер телефона'
+                pattern='\+375\([0-9]{2}\)-[0-9]{3}(-[0-9]{2}){2}'
                 type='tel'
                 mask='+375(99)-999-99-99'
                 title='Введите корректный контактный телефон'
@@ -213,13 +245,11 @@ export default class Category extends React.Component {
               <input
                 value={this.state.email}
                 onChange={this.setEmail}
-                maxLength='35'
                 id='email'
                 type='email'
                 title='адрес электронной почты должен иметь формат: имя_почты@email.com'
                 placeholder='имя_почты@email.com'
                 className='education-form--field'
-                pattern='.+@+*'
                 required
               />
               <span className='validity' />
@@ -260,10 +290,14 @@ export default class Category extends React.Component {
                 notFoundContent='Пожалуйста, выберите регион проживания'
                 placeholder='▼'
               >
-                {this.state.children}
+                {this.state.districts}
               </Select>
-              {this.state.isOpen && <ConfirmMessage />}
-              <span className='validity' />
+              {this.state.isValid && <span className='valid' />}
+              {!this.state.isValid && <span className='inValid' />}
+              {this.state.isOpen && <Message
+                type='alert'
+                message='Пожалуйста, выберите регион проживания'
+              />}
             </div>
             <div className='education-form--field-wrapper'>
               <p className='education-form--field-comment'>
@@ -273,12 +307,10 @@ export default class Category extends React.Component {
                 id='city'
                 onChange={this.setCity}
                 type='text'
-                maxLength='15'
                 value={this.state.city}
                 title='Название города должно содержать только буквы русского алфавита'
                 placeholder='Ваш город'
                 className='education-form--field'
-                pattern='^[А-Яа-яЁё\s]+$'
                 required
               />
               <span className='validity' />
@@ -358,6 +390,7 @@ export default class Category extends React.Component {
               type='submit'
               className='education-form--submit'
               value='Отправить'
+              onClick={this.isRegionDistrict}
             />
           </form>
         </div>

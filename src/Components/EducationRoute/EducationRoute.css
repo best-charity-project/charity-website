@@ -8,29 +8,6 @@
     text-transform: uppercase;
   }
 
-  .confirm-message {
-    width: 35em;
-    height: 2em;
-    background-color: #2ccb71;
-    position: relative;
-    top: 0;
-    right: 0;
-    color: #1e4b28;
-    border-radius: 0;
-    text-align: center;
-    padding-top: 0.5em;
-    animation: message 2s;
-  }
-
-  @keyframes message {
-    from {
-      top: -2em;
-    }
-    to {
-      top: 0em;
-    }
-  }
-
   .education-route--education-form {
     background-color: #fff;
     box-shadow: 0 0.5em 1em rgb(238, 235, 235);
@@ -108,53 +85,13 @@
   }
 
   .education-form--radio {
-    appearance: none;
-    position: relative;
-    top: 0.5em;
-    height: 2em;
-    width: 2em;
-    transition: all 0.15s ease-out 0s;
-    background: #cbd1d8;
-    color: #fff;
-    cursor: pointer;
-    margin-right: 0.5em;
     outline: none;
-    border-radius: 50%;
-  }
-
-  .education-form--radio:hover {
-    background: #9faab7;
-  }
-
-  .education-form--radio:checked {
-    background: #37b3d8;
-  }
-
-  .education-form--radio:checked::before {
-    width: 1.5em;
-    position: absolute;
-    content: '✓';
-    font-size: 1.5em;
-    text-align: center;
-    line-height: 1.5em;
-  }
-
-  .education-form--radio:checked::after {
-    background: #37b3d8;
-    content: '';
-    display: block;
-    position: relative;
   }
 
   .education-form--radio-wrapper {
     display: flex;
     flex-direction: row;
-    align-items: baseline;
-    justify-content: space-between;
-  }
-
-  .education-form--radio-description {
-    padding-left: 2.5em
+    justify-content: space-evenly;
   }
 
   .education-form--radio:invalid~.validity:after {
@@ -173,4 +110,20 @@
 
   .education-form--select {
     width: 42em;
+  }
+
+  .inValid:after {
+    position: absolute;
+    content: '*';
+    padding-left: 0.5em;
+    padding-top: 0.5em;
+    color: #8b0000;
+  }
+
+  .valid:after {
+    position: absolute;
+    content: '✓';
+    padding-top: 0.5em;
+    padding-left: 0.5em;
+    color: #009000;
   }

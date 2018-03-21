@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getLibraryCategories } from '../../../libraryCalls';
-import ConfirmMessage from '../../ConfirmMessage/ConfirmMessage';
+import Message from '../../Message/Message';
 import './Form.css';
 
 class Form extends React.Component {
@@ -14,7 +14,7 @@ class Form extends React.Component {
       title: '',
       description: '',
       url: '',
-      isOpen: false,
+      isOpen: true,
     };
     this.handleChangeCategory = this.handleChangeCategory.bind(this);
     this.handleChangeType = this.handleChangeType.bind(this);
@@ -22,7 +22,7 @@ class Form extends React.Component {
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleChangeUrl = this.handleChangeUrl.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.toggleConfirmMessage = this.toggleConfirmMessage.bind(this);
+    this.toggleMessage = this.toggleMessage.bind(this);
   }
 
   componentDidMount() {
@@ -78,10 +78,10 @@ class Form extends React.Component {
       description,
       url,
     });
-    this.toggleConfirmMessage();
+    this.toggleMessage();
   }
 
-  toggleConfirmMessage() {
+  toggleMessage() {
     this.setState({
       isOpen: !this.state.isOpen,
     });
@@ -93,8 +93,8 @@ class Form extends React.Component {
       <div className='form-library'>
         <h2 className='form-library--heading'>Добавить информацию</h2>
         <form name='addCategory' onSubmit={this.handleSubmit}>
-          {isOpen && <ConfirmMessage
-            classNames='confirm-message'
+          {isOpen && <Message
+            type='confirm'
             message='Документ был добавлен в библиотеку'
           />}
           <p className='form-library--comment'>
