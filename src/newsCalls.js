@@ -16,11 +16,11 @@ const addNews = news => API.post('news', news);
 
 const updateNews = (id, news) => {
   const {
-    title, shortDescription, url, date,
+    title, newsText, url, date,
   } = news;
   API.put(`news/${id}`, {
     title,
-    shortDescription,
+    newsText,
     url,
     date,
   });

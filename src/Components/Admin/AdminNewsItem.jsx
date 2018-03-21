@@ -44,7 +44,7 @@ class AdminNewsItem extends React.Component {
     }
     return (
       <div className='news-list--item'>
-        <SingleNews title={this.props.title} shortDescription={this.props.shortDescription} />
+        <SingleNews title={this.props.title} newsText={this.props.newsText} />
         <div className='item--buttons'>
           <ControlButton
             text='Редактировать'
@@ -72,7 +72,7 @@ export default withRouter(AdminNewsItem);
 AdminNewsItem.propTypes = {
   _id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  shortDescription: PropTypes.string.isRequired,
+  newsText: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   match: PropTypes.shape({
     url: PropTypes.string,

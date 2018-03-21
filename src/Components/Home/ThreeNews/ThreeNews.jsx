@@ -18,7 +18,7 @@ LatestNews.propTypes = {
     PropTypes.objectOf({
       _id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
-      shortDescription: PropTypes.string.isRequired,
+      newsText: PropTypes.string.isRequired,
     }),
     PropTypes.object,
   ])).isRequired,

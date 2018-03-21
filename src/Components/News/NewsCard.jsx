@@ -5,15 +5,18 @@ import './NewsCard.css';
 
 const NewsCard = (item) => {
   let link;
+  let text;
   if (item.url) {
     link = item.url;
+    text = 'Перейти';
   } else {
     link = `/news/${item._id}`;
+    text = 'Подробнее';
   }
   return (
     <div className='news-list--item' key={item._id}>
-      <SingleNews title={item.title} shortDescription={item.shortDescription} />
-      <DetailsButton className='control-button control-button--blue' text='Подробнее' url={link} />
+      <SingleNews title={item.title} newsText={item.newsText} />
+      <DetailsButton className='control-button control-button--blue' text={text} url={link} />
     </div>
   );
 };

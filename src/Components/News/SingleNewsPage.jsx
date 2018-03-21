@@ -9,7 +9,7 @@ class SingleNewsPage extends React.Component {
     this.state = {
       news: {
         title: '',
-        shortDescription: '',
+        newsText: '',
       },
     };
   }
@@ -29,7 +29,7 @@ class SingleNewsPage extends React.Component {
     return (
       <div className='news-item indent'>
         <h2 className='news-item--heading'>{this.state.news.title}</h2>
-        <p className='news-item--text'>{this.state.news.shortDescription}</p>
+        <p className='news-item--text'>{this.state.news.newsText}</p>
       </div>
     );
   }

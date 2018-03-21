@@ -68,10 +68,6 @@
   transform: translateY(-1px);
 }
 
-.form--input-hidden {
-  display: none;
-}
-
 @media (max-width: 768px) {
   .form--add-news {
     padding: 0.5em;
