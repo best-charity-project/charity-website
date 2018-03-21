@@ -1,7 +1,7 @@
 import React from 'react';
 import './Form.css';
 import { getLibraryCategories, addLibraryItem } from '../../../libraryCalls';
-import ConfirmMessage from './ConfirmMessage/ConfirmMessage';
+import ConfirmMessage from '../../ConfirmMessage/ConfirmMessage';
 
 class Form extends React.Component {
   constructor(props) {
@@ -75,7 +75,10 @@ class Form extends React.Component {
   render() {
     return (
       <div className='form-library'>
-        {this.state.isOpen && <ConfirmMessage />}
+        {this.state.isOpen && <ConfirmMessage
+          classNames='confirm-message'
+          text='Документ был добавлен в библиотеку'
+        />}
         <h2 className='form-library--heading'>Добавить информацию</h2>
         <form name='addCategory' onSubmit={this.handleSubmit}>
           <p className='form-library--comment'>

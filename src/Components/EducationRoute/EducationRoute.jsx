@@ -1,7 +1,9 @@
 import React from 'react';
+import InputMask from 'react-input-mask';
 import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
 import { getLocations, addEducation } from '../../educationCalls';
+import ConfirmMessage from '../ConfirmMessage/ConfirmMessage';
 import './EducationRoute.css';
 import './SelectStyles.css';
 
@@ -20,6 +22,7 @@ export default class Category extends React.Component {
       year: '',
       program: '',
       children: [],
+      isOpen: true,
     };
     this.addEducationRoute = this.addEducationRoute.bind(this);
     this.setName = this.setName.bind(this);
@@ -192,16 +195,15 @@ export default class Category extends React.Component {
               <p className='education-form--field-comment'>
                 <label htmlFor='phone'>Номер телефона</label>
               </p>
-              <input
+              <InputMask
                 value={this.state.phone}
                 onChange={this.setPhone}
                 id='phone'
                 pattern='[^А-Яа-яЁёA-Za-z]+$'
                 type='tel'
+                mask='+375(99)-999-99-99'
                 title='Введите корректный контактный телефон'
-                placeholder='+375-ХХ-ХХХ-ХХ-ХХ'
                 className='education-form--field'
-                maxLength='20'
                 required
               />
               <span className='validity' />
@@ -262,6 +264,7 @@ export default class Category extends React.Component {
               >
                 {this.state.children}
               </Select>
+              {this.state.isOpen && <ConfirmMessage />}
               <span className='validity' />
             </div>
             <div className='education-form--field-wrapper'>

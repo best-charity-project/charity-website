@@ -8,6 +8,29 @@
     text-transform: uppercase;
   }
 
+  .confirm-message {
+    width: 35em;
+    height: 2em;
+    background-color: #2ccb71;
+    position: relative;
+    top: 0;
+    right: 0;
+    color: #1e4b28;
+    border-radius: 0;
+    text-align: center;
+    padding-top: 0.5em;
+    animation: message 2s;
+  }
+
+  @keyframes message {
+    from {
+      top: -2em;
+    }
+    to {
+      top: 0em;
+    }
+  }
+
   .education-route--education-form {
     background-color: #fff;
     box-shadow: 0 0.5em 1em rgb(238, 235, 235);
