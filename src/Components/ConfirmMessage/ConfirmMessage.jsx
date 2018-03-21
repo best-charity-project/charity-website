@@ -24,7 +24,7 @@ class ConfirmMessage extends React.Component {
 
   render() {
     return this.state.visible ? (
-      <div className={this.props.classNames}>{this.props.text}</div>
+      <div className={this.props.classNames}>{this.props.message}</div>
     ) : (
       <span />
     );
@@ -35,5 +35,5 @@ export default ConfirmMessage;
 
 ConfirmMessage.propTypes = {
   classNames: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
 };

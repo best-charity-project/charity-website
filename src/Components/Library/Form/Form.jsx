@@ -1,7 +1,8 @@
 import React from 'react';
-import './Form.css';
-import { getLibraryCategories, addLibraryItem } from '../../../libraryCalls';
+import PropTypes from 'prop-types';
+import { getLibraryCategories } from '../../../libraryCalls';
 import ConfirmMessage from '../../ConfirmMessage/ConfirmMessage';
+import './Form.css';
 
 class Form extends React.Component {
   constructor(props) {
@@ -26,6 +27,19 @@ class Form extends React.Component {
 
   componentDidMount() {
     this.setCategories();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {
+      categoryTag, type, title, description, url,
+    } = nextProps.item;
+    this.setState({
+      categoryTag,
+      type,
+      title,
+      description,
+      url,
+    });
   }
 
   setCategories() {
@@ -57,13 +71,14 @@ class Form extends React.Component {
     const {
       categoryTag, type, title, description, url,
     } = this.state;
-    addLibraryItem({
+    this.props.onSubmit({
       categoryTag,
       type,
       title,
       description,
       url,
     });
+    this.toggleConfirmMessage();
   }
 
   toggleConfirmMessage() {
@@ -73,18 +88,20 @@ class Form extends React.Component {
   }
 
   render() {
+    const { isOpen } = this.state;
     return (
       <div className='form-library'>
-        {this.state.isOpen && <ConfirmMessage
-          classNames='confirm-message'
-          text='Документ был добавлен в библиотеку'
-        />}
         <h2 className='form-library--heading'>Добавить информацию</h2>
         <form name='addCategory' onSubmit={this.handleSubmit}>
+          {isOpen && <ConfirmMessage
+            classNames='confirm-message'
+            message='Документ был добавлен в библиотеку'
+          />}
           <p className='form-library--comment'>
             <label htmlFor='category'>Выбор категории</label>
           </p>
           <select
+            value={this.state.categoryTag}
             id='category'
             className='form-library--field field--select'
             onChange={this.handleChangeCategory}
@@ -103,6 +120,7 @@ class Form extends React.Component {
             <label htmlFor='type'>Выбор типа материала</label>
           </p>
           <select
+            value={this.state.type}
             id='type'
             className='form-library--field field--select'
             onChange={this.handleChangeType}
@@ -120,6 +138,7 @@ class Form extends React.Component {
             <label htmlFor='title'>Название документа</label>
           </p>
           <input
+            value={this.state.title}
             id='title'
             type='text'
             placeholder='Название'
@@ -131,6 +150,7 @@ class Form extends React.Component {
             <label htmlFor='descripton'>Краткое описание</label>
           </p>
           <textarea
+            value={this.state.description}
             id='description'
             type='text'
             placeholder='Описание документа'
@@ -142,6 +162,7 @@ class Form extends React.Component {
             <label htmlFor='url'> Ссылка на источник</label>
           </p>
           <input
+            value={this.state.url}
             id='url'
             type='url'
             placeholder='https://....'
@@ -151,14 +172,35 @@ class Form extends React.Component {
           />
           <input
             type='submit'
-            value='Добавить'
+            value={this.props.buttonText}
             className='form-library--button control-button control-button--blue'
-            onClick={this.toggleConfirmMessage}
           />
         </form>
-      </div>
+      </div >
     );
   }
 }
 
 export default Form;
+
+Form.defaultProps = {
+  item: {
+    categoryTag: '',
+    type: '',
+    title: '',
+    description: '',
+    url: '',
+  },
+};
+
+Form.propTypes = {
+  item: PropTypes.shape({
+    categoryTag: PropTypes.string,
+    type: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    url: PropTypes.string,
+  }),
+  onSubmit: PropTypes.func.isRequired,
+  buttonText: PropTypes.string.isRequired,
+};
