@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 import Time from './Time';
 import './Form.css';
 
@@ -11,14 +10,11 @@ export default class Form extends React.Component {
       title: '',
       shortDescription: '',
       url: '',
-      isHidden: true,
     };
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeUrl = this.handleChangeUrl.bind(this);
-    this.toggleClass = this.toggleClass.bind(this);
-    this.getImageClass = this.getImageClass.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -27,12 +23,6 @@ export default class Form extends React.Component {
       title,
       shortDescription,
       url,
-    });
-  }
-
-  getImageClass() {
-    return classnames('form--input', {
-      'input-hidden': this.state.isHidden,
     });
   }
 
@@ -73,28 +63,11 @@ export default class Form extends React.Component {
     this.clearFields();
   }
 
-  toggleClass() {
-    this.setState({
-      isHidden: !this.state.isHidden,
-    });
-  }
-
   render() {
     return (
       <div className='form--add-news'>
         <Time />
         <form name='addNews' onSubmit={this.handleSubmit} className='form--form'>
-          <p className='add-news--checkbox-text'>
-            <input type='checkbox' onClick={this.toggleClass} /> Новость со ссылкой на сторонний
-            ресурс
-          </p>
-          <input
-            value={this.state.url}
-            onChange={this.handleChangeUrl}
-            type='url'
-            className={this.getImageClass()}
-            placeholder='Ссылка на новость https://....'
-          />
           <label htmlFor='addNews'>
             <p className='form--label'>Заглавие:</p>
             <input
@@ -117,7 +90,17 @@ export default class Form extends React.Component {
               required
             />
           </label>
-
+          <label htmlFor='addNews'>
+            <p className='form--label'>Ссылка на новость:</p>
+            <input
+              value={this.state.url}
+              onChange={this.handleChangeUrl}
+              type='url'
+              className='form--input'
+              placeholder='https://.....'
+            />
+          </label>
+          <br />
           <input
             type='submit'
             className='control-button control-button--blue'

@@ -1,33 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SingleNews from '../../News/SingleNews/SingleNews';
+import NewsCard from '../../News/NewsCard';
 import './ThreeNews.css';
-import DetailsButton from '../../DetailsButton/DetailsButton';
 
 const LatestNews = props => (
   <div className='latest-news'>
     <h1 className='latest-news--heading'>Свежие новости</h1>
     <hr className='heading-underline' />
-    <div className='news-list'>
-      {props.news.slice(0, 3).map((item) => {
-        let link;
-        if (item.url) {
-          link = item.url;
-        } else {
-          link = `/news/${item._id}`;
-        }
-        return (
-          <div className='news-list--item' key={item._id}>
-            <SingleNews title={item.title} shortDescription={item.shortDescription} />
-            <DetailsButton
-              className='control-button control-button--blue'
-              text='Подробнее'
-              url={link}
-            />
-          </div>
-        );
-      })}
-    </div>
+    <div className='news-list'>{props.news.slice(0, 3).map(item => NewsCard(item))}</div>
   </div>
 );
 
