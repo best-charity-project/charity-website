@@ -35,11 +35,7 @@ class Search extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     let checkedTypesArray = [];
-    Object.keys(this.state.checkedTypes).forEach((key) => {
-      if (this.state.checkedTypes[key] === true) {
-        checkedTypesArray.push(key);
-      }
-    });
+    checkedTypesArray = Object.keys(this.state.checkedTypes).filter(key => this.state.checkedTypes[key] === true);
     if (checkedTypesArray.length === 0) {
       checkedTypesArray = this.defaultQuery;
     }
