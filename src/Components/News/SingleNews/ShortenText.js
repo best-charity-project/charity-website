@@ -1,13 +1,14 @@
-function shortenText(short) {
-  let result = short;
-  const size = 240;
-  if (!result) {
-    return 'Error';
+import { MAX_DESCRIPTION_SIZE } from '../../../configs/config.json'; // TODO: put 240 to const
+
+export default (text) => {
+  if (!text) {
+    return 'Ошибка в базе данных при получении новости';
   }
 
-  if (result.length > size) {
-    result = `${result.slice(0, size)} ...`;
+  if (text.length > MAX_DESCRIPTION_SIZE) {
+    return `${text.slice(0, MAX_DESCRIPTION_SIZE - 5)} ...`;
   }
-  return result;
-}
-export default shortenText;
+
+  return text;
+};
+
