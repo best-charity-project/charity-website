@@ -1,4 +1,4 @@
-import { MAX_DESCRIPTION_SIZE } from '../../../configs/config.json'; // TODO: put 240 to const
+import { MAX_DESCRIPTION_SIZE } from '../../../configs/config.json';
 
 export default (text) => {
   if (!text) {
