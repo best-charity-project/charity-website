@@ -116,9 +116,7 @@ export default class Category extends React.Component {
 
   addEducationRoute(event) {
     event.preventDefault();
-    if (this.state.regionDistrict.length === 0) {
-      console.log('NIT');
-    } else {
+    if (!(this.state.regionDistrict.length === 0)) {
       const {
         name, phone, email, region, regionDistrict, city, educationalInstitution, year, program,
       } = this.state;
