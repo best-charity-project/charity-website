@@ -1,8 +1,10 @@
 .search {
   display: inline-block;
-  margin: 2em auto;
+  margin: 2em 2em 1em;
   cursor: pointer;
   height: 2em;
+  text-align: center;
+  padding: 1em 1em 2em 1em;
 }
 
 .search--input {
@@ -41,7 +43,7 @@
   margin-right: 0.5em;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1200px) {
   .search--input {
     max-width: 50%;
   }
