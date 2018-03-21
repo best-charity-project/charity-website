@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SignupForm from './SignupForm';
 import { signupUser } from '../../Auth/Auth';
 import './SignupForm.css';
@@ -20,6 +21,7 @@ class SignupPage extends React.Component {
         return;
       }
       this.setState({ successMessage: res.data.message });
+      this.props.onSignup(res.data.userInfo);
     });
   }
 
@@ -35,3 +37,7 @@ class SignupPage extends React.Component {
 }
 
 export default SignupPage;
+
+SignupPage.propTypes = {
+  onSignup: PropTypes.func.isRequired,
+};
