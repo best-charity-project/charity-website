@@ -1,11 +1,30 @@
-.login-panel--logout-btn {
+.login-panel--link,
+.login-panel--btn {
   z-index: 2;
   position: relative;
-  margin-left: 1em;
+  text-decoration: none;
+  color: #1d6e87;
+  width: 6em;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 0.7em 0;
+  border: 1px solid #1d6e87;
+}
+
+.login-panel--btn {
+  cursor: pointer;
+  background-color: #eceff1;
 }
 
 .login-panel {
   display: flex;
   height: inherit;
   align-items: center;
+  margin-left: 1em;
+}
+
+.login-panel--heading {
+  color: #1d6e87;
+  font-size: 1.2em;
+  margin-right: 1em;
 }
