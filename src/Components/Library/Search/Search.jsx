@@ -7,6 +7,7 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.defaultQuery = ['video', 'literature', 'article', 'studyMaterial'];
+    this.queryValuesRus = ['Видео', 'Литератруа', 'Статьи', 'Учебные материалы'];
     this.state = {
       searchText: '',
       checkedTypes: {
@@ -66,46 +67,18 @@ class Search extends React.Component {
             <button className='search--button'>Поиск</button>
           </div>
           <div className='search--checkbox'>
-            <div className='checkbox-item'>
-              <input
-                type='checkbox'
-                id='article'
-                name='type'
-                value='article'
-                onChange={this.handleChangeOfCheckboxes}
-              />
-              <label htmlFor='article'>Статьи</label>
-            </div>
-            <div className='checkbox-item'>
-              <input
-                type='checkbox'
-                id='video'
-                name='type'
-                value='video'
-                onChange={this.handleChangeOfCheckboxes}
-              />
-              <label htmlFor='video'>Видео</label>
-            </div>
-            <div className='checkbox-item'>
-              <input
-                type='checkbox'
-                id='literature'
-                name='type'
-                value='literature'
-                onChange={this.handleChangeOfCheckboxes}
-              />
-              <label htmlFor='literature'>Литература</label>
-            </div>
-            <div className='checkbox-item'>
-              <input
-                type='checkbox'
-                id='studyMaterial'
-                name='type'
-                value='studyMaterial'
-                onChange={this.handleChangeOfCheckboxes}
-              />
-              <label htmlFor='studyMaterial'>Учебный материал</label>
-            </div>
+            {this.defaultQuery.map((item, index) => (
+              <div className='search--checkbox-item'>
+                <input
+                  type='checkbox'
+                  id={item}
+                  name='type'
+                  value={item}
+                  onChange={this.handleChangeOfCheckboxes}
+                />
+                <label htmlFor={item}>{this.queryValuesRus[index]}</label>
+              </div>
+            ))}
           </div>
         </form>
       </div>

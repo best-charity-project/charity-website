@@ -31,15 +31,12 @@
   opacity: 1;
 }
 
-.search--checkbox > div {
-  display: inline;
-}
-
 .search--checkbox {
   margin-top: 0.5em;
 }
 
-.checkbox-item {
+.search--checkbox-item {
+  display: inline;
   margin-right: 0.5em;
 }
 
