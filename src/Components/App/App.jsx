@@ -21,6 +21,7 @@ export default class App extends React.Component {
     };
     this.onLogin = this.onLogin.bind(this);
     this.onLogout = this.onLogout.bind(this);
+    this.onSignup = this.onSignup.bind(this);
   }
 
   componentDidMount() {
@@ -28,6 +29,12 @@ export default class App extends React.Component {
       this.setState({
         userInfo,
       });
+    });
+  }
+
+  onSignup(userInfo) {
+    this.setState({
+      userInfo,
     });
   }
 
@@ -56,7 +63,7 @@ export default class App extends React.Component {
           <Route path='/library' component={Library} />
           <Route path='/education-route' component={EducationRoute} />
           <Route path='/login' render={() => <LoginPage onLogin={this.onLogin} />} />
-          <Route path='/signup' component={SignupPage} />
+          <Route path='/signup' render={() => <SignupPage onSignup={this.onSignup} />} />
           <Redirect to='/home' />
         </Switch>
         <Footer />
