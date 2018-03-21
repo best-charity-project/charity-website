@@ -59,7 +59,7 @@ class AdminNewsItem extends React.Component {
   render() {
     return (
       <div className='news-list--item'>
-        <SingleNews title={this.props.title} newsText={this.props.newsText} />
+        <SingleNews {...this.props} />
         <div className='item--buttons'>
           <ControlButton
             text='Редактировать'
@@ -74,8 +74,7 @@ class AdminNewsItem extends React.Component {
           {this.state.isOpen && <Modal onConfirm={this.deleteHandler} toggle={this.toggleModal} />}
           <DetailsButton
             className='control-button control-button--blue control-button--small'
-            text={this.state.text}
-            url={this.state.link}
+            {...this.state}
           />
         </div>
       </div>
@@ -86,8 +85,6 @@ export default withRouter(AdminNewsItem);
 
 AdminNewsItem.propTypes = {
   _id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  newsText: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   match: PropTypes.shape({
     url: PropTypes.string,
