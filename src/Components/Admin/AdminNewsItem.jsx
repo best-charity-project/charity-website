@@ -14,10 +14,31 @@ class AdminNewsItem extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
+      link: '',
+      text: '',
     };
     this.deleteHandler = this.deleteHandler.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
+    this.checkUrlHandler = this.checkUrlHandler.bind(this);
+  }
+
+  componentDidMount() {
+    this.checkUrlHandler();
+  }
+
+  checkUrlHandler() {
+    if (this.props.url) {
+      this.setState({
+        link: this.props.url,
+        text: 'Перейти',
+      });
+    } else {
+      this.setState({
+        link: `/news/${this.props._id}`,
+        text: 'Подробнее',
+      });
+    }
   }
 
   handleEditClick() {
@@ -36,12 +57,6 @@ class AdminNewsItem extends React.Component {
   }
 
   render() {
-    let link;
-    if (this.props.url) {
-      link = this.props.url;
-    } else {
-      link = `/news/${this.props._id}`;
-    }
     return (
       <div className='news-list--item'>
         <SingleNews title={this.props.title} newsText={this.props.newsText} />
@@ -58,9 +73,9 @@ class AdminNewsItem extends React.Component {
           />
           {this.state.isOpen && <Modal onConfirm={this.deleteHandler} toggle={this.toggleModal} />}
           <DetailsButton
-            text='Подробнее'
             className='control-button control-button--blue control-button--small'
-            url={link}
+            text={this.state.text}
+            url={this.state.link}
           />
         </div>
       </div>
