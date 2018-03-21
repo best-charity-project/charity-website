@@ -2,7 +2,7 @@ function shortenText(short) {
   let result = short;
   const size = 240;
   if (!result) {
-    return '';
+    return 'Error';
   }
 
   if (result.length > size) {
