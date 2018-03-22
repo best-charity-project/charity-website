@@ -6,8 +6,8 @@ import './Search.css';
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.defaultQuery = ['video', 'literature', 'article', 'studyMaterial'];
-    this.queryValuesRus = ['Видео', 'Литератруа', 'Статьи', 'Учебные материалы'];
+    this.defaultTypesArray = ['video', 'literature', 'article', 'studyMaterial'];
+    this.typesValuesRus = ['Видео', 'Литератруа', 'Статьи', 'Учебные материалы'];
     this.state = {
       searchText: '',
       checkedTypes: {
@@ -40,7 +40,7 @@ class Search extends React.Component {
     event.preventDefault();
     let checkedTypesArray = this.getCheckedValues();
     if (checkedTypesArray.length === 0) {
-      checkedTypesArray = this.defaultQuery;
+      checkedTypesArray = this.defaultTypesArray;
     }
     this.props.history.push({
       pathname: `${this.props.match.url}/search`,
@@ -66,7 +66,7 @@ class Search extends React.Component {
             <button className='search--button'>Поиск</button>
           </div>
           <div className='search--checkbox'>
-            {this.defaultQuery.map((item, index) => (
+            {this.defaultTypesArray.map((item, index) => (
               <div className='search--checkbox-item'>
                 <input
                   type='checkbox'
@@ -75,7 +75,7 @@ class Search extends React.Component {
                   value={item}
                   onChange={this.handleChangeOfCheckboxes}
                 />
-                <label htmlFor={item}>{this.queryValuesRus[index]}</label>
+                <label htmlFor={item}>{this.typesValuesRus[index]}</label>
               </div>
             ))}
           </div>
