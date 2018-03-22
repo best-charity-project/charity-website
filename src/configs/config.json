@@ -1,4 +1,5 @@
 {
-  "baseURL": "https://charity-server.herokuapp.com/api/",
-  "confirmMessageTimer": 5000
+  "baseURL": "http://localhost:8080/api/",
+  "confirmMessageTimer": 5000,
+  "redirectTime": 5000
 }
