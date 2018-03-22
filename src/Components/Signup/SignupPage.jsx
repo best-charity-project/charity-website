@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SignupForm from './SignupForm';
 import { signupUser } from '../../Auth/Auth';
-import Message from './Message/Message';
+import Message from '../Message/Message';
 import { redirectTime } from '../../configs/config.json';
 import './SignupForm.css';
 

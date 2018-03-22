@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Message.css';
-import { confirmMessageTimer } from '../../../configs/config.json';
+import { confirmMessageTimer } from '../../configs/config.json';
 
 class ConfirmMessage extends React.Component {
   constructor(props) {

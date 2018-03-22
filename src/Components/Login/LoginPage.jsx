@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import { loginUser } from '../../Auth/Auth';
+import Message from '../Message/Message';
 import './LoginForm.css';
 
 class LoginPage extends React.Component {
@@ -31,7 +32,7 @@ class LoginPage extends React.Component {
     return (
       <div className='login indent'>
         <LoginForm buttonText='Вход' onSubmit={this.handleFormSubmit} />
-        <p className='login--error-message'>{this.state.errorMessage}</p>
+        {this.state.errorMessage && <Message type='error' text={this.state.errorMessage} />}
       </div>
     );
   }
