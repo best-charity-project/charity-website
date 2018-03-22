@@ -40,11 +40,7 @@ class SignupForm extends React.Component {
   }
 
   handleConfirmPasswordChange() {
-    if (this.password.value !== this.confirmPassword.value) {
-      this.confirmPassword.setCustomValidity('Пароль не соответствует');
-    } else {
-      this.confirmPassword.setCustomValidity('');
-    }
+    this.confirmPassword.setCustomValidity('Пароль не соответствует');
   }
 
   handleNameChange(e) {
