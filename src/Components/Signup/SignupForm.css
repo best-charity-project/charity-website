@@ -16,6 +16,10 @@
   padding: 1em;
 }
 
+.form--heading {
+  text-align: center;
+}
+
 .form--label {
   margin: 1em 0 1em 1em;
   text-indent: 1em;

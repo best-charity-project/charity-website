@@ -17,6 +17,7 @@ class SignupForm extends React.Component {
     };
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleConfirmPasswordChange = this.handleConfirmPasswordChange.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleReasonForRegistrationChange = this.handleReasonForRegistrationChange.bind(this);
@@ -36,6 +37,14 @@ class SignupForm extends React.Component {
     this.setState({
       password: e.target.value,
     });
+  }
+
+  handleConfirmPasswordChange() {
+    if (this.password.value !== this.confirmPassword.value) {
+      this.confirmPassword.setCustomValidity('Пароль не соответствует');
+    } else {
+      this.confirmPassword.setCustomValidity('');
+    }
   }
 
   handleNameChange(e) {
@@ -103,7 +112,8 @@ class SignupForm extends React.Component {
   render() {
     return (
       <div className='signup-form'>
-        <form name='signupForm' onSubmit={this.handleSubmit} className='form--form'>
+        <p className='form--heading'>Регистрация</p>
+        <form name='signupForm' onSubmit={this.handleSubmit}>
           <p className='form--label'>
             <label htmlFor='email'>Email:</label>
           </p>
@@ -125,7 +135,26 @@ class SignupForm extends React.Component {
             onChange={this.handlePasswordChange}
             type='password'
             className='form--input'
-            placeholder='Пароль'
+            placeholder='Введите пароль не менее 6 символов'
+            minLength='6'
+            ref={(input) => {
+              this.password = input;
+            }}
+            required
+          />
+          <p className='form--label'>
+            <label htmlFor='confirmPassword'>Подтвердите пароль:</label>
+          </p>
+          <input
+            id='confirmPassword'
+            // value={this.state.confirmPassword}
+            onChange={this.handleConfirmPasswordChange}
+            type='password'
+            className='form--input'
+            placeholder='Подтвердите пароль'
+            ref={(input) => {
+              this.confirmPassword = input;
+            }}
             required
           />
           <p className='form--label'>
