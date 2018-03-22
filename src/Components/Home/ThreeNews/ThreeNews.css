@@ -15,7 +15,7 @@
   text-transform: uppercase;
 }
 
-.news-list--item .details-button {
+.news-card .details-button {
   margin: 0 auto;
   display: block;
 }

@@ -58,7 +58,7 @@ class AdminNewsItem extends React.Component {
 
   render() {
     return (
-      <div className='news-list--item'>
+      <div className='news-card'>
         <SingleNews {...this.props} />
         <div className='item--buttons'>
           <ControlButton
