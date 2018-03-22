@@ -40,7 +40,11 @@ class SignupForm extends React.Component {
   }
 
   handleConfirmPasswordChange() {
-    this.confirmPassword.setCustomValidity('Пароль не соответствует');
+    if (this.password.value !== this.confirmPassword.value) {
+      this.confirmPassword.setCustomValidity('Пароль не соответствует');
+    } else {
+      this.confirmPassword.setCustomValidity('');
+    }
   }
 
   handleNameChange(e) {
@@ -83,6 +87,7 @@ class SignupForm extends React.Component {
       otherCountry: '',
       reasonForRegistration: '',
     });
+    this.confirmPassword.value = '';
   }
 
   handleSubmit(e) {
