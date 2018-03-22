@@ -14,7 +14,7 @@ const NewsCard = (item) => {
     text = 'Подробнее';
   }
   return (
-    <div className='news-list--item' key={item._id}>
+    <div className='news-card' key={item._id}>
       <SingleNews title={item.title} newsText={item.newsText} />
       <DetailsButton className='control-button control-button--blue' text={text} url={link} />
     </div>
