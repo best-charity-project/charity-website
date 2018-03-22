@@ -7,6 +7,7 @@ import Admin from '../Admin/Admin';
 import About from '../About/About';
 import News from '../News/News';
 import Library from '../Library/Library';
+import SingleNewsPage from '../News/SingleNewsPage';
 import EducationRoute from '../EducationRoute/EducationRoute';
 import LoginPage from '../Login/LoginPage';
 import SignupPage from '../Signup/SignupPage';
@@ -60,6 +61,7 @@ export default class App extends React.Component {
           <Route path='/admin' render={() => <Admin userInfo={this.state.userInfo} />} />
           <Route path='/about' component={About} />
           <Route path='/news' component={News} />
+          <Route path='/news/:id' component={SingleNewsPage} />
           <Route path='/library' component={Library} />
           <Route path='/education-route' component={EducationRoute} />
           <Route path='/login' render={() => <LoginPage onLogin={this.onLogin} />} />

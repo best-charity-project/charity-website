@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Search from './Search/Search';
 import LibraryItemsList from './LibraryItemsList/LibraryItemsList';
 import CategoriesList from './CategoriesList/CategoriesList';
-import Form from './Form/Form';
+import AddLibraryItem from './Form/AddLibraryItem';
 import LibraryDefault from './LibraryDefault/LibraryDefault';
 import './Library.css';
 
@@ -19,11 +19,12 @@ const Library = ({ match }) => (
       </div>
       <div className='library--board'>
         <div className='library--header'>
-          <Search />
+          <Search match={match} />
         </div>
         <Switch>
           <Route exact path={`${match.url}/`} component={LibraryDefault} />
-          <Route path={`${match.url}/addToLibrary`} component={Form} />
+          <Route path={`${match.url}/search`} component={LibraryItemsList} />
+          <Route path={`${match.url}/addToLibrary`} component={AddLibraryItem} />
           <Route path={`${match.url}/:category/:type`} component={LibraryItemsList} />
           <Redirect to={`${match.url}/`} />
         </Switch>
