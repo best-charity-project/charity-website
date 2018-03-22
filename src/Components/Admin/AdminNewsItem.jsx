@@ -14,27 +14,52 @@ class AdminNewsItem extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
+      link: '',
+      text: '',
     };
     this.deleteHandler = this.deleteHandler.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
+    this.checkUrlHandler = this.checkUrlHandler.bind(this);
   }
+
+  componentDidMount() {
+    this.checkUrlHandler();
+  }
+
+  checkUrlHandler() {
+    if (this.props.url) {
+      this.setState({
+        link: this.props.url,
+        text: 'Перейти',
+      });
+    } else {
+      this.setState({
+        link: `/news/${this.props._id}`,
+        text: 'Подробнее',
+      });
+    }
+  }
+
   handleEditClick() {
     this.props.history.push(`${this.props.match.url}/edit/${this.props._id}`);
   }
+
   toggleModal() {
     this.setState({
       isOpen: !this.state.isOpen,
     });
   }
+
   deleteHandler() {
     deleteNews(this.props._id);
     this.toggleModal();
   }
+
   render() {
     return (
-      <div className='news-list--item'>
-        <SingleNews title={this.props.title} shortDescription={this.props.shortDescription} />
+      <div className='news-card'>
+        <SingleNews {...this.props} />
         <div className='item--buttons'>
           <ControlButton
             text='Редактировать'
@@ -48,9 +73,9 @@ class AdminNewsItem extends React.Component {
           />
           {this.state.isOpen && <Modal onConfirm={this.deleteHandler} toggle={this.toggleModal} />}
           <DetailsButton
-            text='Подробнее'
             className='control-button control-button--blue control-button--small'
-            url={this.props.url}
+            url={this.state.link}
+            text={this.state.text}
           />
         </div>
       </div>
@@ -61,8 +86,6 @@ export default withRouter(AdminNewsItem);
 
 AdminNewsItem.propTypes = {
   _id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  shortDescription: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   match: PropTypes.shape({
     url: PropTypes.string,
