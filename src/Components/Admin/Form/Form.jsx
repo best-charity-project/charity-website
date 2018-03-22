@@ -8,21 +8,20 @@ export default class Form extends React.Component {
     super(props);
     this.state = {
       title: '',
-      shortDescription: '',
+      newsText: '',
       url: '',
     };
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
-    this.handleChangeDescription = this.handleChangeDescription.bind(this);
+    this.handleChangeNewsText = this.handleChangeNewsText.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeUrl = this.handleChangeUrl.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    const { title, shortDescription, url } = nextProps.news;
-
+    const { title, newsText, url } = nextProps.news;
     this.setState({
       title,
-      shortDescription,
+      newsText,
       url,
     });
   }
@@ -33,9 +32,9 @@ export default class Form extends React.Component {
     });
   }
 
-  handleChangeDescription(event) {
+  handleChangeNewsText(event) {
     this.setState({
-      shortDescription: event.target.value,
+      newsText: event.target.value,
     });
   }
 
@@ -48,17 +47,17 @@ export default class Form extends React.Component {
   clearFields() {
     this.setState({
       title: '',
-      shortDescription: '',
+      newsText: '',
       url: '',
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const { title, shortDescription, url } = this.state;
+    const { title, newsText, url } = this.state;
     this.props.onSubmit({
       title,
-      shortDescription,
+      newsText,
       url,
     });
     this.clearFields();
@@ -76,18 +75,18 @@ export default class Form extends React.Component {
               onChange={this.handleChangeTitle}
               type='text'
               className='form--input'
-              placeholder='Type heading here'
+              placeholder='Заголовок новости'
               required
             />
           </label>
           <label htmlFor='addNews'>
-            <p className='form--label'>Краткое описание:</p>
+            <p className='form--label'>Текст новости(краткое описание):</p>
             <textarea
-              value={this.state.shortDescription}
-              onChange={this.handleChangeDescription}
+              value={this.state.newsText}
+              onChange={this.handleChangeNewsText}
               type='text'
               className='form--textarea'
-              placeholder='Short description'
+              placeholder='Текст новости'
               required
             />
           </label>
@@ -98,8 +97,7 @@ export default class Form extends React.Component {
               onChange={this.handleChangeUrl}
               type='url'
               className='form--input'
-              placeholder='url'
-              required
+              placeholder='https://.....'
             />
           </label>
           <br />
@@ -117,7 +115,7 @@ export default class Form extends React.Component {
 Form.defaultProps = {
   news: {
     title: '',
-    shortDescription: '',
+    newsText: '',
     url: '',
   },
 };
@@ -125,7 +123,7 @@ Form.defaultProps = {
 Form.propTypes = {
   news: PropTypes.shape({
     title: PropTypes.string,
-    shortDescription: PropTypes.string,
+    newsText: PropTypes.string,
     url: PropTypes.string,
   }),
   onSubmit: PropTypes.func.isRequired,
