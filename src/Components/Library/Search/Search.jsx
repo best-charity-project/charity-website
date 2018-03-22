@@ -22,6 +22,10 @@ class Search extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  getCheckedValues() {
+    return Object.keys(this.state.checkedTypes).filter(key => this.state.checkedTypes[key]);
+  }
+
   handleChangeOfText(event) {
     this.setState({ searchText: event.target.value });
   }
@@ -34,8 +38,7 @@ class Search extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    let checkedTypesArray = [];
-    checkedTypesArray = Object.keys(this.state.checkedTypes).filter(key => this.state.checkedTypes[key] === true);
+    let checkedTypesArray = this.getCheckedValues();
     if (checkedTypesArray.length === 0) {
       checkedTypesArray = this.defaultQuery;
     }
