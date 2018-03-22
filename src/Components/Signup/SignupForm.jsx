@@ -14,6 +14,11 @@ class SignupForm extends React.Component {
       otherCountry: '',
       city: '',
       reasonForRegistration: '',
+      reasons: [
+        'Профессиональная деятельность',
+        'Родственные связи/знакомый человека с особыми потребностями',
+        'Являюсь человеком с особыми потребностями',
+      ],
     };
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -215,54 +220,23 @@ class SignupForm extends React.Component {
             required
           />
           <p className='form--comment'>Что Вас привело на сайт:</p>
-          <p className='form--radio-input'>
-            <input
-              id='reason1'
-              name='reason'
-              type='radio'
-              className='radio-input'
-              value='Профессиональная деятельность'
-              checked={this.state.reasonForRegistration === 'Профессиональная деятельность'}
-              onChange={this.handleReasonForRegistrationChange}
-              required
-            />
-            <label htmlFor='reason1' className='radio-input--label'>
-              Профессиональная деятельность
-            </label>
-          </p>
-          <p className='form--radio-input'>
-            <input
-              id='reason2'
-              name='reason'
-              type='radio'
-              className='radio-input'
-              value='Родственные связи/знакомый человека с особыми потребностями'
-              checked={
-                this.state.reasonForRegistration ===
-                'Родственные связи/знакомый человека с особыми потребностями'
-              }
-              onChange={this.handleReasonForRegistrationChange}
-            />
-            <label htmlFor='reason2' className='radio-input--label'>
-              Родственные связи/знакомый человека с особыми потребностями
-            </label>
-          </p>
-          <p className='form--radio-input'>
-            <input
-              id='reason3'
-              name='reason'
-              type='radio'
-              className='radio-input'
-              value='Являюсь человеком с особыми потребностями'
-              checked={
-                this.state.reasonForRegistration === 'Являюсь человеком с особыми потребностями'
-              }
-              onChange={this.handleReasonForRegistrationChange}
-            />
-            <label htmlFor='reason3' className='radio-input--label'>
-              Являюсь человеком с особыми потребностями
-            </label>
-          </p>
+          {this.state.reasons.map((reason, index) => (
+            <p key={reason} className='form--radio-input'>
+              <input
+                id={`reason${index + 1}`}
+                name='reason'
+                type='radio'
+                className='radio-input'
+                value={reason}
+                checked={this.state.reasonForRegistration === reason}
+                onChange={this.handleReasonForRegistrationChange}
+                required
+              />
+              <label htmlFor={`reason${index + 1}`} className='radio-input--label'>
+                {reason}
+              </label>
+            </p>
+          ))}
           <br />
           <input type='submit' className='control-button control-button--blue' value='Отправить' />
         </form>
