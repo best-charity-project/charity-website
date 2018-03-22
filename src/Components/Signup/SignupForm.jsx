@@ -148,7 +148,6 @@ class SignupForm extends React.Component {
           </p>
           <input
             id='confirmPassword'
-            // value={this.state.confirmPassword}
             onChange={this.handleConfirmPasswordChange}
             type='password'
             className='form--input'
@@ -219,11 +218,13 @@ class SignupForm extends React.Component {
           <p className='form--radio-input'>
             <input
               id='reason1'
+              name='reason'
               type='radio'
               className='radio-input'
               value='Профессиональная деятельность'
               checked={this.state.reasonForRegistration === 'Профессиональная деятельность'}
               onChange={this.handleReasonForRegistrationChange}
+              required
             />
             <label htmlFor='reason1' className='radio-input--label'>
               Профессиональная деятельность
@@ -232,6 +233,7 @@ class SignupForm extends React.Component {
           <p className='form--radio-input'>
             <input
               id='reason2'
+              name='reason'
               type='radio'
               className='radio-input'
               value='Родственные связи/знакомый человека с особыми потребностями'
@@ -248,6 +250,7 @@ class SignupForm extends React.Component {
           <p className='form--radio-input'>
             <input
               id='reason3'
+              name='reason'
               type='radio'
               className='radio-input'
               value='Являюсь человеком с особыми потребностями'
