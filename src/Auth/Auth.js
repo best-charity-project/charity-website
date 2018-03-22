@@ -23,7 +23,15 @@ const loginUser = credentials =>
     return null;
   });
 
-const signupUser = credentials => API.post('signup', credentials);
+const signupUser = credentials =>
+  API.post('signup', credentials).then((res) => {
+    const { token } = res.data;
+    if (token) {
+      setToken(token);
+      return res.data;
+    }
+    return res.data;
+  });
 
 const logoutUser = () => {
   deleteToken();
