@@ -67,7 +67,7 @@ class Search extends React.Component {
           </div>
           <div className='search--checkbox'>
             {this.defaultTypesArray.map((item, index) => (
-              <div className='search--checkbox-item'>
+              <div className='search--checkbox-item' key={item}>
                 <input
                   type='checkbox'
                   id={item}
