@@ -31,8 +31,8 @@ const Admin = ({ match, userInfo }) => (
         </Switch>
       </div>
     )}
-    {!userInfo.admin && <Redirect to='/home' />}
-    {!userInfo.admin === undefined && <h1>Загрузка...</h1>}
+    {!userInfo.admin && <Redirect to='/login' />}
+    {!userInfo.admin === undefined && <p>Загрузка...</p>}
   </div>
 );
 
