@@ -1,6 +1,5 @@
 .message {
   width: 20em;
-  height: 2em;
   position: fixed;
   top: 6em;
   right: 0;
@@ -8,7 +7,7 @@
   color: white;
   border-radius: 5px;
   text-align: center;
-  padding-top: 0.9em;
+  padding: 0.9em;
   animation: message 2s;
 }
 
