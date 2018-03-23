@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './Message.css';
 import { confirmMessageTimer } from '../../configs/config.json';
 
-class ConfirmMessage extends React.Component {
+class Message extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,9 +43,14 @@ class ConfirmMessage extends React.Component {
   }
 }
 
-export default ConfirmMessage;
+export default Message;
 
-ConfirmMessage.propTypes = {
-  text: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+Message.defaultProps = {
+  text: '',
+  type: '',
+};
+
+Message.propTypes = {
+  text: PropTypes.string,
+  type: PropTypes.string,
 };
