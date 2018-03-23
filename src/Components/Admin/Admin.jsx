@@ -32,7 +32,7 @@ const Admin = ({ match, userInfo }) => (
       </div>
     )}
     {!userInfo.admin && <Redirect to='/login' />}
-    {!userInfo.admin === undefined && <p>Загрузка...</p>}
+    {userInfo.admin === undefined && <p>Загрузка...</p>}
   </div>
 );
 
