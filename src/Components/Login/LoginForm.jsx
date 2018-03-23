@@ -47,7 +47,6 @@ class LoginForm extends React.Component {
             placeholder='Email'
             required
           />
-
           <p className='form--label'>
             <label htmlFor='password'>Пароль:</label>
           </p>
@@ -60,7 +59,6 @@ class LoginForm extends React.Component {
             placeholder='Пароль'
             required
           />
-          <br />
           <input
             type='submit'
             className='control-button control-button--blue'
