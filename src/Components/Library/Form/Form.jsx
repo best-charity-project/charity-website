@@ -176,7 +176,7 @@ class Form extends React.Component {
             className='form-library--button control-button control-button--blue'
           />
         </form>
-      </div >
+      </div>
     );
   }
 }
