@@ -11,8 +11,10 @@ class SignupPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      successMessage: '',
-      errorMessage: '',
+      message: {
+        type: '',
+        text: '',
+      },
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.redirect = this.redirect.bind(this);
@@ -26,11 +28,14 @@ class SignupPage extends React.Component {
 
   handleFormSubmit(formData) {
     signupUser(formData).then((data) => {
+      let message = {};
       if (data.error) {
-        this.setState({ errorMessage: data.error });
+        message = { type: 'error', text: data.error };
+        this.setState({ message });
         return;
       }
-      this.setState({ successMessage: data.message });
+      message = { type: 'success', text: data.message };
+      this.setState({ message });
       this.props.onSignup(data.userInfo);
       this.redirect();
     });
@@ -39,8 +44,7 @@ class SignupPage extends React.Component {
   render() {
     return (
       <div className='indent'>
-        {this.state.successMessage && <Message type='success' text={this.state.successMessage} />}
-        {this.state.errorMessage && <Message type='error' text={this.state.errorMessage} />}
+        <Message {...this.state.message} />
         <SignupForm onSubmit={this.handleFormSubmit} />
       </div>
     );
