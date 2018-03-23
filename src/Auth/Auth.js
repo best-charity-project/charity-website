@@ -28,7 +28,6 @@ const signupUser = credentials =>
     const { token } = res.data;
     if (token) {
       setToken(token);
-      return res.data;
     }
     return res.data;
   });
