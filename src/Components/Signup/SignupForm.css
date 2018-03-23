@@ -1,11 +1,3 @@
-.signup--success-message {
-  color: green;
-}
-
-.signup--error-message {
-  color: red;
-}
-
 .signup-form {
   display: flex;
   flex-direction: column;
