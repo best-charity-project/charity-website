@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const detailsButton = props => (
-  <a className={props.className} href={props.url} target='_blank' rel='noopener noreferrer'>
-    {props.text}
+const detailsButton = ({ url, text, className }) => (
+  <a className={className} href={url} target='_blank' rel='noopener noreferrer'>
+    {text}
   </a>
 );
 

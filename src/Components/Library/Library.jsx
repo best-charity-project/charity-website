@@ -19,10 +19,11 @@ const Library = ({ match }) => (
       </div>
       <div className='library--board'>
         <div className='library--header'>
-          <Search />
+          <Search match={match} />
         </div>
         <Switch>
           <Route exact path={`${match.url}/`} component={LibraryDefault} />
+          <Route path={`${match.url}/search`} component={LibraryItemsList} />
           <Route path={`${match.url}/addToLibrary`} component={AddLibraryItem} />
           <Route path={`${match.url}/:category/:type`} component={LibraryItemsList} />
           <Redirect to={`${match.url}/`} />

@@ -179,12 +179,6 @@ export default class Category extends React.Component {
   }
 
   render() {
-    const dropdownMenuStyle = {
-      maxHeight: 200,
-    };
-    const dropdownStyle = {
-      borderRadius: '0',
-    };
     return (
       <div className='education-route indent'>
         <h1 className='education-route--heading'>образовательный маршрут</h1>
@@ -282,11 +276,9 @@ export default class Category extends React.Component {
                 id='regionDistrict'
                 title='Вы должны выбрать областной район'
                 choiceTransitionName='rc-select-selection__choice-zoom'
-                dropdownMenuStyle={dropdownMenuStyle}
                 multiple
                 allowClear
                 onChange={this.setRegionDistrict}
-                dropdownStyle={dropdownStyle}
                 notFoundContent='Пожалуйста, выберите регион проживания'
                 placeholder='▼'
               >

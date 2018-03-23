@@ -7,6 +7,9 @@ const getLibraryCategories = () => API.get('categories').then(response => respon
 
 const addLibraryItem = libraryItem => API.post('library', libraryItem);
 
+const fullTextLibrarySearch = (textSearch, checkedTypes) =>
+  API.get(`library/search/?textSearch=${textSearch}&types=${checkedTypes}`).then(response => response.data);
+
 const getPendingItems = () => API.get('library/pending').then(response => response.data);
 
 const acceptPendingItems = id => API.put(`library/${id}`);
@@ -37,4 +40,5 @@ export {
   deleteLibraryItems,
   updateItem,
   getItemById,
+  fullTextLibrarySearch,
 };

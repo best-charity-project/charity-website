@@ -38,6 +38,10 @@
   margin: 0 auto;
 }
 
+.rc-select-dropdown-menu {
+  max-height: 10em;
+}
+
 .rc-select {
   line-height: unset;
 }
@@ -45,10 +49,6 @@
 li.rc-select-dropdown-menu-item.rc-select-dropdown-menu-item-selected {
   background-color: #1E90FF;
   color: white;
-}
-
-.rc-select-dropdown {
-  border: 1px solid #1E90FF;
 }
 
 li.rc-select-dropdown-menu-item {
