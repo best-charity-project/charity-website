@@ -5,7 +5,7 @@ import './Navigation.css';
 
 const NavigationList = props =>
   navigationPaths.map((item) => {
-    if (props.userInfo && !props.userInfo.admin && item.path === '/admin') {
+    if (!props.userInfo.admin && item.path === '/admin') {
       return null;
     }
     return (
