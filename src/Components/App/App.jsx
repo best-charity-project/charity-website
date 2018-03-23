@@ -11,7 +11,7 @@ import SingleNewsPage from '../News/SingleNewsPage';
 import EducationRoute from '../EducationRoute/EducationRoute';
 import LoginPage from '../Login/LoginPage';
 import SignupPage from '../Signup/SignupPage';
-import { isUserAuthenticated, logoutUser } from '../../Auth/Auth';
+import { getUserAuthInfo, logoutUser } from '../../Auth/Auth';
 import './App.css';
 
 export default class App extends React.Component {
@@ -26,7 +26,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    isUserAuthenticated().then((userInfo) => {
+    getUserAuthInfo().then((userInfo) => {
       this.setState({
         userInfo,
       });

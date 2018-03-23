@@ -10,7 +10,7 @@ const deleteToken = () => {
   window.localStorage.removeItem('token');
 };
 
-const isUserAuthenticated = () =>
+const getUserAuthInfo = () =>
   API.get('auth-info', { headers: { Authorization: `Bearer ${getToken()}` } }).then(res => res.data.userInfo);
 
 const loginUser = credentials =>
@@ -37,4 +37,4 @@ const logoutUser = () => {
   deleteToken();
 };
 
-export { isUserAuthenticated, logoutUser, loginUser, signupUser };
+export { getUserAuthInfo, logoutUser, loginUser, signupUser };
