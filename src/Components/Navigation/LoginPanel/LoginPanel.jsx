@@ -5,19 +5,19 @@ import ControlButton from '../../ControlButton/ControlButton';
 import './LoginPanel.css';
 
 const LoginPanel = ({ userInfo, onLogout }) => {
-  if (!userInfo.name) {
+  if (userInfo.name) {
     return (
       <div className='login-panel'>
-        <Link to='/login' className='login-panel--link'>
-          Войти
-        </Link>
+        <h1 className='login-panel--heading'>{userInfo.name}</h1>
+        <ControlButton onButtonClick={onLogout} text='Выйти' className='login-panel--btn' />
       </div>
     );
   }
   return (
     <div className='login-panel'>
-      <h1 className='login-panel--heading'>{userInfo.name}</h1>
-      <ControlButton onButtonClick={onLogout} text='Выйти' className='login-panel--btn' />
+      <Link to='/login' className='login-panel--link'>
+        Войти
+      </Link>
     </div>
   );
 };

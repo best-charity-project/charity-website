@@ -21,11 +21,9 @@ class Message extends React.Component {
   }
 
   getClass() {
-    if (this.props.type === 'success') {
-      return 'message-success';
-    }
-    if (this.props.type === 'error') {
-      return 'message-error';
+    const { type } = this.props;
+    if (type === 'success' || type === 'error') {
+      return `message-${type}`;
     }
     return null;
   }
