@@ -119,7 +119,7 @@ class SignupForm extends React.Component {
     return (
       <div className='signup-form'>
         <p className='form--heading'>Регистрация</p>
-        <form name='signupForm' onSubmit={this.handleSubmit}>
+        <form name='signupForm' onSubmit={this.handleSubmit} className='signup-form--form'>
           <p className='form--label'>
             <label htmlFor='email'>Email:</label>
           </p>

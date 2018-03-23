@@ -38,7 +38,7 @@ class LoginPage extends React.Component {
     return (
       <div className='login indent'>
         <LoginForm buttonText='Вход' onSubmit={this.handleFormSubmit} />
-        <Message type='error' {...this.state.message} />
+        <Message {...this.state.message} />
       </div>
     );
   }

@@ -58,7 +58,7 @@ export default class App extends React.Component {
         <Header {...this.state} onLogout={this.onLogout} />
         <Switch>
           <Route exact path='/home' component={Home} />
-          <Route path='/admin' render={() => <Admin userInfo={this.state.userInfo} />} />
+          <Route path='/admin' render={() => <Admin {...this.state} />} />
           <Route path='/about' component={About} />
           <Route path='/news' component={News} />
           <Route path='/news/:id' component={SingleNewsPage} />
