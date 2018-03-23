@@ -7,14 +7,17 @@ class ConfirmMessage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: true,
+      visible: false,
     };
-    this.setTimer = this.setTimer.bind(this);
+    this.hide = this.hide.bind(this);
     this.getClass = this.getClass.bind(this);
   }
 
-  componentDidMount() {
-    this.setTimer();
+  componentWillReceiveProps() {
+    this.setState({
+      visible: true,
+    });
+    this.hide();
   }
 
   getClass() {
@@ -27,7 +30,7 @@ class ConfirmMessage extends React.Component {
     return null;
   }
 
-  setTimer() {
+  hide() {
     setTimeout(() => {
       this.setState({ visible: false });
     }, confirmMessageTimer);
