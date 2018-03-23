@@ -36,7 +36,7 @@ class SignupPage extends React.Component {
       }
       message = { type: 'success', text: data.message };
       this.setState({ message });
-      this.props.onSignup(data.userInfo);
+      this.props.onAuthChange(data.userInfo);
       this.redirect();
     });
   }
@@ -54,7 +54,7 @@ class SignupPage extends React.Component {
 export default withRouter(SignupPage);
 
 SignupPage.propTypes = {
-  onSignup: PropTypes.func.isRequired,
+  onAuthChange: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,

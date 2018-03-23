@@ -20,9 +20,8 @@ export default class App extends React.Component {
     this.state = {
       userInfo: {},
     };
-    this.onLogin = this.onLogin.bind(this);
+    this.onAuthChange = this.onAuthChange.bind(this);
     this.onLogout = this.onLogout.bind(this);
-    this.onSignup = this.onSignup.bind(this);
   }
 
   componentDidMount() {
@@ -33,13 +32,7 @@ export default class App extends React.Component {
     });
   }
 
-  onSignup(userInfo) {
-    this.setState({
-      userInfo,
-    });
-  }
-
-  onLogin(userInfo) {
+  onAuthChange(userInfo) {
     this.setState({
       userInfo,
     });
@@ -64,8 +57,8 @@ export default class App extends React.Component {
           <Route path='/news/:id' component={SingleNewsPage} />
           <Route path='/library' component={Library} />
           <Route path='/education-route' component={EducationRoute} />
-          <Route path='/login' render={() => <LoginPage onLogin={this.onLogin} />} />
-          <Route path='/signup' render={() => <SignupPage onSignup={this.onSignup} />} />
+          <Route path='/login' render={() => <LoginPage onAuthChange={this.onAuthChange} />} />
+          <Route path='/signup' render={() => <SignupPage onAuthChange={this.onAuthChange} />} />
           <Redirect to='/home' />
         </Switch>
         <Footer />

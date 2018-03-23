@@ -26,7 +26,7 @@ class LoginPage extends React.Component {
   handleFormSubmit(formData) {
     loginUser(formData)
       .then((userInfo) => {
-        this.props.onLogin(userInfo);
+        this.props.onAuthChange(userInfo);
         this.props.history.push('/home');
       })
       .catch((err) => {
@@ -47,7 +47,7 @@ class LoginPage extends React.Component {
 export default withRouter(LoginPage);
 
 LoginPage.propTypes = {
-  onLogin: PropTypes.func.isRequired,
+  onAuthChange: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
