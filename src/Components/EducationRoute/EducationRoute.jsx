@@ -17,7 +17,7 @@ export default class Category extends React.Component {
       phone: '',
       email: '',
       region: '',
-      regionDistrict: '',
+      regionDistrictIndices: 0,
       city: '',
       educationalInstitution: '',
       year: '',
@@ -30,12 +30,12 @@ export default class Category extends React.Component {
     this.setPhone = this.setPhone.bind(this);
     this.setEmail = this.setEmail.bind(this);
     this.setRegion = this.setRegion.bind(this);
-    this.setRegionDistrict = this.setRegionDistrict.bind(this);
+    this.setregionDistrictIndices = this.setregionDistrictIndices.bind(this);
     this.setCity = this.setCity.bind(this);
     this.setEducationalInstitution = this.setEducationalInstitution.bind(this);
     this.setYear = this.setYear.bind(this);
     this.setProgram = this.setProgram.bind(this);
-    this.isRegionDistrict = this.isRegionDistrict.bind(this);
+    this.isRegionDistrictIndices = this.isRegionDistrictIndices.bind(this);
   }
 
   componentDidMount() {
@@ -86,11 +86,11 @@ export default class Category extends React.Component {
     }
   }
 
-  setRegionDistrict(event) {
+  setregionDistrictIndices(event) {
     this.setState({
-      regionDistrict: event,
+      regionDistrictIndices: event,
     }, () => {
-      if (this.state.regionDistrict.length === 0) {
+      if (this.state.regionDistrictIndices.length === 0) {
         this.setState({ isValid: false });
       } else {
         this.setState({ isValid: true });
@@ -134,8 +134,8 @@ export default class Category extends React.Component {
     });
   }
 
-  isRegionDistrict() {
-    if (((this.state.regionDistrict === 0) || (this.state.regionDistrict === ''))
+  isRegionDistrictIndices() {
+    if ((this.state.regionDistrictIndices === 0)
       && (this.state.name !== '')
       && (this.state.phone.replace(/\+|\(|\)|\\-|\\_/g, '').length >= 12)
       && (this.state.email !== '')
@@ -147,18 +147,19 @@ export default class Category extends React.Component {
 
   addEducationRoute(event) {
     event.preventDefault();
-    if (this.state.regionDistrict.length === 0) {
+    if (this.state.regionDistrictIndices.length === 0) {
       this.toggleMessageisOpen();
     } else {
       const {
-        name, phone, email, region, regionDistrict, city, educationalInstitution, year, program,
+        name, phone, email, region, regionDistrictIndices,
+        city, educationalInstitution, year, program,
       } = this.state;
       addEducation({
         name,
         phone,
         email,
         region,
-        regionDistrict,
+        regionDistrictIndices,
         city,
         educationalInstitution,
         year,
@@ -169,7 +170,7 @@ export default class Category extends React.Component {
         phone: '',
         email: '',
         region: '',
-        regionDistrict: '',
+        regionDistrictIndices: 0,
         city: '',
         educationalInstitution: '',
         year: '',
@@ -270,15 +271,15 @@ export default class Category extends React.Component {
             </div>
             <div className='education-form--field-wrapper'>
               <p className='education-form--field-comment'>
-                <label htmlFor='regionDistrict'>Областной район</label>
+                <label htmlFor='regionDistrictIndices'>Областной район</label>
               </p>
               <Select
-                id='regionDistrict'
+                id='regionDistrictIndices'
                 title='Вы должны выбрать областной район'
                 choiceTransitionName='rc-select-selection__choice-zoom'
                 multiple
                 allowClear
-                onChange={this.setRegionDistrict}
+                onChange={this.setregionDistrictIndices}
                 notFoundContent='Пожалуйста, выберите регион проживания'
                 placeholder='▼'
               >
@@ -382,7 +383,7 @@ export default class Category extends React.Component {
               type='submit'
               className='education-form--submit'
               value='Отправить'
-              onClick={this.isRegionDistrict}
+              onClick={this.isRegionDistrictIndices}
             />
           </form>
         </div>

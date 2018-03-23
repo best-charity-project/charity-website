@@ -30,12 +30,12 @@
 
 .rc-select-selection--multiple {
   min-height: 28px;
-  width: 35em;
+  width: 26.6em;
   border-radius: 0;
   border: none;
   background-color: #F0F0F0;
   display: inline-block;
-  margin: 0 auto;
+  margin-left: 4.6em;
 }
 
 .rc-select-dropdown-menu {

@@ -30,7 +30,7 @@
 
   .field-wrapper--condition {
     color: #8b0000;
-    padding-left: 2em;
+    padding-left: 5em;
   }
 
   .education-form--field-comment {
@@ -91,7 +91,7 @@
   .education-form--radio-wrapper {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
   }
 
   .education-form--radio:invalid~.validity:after {
