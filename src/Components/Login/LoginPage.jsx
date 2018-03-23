@@ -10,14 +10,17 @@ class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      errorMessage: '',
+      message: {
+        type: '',
+        text: '',
+      },
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.setErrorMessage = this.setErrorMessage.bind(this);
   }
 
   setErrorMessage(message) {
-    this.setState({ errorMessage: message });
+    this.setState({ message });
   }
 
   handleFormSubmit(formData) {
@@ -27,7 +30,7 @@ class LoginPage extends React.Component {
         this.props.history.push('/home');
       })
       .catch((err) => {
-        this.setErrorMessage(err.response.data.error);
+        this.setErrorMessage({ type: 'error', text: err.response.data.error });
       });
   }
 
@@ -35,7 +38,7 @@ class LoginPage extends React.Component {
     return (
       <div className='login indent'>
         <LoginForm buttonText='Вход' onSubmit={this.handleFormSubmit} />
-        <Message type='error' text={this.state.errorMessage} />
+        <Message type='error' {...this.state.message} />
       </div>
     );
   }
