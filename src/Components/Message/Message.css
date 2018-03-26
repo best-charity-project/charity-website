@@ -1,0 +1,29 @@
+.message {
+  width: 20em;
+  position: fixed;
+  top: 6em;
+  right: 0;
+  font-size: 1.2em;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  padding: 0.9em;
+  animation: message 2s;
+}
+
+.message-success {
+  background-color: #2ccb71;
+}
+
+.message-error {
+  background-color: #ff6d6e;
+}
+
+@keyframes message {
+  from {
+    top: 0px;
+  }
+  to {
+    top: 6em;
+  }
+}
