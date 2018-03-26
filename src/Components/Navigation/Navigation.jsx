@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import NavigationList from './NavigationList';
+import LoginPanel from './LoginPanel/LoginPanel';
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -10,7 +12,9 @@ class Navigation extends React.Component {
     this.state = {
       isActive: false,
     };
+    this.logout = this.logout.bind(this);
   }
+
   setStateToFalse() {
     this.setState({ isActive: false });
   }
@@ -25,12 +29,20 @@ class Navigation extends React.Component {
     this.setState({ isActive: !this.state.isActive });
   }
 
+  logout() {
+    this.props.onLogout();
+  }
+
   render() {
     return (
       <nav className='navigation'>
+        <LoginPanel onLogout={this.logout} {...this.props} />
         <ul className='navigation--menu'>
           <button className={this.getImageClass()} onClick={this.toggleClass} />
-          <NavigationList onClick={this.setStateToFalse} />
+          <NavigationList {...this.props} onClick={this.setStateToFalse} />
+          <a className='navigation--element' href='http://charity.forum2x2.ru/'>
+            Форум
+          </a>
         </ul>
       </nav>
     );
@@ -38,3 +50,7 @@ class Navigation extends React.Component {
 }
 
 export default Navigation;
+
+Navigation.propTypes = {
+  onLogout: PropTypes.func.isRequired,
+};
