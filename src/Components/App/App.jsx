@@ -55,7 +55,7 @@ export default class App extends React.Component {
           <Route path='/about' component={About} />
           <Route path='/news' component={News} />
           <Route path='/news/:id' component={SingleNewsPage} />
-          <Route path='/library' component={Library} />
+          <Route path='/library' render={() => <Library {...this.state} />} />
           <Route path='/education-route' component={EducationRoute} />
           <Route path='/login' render={() => <LoginPage onAuthChange={this.onAuthChange} />} />
           <Route path='/signup' render={() => <SignupPage onAuthChange={this.onAuthChange} />} />
