@@ -1,10 +1,10 @@
 .rc-select-selection__placeholder {
   color: black;
-  top: 1em;
+  top: 2em;
   font-size: .55em;
   float: right;
   position: inherit;
-  margin-right: .5em;
+  margin-right: 0.5em;
 }
 
 .rc-select-selection--multiple .rc-select-selection__rendered .rc-select-selection__choice {
@@ -13,6 +13,14 @@
   margin-right: .1em;
   background-color: #37b3d8;
   color: white;
+}
+
+.rc-select-selection--multiple .rc-select-selection__rendered {
+  padding-bottom: 1em;
+}
+
+.rc-select-selection--multiple .rc-select-selection__clear {
+  top: 0.4em;
 }
 
 .rc-select-focused .rc-select-selection.rc-select-selection--multiple {
@@ -29,17 +37,23 @@
 }
 
 .rc-select-selection--multiple {
-  min-height: 28px;
-  width: 26.6em;
+  width: 29.8em;
   border-radius: 0;
   border: none;
   background-color: #F0F0F0;
   display: inline-block;
-  margin-left: 4.6em;
+  margin-left: 2.7em;
+  min-height: 2.5em;
 }
 
 .rc-select-dropdown-menu {
   max-height: 10em;
+}
+
+.rc-select-dropdown {
+  border: none;
+  box-shadow: none;
+  padding-left: 2.7em;
 }
 
 .rc-select {

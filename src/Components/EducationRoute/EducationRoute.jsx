@@ -180,11 +180,14 @@ export default class Category extends React.Component {
   }
 
   render() {
+    const dropdownMenuStyle = {
+      maxHeight: 200,
+    };
     return (
       <div className='education-route indent'>
-        <h1 className='education-route--heading'>образовательный маршрут</h1>
-        <div className='education-route--education-form' >
-          <h2 className='education-form--title'>
+        <h1 className='primary-heading'>образовательный маршрут</h1>
+        <div className='form' >
+          <h2 className='form--heading'>
             Анкета
           </h2>
           <div className='education-form--description'>
@@ -198,196 +201,170 @@ export default class Category extends React.Component {
               родителей в Республике Беларусь и объединиться.
             </p>
           </div>
-          <form className='education-form' name='addName' onSubmit={this.addEducationRoute}>
-            <div className='education-form--field-wrapper'>
-              <p className='education-form--field-comment'>
-                <label htmlFor='name'>Имя</label>
-              </p>
-              <input
-                value={this.state.name}
-                onChange={this.setName}
-                id='name'
-                type='text'
-                placeholder='Имя по которому к Вам можно обратиться'
-                className='education-form--field'
-                title='Имя должно содержать только буквы русского алфавита'
-                required
-              />
-              <span className='validity' />
+          <form name='educationForm' onSubmit={this.addEducationRoute}>
+            <p className='form--label'>
+              <label htmlFor='name'>Имя</label>
+            </p>
+            <input
+              value={this.state.name}
+              onChange={this.setName}
+              id='name'
+              type='text'
+              placeholder='Имя по которому к Вам можно обратиться'
+              className='form--input'
+              title='Имя должно содержать только буквы русского алфавита'
+              required
+            />
+            <p className='form--label'>
+              <label htmlFor='phone'>Номер телефона</label>
+            </p>
+            <InputMask
+              value={this.state.phone}
+              onChange={this.setPhone}
+              id='phone'
+              placeholder='Введите контактный номер телефона'
+              pattern='\+375\([0-9]{2}\)-[0-9]{3}(-[0-9]{2}){2}'
+              type='tel'
+              mask='+375(99)-999-99-99'
+              title='Введите корректный контактный телефон'
+              className='form--input'
+              required
+            />
+            <p className='form--label'>
+              <label htmlFor='email'>Адрес электронной почты</label>
+            </p>
+            <input
+              value={this.state.email}
+              onChange={this.setEmail}
+              id='email'
+              type='email'
+              title='адрес электронной почты должен иметь формат: имя_почты@email.com'
+              placeholder='имя_почты@email.com'
+              className='form--input'
+              required
+            />
+            <p className='form--label'>
+              <label htmlFor='region'>Регион проживания</label>
+            </p>
+            <select
+              id='region'
+              title='Вы должны выбрать свой регион'
+              className='form--input input--select'
+              required
+              onChange={this.setRegion}
+            >
+              <option value=''>
+                ---
+              </option>
+              {this.state.locations.map((region, index) => (
+                <option key={region.name} value={index}>{region.name}</option>
+              ))}
+            </select>
+            <p className='form--label'>
+              <label htmlFor='regionDistrictIndices'>Областной район</label>
+            </p>
+            <Select
+              id='regionDistrictIndices'
+              title='Вы должны выбрать областной район'
+              choiceTransitionName='rc-select-selection__choice-zoom'
+              multiple
+              allowClear
+              dropdownMenuStyle={dropdownMenuStyle}
+              onChange={this.setregionDistrictIndices}
+              notFoundContent='Пожалуйста, выберите регион проживания'
+              placeholder='▼'
+            >
+              {this.state.districts}
+            </Select>
+            {this.state.isValid && <span className='valid' />}
+            {!this.state.isValid && <span className='inValid' />}
+            {this.state.isOpen && <Message
+              type='alert'
+              message='Пожалуйста, выберите регион проживания'
+            />}
+            <p className='form--label'>
+              <label htmlFor='city'>Город</label>
+            </p>
+            <input
+              id='city'
+              onChange={this.setCity}
+              type='text'
+              value={this.state.city}
+              title='Название города должно содержать только буквы русского алфавита'
+              placeholder='Ваш город'
+              className='form--input'
+              required
+            />
+            <p className='form--label'>
+              Выберите учреждение образования
+            </p>
+            <div className='education-form--radio-wrapper'>
+              <label className='education-form--radio-description' htmlFor='kindergarten'>
+                <input
+                  type='radio'
+                  id='kindergarten'
+                  className='education-form--radio'
+                  name='setEducationalInstitution'
+                  value='Дошкольное детское учреждение'
+                  onChange={this.setEducationalInstitution}
+                  required
+                />
+                Дошкольное детское учреждение
+              </label>
+              <label className='education-form--radio-description' htmlFor='school'>
+                <input
+                  type='radio'
+                  className='education-form--radio'
+                  id='school'
+                  onChange={this.setEducationalInstitution}
+                  name='setEducationalInstitution'
+                  value='Средняя школа'
+                />
+                Средняя школа
+              </label>
             </div>
-            <div className='education-form--field-wrapper'>
-              <p className='education-form--field-comment'>
-                <label htmlFor='phone'>Номер телефона</label>
-              </p>
-              <InputMask
-                value={this.state.phone}
-                onChange={this.setPhone}
-                id='phone'
-                placeholder='Введите контактный номер телефона'
-                pattern='\+375\([0-9]{2}\)-[0-9]{3}(-[0-9]{2}){2}'
-                type='tel'
-                mask='+375(99)-999-99-99'
-                title='Введите корректный контактный телефон'
-                className='education-form--field'
-                required
-              />
-              <span className='validity' />
-            </div>
-            <div className='education-form--field-wrapper'>
-              <p className='education-form--field-comment'>
-                <label htmlFor='email'>Адрес электронной почты</label>
-              </p>
-              <input
-                value={this.state.email}
-                onChange={this.setEmail}
-                id='email'
-                type='email'
-                title='адрес электронной почты должен иметь формат: имя_почты@email.com'
-                placeholder='имя_почты@email.com'
-                className='education-form--field'
-                required
-              />
-              <span className='validity' />
-            </div>
-            <div className='education-form--field-wrapper'>
-              <p className='education-form--field-comment'>
-                <label htmlFor='region'>Регион проживания</label>
-              </p>
-              <select
-                id='region'
-                title='Вы должны выбрать свой регион'
-                className='education-form--select education-form--field'
-                required
-                onChange={this.setRegion}
-              >
-                <option value=''>
-                  ---
-                </option>
-                {this.state.locations.map((region, index) => (
-                  <option key={region.name} value={index}>{region.name}</option>
-                ))}
-              </select>
-              <span className='validity' />
-            </div>
-            <div className='education-form--field-wrapper'>
-              <p className='education-form--field-comment'>
-                <label htmlFor='regionDistrictIndices'>Областной район</label>
-              </p>
-              <Select
-                id='regionDistrictIndices'
-                title='Вы должны выбрать областной район'
-                choiceTransitionName='rc-select-selection__choice-zoom'
-                multiple
-                allowClear
-                onChange={this.setregionDistrictIndices}
-                notFoundContent='Пожалуйста, выберите регион проживания'
-                placeholder='▼'
-              >
-                {this.state.districts}
-              </Select>
-              {this.state.isValid && <span className='valid' />}
-              {!this.state.isValid && <span className='inValid' />}
-              {this.state.isOpen && <Message
-                type='alert'
-                message='Пожалуйста, выберите регион проживания'
-              />}
-            </div>
-            <div className='education-form--field-wrapper'>
-              <p className='education-form--field-comment'>
-                <label htmlFor='city'>Город</label>
-              </p>
-              <input
-                id='city'
-                onChange={this.setCity}
-                type='text'
-                value={this.state.city}
-                title='Название города должно содержать только буквы русского алфавита'
-                placeholder='Ваш город'
-                className='education-form--field'
-                required
-              />
-              <span className='validity' />
-            </div>
-            <div className='education-form--field-wrapper'>
-              <p className='education-form--field-comment'>
-                Выберите учреждение образования
-              </p>
-              <div className='education-form--radio-wrapper'>
-                <label className='education-form--radio-description' htmlFor='kindergarten'>
-                  <input
-                    type='radio'
-                    id='kindergarten'
-                    className='education-form--radio'
-                    name='setEducationalInstitution'
-                    value='Дошкольное детское учреждение'
-                    onChange={this.setEducationalInstitution}
-                    required
-                  />
-                  Дошкольное детское учреждение
-                </label>
-                <label className='education-form--radio-description' htmlFor='school'>
-                  <input
-                    type='radio'
-                    className='education-form--radio'
-                    id='school'
-                    onChange={this.setEducationalInstitution}
-                    name='setEducationalInstitution'
-                    value='Средняя школа'
-                  />
-                  Средняя школа
-                  <span className='validity' />
-                </label>
-              </div>
-            </div>
-            <div className='education-form--field-wrapper'>
-              <p className='education-form--field-comment'>
-                <label htmlFor='year'>В каком году учащийся пойдет в учреждение образования</label>
-              </p>
-              <input
-                id='year'
-                value={this.state.year}
-                onChange={this.setYear}
-                type='number'
-                title='дата должна содержать только год и начинаться с 20..'
-                placeholder='20__'
-                className='education-form--field'
-                min='2018'
-                max='2100'
-                required
-              />
-              <span className='validity' />
-            </div>
-            <div className='education-form--field-wrapper'>
-              <p className='education-form--field-comment'>
-                <label htmlFor='program'>Рекомендованная программа образования</label>
-              </p>
-              <input
-                id='program'
-                value={this.state.program}
-                onChange={this.setProgram}
-                type='text'
-                maxLength='80'
-                placeholder='Программа обучения рекомендованная ЦКРОиР'
-                className='education-form--field'
-              />
-            </div>
-            <div className='education-form--field-wrapper'>
-              <p>
-                <span className='field-wrapper--condition'>
-                  *
-                </span>
-                - поля, обязательные для заполнения
-              </p>
-            </div>
+            <p className='form--label'>
+              <label htmlFor='year'>В каком году учащийся пойдет в учреждение образования</label>
+            </p>
+            <input
+              id='year'
+              value={this.state.year}
+              onChange={this.setYear}
+              type='number'
+              title='дата должна содержать только год и начинаться с 20..'
+              placeholder='20__'
+              className='form--input'
+              min='2018'
+              max='2100'
+              required
+            />
+            <p className='form--label'>
+              <label htmlFor='program'>Рекомендованная программа образования</label>
+            </p>
+            <input
+              id='program'
+              value={this.state.program}
+              onChange={this.setProgram}
+              type='text'
+              maxLength='80'
+              placeholder='Программа обучения рекомендованная ЦКРОиР'
+              className='form--input'
+            />
+            <p>
+              <span className='field-wrapper--condition'>
+                *
+              </span>
+              - поля, обязательные для заполнения
+            </p>
             <input
               type='submit'
-              className='education-form--submit'
+              className='form-library--button control-button control-button--blue'
               value='Отправить'
               onClick={this.isRegionDistrictIndices}
             />
           </form>
         </div>
-      </div>
+      </div >
     );
   }
 }
