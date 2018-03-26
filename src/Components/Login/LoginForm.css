@@ -12,8 +12,16 @@
 
 .form--field {
   display: inline-block;
-  width: 50%;
-  margin: 2em 0;
+  width: 40%;
+  margin: 2em 1em;
+  border: none;
+  border-bottom: 2px solid #37b3d8;
+  padding: 1em;
+  outline: none;
+}
+
+.field--select {
+  width: 45%;
 }
 
 @media (max-width: 576px) {

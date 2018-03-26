@@ -129,66 +129,51 @@ class SignupForm extends React.Component {
       <div className='form'>
         <p className='form--heading'>Регистрация</p>
         <form name='signupForm' onSubmit={this.handleSubmit}>
-          <p className='form--label'>
-            <label htmlFor='email'>Email:</label>
-          </p>
           <input
             id='email'
             value={this.state.email}
             onChange={this.handleEmailChange}
             type='email'
-            className='form--input'
+            className='form--field'
             placeholder='Email'
             required
           />
-          <p className='form--label'>
-            <label htmlFor='password'>Пароль:</label>
-          </p>
+          <input
+            id='name'
+            value={this.state.name}
+            onChange={this.handleNameChange}
+            type='text'
+            className='form--field'
+            placeholder='Ваше имя'
+            required
+          />
           <input
             id='password'
             value={this.state.password}
             onChange={this.handlePasswordChange}
             type='password'
-            className='form--input'
-            placeholder='Введите пароль не менее 6 символов'
+            className='form--field'
+            placeholder='Пароль'
             minLength='6'
             ref={(input) => {
               this.password = input;
             }}
             required
           />
-          <p className='form--label'>
-            <label htmlFor='confirmPassword'>Подтвердите пароль:</label>
-          </p>
           <input
             id='confirmPassword'
             onChange={this.handleConfirmPasswordChange}
             type='password'
-            className='form--input'
+            className='form--field'
             placeholder='Подтвердите пароль'
             ref={(input) => {
               this.confirmPassword = input;
             }}
             required
           />
-          <p className='form--label'>
-            <label htmlFor='name'>Имя пользователя:</label>
-          </p>
-          <input
-            id='name'
-            value={this.state.name}
-            onChange={this.handleNameChange}
-            type='text'
-            className='form--input'
-            placeholder='Ваше имя'
-            required
-          />
-          <p className='form--label'>
-            <label htmlFor='country'>Страна проживания:</label>
-          </p>
           <select
             id='country'
-            className='form--input input--select'
+            className='form--field field--select'
             value={this.state.country}
             onChange={this.handleCountryChange}
             required
@@ -210,21 +195,18 @@ class SignupForm extends React.Component {
                 value={this.state.otherCountry}
                 onChange={this.handleOtherCountryChange}
                 type='text'
-                className='form--input'
+                className='form--field'
                 placeholder='Cтрана проживания'
                 required
               />
             </div>
             )}
-          <p className='form--label'>
-            <label htmlFor='city'>Город:</label>
-          </p>
           <input
             id='city'
             value={this.state.city}
             onChange={this.handleCityChange}
             type='text'
-            className='form--input'
+            className='form--field'
             placeholder='Город проживания'
             required
           />
@@ -235,7 +217,7 @@ class SignupForm extends React.Component {
                 id={`reason${index + 1}`}
                 name='reason'
                 type='radio'
-                className='radio-input'
+                className='radio-field'
                 value={reason}
                 checked={this.state.reasonForRegistration === reason}
                 onChange={this.handleReasonForRegistrationChange}
@@ -257,7 +239,7 @@ class SignupForm extends React.Component {
               onKeyPress={this.toggleWindow}
               role='button'
               tabIndex={0}
-            >              правилами
+            > правилами
             </a>
           </p>
           <input type='submit' className='control-button control-button--blue' value='Отправить' />
