@@ -29,9 +29,6 @@ const Admin = ({ match }) => (
         <Redirect to={`${match.url}/news`} />
       </Switch>
     </div>
-
-    {/* {!userInfo.admin && <Redirect to='/home' />} */}
-    {/* {!userInfo.admin === undefined && <h1>Загрузка...</h1>} */}
   </div>
 );
 
