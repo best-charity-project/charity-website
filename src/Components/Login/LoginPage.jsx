@@ -3,26 +3,34 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import { loginUser } from '../../Auth/Auth';
+import Message from '../Message/Message';
+import './LoginForm.css';
 
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      errorMessage: '',
+      message: {
+        type: '',
+        text: '',
+      },
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.setErrorMessage = this.setErrorMessage.bind(this);
+  }
+
+  setErrorMessage(message) {
+    this.setState({ message });
   }
 
   handleFormSubmit(formData) {
     loginUser(formData)
       .then((userInfo) => {
-        this.props.onLogin(userInfo);
+        this.props.onAuthChange(userInfo);
         this.props.history.push('/home');
       })
       .catch((err) => {
-        if (err) {
-          this.setState({ errorMessage: err.response.data.error });
-        }
+        this.setErrorMessage({ type: 'error', text: err.response.data.error });
       });
   }
 
@@ -30,7 +38,7 @@ class LoginPage extends React.Component {
     return (
       <div className='login indent'>
         <LoginForm buttonText='Вход' onSubmit={this.handleFormSubmit} />
-        <p className='login--error-message'>{this.state.errorMessage}</p>
+        <Message {...this.state.message} />
       </div>
     );
   }
@@ -39,7 +47,7 @@ class LoginPage extends React.Component {
 export default withRouter(LoginPage);
 
 LoginPage.propTypes = {
-  onLogin: PropTypes.func.isRequired,
+  onAuthChange: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,

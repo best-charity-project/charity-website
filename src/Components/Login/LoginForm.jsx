@@ -12,7 +12,6 @@ class LoginForm extends React.Component {
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.clearFields = this.clearFields.bind(this);
   }
 
   handleEmailChange(e) {
@@ -27,22 +26,14 @@ class LoginForm extends React.Component {
     });
   }
 
-  clearFields() {
-    this.setState({
-      email: '',
-      password: '',
-    });
-  }
-
   handleSubmit(e) {
     e.preventDefault();
     this.props.onSubmit({ ...this.state });
-    this.clearFields();
   }
 
   render() {
     return (
-      <div className='form form-small'>
+      <div className='form'>
         <form name='loginForm' onSubmit={this.handleSubmit}>
           <p className='form--label'>
             <label htmlFor='email'>Email</label>
@@ -56,7 +47,6 @@ class LoginForm extends React.Component {
             placeholder='Email'
             required
           />
-
           <p className='form--label'>
             <label htmlFor='password'>Пароль:</label>
           </p>
@@ -69,7 +59,6 @@ class LoginForm extends React.Component {
             placeholder='Пароль'
             required
           />
-          <br />
           <input
             type='submit'
             className='control-button control-button--blue'
