@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Time from './Time';
-import './Form.css';
+import '../../Form/Form.css';
 
 export default class Form extends React.Component {
   constructor(props) {
