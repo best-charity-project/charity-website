@@ -228,7 +228,6 @@ export default class Category extends React.Component {
               mask='+375(99)-999-99-99'
               title='Введите корректный контактный телефон'
               className='form--input'
-              required
             />
             <p className='form--label'>
               <label htmlFor='email'>Адрес электронной почты</label>
