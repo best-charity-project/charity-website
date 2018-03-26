@@ -18,5 +18,9 @@
   {
     "name": "Администратор",
     "path": "/admin"
+  },
+  {
+    "name": "Форум",
+    "path": "http://charity.forum2x2.ru/"
   }
 ]
