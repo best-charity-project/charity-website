@@ -1,38 +1,6 @@
-.signup--success-message {
-  color: green;
-}
-
-.signup--error-message {
-  color: red;
-}
-
-.signup-form {
-  display: flex;
-  flex-direction: column;
-  margin: 1em auto;
-  max-width: 30em;
-  background-color: #fff;
-  box-shadow: 0 0.5em 1em rgb(238, 235, 235);
-  padding: 1em;
-}
-
-.form--label {
-  margin: 1em 0 1em 1em;
-  text-indent: 1em;
-}
-
 .form--comment {
   margin: 1.5em auto;
   width: 12em;
-}
-
-.form--radio-input {
-  display: flex;
-  margin: 1em;
-}
-
-.radio-input--label {
-  margin-left: 0.5em;
 }
 
 .form--accept-rules-checkbox {

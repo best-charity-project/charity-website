@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getLibraryCategories } from '../../../libraryCalls';
 import ConfirmMessage from './ConfirmMessage/ConfirmMessage';
-import './Form.css';
 
 class Form extends React.Component {
   constructor(props) {
@@ -90,16 +89,16 @@ class Form extends React.Component {
   render() {
     const { isOpen } = this.state;
     return (
-      <div className='form-library'>
+      <div className='form'>
         <form name='addCategory' onSubmit={this.handleSubmit}>
           {isOpen && <ConfirmMessage message={this.props.message} />}
-          <p className='form-library--comment'>
+          <p className='form--label'>
             <label htmlFor='category'>Выбор категории</label>
           </p>
           <select
             value={this.state.categoryTag}
             id='category'
-            className='form-library--field field--select'
+            className='form--input input--select'
             onChange={this.handleChangeCategory}
             required
           >
@@ -112,13 +111,13 @@ class Form extends React.Component {
               </option>
             ))}
           </select>
-          <p className='form-library--comment'>
+          <p className='form--label'>
             <label htmlFor='type'>Выбор типа материала</label>
           </p>
           <select
             value={this.state.type}
             id='type'
-            className='form-library--field field--select'
+            className='form--input input--select'
             onChange={this.handleChangeType}
             required
           >
@@ -130,7 +129,7 @@ class Form extends React.Component {
             <option value='article'>Статьи</option>
             <option value='studyMaterial'>Учебные материалы</option>
           </select>
-          <p className='form-library--comment'>
+          <p className='form--label'>
             <label htmlFor='title'>Название документа</label>
           </p>
           <input
@@ -138,11 +137,11 @@ class Form extends React.Component {
             id='title'
             type='text'
             placeholder='Название'
-            className='form-library--field'
+            className='form--input'
             onChange={this.handleChangeTitle}
             required
           />
-          <p className='form-library--comment'>
+          <p className='form--label'>
             <label htmlFor='descripton'>Краткое описание</label>
           </p>
           <textarea
@@ -150,11 +149,11 @@ class Form extends React.Component {
             id='description'
             type='text'
             placeholder='Описание документа'
-            className='form-library--field'
+            className='form--input'
             onChange={this.handleChangeDescription}
             required
           />
-          <p className='form-library--comment'>
+          <p className='form--label'>
             <label htmlFor='url'> Ссылка на источник</label>
           </p>
           <input
@@ -162,7 +161,7 @@ class Form extends React.Component {
             id='url'
             type='url'
             placeholder='https://....'
-            className='form-library--field'
+            className='form--input'
             onChange={this.handleChangeUrl}
             required
           />

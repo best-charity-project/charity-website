@@ -42,8 +42,8 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div className='login-form'>
-        <form name='loginForm' onSubmit={this.handleSubmit} className='login-form--form'>
+      <div className='form form-small'>
+        <form name='loginForm' onSubmit={this.handleSubmit}>
           <p className='form--label'>
             <label htmlFor='email'>Email</label>
           </p>
@@ -76,8 +76,8 @@ class LoginForm extends React.Component {
             value={this.props.buttonText}
           />
         </form>
-        <p className='login-form--question'>Не зарегистрированы? </p>
-        <Link className='login-form--link' to='/signup'>
+        <p className='form--question'>Не зарегистрированы? </p>
+        <Link className='form--link' to='/signup'>
           Регистрация
         </Link>
       </div>

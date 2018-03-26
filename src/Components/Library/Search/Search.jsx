@@ -50,37 +50,33 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div>
-        <form className='search' onSubmit={this.handleSubmit}>
-          <div>
-            <input
-              required
-              className='search--input'
-              type='search'
-              id='search'
-              name='textSearch'
-              placeholder='Поиск по библиотеке...'
-              value={this.state.searchText}
-              onChange={this.handleChangeOfText}
-            />
-            <button className='search--button'>Поиск</button>
-          </div>
-          <div className='search--checkbox'>
-            {this.defaultTypesArray.map((item, index) => (
-              <div className='search--checkbox-item' key={item}>
-                <input
-                  type='checkbox'
-                  id={item}
-                  name='type'
-                  value={item}
-                  onChange={this.handleChangeOfCheckboxes}
-                />
-                <label htmlFor={item}>{this.typesValuesRus[index]}</label>
-              </div>
-            ))}
-          </div>
-        </form>
-      </div>
+      <form className='search' onSubmit={this.handleSubmit}>
+        <input
+          required
+          className='search--input'
+          type='search'
+          id='search'
+          name='textSearch'
+          placeholder='Поиск по библиотеке...'
+          value={this.state.searchText}
+          onChange={this.handleChangeOfText}
+        />
+        <button className='search--button'>Поиск</button>
+        <div className='search--checkbox'>
+          {this.defaultTypesArray.map((item, index) => (
+            <div className='search--checkbox-item' key={item}>
+              <input
+                type='checkbox'
+                id={item}
+                name='type'
+                value={item}
+                onChange={this.handleChangeOfCheckboxes}
+              />
+              <label htmlFor={item}>{this.typesValuesRus[index]}</label>
+            </div>
+          ))}
+        </div>
+      </form>
     );
   }
 }

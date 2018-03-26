@@ -111,151 +111,150 @@ class SignupForm extends React.Component {
 
   render() {
     return (
-      <div className='signup-form'>
-        <form name='signupForm' onSubmit={this.handleSubmit} className='form--form'>
-          <p className='form--label'>
-            <label htmlFor='email'>Email:</label>
-          </p>
+      <form name='signupForm' onSubmit={this.handleSubmit} className='form'>
+        <p className='form--label'>
+          <label htmlFor='email'>Email:</label>
+        </p>
+        <input
+          id='email'
+          value={this.state.email}
+          onChange={this.handleEmailChange}
+          type='email'
+          className='form--input'
+          placeholder='Email'
+          required
+        />
+        <p className='form--label'>
+          <label htmlFor='password'>Пароль:</label>
+        </p>
+        <input
+          id='password'
+          value={this.state.password}
+          onChange={this.handlePasswordChange}
+          type='password'
+          className='form--input'
+          placeholder='Пароль'
+          required
+        />
+        <p className='form--label'>
+          <label htmlFor='name'>Имя пользователя:</label>
+        </p>
+        <input
+          id='name'
+          value={this.state.name}
+          onChange={this.handleNameChange}
+          type='text'
+          className='form--input'
+          placeholder='Ваше имя'
+          required
+        />
+        <p className='form--label'>
+          <label htmlFor='country'>Страна проживания:</label>
+        </p>
+        <select
+          id='country'
+          className='form--input input--select'
+          value={this.state.country}
+          onChange={this.handleCountryChange}
+          required
+        >
+          <option value=''>---</option>
+          {countries.map(country => (
+            <option value={country} key={country}>
+              {country}
+            </option>
+          ))}
+        </select>
+        {this.state.country === countries[countries.length - 1] && (
+          <div>
+            <p className='form--label'>
+              <label htmlFor='otherCountry'>Страна:</label>
+            </p>
+            <input
+              id='otherCountry'
+              value={this.state.otherCountry}
+              onChange={this.handleOtherCountryChange}
+              type='text'
+              className='form--input'
+              placeholder='Cтрана проживания'
+              required
+            />
+          </div>
+        )}
+        <p className='form--label'>
+          <label htmlFor='city'>Город:</label>
+        </p>
+        <input
+          id='city'
+          value={this.state.city}
+          onChange={this.handleCityChange}
+          type='text'
+          className='form--input'
+          placeholder='Город проживания'
+          required
+        />
+        <p className='form--comment'>Что Вас привело на сайт:</p>
+        <p className='form--radio-input'>
           <input
-            id='email'
-            value={this.state.email}
-            onChange={this.handleEmailChange}
-            type='email'
-            className='form--input'
-            placeholder='Email'
-            required
+            id='reason1'
+            type='radio'
+            className='radio-input'
+            value='Профессиональная деятельность'
+            checked={this.state.reasonForRegistration === 'Профессиональная деятельность'}
+            onChange={this.handleReasonForRegistrationChange}
           />
-          <p className='form--label'>
-            <label htmlFor='password'>Пароль:</label>
-          </p>
+          <label htmlFor='reason1' className='radio-input--label'>
+            Профессиональная деятельность
+          </label>
+        </p>
+        <p className='form--radio-input'>
           <input
-            id='password'
-            value={this.state.password}
-            onChange={this.handlePasswordChange}
-            type='password'
-            className='form--input'
-            placeholder='Пароль'
-            required
+            id='reason2'
+            type='radio'
+            className='radio-input'
+            value='Родственные связи/знакомый человека с особыми потребностями'
+            checked={
+              this.state.reasonForRegistration ===
+              'Родственные связи/знакомый человека с особыми потребностями'
+            }
+            onChange={this.handleReasonForRegistrationChange}
           />
-          <p className='form--label'>
-            <label htmlFor='name'>Имя пользователя:</label>
-          </p>
+          <label htmlFor='reason2' className='radio-input--label'>
+            Родственные связи/знакомый человека с особыми потребностями
+          </label>
+        </p>
+        <p className='form--radio-input'>
           <input
-            id='name'
-            value={this.state.name}
-            onChange={this.handleNameChange}
-            type='text'
-            className='form--input'
-            placeholder='Ваше имя'
-            required
+            id='reason3'
+            type='radio'
+            className='radio-input'
+            value='Являюсь человеком с особыми потребностями'
+            checked={
+              this.state.reasonForRegistration === 'Являюсь человеком с особыми потребностями'
+            }
+            onChange={this.handleReasonForRegistrationChange}
           />
-          <p className='form--label'>
-            <label htmlFor='country'>Страна проживания:</label>
-          </p>
-          <select
-            id='country'
-            className='form--input'
-            value={this.state.country}
-            onChange={this.handleCountryChange}
-            required
+          <label htmlFor='reason3' className='radio-input--label'>
+            Являюсь человеком с особыми потребностями
+          </label>
+        </p>
+        <br />
+        {this.state.isOpen && <RulesPage toggle={this.toggleWindow} />}
+        <p className='form--accept-rules-checkbox'>
+          <input onChange={this.handleCheckbox} type='checkbox' required />
+          <span>Регистрируясь, вы соглашаетесь с </span>
+          <a
+            className='accept-rules--link'
+            onClick={this.toggleWindow}
+            onKeyPress={this.toggleWindow}
+            role='button'
+            tabIndex={0}
           >
-            <option value=''>---</option>
-            {countries.map(country => (
-              <option value={country} key={country}>
-                {country}
-              </option>
-            ))}
-          </select>
-          {this.state.country === countries[countries.length - 1] && (
-            <div>
-              <p className='form--label'>
-                <label htmlFor='otherCountry'>Страна:</label>
-              </p>
-              <input
-                id='otherCountry'
-                value={this.state.otherCountry}
-                onChange={this.handleOtherCountryChange}
-                type='text'
-                className='form--input'
-                placeholder='Cтрана проживания'
-                required
-              />
-            </div>
-          )}
-          <p className='form--label'>
-            <label htmlFor='city'>Город:</label>
-          </p>
-          <input
-            id='city'
-            value={this.state.city}
-            onChange={this.handleCityChange}
-            type='text'
-            className='form--input'
-            placeholder='Город проживания'
-            required
-          />
-          <p className='form--comment'>Что Вас привело на сайт:</p>
-          <p className='form--radio-input'>
-            <input
-              id='reason1'
-              type='radio'
-              className='radio-input'
-              value='Профессиональная деятельность'
-              checked={this.state.reasonForRegistration === 'Профессиональная деятельность'}
-              onChange={this.handleReasonForRegistrationChange}
-            />
-            <label htmlFor='reason1' className='radio-input--label'>
-              Профессиональная деятельность
-            </label>
-          </p>
-          <p className='form--radio-input'>
-            <input
-              id='reason2'
-              type='radio'
-              className='radio-input'
-              value='Родственные связи/знакомый человека с особыми потребностями'
-              checked={
-                this.state.reasonForRegistration ===
-                'Родственные связи/знакомый человека с особыми потребностями'
-              }
-              onChange={this.handleReasonForRegistrationChange}
-            />
-            <label htmlFor='reason2' className='radio-input--label'>
-              Родственные связи/знакомый человека с особыми потребностями
-            </label>
-          </p>
-          <p className='form--radio-input'>
-            <input
-              id='reason3'
-              type='radio'
-              className='radio-input'
-              value='Являюсь человеком с особыми потребностями'
-              checked={
-                this.state.reasonForRegistration === 'Являюсь человеком с особыми потребностями'
-              }
-              onChange={this.handleReasonForRegistrationChange}
-            />
-            <label htmlFor='reason3' className='radio-input--label'>
-              Являюсь человеком с особыми потребностями
-            </label>
-          </p>
-          <br />
-          {this.state.isOpen && <RulesPage toggle={this.toggleWindow} />}
-          <p className='form--accept-rules-checkbox'><input type='checkbox' />
-            <span>Регистрируясь, вы соглашаетесь с </span>
-            <a
-              className='accept-rules--link'
-              onClick={this.toggleWindow}
-              onKeyPress={this.toggleWindow}
-              role='button'
-              tabIndex={0}
-            >
-               правилами
-            </a>
-          </p>
-          <input type='submit' className='control-button control-button--blue' value='Отправить' />
-        </form>
-      </div>
+              правилами
+          </a>
+        </p>
+        <input type='submit' className='control-button control-button--blue' value='Отправить' />
+      </form>
     );
   }
 }

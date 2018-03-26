@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import { loginUser } from '../../Auth/Auth';
-import './LoginForm.css';
 
 class LoginPage extends React.Component {
   constructor(props) {
