@@ -38,7 +38,7 @@ class EditLibraryItem extends React.Component {
         <NavLink to='/admin/library/libraryItems' className='library-items--link'>
           Вернуться к списку
         </NavLink>
-        <h1 className='form-library--heading'>Редактирование документа</h1>
+        <h1 className='secondary-heading'>Редактирование документа</h1>
         <Form
           item={this.state.libraryItem}
           onSubmit={this.updateLibraryItem}

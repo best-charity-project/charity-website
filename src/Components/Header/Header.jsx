@@ -1,4 +1,4 @@
 import React from 'react';
 import Navigation from '../Navigation/Navigation';
 
-export default () => <Navigation />;
+export default props => <Navigation {...props} />;

@@ -1,52 +1,54 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { confirmMessageTimer } from '../../configs/config.json';
 import './Message.css';
+import { confirmMessageTimer } from '../../configs/config.json';
 
-class ConfirmMessage extends React.Component {
+class Message extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: true,
+      visible: false,
     };
-    this.setTimer = this.setTimer.bind(this);
+    this.hide = this.hide.bind(this);
+    this.getClass = this.getClass.bind(this);
   }
 
-  componentDidMount() {
-    this.setTimer();
-    this.whatType();
+  componentWillReceiveProps() {
+    this.setState({
+      visible: true,
+    });
+    this.hide();
   }
 
-  setTimer() {
+  getClass() {
+    const { type } = this.props;
+    if (type === 'success' || type === 'error') {
+      return `message-${type}`;
+    }
+    return null;
+  }
+
+  hide() {
     setTimeout(() => {
       this.setState({ visible: false });
     }, confirmMessageTimer);
   }
 
-  whatType() {
-    let classname = '';
-    if (this.props.type === 'alert') { classname = 'message alert'; }
-    if (this.props.type === 'confirm') { classname = 'message confirm'; }
-    return classname;
-  }
-
   render() {
     return (
-      <div className='confirm-wrapper' >
-        {this.state.visible &&
-          <div
-            className={this.whatType()}
-            type={this.props.type}
-          >{this.props.message}
-          </div>}
-      </div>
+      this.state.visible && <div className={`message ${this.getClass()}`}>{this.props.text}</div>
     );
   }
 }
 
-export default ConfirmMessage;
+export default Message;
 
-ConfirmMessage.propTypes = {
-  message: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+Message.defaultProps = {
+  text: '',
+  type: '',
+};
+
+Message.propTypes = {
+  text: PropTypes.string,
+  type: PropTypes.string,
 };

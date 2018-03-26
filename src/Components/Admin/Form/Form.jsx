@@ -65,41 +65,45 @@ export default class Form extends React.Component {
 
   render() {
     return (
-      <div className='form--add-news'>
+      <div className='add-news form'>
         <Time />
-        <form name='addNews' onSubmit={this.handleSubmit} className='form--form'>
-          <label htmlFor='addNews'>
-            <p className='form--label'>Заглавие:</p>
-            <input
-              value={this.state.title}
-              onChange={this.handleChangeTitle}
-              type='text'
-              className='form--input'
-              placeholder='Заголовок новости'
-              required
-            />
-          </label>
-          <label htmlFor='addNews'>
-            <p className='form--label'>Текст новости(краткое описание):</p>
-            <textarea
-              value={this.state.newsText}
-              onChange={this.handleChangeNewsText}
-              type='text'
-              className='form--textarea'
-              placeholder='Текст новости'
-              required
-            />
-          </label>
-          <label htmlFor='addNews'>
-            <p className='form--label'>Ссылка на новость:</p>
-            <input
-              value={this.state.url}
-              onChange={this.handleChangeUrl}
-              type='url'
-              className='form--input'
-              placeholder='https://.....'
-            />
-          </label>
+        <form name='addNews' onSubmit={this.handleSubmit}>
+          <p className='form--label'>
+            <label htmlFor='news-heading'>Заглавие:</label>
+          </p>
+          <input
+            id='news-heading'
+            value={this.state.title}
+            onChange={this.handleChangeTitle}
+            type='text'
+            className='form--input'
+            placeholder='Заголовок новости'
+            required
+          />
+
+          <p className='form--label'>
+            <label htmlFor='news-text'>Текст новости(краткое описание):</label>
+          </p>
+          <textarea
+            id='news-text'
+            value={this.state.newsText}
+            onChange={this.handleChangeNewsText}
+            type='text'
+            className='form--input'
+            placeholder='Текст новости'
+            required
+          />
+          <p className='form--label'>
+            <label htmlFor='news-url'>Ссылка на новость:</label>
+          </p>
+          <input
+            id='news-url'
+            value={this.state.url}
+            onChange={this.handleChangeUrl}
+            type='url'
+            className='form--input'
+            placeholder='https://.....'
+          />
           <br />
           <input
             type='submit'

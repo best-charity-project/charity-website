@@ -22,7 +22,7 @@ export default class AdminNews extends React.Component {
     return (
       <div>
         <div className='news-admin'>
-          <h2 className='news-admin--news-heading'>Список всех новостей</h2>
+          <h2 className='secondary-heading'>Список всех новостей</h2>
           <div className='news-list'>
             {this.state.news.map(item => <AdminNewsItem key={item._id} {...item} />)}
           </div>

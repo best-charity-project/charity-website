@@ -1,5 +1,6 @@
 {
   "baseURL": "https://charity-server.herokuapp.com/api/",
   "confirmMessageTimer": 5000,
+  "redirectTime": 5000,
   "MAX_DESCRIPTION_SIZE": 240
 }

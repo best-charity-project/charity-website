@@ -5,13 +5,3 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
-
-.news--heading {
-  text-align: center;
-  margin: 1em 0;
-  font-weight: 100;
-  font-size: 3em;
-  color: #1d6e87;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
