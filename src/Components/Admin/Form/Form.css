@@ -12,7 +12,6 @@
 
 .form--input {
   width: 80%;
-  margin: 0.3em;
   border: none;
   background-color: #f6f6f6;
   padding: 1em;
@@ -64,16 +63,6 @@
 
 .form--button:active {
   transform: translateY(-1px);
-}
-
-.form--question {
-  margin-top: 1.3em;
-  margin-left: 2em;
-}
-
-.form--link {
-  margin: 0.5em 0.5em 0.5em 2em;
-  display: block;
 }
 
 @media (max-width: 576px) {

@@ -34,41 +34,40 @@ class LoginForm extends React.Component {
   render() {
     return (
       <div className='form'>
+        <h2 className='form--heading'>Вход в систему</h2>
         <form name='loginForm' onSubmit={this.handleSubmit}>
-          <p className='form--label'>
-            <label htmlFor='email'>Email</label>
-          </p>
-          <input
-            id='email'
-            value={this.state.email}
-            onChange={this.handleEmailChange}
-            type='email'
-            className='form--input'
-            placeholder='Email'
-            required
-          />
-          <p className='form--label'>
-            <label htmlFor='password'>Пароль:</label>
-          </p>
-          <input
-            id='password'
-            value={this.state.password}
-            onChange={this.handlePasswordChange}
-            type='password'
-            className='form--input'
-            placeholder='Пароль'
-            required
-          />
+          <div className='form--field'>
+            <input
+              id='email'
+              value={this.state.email}
+              onChange={this.handleEmailChange}
+              type='email'
+              className='form--input'
+              placeholder='Email'
+              required
+            />
+          </div>
+          <div className='form--field'>
+            <input
+              id='password'
+              value={this.state.password}
+              onChange={this.handlePasswordChange}
+              type='password'
+              className='form--input'
+              placeholder='Пароль'
+              required
+            />
+          </div>
           <input
             type='submit'
-            className='control-button control-button--blue'
+            className='control-button control-button--blue '
             value={this.props.buttonText}
           />
         </form>
-        <p className='form--question'>Не зарегистрированы? </p>
-        <Link className='form--link' to='/signup'>
-          Регистрация
-        </Link>
+        <div className='form--question'>
+          <p className='question--text'>Не зарегистрированы? </p>
+          <Link to='/signup'>Регистрация</Link>
+        </div>
       </div>
     );
   }
