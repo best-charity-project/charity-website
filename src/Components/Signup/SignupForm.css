@@ -1,20 +1,5 @@
-.signup-form {
-  display: flex;
-  flex-direction: column;
-  margin: 1em auto;
-  max-width: 30em;
-  background-color: #fff;
-  box-shadow: 0 0.5em 1em rgb(238, 235, 235);
-  padding: 1em;
-}
-
 .form--heading {
   text-align: center;
-}
-
-.form--label {
-  margin: 1em 0 1em 1em;
-  text-indent: 1em;
 }
 
 .form--comment {
@@ -22,11 +7,26 @@
   width: 12em;
 }
 
-.form--radio-input {
-  display: flex;
-  margin: 1em;
+.form--accept-rules-checkbox {
+  margin: 1.5em 0 1.5em 2.4em;
 }
 
-.radio-input--label {
-  margin-left: 0.5em;
+.radio-field {
+  box-shadow: none;
+}
+
+.accept-rules--link {
+  color: #551a8b;
+  border-bottom: 1px solid #551a8b;
+}
+
+.accept-rules--link:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 576px) {
+  .form--radio-input,
+  .form--accept-rules-checkbox {
+    margin-left: 0.2em;
+  }
 }

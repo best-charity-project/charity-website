@@ -24,12 +24,6 @@
   background-color: #37b3d8;
 }
 
-.news-admin--news-heading {
-  margin: 2em 0;
-  font-size: 2em;
-  text-align: center;
-}
-
 .news-list--single-item {
   width: 90%;
   border-radius: 5px;
@@ -42,9 +36,6 @@
 @media (max-width: 1200px) {
   .news-card {
     width: 90%;
-  }
-  .library--header {
-    flex-direction: column;
   }
 }
 
