@@ -11,6 +11,10 @@
   margin: 1.5em 0 1.5em 2.4em;
 }
 
+.radio-field {
+  box-shadow: none;
+}
+
 .accept-rules--link {
   color: #551a8b;
   border-bottom: 1px solid #551a8b;

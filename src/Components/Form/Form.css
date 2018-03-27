@@ -17,6 +17,7 @@
   padding: 1em;
   display: block;
   margin: 0 auto;
+  box-shadow: none;
 }
 
 .input--select {
