@@ -117,7 +117,6 @@ export default class EducationRoute extends React.Component {
   }
 
   toggleMessageIsOpen() {
-    console.log('uuu');
     this.setState({
       isOpen: !this.state.isOpen,
     });
