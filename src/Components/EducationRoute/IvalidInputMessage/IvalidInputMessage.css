@@ -1,0 +1,21 @@
+.ivalidInputMessage {
+  width: max-content;
+  height: 2em;
+  background-color: #2ccb71;
+  position: static;
+  color: #1e4b28;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 1em;
+  -webkit-animation: easy 2s;
+  animation: easy 2s;
+}
+
+@keyframes message {
+  from {
+    top: 0px;
+  }
+  to {
+    top: 6em;
+  }
+}

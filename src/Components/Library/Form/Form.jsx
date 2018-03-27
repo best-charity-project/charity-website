@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getLibraryCategories } from '../../../libraryCalls';
+import ConfirmMessage from './ConfirmMessage/ConfirmMessage';
 
 class Form extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class Form extends React.Component {
       title: '',
       description: '',
       url: '',
-      isOpen: true,
+      isOpen: false,
     };
     this.handleChangeCategory = this.handleChangeCategory.bind(this);
     this.handleChangeType = this.handleChangeType.bind(this);
@@ -20,7 +21,7 @@ class Form extends React.Component {
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleChangeUrl = this.handleChangeUrl.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.toggleMessage = this.toggleMessage.bind(this);
+    this.toggleConfirmMessage = this.toggleConfirmMessage.bind(this);
   }
 
   componentDidMount() {
@@ -76,19 +77,21 @@ class Form extends React.Component {
       description,
       url,
     });
-    this.toggleMessage();
+    this.toggleConfirmMessage();
   }
 
-  toggleMessage() {
+  toggleConfirmMessage() {
     this.setState({
       isOpen: !this.state.isOpen,
     });
   }
 
   render() {
+    const { isOpen } = this.state;
     return (
       <div className='form'>
         <form name='addCategory' onSubmit={this.handleSubmit}>
+          {isOpen && <ConfirmMessage message={this.props.message} />}
           <p className='form--label'>
             <label htmlFor='category'>Выбор категории</label>
           </p>
@@ -195,4 +198,5 @@ Form.propTypes = {
   }),
   onSubmit: PropTypes.func.isRequired,
   buttonText: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
 };

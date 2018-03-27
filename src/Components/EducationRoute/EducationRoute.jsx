@@ -3,11 +3,11 @@ import InputMask from 'react-input-mask';
 import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
 import { getLocations, addEducation } from '../../educationCalls';
-import Message from '../Message/Message';
+import IvalidInputMessage from './IvalidInputMessage/IvalidInputMessage';
 import './EducationRoute.css';
 import './SelectStyles.css';
 
-export default class Category extends React.Component {
+export default class EducationRoute extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,25 +17,25 @@ export default class Category extends React.Component {
       phone: '',
       email: '',
       region: '',
-      regionDistrictIndices: 0,
+      regionDistrictIndexes: 0,
       city: '',
       educationalInstitution: '',
       year: '',
       program: '',
       isOpen: false,
-      isValid: false,
     };
     this.addEducationRoute = this.addEducationRoute.bind(this);
     this.setName = this.setName.bind(this);
     this.setPhone = this.setPhone.bind(this);
     this.setEmail = this.setEmail.bind(this);
     this.setRegion = this.setRegion.bind(this);
-    this.setregionDistrictIndices = this.setregionDistrictIndices.bind(this);
+    this.setregionDistrictIndexes = this.setRegionDistrictIndices.bind(this);
     this.setCity = this.setCity.bind(this);
     this.setEducationalInstitution = this.setEducationalInstitution.bind(this);
     this.setYear = this.setYear.bind(this);
     this.setProgram = this.setProgram.bind(this);
-    this.isRegionDistrictIndices = this.isRegionDistrictIndices.bind(this);
+    this.isRegionDistrictIndexes = this.isRegionDistrictIndexes.bind(this);
+    this.toggleMessageisOpen = this.toggleMessageIsOpen.bind(this);
   }
 
   componentDidMount() {
@@ -86,15 +86,9 @@ export default class Category extends React.Component {
     }
   }
 
-  setregionDistrictIndices(event) {
+  setRegionDistrictIndices(event) {
     this.setState({
-      regionDistrictIndices: event,
-    }, () => {
-      if (this.state.regionDistrictIndices.length === 0) {
-        this.setState({ isValid: false });
-      } else {
-        this.setState({ isValid: true });
-      }
+      regionDistrictIndexes: event,
     });
   }
 
@@ -122,36 +116,30 @@ export default class Category extends React.Component {
     });
   }
 
-  toggleMessageisOpen() {
+  toggleMessageIsOpen() {
+    console.log('uuu');
     this.setState({
       isOpen: !this.state.isOpen,
     });
   }
 
-  toggleIsValid() {
-    this.setState({
-      isValid: !this.state.isValid,
-    });
-  }
-
-  isRegionDistrictIndices() {
-    if ((this.state.regionDistrictIndices === 0)
+  isRegionDistrictIndexes() {
+    if ((this.state.regionDistrictIndexes === 0)
       && (this.state.name !== '')
-      && (this.state.phone.replace(/\+|\(|\)|\\-|\\_/g, '').length >= 12)
       && (this.state.email !== '')
       && (this.state.region !== '')
     ) {
-      this.toggleMessageisOpen();
+      this.toggleMessageIsOpen();
     }
   }
 
   addEducationRoute(event) {
     event.preventDefault();
-    if (this.state.regionDistrictIndices.length === 0) {
-      this.toggleMessageisOpen();
+    if (this.state.regionDistrictIndexes.length === 0) {
+      this.toggleMessageIsOpen();
     } else {
       const {
-        name, phone, email, region, regionDistrictIndices,
+        name, phone, email, region, regionDistrictIndexes,
         city, educationalInstitution, year, program,
       } = this.state;
       addEducation({
@@ -159,7 +147,7 @@ export default class Category extends React.Component {
         phone,
         email,
         region,
-        regionDistrictIndices,
+        regionDistrictIndexes,
         city,
         educationalInstitution,
         year,
@@ -170,7 +158,7 @@ export default class Category extends React.Component {
         phone: '',
         email: '',
         region: '',
-        regionDistrictIndices: 0,
+        regionDistrictIndexes: 0,
         city: '',
         educationalInstitution: '',
         year: '',
@@ -269,16 +257,13 @@ export default class Category extends React.Component {
               multiple
               allowClear
               dropdownMenuStyle={dropdownMenuStyle}
-              onChange={this.setregionDistrictIndices}
+              onChange={this.setRegionDistrictIndices}
               notFoundContent='Пожалуйста, выберите регион проживания'
               placeholder='▼'
             >
               {this.state.districts}
             </Select>
-            {this.state.isValid && <span className='valid' />}
-            {!this.state.isValid && <span className='inValid' />}
-            {this.state.isOpen && <Message
-              type='alert'
+            {this.state.isOpen && <IvalidInputMessage
               message='Пожалуйста, выберите регион проживания'
             />}
             <p className='form--label'>
@@ -359,7 +344,7 @@ export default class Category extends React.Component {
               type='submit'
               className='form-library--button control-button control-button--blue'
               value='Отправить'
-              onClick={this.isRegionDistrictIndices}
+              onClick={this.isRegionDistrictIndexes}
             />
           </form>
         </div>

@@ -16,8 +16,8 @@
 After doing this operetions u can just use "Ctrl + "S"" to update ur file with new settings.
 
 ## To create a new database:
- 1. Go to https://mlab.com/home and sign up a new account and verified your email
-    + Create new MongoDB Deployments
+ 1. Go to https://mlab.com/home and sign up a new account and verifie your email
+    + Create new MongoDB Deployment
     + Choose cloud provider and plan type then choose region
     + Create a new user for your database (choose users tab)
  2. Download mongoDB Community Server from https://www.mongodb.com
