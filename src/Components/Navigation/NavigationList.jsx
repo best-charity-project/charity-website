@@ -8,6 +8,12 @@ const NavigationList = props =>
     if (!props.userInfo.admin && item.path === '/admin') {
       return null;
     }
+    if (props.userInfo.admin && item.path === '/account') {
+      return null;
+    }
+    if (!props.userInfo.name && item.path === '/account') {
+      return null;
+    }
     return (
       <li key={item.path}>
         <NavLink onClick={props.onClick} to={item.path} className='navigation--element'>

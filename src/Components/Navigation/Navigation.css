@@ -61,7 +61,7 @@
   transition: .3s all ease;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 575px) {
   .navigation--button {
     display: block;
   }
