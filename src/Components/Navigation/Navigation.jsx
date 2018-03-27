@@ -41,7 +41,7 @@ class Navigation extends React.Component {
         <ul className='navigation--menu'>
           <button className={this.getImageClass()} onClick={this.toggleClass} />
           <NavigationList {...this.props} onClick={this.setStateToFalse} />
-          <a className='navigation--element' href={forumURL}>
+          <a className='navigation--element' target='_blank' href={forumURL}>
             Форум
           </a>
         </ul>
