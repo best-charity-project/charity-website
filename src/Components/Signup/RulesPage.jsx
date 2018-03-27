@@ -4,7 +4,7 @@ import rules from './rules.json';
 import './RulesPage.css';
 
 const RulesPage = props => (
-  <div className='form--accept-rules'>
+  <div className='accept-rules'>
     <div className='accept-rules--window'>
       <button className='window--close' onClick={props.toggle} />
       <p className='window--heading'>{rules.title}</p>

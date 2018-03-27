@@ -1,4 +1,4 @@
-.form--accept-rules {
+.accept-rules {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -45,9 +45,6 @@
 @media (max-width: 630px) {
   .accept-rules--window {
     font-size: 0.8em;
-  }
-  .signup-form {
-    position: relative;
   }
   .form--accept-rules {
     position: absolute;
