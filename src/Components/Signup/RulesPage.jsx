@@ -7,8 +7,8 @@ const RulesPage = props => (
   <div className='form--accept-rules'>
     <div className='accept-rules--window'>
       <button className='window--close' onClick={props.toggle} />
-      <p className='window--heading'>{rules[0].title}</p>
-      {rules.slice(1).map(rule => <p key={rule.slice(0, 20)}>{rule}</p>)}
+      <p className='window--heading'>{rules.title}</p>
+      {rules.points.map(rule => <p key={rule.slice(0, 20)}>{rule}</p>)}
     </div>
   </div>
 );

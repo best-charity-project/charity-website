@@ -8,6 +8,7 @@ class LoginForm extends React.Component {
     this.state = {
       email: '',
       password: '',
+      isVisible: true,
     };
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -36,24 +37,32 @@ class LoginForm extends React.Component {
       <div className='form'>
         <h2 className='form--heading'>Вход в систему</h2>
         <form name='loginForm' onSubmit={this.handleSubmit}>
-          <input
-            id='email'
-            value={this.state.email}
-            onChange={this.handleEmailChange}
-            type='email'
-            className='form--field'
-            placeholder='Email'
-            required
-          />
-          <input
-            id='password'
-            value={this.state.password}
-            onChange={this.handlePasswordChange}
-            type='password'
-            className='form--field'
-            placeholder='Пароль'
-            required
-          />
+          <div className='form--box'>
+            <input
+              id='email'
+              value={this.state.email}
+              onChange={this.handleEmailChange}
+              type='email'
+              className={this.state.email ? 'form--field label-move-up' : 'form--field'}
+              required
+            />
+            <label htmlFor='email' className='form--placeholder'>
+              e-mail
+            </label>
+          </div>
+          <div className='form--box'>
+            <input
+              id='password'
+              value={this.state.password}
+              onChange={this.handlePasswordChange}
+              type='password'
+              className={this.state.password ? 'form--field label-move-up' : 'form--field'}
+              required
+            />
+            <label htmlFor='password' className='form--placeholder'>
+              Пароль
+            </label>
+          </div>
           <input
             type='submit'
             className='control-button control-button--blue '

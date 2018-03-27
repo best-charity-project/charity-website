@@ -129,87 +129,106 @@ class SignupForm extends React.Component {
       <div className='form'>
         <p className='form--heading'>Регистрация</p>
         <form name='signupForm' onSubmit={this.handleSubmit}>
-          <input
-            id='email'
-            value={this.state.email}
-            onChange={this.handleEmailChange}
-            type='email'
-            className='form--field'
-            placeholder='Email'
-            required
-          />
-          <input
-            id='name'
-            value={this.state.name}
-            onChange={this.handleNameChange}
-            type='text'
-            className='form--field'
-            placeholder='Ваше имя'
-            required
-          />
-          <input
-            id='password'
-            value={this.state.password}
-            onChange={this.handlePasswordChange}
-            type='password'
-            className='form--field'
-            placeholder='Пароль'
-            minLength='6'
-            ref={(input) => {
-              this.password = input;
-            }}
-            required
-          />
-          <input
-            id='confirmPassword'
-            onChange={this.handleConfirmPasswordChange}
-            type='password'
-            className='form--field'
-            placeholder='Подтвердите пароль'
-            ref={(input) => {
-              this.confirmPassword = input;
-            }}
-            required
-          />
-          <select
-            id='country'
-            className='form--field field--select'
-            value={this.state.country}
-            onChange={this.handleCountryChange}
-            required
-          >
-            <option value=''>---</option>
-            {countries.map(country => (
-              <option value={country} key={country}>
-                {country}
-              </option>
-              ))}
-          </select>
-          {this.state.country === countries[countries.length - 1] && (
-            <div>
-              <p className='form--label'>
-                <label htmlFor='otherCountry'>Страна:</label>
-              </p>
-              <input
-                id='otherCountry'
-                value={this.state.otherCountry}
-                onChange={this.handleOtherCountryChange}
-                type='text'
-                className='form--field'
-                placeholder='Cтрана проживания'
-                required
-              />
-            </div>
-            )}
-          <input
-            id='city'
-            value={this.state.city}
-            onChange={this.handleCityChange}
-            type='text'
-            className='form--field'
-            placeholder='Город проживания'
-            required
-          />
+          <div className='form--box'>
+            <input
+              id='email'
+              value={this.state.email}
+              onChange={this.handleEmailChange}
+              type='email'
+              className={this.state.email ? 'form--field label-move-up' : 'form--field'}
+              required
+            />
+            <label htmlFor='email' className='form--placeholder'>
+              e-mail
+            </label>
+          </div>
+          <div className='form--box'>
+            <input
+              id='name'
+              value={this.state.name}
+              onChange={this.handleNameChange}
+              type='text'
+              className={this.state.name ? 'form--field label-move-up' : 'form--field'}
+              required
+            />
+            <label htmlFor='name' className='form--placeholder'>
+              Ваше имя
+            </label>
+          </div>
+          <div className='form--box'>
+            <input
+              id='password'
+              value={this.state.password}
+              onChange={this.handlePasswordChange}
+              type='password'
+              className={this.state.password ? 'form--field label-move-up' : 'form--field'}
+              minLength='6'
+              ref={(input) => {
+                this.password = input;
+              }}
+              required
+            />
+            <label htmlFor='password' className='form--placeholder'>
+              Пароль
+            </label>
+          </div>
+          <div className='form--box'>
+            <input
+              id='confirmPassword'
+              onChange={this.handleConfirmPasswordChange}
+              type='password'
+              className={this.state.password ? 'form--field label-move-up' : 'form--field'}
+              ref={(input) => {
+                this.confirmPassword = input;
+              }}
+              required
+            />
+            <label htmlFor='confirmPassword' className='form--placeholder'>
+               Подтвердите пароль
+            </label>
+          </div>
+          <div className='form--box'>
+            <select
+              id='country'
+              className='form--field field--select'
+              value={this.state.country}
+              onChange={this.handleCountryChange}
+              required
+            >
+              <option value='' disabled selected>Страна проживания</option>
+              {countries.map(country => (
+                <option value={country} key={country}>
+                  {country}
+                </option>
+                ))}
+            </select>
+            {this.state.country === countries[countries.length - 1] && (
+              <div>
+                <input
+                  id='otherCountry'
+                  value={this.state.otherCountry}
+                  onChange={this.handleOtherCountryChange}
+                  type='text'
+                  className='form--field'
+                  placeholder='Cтрана проживания'
+                  required
+                />
+              </div>
+              )}
+          </div>
+          <div className='form--box'>
+            <input
+              id='city'
+              value={this.state.city}
+              onChange={this.handleCityChange}
+              type='text'
+              className={this.state.city ? 'form--field label-move-up' : 'form--field'}
+              required
+            />
+            <label htmlFor='city' className='form--placeholder'>
+            Город проживания
+            </label>
+          </div>
           <p className='form--comment'>Что Вас привело на сайт:</p>
           {this.state.reasons.map((reason, index) => (
             <p key={reason} className='form--radio-input'>

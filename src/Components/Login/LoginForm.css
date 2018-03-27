@@ -10,14 +10,33 @@
   margin: 0.5em;
 }
 
-.form--field {
+.form--box {
+  position: relative;
   display: inline-block;
-  width: 40%;
+  width: 50%;
+}
+
+.form--field {
   margin: 2em 1em;
   border: none;
-  border-bottom: 2px solid #37b3d8;
+  border-bottom: 1px solid #37b3d8;
   padding: 1em;
   outline: none;
+}
+
+.form--placeholder {
+  position: absolute;
+  pointer-events: none;
+  left: 1.5em;
+  top: 2.5em;
+  transition: 0.3s ease all;
+}
+
+.label-move-up ~ .form--placeholder {
+  font-size: 0.7em;
+  left: 2.5em;
+  top: 2em;
+  color: #37b3d8;
 }
 
 .field--select {
@@ -25,8 +44,14 @@
 }
 
 @media (max-width: 576px) {
-  .form--field {
+  .form--box {
     display: block;
+    width: 90%;
+  }
+  .form--field {
+    width: 90%;
+  }
+  .form--box .field--select {
     width: 95%;
   }
 }
