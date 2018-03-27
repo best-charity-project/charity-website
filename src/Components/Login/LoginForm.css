@@ -34,6 +34,10 @@
 
 .form--box .field--select {
   width: 70%;
+  font: inherit;
+  padding-left: 0;
+  color: inherit;
+  padding-bottom: 0.7em;
 }
 
 .label-move-up ~ .form--placeholder {
