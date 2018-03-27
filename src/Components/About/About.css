@@ -6,19 +6,6 @@
   min-height: calc(100vh - 4em);
 }
 
-<<<<<<< HEAD
-.about-us--heading {
-  text-align: center;
-  margin: 1em 0;
-  font-weight: 100;
-  font-size: 3em;
-  color: #1d6e87;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-=======
->>>>>>> 72b1d53c0f7dccc67dbbe9005dcf4dd3dc2c4e37
 .about-us--main {
   display: flex;
 }

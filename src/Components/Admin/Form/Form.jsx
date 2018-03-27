@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Time from './Time';
-import './Form.css';
+import '../../Form/Form.css';
 
 export default class Form extends React.Component {
   constructor(props) {
@@ -80,7 +80,6 @@ export default class Form extends React.Component {
             placeholder='Заголовок новости'
             required
           />
-
           <p className='form--label'>
             <label htmlFor='news-text'>Текст новости(краткое описание):</label>
           </p>

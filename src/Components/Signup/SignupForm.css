@@ -8,8 +8,11 @@
 }
 
 .form--accept-rules-checkbox {
-  text-align: center;
-  margin: 1.5em 0;
+  margin: 1.5em 0 1.5em 2.4em;
+}
+
+.radio-field {
+  box-shadow: none;
 }
 
 .accept-rules--link {
@@ -19,4 +22,11 @@
 
 .accept-rules--link:hover {
   cursor: pointer;
+}
+
+@media (max-width: 576px) {
+  .form--radio-input,
+  .form--accept-rules-checkbox {
+    margin-left: 0.2em;
+  }
 }

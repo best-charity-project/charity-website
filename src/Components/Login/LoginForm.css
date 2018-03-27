@@ -2,24 +2,68 @@
   color: red;
 }
 
-.login-form {
-  display: flex;
-  flex-direction: column;
-  margin: 1em auto;
-  max-width: 30em;
-  background-color: #fff;
-  box-shadow: 0 0.5em 1em rgb(238, 235, 235);
-  padding: 1em;
+.form--question {
+  text-align: center;
 }
 
-.login-form .control-button {
-  margin: 2em auto;
-}
-
-.login-form--question {
-  margin-left: 0.5em;
-}
-
-.login-form--link {
+.question--text {
   margin: 0.5em;
+}
+
+.form--box {
+  position: relative;
+  width: 50%;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.form--field {
+  margin: 2em 1em;
+  border: none;
+  border-bottom: 1px solid #37b3d8;
+  padding: 1em;
+  outline: none;
+  box-shadow: none;
+}
+
+.form--placeholder {
+  position: absolute;
+  pointer-events: none;
+  left: 3em;
+  top: 2.5em;
+  transition: 0.3s ease all;
+}
+
+.form--box .field--select {
+  width: 70%;
+  font: inherit;
+  padding-left: 0;
+  color: inherit;
+  padding-bottom: 0.7em;
+}
+
+.label-move-up~.form--placeholder,
+.form--field:focus~.form--placeholder {
+  font-size: 0.8em;
+  left: 3.5em;
+  top: 1.7em;
+  color: #37b3d8;
+}
+
+.field--select {
+  width: 45%;
+}
+
+@media (max-width: 576px) {
+  .form--box {
+    display: block;
+    width: 90%;
+  }
+  .form--field {
+    width: 90%;
+  }
+  .form--box .field--select {
+    width: 95%;
+  }
 }
