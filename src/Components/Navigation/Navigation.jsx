@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import NavigationList from './NavigationList';
 import LoginPanel from './LoginPanel/LoginPanel';
-import URL from '../../configs/config.json';
+import { forumURL } from '../../configs/config.json';
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class Navigation extends React.Component {
         <ul className='navigation--menu'>
           <button className={this.getImageClass()} onClick={this.toggleClass} />
           <NavigationList {...this.props} onClick={this.setStateToFalse} />
-          <a className='navigation--element' href={URL.forumURL}>
+          <a className='navigation--element' href={forumURL}>
             Форум
           </a>
         </ul>
