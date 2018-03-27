@@ -5,7 +5,7 @@ import EducationRoute from '../EducationRoute/EducationRoute';
 
 class UserAccount extends React.Component {
   componentDidMount() {
-    console.log(this.props.match);
+    // console.log(this.props.match);
   }
 
   render() {
