@@ -25,11 +25,17 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    getUserAuthInfo().then((userInfo) => {
-      this.setState({
-        userInfo,
+    getUserAuthInfo()
+      .then((userInfo) => {
+        this.setState({
+          userInfo,
+        });
+      })
+      .catch((err) => {
+        if (err.response.status === 401) {
+          this.setState({ userInfo: { admin: false } });
+        }
       });
-    });
   }
 
   onAuthChange(userInfo) {
@@ -41,7 +47,7 @@ export default class App extends React.Component {
   onLogout() {
     logoutUser();
     this.setState({
-      userInfo: {},
+      userInfo: { admin: false },
     });
   }
 
@@ -53,8 +59,8 @@ export default class App extends React.Component {
           <Route exact path='/home' component={Home} />
           <Route path='/admin' render={() => <Admin {...this.state} />} />
           <Route path='/about' component={About} />
-          <Route path='/news' component={News} />
           <Route path='/news/:id' component={SingleNewsPage} />
+          <Route path='/news' component={News} />
           <Route path='/library' component={Library} />
           <Route path='/education-route' component={EducationRoute} />
           <Route path='/login' render={() => <LoginPage onAuthChange={this.onAuthChange} />} />
