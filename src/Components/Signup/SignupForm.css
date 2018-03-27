@@ -6,9 +6,6 @@
   margin: 1.5em auto;
   width: 12em;
 }
-.form--box .field--select {
-  width: 70%;
-}
 
 .form--accept-rules-checkbox {
   margin: 1.5em 0 1.5em 2.4em;
@@ -21,4 +18,11 @@
 
 .accept-rules--link:hover {
   cursor: pointer;
+}
+
+@media (max-width: 576px) {
+  .form--radio-input,
+  .form--accept-rules-checkbox {
+    margin-left: 0.2em;
+  }
 }
