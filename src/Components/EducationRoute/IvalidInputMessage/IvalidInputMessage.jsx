@@ -23,10 +23,15 @@ class ConfirmMessage extends React.Component {
   }
 
   render() {
-    return this.state.visible ? (
-      <div className='ivalidInputMessage'>{this.props.message}</div>
-    ) : (
-      <span />
+    return (
+      <div className='confirm-wrapper' >
+        {this.state.visible &&
+          <div
+            className='ivalidInputMessage'
+            type={this.props.type}
+          >{this.props.message}
+          </div>}
+      </div>
     );
   }
 }
@@ -35,4 +40,5 @@ export default ConfirmMessage;
 
 ConfirmMessage.propTypes = {
   message: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
