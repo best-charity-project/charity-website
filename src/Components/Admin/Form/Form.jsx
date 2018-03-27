@@ -80,7 +80,6 @@ export default class Form extends React.Component {
             placeholder='Заголовок новости'
             required
           />
-
           <p className='form--label'>
             <label htmlFor='news-text'>Текст новости(краткое описание):</label>
           </p>

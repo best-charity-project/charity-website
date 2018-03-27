@@ -41,7 +41,8 @@
   padding-bottom: 0.7em;
 }
 
-.label-move-up ~ .form--placeholder {
+.label-move-up ~ .form--placeholder,
+.form--field:focus ~ .form--placeholder {
   font-size: 0.7em;
   left: 2.5em;
   top: 2em;

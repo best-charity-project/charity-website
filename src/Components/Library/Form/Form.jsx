@@ -168,7 +168,7 @@ class Form extends React.Component {
           <input
             type='submit'
             value={this.props.buttonText}
-            className='form-library--button control-button control-button--blue'
+            className='form--button control-button control-button--blue'
           />
         </form>
       </div>

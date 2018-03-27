@@ -261,7 +261,11 @@ class SignupForm extends React.Component {
             > правилами
             </a>
           </p>
-          <input type='submit' className='control-button control-button--blue' value='Отправить' />
+          <input
+            type='submit'
+            className='control-button control-button--blue'
+            value='Регистрация'
+          />
         </form>
       </div>
     );
