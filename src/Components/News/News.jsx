@@ -22,7 +22,7 @@ class News extends React.Component {
   render() {
     return (
       <div className='news indent'>
-        <h1 className='news--heading'>Новости</h1>
+        <h1 className='primary-heading'>Новости</h1>
         <div className='news-list'>{this.state.news.map(item => NewsCard(item))}</div>
       </div>
     );

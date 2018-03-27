@@ -11,29 +11,9 @@
   width: 25em;
   background-color: #fff;
   padding-top: 2em;
-  margin-right: 2em;
 }
 
-.library--header {
-  width: 50em;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-}
-
-@media (max-width: 1200px) {
-  .library--header {
-    width: 30em;
-  }
-}
-
-@media (max-width: 992px) {
-  .library--header {
-    width: 100%;
-  }
-}
-
-.library--add {
+.sidebar--add-item-button {
   margin-left: 1em;
   text-decoration: none;
   background-color: #1d6e87;
@@ -42,7 +22,7 @@
   color: white;
   text-transform: uppercase;
   padding: 0.6em;
-  font-size: .8em;
+  font-size: 0.8em;
 }
 
 @media (max-width: 992px) {

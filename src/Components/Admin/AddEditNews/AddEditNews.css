@@ -1,13 +1,6 @@
 .admin-form-news {
   padding: 0.5em;
-}
-
-.admin-form-news--heading {
-  color: #37b3d8;
-  font-size: 1.5em;
-  text-transform: uppercase;
-  margin-bottom: 1em;
-  text-align: center;
+  margin: 0 auto;
 }
 
 @media (max-width: 992px) {

@@ -12,7 +12,7 @@ const Library = ({ match }) => (
   <div className='library indent'>
     <div className='library--box'>
       <div className='library--sidebar'>
-        <Link to={`${match.url}/addToLibrary`} className='library--add'>
+        <Link to={`${match.url}/addToLibrary`} className='sidebar--add-item-button'>
           Добавить в библиотeку
         </Link>
         <CategoriesList match={match} />
