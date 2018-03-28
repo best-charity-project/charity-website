@@ -5,7 +5,10 @@ const getLibraryItems = (categoryTag, type) =>
 
 const getLibraryCategories = () => API.get('categories').then(response => response.data);
 
-const addLibraryItem = libraryItem => API.post('library', libraryItem);
+const addLibraryItem = libraryItem =>
+  API.post('library', libraryItem)
+    .then(res => res.data)
+    .catch(err => err.response.data);
 
 const fullTextLibrarySearch = (textSearch, checkedTypes) =>
   API.get(`library/search/?textSearch=${textSearch}&types=${checkedTypes}`).then(response => response.data);
