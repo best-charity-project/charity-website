@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { confirmMessageTimer } from '../../../configs/config.json';
-import './IvalidInputMessage.css';
+import './InvalidInputMessage.css';
 
-class IvalidInputMessage extends React.Component {
+class InvalidInputMessage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,10 +24,10 @@ class IvalidInputMessage extends React.Component {
 
   render() {
     return (
-      <div className='ivalidInputMessage-wrapper' >
+      <div className='invalidInputMessage-wrapper' >
         {this.state.visible &&
           <div
-            className='ivalidInputMessage'
+            className='invalidInputMessage'
           >{this.props.message}
           </div>}
       </div>
@@ -35,8 +35,8 @@ class IvalidInputMessage extends React.Component {
   }
 }
 
-export default IvalidInputMessage;
+export default InvalidInputMessage;
 
-IvalidInputMessage.propTypes = {
+InvalidInputMessage.propTypes = {
   message: PropTypes.string.isRequired,
 };

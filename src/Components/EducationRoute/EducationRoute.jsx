@@ -4,7 +4,7 @@ import InputMask from 'react-input-mask';
 import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
 import { getLocations, addEducation } from '../../educationCalls';
-import IvalidInputMessage from './IvalidInputMessage/IvalidInputMessage';
+import InvalidInputMessage from './InvalidInputMessage/InvalidInputMessage';
 import './EducationRoute.css';
 import './SelectStyles.css';
 
@@ -265,7 +265,7 @@ export default class EducationRoute extends React.Component {
             >
               {this.state.districts}
             </Select>
-            {this.state.isOpen && <IvalidInputMessage
+            {this.state.isOpen && <InvalidInputMessage
               message='Пожалуйста, выберите регион проживания'
             />}
             <p className='form--label'>
