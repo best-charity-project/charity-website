@@ -126,10 +126,10 @@ export default class EducationRoute extends React.Component {
   }
 
   isRegionDistricts() {
-    if ((this.state.regionDistricts.length === 0)
-      && (this.state.name !== '')
-      && (this.state.email !== '')
-      && (this.state.region !== null)
+    if (this.state.regionDistricts.length === 0
+      && this.state.name !== ''
+      && this.state.email !== ''
+      && this.state.region !== null
     ) {
       this.toggleMessageIsOpen();
     }
@@ -168,9 +168,6 @@ export default class EducationRoute extends React.Component {
   }
 
   render() {
-    const dropdownMenuStyle = {
-      maxHeight: 200,
-    };
     return (
       <div className='education-route indent'>
         <h1 className='primary-heading'>образовательный маршрут</h1>
@@ -257,7 +254,6 @@ export default class EducationRoute extends React.Component {
               choiceTransitionName='rc-select-selection__choice-zoom'
               multiple
               allowClear
-              dropdownMenuStyle={dropdownMenuStyle}
               onChange={this.setRegionDistricts}
               notFoundContent='Пожалуйста, выберите регион проживания'
               placeholder='▼'
