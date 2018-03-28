@@ -24,7 +24,7 @@ class IvalidInputMessage extends React.Component {
 
   render() {
     return (
-      <div className='confirm-wrapper' >
+      <div className='ivalidInputMessage-wrapper' >
         {this.state.visible &&
           <div
             className='ivalidInputMessage'

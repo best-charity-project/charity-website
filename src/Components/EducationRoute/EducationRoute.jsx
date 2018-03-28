@@ -36,7 +36,7 @@ export default class EducationRoute extends React.Component {
     this.setEducationalInstitution = this.setEducationalInstitution.bind(this);
     this.setYear = this.setYear.bind(this);
     this.setProgram = this.setProgram.bind(this);
-    this.isregionDistricts = this.isregionDistricts.bind(this);
+    this.isRegionDistricts = this.isRegionDistricts.bind(this);
     this.toggleMessageisOpen = this.toggleMessageIsOpen.bind(this);
   }
 
@@ -125,11 +125,11 @@ export default class EducationRoute extends React.Component {
     });
   }
 
-  isregionDistricts() {
-    if ((this.state.regionDistricts === 0)
+  isRegionDistricts() {
+    if ((this.state.regionDistricts.length === 0)
       && (this.state.name !== '')
       && (this.state.email !== '')
-      && (this.state.region !== '')
+      && (this.state.region !== null)
     ) {
       this.toggleMessageIsOpen();
     }
@@ -346,7 +346,7 @@ export default class EducationRoute extends React.Component {
               type='submit'
               className='form-library--button control-button control-button--blue'
               value='Отправить'
-              onClick={this.isregionDistricts}
+              onClick={this.isRegionDistricts}
             />
           </form>
         </div>
