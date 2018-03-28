@@ -21,7 +21,7 @@
   border-left: 0.75em solid transparent;
   border-right: 0.75em solid transparent;
   border-bottom: 0.75em solid rgba(135, 135, 135, 0.6);
-  content: "";
+  content: '';
   margin-top: -25px;
   margin-left: 20px;
   position: absolute;

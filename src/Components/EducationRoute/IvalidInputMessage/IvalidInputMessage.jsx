@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { confirmMessageTimer } from '../../../configs/config.json';
 import './IvalidInputMessage.css';
 
-class ConfirmMessage extends React.Component {
+class IvalidInputMessage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,7 +28,6 @@ class ConfirmMessage extends React.Component {
         {this.state.visible &&
           <div
             className='ivalidInputMessage'
-            type={this.props.type}
           >{this.props.message}
           </div>}
       </div>
@@ -36,9 +35,8 @@ class ConfirmMessage extends React.Component {
   }
 }
 
-export default ConfirmMessage;
+export default IvalidInputMessage;
 
-ConfirmMessage.propTypes = {
+IvalidInputMessage.propTypes = {
   message: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
 };
