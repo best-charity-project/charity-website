@@ -5,7 +5,7 @@ import './ThreeNews.css';
 
 const LatestNews = props => (
   <div className='latest-news'>
-    <h1 className='latest-news--heading'>Свежие новости</h1>
+    <h1 className='primary-heading'>Свежие новости</h1>
     <hr className='heading-underline' />
     <div className='news-list'>{props.news.slice(0, 3).map(item => NewsCard(item))}</div>
   </div>

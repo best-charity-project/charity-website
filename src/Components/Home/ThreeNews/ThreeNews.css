@@ -2,22 +2,7 @@
   width: 35%;
   border-color: rgb(47, 179, 219);
   margin-bottom: 3em;
-}
-
-.latest-news--heading {
-  text-align: center;
-  margin: 1em 0 0;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 100;
-  font-size: 50px;
-  color: #1d6e87;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-}
-
-.news-card .details-button {
-  margin: 0 auto;
-  display: block;
+  margin-top: -2em;
 }
 
 @media (max-width: 960px) {
