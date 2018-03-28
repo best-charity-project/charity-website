@@ -12,7 +12,10 @@ const getNews = () => {
   return Promise.resolve(newsCache);
 };
 
-const addNews = news => API.post('news', news);
+const addNews = news =>
+  API.post('news', news)
+    .then(res => res.data)
+    .catch(err => err.response.data);
 
 const updateNews = (id, news) => {
   const {

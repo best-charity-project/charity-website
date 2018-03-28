@@ -16,8 +16,8 @@ class AddLibraryItem extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-  handleFormSubmit(d) {
-    addLibraryItem(d).then((data) => {
+  handleFormSubmit(formData) {
+    addLibraryItem(formData).then((data) => {
       let message = {};
       if (data.error) {
         message = { type: 'error', text: data.error };

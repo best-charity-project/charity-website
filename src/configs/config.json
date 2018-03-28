@@ -1,5 +1,5 @@
 {
-  "baseURL": "https://charity-server.herokuapp.com/api/",
+  "baseURL": "http://localhost:8080/api/",
   "forumURL": "http://charity.forum2x2.ru/",
   "confirmMessageTimer": 5000,
   "redirectTime": 5000,
