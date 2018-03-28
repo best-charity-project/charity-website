@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import InputMask from 'react-input-mask';
 import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
@@ -16,8 +17,9 @@ export default class EducationRoute extends React.Component {
       name: '',
       phone: '',
       email: '',
-      region: '',
-      regionDistrictIndexes: 0,
+      region: null,
+      regionIndex: -1,
+      regionDistricts: [],
       city: '',
       educationalInstitution: '',
       year: '',
@@ -29,12 +31,12 @@ export default class EducationRoute extends React.Component {
     this.setPhone = this.setPhone.bind(this);
     this.setEmail = this.setEmail.bind(this);
     this.setRegion = this.setRegion.bind(this);
-    this.setregionDistrictIndexes = this.setRegionDistrictIndices.bind(this);
+    this.setRegionDistricts = this.setRegionDistricts.bind(this);
     this.setCity = this.setCity.bind(this);
     this.setEducationalInstitution = this.setEducationalInstitution.bind(this);
     this.setYear = this.setYear.bind(this);
     this.setProgram = this.setProgram.bind(this);
-    this.isRegionDistrictIndexes = this.isRegionDistrictIndexes.bind(this);
+    this.isregionDistricts = this.isregionDistricts.bind(this);
     this.toggleMessageisOpen = this.toggleMessageIsOpen.bind(this);
   }
 
@@ -68,6 +70,8 @@ export default class EducationRoute extends React.Component {
 
   setRegion(event) {
     event.persist();
+    this.setState({ regionIndex: event.target.value });
+    this.setState({ districts: [] });
     this.setState({
       region: this.state.locations[0].name,
     }, () => {
@@ -78,7 +82,6 @@ export default class EducationRoute extends React.Component {
               .push(<Option key={district} title={district}>{district} </Option>));
       }
     });
-
     if (event.target.value === '6') {
       this.setState({ city: 'Минск' });
     } else {
@@ -86,9 +89,9 @@ export default class EducationRoute extends React.Component {
     }
   }
 
-  setRegionDistrictIndices(event) {
+  setRegionDistricts(event) {
     this.setState({
-      regionDistrictIndexes: event,
+      regionDistricts: event,
     });
   }
 
@@ -122,8 +125,8 @@ export default class EducationRoute extends React.Component {
     });
   }
 
-  isRegionDistrictIndexes() {
-    if ((this.state.regionDistrictIndexes === 0)
+  isregionDistricts() {
+    if ((this.state.regionDistricts === 0)
       && (this.state.name !== '')
       && (this.state.email !== '')
       && (this.state.region !== '')
@@ -134,36 +137,34 @@ export default class EducationRoute extends React.Component {
 
   addEducationRoute(event) {
     event.preventDefault();
-    if (this.state.regionDistrictIndexes.length === 0) {
-      this.toggleMessageIsOpen();
-    } else {
-      const {
-        name, phone, email, region, regionDistrictIndexes,
-        city, educationalInstitution, year, program,
-      } = this.state;
-      addEducation({
-        name,
-        phone,
-        email,
-        region,
-        regionDistrictIndexes,
-        city,
-        educationalInstitution,
-        year,
-        program,
-      });
-      this.setState({
-        name: '',
-        phone: '',
-        email: '',
-        region: '',
-        regionDistrictIndexes: 0,
-        city: '',
-        educationalInstitution: '',
-        year: '',
-        program: '',
-      });
-    }
+    const {
+      name, phone, email, region, regionDistricts,
+      city, educationalInstitution, year, program,
+    } = this.state;
+    const { userId } = this.props.userInfo;
+    addEducation({
+      name,
+      phone,
+      email,
+      region,
+      regionDistricts,
+      city,
+      educationalInstitution,
+      year,
+      program,
+      userId,
+    });
+    this.setState({
+      name: '',
+      phone: '',
+      email: '',
+      region: '',
+      regionDistricts: null,
+      city: '',
+      year: '',
+      program: '',
+      regionIndex: -1,
+    });
   }
 
   render() {
@@ -238,6 +239,7 @@ export default class EducationRoute extends React.Component {
               className='form--input input--select'
               required
               onChange={this.setRegion}
+              value={this.state.regionIndex}
             >
               <option value=''>
                 ---
@@ -256,9 +258,10 @@ export default class EducationRoute extends React.Component {
               multiple
               allowClear
               dropdownMenuStyle={dropdownMenuStyle}
-              onChange={this.setRegionDistrictIndices}
+              onChange={this.setRegionDistricts}
               notFoundContent='Пожалуйста, выберите регион проживания'
               placeholder='▼'
+              value={this.state.regionDistricts}
             >
               {this.state.districts}
             </Select>
@@ -343,7 +346,7 @@ export default class EducationRoute extends React.Component {
               type='submit'
               className='form-library--button control-button control-button--blue'
               value='Отправить'
-              onClick={this.isRegionDistrictIndexes}
+              onClick={this.isregionDistricts}
             />
           </form>
         </div>
@@ -351,3 +354,9 @@ export default class EducationRoute extends React.Component {
     );
   }
 }
+
+EducationRoute.propTypes = {
+  userInfo: PropTypes.shape({
+    userId: PropTypes.string,
+  }).isRequired,
+};
