@@ -15,16 +15,16 @@
     justify-content: space-around;
   }
 
-  .inline-description {
+  .label-inline-description {
     display: block;
   }
 
-  .inline-input {
+  .label-inline--input {
     display: block;
     width: 25%;
   }
 
-  .form--label--inline {
+  .form--label-inline {
     display: flex;
     align-items: baseline;
   }

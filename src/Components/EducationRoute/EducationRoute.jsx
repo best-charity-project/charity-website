@@ -289,8 +289,8 @@ export default class EducationRoute extends React.Component {
             <label className='form--label' htmlFor='first-year'>
               В каком году учащийся пойдет в учреждение образования
             </label>
-            <p className='form--label form--label--inline'>
-              <label htmlFor='first-year' className='inline-description'> c </label>
+            <p className='form--label form--label-inline'>
+              <label htmlFor='first-year' className='label-inline-description'> c </label>
               <input
                 id='first-year'
                 value={this.state.firstYear}
@@ -298,12 +298,12 @@ export default class EducationRoute extends React.Component {
                 type='number'
                 title='дата должна содержать только год и начинаться с 20..'
                 placeholder='20__'
-                className='form--input inline-input'
+                className='form--input label-inline--input'
                 min='2018'
                 max='2100'
                 required
               />
-              <label htmlFor='last-year' className='inline-description'>по</label>
+              <label htmlFor='last-year' className='label-inline-description'>по</label>
               <input
                 id='last-year'
                 value={this.state.lastYear}
@@ -311,7 +311,7 @@ export default class EducationRoute extends React.Component {
                 type='number'
                 title='дата должна содержать только год и начинаться с 20..'
                 placeholder='20__'
-                className='form--input inline-input'
+                className='form--input label-inline--input'
                 min='2018'
                 max='2100'
                 required

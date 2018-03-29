@@ -24,10 +24,10 @@ class InvalidInputMessage extends React.Component {
 
   render() {
     return (
-      <div className='invalidInputMessage-wrapper' >
+      <div className='invalid-input-message--wrapper' >
         {this.state.visible &&
           <div
-            className='invalidInputMessage'
+            className='invalid-input-message'
           >{this.props.message}
           </div>}
       </div>

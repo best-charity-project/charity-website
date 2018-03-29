@@ -1,4 +1,4 @@
-.invalidInputMessage {
+.invalid-input-message {
   text-align: center;
   padding: 1em;
   width: max-content;
@@ -11,13 +11,13 @@
   box-shadow: 3px 3px 0px rgba(135, 135, 135, 0.3);
 }
 
-.invalidInputMessage-wrapper {
+.invalid-input-message--wrapper {
   width: 35em;
   margin-top: 1em;
   position: absolute;
 }
 
-.invalidInputMessage:before {
+.invalid-input-message:before {
   border-left: 0.75em solid transparent;
   border-right: 0.75em solid transparent;
   border-bottom: 0.75em solid rgba(135, 135, 135, 0.6);
@@ -27,7 +27,7 @@
   position: absolute;
 }
 
-@keyframes invalidInputMessage {
+@keyframes invalid-input-message {
   from {
     opacity: 0;
   }
