@@ -32,7 +32,7 @@ export default class Category extends React.Component {
             <span>{this.props.title}</span>
           </div>
         </button>
-        {<TypeList {...this.props} />}
+        {this.state.isActive && <TypeList {...this.props} />}
       </div>
     );
   }
