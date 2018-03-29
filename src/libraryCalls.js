@@ -30,7 +30,7 @@ const updateItem = (id, item) => {
   const {
     categoryTag, type, title, description, url,
   } = item;
-  API.put(
+  return API.put(
     `library/edit/${id}`,
     {
       categoryTag,
