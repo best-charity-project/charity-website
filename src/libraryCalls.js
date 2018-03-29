@@ -4,6 +4,8 @@ import { getToken } from './Auth/Auth';
 const getLibraryItems = (categoryTag, type) =>
   API.get(`library/?categoryTag=${categoryTag}&type=${type}`).then(response => response.data);
 
+const getLibraryItemsAmount = (categoryTag, type) => API.get(`library/count?categoryTag=${categoryTag}&type=${type}`).then(response => response.data);
+
 const getLibraryCategories = () => API.get('categories').then(response => response.data);
 
 const addLibraryItem = libraryItem =>
@@ -49,4 +51,5 @@ export {
   updateItem,
   getItemById,
   fullTextLibrarySearch,
+  getLibraryItemsAmount,
 };
