@@ -7,7 +7,6 @@ export default () => (
   <div className='home--education-route'>
     <img src={educationImage} alt='Образовательный маршрут' className='education-route--image' />
     <Card
-      styles='card'
       heading='Образовательный маршрут'
       text='Раздел образовательный маршрут предполагает возможность
       объединение родителей для дальнейшего выстраивания образовательного маршрута

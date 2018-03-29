@@ -13,16 +13,13 @@ const Library = ({ match, userInfo }) => (
   <div className='library indent'>
     <div className='library--box'>
       <div className='library--sidebar'>
-        {userInfo.name && <Link to={`${match.url}/addToLibrary`} className='sidebar--add-item-button'>
+        <Link to={`${match.url}/${userInfo.name ? 'addToLibrary' : 'login'}`} className='sidebar--add-item-button'>
           Добавить в библиотeку
-                          </Link>}
-        {!userInfo.name && <Link to={`${match.url}/login`} className='sidebar--add-item-button'>
-          Добавить в библиотeку
-                           </Link>}
+        </Link>
         <CategoriesList match={match} />
       </div>
       <div className='library--board'>
-        <div className='library--header'>
+        <div className='board--header'>
           <Search match={match} />
         </div>
         <Switch>
@@ -35,7 +32,7 @@ const Library = ({ match, userInfo }) => (
         </Switch>
       </div>
     </div>
-  </div>
+  </div >
 );
 
 export default withRouter(Library);

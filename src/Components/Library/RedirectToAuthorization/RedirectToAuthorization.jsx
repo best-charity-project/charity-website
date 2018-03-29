@@ -3,7 +3,7 @@ import Card from '../../Card/Card';
 
 export default () => (
   <Card
-    styles='form'
+    className='form'
     heading='Пожалуйста авторизируйтесь'
     text='По правилам сайта, для того,
 чтобы добавить информацию в библиотеку,

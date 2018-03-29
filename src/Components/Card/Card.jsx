@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import './Card.css';
 
 const Card = ({
-  heading, text, path, linkText, classNameLink, target, styles,
+  heading, text, path, linkText, classNameLink, target, className,
 }) =>
   (
-    <div className={`card ${styles}`}>
+    <div className={`card ${className}`}>
       <h2 className='card--heading'>
         {heading}
       </h2>
@@ -22,14 +22,14 @@ const Card = ({
       >
         {linkText}
       </Link>
-    </div >
+    </div>
   );
 
 export default Card;
 
 Card.defaultProps = {
   target: '_self',
-  styles: '',
+  className: '',
 };
 
 Card.propTypes = {
@@ -39,5 +39,5 @@ Card.propTypes = {
   linkText: PropTypes.string.isRequired,
   target: PropTypes.string,
   classNameLink: PropTypes.string.isRequired,
-  styles: PropTypes.string,
+  className: PropTypes.string,
 };
