@@ -2,11 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch, Link, Redirect, withRouter } from 'react-router-dom';
 import EducationRoute from '../EducationRoute/EducationRoute';
-import news from '../News/News';
+import EducationRouteSearch from '../EducationRouteSearch/EducationRouteSearch';
 
 class UserAccount extends React.Component {
-  componentDidMount() {
-    // console.log(this.props.match);
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInfo: {},
+    };
   }
 
   render() {
@@ -15,17 +18,16 @@ class UserAccount extends React.Component {
         {this.props.userInfo.name && (
           <div className='admin--box'>
             <div className='admin--sidebar'>
-              <Link to={`${this.props.match.url}/education-route/form`} className='admin--link'>
+              <Link to={`${this.props.match.url}/education-route-form`} className='admin--link'>
                 Анкета образовательного маршрута
               </Link>
-              <Link to={`${this.props.match.url}/education-route`} className='admin--link'>
+              <Link to={`${this.props.match.url}/education-route-search`} className='admin--link'>
                 поиск участников <br />образовательного маршрута
               </Link>
             </div>
             <Switch>
-              <Route exact path={`${this.props.match.url}/education-route/form`} component={EducationRoute} />
-              <Route exact path={`${this.props.match.url}/education-route`} component={news} />
-              <Redirect to={`${this.props.match.url}`} />
+              <Route path={`${this.props.match.url}/education-route-form`} render={() => <EducationRoute {...this.state} />} />
+              <Route path={`${this.props.match.url}/education-route-search`} component={EducationRouteSearch} />
             </Switch>
           </div>
         )}

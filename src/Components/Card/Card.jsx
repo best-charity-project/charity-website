@@ -29,6 +29,7 @@ export default Card;
 
 Card.defaultProps = {
   target: '_self',
+  styles: '',
 };
 
 Card.propTypes = {
@@ -38,5 +39,5 @@ Card.propTypes = {
   linkText: PropTypes.string.isRequired,
   target: PropTypes.string,
   classNameLink: PropTypes.string.isRequired,
-  styles: PropTypes.string.isRequired,
+  styles: PropTypes.string,
 };

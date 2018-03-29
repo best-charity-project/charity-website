@@ -158,8 +158,8 @@ export default class EducationRoute extends React.Component {
   render() {
     const districts = (this.state.locations[this.state.regionIndex] || {}).districts || [];
     return (
-      <div className='education-route indent'>
-        <h1 className='primary-heading'>образовательный маршрут</h1>
+      <div className='education-route'>
+        <h1 className='secondary-heading'>образовательный маршрут</h1>
         <div className='form' >
           <h2 className='form--heading'>
             Анкета
