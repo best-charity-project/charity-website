@@ -22,14 +22,12 @@ export default class EducationRoute extends React.Component {
       regionDistricts: [],
       city: '',
       educationalInstitution: '',
-      arrayOfYears: [],
       firstYear: '',
       lastYear: '',
       program: '',
       isOpen: false,
     };
     this.addEducationRoute = this.addEducationRoute.bind(this);
-    this.setDefaultYears = this.setDefaultYears.bind(this);
     this.setName = this.setName.bind(this);
     this.setPhone = this.setPhone.bind(this);
     this.setEmail = this.setEmail.bind(this);
@@ -37,15 +35,23 @@ export default class EducationRoute extends React.Component {
     this.setRegionDistricts = this.setRegionDistricts.bind(this);
     this.setCity = this.setCity.bind(this);
     this.setEducationalInstitution = this.setEducationalInstitution.bind(this);
-    this.setYear = this.setYear.bind(this);
     this.setProgram = this.setProgram.bind(this);
     this.isRegionDistricts = this.isRegionDistricts.bind(this);
     this.toggleMessageisOpen = this.toggleMessageIsOpen.bind(this);
+    this.setFirstYear = this.setFirstYear.bind(this);
+    this.setLastYear = this.setLastYear.bind(this);
   }
 
   componentDidMount() {
     this.setCategories();
-    this.setDefaultYears();
+  }
+
+  setFirstYear(event) {
+    this.setState({ firstYear: event.target.value });
+  }
+
+  setLastYear(event) {
+    this.setState({ lastYear: event.target.value });
   }
 
   setCategories() {
@@ -111,39 +117,10 @@ export default class EducationRoute extends React.Component {
     });
   }
 
-  setYear(event) {
-    let { firstYear } = this.state;
-    let { lastYear } = this.state;
-    const arrayOfYears = [];
-    if (event.target.id === 'first-year') {
-      firstYear = event.target.value;
-      this.setState({ firstYear });
-    }
-    if (event.target.id === 'last-year') {
-      lastYear = event.target.value;
-      this.setState({ lastYear });
-    }
-    if (firstYear > lastYear) {
-      lastYear = firstYear;
-      this.setState({ lastYear });
-    }
-    for (let year = +firstYear; year <= +lastYear; year += 1) {
-      arrayOfYears.push(year);
-    }
-    this.setState({ arrayOfYears });
-  }
-
   setProgram(event) {
     this.setState({
       program: event.target.value,
     });
-  }
-
-  setDefaultYears() {
-    const date = new Date();
-    this.setState({ firstYear: date.getFullYear() });
-    this.setState({ lastYear: date.getFullYear() });
-    this.setState({ arrayOfYears: date.getFullYear() });
   }
 
   toggleMessageIsOpen() {
@@ -166,10 +143,10 @@ export default class EducationRoute extends React.Component {
     event.preventDefault();
     const {
       name, phone, email, region, regionDistricts,
-      city, educationalInstitution, arrayOfYears, program,
+      city, educationalInstitution, program,
+      firstYear, lastYear,
     } = this.state;
     const { userId } = this.props.userInfo;
-    const date = new Date();
     addEducation({
       name,
       phone,
@@ -178,18 +155,20 @@ export default class EducationRoute extends React.Component {
       regionDistricts,
       city,
       educationalInstitution,
-      arrayOfYears,
       program,
       userId,
+      firstYear,
+      lastYear,
     });
     this.setState({
+      firstYear: '',
+      lastYear: '',
       name: '',
       phone: '',
       email: '',
       region: '',
       regionDistricts: null,
       city: '',
-      arrayOfYears: date.getFullYear(),
       program: '',
       regionIndex: -1,
     });
@@ -343,7 +322,7 @@ export default class EducationRoute extends React.Component {
               <input
                 id='first-year'
                 value={this.state.firstYear}
-                onChange={this.setYear}
+                onChange={this.setFirstYear}
                 type='number'
                 title='дата должна содержать только год и начинаться с 20..'
                 placeholder='20__'
@@ -356,7 +335,7 @@ export default class EducationRoute extends React.Component {
               <input
                 id='last-year'
                 value={this.state.lastYear}
-                onChange={this.setYear}
+                onChange={this.setLastYear}
                 type='number'
                 title='дата должна содержать только год и начинаться с 20..'
                 placeholder='20__'

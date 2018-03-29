@@ -36,4 +36,4 @@ const logoutUser = () => {
   deleteToken();
 };
 
-export { getUserAuthInfo, logoutUser, loginUser, signupUser };
+export { getUserAuthInfo, logoutUser, loginUser, signupUser, getToken };
