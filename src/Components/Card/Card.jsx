@@ -14,7 +14,7 @@ const Card = ({
         {linkText}
       </Link>
     ) : (
-      <Link to={url} className={classNameLink} target='_blanck' rel='noopener noreferrer'>
+      <Link to={url} className={classNameLink} target='_blank' rel='noopener noreferrer'>
         {linkText}
       </Link>
     )}

@@ -52,13 +52,13 @@
   margin: 0.5em auto;
 }
 
-.purple {
+.card--link-purple {
   color: #4286f4;
   border: 1px solid #4286f4;
 }
 
 @media (hover: hover) {
-  .card--link.purple:hover {
+  .card--link.card--link-purple:hover {
     color: #fff;
     background-color: #4286f4;
   }
