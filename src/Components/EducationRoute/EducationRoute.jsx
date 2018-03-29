@@ -336,9 +336,9 @@ export default class EducationRoute extends React.Component {
               value='Отправить'
               onClick={this.isRegionDistricts}
             />
-          </form >
-        </div >
-      </div >
+          </form>
+        </div>
+      </div>
     );
   }
 }
