@@ -1,6 +1,7 @@
 {
   "baseURL": "https://charity-server.herokuapp.com/api/",
   "forumURL": "http://charity.forum2x2.ru/",
+  "accessibilityMapURL": "http://freeway.by",
   "confirmMessageTimer": 5000,
   "redirectTime": 5000,
   "MAX_DESCRIPTION_SIZE": 240
