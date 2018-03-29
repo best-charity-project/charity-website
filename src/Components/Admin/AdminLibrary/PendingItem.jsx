@@ -26,7 +26,6 @@ class PendingItem extends React.Component {
     acceptPendingItems(this.props._id).then((data) => {
       this.setState({ message: checkMessageType(data) });
     });
-    console.log(this.state.message);
   }
 
   toggleModal() {
