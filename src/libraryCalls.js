@@ -1,4 +1,5 @@
 import API from './api';
+import { getToken } from './Auth/Auth';
 
 const getLibraryItems = (categoryTag, type) =>
   API.get(`library/?categoryTag=${categoryTag}&type=${type}`).then(response => response.data);
@@ -6,7 +7,7 @@ const getLibraryItems = (categoryTag, type) =>
 const getLibraryCategories = () => API.get('categories').then(response => response.data);
 
 const addLibraryItem = libraryItem =>
-  API.post('library', libraryItem)
+  API.post('library', libraryItem, { headers: { Authorization: `Bearer ${getToken()}` } })
     .then(res => res.data)
     .catch(err => err.response.data);
 
@@ -15,12 +16,13 @@ const fullTextLibrarySearch = (textSearch, checkedTypes) =>
 
 const getPendingItems = () => API.get('library/pending').then(response => response.data);
 
-const acceptPendingItems = id => API.put(`library/${id}`)
-  .then(res => res.data)
-  .catch(err => err.response.data);
+const acceptPendingItems = id =>
+  API.put(`library/${id}`, { headers: { Authorization: `Bearer ${getToken()}` } })
+    .then(res => res.data)
+    .catch(err => err.response.data);
 
 const deleteLibraryItems = id =>
-  API.delete(`library/${id}`)
+  API.delete(`library/${id}`, { headers: { Authorization: `Bearer ${getToken()}` } })
     .then(res => res.data)
     .catch(err => err.response.data);
 
@@ -28,13 +30,17 @@ const updateItem = (id, item) => {
   const {
     categoryTag, type, title, description, url,
   } = item;
-  return API.put(`library/edit/${id}`, {
-    categoryTag,
-    type,
-    title,
-    description,
-    url,
-  })
+  API.put(
+    `library/edit/${id}`,
+    {
+      categoryTag,
+      type,
+      title,
+      description,
+      url,
+    },
+    { headers: { Authorization: `Bearer ${getToken()}` } },
+  )
     .then(res => res.data)
     .catch(err => err.response.data);
 };

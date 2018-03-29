@@ -35,6 +35,7 @@
 }
 
 .form--label {
+  display: inline-block;
   margin: 2em 0 1em 3em;
 }
 

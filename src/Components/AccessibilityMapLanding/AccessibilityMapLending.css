@@ -1,0 +1,19 @@
+.accessibility-map {
+  padding: 2em;
+  justify-content: center;
+  display: flex;
+  margin: 1em 0;
+}
+
+.accessibility-map--image {
+  height: 200px;
+  max-width: 25em;
+  opacity: 0.2;
+  margin-left: 5em;
+}
+
+@media (max-width: 1200px) {
+  .accessibility-map--image {
+    display: none;
+  }
+}

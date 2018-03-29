@@ -1,11 +1,8 @@
 const checkMessageType = (data) => {
-  let message = {};
   if (data.error) {
-    message = { type: 'error', text: data.error };
-  } else {
-    message = { type: 'success', text: data.message };
+    return { type: 'error', text: data.error };
   }
-  return message;
+  return { type: 'success', text: data.message };
 };
 
 export default checkMessageType;

@@ -34,7 +34,7 @@ class AddLibraryItem extends React.Component {
           message='Документ был добавлен в библиотеку'
         />
         <p className='add-library-item-comment'>
-          *** Информация отобразиться в библиотеке после одобрения модератором
+          *** Информация отобразится в библиотеке после одобрения модератором
         </p>
       </div>
     );
