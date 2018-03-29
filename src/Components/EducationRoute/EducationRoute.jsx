@@ -8,25 +8,26 @@ import InvalidInputMessage from './InvalidInputMessage/InvalidInputMessage';
 import './EducationRoute.css';
 import './SelectStyles.css';
 
+const defaultValues = {
+  locations: [],
+  districts: [],
+  name: '',
+  phone: '',
+  email: '',
+  regionIndex: '---',
+  regionDistricts: [],
+  city: '',
+  educationalInstitution: '',
+  firstYear: '',
+  lastYear: '',
+  program: '',
+  isOpen: false,
+};
+
 export default class EducationRoute extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      locations: [],
-      districts: [],
-      name: '',
-      phone: '',
-      email: '',
-      region: null,
-      regionIndex: -1,
-      regionDistricts: [],
-      city: '',
-      educationalInstitution: '',
-      firstYear: '',
-      lastYear: '',
-      program: '',
-      isOpen: false,
-    };
+    this.state = defaultValues;
     this.addEducationRoute = this.addEducationRoute.bind(this);
     this.setName = this.setName.bind(this);
     this.setPhone = this.setPhone.bind(this);
@@ -37,7 +38,7 @@ export default class EducationRoute extends React.Component {
     this.setEducationalInstitution = this.setEducationalInstitution.bind(this);
     this.setProgram = this.setProgram.bind(this);
     this.isRegionDistricts = this.isRegionDistricts.bind(this);
-    this.toggleMessageisOpen = this.toggleMessageIsOpen.bind(this);
+    this.toggleMessageisOpen = this.toggleMessageOpening.bind(this);
     this.setFirstYear = this.setFirstYear.bind(this);
     this.setLastYear = this.setLastYear.bind(this);
   }
@@ -47,11 +48,15 @@ export default class EducationRoute extends React.Component {
   }
 
   setFirstYear(event) {
-    this.setState({ firstYear: event.target.value });
+    this.setState({
+      firstYear: event.target.value,
+    });
   }
 
   setLastYear(event) {
-    this.setState({ lastYear: event.target.value });
+    this.setState({
+      lastYear: event.target.value,
+    });
   }
 
   setCategories() {
@@ -79,24 +84,12 @@ export default class EducationRoute extends React.Component {
   }
 
   setRegion(event) {
-    event.persist();
-    this.setState({ regionIndex: event.target.value });
-    this.setState({ districts: [] });
+    const city = event.target.value === '6' ? 'Минск' : '';
     this.setState({
-      region: this.state.locations[0].name,
-    }, () => {
-      if (!(event.target.value === '')) {
-        this.state.locations[event.target.value]
-          .district.map(district =>
-            this.state.districts
-              .push(<Option key={district} title={district}>{district} </Option>));
-      }
+      regionIndex: event.target.value,
+      districts: this.state.locations[event.target.value].district,
+      city,
     });
-    if (event.target.value === '6') {
-      this.setState({ city: 'Минск' });
-    } else {
-      this.setState({ city: '' });
-    }
   }
 
   setRegionDistricts(event) {
@@ -123,7 +116,7 @@ export default class EducationRoute extends React.Component {
     });
   }
 
-  toggleMessageIsOpen() {
+  toggleMessageOpening() {
     this.setState({
       isOpen: !this.state.isOpen,
     });
@@ -133,19 +126,20 @@ export default class EducationRoute extends React.Component {
     if (this.state.regionDistricts.length === 0
       && this.state.name !== ''
       && this.state.email !== ''
-      && this.state.region !== null
+      && this.state.regionIndex !== 0
     ) {
-      this.toggleMessageIsOpen();
+      this.toggleMessageOpening();
     }
   }
 
   addEducationRoute(event) {
     event.preventDefault();
     const {
-      name, phone, email, region, regionDistricts,
+      name, phone, email, regionDistricts,
       city, educationalInstitution, program,
-      firstYear, lastYear,
+      firstYear, lastYear, locations, regionIndex,
     } = this.state;
+    const region = locations[regionIndex].name;
     const { userId } = this.props.userInfo;
     addEducation({
       name,
@@ -160,18 +154,7 @@ export default class EducationRoute extends React.Component {
       firstYear,
       lastYear,
     });
-    this.setState({
-      firstYear: '',
-      lastYear: '',
-      name: '',
-      phone: '',
-      email: '',
-      region: '',
-      regionDistricts: null,
-      city: '',
-      program: '',
-      regionIndex: -1,
-    });
+    this.setState(defaultValues);
   }
 
   render() {
@@ -194,9 +177,7 @@ export default class EducationRoute extends React.Component {
             </p>
           </div>
           <form name='educationForm' onSubmit={this.addEducationRoute}>
-            <p className='form--label'>
-              <label htmlFor='name'>Имя</label>
-            </p>
+            <label className='form--label' htmlFor='name'>Имя</label>
             <input
               value={this.state.name}
               onChange={this.setName}
@@ -207,9 +188,7 @@ export default class EducationRoute extends React.Component {
               title='Имя должно содержать только буквы русского алфавита'
               required
             />
-            <p className='form--label'>
-              <label htmlFor='phone'>Номер телефона</label>
-            </p>
+            <label className='form--label' htmlFor='phone'>Номер телефона</label>
             <InputMask
               value={this.state.phone}
               onChange={this.setPhone}
@@ -221,9 +200,7 @@ export default class EducationRoute extends React.Component {
               title='Введите корректный контактный телефон'
               className='form--input'
             />
-            <p className='form--label'>
-              <label htmlFor='email'>Адрес электронной почты</label>
-            </p>
+            <label className='form--label' htmlFor='email'>Адрес электронной почты</label>
             <input
               value={this.state.email}
               onChange={this.setEmail}
@@ -234,9 +211,7 @@ export default class EducationRoute extends React.Component {
               className='form--input'
               required
             />
-            <p className='form--label'>
-              <label htmlFor='region'>Регион проживания</label>
-            </p>
+            <label className='form--label' htmlFor='region'>Регион проживания</label>
             <select
               id='region'
               title='Вы должны выбрать свой регион'
@@ -245,16 +220,14 @@ export default class EducationRoute extends React.Component {
               onChange={this.setRegion}
               value={this.state.regionIndex}
             >
-              <option value=''>
+              <option disabled>
                 ---
               </option>
               {this.state.locations.map((region, index) => (
                 <option key={region.name} value={index}>{region.name}</option>
               ))}
             </select>
-            <p className='form--label'>
-              <label htmlFor='regionDistrictIndices'>Областной район</label>
-            </p>
+            <label className='form--label' htmlFor='regionDistrictIndices'>Областной район</label>
             <Select
               id='regionDistrictIndices'
               title='Вы должны выбрать областной район'
@@ -266,14 +239,16 @@ export default class EducationRoute extends React.Component {
               placeholder='▼'
               value={this.state.regionDistricts}
             >
-              {this.state.districts}
+              {this.state.districts.map(district => (
+                <Option key={district} title={district}>{district} </Option>
+              ))}
             </Select>
-            {this.state.isOpen && <InvalidInputMessage
-              message='Пожалуйста, выберите регион проживания'
-            />}
-            <p className='form--label'>
-              <label htmlFor='city'>Город</label>
-            </p>
+            {
+              this.state.isOpen && <InvalidInputMessage
+                message='Пожалуйста, выберите регион проживания'
+              />
+            }
+            <label className='form--label' htmlFor='city'>Город</label>
             <input
               id='city'
               onChange={this.setCity}
@@ -312,11 +287,9 @@ export default class EducationRoute extends React.Component {
                 Средняя школа
               </label>
             </div>
-            <p className='form--label'>
-              <label htmlFor='first-year'>
-                В каком году учащийся пойдет в учреждение образования
-              </label>
-            </p>
+            <label className='form--label' htmlFor='first-year'>
+              В каком году учащийся пойдет в учреждение образования
+            </label>
             <p className='form--label form--label--inline'>
               <label htmlFor='first-year' className='inline-description'> c </label>
               <input
@@ -345,9 +318,9 @@ export default class EducationRoute extends React.Component {
                 required
               />
             </p>
-            <p className='form--label'>
-              <label htmlFor='program'>Рекомендованная программа образования</label>
-            </p>
+            <label className='form--label' htmlFor='program'>
+              Рекомендованная программа образования
+            </label>
             <input
               id='program'
               value={this.state.program}
@@ -357,21 +330,15 @@ export default class EducationRoute extends React.Component {
               placeholder='Программа обучения рекомендованная ЦКРОиР'
               className='form--input'
             />
-            <p>
-              <span className='field-wrapper--condition'>
-                *
-              </span>
-              - поля, обязательные для заполнения
-            </p>
             <input
               type='submit'
               className='form-library--button control-button control-button--blue'
               value='Отправить'
               onClick={this.isRegionDistricts}
             />
-          </form>
-        </div>
-      </div>
+          </form >
+        </div >
+      </div >
     );
   }
 }
