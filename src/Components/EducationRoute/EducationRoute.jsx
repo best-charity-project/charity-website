@@ -22,11 +22,14 @@ export default class EducationRoute extends React.Component {
       regionDistricts: [],
       city: '',
       educationalInstitution: '',
-      year: '',
+      arrayOfYears: [],
+      firstYear: '',
+      lastYear: '',
       program: '',
       isOpen: false,
     };
     this.addEducationRoute = this.addEducationRoute.bind(this);
+    this.setDefaultYears = this.setDefaultYears.bind(this);
     this.setName = this.setName.bind(this);
     this.setPhone = this.setPhone.bind(this);
     this.setEmail = this.setEmail.bind(this);
@@ -42,6 +45,7 @@ export default class EducationRoute extends React.Component {
 
   componentDidMount() {
     this.setCategories();
+    this.setDefaultYears();
   }
 
   setCategories() {
@@ -108,15 +112,38 @@ export default class EducationRoute extends React.Component {
   }
 
   setYear(event) {
-    this.setState({
-      year: event.target.value,
-    });
+    let { firstYear } = this.state;
+    let { lastYear } = this.state;
+    const arrayOfYears = [];
+    if (event.target.id === 'first-year') {
+      firstYear = event.target.value;
+      this.setState({ firstYear });
+    }
+    if (event.target.id === 'last-year') {
+      lastYear = event.target.value;
+      this.setState({ lastYear });
+    }
+    if (firstYear > lastYear) {
+      lastYear = firstYear;
+      this.setState({ lastYear });
+    }
+    for (let year = +firstYear; year <= +lastYear; year += 1) {
+      arrayOfYears.push(year);
+    }
+    this.setState({ arrayOfYears });
   }
 
   setProgram(event) {
     this.setState({
       program: event.target.value,
     });
+  }
+
+  setDefaultYears() {
+    const date = new Date();
+    this.setState({ firstYear: date.getFullYear() });
+    this.setState({ lastYear: date.getFullYear() });
+    this.setState({ arrayOfYears: date.getFullYear() });
   }
 
   toggleMessageIsOpen() {
@@ -139,9 +166,10 @@ export default class EducationRoute extends React.Component {
     event.preventDefault();
     const {
       name, phone, email, region, regionDistricts,
-      city, educationalInstitution, year, program,
+      city, educationalInstitution, arrayOfYears, program,
     } = this.state;
     const { userId } = this.props.userInfo;
+    const date = new Date();
     addEducation({
       name,
       phone,
@@ -150,7 +178,7 @@ export default class EducationRoute extends React.Component {
       regionDistricts,
       city,
       educationalInstitution,
-      year,
+      arrayOfYears,
       program,
       userId,
     });
@@ -161,7 +189,7 @@ export default class EducationRoute extends React.Component {
       region: '',
       regionDistricts: null,
       city: '',
-      year: '',
+      arrayOfYears: date.getFullYear(),
       program: '',
       regionIndex: -1,
     });
@@ -306,20 +334,38 @@ export default class EducationRoute extends React.Component {
               </label>
             </div>
             <p className='form--label'>
-              <label htmlFor='year'>В каком году учащийся пойдет в учреждение образования</label>
+              <label htmlFor='first-year'>
+                В каком году учащийся пойдет в учреждение образования
+              </label>
             </p>
-            <input
-              id='year'
-              value={this.state.year}
-              onChange={this.setYear}
-              type='number'
-              title='дата должна содержать только год и начинаться с 20..'
-              placeholder='20__'
-              className='form--input'
-              min='2018'
-              max='2100'
-              required
-            />
+            <p className='form--label form--label--inline'>
+              <label htmlFor='first-year' className='inline-description'> c </label>
+              <input
+                id='first-year'
+                value={this.state.firstYear}
+                onChange={this.setYear}
+                type='number'
+                title='дата должна содержать только год и начинаться с 20..'
+                placeholder='20__'
+                className='form--input inline-input'
+                min='2018'
+                max='2100'
+                required
+              />
+              <label htmlFor='last-year' className='inline-description'>по</label>
+              <input
+                id='last-year'
+                value={this.state.lastYear}
+                onChange={this.setYear}
+                type='number'
+                title='дата должна содержать только год и начинаться с 20..'
+                placeholder='20__'
+                className='form--input inline-input'
+                min='2018'
+                max='2100'
+                required
+              />
+            </p>
             <p className='form--label'>
               <label htmlFor='program'>Рекомендованная программа образования</label>
             </p>

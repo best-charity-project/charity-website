@@ -14,3 +14,17 @@
     flex-direction: row;
     justify-content: space-around;
   }
+
+  .inline-description {
+    display: block;
+  }
+
+  .inline-input {
+    display: block;
+    width: 25%;
+  }
+
+  .form--label--inline {
+    display: flex;
+    align-items: baseline;
+  }
