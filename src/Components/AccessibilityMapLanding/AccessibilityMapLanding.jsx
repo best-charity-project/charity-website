@@ -10,9 +10,10 @@ export default () => (
       heading='Карта доступности'
       text='Карта доcтупности поможет построить вам наиболее оптимальный и
             удобный вариант передвижения по городу.'
-      url={accessibilityMapURL}
+      path={accessibilityMapURL}
       linkText='Посмотреть'
       classNameLink='card--link card--link-purple'
+      target='_blank'
     />
     <img src={accessibilityImage} alt='Карта доступности' className='accessibility-map--image' />
   </div>
