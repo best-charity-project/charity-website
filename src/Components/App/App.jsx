@@ -25,11 +25,17 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    getUserAuthInfo().then((userInfo) => {
-      this.setState({
-        userInfo,
+    getUserAuthInfo()
+      .then((userInfo) => {
+        this.setState({
+          userInfo,
+        });
+      })
+      .catch((err) => {
+        if (err.response.status === 401) {
+          this.setState({ userInfo: { admin: false } });
+        }
       });
-    });
   }
 
   onAuthChange(userInfo) {
@@ -41,7 +47,7 @@ export default class App extends React.Component {
   onLogout() {
     logoutUser();
     this.setState({
-      userInfo: {},
+      userInfo: { admin: false },
     });
   }
 
