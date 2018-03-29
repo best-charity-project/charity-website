@@ -23,15 +23,15 @@ const Admin = ({ match, userInfo }) => (
           </Link>
         </div>
         <Switch>
+          <Route path={`${match.url}/news/edit/:id`} component={EditNews} />
           <Route exact path={`${match.url}/news`} component={AdminNews} />
           <Route path={`${match.url}/addNews`} component={AddNews} />
-          <Route path={`${match.url}/news/edit/:id`} component={EditNews} />
           <Route path={`${match.url}/library`} component={AdminLibrary} />
           <Redirect to={`${match.url}/news`} />
         </Switch>
       </div>
     )}
-    {!userInfo.admin && <Redirect to='/login' />}
+    {userInfo.admin === false && <Redirect to='/login' />}
     {userInfo.admin === undefined && <p>Загрузка...</p>}
   </div>
 );

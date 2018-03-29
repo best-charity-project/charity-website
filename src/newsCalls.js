@@ -1,4 +1,5 @@
 import API from './api';
+import { getToken } from './Auth/Auth';
 
 let newsCache;
 
@@ -12,24 +13,29 @@ const getNews = () => {
   return Promise.resolve(newsCache);
 };
 
-const addNews = news => API.post('news', news);
+const addNews = news =>
+  API.post('news', news, { headers: { Authorization: `Bearer ${getToken()}` } });
 
 const updateNews = (id, news) => {
   const {
     title, newsText, url, date,
   } = news;
-  API.put(`news/${id}`, {
-    title,
-    newsText,
-    url,
-    date,
-  });
+  API.put(
+    `news/${id}`,
+    {
+      title,
+      newsText,
+      url,
+      date,
+    },
+    { headers: { Authorization: `Bearer ${getToken()}` } },
+  );
 };
 
 const getNewsById = id => API.get(`news/${id}`).then(response => response.data);
 
 const deleteNews = (id) => {
-  API.delete(`news/${id}`);
+  API.delete(`news/${id}`, { headers: { Authorization: `Bearer ${getToken()}` } });
 };
 
 export { getNews, addNews, updateNews, getNewsById, deleteNews };
