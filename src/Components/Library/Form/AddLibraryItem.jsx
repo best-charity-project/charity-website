@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from '../Form/Form';
 import { addLibraryItem } from '../../../libraryCalls';
+import checkMessageType from '../../Admin/checkMessageType';
 import Message from '../../Message/Message';
 import './AddLibraryItem.css';
 
@@ -18,14 +19,7 @@ class AddLibraryItem extends React.Component {
 
   handleFormSubmit(formData) {
     addLibraryItem(formData).then((data) => {
-      let message = {};
-      if (data.error) {
-        message = { type: 'error', text: data.error };
-        this.setState({ message });
-      } else {
-        message = { type: 'success', text: data.message };
-        this.setState({ message });
-      }
+      this.setState({ message: checkMessageType(data) });
     });
   }
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { acceptPendingItems, deleteLibraryItems } from '../../../libraryCalls';
+import checkMessageType from '../checkMessageType';
+import Message from '../../Message/Message';
 import ControlButton from '../../ControlButton/ControlButton';
 import Modal from '../ModalWindow/ModalWindow';
 import './PendingItem.css';
@@ -17,7 +19,9 @@ class PendingItem extends React.Component {
   }
 
   acceptItem() {
-    acceptPendingItems(this.props._id);
+    acceptPendingItems(this.props._id).then((data) => {
+      this.setState({ message: checkMessageType(data) });
+    });
   }
 
   toggleModal() {
@@ -27,7 +31,9 @@ class PendingItem extends React.Component {
   }
 
   rejectItem() {
-    deleteLibraryItems(this.props._id);
+    deleteLibraryItems(this.props._id).then((data) => {
+      this.setState({ message: checkMessageType(data) });
+    });
     this.toggleModal();
   }
 
@@ -37,6 +43,7 @@ class PendingItem extends React.Component {
         <a href={this.props.url} className='single-item--link'>
           <h2>{this.props.title}</h2>
         </a>
+        <Message {...this.state.message} />
         <p className='single-item--text'>{this.props.description}</p>
         <div className='item--buttons'>
           <ControlButton

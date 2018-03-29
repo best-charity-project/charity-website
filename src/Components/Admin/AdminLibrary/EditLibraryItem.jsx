@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import Form from '../../Library/Form/Form';
 import { updateItem, getItemById } from '../../../libraryCalls';
+import checkMessageType from '../checkMessageType';
+import Message from '../../Message/Message';
 import BackIcon from '../../icons/back.svg';
 import './EditLibraryItem.css';
 
@@ -11,6 +13,10 @@ class EditLibraryItem extends React.Component {
     super(props);
     this.state = {
       libraryItem: null,
+      message: {
+        type: '',
+        text: '',
+      },
     };
     this.getLibraryItems = this.getLibraryItems.bind(this);
     this.updateLibraryItem = this.updateLibraryItem.bind(this);
@@ -28,7 +34,9 @@ class EditLibraryItem extends React.Component {
   }
 
   updateLibraryItem(item) {
-    updateItem(this.props.match.params.id, item);
+    updateItem(this.props.match.params.id, item).then((data) => {
+      this.setState({ message: checkMessageType(data) });
+    });
   }
 
   render() {
@@ -39,6 +47,7 @@ class EditLibraryItem extends React.Component {
           Вернуться к списку
         </NavLink>
         <h1 className='secondary-heading'>Редактирование документа</h1>
+        <Message {...this.state.message} />
         <Form
           item={this.state.libraryItem}
           onSubmit={this.updateLibraryItem}

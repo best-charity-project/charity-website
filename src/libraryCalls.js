@@ -15,21 +15,28 @@ const fullTextLibrarySearch = (textSearch, checkedTypes) =>
 
 const getPendingItems = () => API.get('library/pending').then(response => response.data);
 
-const acceptPendingItems = id => API.put(`library/${id}`);
+const acceptPendingItems = id => API.put(`library/${id}`)
+  .then(res => res.data)
+  .catch(err => err.response.data);
 
-const deleteLibraryItems = id => API.delete(`library/${id}`);
+const deleteLibraryItems = id =>
+  API.delete(`library/${id}`)
+    .then(res => res.data)
+    .catch(err => err.response.data);
 
 const updateItem = (id, item) => {
   const {
     categoryTag, type, title, description, url,
   } = item;
-  API.put(`library/edit/${id}`, {
+  return API.put(`library/edit/${id}`, {
     categoryTag,
     type,
     title,
     description,
     url,
-  });
+  })
+    .then(res => res.data)
+    .catch(err => err.response.data);
 };
 
 const getItemById = id => API.get(`library/${id}`).then(response => response.data);
