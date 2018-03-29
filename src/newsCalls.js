@@ -21,18 +21,21 @@ const updateNews = (id, news) => {
   const {
     title, newsText, url, date,
   } = news;
-  API.put(`news/${id}`, {
+  return API.put(`news/${id}`, {
     title,
     newsText,
     url,
     date,
-  });
+  })
+    .then(res => res.data)
+    .catch(err => err.response.data);
 };
 
 const getNewsById = id => API.get(`news/${id}`).then(response => response.data);
 
-const deleteNews = (id) => {
-  API.delete(`news/${id}`);
-};
+const deleteNews = id =>
+  API.delete(`news/${id}`)
+    .then(res => res.data)
+    .catch(err => err.response.data);
 
 export { getNews, addNews, updateNews, getNewsById, deleteNews };

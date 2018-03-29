@@ -1,12 +1,14 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import './Admin.css';
 import { deleteNews } from '../../newsCalls';
 import SingleNews from '../News/SingleNews/SingleNews';
 import ControlButton from '../ControlButton/ControlButton';
 import DetailsButton from '../DetailsButton/DetailsButton';
 import Modal from './ModalWindow/ModalWindow';
+import checkMessageType from './checkMessageType';
+import Message from '../Message/Message';
+import './Admin.css';
 import './AdminNewsItem.css';
 import '../ControlButton/ControlButton.css';
 
@@ -17,6 +19,10 @@ class AdminNewsItem extends React.Component {
       isOpen: false,
       link: '',
       text: '',
+      message: {
+        type: '',
+        text: '',
+      },
     };
     this.deleteHandler = this.deleteHandler.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -53,13 +59,16 @@ class AdminNewsItem extends React.Component {
   }
 
   deleteHandler() {
-    deleteNews(this.props._id);
+    deleteNews(this.props._id).then((data) => {
+      this.setState({ message: checkMessageType(data) });
+    });
     this.toggleModal();
   }
 
   render() {
     return (
       <div className='news-card'>
+        <Message {...this.state.message} />
         <SingleNews {...this.props} />
         <div className='item--buttons'>
           <ControlButton
@@ -85,9 +94,13 @@ class AdminNewsItem extends React.Component {
 }
 export default withRouter(AdminNewsItem);
 
+AdminNewsItem.defaultProps = {
+  url: '',
+};
+
 AdminNewsItem.propTypes = {
   _id: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  url: PropTypes.string,
   match: PropTypes.shape({
     url: PropTypes.string,
   }).isRequired,
