@@ -9,9 +9,10 @@ export default () => (
     <Card
       heading='Карта доступности'
       text='Карта дсотупности поможет построить вам наиболее оптимальный и
-      удобный вариант передвижения по городу.'
+            удобный вариант передвижения по городу.'
       url={accessibilityMapURL}
       linkText='Посмотреть'
+      classNameLink='card--link purple'
     />
     <img src={accessibilityImage} alt='Карта доступности' className='accessibility-map--image' />
   </div>

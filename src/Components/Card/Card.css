@@ -52,21 +52,13 @@
   margin: 0.5em auto;
 }
 
-.card--link-default {
-  text-decoration: none;
+.purple {
   color: #4286f4;
-  width: 12em;
-  text-align: center;
-  text-transform: uppercase;
-  padding: 0.8em 0;
-  transition: all 0.2s;
-  display: block;
   border: 1px solid #4286f4;
-  margin: 0.5em auto;
 }
 
 @media (hover: hover) {
-  .card--link-default:hover {
+  .card--link.purple:hover {
     color: #fff;
     background-color: #4286f4;
   }

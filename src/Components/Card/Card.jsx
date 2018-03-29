@@ -4,17 +4,17 @@ import PropTypes from 'prop-types';
 import './Card.css';
 
 const Card = ({
-  heading, text, path, url, linkText,
+  heading, text, path, url, linkText, classNameLink,
 }) => (
   <div className='card'>
     <h2 className='card--heading'>{heading}</h2>
     <p className='card--text'>{text}</p>
     {path ? (
-      <Link to={path} className='card--link'>
-        Перейти
+      <Link to={path} className={classNameLink}>
+        {linkText}
       </Link>
     ) : (
-      <Link to={url} className='card--link-default' target='_blanck' rel='noopener noreferrer'>
+      <Link to={url} className={classNameLink} target='_blanck' rel='noopener noreferrer'>
         {linkText}
       </Link>
     )}
@@ -29,4 +29,5 @@ Card.propTypes = {
   path: PropTypes.string.isRequired,
   linkText: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
+  classNameLink: PropTypes.string.isRequired,
 };
