@@ -4,7 +4,7 @@
 
 .card--text {
   text-align: justify;
-  padding: .5em 2em;
+  padding: 0.5em 2em;
   line-height: 1.5;
   text-indent: 2em;
 }
@@ -21,7 +21,6 @@
 .card--heading {
   font-size: 1.8em;
   padding: 1em;
-  font-family: "Roboto", sans-serif;
   text-align: center;
   font-weight: 100;
 }
@@ -50,6 +49,18 @@
   display: block;
   border: 1px solid #70ea88;
   margin: 0.5em auto;
+}
+
+.card--link-purple {
+  color: #4286f4;
+  border: 1px solid #4286f4;
+}
+
+@media (hover: hover) {
+  .card--link.card--link-purple:hover {
+    color: #fff;
+    background-color: #4286f4;
+  }
 }
 
 @media (hover: hover) {

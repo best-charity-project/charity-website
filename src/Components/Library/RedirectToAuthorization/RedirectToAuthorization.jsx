@@ -3,12 +3,13 @@ import Card from '../../Card/Card';
 
 export default () => (
   <Card
+    styles='login-form'
     heading='Пожалуйста авторизируйтесь'
     text='По правилам сайта, для того,
 чтобы добавить информацию в библиотеку,
 пользователь должен авторизироваться'
     path='/login'
-    styles='login-form'
-    buttonText='Авторизироваться'
+    linkText='Авторизироваться'
+    classNameLink='card--link'
   />
 );

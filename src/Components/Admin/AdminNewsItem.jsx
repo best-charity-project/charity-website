@@ -8,6 +8,7 @@ import ControlButton from '../ControlButton/ControlButton';
 import DetailsButton from '../DetailsButton/DetailsButton';
 import Modal from './ModalWindow/ModalWindow';
 import './AdminNewsItem.css';
+import '../ControlButton/ControlButton.css';
 
 class AdminNewsItem extends React.Component {
   constructor(props) {

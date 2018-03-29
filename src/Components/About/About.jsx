@@ -4,7 +4,7 @@ import './About.css';
 
 export default () => (
   <div className='about-us indent'>
-    <h1 className='about-us--heading'>О нас </h1>
+    <h1 className='primary-heading'>О нас </h1>
     <div className='about-us--main'>
       <img src={AboutUs} className='main--image' alt='here should be a pic' />
       <div className='main--content'>

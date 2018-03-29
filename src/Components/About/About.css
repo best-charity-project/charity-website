@@ -6,17 +6,6 @@
   min-height: calc(100vh - 4em);
 }
 
-.about-us--heading {
-  text-align: center;
-  margin: 1em 0;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 100;
-  font-size: 3em;
-  color: #1d6e87;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
 .about-us--main {
   display: flex;
 }
@@ -57,11 +46,5 @@
 @media (max-width: 992px) {
   .main--image {
     display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .about-us--heading {
-    padding-top: 1em;
   }
 }

@@ -13,10 +13,10 @@ const Library = ({ match, userInfo }) => (
   <div className='library indent'>
     <div className='library--box'>
       <div className='library--sidebar'>
-        {userInfo.name && <Link to={`${match.url}/addToLibrary`} className='library--add'>
+        {userInfo.name && <Link to={`${match.url}/addToLibrary`} className='sidebar--add-item-button'>
           Добавить в библиотeку
                           </Link>}
-        {!userInfo.name && <Link to={`${match.url}/login`} className='library--add'>
+        {!userInfo.name && <Link to={`${match.url}/login`} className='sidebar--add-item-button'>
           Добавить в библиотeку
                            </Link>}
         <CategoriesList match={match} />

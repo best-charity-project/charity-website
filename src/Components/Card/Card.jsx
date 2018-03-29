@@ -4,25 +4,39 @@ import PropTypes from 'prop-types';
 import './Card.css';
 
 const Card = ({
-  heading,
-  text,
-  path,
-  styles,
-  buttonText,
+  heading, text, path, linkText, classNameLink, target, styles,
 }) =>
   (
-    <div className={styles}>
-      <h2 className='card--heading'> {heading} </h2>
-      <p className='card--text'>{text} </p>
-      <Link to={path} className='card--link'>{buttonText}</Link>
-    </div>);
+    <div className={`card ${styles}`}>
+      <h2 className='card--heading'>
+        {heading}
+      </h2>
+      <p className='card--text'>
+        {text}
+      </p>
+      <Link
+        to={path}
+        className={classNameLink}
+        target={target}
+        rel='noopener noreferrer'
+      >
+        {linkText}
+      </Link>
+    </div >
+  );
 
 export default Card;
+
+Card.defaultProps = {
+  target: '_self',
+};
 
 Card.propTypes = {
   heading: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
+  linkText: PropTypes.string.isRequired,
+  target: PropTypes.string,
+  classNameLink: PropTypes.string.isRequired,
   styles: PropTypes.string.isRequired,
-  buttonText: PropTypes.string.isRequired,
 };
