@@ -4,7 +4,7 @@ import educationImage from '../img/kids.svg';
 import './EducationRouteLanding.css';
 
 export default () => (
-  <div className='education-route'>
+  <div className='home--education-route'>
     <img src={educationImage} alt='Образовательный маршрут' className='education-route--image' />
     <Card
       heading='Образовательный маршрут'

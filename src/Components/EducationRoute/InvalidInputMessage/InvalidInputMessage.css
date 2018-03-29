@@ -1,0 +1,37 @@
+.invalid-input-message {
+  text-align: center;
+  padding: 1em;
+  width: max-content;
+  background-color: white;
+  margin: 0 auto;
+  border: 1px solid;
+  border-radius: 5px;
+  font-size: 0.9em;
+  animation: alert .75s;
+  box-shadow: 3px 3px 0px rgba(135, 135, 135, 0.3);
+}
+
+.invalid-input-message--wrapper {
+  width: 35em;
+  margin-top: 1em;
+  position: absolute;
+}
+
+.invalid-input-message:before {
+  border-left: 0.75em solid transparent;
+  border-right: 0.75em solid transparent;
+  border-bottom: 0.75em solid rgba(135, 135, 135, 0.6);
+  content: '';
+  margin-top: -25px;
+  margin-left: 20px;
+  position: absolute;
+}
+
+@keyframes invalid-input-message {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

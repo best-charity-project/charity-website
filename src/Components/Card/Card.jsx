@@ -5,15 +5,25 @@ import './Card.css';
 
 const Card = ({
   heading, text, path, linkText, classNameLink, target,
-}) => (
-  <div className='card'>
-    <h2 className='card--heading'>{heading}</h2>
-    <p className='card--text'>{text}</p>
-    <Link to={path} className={classNameLink} target={target} rel='noopener noreferrer'>
-      {linkText}
-    </Link>
-  </div>
-);
+}) =>
+  (
+    <div className='card'>
+      <h2 className='card--heading'>
+        {heading}
+      </h2>
+      <p className='card--text'>
+        {text}
+      </p>
+      <Link
+        to={path}
+        className={classNameLink}
+        target={target}
+        rel='noopener noreferrer'
+      >
+        {linkText}
+      </Link>
+    </div>
+  );
 
 export default Card;
 
