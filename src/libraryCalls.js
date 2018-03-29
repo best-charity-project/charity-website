@@ -17,7 +17,7 @@ const fullTextLibrarySearch = (textSearch, checkedTypes) =>
 const getPendingItems = () => API.get('library/pending').then(response => response.data);
 
 const acceptPendingItems = id =>
-  API.put(`library/${id}`, { headers: { Authorization: `Bearer ${getToken()}` } })
+  API.put(`library/${id}`, {}, { headers: { Authorization: `Bearer ${getToken()}` } })
     .then(res => res.data)
     .catch(err => err.response.data);
 

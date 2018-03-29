@@ -12,6 +12,10 @@ class PendingItem extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
+      message: {
+        type: '',
+        text: '',
+      },
     };
     this.acceptItem = this.acceptItem.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -22,6 +26,7 @@ class PendingItem extends React.Component {
     acceptPendingItems(this.props._id).then((data) => {
       this.setState({ message: checkMessageType(data) });
     });
+    console.log(this.state.message);
   }
 
   toggleModal() {
