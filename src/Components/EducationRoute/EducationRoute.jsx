@@ -10,7 +10,6 @@ import './SelectStyles.css';
 
 const defaultValues = {
   locations: [],
-  districts: [],
   name: '',
   phone: '',
   email: '',
@@ -87,7 +86,6 @@ export default class EducationRoute extends React.Component {
     const city = event.target.value === '6' ? 'Минск' : '';
     this.setState({
       regionIndex: event.target.value,
-      districts: this.state.locations[event.target.value].district,
       city,
     });
   }
@@ -158,6 +156,7 @@ export default class EducationRoute extends React.Component {
   }
 
   render() {
+    const districts = (this.state.locations[this.state.regionIndex] || {}).districts || [];
     return (
       <div className='education-route indent'>
         <h1 className='primary-heading'>образовательный маршрут</h1>
@@ -239,7 +238,7 @@ export default class EducationRoute extends React.Component {
               placeholder='▼'
               value={this.state.regionDistricts}
             >
-              {this.state.districts.map(district => (
+              {districts.map(district => (
                 <Option key={district} title={district}>{district} </Option>
               ))}
             </Select>
