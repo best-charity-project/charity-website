@@ -23,9 +23,13 @@ class PendingItem extends React.Component {
   }
 
   acceptItem() {
-    acceptPendingItems(this.props._id).then((data) => {
-      this.setState({ message: checkMessageType(data) });
-    });
+    acceptPendingItems(this.props._id)
+      .then((data) => {
+        this.setState({ message: checkMessageType(data, 'success') });
+      })
+      .catch((err) => {
+        this.setState({ message: checkMessageType(err, 'error') });
+      });
   }
 
   toggleModal() {
@@ -35,9 +39,13 @@ class PendingItem extends React.Component {
   }
 
   rejectItem() {
-    deleteLibraryItems(this.props._id).then((data) => {
-      this.setState({ message: checkMessageType(data) });
-    });
+    deleteLibraryItems(this.props._id)
+      .then((data) => {
+        this.setState({ message: checkMessageType(data, 'success') });
+      })
+      .catch((err) => {
+        this.setState({ message: checkMessageType(err, 'error') });
+      });
     this.toggleModal();
   }
 

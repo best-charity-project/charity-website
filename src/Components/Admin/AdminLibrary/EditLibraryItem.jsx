@@ -34,9 +34,13 @@ class EditLibraryItem extends React.Component {
   }
 
   updateLibraryItem(item) {
-    updateItem(this.props.match.params.id, item).then((data) => {
-      this.setState({ message: checkMessageType(data) });
-    });
+    updateItem(this.props.match.params.id, item)
+      .then((data) => {
+        this.setState({ message: checkMessageType(data, 'success') });
+      })
+      .catch((err) => {
+        this.setState({ message: checkMessageType(err, 'error') });
+      });
   }
 
   render() {

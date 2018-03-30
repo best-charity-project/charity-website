@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import SignupForm from './SignupForm';
 import { signupUser } from '../../Auth/Auth';
 import Message from '../Message/Message';
-import checkMessageType from '../Admin/checkMessageType';
 import { redirectTime } from '../../configs/config.json';
 import './SignupForm.css';
 
@@ -29,7 +28,14 @@ class SignupPage extends React.Component {
 
   handleFormSubmit(formData) {
     signupUser(formData).then((data) => {
-      this.setState({ message: checkMessageType(data) });
+      let message = {};
+      if (data.error) {
+        message = { type: 'error', text: data.error };
+        this.setState({ message });
+        return;
+      }
+      message = { type: 'success', text: data.message };
+      this.setState({ message });
       this.props.onAuthChange(data.userInfo);
       this.redirect();
     });

@@ -18,9 +18,13 @@ class AddLibraryItem extends React.Component {
   }
 
   handleFormSubmit(formData) {
-    addLibraryItem(formData).then((data) => {
-      this.setState({ message: checkMessageType(data) });
-    });
+    addLibraryItem(formData)
+      .then((data) => {
+        this.setState({ message: checkMessageType(data, 'success') });
+      })
+      .catch((err) => {
+        this.setState({ message: checkMessageType(err, 'error') });
+      });
   }
 
   render() {

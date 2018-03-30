@@ -31,9 +31,13 @@ class EditNews extends React.Component {
   }
 
   handleNewsUpdate(news) {
-    updateNews(this.props.match.params.id, news).then((data) => {
-      this.setState({ message: checkMessageType(data) });
-    });
+    updateNews(this.props.match.params.id, news)
+      .then((data) => {
+        this.setState({ message: checkMessageType(data, 'success') });
+      })
+      .catch((err) => {
+        this.setState({ message: checkMessageType(err, 'error') });
+      });
   }
 
   render() {

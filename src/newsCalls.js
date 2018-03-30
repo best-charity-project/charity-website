@@ -14,9 +14,7 @@ const getNews = () => {
 };
 
 const addNews = news =>
-  API.post('news', news, { headers: { Authorization: `Bearer ${getToken()}` } })
-    .then(res => res.data)
-    .catch(err => err.response.data);
+  API.post('news', news, { headers: { Authorization: `Bearer ${getToken()}` } }).then(res => res.data);
 
 const updateNews = (id, news) => {
   const {
@@ -32,16 +30,12 @@ const updateNews = (id, news) => {
       date,
     },
     { headers: { Authorization: `Bearer ${getToken()}` } },
-  )
-    .then(res => res.data)
-    .catch(err => err.response.data);
+  ).then(res => res.data);
 };
 
 const getNewsById = id => API.get(`news/${id}`).then(response => response.data);
 
 const deleteNews = id =>
-  API.delete(`news/${id}`, { headers: { Authorization: `Bearer ${getToken()}` } })
-    .then(res => res.data)
-    .catch(err => err.response.data);
+  API.delete(`news/${id}`, { headers: { Authorization: `Bearer ${getToken()}` } }).then(res => res.data);
 
 export { getNews, addNews, updateNews, getNewsById, deleteNews };

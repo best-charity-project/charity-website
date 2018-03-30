@@ -7,9 +7,7 @@ const getLibraryItems = (categoryTag, type) =>
 const getLibraryCategories = () => API.get('categories').then(response => response.data);
 
 const addLibraryItem = libraryItem =>
-  API.post('library', libraryItem, { headers: { Authorization: `Bearer ${getToken()}` } })
-    .then(res => res.data)
-    .catch(err => err.response.data);
+  API.post('library', libraryItem, { headers: { Authorization: `Bearer ${getToken()}` } }).then(res => res.data);
 
 const fullTextLibrarySearch = (textSearch, checkedTypes) =>
   API.get(`library/search/?textSearch=${textSearch}&types=${checkedTypes}`).then(response => response.data);
@@ -17,14 +15,10 @@ const fullTextLibrarySearch = (textSearch, checkedTypes) =>
 const getPendingItems = () => API.get('library/pending').then(response => response.data);
 
 const acceptPendingItems = id =>
-  API.put(`library/${id}`, {}, { headers: { Authorization: `Bearer ${getToken()}` } })
-    .then(res => res.data)
-    .catch(err => err.response.data);
+  API.put(`library/${id}`, {}, { headers: { Authorization: `Bearer ${getToken()}` } }).then(res => res.data);
 
 const deleteLibraryItems = id =>
-  API.delete(`library/${id}`, { headers: { Authorization: `Bearer ${getToken()}` } })
-    .then(res => res.data)
-    .catch(err => err.response.data);
+  API.delete(`library/${id}`, { headers: { Authorization: `Bearer ${getToken()}` } }).then(res => res.data);
 
 const updateItem = (id, item) => {
   const {
@@ -40,9 +34,7 @@ const updateItem = (id, item) => {
       url,
     },
     { headers: { Authorization: `Bearer ${getToken()}` } },
-  )
-    .then(res => res.data)
-    .catch(err => err.response.data);
+  ).then(res => res.data);
 };
 
 const getItemById = id => API.get(`library/${id}`).then(response => response.data);

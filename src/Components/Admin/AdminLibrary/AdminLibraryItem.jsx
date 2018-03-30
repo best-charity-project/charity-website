@@ -33,9 +33,13 @@ class AdminLibraryItem extends React.Component {
   }
 
   deleteItem() {
-    deleteLibraryItems(this.props._id).then((data) => {
-      this.setState({ message: checkMessageType(data) });
-    });
+    deleteLibraryItems(this.props._id)
+      .then((data) => {
+        this.setState({ message: checkMessageType(data, 'success') });
+      })
+      .catch((err) => {
+        this.setState({ message: checkMessageType(err, 'error') });
+      });
     this.toggleModal();
   }
 

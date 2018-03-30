@@ -18,9 +18,13 @@ class AddNews extends React.Component {
   }
 
   handleFormSubmit(formData) {
-    addNews(formData).then((data) => {
-      this.setState({ message: checkMessageType(data) });
-    });
+    addNews(formData)
+      .then((data) => {
+        this.setState({ message: checkMessageType(data, 'success') });
+      })
+      .catch((err) => {
+        this.setState({ message: checkMessageType(err, 'error') });
+      });
   }
 
   render() {
