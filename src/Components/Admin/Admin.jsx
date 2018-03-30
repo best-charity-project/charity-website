@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Switch, Link, Redirect, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import './Admin.css';
 import AdminNews from './AdminNews';
 import EditNews from './AddEditNews/EditNews';
 import AddNews from './AddEditNews/AddNews';
 import AdminLibrary from './AdminLibrary';
+import '../Sidebar/Sidebar.css';
 
 const Admin = ({ match, userInfo }) => (
   <div className='admin indent'>

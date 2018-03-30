@@ -138,7 +138,7 @@ export default class EducationRoute extends React.Component {
       firstYear, lastYear, locations, regionIndex,
     } = this.state;
     const region = locations[regionIndex].name;
-    const { userId } = this.props.userInfo;
+    const { userId } = this.props;
     addEducation({
       name,
       phone,
@@ -343,7 +343,5 @@ export default class EducationRoute extends React.Component {
 }
 
 EducationRoute.propTypes = {
-  userInfo: PropTypes.shape({
-    userId: PropTypes.string,
-  }).isRequired,
+  userId: PropTypes.string.isRequired,
 };
