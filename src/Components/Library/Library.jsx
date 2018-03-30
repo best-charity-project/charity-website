@@ -32,7 +32,7 @@ const Library = ({ match, userInfo }) => (
         </Switch>
       </div>
     </div>
-  </div >
+  </div>
 );
 
 export default withRouter(Library);
