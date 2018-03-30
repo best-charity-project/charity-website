@@ -4,7 +4,7 @@ import educationImage from '../img/kids.svg';
 import './EducationRouteLanding.css';
 
 export default () => (
-  <div className='education-route'>
+  <div className='home--education-route'>
     <img src={educationImage} alt='Образовательный маршрут' className='education-route--image' />
     <Card
       heading='Образовательный маршрут'
@@ -12,6 +12,8 @@ export default () => (
       объединение родителей для дальнейшего выстраивания образовательного маршрута
       детей с особыми образовательными потребностями.'
       path='education-route'
+      linkText='Перейти'
+      classNameLink='card--link'
     />
   </div>
 );
