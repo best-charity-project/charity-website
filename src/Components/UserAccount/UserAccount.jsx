@@ -10,6 +10,15 @@ class UserAccount extends React.Component {
     this.state = {
       userInfo: {},
     };
+    this.setUserInfo = this.setUserInfo.bind(this);
+  }
+
+  componentDidMount() {
+    this.setUserInfo();
+  }
+
+  setUserInfo() {
+    this.setState({ userInfo: this.props.userInfo });
   }
 
   render() {
