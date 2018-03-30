@@ -28,7 +28,7 @@ const Card = ({
 export default Card;
 
 Card.defaultProps = {
-  target: '_self',
+  target: '',
   classNameCard: '',
 };
 
