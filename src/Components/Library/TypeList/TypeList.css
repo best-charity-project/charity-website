@@ -1,36 +1,32 @@
 .type-list {
   width: 95%;
-  margin: 0 auto .25em;
+  margin: 0 auto 0.25em;
   text-transform: uppercase;
   opacity: 0;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
   max-height: 0;
 }
 
-.type-list .type-list--link {
-  visibility: hidden;
-  transition: all .3s ease;
-}
-
-.open~.type-list .type-list--link {
+.open ~ .type-list .type--link {
+  font-size: 1em;
   visibility: visible;
 }
 
-.open~.type-list {
+.open ~ .type-list {
   max-height: 200px;
   opacity: 1;
   transition-property: max-height, opacity;
-  transition-duration: .5s;
+  transition-duration: 0.5s;
 }
 
-.open~.type-list>li {
-  margin: .5em;
+.open ~ .type-list > li {
+  margin: 0.5em;
   transition-property: opacity;
-  transition-duration: .5s;
+  transition-duration: 0.5s;
 }
 
 .type-list li {
   max-height: inherit;
   padding-left: 3em;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
