@@ -1,15 +1,15 @@
-.admin--box {
+.sidebar {
   display: flex;
 }
 
-.admin--sidebar {
+.sidebar--navigation {
   min-width: 23em;
   background-color: #fff;
   padding-top: 2em;
   min-height: calc(100vh - 10em);
 }
 
-.admin--link {
+.sidebar--link {
   display: block;
   margin: 1em 0;
   text-decoration: none;
@@ -19,7 +19,7 @@
   padding: 1em 3em;
 }
 
-.admin--link:hover {
+.sidebar--link:hover {
   color: #fff;
   background-color: #37b3d8;
 }
@@ -43,10 +43,10 @@
   .admin {
     flex-direction: column;
   }
-  .admin--box {
+  .sidebar {
     flex-direction: column;
   }
-  .admin--sidebar {
+  .sidebar--navigation {
     min-width: 100%;
     min-height: auto;
   }

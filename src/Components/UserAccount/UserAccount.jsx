@@ -14,14 +14,14 @@ class UserAccount extends React.Component {
 
   render() {
     return (
-      <div className='Account indent'>
+      <div className='account indent'>
         {this.props.userInfo.name && (
-          <div className='admin--box'>
-            <div className='admin--sidebar'>
-              <Link to={`${this.props.match.url}/education-route-form`} className='admin--link'>
+          <div className='sidebar'>
+            <div className='sidebar--navigation'>
+              <Link to={`${this.props.match.url}/education-route-form`} className='sidebar--link'>
                 Анкета образовательного маршрута
               </Link>
-              <Link to={`${this.props.match.url}/education-route-search`} className='admin--link'>
+              <Link to={`${this.props.match.url}/education-route-search`} className='sidebar--link'>
                 поиск участников <br />образовательного маршрута
               </Link>
             </div>

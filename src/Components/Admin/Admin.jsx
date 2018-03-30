@@ -10,15 +10,15 @@ import AdminLibrary from './AdminLibrary';
 const Admin = ({ match, userInfo }) => (
   <div className='admin indent'>
     {userInfo.admin && (
-      <div className='admin--box'>
-        <div className='admin--sidebar'>
-          <Link to={`${match.url}/news`} className='admin--link'>
+      <div className='sidebar'>
+        <div className='sidebar--navigation'>
+          <Link to={`${match.url}/news`} className='sidebar--link'>
             Посмотреть все новости
           </Link>
-          <Link to={`${match.url}/addNews`} className='admin--link'>
+          <Link to={`${match.url}/addNews`} className='sidebar--link'>
             Добавить новость
           </Link>
-          <Link to={`${match.url}/library`} className='admin--link'>
+          <Link to={`${match.url}/library`} className='sidebar--link'>
             Библиотека
           </Link>
         </div>
