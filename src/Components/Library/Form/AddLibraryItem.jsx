@@ -29,7 +29,7 @@ class AddLibraryItem extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='add-library-item'>
         <h1 className='secondary-heading'>Добавление информации в библиотеку</h1>
         <Message {...this.state.message} />
         <Form
