@@ -1,0 +1,61 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import './RestorePassForm.css';
+
+class RestorePassForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+    };
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleEmailChange(e) {
+    this.setState({
+      email: e.target.value,
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const { email } = this.state;
+    this.props.onSubmit(email);
+  }
+
+  render() {
+    return (
+      <div className='form'>
+        <h2 className='form--heading'>Введите Ваш email</h2>
+        <form name='resetPasswordForm' onSubmit={this.handleSubmit}>
+          <div className='resetPasswordForm--box'>
+            <input
+              id='email'
+              value={this.state.email}
+              onChange={this.handleEmailChange}
+              type='email'
+              className={this.state.email ? 'form--field label-move-up' : 'form--field'}
+              required
+            />
+            <label htmlFor='email' className='form--placeholder'>
+              e-mail
+            </label>
+          </div>
+          <input
+            type='submit'
+            className='control-button control-button--blue '
+            value={this.props.buttonText}
+          />
+        </form>
+      </div>
+    );
+  }
+}
+
+RestorePassForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  buttonText: PropTypes.string.isRequired,
+};
+
+export default RestorePassForm;
