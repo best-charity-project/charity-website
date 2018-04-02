@@ -9,27 +9,27 @@
   text-align: left;
   line-height: normal;
   width: 100%;
-  padding: .25em;
+  padding: 0.25em;
   text-decoration: none;
 }
 
 .category--item:hover {
   background-color: #37b3d8;
   color: #fff;
-  transition: background-color .2s, color .2s ease;
+  transition: background-color 0.2s, color 0.2s ease;
 }
 
 .category--title {
   cursor: pointer;
   display: flex;
-  margin-left: .5em;
+  margin-left: 0.5em;
   text-transform: capitalize;
 }
 
 .category--title:before {
   content: '+';
   font-size: 1.2em;
-  padding-right: .3em;
+  padding-right: 0.3em;
   color: #1d6e87;
   font-weight: bold;
 }
