@@ -4,10 +4,12 @@ import { getToken } from './Auth/Auth';
 const getLibraryItems = (categoryTag, type) =>
   API.get(`library/?categoryTag=${categoryTag}&type=${type}`).then(response => response.data);
 
+const getLibraryItemsAmount = (categoryTag, type) => API.get(`library/count?categoryTag=${categoryTag}&type=${type}`).then(response => response.data);
+
 const getLibraryCategories = () => API.get('categories').then(response => response.data);
 
 const addLibraryItem = libraryItem =>
-  API.post('library', libraryItem, { headers: { Authorization: `Bearer ${getToken()}` } });
+  API.post('library', libraryItem, { headers: { Authorization: `Bearer ${getToken()}` } }).then(res => res.data);
 
 const fullTextLibrarySearch = (textSearch, checkedTypes) =>
   API.get(`library/search/?textSearch=${textSearch}&types=${checkedTypes}`).then(response => response.data);
@@ -15,16 +17,16 @@ const fullTextLibrarySearch = (textSearch, checkedTypes) =>
 const getPendingItems = () => API.get('library/pending').then(response => response.data);
 
 const acceptPendingItems = id =>
-  API.put(`library/${id}`, { headers: { Authorization: `Bearer ${getToken()}` } });
+  API.put(`library/${id}`, {}, { headers: { Authorization: `Bearer ${getToken()}` } }).then(res => res.data);
 
 const deleteLibraryItems = id =>
-  API.delete(`library/${id}`, { headers: { Authorization: `Bearer ${getToken()}` } });
+  API.delete(`library/${id}`, { headers: { Authorization: `Bearer ${getToken()}` } }).then(res => res.data);
 
 const updateItem = (id, item) => {
   const {
     categoryTag, type, title, description, url,
   } = item;
-  API.put(
+  return API.put(
     `library/edit/${id}`,
     {
       categoryTag,
@@ -34,7 +36,7 @@ const updateItem = (id, item) => {
       url,
     },
     { headers: { Authorization: `Bearer ${getToken()}` } },
-  );
+  ).then(res => res.data);
 };
 
 const getItemById = id => API.get(`library/${id}`).then(response => response.data);
@@ -49,4 +51,5 @@ export {
   updateItem,
   getItemById,
   fullTextLibrarySearch,
+  getLibraryItemsAmount,
 };

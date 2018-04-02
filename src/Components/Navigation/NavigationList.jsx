@@ -3,14 +3,16 @@ import { NavLink } from 'react-router-dom';
 import navigationPaths from './NavigationPaths.json';
 import './Navigation.css';
 
-const NavigationList = props =>
+const NavigationList = ({ userInfo, onClick }) =>
   navigationPaths.map((item) => {
-    if (!props.userInfo.admin && item.path === '/admin') {
+    if ((!userInfo.admin && item.path === '/admin') ||
+      (userInfo.admin && item.path === '/account') ||
+      (!userInfo.name && item.path === '/account')) {
       return null;
     }
     return (
       <li key={item.path}>
-        <NavLink onClick={props.onClick} to={item.path} className='navigation--element'>
+        <NavLink onClick={onClick} to={item.path} className='navigation--element'>
           {item.name}
         </NavLink>
       </li>
