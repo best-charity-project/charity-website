@@ -14,13 +14,14 @@ const getNews = () => {
 };
 
 const addNews = news =>
-  API.post('news', news, { headers: { Authorization: `Bearer ${getToken()}` } });
+  API.post('news', news, { headers: { Authorization: `Bearer ${getToken()}` } }).then(res => res.data);
 
 const updateNews = (id, news) => {
   const {
     title, newsText, url, date,
   } = news;
-  API.put(
+
+  return API.put(
     `news/${id}`,
     {
       title,
@@ -29,13 +30,12 @@ const updateNews = (id, news) => {
       date,
     },
     { headers: { Authorization: `Bearer ${getToken()}` } },
-  );
+  ).then(res => res.data);
 };
 
 const getNewsById = id => API.get(`news/${id}`).then(response => response.data);
 
-const deleteNews = (id) => {
-  API.delete(`news/${id}`, { headers: { Authorization: `Bearer ${getToken()}` } });
-};
+const deleteNews = id =>
+  API.delete(`news/${id}`, { headers: { Authorization: `Bearer ${getToken()}` } }).then(res => res.data);
 
 export { getNews, addNews, updateNews, getNewsById, deleteNews };
