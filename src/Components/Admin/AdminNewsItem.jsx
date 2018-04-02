@@ -6,7 +6,6 @@ import SingleNews from '../News/SingleNews/SingleNews';
 import ControlButton from '../ControlButton/ControlButton';
 import DetailsButton from '../DetailsButton/DetailsButton';
 import Modal from './ModalWindow/ModalWindow';
-import checkMessageType from './checkMessageType';
 import Message from '../Message/Message';
 import './Admin.css';
 import './AdminNewsItem.css';
@@ -61,10 +60,10 @@ class AdminNewsItem extends React.Component {
   deleteHandler() {
     deleteNews(this.props._id)
       .then((data) => {
-        this.setState({ message: checkMessageType(data, 'success') });
+        this.setState({ message: { type: 'success', text: data.message } });
       })
       .catch((err) => {
-        this.setState({ message: checkMessageType(err, 'error') });
+        this.setState({ message: { type: 'error', text: err.response.data.message } });
       });
     this.toggleModal();
   }

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import Form from '../../Library/Form/Form';
 import { updateItem, getItemById } from '../../../libraryCalls';
-import checkMessageType from '../checkMessageType';
 import Message from '../../Message/Message';
 import BackIcon from '../../icons/back.svg';
 import './EditLibraryItem.css';
@@ -36,10 +35,10 @@ class EditLibraryItem extends React.Component {
   updateLibraryItem(item) {
     updateItem(this.props.match.params.id, item)
       .then((data) => {
-        this.setState({ message: checkMessageType(data, 'success') });
+        this.setState({ message: { type: 'success', text: data.message } });
       })
       .catch((err) => {
-        this.setState({ message: checkMessageType(err, 'error') });
+        this.setState({ message: { type: 'error', text: err.response.data.message } });
       });
   }
 

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Form from '../Form/Form';
 import { updateNews, getNewsById } from '../../../newsCalls';
-import checkMessageType from '../checkMessageType';
 import Message from '../../Message/Message';
 import './AddEditNews.css';
 
@@ -33,10 +32,10 @@ class EditNews extends React.Component {
   handleNewsUpdate(news) {
     updateNews(this.props.match.params.id, news)
       .then((data) => {
-        this.setState({ message: checkMessageType(data, 'success') });
+        this.setState({ message: { type: 'success', text: data.message } });
       })
       .catch((err) => {
-        this.setState({ message: checkMessageType(err, 'error') });
+        this.setState({ message: { type: 'error', text: err.response.data.message } });
       });
   }
 
