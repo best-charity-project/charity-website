@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import './Card.css';
 
 const Card = ({
-  heading, text, path, linkText, classNameLink, target,
+  heading, text, path, linkText, classNameLink, target, classNameCard,
 }) =>
   (
-    <div className='card'>
+    <div className={`card ${classNameCard}`}>
       <h2 className='card--heading'>
         {heading}
       </h2>
@@ -28,7 +28,8 @@ const Card = ({
 export default Card;
 
 Card.defaultProps = {
-  target: '_self',
+  target: '',
+  classNameCard: '',
 };
 
 Card.propTypes = {
@@ -38,4 +39,5 @@ Card.propTypes = {
   linkText: PropTypes.string.isRequired,
   target: PropTypes.string,
   classNameLink: PropTypes.string.isRequired,
+  classNameCard: PropTypes.string,
 };
