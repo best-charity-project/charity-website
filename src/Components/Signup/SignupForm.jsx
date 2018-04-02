@@ -202,19 +202,6 @@ class SignupForm extends React.Component {
                 </option>
                 ))}
             </select>
-            {this.state.country === countries[countries.length - 1] && (
-              <div>
-                <input
-                  id='otherCountry'
-                  value={this.state.otherCountry}
-                  onChange={this.handleOtherCountryChange}
-                  type='text'
-                  className='form--field'
-                  placeholder='Cтрана проживания'
-                  required
-                />
-              </div>
-              )}
           </div>
           <div className='form--box'>
             <input
@@ -229,6 +216,21 @@ class SignupForm extends React.Component {
             Город проживания
             </label>
           </div>
+          {this.state.country === countries[countries.length - 1] && (
+            <div className='form--box'>
+              <input
+                id='otherCountry'
+                value={this.state.otherCountry}
+                onChange={this.handleOtherCountryChange}
+                type='text'
+                className={this.state.otherCountry ? 'form--field label-move-up' : 'form--field'}
+                required
+              />
+              <label htmlFor='city' className='form--placeholder'>
+                Страна проживания
+              </label>
+            </div>
+            )}
           <p className='form--comment'>Что Вас привело на сайт:</p>
           {this.state.reasons.map((reason, index) => (
             <p key={reason} className='form--radio-input'>
