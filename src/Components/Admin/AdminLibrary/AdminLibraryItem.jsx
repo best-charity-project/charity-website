@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { deleteLibraryItems } from '../../../libraryCalls';
+import Message from '../../Message/Message';
 import ControlButton from '../../ControlButton/ControlButton';
 import Modal from '../ModalWindow/ModalWindow';
 
@@ -10,6 +11,10 @@ class AdminLibraryItem extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
+      message: {
+        type: '',
+        text: '',
+      },
     };
     this.handleEditClick = this.handleEditClick.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -27,7 +32,13 @@ class AdminLibraryItem extends React.Component {
   }
 
   deleteItem() {
-    deleteLibraryItems(this.props._id);
+    deleteLibraryItems(this.props._id)
+      .then((data) => {
+        this.setState({ message: { type: 'success', text: data.message } });
+      })
+      .catch((err) => {
+        this.setState({ message: { type: 'error', text: err.response.data.message } });
+      });
     this.toggleModal();
   }
 
@@ -37,6 +48,7 @@ class AdminLibraryItem extends React.Component {
         <a href={this.props.url} className='single-item--link'>
           <h2>{this.props.title}</h2>
         </a>
+        <Message {...this.state.message} />
         <p className='single-item--text'>{this.props.description}</p>
         <div className='item--buttons'>
           <ControlButton
