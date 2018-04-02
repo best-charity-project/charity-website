@@ -1,0 +1,35 @@
+.sidebar {
+  display: flex;
+}
+
+.sidebar--navigation {
+  min-width: 23em;
+  background-color: #fff;
+  padding-top: 2em;
+  min-height: calc(100vh - 10em);
+}
+
+.sidebar--link {
+  display: block;
+  margin: 1em 0;
+  text-decoration: none;
+  color: #000;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 1em 3em;
+}
+
+.sidebar--link:hover {
+  color: #fff;
+  background-color: #37b3d8;
+}
+
+@media (max-width: 992px) {
+  .sidebar {
+    flex-direction: column;
+  }
+  .sidebar--navigation {
+    min-width: 100%;
+    min-height: auto;
+  }
+}
