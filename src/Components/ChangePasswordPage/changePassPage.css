@@ -1,0 +1,9 @@
+.changePassPage {
+  margin: auto;
+}
+
+@media (max-width: 576px) {
+  .changePassPage {
+    margin: 0;
+  }
+}
