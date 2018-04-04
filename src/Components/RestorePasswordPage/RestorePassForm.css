@@ -1,14 +1,14 @@
-.resetPasswordForm--box {
+.restorePasswordForm--box {
   width: 40%;
   position: relative;
   display: block;
   margin: 0 auto;
 }
 
-.resetPasswordForm--box .form--placeholder {
+.restorePasswordForm--box .form--placeholder {
   left: 1.5em;
 }
 
-.resetPasswordForm--box .form--field:focus ~ .form--placeholder {
+.restorePasswordForm--box .form--field:focus ~ .form--placeholder {
   left: 1.5em;
 }

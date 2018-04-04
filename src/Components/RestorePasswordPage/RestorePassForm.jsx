@@ -26,10 +26,10 @@ class RestorePassForm extends React.Component {
 
   render() {
     return (
-      <div className='form'>
+      <div className='restorePasswordForm form'>
         <h2 className='form--heading'>Введите Ваш email</h2>
-        <form name='resetPasswordForm' onSubmit={this.handleSubmit}>
-          <div className='resetPasswordForm--box'>
+        <form name='restorePasswordForm' onSubmit={this.handleSubmit}>
+          <div className='restorePasswordForm--box'>
             <input
               id='email'
               value={this.state.email}
