@@ -1,6 +1,6 @@
 import React from 'react';
 import RestorePassForm from './RestorePassForm';
-import restorePassword from '../../accountCalls';
+import { restorePassword } from '../../accountCalls';
 import Message from '../Message/Message';
 
 class RestorePassPage extends React.Component {
