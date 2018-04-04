@@ -55,9 +55,6 @@ class ChangePassForm extends React.Component {
               type='password'
               className={this.state.oldPassword ? 'form--field label-move-up' : 'form--field'}
               minLength='6'
-              ref={(input) => {
-                this.oldPassword = input;
-              }}
               required
             />
             <label htmlFor='oldPassword' className='form--placeholder'>
