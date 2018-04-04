@@ -34,7 +34,7 @@ export default class App extends React.Component {
       })
       .catch((err) => {
         if (err.response.status === 401) {
-          this.setState({ userInfo: { admin: false } });
+          this.setState({ userInfo: { admin: false, name: '' } });
         }
       });
   }
@@ -48,7 +48,7 @@ export default class App extends React.Component {
   onLogout() {
     logoutUser();
     this.setState({
-      userInfo: { admin: false },
+      userInfo: { admin: false, name: '' },
     });
   }
 
