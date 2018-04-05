@@ -75,7 +75,6 @@ class EducationRouteSearch extends React.Component {
       this.state.lastYear,
       encodeURIComponent(this.state.program),
     ).then(filterResult => this.setState({ filterResult }));
-
     this.showTable();
   }
 
@@ -133,7 +132,7 @@ class EducationRouteSearch extends React.Component {
                 <option value='' disabled selected>
                   Учреждение образования
                 </option>
-                <option>Детское дошкольное учреждение</option>
+                <option>Дошкольное детское учреждение</option>
                 <option>Средняя школа</option>
               </select>
               <select
@@ -195,7 +194,9 @@ class EducationRouteSearch extends React.Component {
               </thead>
             )}
           <tbody>
-            {this.state.filterResult.map(item => <ResultsTable key={item._id} {...item} />)}
+            {this.state.filterResult.map((item, index) => (
+              <ResultsTable index={index} key={item._id} {...item} />
+            ))}
           </tbody>
         </table>
       </div>

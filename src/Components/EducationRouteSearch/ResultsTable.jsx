@@ -4,6 +4,7 @@ import './ResultsTable.css';
 
 const ResultsTable = props => (
   <tr className='table--body'>
+    <td className='table--title'>Карта № {props.index + 1}</td>
     <td className='body--field'>
       <ul>
         {props.regionDistricts.map(regionDistrict => (
@@ -25,6 +26,7 @@ const ResultsTable = props => (
 export default ResultsTable;
 
 ResultsTable.propTypes = {
+  index: PropTypes.number.isRequired,
   regionDistricts: PropTypes.arrayOf(PropTypes.string).isRequired,
   city: PropTypes.string.isRequired,
   firstYear: PropTypes.number.isRequired,
