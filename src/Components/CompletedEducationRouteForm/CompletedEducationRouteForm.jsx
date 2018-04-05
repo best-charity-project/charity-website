@@ -7,7 +7,7 @@ export default class CompletedEducationRouteForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      usersCarts: [],
+      usersCards: [],
     };
   }
 
@@ -16,7 +16,7 @@ export default class CompletedEducationRouteForm extends React.Component {
   }
 
   getById() {
-    getEducation(this.props.userId).then(usersCarts => this.setState({ usersCarts }));
+    getEducation(this.props.userId).then(usersCards => this.setState({ usersCards }));
   }
 
   render() {
@@ -24,7 +24,7 @@ export default class CompletedEducationRouteForm extends React.Component {
       <div className='education-route'>
         <h2 className='secondary-heading'>Заполненные карты</h2>
         <div className='education-route--user-cards'>
-          {this.state.usersCarts.map((item, index) => (
+          {this.state.usersCards.map((item, index) => (
             <EducationRouteCard index={index} key={item._id} {...item} />
           ))}
         </div>
