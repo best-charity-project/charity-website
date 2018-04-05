@@ -11,7 +11,7 @@ const UserAccount = ({ userInfo, match }) => (
       <div className='sidebar'>
         <div className='sidebar--navigation'>
           <div className='sidebar--navigation'>
-            <p className='sidebar--navigation--header'>Образовательный маршрут:</p>
+            <p className='sidebar--header'>Образовательный маршрут:</p>
             <Link to={`${match.url}/education-route-add-form`} className='sidebar--link'>
               Заполнить новую карту
             </Link>
