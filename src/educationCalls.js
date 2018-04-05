@@ -11,4 +11,7 @@ const getEducation = userId =>
     headers: { Authorization: `Bearer ${getToken()}` },
   }).then(response => response.data);
 
-export { getLocations, addEducation, getEducation };
+const deleteEducation = id =>
+  API.delete(`education/${id}`, { headers: { Authorization: `Bearer ${getToken()}` } }).then(res => res.data);
+
+export { getLocations, addEducation, getEducation, deleteEducation };

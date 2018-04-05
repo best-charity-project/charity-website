@@ -3,24 +3,53 @@
 }
 
 .user-cards-wrapper {
-  width: 20em;
+  width: 21em;
   background-color: #fff;
   box-shadow: 0 0.5em 1em rgb(238, 235, 235);
   margin: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.card--button-wrapper {
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .education-route--user-cards {
   display: flex;
-  align-items: flex-start;
   width: 46em;
   margin: 0 auto;
   flex-grow: 1;
   flex-wrap: wrap;
 }
 
+.users-card--mask {
+  width: calc(100% - 1.2em);
+  padding: 0.6em;
+  font: inherit;
+  background-color: inherit;
+  border-bottom: 1px solid #ddd;
+}
+
 .users-card--field {
   padding: 0.7em;
   text-align: left;
+}
+
+.users-card--input-field {
+  padding: 0.6em;
+  text-align: left;
+  border: none;
+  width: calc(100% - 1.2em);
+  border-bottom: 1px solid #ddd;
+  font: inherit;
+}
+
+.input-field--select {
+  width: 100%;
 }
 
 .user-cards--title {
@@ -41,4 +70,28 @@
   text-align: left;
   line-height: 1.3em;
   padding-left: 2em;
+}
+
+.users-card--radio-field {
+  flex-direction: column;
+  border-bottom: 1px solid #ddd;
+}
+
+.users-card--number-field {
+  display: initial;
+  width: 4em;
+  height: max-content;
+}
+
+.rc-select-dropdown {
+  padding-left: 0;
+}
+.rc-select {
+  width: 100%;
+}
+.rc-select-selection--multiple {
+  width: 100%;
+  margin-left: 0;
+  background-color: inherit;
+  border-bottom: 1px solid #ddd;
 }

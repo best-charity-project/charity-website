@@ -59,6 +59,7 @@ export default class EducationRoute extends React.Component {
   }
 
   setCategories() {
+    this.setState({ name: this.props.name });
     getLocations().then((locations) => {
       this.setState({ locations });
     });
@@ -121,10 +122,11 @@ export default class EducationRoute extends React.Component {
   }
 
   isRegionDistricts() {
-    if (this.state.regionDistricts.length === 0
-      && this.state.name !== ''
-      && this.state.email !== ''
-      && this.state.regionIndex !== 0
+    if (
+      this.state.regionDistricts.length === 0 &&
+      this.state.name !== '' &&
+      this.state.email !== '' &&
+      this.state.regionIndex !== 0
     ) {
       this.toggleMessageOpening();
     }
@@ -133,9 +135,17 @@ export default class EducationRoute extends React.Component {
   addEducationRoute(event) {
     event.preventDefault();
     const {
-      name, phone, email, regionDistricts,
-      city, educationalInstitution, program,
-      firstYear, lastYear, locations, regionIndex,
+      name,
+      phone,
+      email,
+      regionDistricts,
+      city,
+      educationalInstitution,
+      program,
+      firstYear,
+      lastYear,
+      locations,
+      regionIndex,
     } = this.state;
     const region = locations[regionIndex].name;
     const { userId } = this.props;
@@ -151,6 +161,7 @@ export default class EducationRoute extends React.Component {
       userId,
       firstYear,
       lastYear,
+      regionIndex,
     });
     this.setState(defaultValues);
   }
@@ -160,23 +171,19 @@ export default class EducationRoute extends React.Component {
     return (
       <div className='education-route'>
         <h1 className='secondary-heading'>образовательный маршрут</h1>
-        <div className='form' >
-          <h2 className='form--heading'>
-            Анкета
-          </h2>
+        <div className='form'>
+          <h2 className='form--heading'>Анкета</h2>
           <div className='education-form--description'>
-            <p>Уважаемые законные представители детей с
-              особыми образовательными потребностями!
-            </p>
-            <p>Предлагаем Вам заполнить анкету по
-              определения образовательного маршрута.
-            </p>
-            <p>Данная информация поможет Вам найти
-              родителей в Республике Беларусь и объединиться.
+            <p>Уважаемые законные представители детей с особыми образовательными потребностями!</p>
+            <p>Предлагаем Вам заполнить анкету по определения образовательного маршрута.</p>
+            <p>
+              Данная информация поможет Вам найти родителей в Республике Беларусь и объединиться.
             </p>
           </div>
           <form name='educationForm' onSubmit={this.addEducationRoute}>
-            <label className='form--label' htmlFor='name'>Имя</label>
+            <label className='form--label' htmlFor='name'>
+              Имя
+            </label>
             <input
               value={this.state.name}
               onChange={this.setName}
@@ -187,7 +194,9 @@ export default class EducationRoute extends React.Component {
               title='Имя должно содержать только буквы русского алфавита'
               required
             />
-            <label className='form--label' htmlFor='phone'>Номер телефона</label>
+            <label className='form--label' htmlFor='phone'>
+              Номер телефона
+            </label>
             <InputMask
               value={this.state.phone}
               onChange={this.setPhone}
@@ -199,7 +208,9 @@ export default class EducationRoute extends React.Component {
               title='Введите корректный контактный телефон'
               className='form--input'
             />
-            <label className='form--label' htmlFor='email'>Адрес электронной почты</label>
+            <label className='form--label' htmlFor='email'>
+              Адрес электронной почты
+            </label>
             <input
               value={this.state.email}
               onChange={this.setEmail}
@@ -210,7 +221,9 @@ export default class EducationRoute extends React.Component {
               className='form--input'
               required
             />
-            <label className='form--label' htmlFor='region'>Регион проживания</label>
+            <label className='form--label' htmlFor='region'>
+              Регион проживания
+            </label>
             <select
               id='region'
               title='Вы должны выбрать свой регион'
@@ -219,14 +232,16 @@ export default class EducationRoute extends React.Component {
               onChange={this.setRegion}
               value={this.state.regionIndex}
             >
-              <option disabled>
-                ---
-              </option>
+              <option disabled>---</option>
               {this.state.locations.map((region, index) => (
-                <option key={region.name} value={index}>{region.name}</option>
+                <option key={region.name} value={index}>
+                  {region.name}
+                </option>
               ))}
             </select>
-            <label className='form--label' htmlFor='regionDistrictIndices'>Областной район</label>
+            <label className='form--label' htmlFor='regionDistrictIndices'>
+              Областной район
+            </label>
             <Select
               id='regionDistrictIndices'
               title='Вы должны выбрать областной район'
@@ -239,15 +254,17 @@ export default class EducationRoute extends React.Component {
               value={this.state.regionDistricts}
             >
               {districts.map(district => (
-                <Option key={district} title={district}>{district} </Option>
+                <Option key={district} title={district}>
+                  {district}{' '}
+                </Option>
               ))}
             </Select>
-            {
-              this.state.isOpen && <InvalidInputMessage
-                message='Пожалуйста, выберите регион проживания'
-              />
-            }
-            <label className='form--label' htmlFor='city'>Город</label>
+            {this.state.isOpen && (
+              <InvalidInputMessage message='Пожалуйста, выберите регион проживания' />
+            )}
+            <label className='form--label' htmlFor='city'>
+              Город
+            </label>
             <input
               id='city'
               onChange={this.setCity}
@@ -258,9 +275,7 @@ export default class EducationRoute extends React.Component {
               className='form--input'
               required
             />
-            <p className='form--label'>
-              Выберите учреждение образования
-            </p>
+            <p className='form--label'>Выберите учреждение образования</p>
             <div className='education-form--radio-wrapper'>
               <label className='education-form--radio-description' htmlFor='kindergarten'>
                 <input
@@ -290,7 +305,10 @@ export default class EducationRoute extends React.Component {
               В каком году учащийся пойдет в учреждение образования
             </label>
             <p className='form--label form--label-inline'>
-              <label htmlFor='first-year' className='label-inline-description'> c </label>
+              <label htmlFor='first-year' className='label-inline-description'>
+                {' '}
+                c{' '}
+              </label>
               <input
                 id='first-year'
                 value={this.state.firstYear}
@@ -303,7 +321,9 @@ export default class EducationRoute extends React.Component {
                 max='2100'
                 required
               />
-              <label htmlFor='last-year' className='label-inline-description'>по</label>
+              <label htmlFor='last-year' className='label-inline-description'>
+                по
+              </label>
               <input
                 id='last-year'
                 value={this.state.lastYear}
@@ -344,4 +364,5 @@ export default class EducationRoute extends React.Component {
 
 EducationRoute.propTypes = {
   userId: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
