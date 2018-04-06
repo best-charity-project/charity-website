@@ -4,6 +4,7 @@ import InputMask from 'react-input-mask';
 import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
 import { getLocations, addEducation } from '../../educationCalls';
+import programs from './programs.json';
 import InvalidInputMessage from './InvalidInputMessage/InvalidInputMessage';
 import './EducationRoute.css';
 import './SelectStyles.css';
@@ -320,15 +321,14 @@ export default class EducationRoute extends React.Component {
             <label className='form--label' htmlFor='program'>
               Рекомендованная программа образования
             </label>
-            <input
+            <select
               id='program'
+              className='form--input input--select'
               value={this.state.program}
               onChange={this.setProgram}
-              type='text'
-              maxLength='80'
-              placeholder='Программа обучения рекомендованная ЦКРОиР'
-              className='form--input'
-            />
+            >
+              {programs.map(program => <option key={program}>{program}</option>)}
+            </select>
             <input
               type='submit'
               className='form-library--button control-button control-button--blue'

@@ -8,6 +8,10 @@
   color: #fff;
 }
 
+.table--body {
+  margin-bottom: 1em;
+}
+
 .header--field {
   padding: 1em;
 }
@@ -22,11 +26,15 @@
   border-bottom: 1px solid #ddd;
 }
 
+.body--field:nth-child(2n + 1) {
+  background-color: #fafafa;
+}
+
 .table--title {
   display: none;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
   table,
   thead,
   tbody,
@@ -38,73 +46,19 @@
 
   .table--title {
     display: block;
-  }
-
-  .table--header {
-    display: none;
-  }
-
-  .table--body {
-    margin-bottom: 1em;
-  }
-
-  .body--field {
-    position: relative;
-    text-align: start;
-    padding-left: 38%;
-  }
-
-  .body--field:before {
-    position: absolute;
-    top: 1em;
-    left: 0.6em;
-    width: 45%;
-    text-align: start;
-  }
-
-  .body--field:nth-child(2n + 1) {
-    background-color: #fafafa;
-  }
-
-  .body--field:nth-of-type(2):before {
-    content: 'Район';
-  }
-  .body--field:nth-of-type(3):before {
-    content: 'Город';
-  }
-  .body--field:nth-of-type(4):before {
-    content: 'Год обучения';
-  }
-  .body--field:nth-of-type(5):before {
-    content: 'Программа образования';
-  }
-  .body--field:nth-of-type(6):before {
-    content: 'Контактное лицо';
-  }
-  .body--field:nth-of-type(7):before {
-    content: 'E-mail';
-  }
-  .body--field:nth-of-type(8):before {
-    content: 'Телефон';
-  }
-
-  .table--title {
     font-weight: bold;
     font-size: 1em;
     text-align: center;
     background-color: #b4e9fa;
     padding: 1em 0.5em;
   }
-}
 
-@media (max-width: 576px) {
-  .body--field:nth-of-type(-n + 8):before {
-    content: '';
+  .table--header {
+    display: none;
   }
 
-  .body--field {
+  .header--field {
     text-align: center;
-    padding-left: 0.1em;
   }
 
   .field--wide {

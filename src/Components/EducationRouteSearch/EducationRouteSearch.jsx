@@ -1,7 +1,7 @@
 import React from 'react';
 import { getLocations, filterEducationalRoutes } from '../../educationCalls';
 import ResultsTable from './ResultsTable';
-import programs from './programs.json';
+import programs from '../EducationRoute/programs.json';
 import './EducationRouteSearch.css';
 
 class EducationRouteSearch extends React.Component {
@@ -183,13 +183,11 @@ class EducationRouteSearch extends React.Component {
             this.state.filterResult.length > 0 && (
               <thead>
                 <tr className='table--header'>
-                  <th className='header--field'>Район</th>
-                  <th className='header--field'>Город</th>
+                  <th>Контактная информация</th>
+                  <th className='header--field'>Адрес</th>
                   <th className='header--field'>Год обучения</th>
+                  <th className='header--field'>Учреждение образования</th>
                   <th className='header--field'>Программа образования</th>
-                  <th className='header--field'>Контактное лицо</th>
-                  <th className='header--field'>E-mail</th>
-                  <th className='header--field'>Телефон</th>
                 </tr>
               </thead>
             )}
