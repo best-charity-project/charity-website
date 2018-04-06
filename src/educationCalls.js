@@ -6,4 +6,9 @@ const getLocations = () => API.get('locations').then(response => response.data);
 const addEducation = education =>
   API.post('education', education, { headers: { Authorization: `Bearer ${getToken()}` } });
 
-export { getLocations, addEducation };
+const getEducation = userId =>
+  API.get(`education?userId=${userId}`, {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  }).then(response => response.data);
+
+export { getLocations, addEducation, getEducation };

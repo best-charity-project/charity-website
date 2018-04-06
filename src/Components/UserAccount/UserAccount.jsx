@@ -4,17 +4,22 @@ import { Route, Switch, Link, Redirect, withRouter } from 'react-router-dom';
 import EducationRoute from '../EducationRoute/EducationRoute';
 import EducationRouteSearch from '../EducationRouteSearch/EducationRouteSearch';
 import ChangePassPage from '../ChangePasswordPage/ChangePassPage';
+import CompletedEducationRouteForm from '../CompletedEducationRouteForm/CompletedEducationRouteForm';
 
 const UserAccount = ({ userInfo, match }) => (
   <div className='account indent'>
     {userInfo.name && (
       <div className='sidebar'>
         <div className='sidebar--navigation'>
-          <Link to={`${match.url}/education-route-form`} className='sidebar--link'>
-            Анкета образовательного маршрута
+          <p className='sidebar--header'>Образовательный маршрут:</p>
+          <Link to={`${match.url}/education-route-add-form`} className='sidebar--link'>
+            Заполнить новую карту
+          </Link>
+          <Link to={`${match.url}/education-route-users-form`} className='sidebar--link'>
+            Просмотр заполненных карт
           </Link>
           <Link to={`${match.url}/education-route-search`} className='sidebar--link'>
-            поиск участников <br />образовательного маршрута
+            поиск участников
           </Link>
           <Link to={`${match.url}/change-password`} className='sidebar--link'>
             Сменить пароль
@@ -22,8 +27,12 @@ const UserAccount = ({ userInfo, match }) => (
         </div>
         <Switch>
           <Route
-            path={`${match.url}/education-route-form`}
+            path={`${match.url}/education-route-add-form`}
             render={() => <EducationRoute {...userInfo} />}
+          />
+          <Route
+            path={`${match.url}/education-route-users-form`}
+            render={() => <CompletedEducationRouteForm {...userInfo} />}
           />
           <Route path={`${match.url}/education-route-search`} component={EducationRouteSearch} />
           <Route path={`${match.url}/change-password`} component={ChangePassPage} />

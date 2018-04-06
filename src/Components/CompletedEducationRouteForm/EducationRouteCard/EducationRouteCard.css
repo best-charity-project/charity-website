@@ -1,0 +1,44 @@
+.user-cards {
+  padding: 0 1em;
+}
+
+.user-cards-wrapper {
+  width: 20em;
+  background-color: #fff;
+  box-shadow: 0 0.5em 1em rgb(238, 235, 235);
+  margin: 1em;
+}
+
+.education-route--user-cards {
+  display: flex;
+  align-items: flex-start;
+  width: 46em;
+  margin: 0 auto;
+  flex-grow: 1;
+  flex-wrap: wrap;
+}
+
+.users-card--field {
+  padding: 0.7em;
+  text-align: left;
+}
+
+.user-cards--title {
+  font-weight: bold;
+  font-size: 1em;
+  text-align: center;
+  background-color: #b4e9fa;
+  padding: 1em 0.5em;
+}
+
+.users-card--field:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+}
+
+.users-card--field--list {
+  padding: 0.7em;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  line-height: 1.3em;
+  padding-left: 2em;
+}
