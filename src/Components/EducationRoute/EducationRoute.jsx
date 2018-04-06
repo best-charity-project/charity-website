@@ -306,8 +306,7 @@ export default class EducationRoute extends React.Component {
             </label>
             <p className='form--label form--label-inline'>
               <label htmlFor='first-year' className='label-inline-description'>
-                {' '}
-                c{' '}
+                c
               </label>
               <input
                 id='first-year'
