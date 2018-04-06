@@ -9,11 +9,17 @@
   min-height: calc(100vh - 10em);
 }
 
+.sidebar--header {
+  font-size: 1.5em;
+  color: black;
+  padding: 0 1em;
+}
+
 .sidebar--link {
   display: block;
   margin: 1em 0;
   text-decoration: none;
-  color: #000;
+  color: inherit;
   text-transform: uppercase;
   font-weight: 600;
   padding: 1em 3em;

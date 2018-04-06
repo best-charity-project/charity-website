@@ -20,4 +20,9 @@ const filterEducationalRoutes = (
   return API.get(`education/filter?region=${region}&regionDistricts=${regionDistricts}&educationalInstitution=${educationalInstitution}&firstYear=${firstYear}&lastYear=${lastYear}&program=${program}`).then(response => response.data);
 };
 
-export { getLocations, addEducation, filterEducationalRoutes };
+const getEducation = userId =>
+  API.get(`education?userId=${userId}`, {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  }).then(response => response.data);
+
+export { getLocations, addEducation, filterEducationalRoutes, getEducation };
