@@ -6,6 +6,7 @@ import ControlButton from '../../ControlButton/ControlButton';
 import { getLocations, deleteEducation, updateEducation } from '../../../educationCalls';
 import Modal from '../../Admin/ModalWindow/ModalWindow';
 import Message from '../../Message/Message';
+import InvalidInputMessage from '../../EducationRoute/InvalidInputMessage/InvalidInputMessage';
 import './EducationRouteCard.css';
 
 export default class EducationRouteCard extends React.Component {
@@ -17,6 +18,7 @@ export default class EducationRouteCard extends React.Component {
         type: '',
         text: '',
       },
+      isInvalidMessageOpen: false,
       isEdited: false,
       educationToEdit: {
         locations: [],
@@ -48,6 +50,8 @@ export default class EducationRouteCard extends React.Component {
     this.setEducationalInstitution = this.setEducationalInstitution.bind(this);
     this.setLastYear = this.setLastYear.bind(this);
     this.handleNewsUpdate = this.handleNewsUpdate.bind(this);
+    this.toggleMessageOpening = this.toggleMessageOpening.bind(this);
+    this.isRegionDistricts = this.isRegionDistricts.bind(this);
   }
 
   componentDidMount() {
@@ -157,9 +161,14 @@ export default class EducationRouteCard extends React.Component {
     });
   }
 
-  handleNewsUpdate() {
-    this.handleEditClick();
-    updateEducation(this.props._id, this.state.educationToEdit);
+  handleNewsUpdate(event) {
+    event.preventDefault();
+    if (this.state.educationToEdit.regionDistricts.length === 0) {
+      this.isRegionDistricts();
+    } else {
+      this.handleEditClick();
+      updateEducation(this.props._id, this.state.educationToEdit);
+    }
   }
 
   handleEditClick() {
@@ -171,6 +180,23 @@ export default class EducationRouteCard extends React.Component {
   toggleModal() {
     this.setState({
       isOpen: !this.state.isOpen,
+    });
+  }
+
+  isRegionDistricts() {
+    if (
+      this.state.educationToEdit.regionDistricts.length === 0 &&
+      this.state.educationToEdit.name !== '' &&
+      this.state.educationToEdit.email !== '' &&
+      this.state.educationToEdit.regionIndex !== 0
+    ) {
+      this.toggleMessageOpening();
+    }
+  }
+
+  toggleMessageOpening() {
+    this.setState({
+      isInvalidMessageOpen: !this.state.isInvalidMessageOpen,
     });
   }
 
@@ -190,7 +216,7 @@ export default class EducationRouteCard extends React.Component {
       (this.state.educationToEdit.locations[this.state.educationToEdit.regionIndex] || {})
         .districts || [];
     return (
-      <div className='user-cards-wrapper'>
+      <form className='user-cards-wrapper' onSubmit={this.handleNewsUpdate}>
         {!this.state.isEdited && <h2 className='user-cards--title'>Карта № {this.props.index}</h2>}
         {this.state.isEdited && (
           <h2 className='user-cards--title'>Карта № {this.props.index} (РЕДАКТИРОВАНИЕ)</h2>
@@ -203,6 +229,7 @@ export default class EducationRouteCard extends React.Component {
             <input
               className='users-card--input-field'
               autoFocus
+              required
               value={this.state.educationToEdit.name}
               onChange={this.setName}
             />
@@ -215,6 +242,7 @@ export default class EducationRouteCard extends React.Component {
               className='users-card--input-field'
               value={this.state.educationToEdit.email}
               onChange={this.setEmail}
+              required
             />
           )}
           {!this.state.isEdited && (
@@ -225,6 +253,7 @@ export default class EducationRouteCard extends React.Component {
               value={this.state.educationToEdit.phone}
               onChange={this.setPhone}
               id='phone'
+              required
               placeholder='Введите контактный номер телефона'
               pattern='\+375\([0-9]{2}\)-[0-9]{3}(-[0-9]{2}){2}'
               type='tel'
@@ -278,6 +307,9 @@ export default class EducationRouteCard extends React.Component {
                 </Option>
               ))}
             </Select>
+          )}
+          {this.state.isInvalidMessageOpen && (
+            <InvalidInputMessage message='Пожалуйста, выберите регион проживания' />
           )}
           {!this.state.isEdited && (
             <p className='users-card--field'>{this.state.educationToEdit.city}</p>
@@ -367,7 +399,7 @@ export default class EducationRouteCard extends React.Component {
           {this.state.isEdited && (
             <ControlButton
               text='Сохранить'
-              onButtonClick={this.handleNewsUpdate}
+              type='submit'
               className='control-button control-button--green control-button--small'
             />
           )}
@@ -388,7 +420,7 @@ export default class EducationRouteCard extends React.Component {
           {this.state.isOpen && <Modal onConfirm={this.deleteItem} toggle={this.toggleModal} />}
           <Message {...this.state.message} />
         </div>
-      </div>
+      </form>
     );
   }
 }

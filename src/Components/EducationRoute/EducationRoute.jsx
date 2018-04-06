@@ -13,7 +13,7 @@ const defaultValues = {
   name: '',
   phone: '',
   email: '',
-  regionIndex: '---',
+  regionIndex: '',
   regionDistricts: [],
   city: '',
   educationalInstitution: '',
@@ -232,7 +232,7 @@ export default class EducationRoute extends React.Component {
               onChange={this.setRegion}
               value={this.state.regionIndex}
             >
-              <option disabled>---</option>
+              <option disabled />
               {this.state.locations.map((region, index) => (
                 <option key={region.name} value={index}>
                   {region.name}
@@ -255,7 +255,7 @@ export default class EducationRoute extends React.Component {
             >
               {districts.map(district => (
                 <Option key={district} title={district}>
-                  {district}{' '}
+                  {district}
                 </Option>
               ))}
             </Select>

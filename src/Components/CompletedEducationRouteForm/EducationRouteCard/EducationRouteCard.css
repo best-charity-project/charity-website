@@ -97,3 +97,7 @@
 .users-card .rc-select-selection--multiple:hover {
   border: 1px solid #23c0fa;
 }
+
+.users-card .rc-select {
+  width: 100%;
+}
