@@ -16,7 +16,7 @@ class EducationRouteSearch extends React.Component {
       firstYear: '',
       lastYear: '',
       program: '',
-      filterResult: [],
+      filterResult: null,
       isOpenTable: false,
     };
     this.setCategories = this.setCategories.bind(this);
@@ -180,6 +180,7 @@ class EducationRouteSearch extends React.Component {
         </div>
         <table className='education-route--table'>
           {this.state.isOpenTable &&
+            this.state.filterResult &&
             this.state.filterResult.length > 0 && (
               <thead>
                 <tr className='table--header'>
@@ -192,11 +193,16 @@ class EducationRouteSearch extends React.Component {
               </thead>
             )}
           <tbody>
-            {this.state.filterResult.map((item, index) => (
-              <ResultsTable index={index} key={item._id} {...item} />
-            ))}
+            {this.state.filterResult &&
+              this.state.filterResult.map((item, index) => (
+                <ResultsTable index={index} key={item._id} {...item} />
+              ))}
           </tbody>
         </table>
+        {this.state.filterResult &&
+          this.state.filterResult.length === 0 && (
+            <p className='educational-route--message'>По данному запросу ничего не найдено</p>
+          )}
       </div>
     );
   }

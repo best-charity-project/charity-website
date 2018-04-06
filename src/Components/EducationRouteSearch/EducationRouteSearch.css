@@ -9,6 +9,11 @@
   width: 95%;
 }
 
+.educational-route--message {
+  text-align: center;
+  font-size: 1.4em;
+}
+
 .filter--box {
   display: flex;
   flex-wrap: wrap;

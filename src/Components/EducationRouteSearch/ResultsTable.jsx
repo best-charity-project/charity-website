@@ -4,16 +4,16 @@ import './ResultsTable.css';
 
 const ResultsTable = props => (
   <tr className='table--body'>
-    <td className='table--title'>Карта № {props.index + 1}</td>
+    <td className='body--header'>Карта № {props.index + 1}</td>
     <td className='body--field'>
-      <ul>
+      <ul className='field--list'>
         <li>{props.name}</li>
         <li>{props.email}</li>
         <li>{props.phone}</li>
       </ul>
     </td>
     <td className='body--field'>
-      <ul>
+      <ul className='field--list'>
         <li>{props.region}</li>
         {props.regionDistricts.map(regionDistrict => (
           <li key={regionDistrict}>{regionDistrict}</li>

@@ -30,8 +30,12 @@
   background-color: #fafafa;
 }
 
-.table--title {
+.body--header {
   display: none;
+}
+
+.field--list {
+  line-height: 1.5;
 }
 
 @media (max-width: 768px) {
@@ -44,7 +48,7 @@
     display: block;
   }
 
-  .table--title {
+  .body--header {
     display: block;
     font-weight: bold;
     font-size: 1em;
@@ -60,7 +64,9 @@
   .header--field {
     text-align: center;
   }
+}
 
+@media (max-width: 576px) {
   .field--wide {
     min-width: 90%;
   }

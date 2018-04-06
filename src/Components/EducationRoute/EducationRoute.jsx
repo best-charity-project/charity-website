@@ -327,6 +327,9 @@ export default class EducationRoute extends React.Component {
               value={this.state.program}
               onChange={this.setProgram}
             >
+              <option value='' disabled selected>
+                ---
+              </option>
               {programs.map(program => <option key={program}>{program}</option>)}
             </select>
             <input
