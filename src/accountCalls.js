@@ -9,4 +9,10 @@ const changePassword = data =>
     headers: { Authorization: `Bearer ${getToken()}` },
   }).then(response => response.data);
 
-export { restorePassword, changePassword };
+const changeForgottenPassword = data =>
+  API.post('account/change-forgotten-password', data).then(response => response.data);
+
+const isValidToken = token =>
+  API.get(`account/${token}`).then(response => response.data.isValidToken);
+
+export { restorePassword, changePassword, isValidToken, changeForgottenPassword };
