@@ -167,6 +167,7 @@ export default class EducationRouteCard extends React.Component {
       this.isRegionDistricts();
     } else {
       this.handleEditClick();
+      // this.setState({ isEdited: false });
       updateEducation(this.props._id, this.state.educationToEdit);
     }
   }
@@ -391,30 +392,32 @@ export default class EducationRouteCard extends React.Component {
         </div>
         <div className='card--button-wrapper'>
           {!this.state.isEdited && (
-            <ControlButton
-              text='Редактировать'
-              onButtonClick={this.handleEditClick}
+            <input
+              type='button'
+              value='Редактировать'
+              onClick={this.handleEditClick}
               className='control-button control-button--green control-button--small'
             />
           )}
           {this.state.isEdited && (
             <ControlButton
               text='Сохранить'
-              type='submit'
               className='control-button control-button--green control-button--small'
             />
           )}
           {!this.state.isEdited && (
-            <ControlButton
-              text='Удалить'
-              onButtonClick={this.toggleModal}
+            <input
+              type='button'
+              value='Удалить'
+              onClick={this.toggleModal}
               className='control-button control-button--red control-button--small'
             />
           )}
           {this.state.isEdited && (
-            <ControlButton
-              text='Отменить'
-              onButtonClick={this.handleEditClick}
+            <input
+              type='button'
+              value='Отменить'
+              onClick={this.handleEditClick}
               className='control-button control-button--red control-button--small'
             />
           )}
