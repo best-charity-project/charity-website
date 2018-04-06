@@ -184,7 +184,7 @@ class EducationRouteSearch extends React.Component {
             this.state.filterResult.length > 0 && (
               <thead>
                 <tr className='table--header'>
-                  <th>Контактная информация</th>
+                  <th className='header--field'>Контактная информация</th>
                   <th className='header--field'>Адрес</th>
                   <th className='header--field'>Год обучения</th>
                   <th className='header--field'>Учреждение образования</th>
