@@ -14,4 +14,37 @@ const getEducation = userId =>
 const deleteEducation = id =>
   API.delete(`education/${id}`, { headers: { Authorization: `Bearer ${getToken()}` } }).then(res => res.data);
 
-export { getLocations, addEducation, getEducation, deleteEducation };
+const updateEducation = (id, education) => {
+  const {
+    name,
+    phone,
+    email,
+    regionIndex,
+    regionDistricts,
+    city,
+    educationalInstitution,
+    firstYear,
+    lastYear,
+    program,
+    region,
+  } = education;
+  return API.put(
+    `education/${id}`,
+    {
+      name,
+      phone,
+      email,
+      regionIndex,
+      regionDistricts,
+      city,
+      educationalInstitution,
+      firstYear,
+      lastYear,
+      program,
+      region,
+    },
+    { headers: { Authorization: `Bearer ${getToken()}` } },
+  ).then(res => res.data);
+};
+
+export { getLocations, addEducation, getEducation, deleteEducation, updateEducation };
