@@ -36,4 +36,6 @@ const logoutUser = () => {
   deleteToken();
 };
 
-export { getUserAuthInfo, logoutUser, loginUser, signupUser, getToken };
+const headers = { Authorization: `Bearer ${getToken()}` };
+
+export { getUserAuthInfo, logoutUser, loginUser, signupUser, headers };
