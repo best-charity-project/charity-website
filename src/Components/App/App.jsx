@@ -13,7 +13,7 @@ import SignupPage from '../Signup/SignupPage';
 import { getUserAuthInfo, logoutUser } from '../../Auth/Auth';
 import RestorePassPage from '../RestorePasswordPage/RestorePassPage';
 import UserAccount from '../UserAccount/UserAccount';
-import ChangeForgotenPasswordPage from '../ChangeForgotenPasswordPage/ChangeForgotenPasswordPage';
+import ChangeForgottenPasswordPage from '../ChangeForgottenPasswordPage/ChangeForgottenPasswordPage';
 import './App.css';
 
 export default class App extends React.Component {
@@ -67,7 +67,7 @@ export default class App extends React.Component {
           <Route path='/login' render={() => <LoginPage onAuthChange={this.onAuthChange} />} />
           <Route path='/signup' render={() => <SignupPage onAuthChange={this.onAuthChange} />} />
           <Route path='/restore-password' component={RestorePassPage} />
-          <Route path='/change-password/:token' component={ChangeForgotenPasswordPage} />
+          <Route path='/change-password/:token' component={ChangeForgottenPasswordPage} />
           <Route path='/account' render={() => <UserAccount {...this.state} />} />
           <Redirect to='/home' />
         </Switch>

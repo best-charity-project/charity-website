@@ -1,11 +1,11 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ChangeForgotenPasswordForm from './ChangeForgotenPasswordForm';
+import ChangeForgottenPasswordForm from './ChangeForgottenPasswordForm';
 import { changeForgottenPassword, isValidToken } from '../../accountCalls';
 import Message from '../Message/Message';
 
-class ChangeForgotenPasswordPage extends React.Component {
+class ChangeForgottenPasswordPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +44,7 @@ class ChangeForgotenPasswordPage extends React.Component {
       <div className='changePassPage indent'>
         <Message {...this.state.message} />
         {this.state.isValidToken === true && (
-          <ChangeForgotenPasswordForm buttonText='Отправить' onSubmit={this.handleFormSubmit} />
+          <ChangeForgottenPasswordForm buttonText='Отправить' onSubmit={this.handleFormSubmit} />
         )}
         {this.state.isValidToken === '' && <p>Загрузка...</p>}
         {this.state.isValidToken === false && <Redirect to='/login' />}
@@ -53,9 +53,9 @@ class ChangeForgotenPasswordPage extends React.Component {
   }
 }
 
-export default ChangeForgotenPasswordPage;
+export default ChangeForgottenPasswordPage;
 
-ChangeForgotenPasswordPage.propTypes = {
+ChangeForgottenPasswordPage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       token: PropTypes.string,
