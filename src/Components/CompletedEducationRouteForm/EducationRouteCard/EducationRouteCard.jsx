@@ -254,7 +254,7 @@ export default class EducationRouteCard extends React.Component {
             </select>
           )}
           {!this.state.isEdited && (
-            <ul className='users-card--field--list'>
+            <ul className='users-card--field-list'>
               {this.state.educationToEdit.regionDistricts.map(regionDistrict => (
                 <li key={regionDistrict}>{regionDistrict}</li>
               ))}
@@ -274,7 +274,7 @@ export default class EducationRouteCard extends React.Component {
             >
               {districts.map(district => (
                 <Option key={district} title={district}>
-                  {district}{' '}
+                  {district}
                 </Option>
               ))}
             </Select>
@@ -335,7 +335,7 @@ export default class EducationRouteCard extends React.Component {
               />
             )}
             <span>
-              ,<br />но не позднее{' '}
+              ,<br />но не позднее
             </span>
             {!this.state.isEdited && (
               <span className=''>{this.state.educationToEdit.lastYear}</span>
