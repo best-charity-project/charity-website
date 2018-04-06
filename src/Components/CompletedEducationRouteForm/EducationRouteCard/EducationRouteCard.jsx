@@ -191,11 +191,9 @@ export default class EducationRouteCard extends React.Component {
         .districts || [];
     return (
       <div className='user-cards-wrapper'>
-        {!this.state.isEdited && (
-          <h2 className='user-cards--title'>Карта № {this.props.index + 1}</h2>
-        )}
+        {!this.state.isEdited && <h2 className='user-cards--title'>Карта № {this.props.index}</h2>}
         {this.state.isEdited && (
-          <h2 className='user-cards--title'>Карта № {this.props.index + 1} (РЕДАКТИРОВАНИЕ)</h2>
+          <h2 className='user-cards--title'>Карта № {this.props.index} (РЕДАКТИРОВАНИЕ)</h2>
         )}
         <div className='users-card'>
           {!this.state.isEdited && (
