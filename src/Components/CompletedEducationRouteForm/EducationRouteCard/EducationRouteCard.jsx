@@ -245,15 +245,15 @@ export default class EducationRouteCard extends React.Component {
               required
             />
           )}
-          {!this.state.isEdited && (
-            <p className='users-card--field'>{this.state.educationToEdit.phone}</p>
-          )}
+          {!this.state.isEdited &&
+            this.state.educationToEdit.phone && (
+              <p className='users-card--field'>{this.state.educationToEdit.phone}</p>
+            )}
           {this.state.isEdited && (
             <InputMask
               value={this.state.educationToEdit.phone}
               onChange={this.setPhone}
               id='phone'
-              required
               placeholder='Введите контактный номер телефона'
               pattern='\+375\([0-9]{2}\)-[0-9]{3}(-[0-9]{2}){2}'
               type='tel'
@@ -337,9 +337,10 @@ export default class EducationRouteCard extends React.Component {
               <option>Средняя школа</option>
             </select>
           )}
-          {!this.state.isEdited && (
-            <p className='users-card--field'>{this.state.educationToEdit.program}</p>
-          )}
+          {!this.state.isEdited &&
+            this.state.educationToEdit.program && (
+              <p className='users-card--field'>{this.state.educationToEdit.program}</p>
+            )}
           {this.state.isEdited && (
             <input
               className='users-card--input-field'
@@ -367,7 +368,7 @@ export default class EducationRouteCard extends React.Component {
               />
             )}
             <span>
-              ,<br />но не позднее
+              ,<br />но не позднее{' '}
             </span>
             {!this.state.isEdited && (
               <span className=''>{this.state.educationToEdit.lastYear}</span>
