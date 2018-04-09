@@ -12,6 +12,7 @@ module.exports = {
     'jsx-quotes': ['error', 'prefer-single'],
     'linebreak-style': 0,
     'no-underscore-dangle': 0,
+    'jsx-a11y/no-autofocus': 0,
   },
   globals: {
     window: true,
