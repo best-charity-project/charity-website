@@ -9,7 +9,6 @@ class EducationRouteSearch extends React.Component {
     super(props);
     this.state = {
       locations: [],
-      region: '',
       regionIndex: 'Регион проживания',
       educationalInstitution: '',
       regionDistricts: '',
@@ -19,7 +18,6 @@ class EducationRouteSearch extends React.Component {
       filterResult: null,
       isOpenTable: false,
     };
-    this.setCategories = this.setCategories.bind(this);
     this.setRegion = this.setRegion.bind(this);
     this.handleFieldChange = this.handleFieldChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,8 +37,11 @@ class EducationRouteSearch extends React.Component {
   setRegion(event) {
     this.setState({
       regionIndex: event.target.value,
-      region: this.state.locations[event.target.value].name,
     });
+  }
+
+  getRegion() {
+    return this.state.locations[this.state.regionIndex] || {};
   }
 
   handleFieldChange(event) {
@@ -52,7 +53,7 @@ class EducationRouteSearch extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     filterEducationalRoutes(
-      this.state.region,
+      this.getRegion().name,
       this.state.regionDistricts,
       this.state.educationalInstitution,
       this.state.firstYear,
@@ -67,7 +68,7 @@ class EducationRouteSearch extends React.Component {
   }
 
   render() {
-    const districts = (this.state.locations[this.state.regionIndex] || {}).districts || [];
+    const regions = this.getRegion().districts || [];
     return (
       <div className='education-route'>
         <div className='education-route--filter'>
@@ -100,9 +101,9 @@ class EducationRouteSearch extends React.Component {
                 <option value='' disabled selected>
                   Район
                 </option>
-                {districts.map(district => (
-                  <option key={district} title={district}>
-                    {district}
+                {regions.map(region => (
+                  <option key={region} title={region}>
+                    {region}
                   </option>
                 ))}
               </select>
