@@ -1,14 +1,13 @@
 import API from './api';
-import { getToken } from './Auth/Auth';
+import { headers } from './Auth/Auth';
 
 const getLocations = () => API.get('locations').then(response => response.data);
 
-const addEducation = education =>
-  API.post('education', education, { headers: { Authorization: `Bearer ${getToken()}` } });
+const addEducation = education => API.post('education', education, { headers });
 
 const getEducation = userId =>
   API.get(`education?userId=${userId}`, {
-    headers: { Authorization: `Bearer ${getToken()}` },
+    headers,
   }).then(response => response.data);
 
 const deleteEducation = id =>
