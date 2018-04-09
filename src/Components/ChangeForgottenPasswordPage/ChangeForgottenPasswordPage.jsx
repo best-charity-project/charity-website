@@ -43,7 +43,7 @@ class ChangeForgottenPasswordPage extends React.Component {
     return (
       <div className='changePassPage indent'>
         <Message {...this.state.message} />
-        {this.state.isValidToken === true && (
+        {this.state.isValidToken && (
           <ChangeForgottenPasswordForm buttonText='Отправить' onSubmit={this.handleFormSubmit} />
         )}
         {this.state.isValidToken === '' && <p>Загрузка...</p>}
