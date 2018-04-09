@@ -76,7 +76,7 @@
 .users-card--number-field {
   display: initial;
   width: 4em;
-  height: max-content;
+  height: 0.1em;
 }
 
 .users-card--number-field:hover {

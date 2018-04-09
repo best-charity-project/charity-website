@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Select, { Option } from 'rc-select';
 import InputMask from 'react-input-mask';
-import ControlButton from '../../ControlButton/ControlButton';
 import { getLocations, deleteEducation, updateEducation } from '../../../educationCalls';
 import Modal from '../../Admin/ModalWindow/ModalWindow';
 import Message from '../../Message/Message';
@@ -49,7 +48,7 @@ export default class EducationRouteCard extends React.Component {
     this.setFirstYear = this.setFirstYear.bind(this);
     this.setEducationalInstitution = this.setEducationalInstitution.bind(this);
     this.setLastYear = this.setLastYear.bind(this);
-    this.handleNewsUpdate = this.handleNewsUpdate.bind(this);
+    this.handleEducationUpdate = this.handleEducationUpdate.bind(this);
     this.toggleMessageOpening = this.toggleMessageOpening.bind(this);
     this.isRegionDistricts = this.isRegionDistricts.bind(this);
   }
@@ -97,11 +96,14 @@ export default class EducationRouteCard extends React.Component {
   }
 
   setRegion(event) {
+    const { locations } = this.state.educationToEdit;
+    const regionIndex = event.target.value;
     this.setState({
       educationToEdit: {
         ...this.state.educationToEdit,
         regionIndex: event.target.value,
         regionDistricts: [],
+        region: locations[regionIndex].name,
       },
     });
   }
@@ -111,7 +113,6 @@ export default class EducationRouteCard extends React.Component {
       educationToEdit: {
         ...this.state.educationToEdit,
         regionDistricts: event,
-        region: this.state.educationToEdit.locations[this.state.educationToEdit.regionIndex].name,
       },
     });
   }
@@ -161,13 +162,12 @@ export default class EducationRouteCard extends React.Component {
     });
   }
 
-  handleNewsUpdate(event) {
+  handleEducationUpdate(event) {
     event.preventDefault();
     if (this.state.educationToEdit.regionDistricts.length === 0) {
       this.isRegionDistricts();
     } else {
       this.handleEditClick();
-      // this.setState({ isEdited: false });
       updateEducation(this.props._id, this.state.educationToEdit);
     }
   }
@@ -217,7 +217,7 @@ export default class EducationRouteCard extends React.Component {
       (this.state.educationToEdit.locations[this.state.educationToEdit.regionIndex] || {})
         .districts || [];
     return (
-      <form className='user-cards-wrapper' onSubmit={this.handleNewsUpdate}>
+      <form className='user-cards-wrapper' onSubmit={this.handleEducationUpdate}>
         {!this.state.isEdited && <h2 className='user-cards--title'>Карта № {this.props.index}</h2>}
         {this.state.isEdited && (
           <h2 className='user-cards--title'>Карта № {this.props.index} (РЕДАКТИРОВАНИЕ)</h2>
@@ -400,8 +400,9 @@ export default class EducationRouteCard extends React.Component {
             />
           )}
           {this.state.isEdited && (
-            <ControlButton
-              text='Сохранить'
+            <input
+              type='submit'
+              value='Сохранить'
               className='control-button control-button--green control-button--small'
             />
           )}
