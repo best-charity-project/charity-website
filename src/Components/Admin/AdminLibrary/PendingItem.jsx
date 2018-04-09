@@ -60,12 +60,12 @@ class PendingItem extends React.Component {
           <ControlButton
             text='Одобрить заявку'
             onButtonClick={this.acceptItem}
-            className='control-button control-button-green control-button-small'
+            className='control-button control-button-secondary control-button-small'
           />
           <ControlButton
             text='Удалить'
             onButtonClick={this.toggleModal}
-            className='control-button control-button-red control-button-small'
+            className='control-button control-button-warning control-button-small'
           />
           {this.state.isOpen && <Modal onConfirm={this.rejectItem} toggle={this.toggleModal} />}
         </div>

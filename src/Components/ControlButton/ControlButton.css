@@ -21,11 +21,11 @@
   transform: translateY(-1px);
 }
 
-.control-button-green {
+.control-button-secondary {
   background-color: rgb(92, 185, 120);
 }
 
-.control-button-red {
+.control-button-warning {
   background-color: rgb(238, 169, 174);
 }
 
@@ -33,11 +33,11 @@
   background-color: #37b3d8;
 }
 
-.control-button-green:hover {
+.control-button-secondary:hover {
   background-color: rgb(92, 185, 120);
 }
 
-.control-button-red:hover {
+.control-button-warning:hover {
   background-color: rgb(218, 137, 144);
 }
 

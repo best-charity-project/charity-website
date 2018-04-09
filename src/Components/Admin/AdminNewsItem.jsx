@@ -76,12 +76,12 @@ class AdminNewsItem extends React.Component {
         <div className='item--buttons'>
           <ControlButton
             text='Редактировать'
-            className='control-button control-button-green control-button-small'
+            className='control-button control-button-secondary control-button-small'
             onButtonClick={this.handleEditClick}
           />
           <ControlButton
             text='Удалить'
-            className='control-button control-button-red control-button-small'
+            className='control-button control-button-warning control-button-small'
             onButtonClick={this.toggleModal}
           />
           {this.state.isOpen && <Modal onConfirm={this.deleteHandler} toggle={this.toggleModal} />}
