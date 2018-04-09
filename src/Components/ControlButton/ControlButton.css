@@ -21,27 +21,27 @@
   transform: translateY(-1px);
 }
 
-.control-button--green {
+.control-button-green {
   background-color: rgb(92, 185, 120);
 }
 
-.control-button--red {
+.control-button-red {
   background-color: rgb(238, 169, 174);
 }
 
-.control-button--blue {
+.control-button-blue {
   background-color: #37b3d8;
 }
 
-.control-button--green:hover {
+.control-button-green:hover {
   background-color: rgb(92, 185, 120);
 }
 
-.control-button--red:hover {
+.control-button-red:hover {
   background-color: rgb(218, 137, 144);
 }
 
-.control-button--small {
+.control-button-small {
   font-size: 0.8em;
   display: inline-block;
   margin: 0.3em;

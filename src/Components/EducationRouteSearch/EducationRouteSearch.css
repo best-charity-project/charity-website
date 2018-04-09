@@ -20,11 +20,11 @@
   justify-content: center;
 }
 
-.field--wide {
+.field-wide {
   width: 17em;
 }
 
-.field--narrow {
+.field-narrow {
   width: 4.1em;
 }
 

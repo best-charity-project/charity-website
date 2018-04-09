@@ -92,7 +92,7 @@ class EducationRouteSearch extends React.Component {
             <div className='filter--box'>
               <select
                 id='region'
-                className='form--field field--wide'
+                className='form--field field-wide'
                 onChange={this.setRegion}
                 value={this.state.regionIndex}
                 required
@@ -108,7 +108,7 @@ class EducationRouteSearch extends React.Component {
               </select>
               <select
                 id='regionDistricts'
-                className='form--field field--wide'
+                className='form--field field-wide'
                 onChange={this.handleRegionDistricts}
                 value={this.state.regionDistricts}
                 required
@@ -126,7 +126,7 @@ class EducationRouteSearch extends React.Component {
                 id='edicationalInstitution'
                 onChange={this.handleEducation}
                 value={this.state.educationalInstitution}
-                className='form--field field--wide'
+                className='form--field field-wide'
                 required
               >
                 <option value='' disabled selected>
@@ -137,7 +137,7 @@ class EducationRouteSearch extends React.Component {
               </select>
               <select
                 id='program'
-                className='form--field field--wide'
+                className='form--field field-wide'
                 onChange={this.handleProgram}
                 value={this.state.program}
               >
@@ -155,7 +155,7 @@ class EducationRouteSearch extends React.Component {
                   value={this.state.firstYear}
                   onChange={this.handleFirstYear}
                   type='number'
-                  className='form--field field--narrow'
+                  className='form--field field-narrow'
                   placeholder='20__'
                   min='2018'
                   max='2100'
@@ -167,7 +167,7 @@ class EducationRouteSearch extends React.Component {
                   value={this.state.lastYear}
                   onChange={this.handleLastTear}
                   type='number'
-                  className='form--field field--narrow'
+                  className='form--field field-narrow'
                   placeholder='20__'
                   min='2018'
                   max='2100'
@@ -175,7 +175,7 @@ class EducationRouteSearch extends React.Component {
                 />
               </p>
             </div>
-            <input type='submit' className='control-button control-button--blue' value='Искать' />
+            <input type='submit' className='control-button control-button-blue' value='Искать' />
           </form>
         </div>
         <table className='education-route--table'>

@@ -54,12 +54,12 @@ class AdminLibraryItem extends React.Component {
           <ControlButton
             text='Редактировать'
             onButtonClick={this.handleEditClick}
-            className='control-button control-button--green control-button--small'
+            className='control-button control-button-green control-button-small'
           />
           <ControlButton
             text='Удалить'
             onButtonClick={this.toggleModal}
-            className='control-button control-button--red control-button--small'
+            className='control-button control-button-red control-button-small'
           />
           {this.state.isOpen && <Modal onConfirm={this.deleteItem} toggle={this.toggleModal} />}
         </div>

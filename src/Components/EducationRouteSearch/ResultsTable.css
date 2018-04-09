@@ -67,7 +67,7 @@
 }
 
 @media (max-width: 576px) {
-  .field--wide {
+  .field-wide {
     min-width: 90%;
   }
 }
