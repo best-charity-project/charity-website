@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { minPasswordLength } from '../../configs/config.json';
 
 class ChangeForgotenPasswordForm extends React.Component {
   constructor(props) {
@@ -45,7 +46,7 @@ class ChangeForgotenPasswordForm extends React.Component {
               onChange={this.handleNewPasswordChange}
               type='password'
               className={this.state.newPassword ? 'form--field label-move-up' : 'form--field'}
-              minLength='6'
+              minLength={minPasswordLength}
               ref={(input) => {
                 this.newPassword = input;
               }}
@@ -62,7 +63,7 @@ class ChangeForgotenPasswordForm extends React.Component {
               onChange={this.handleConfirmPasswordChange}
               type='password'
               className={this.state.confirmPassword ? 'form--field label-move-up' : 'form--field'}
-              minLength='6'
+              minLength={minPasswordLength}
               ref={(input) => {
                 this.confirmPassword = input;
               }}
