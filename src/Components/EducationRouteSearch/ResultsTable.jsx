@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import './ResultsTable.css';
 
 const ResultsTable = props => (
-  <tr className='table-body--table-row'>
-    <td className='table-row--header'>Карта № {props.index + 1}</td>
-    <td className='table-row--field'>
+  <tr className='results-body--results-row'>
+    <td className='results-row--header'>Карта № {props.index + 1}</td>
+    <td className='results-row--field'>
       <ul className='field--list'>
         <li>{props.name}</li>
         <li>{props.email}</li>
         <li>{props.phone}</li>
       </ul>
     </td>
-    <td className='table-row--field'>
+    <td className='results-row--field'>
       <ul className='field--list'>
         <li>{props.region}</li>
         {props.regionDistricts.map(regionDistrict => (
@@ -21,11 +21,11 @@ const ResultsTable = props => (
         <li>{props.city}</li>
       </ul>
     </td>
-    <td className='table-row--field'>
+    <td className='results-row--field'>
       {props.firstYear}-{props.lastYear}
     </td>
-    <td className='table-row--field'>{props.educationalInstitution}</td>
-    <td className='table-row--field'>{props.program}</td>
+    <td className='results-row--field'>{props.educationalInstitution}</td>
+    <td className='results-row--field'>{props.program}</td>
   </tr>
 );
 

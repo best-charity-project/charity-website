@@ -14,10 +14,25 @@ const filterEducationalRoutes = (
   lastYear,
   program,
 ) => {
+  const query = {
+    region: encodeURIComponent(region),
+    regionDistricts: encodeURIComponent(regionDistricts),
+    educationalInstitution: encodeURIComponent(educationalInstitution),
+    program: encodeURIComponent(program),
+  };
+
   if (!program) {
-    return API.get(`education/filter?region=${encodeURIComponent(region)}&regionDistricts=${encodeURIComponent(regionDistricts)}&educationalInstitution=${encodeURIComponent(educationalInstitution)}&firstYear=${firstYear}&lastYear=${lastYear}`).then(response => response.data);
+    return API.get(`education/filter?region=${query.region}&regionDistricts=${
+      query.regionDistricts
+    }&educationalInstitution=${
+      query.educationalInstitution
+    }&firstYear=${firstYear}&lastYear=${lastYear}`).then(response => response.data);
   }
-  return API.get(`education/filter?region=${encodeURIComponent(region)}&regionDistricts=${encodeURIComponent(regionDistricts)}&educationalInstitution=${encodeURIComponent(educationalInstitution)}&firstYear=${firstYear}&lastYear=${lastYear}&program=${encodeURIComponent(program)}`).then(response => response.data);
+  return API.get(`education/filter?region=${query.region}&regionDistricts=${
+    query.regionDistricts
+  }&educationalInstitution=${
+    query.educationalInstitution
+  }&firstYear=${firstYear}&lastYear=${lastYear}&program=${query.program}`).then(response => response.data);
 };
 
 const getEducation = userId =>

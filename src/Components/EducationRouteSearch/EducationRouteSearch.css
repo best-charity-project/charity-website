@@ -20,20 +20,14 @@
   justify-content: center;
 }
 
+.form--filter-label {
+  margin-left: 0.8em;
+}
+
 .field-wide {
   width: 17em;
 }
 
 .field-narrow {
   width: 4.1em;
-}
-
-.form--filter-label {
-  margin-left: 0.8em;
-}
-
-@media (max-width: 576px) {
-  .field-wide {
-    min-width: 90%;
-  }
 }

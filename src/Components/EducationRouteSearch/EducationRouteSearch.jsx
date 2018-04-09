@@ -179,7 +179,7 @@ class EducationRouteSearch extends React.Component {
                 </tr>
               </thead>
             )}
-          <tbody className='results-table--table-body'>
+          <tbody className='results-table--results-body'>
             {this.state.filterResult &&
               this.state.filterResult.map((item, index) => (
                 <ResultsTable index={index} key={item._id} {...item} />
