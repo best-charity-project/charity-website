@@ -68,12 +68,12 @@ class EducationRouteSearch extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     filterEducationalRoutes(
-      encodeURIComponent(this.state.region),
-      encodeURIComponent(this.state.regionDistricts),
-      encodeURIComponent(this.state.educationalInstitution),
+      this.state.region,
+      this.state.regionDistricts,
+      this.state.educationalInstitution,
       this.state.firstYear,
       this.state.lastYear,
-      encodeURIComponent(this.state.program),
+      this.state.program,
     ).then(filterResult => this.setState({ filterResult }));
     this.showTable();
   }
@@ -161,7 +161,9 @@ class EducationRouteSearch extends React.Component {
                   max='2100'
                   required
                 />
-                <label htmlFor='last-year'>по</label>
+                <label htmlFor='last-year' className='form--filter-label'>
+                  по
+                </label>
                 <input
                   id='last-year'
                   value={this.state.lastYear}
@@ -178,21 +180,21 @@ class EducationRouteSearch extends React.Component {
             <input type='submit' className='control-button control-button-blue' value='Искать' />
           </form>
         </div>
-        <table className='education-route--table'>
+        <table className='education-route--results-table'>
           {this.state.isOpenTable &&
             this.state.filterResult &&
             this.state.filterResult.length > 0 && (
-              <thead>
-                <tr className='table--header'>
-                  <th className='header--field'>Контактная информация</th>
-                  <th className='header--field'>Адрес</th>
-                  <th className='header--field'>Год обучения</th>
-                  <th className='header--field'>Учреждение образования</th>
-                  <th className='header--field'>Программа образования</th>
+              <thead className='results-table--header'>
+                <tr className='header-row'>
+                  <th className='row--field'>Контактная информация</th>
+                  <th className='row--field'>Адрес</th>
+                  <th className='row--field'>Год обучения</th>
+                  <th className='row--field'>Учреждение образования</th>
+                  <th className='row--field'>Программа образования</th>
                 </tr>
               </thead>
             )}
-          <tbody>
+          <tbody className='results-table--table-body'>
             {this.state.filterResult &&
               this.state.filterResult.map((item, index) => (
                 <ResultsTable index={index} key={item._id} {...item} />

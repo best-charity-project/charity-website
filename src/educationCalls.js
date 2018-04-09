@@ -15,9 +15,9 @@ const filterEducationalRoutes = (
   program,
 ) => {
   if (!program) {
-    return API.get(`education/filter?region=${region}&regionDistricts=${regionDistricts}&educationalInstitution=${educationalInstitution}&firstYear=${firstYear}&lastYear=${lastYear}`).then(response => response.data);
+    return API.get(`education/filter?region=${encodeURIComponent(region)}&regionDistricts=${encodeURIComponent(regionDistricts)}&educationalInstitution=${encodeURIComponent(educationalInstitution)}&firstYear=${firstYear}&lastYear=${lastYear}`).then(response => response.data);
   }
-  return API.get(`education/filter?region=${region}&regionDistricts=${regionDistricts}&educationalInstitution=${educationalInstitution}&firstYear=${firstYear}&lastYear=${lastYear}&program=${program}`).then(response => response.data);
+  return API.get(`education/filter?region=${encodeURIComponent(region)}&regionDistricts=${encodeURIComponent(regionDistricts)}&educationalInstitution=${encodeURIComponent(educationalInstitution)}&firstYear=${firstYear}&lastYear=${lastYear}&program=${encodeURIComponent(program)}`).then(response => response.data);
 };
 
 const getEducation = userId =>

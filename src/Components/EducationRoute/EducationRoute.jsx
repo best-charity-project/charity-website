@@ -158,6 +158,7 @@ export default class EducationRoute extends React.Component {
 
   render() {
     const districts = (this.state.locations[this.state.regionIndex] || {}).districts || [];
+    const educationalPrograms = ['---', ...programs];
     return (
       <div className='education-route'>
         <h1 className='secondary-heading'>образовательный маршрут</h1>
@@ -327,10 +328,7 @@ export default class EducationRoute extends React.Component {
               value={this.state.program}
               onChange={this.setProgram}
             >
-              <option value='' disabled selected>
-                ---
-              </option>
-              {programs.map(program => <option key={program}>{program}</option>)}
+              {educationalPrograms.map(program => <option key={program}>{program}</option>)}
             </select>
             <input
               type='submit'

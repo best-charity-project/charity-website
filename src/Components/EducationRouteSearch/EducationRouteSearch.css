@@ -32,5 +32,8 @@
   margin-left: 0.8em;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 576px) {
+  .field-wide {
+    min-width: 90%;
+  }
 }
