@@ -18,14 +18,11 @@ export default class ChangePasswordPage extends React.Component {
 
   handleFormSubmit(formData) {
     changePassword(formData).then((data) => {
-      let message = {};
       if (data.error) {
-        message = { type: 'error', text: data.error };
-        this.setState({ message });
+        this.setState({ message: { type: 'error', text: data.error } });
         return;
       }
-      message = { type: 'success', text: data.message };
-      this.setState({ message });
+      this.setState({ message: { type: 'success', text: data.message } });
     });
   }
 
