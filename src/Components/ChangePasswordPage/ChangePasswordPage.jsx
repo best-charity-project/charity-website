@@ -1,10 +1,10 @@
 import React from 'react';
-import ChangePassForm from './ChangePassForm';
+import ChangePasswordForm from './ChangePasswordForm';
 import { changePassword } from '../../accountCalls';
 import Message from '../Message/Message';
-import './changePassPage.css';
+import './ChangePasswordPage.css';
 
-class ChangePassPage extends React.Component {
+export default class ChangePasswordPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,12 +31,10 @@ class ChangePassPage extends React.Component {
 
   render() {
     return (
-      <div className='changePassPage'>
+      <div className='changePasswordPage'>
         <Message {...this.state.message} />
-        <ChangePassForm buttonText='Отправить' onSubmit={this.handleFormSubmit} />
+        <ChangePasswordForm buttonText='Отправить' onSubmit={this.handleFormSubmit} />
       </div>
     );
   }
 }
-
-export default ChangePassPage;

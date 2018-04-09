@@ -5,7 +5,7 @@ import ChangeForgottenPasswordForm from './ChangeForgottenPasswordForm';
 import { changeForgottenPassword, isValidToken } from '../../accountCalls';
 import Message from '../Message/Message';
 
-class ChangeForgottenPasswordPage extends React.Component {
+export default class ChangeForgottenPasswordPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,8 +52,6 @@ class ChangeForgottenPasswordPage extends React.Component {
     );
   }
 }
-
-export default ChangeForgottenPasswordPage;
 
 ChangeForgottenPasswordPage.propTypes = {
   match: PropTypes.shape({

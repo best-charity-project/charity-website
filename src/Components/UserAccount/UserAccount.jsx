@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Route, Switch, Link, Redirect, withRouter } from 'react-router-dom';
 import EducationRoute from '../EducationRoute/EducationRoute';
 import EducationRouteSearch from '../EducationRouteSearch/EducationRouteSearch';
-import ChangePassPage from '../ChangePasswordPage/ChangePassPage';
+import ChangePasswordPage from '../ChangePasswordPage/ChangePasswordPage';
 import CompletedEducationRouteForm from '../CompletedEducationRouteForm/CompletedEducationRouteForm';
 
 const UserAccount = ({ userInfo, match }) => (
@@ -35,7 +35,7 @@ const UserAccount = ({ userInfo, match }) => (
             render={() => <CompletedEducationRouteForm {...userInfo} />}
           />
           <Route path={`${match.url}/education-route-search`} component={EducationRouteSearch} />
-          <Route path={`${match.url}/change-password`} component={ChangePassPage} />
+          <Route path={`${match.url}/change-password`} component={ChangePasswordPage} />
         </Switch>
       </div>
     )}

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { minPasswordLength } from '../../configs/config.json';
 
-class ChangeForgotenPasswordForm extends React.Component {
+export default class ChangeForgotenPasswordForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -83,8 +83,6 @@ class ChangeForgotenPasswordForm extends React.Component {
     );
   }
 }
-
-export default ChangeForgotenPasswordForm;
 
 ChangeForgotenPasswordForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
