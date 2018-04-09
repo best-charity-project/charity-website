@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import confirmPassword from '../Form/confirmPassword';
+import { minPasswordLength } from '../../configs/config.json';
 import './ChangePasswordForm.css';
 
 export default class ChangePasswordForm extends React.Component {
@@ -18,11 +20,7 @@ export default class ChangePasswordForm extends React.Component {
 
   handleConfirmPasswordChange() {
     this.setState({ confirmPassword: this.confirmPassword.value });
-    if (this.newPassword.value !== this.confirmPassword.value) {
-      this.confirmPassword.setCustomValidity('Пароль не соответствует');
-    } else {
-      this.confirmPassword.setCustomValidity('');
-    }
+    confirmPassword(this.newPassword, this.confirmPassword);
   }
 
   handleOldPasswordChange(e) {
@@ -54,7 +52,7 @@ export default class ChangePasswordForm extends React.Component {
               onChange={this.handleOldPasswordChange}
               type='password'
               className={this.state.oldPassword ? 'form--field label-move-up' : 'form--field'}
-              minLength='6'
+              minLength={minPasswordLength}
               required
             />
             <label htmlFor='oldPassword' className='form--placeholder'>
@@ -68,7 +66,7 @@ export default class ChangePasswordForm extends React.Component {
               onChange={this.handleNewPasswordChange}
               type='password'
               className={this.state.newPassword ? 'form--field label-move-up' : 'form--field'}
-              minLength='6'
+              minLength={minPasswordLength}
               ref={(input) => {
                 this.newPassword = input;
               }}
@@ -85,7 +83,7 @@ export default class ChangePasswordForm extends React.Component {
               onChange={this.handleConfirmPasswordChange}
               type='password'
               className={this.state.confirmPassword ? 'form--field label-move-up' : 'form--field'}
-              minLength='6'
+              minLength={minPasswordLength}
               ref={(input) => {
                 this.confirmPassword = input;
               }}

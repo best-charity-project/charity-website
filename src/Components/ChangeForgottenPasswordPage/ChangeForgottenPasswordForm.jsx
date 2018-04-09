@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { minPasswordLength } from '../../configs/config.json';
+import confirmPassword from '../Form/confirmPassword';
 
 export default class ChangeForgotenPasswordForm extends React.Component {
   constructor(props) {
@@ -16,11 +17,7 @@ export default class ChangeForgotenPasswordForm extends React.Component {
 
   handleConfirmPasswordChange() {
     this.setState({ confirmPassword: this.confirmPassword.value });
-    if (this.newPassword.value !== this.confirmPassword.value) {
-      this.confirmPassword.setCustomValidity('Пароль не соответствует');
-    } else {
-      this.confirmPassword.setCustomValidity('');
-    }
+    confirmPassword(this.newPassword, this.confirmPassword);
   }
 
   handleNewPasswordChange(e) {
