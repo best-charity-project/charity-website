@@ -106,7 +106,7 @@ export default class Form extends React.Component {
           <br />
           <input
             type='submit'
-            className='control-button control-button-blue'
+            className='control-button control-button-primary'
             value={this.props.buttonText}
           />
         </form>

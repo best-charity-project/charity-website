@@ -332,7 +332,7 @@ export default class EducationRoute extends React.Component {
             </select>
             <input
               type='submit'
-              className='form-library--button control-button control-button-blue'
+              className='form-library--button control-button control-button-primary'
               value='Отправить'
               onClick={this.isRegionDistricts}
             />

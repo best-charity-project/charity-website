@@ -86,7 +86,7 @@ class AdminNewsItem extends React.Component {
           />
           {this.state.isOpen && <Modal onConfirm={this.deleteHandler} toggle={this.toggleModal} />}
           <DetailsButton
-            className='control-button control-button-blue control-button-small'
+            className='control-button control-button-primary control-button-small'
             url={this.state.link}
             text={this.state.text}
           />

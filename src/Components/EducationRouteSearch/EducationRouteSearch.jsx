@@ -177,7 +177,7 @@ class EducationRouteSearch extends React.Component {
                 />
               </p>
             </div>
-            <input type='submit' className='control-button control-button-blue' value='Искать' />
+            <input type='submit' className='control-button control-button-primary' value='Искать' />
           </form>
         </div>
         <table className='education-route--results-table'>
