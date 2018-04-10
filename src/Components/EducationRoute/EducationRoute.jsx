@@ -4,6 +4,7 @@ import InputMask from 'react-input-mask';
 import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
 import { getLocations, addEducation } from '../../educationCalls';
+import programs from './programs.json';
 import InvalidInputMessage from './InvalidInputMessage/InvalidInputMessage';
 import './EducationRoute.css';
 import './SelectStyles.css';
@@ -168,6 +169,7 @@ export default class EducationRoute extends React.Component {
 
   render() {
     const districts = (this.state.locations[this.state.regionIndex] || {}).districts || [];
+    const educationalPrograms = ['---', ...programs];
     return (
       <div className='education-route'>
         <h1 className='secondary-heading'>образовательный маршрут</h1>
@@ -339,18 +341,17 @@ export default class EducationRoute extends React.Component {
             <label className='form--label' htmlFor='program'>
               Рекомендованная программа образования
             </label>
-            <input
+            <select
               id='program'
+              className='form--input input--select'
               value={this.state.program}
               onChange={this.setProgram}
-              type='text'
-              maxLength='80'
-              placeholder='Программа обучения рекомендованная ЦКРОиР'
-              className='form--input'
-            />
+            >
+              {educationalPrograms.map(program => <option key={program}>{program}</option>)}
+            </select>
             <input
               type='submit'
-              className='form-library--button control-button control-button--blue'
+              className='form-library--button control-button control-button-primary'
               value='Отправить'
               onClick={this.isRegionDistricts}
             />

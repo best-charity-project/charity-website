@@ -6,6 +6,7 @@ import { getLocations, deleteEducation, updateEducation } from '../../../educati
 import Modal from '../../Admin/ModalWindow/ModalWindow';
 import Message from '../../Message/Message';
 import InvalidInputMessage from '../../EducationRoute/InvalidInputMessage/InvalidInputMessage';
+import programs from '../../EducationRoute/programs.json';
 import './EducationRouteCard.css';
 
 export default class EducationRouteCard extends React.Component {
@@ -216,6 +217,7 @@ export default class EducationRouteCard extends React.Component {
     const districts =
       (this.state.educationToEdit.locations[this.state.educationToEdit.regionIndex] || {})
         .districts || [];
+    const educationalPrograms = ['---', ...programs];
     return (
       <form className='user-cards-wrapper' onSubmit={this.handleEducationUpdate}>
         {!this.state.isEdited && <h2 className='user-cards--title'>Карта № {this.props.index}</h2>}
@@ -343,11 +345,14 @@ export default class EducationRouteCard extends React.Component {
               <p className='users-card--field'>{this.state.educationToEdit.program}</p>
             )}
           {this.state.isEdited && (
-            <input
-              className='users-card--input-field'
+            <select
+              id='program'
+              className='users-card--input-field input-field--select'
               value={this.state.educationToEdit.program}
               onChange={this.setProgram}
-            />
+            >
+              {educationalPrograms.map(program => <option key={program}>{program}</option>)}
+            </select>
           )}
           <p className='users-card--field'>
             <span>Начало обучения с </span>
@@ -396,14 +401,14 @@ export default class EducationRouteCard extends React.Component {
               type='button'
               value='Редактировать'
               onClick={this.handleEditClick}
-              className='control-button control-button--green control-button--small'
+              className='control-button control-button-secondary control-button-small'
             />
           )}
           {this.state.isEdited && (
             <input
               type='submit'
               value='Сохранить'
-              className='control-button control-button--green control-button--small'
+              className='control-button control-button-secondary control-button-small'
             />
           )}
           {!this.state.isEdited && (
@@ -411,7 +416,7 @@ export default class EducationRouteCard extends React.Component {
               type='button'
               value='Удалить'
               onClick={this.toggleModal}
-              className='control-button control-button--red control-button--small'
+              className='control-button control-button-warning control-button-small'
             />
           )}
           {this.state.isEdited && (
@@ -419,7 +424,7 @@ export default class EducationRouteCard extends React.Component {
               type='button'
               value='Отменить'
               onClick={this.handleEditClick}
-              className='control-button control-button--red control-button--small'
+              className='control-button control-button-warning control-button-small'
             />
           )}
           {this.state.isOpen && <Modal onConfirm={this.deleteItem} toggle={this.toggleModal} />}

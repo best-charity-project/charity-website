@@ -1,18 +1,49 @@
 import API from './api';
-import { getToken } from './Auth/Auth';
+import appendAuthorizationHeaders from './appendAuthorizationHeaders';
+
+const authHeader = appendAuthorizationHeaders();
 
 const getLocations = () => API.get('locations').then(response => response.data);
 
-const addEducation = education =>
-  API.post('education', education, { headers: { Authorization: `Bearer ${getToken()}` } });
+const addEducation = (education) => {
+  API.post('education', education, { headers: authHeader });
+};
+
+const filterEducationalRoutes = (
+  region,
+  regionDistricts,
+  educationalInstitution,
+  firstYear,
+  lastYear,
+  program,
+) => {
+  const query = {
+    region: encodeURIComponent(region),
+    regionDistricts: encodeURIComponent(regionDistricts),
+    educationalInstitution: encodeURIComponent(educationalInstitution),
+    program: encodeURIComponent(program),
+  };
+
+  let url = `education/filter?region=${query.region}&regionDistricts=${
+    query.regionDistricts
+  }&educationalInstitution=${
+    query.educationalInstitution
+  }&firstYear=${firstYear}&lastYear=${lastYear}`;
+
+  if (program) {
+    url = `${url}&program=${query.program}`;
+  }
+
+  return API.get(url).then(response => response.data);
+};
 
 const getEducation = userId =>
   API.get(`education?userId=${userId}`, {
-    headers: { Authorization: `Bearer ${getToken()}` },
+    headers: authHeader,
   }).then(response => response.data);
 
 const deleteEducation = id =>
-  API.delete(`education/${id}`, { headers: { Authorization: `Bearer ${getToken()}` } }).then(res => res.data);
+  API.delete(`education/${id}`, { headers: authHeader }).then(res => res.data);
 
 const updateEducation = (id, education) => {
   const {
@@ -43,8 +74,15 @@ const updateEducation = (id, education) => {
       program,
       region,
     },
-    { headers: { Authorization: `Bearer ${getToken()}` } },
+    { headers: authHeader },
   ).then(res => res.data);
 };
 
-export { getLocations, addEducation, getEducation, deleteEducation, updateEducation };
+export {
+  getLocations,
+  addEducation,
+  filterEducationalRoutes,
+  getEducation,
+  deleteEducation,
+  updateEducation,
+};
