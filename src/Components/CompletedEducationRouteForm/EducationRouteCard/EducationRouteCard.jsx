@@ -396,14 +396,14 @@ export default class EducationRouteCard extends React.Component {
               type='button'
               value='Редактировать'
               onClick={this.handleEditClick}
-              className='control-button control-button--green control-button--small'
+              className='control-button control-button-secondary control-button-small'
             />
           )}
           {this.state.isEdited && (
             <input
               type='submit'
               value='Сохранить'
-              className='control-button control-button--green control-button--small'
+              className='control-button control-button-secondary control-button-small'
             />
           )}
           {!this.state.isEdited && (
@@ -411,7 +411,7 @@ export default class EducationRouteCard extends React.Component {
               type='button'
               value='Удалить'
               onClick={this.toggleModal}
-              className='control-button control-button--red control-button--small'
+              className='control-button control-button-warning control-button-small'
             />
           )}
           {this.state.isEdited && (
@@ -419,7 +419,7 @@ export default class EducationRouteCard extends React.Component {
               type='button'
               value='Отменить'
               onClick={this.handleEditClick}
-              className='control-button control-button--red control-button--small'
+              className='control-button control-button-warning control-button-small'
             />
           )}
           {this.state.isOpen && <Modal onConfirm={this.deleteItem} toggle={this.toggleModal} />}

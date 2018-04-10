@@ -43,8 +43,19 @@
   margin: 1em auto;
 }
 
+.field-wide {
+  width: 17em;
+}
+
+.field-narrow {
+  width: 4.1em;
+}
+
 @media (max-width: 576px) {
   .form {
     width: 90%;
+  }
+  .field-wide {
+    min-width: 90%;
   }
 }
