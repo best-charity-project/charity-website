@@ -13,10 +13,10 @@ export default class CompletedEducationRouteForm extends React.Component {
   }
 
   componentDidMount() {
-    this.getById();
+    this.getEducationByUserId();
   }
 
-  getById() {
+  getEducationByUserId() {
     getEducation(this.props.userId).then(usersCards => this.setState({ usersCards }));
   }
 

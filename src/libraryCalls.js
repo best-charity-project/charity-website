@@ -1,15 +1,18 @@
 import API from './api';
-import { getToken } from './Auth/Auth';
+import appendAuthorizationHeaders from './appendAuthorizationHeaders';
+
+const authHeader = appendAuthorizationHeaders();
 
 const getLibraryItems = (categoryTag, type) =>
   API.get(`library/?categoryTag=${categoryTag}&type=${type}`).then(response => response.data);
 
-const getLibraryItemsAmount = (categoryTag, type) => API.get(`library/count?categoryTag=${categoryTag}&type=${type}`).then(response => response.data);
+const getLibraryItemsAmount = (categoryTag, type) =>
+  API.get(`library/count?categoryTag=${categoryTag}&type=${type}`).then(response => response.data);
 
 const getLibraryCategories = () => API.get('categories').then(response => response.data);
 
 const addLibraryItem = libraryItem =>
-  API.post('library', libraryItem, { headers: { Authorization: `Bearer ${getToken()}` } }).then(res => res.data);
+  API.post('library', libraryItem, { headers: authHeader }).then(res => res.data);
 
 const fullTextLibrarySearch = (textSearch, checkedTypes) =>
   API.get(`library/search/?textSearch=${textSearch}&types=${checkedTypes}`).then(response => response.data);
@@ -17,10 +20,10 @@ const fullTextLibrarySearch = (textSearch, checkedTypes) =>
 const getPendingItems = () => API.get('library/pending').then(response => response.data);
 
 const acceptPendingItems = id =>
-  API.put(`library/${id}`, {}, { headers: { Authorization: `Bearer ${getToken()}` } }).then(res => res.data);
+  API.put(`library/${id}`, {}, { headers: authHeader }).then(res => res.data);
 
 const deleteLibraryItems = id =>
-  API.delete(`library/${id}`, { headers: { Authorization: `Bearer ${getToken()}` } }).then(res => res.data);
+  API.delete(`library/${id}`, { headers: authHeader }).then(res => res.data);
 
 const updateItem = (id, item) => {
   const {
@@ -35,7 +38,7 @@ const updateItem = (id, item) => {
       description,
       url,
     },
-    { headers: { Authorization: `Bearer ${getToken()}` } },
+    { headers: authHeader },
   ).then(res => res.data);
 };
 

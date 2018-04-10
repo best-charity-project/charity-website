@@ -231,7 +231,7 @@ export default class SignupForm extends React.Component {
           </p>
           <input
             type='submit'
-            className='control-button control-button--blue'
+            className='control-button control-button-primary'
             value='Регистрация'
           />
         </form>

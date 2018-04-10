@@ -1,6 +1,5 @@
 .education-route--user-cards {
   display: flex;
-  width: 46em;
   margin: 0 auto;
   flex-grow: 1;
   flex-wrap: wrap;

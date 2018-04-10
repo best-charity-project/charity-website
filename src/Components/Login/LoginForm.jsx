@@ -54,7 +54,7 @@ class LoginForm extends React.Component {
           <PasswordInput id='password' onChange={this.handlePasswordChange} labelText='Пароль' />
           <input
             type='submit'
-            className='control-button control-button--blue'
+            className='control-button control-button-primary '
             value={this.props.buttonText}
           />
         </form>

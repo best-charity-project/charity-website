@@ -1,3 +1,29 @@
-.education-route--search {
-  flex-grow: 1;
+.education-route--filter {
+  background-color: #fff;
+  margin: 1em auto;
+  padding: 0.5em 0;
+  width: 95%;
+}
+
+.educational-route--message {
+  text-align: center;
+  font-size: 1.4em;
+}
+
+.filter--box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.form--filter-label {
+  margin-left: 0.8em;
+}
+
+.field-wide {
+  width: 17em;
+}
+
+.field-narrow {
+  width: 4.1em;
 }
