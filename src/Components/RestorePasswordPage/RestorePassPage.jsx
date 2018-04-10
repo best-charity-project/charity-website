@@ -2,6 +2,7 @@ import React from 'react';
 import RestorePassForm from './RestorePassForm';
 import { restorePassword } from '../../accountCalls';
 import Message from '../Message/Message';
+import createMessage from '../Message/createMessage';
 
 class RestorePassPage extends React.Component {
   constructor(props) {
@@ -17,14 +18,11 @@ class RestorePassPage extends React.Component {
 
   handleFormSubmit(email) {
     restorePassword(email).then((data) => {
-      let message = {};
       if (data.error) {
-        message = { type: 'error', text: data.error };
-        this.setState({ message });
+        this.setState({ message: createMessage('error', data.error) });
         return;
       }
-      message = { type: 'success', text: data.message };
-      this.setState({ message });
+      this.setState({ message: createMessage('success', data.message) });
     });
   }
 

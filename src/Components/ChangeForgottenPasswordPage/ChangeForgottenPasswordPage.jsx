@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ChangeForgottenPasswordForm from './ChangeForgottenPasswordForm';
 import { changeForgottenPassword, isValidToken } from '../../accountCalls';
+import createMessage from '../Message/createMessage';
 import Message from '../Message/Message';
 
 export default class ChangeForgottenPasswordPage extends React.Component {
@@ -20,8 +21,8 @@ export default class ChangeForgottenPasswordPage extends React.Component {
 
   componentDidMount() {
     const { token } = this.props.match.params;
-    isValidToken(token).then((result) => {
-      this.setState({ isValidToken: result });
+    isValidToken(token).then((isValid) => {
+      this.setState({ isValidToken: isValid });
     });
   }
 
@@ -29,10 +30,10 @@ export default class ChangeForgottenPasswordPage extends React.Component {
     const { token } = this.props.match.params;
     changeForgottenPassword({ ...formData, token }).then((data) => {
       if (data.error) {
-        this.setState({ message: { type: 'error', text: data.error } });
+        this.setState({ message: createMessage('error', data.error) });
         return;
       }
-      this.setState({ message: { type: 'success', text: data.message } });
+      this.setState({ message: createMessage('success', data.message) });
     });
   }
 

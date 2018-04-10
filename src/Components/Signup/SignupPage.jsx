@@ -5,6 +5,7 @@ import SignupForm from './SignupForm';
 import { signupUser } from '../../Auth/Auth';
 import Message from '../Message/Message';
 import { redirectTime } from '../../configs/config.json';
+import createMessage from '../Message/createMessage';
 import './SignupForm.css';
 
 class SignupPage extends React.Component {
@@ -28,14 +29,11 @@ class SignupPage extends React.Component {
 
   handleFormSubmit(formData) {
     signupUser(formData).then((data) => {
-      let message = {};
       if (data.error) {
-        message = { type: 'error', text: data.error };
-        this.setState({ message });
+        this.setState({ message: createMessage('error', data.error) });
         return;
       }
-      message = { type: 'success', text: data.message };
-      this.setState({ message });
+      this.setState({ message: createMessage('success', data.message) });
       this.props.onAuthChange(data.userInfo);
       this.redirect();
     });
