@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import countries from './countries.json';
 import RulesPage from './RulesPage';
+import PasswordInput from '../PasswordInput/PasswordInput';
+import ConfirmPassword from '../ConfirmPassword/ConfirmPassword';
 import './SignupForm.css';
 
-class SignupForm extends React.Component {
+export default class SignupForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +26,6 @@ class SignupForm extends React.Component {
     };
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleConfirmPasswordChange = this.handleConfirmPasswordChange.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleReasonForRegistrationChange = this.handleReasonForRegistrationChange.bind(this);
@@ -41,18 +42,10 @@ class SignupForm extends React.Component {
     });
   }
 
-  handlePasswordChange(e) {
+  handlePasswordChange(password) {
     this.setState({
-      password: e.target.value,
+      password,
     });
-  }
-
-  handleConfirmPasswordChange() {
-    if (this.password.value !== this.confirmPassword.value) {
-      this.confirmPassword.setCustomValidity('Пароль не соответствует');
-    } else {
-      this.confirmPassword.setCustomValidity('');
-    }
   }
 
   handleNameChange(e) {
@@ -95,7 +88,6 @@ class SignupForm extends React.Component {
       otherCountry: '',
       reasonForRegistration: '',
     });
-    this.confirmPassword.value = '';
   }
 
   handleSubmit(e) {
@@ -155,38 +147,12 @@ class SignupForm extends React.Component {
               Ваше имя
             </label>
           </div>
-          <div className='form--box'>
-            <input
-              id='password'
-              value={this.state.password}
-              onChange={this.handlePasswordChange}
-              type='password'
-              className={this.state.password ? 'form--field label-move-up' : 'form--field'}
-              minLength='6'
-              ref={(input) => {
-                this.password = input;
-              }}
-              required
-            />
-            <label htmlFor='password' className='form--placeholder'>
-              Пароль
-            </label>
-          </div>
-          <div className='form--box'>
-            <input
-              id='confirmPassword'
-              onChange={this.handleConfirmPasswordChange}
-              type='password'
-              className={this.state.password ? 'form--field label-move-up' : 'form--field'}
-              ref={(input) => {
-                this.confirmPassword = input;
-              }}
-              required
-            />
-            <label htmlFor='confirmPassword' className='form--placeholder'>
-               Подтвердите пароль
-            </label>
-          </div>
+          <PasswordInput id='password' onChange={this.handlePasswordChange} labelText='Пароль' />
+          <ConfirmPassword
+            id='confirmPassword'
+            newPassword={this.state.password}
+            labelText='Подтвердите пароль'
+          />
           <div className='form--box'>
             <select
               id='country'
@@ -273,8 +239,6 @@ class SignupForm extends React.Component {
     );
   }
 }
-
-export default SignupForm;
 
 SignupForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
