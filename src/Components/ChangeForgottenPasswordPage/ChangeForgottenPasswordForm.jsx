@@ -41,7 +41,7 @@ export default class ChangeForgotenPasswordForm extends React.Component {
           />
           <input
             type='submit'
-            className='control-button control-button--blue'
+            className='control-button control-button-primary'
             value={this.props.buttonText}
           />
         </form>
