@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './RestorePassForm.css';
+import './RestorePasswordForm.css';
 
-class RestorePassForm extends React.Component {
+export default class RestorePasswordForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,9 +53,7 @@ class RestorePassForm extends React.Component {
   }
 }
 
-RestorePassForm.propTypes = {
+RestorePasswordForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   buttonText: PropTypes.string.isRequired,
 };
-
-export default RestorePassForm;

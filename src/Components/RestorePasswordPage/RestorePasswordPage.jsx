@@ -1,10 +1,10 @@
 import React from 'react';
-import RestorePassForm from './RestorePassForm';
+import RestorePasswordForm from './RestorePasswordForm';
 import { restorePassword } from '../../accountCalls';
 import Message from '../Message/Message';
 import createMessage from '../Message/createMessage';
 
-class RestorePassPage extends React.Component {
+export default class RestorePasswordPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,10 +30,8 @@ class RestorePassPage extends React.Component {
     return (
       <div className='indent'>
         <Message {...this.state.message} />
-        <RestorePassForm buttonText='Отправить' onSubmit={this.handleFormSubmit} />
+        <RestorePasswordForm buttonText='Отправить' onSubmit={this.handleFormSubmit} />
       </div>
     );
   }
 }
-
-export default RestorePassPage;

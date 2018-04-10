@@ -11,7 +11,7 @@ import SingleNewsPage from '../News/SingleNewsPage';
 import LoginPage from '../Login/LoginPage';
 import SignupPage from '../Signup/SignupPage';
 import { getUserAuthInfo, logoutUser } from '../../Auth/Auth';
-import RestorePassPage from '../RestorePasswordPage/RestorePassPage';
+import RestorePasswordPage from '../RestorePasswordPage/RestorePasswordPage';
 import UserAccount from '../UserAccount/UserAccount';
 import ChangeForgottenPasswordPage from '../ChangeForgottenPasswordPage/ChangeForgottenPasswordPage';
 import './App.css';
@@ -66,7 +66,7 @@ export default class App extends React.Component {
           <Route path='/library' render={() => <Library {...this.state} />} />
           <Route path='/login' render={() => <LoginPage onAuthChange={this.onAuthChange} />} />
           <Route path='/signup' render={() => <SignupPage onAuthChange={this.onAuthChange} />} />
-          <Route path='/restore-password' component={RestorePassPage} />
+          <Route path='/restore-password' component={RestorePasswordPage} />
           <Route path='/change-password/:token' component={ChangeForgottenPasswordPage} />
           <Route path='/account' render={() => <UserAccount {...this.state} />} />
           <Redirect to='/home' />
