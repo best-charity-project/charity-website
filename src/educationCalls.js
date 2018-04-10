@@ -20,18 +20,18 @@ const filterEducationalRoutes = (
     educationalInstitution: encodeURIComponent(educationalInstitution),
     program: encodeURIComponent(program),
   };
-  if (!program) {
-    return API.get(`education/filter?region=${query.region}&regionDistricts=${
-      query.regionDistricts
-    }&educationalInstitution=${
-      query.educationalInstitution
-    }&firstYear=${firstYear}&lastYear=${lastYear}`).then(response => response.data);
-  }
-  return API.get(`education/filter?region=${query.region}&regionDistricts=${
+
+  let url = `education/filter?region=${query.region}&regionDistricts=${
     query.regionDistricts
   }&educationalInstitution=${
     query.educationalInstitution
-  }&firstYear=${firstYear}&lastYear=${lastYear}&program=${query.program}`).then(response => response.data);
+  }&firstYear=${firstYear}&lastYear=${lastYear}`;
+
+  if (program) {
+    url = `${url}&program=${query.program}`;
+  }
+
+  return API.get(url).then(response => response.data);
 };
 
 const getEducation = userId =>
