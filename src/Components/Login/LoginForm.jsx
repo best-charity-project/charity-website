@@ -74,7 +74,6 @@ class LoginForm extends React.Component {
           <Link to='/signup'>Регистрация</Link>
         </div>
         <div className='form--question-right'>
-          {/* <p className='question--text'></p> */}
           <Link to='/restore-password'>Забыли пароль?</Link>
         </div>
       </div>
