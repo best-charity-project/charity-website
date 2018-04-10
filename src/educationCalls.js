@@ -20,7 +20,6 @@ const filterEducationalRoutes = (
     educationalInstitution: encodeURIComponent(educationalInstitution),
     program: encodeURIComponent(program),
   };
-
   if (!program) {
     return API.get(`education/filter?region=${query.region}&regionDistricts=${
       query.regionDistricts
