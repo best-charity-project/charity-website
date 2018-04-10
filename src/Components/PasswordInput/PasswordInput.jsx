@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { minPasswordLength } from '../../configs/config.json';
 
 export default class PasswordInput extends React.Component {
@@ -9,6 +10,13 @@ export default class PasswordInput extends React.Component {
       password: '',
     };
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+  }
+
+  getClasses() {
+    return classNames({
+      'form--field': true,
+      'label-move-up': this.state.password,
+    });
   }
 
   handlePasswordChange(e) {
@@ -26,7 +34,7 @@ export default class PasswordInput extends React.Component {
           value={this.state.password}
           onChange={this.handlePasswordChange}
           type='password'
-          className={this.state.password ? 'form--field label-move-up' : 'form--field'}
+          className={this.getClasses()}
           minLength={minPasswordLength}
           required
         />
