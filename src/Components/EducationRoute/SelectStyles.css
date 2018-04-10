@@ -39,12 +39,12 @@
 }
 
 .rc-select-selection--multiple {
-  width: 29.8em;
+  margin: 0 auto;
+  width: 100%;
   border-radius: 0;
   border: none;
   background-color: #f0f0f0;
   display: inline-block;
-  margin-left: 2.7em;
   min-height: 2.5em;
 }
 
@@ -60,6 +60,9 @@
 
 .rc-select {
   line-height: unset;
+  width: 85%;
+  margin: 0 auto;
+  display: block;
 }
 
 li.rc-select-dropdown-menu-item.rc-select-dropdown-menu-item-selected {

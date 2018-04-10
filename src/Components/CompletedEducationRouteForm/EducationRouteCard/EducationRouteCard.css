@@ -11,6 +11,12 @@
   flex-direction: column;
 }
 
+@media (max-width: 576px) {
+  .user-cards-wrapper {
+    width: 90%;
+  }
+}
+
 .card--button-wrapper {
   flex-grow: 1;
   display: flex;
