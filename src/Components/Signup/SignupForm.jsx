@@ -186,6 +186,7 @@ export default class SignupForm extends React.Component {
           {this.state.reasons.map((reason, index) => (
             <RadioInput
               key={reason}
+              name='reason'
               id={`reason${index + 1}`}
               onChange={this.handleReasonForRegistrationChange}
               labelText={reason}
