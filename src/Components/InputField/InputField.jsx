@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { minPasswordLength } from '../../configs/config.json';
 
-export default class PasswordInput extends React.Component {
+export default class InputField extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,10 +33,10 @@ export default class PasswordInput extends React.Component {
           id={this.props.id}
           value={this.state.password}
           onChange={this.handlePasswordChange}
-          type='password'
+          type={this.props.type}
           className={this.getClasses()}
           minLength={minPasswordLength}
-          required
+          required={this.props.required}
         />
         <label htmlFor={this.props.id} className='form--placeholder'>
           {this.props.labelText}
@@ -46,8 +46,10 @@ export default class PasswordInput extends React.Component {
   }
 }
 
-PasswordInput.propTypes = {
+InputField.propTypes = {
   onChange: PropTypes.func.isRequired,
   labelText: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  required: PropTypes.string.isRequired,
 };

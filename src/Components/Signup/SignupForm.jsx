@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import countries from './countries.json';
 import RulesPage from './RulesPage';
-import PasswordInput from '../PasswordInput/PasswordInput';
+import InputField from '../InputField/InputField';
 import ConfirmPassword from '../ConfirmPassword/ConfirmPassword';
 import './SignupForm.css';
 
@@ -147,7 +147,13 @@ export default class SignupForm extends React.Component {
               Ваше имя
             </label>
           </div>
-          <PasswordInput id='password' onChange={this.handlePasswordChange} labelText='Пароль' />
+          <InputField
+            id='password'
+            type='password'
+            onChange={this.handlePasswordChange}
+            labelText='Пароль'
+            required='required'
+          />
           <ConfirmPassword
             id='confirmPassword'
             newPassword={this.state.password}
@@ -161,12 +167,14 @@ export default class SignupForm extends React.Component {
               onChange={this.handleCountryChange}
               required
             >
-              <option value='' disabled selected>Страна проживания</option>
+              <option value='' disabled selected>
+                Страна проживания
+              </option>
               {countries.map(country => (
                 <option value={country} key={country}>
                   {country}
                 </option>
-                ))}
+              ))}
             </select>
           </div>
           <div className='form--box'>
@@ -179,7 +187,7 @@ export default class SignupForm extends React.Component {
               required
             />
             <label htmlFor='city' className='form--placeholder'>
-            Город проживания
+              Город проживания
             </label>
           </div>
           {this.state.country === countries[countries.length - 1] && (
@@ -196,7 +204,7 @@ export default class SignupForm extends React.Component {
                 Страна проживания
               </label>
             </div>
-            )}
+          )}
           <p className='form--comment'>Что Вас привело на сайт:</p>
           {this.state.reasons.map((reason, index) => (
             <p key={reason} className='form--radio-input'>
@@ -226,7 +234,9 @@ export default class SignupForm extends React.Component {
               onKeyPress={this.toggleWindow}
               role='button'
               tabIndex={0}
-            > правилами
+            >
+              {' '}
+              правилами
             </a>
           </p>
           <input

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PasswordInput from '../PasswordInput/PasswordInput';
+import InputField from '../InputField/InputField';
 import ConfirmPassword from '../ConfirmPassword/ConfirmPassword';
 
 export default class ChangeForgotenPasswordForm extends React.Component {
@@ -29,10 +29,11 @@ export default class ChangeForgotenPasswordForm extends React.Component {
     return (
       <div className='changePasswordForm form'>
         <form name='changePasswordForm' onSubmit={this.handleSubmit}>
-          <PasswordInput
+          <InputField
             id='newPassword'
             onChange={this.handleNewPasswordChange}
             labelText='Новый пароль'
+            required='required'
           />
           <ConfirmPassword
             id='confirmPassword'

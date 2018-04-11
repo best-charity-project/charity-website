@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import PasswordInput from '../PasswordInput/PasswordInput';
+import InputField from '../InputField/InputField';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -51,7 +51,13 @@ class LoginForm extends React.Component {
               e-mail
             </label>
           </div>
-          <PasswordInput id='password' onChange={this.handlePasswordChange} labelText='Пароль' />
+          <InputField
+            id='password'
+            type='password'
+            onChange={this.handlePasswordChange}
+            labelText='Пароль'
+            required='required'
+          />
           <input
             type='submit'
             className='control-button control-button-primary '

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PasswordInput from '../PasswordInput/PasswordInput';
+import InputField from '../InputField/InputField';
 import ConfirmPassword from '../ConfirmPassword/ConfirmPassword';
 import './ChangePasswordForm.css';
 
@@ -38,15 +38,19 @@ export default class ChangePasswordForm extends React.Component {
     return (
       <div className='changePasswordForm form'>
         <form name='changePasswordForm' onSubmit={this.handleSubmit}>
-          <PasswordInput
+          <InputField
             id='oldPassword'
             onChange={this.handleOldPasswordChange}
             labelText='Старый пароль'
+            type='password'
+            required='required'
           />
-          <PasswordInput
+          <InputField
             id='newPassword'
             onChange={this.handleNewPasswordChange}
             labelText='Новый пароль'
+            type='password'
+            required='required'
           />
           <ConfirmPassword
             id='confirmPassword'
@@ -55,7 +59,7 @@ export default class ChangePasswordForm extends React.Component {
           />
           <input
             type='submit'
-            className='control-button control-button--blue '
+            className='control-button control-button-primary '
             value={this.props.buttonText}
           />
         </form>
