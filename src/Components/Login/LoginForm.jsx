@@ -16,9 +16,9 @@ class LoginForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleEmailChange(e) {
+  handleEmailChange(email) {
     this.setState({
-      email: e.target.value,
+      email,
     });
   }
 
@@ -38,19 +38,13 @@ class LoginForm extends React.Component {
       <div className='form'>
         <h2 className='form--heading'>Вход в систему</h2>
         <form name='loginForm' onSubmit={this.handleSubmit}>
-          <div className='form--box'>
-            <input
-              id='email'
-              value={this.state.email}
-              onChange={this.handleEmailChange}
-              type='email'
-              className={this.state.email ? 'form--field label-move-up' : 'form--field'}
-              required
-            />
-            <label htmlFor='email' className='form--placeholder'>
-              e-mail
-            </label>
-          </div>
+          <InputField
+            id='email'
+            type='email'
+            onChange={this.handleEmailChange}
+            labelText='e-mail'
+            required='required'
+          />
           <InputField
             id='password'
             type='password'

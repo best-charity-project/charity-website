@@ -4,6 +4,7 @@ import countries from './countries.json';
 import RulesPage from './RulesPage';
 import InputField from '../InputField/InputField';
 import ConfirmPassword from '../ConfirmPassword/ConfirmPassword';
+import RadioInput from '../RadioInput/RadioInput';
 import './SignupForm.css';
 
 export default class SignupForm extends React.Component {
@@ -36,9 +37,9 @@ export default class SignupForm extends React.Component {
     this.toggleWindow = this.toggleWindow.bind(this);
   }
 
-  handleEmailChange(e) {
+  handleEmailChange(email) {
     this.setState({
-      email: e.target.value,
+      email,
     });
   }
 
@@ -48,9 +49,9 @@ export default class SignupForm extends React.Component {
     });
   }
 
-  handleNameChange(e) {
+  handleNameChange(name) {
     this.setState({
-      name: e.target.value,
+      name,
     });
   }
 
@@ -60,21 +61,21 @@ export default class SignupForm extends React.Component {
     });
   }
 
-  handleOtherCountryChange(e) {
+  handleOtherCountryChange(otherCountry) {
     this.setState({
-      otherCountry: e.target.value,
+      otherCountry,
     });
   }
 
-  handleCityChange(e) {
+  handleCityChange(city) {
     this.setState({
-      city: e.target.value,
+      city,
     });
   }
 
-  handleReasonForRegistrationChange(e) {
+  handleReasonForRegistrationChange(reasonForRegistration) {
     this.setState({
-      reasonForRegistration: e.target.value,
+      reasonForRegistration,
     });
   }
 
@@ -121,32 +122,20 @@ export default class SignupForm extends React.Component {
       <div className='form'>
         <p className='form--heading'>Регистрация</p>
         <form name='signupForm' onSubmit={this.handleSubmit}>
-          <div className='form--box'>
-            <input
-              id='email'
-              value={this.state.email}
-              onChange={this.handleEmailChange}
-              type='email'
-              className={this.state.email ? 'form--field label-move-up' : 'form--field'}
-              required
-            />
-            <label htmlFor='email' className='form--placeholder'>
-              e-mail
-            </label>
-          </div>
-          <div className='form--box'>
-            <input
-              id='name'
-              value={this.state.name}
-              onChange={this.handleNameChange}
-              type='text'
-              className={this.state.name ? 'form--field label-move-up' : 'form--field'}
-              required
-            />
-            <label htmlFor='name' className='form--placeholder'>
-              Ваше имя
-            </label>
-          </div>
+          <InputField
+            id='email'
+            type='email'
+            onChange={this.handleEmailChange}
+            labelText='e-mail'
+            required='required'
+          />
+          <InputField
+            id='name'
+            type='text'
+            onChange={this.handleNameChange}
+            labelText='Ваше имя'
+            required='required'
+          />
           <InputField
             id='password'
             type='password'
@@ -177,51 +166,33 @@ export default class SignupForm extends React.Component {
               ))}
             </select>
           </div>
-          <div className='form--box'>
-            <input
-              id='city'
-              value={this.state.city}
-              onChange={this.handleCityChange}
-              type='text'
-              className={this.state.city ? 'form--field label-move-up' : 'form--field'}
-              required
-            />
-            <label htmlFor='city' className='form--placeholder'>
-              Город проживания
-            </label>
-          </div>
+          <InputField
+            id='city'
+            type='text'
+            onChange={this.handleCityChange}
+            labelText='Город проживания'
+            required='required'
+          />
           {this.state.country === countries[countries.length - 1] && (
-            <div className='form--box'>
-              <input
-                id='otherCountry'
-                value={this.state.otherCountry}
-                onChange={this.handleOtherCountryChange}
-                type='text'
-                className={this.state.otherCountry ? 'form--field label-move-up' : 'form--field'}
-                required
-              />
-              <label htmlFor='city' className='form--placeholder'>
-                Страна проживания
-              </label>
-            </div>
+            <InputField
+              id='otherCountry'
+              type='text'
+              onChange={this.handleOtherCountryChange}
+              labelText='Страна проживания'
+              required='required'
+            />
           )}
           <p className='form--comment'>Что Вас привело на сайт:</p>
           {this.state.reasons.map((reason, index) => (
-            <p key={reason} className='form--radio-input'>
-              <input
-                id={`reason${index + 1}`}
-                name='reason'
-                type='radio'
-                className='radio-field'
-                value={reason}
-                checked={this.state.reasonForRegistration === reason}
-                onChange={this.handleReasonForRegistrationChange}
-                required
-              />
-              <label htmlFor={`reason${index + 1}`} className='radio-input--label'>
-                {reason}
-              </label>
-            </p>
+            <RadioInput
+              key={reason}
+              id={`reason${index + 1}`}
+              onChange={this.handleReasonForRegistrationChange}
+              labelText={reason}
+              checked={this.state.reasonForRegistration === reason}
+              required='required'
+              reason={reason}
+            />
           ))}
           <br />
           {this.state.isOpen && <RulesPage toggle={this.toggleWindow} />}
