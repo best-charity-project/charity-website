@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Time from './Time';
+import InputField from '../../FormFields/InputField';
+import TextareaField from '../../FormFields/TextareaField';
 import '../../Form/Form.css';
 
 export default class Form extends React.Component {
@@ -26,21 +28,21 @@ export default class Form extends React.Component {
     });
   }
 
-  handleChangeTitle(event) {
+  handleChangeTitle(title) {
     this.setState({
-      title: event.target.value,
+      title,
     });
   }
 
-  handleChangeNewsText(event) {
+  handleChangeNewsText(newsText) {
     this.setState({
-      newsText: event.target.value,
+      newsText,
     });
   }
 
-  handleChangeUrl(event) {
+  handleChangeUrl(url) {
     this.setState({
-      url: event.target.value,
+      url,
     });
   }
 
@@ -68,39 +70,30 @@ export default class Form extends React.Component {
       <div className='add-news form'>
         <Time />
         <form name='addNews' onSubmit={this.handleSubmit}>
-          <p className='form--label'>
-            <label htmlFor='news-heading'>Заглавие:</label>
-          </p>
-          <input
+          <InputField
             id='news-heading'
+            type='text'
+            label='Заглавие:'
             value={this.state.title}
             onChange={this.handleChangeTitle}
-            type='text'
-            className='form--input'
-            placeholder='Заголовок новости'
-            required
+            placeholder='Заголовок'
+            required='required'
           />
-          <p className='form--label'>
-            <label htmlFor='news-text'>Текст новости(краткое описание):</label>
-          </p>
-          <textarea
+          <TextareaField
             id='news-text'
+            type='text'
+            label='Текст новости(краткое описание):'
             value={this.state.newsText}
             onChange={this.handleChangeNewsText}
-            type='text'
-            className='form--input'
             placeholder='Текст новости'
-            required
+            required='required'
           />
-          <p className='form--label'>
-            <label htmlFor='news-url'>Ссылка на новость:</label>
-          </p>
-          <input
+          <InputField
             id='news-url'
+            type='url'
+            label='Ссылка на новость:'
             value={this.state.url}
             onChange={this.handleChangeUrl}
-            type='url'
-            className='form--input'
             placeholder='https://.....'
           />
           <br />
