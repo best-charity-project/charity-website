@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import InputField from '../InputField/InputField';
 import './RestorePasswordForm.css';
 
 export default class RestorePasswordForm extends React.Component {
@@ -12,9 +13,9 @@ export default class RestorePasswordForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleEmailChange(e) {
+  handleEmailChange(email) {
     this.setState({
-      email: e.target.value,
+      email,
     });
   }
 
@@ -28,20 +29,19 @@ export default class RestorePasswordForm extends React.Component {
     return (
       <div className='restorePasswordForm form'>
         <h2 className='form--heading'>Введите Ваш email</h2>
-        <form name='restorePasswordForm' onSubmit={this.handleSubmit}>
-          <div className='restorePasswordForm--box'>
-            <input
-              id='email'
-              value={this.state.email}
-              onChange={this.handleEmailChange}
-              type='email'
-              className={this.state.email ? 'form--field label-move-up' : 'form--field'}
-              required
-            />
-            <label htmlFor='email' className='form--placeholder'>
-              e-mail
-            </label>
-          </div>
+        <form
+          name='restorePasswordForm'
+          onSubmit={this.handleSubmit}
+          className='restorePasswordForm--form'
+        >
+          <InputField
+            id='email'
+            type='email'
+            value={this.state.email}
+            onChange={this.handleEmailChange}
+            labelText='e-mail'
+            required='required'
+          />
           <input
             type='submit'
             className='control-button control-button-primary'
