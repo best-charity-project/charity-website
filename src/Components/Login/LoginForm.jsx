@@ -42,6 +42,7 @@ class LoginForm extends React.Component {
           <InputField
             id='email'
             type='email'
+            value={this.state.email}
             onChange={this.handleEmailChange}
             labelText='e-mail'
             required='required'
@@ -49,6 +50,7 @@ class LoginForm extends React.Component {
           <InputField
             id='password'
             type='password'
+            value={this.state.password}
             onChange={this.handlePasswordChange}
             labelText='Пароль'
             minLength={minPasswordLength}

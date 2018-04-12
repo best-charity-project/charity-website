@@ -32,6 +32,8 @@ export default class ChangeForgotenPasswordForm extends React.Component {
           <InputField
             id='newPassword'
             onChange={this.handleNewPasswordChange}
+            type='password'
+            value={this.state.newPassword}
             labelText='Новый пароль'
             required='required'
           />

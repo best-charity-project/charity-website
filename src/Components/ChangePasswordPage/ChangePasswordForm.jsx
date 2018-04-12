@@ -41,6 +41,7 @@ export default class ChangePasswordForm extends React.Component {
           <InputField
             id='oldPassword'
             onChange={this.handleOldPasswordChange}
+            value={this.state.oldPassword}
             labelText='Старый пароль'
             type='password'
             required='required'
@@ -48,6 +49,7 @@ export default class ChangePasswordForm extends React.Component {
           <InputField
             id='newPassword'
             onChange={this.handleNewPasswordChange}
+            value={this.state.newPassword}
             labelText='Новый пароль'
             type='password'
             required='required'
