@@ -15,8 +15,8 @@
     "url-search-params": "^0.10.0"
   },
   "scripts": {
-    "start": "react-scripts build && serve -s build",
-    "start:dev": "react-scripts start",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "jsdomtest": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "test": "eslint */**",
