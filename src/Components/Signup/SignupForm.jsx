@@ -5,6 +5,8 @@ import RulesPage from './RulesPage';
 import InputField from '../InputField/InputField';
 import ConfirmPassword from '../ConfirmPassword/ConfirmPassword';
 import RadioInput from '../RadioInput/RadioInput';
+import SelectInput from '../SelectInput/SelectInput';
+import { minPasswordLength } from '../../configs/config.json';
 import './SignupForm.css';
 
 export default class SignupForm extends React.Component {
@@ -33,7 +35,6 @@ export default class SignupForm extends React.Component {
     this.handleCountryChange = this.handleCountryChange.bind(this);
     this.handleOtherCountryChange = this.handleOtherCountryChange.bind(this);
     this.handleCityChange = this.handleCityChange.bind(this);
-    this.clearFields = this.clearFields.bind(this);
     this.toggleWindow = this.toggleWindow.bind(this);
   }
 
@@ -55,9 +56,9 @@ export default class SignupForm extends React.Component {
     });
   }
 
-  handleCountryChange(e) {
+  handleCountryChange(country) {
     this.setState({
-      country: e.target.value,
+      country,
     });
   }
 
@@ -79,18 +80,6 @@ export default class SignupForm extends React.Component {
     });
   }
 
-  clearFields() {
-    this.setState({
-      email: '',
-      password: '',
-      name: '',
-      country: '',
-      city: '',
-      otherCountry: '',
-      reasonForRegistration: '',
-    });
-  }
-
   handleSubmit(e) {
     e.preventDefault();
     let { country } = this.state;
@@ -108,7 +97,6 @@ export default class SignupForm extends React.Component {
       city,
       reasonForRegistration,
     });
-    this.clearFields();
   }
 
   toggleWindow() {
@@ -125,6 +113,7 @@ export default class SignupForm extends React.Component {
           <InputField
             id='email'
             type='email'
+            value={this.state.email}
             onChange={this.handleEmailChange}
             labelText='e-mail'
             required='required'
@@ -132,6 +121,7 @@ export default class SignupForm extends React.Component {
           <InputField
             id='name'
             type='text'
+            value={this.state.name}
             onChange={this.handleNameChange}
             labelText='Ваше имя'
             required='required'
@@ -139,8 +129,10 @@ export default class SignupForm extends React.Component {
           <InputField
             id='password'
             type='password'
+            value={this.state.password}
             onChange={this.handlePasswordChange}
             labelText='Пароль'
+            minLength={minPasswordLength}
             required='required'
           />
           <ConfirmPassword
@@ -148,27 +140,19 @@ export default class SignupForm extends React.Component {
             newPassword={this.state.password}
             labelText='Подтвердите пароль'
           />
-          <div className='form--box'>
-            <select
-              id='country'
-              className='form--field field--select'
-              value={this.state.country}
-              onChange={this.handleCountryChange}
-              required
-            >
-              <option value='' disabled selected>
-                Страна проживания
-              </option>
-              {countries.map(country => (
-                <option value={country} key={country}>
-                  {country}
-                </option>
-              ))}
-            </select>
-          </div>
+          <SelectInput
+            id='country'
+            value={this.state.country}
+            onChange={this.handleCountryChange}
+            data={countries}
+            labelText=''
+            fieldName='Страна проживания'
+            required='required'
+          />
           <InputField
             id='city'
             type='text'
+            value={this.state.city}
             onChange={this.handleCityChange}
             labelText='Город проживания'
             required='required'
@@ -177,6 +161,7 @@ export default class SignupForm extends React.Component {
             <InputField
               id='otherCountry'
               type='text'
+              value={this.state.otherCountry}
               onChange={this.handleOtherCountryChange}
               labelText='Страна проживания'
               required='required'
@@ -198,7 +183,7 @@ export default class SignupForm extends React.Component {
           <br />
           {this.state.isOpen && <RulesPage toggle={this.toggleWindow} />}
           <p className='form--accept-rules-checkbox'>
-            <input onChange={this.handleCheckbox} type='checkbox' required />
+            <input type='checkbox' required />
             <span>Регистрируясь, вы соглашаетесь с </span>
             <a
               className='accept-rules--link'
