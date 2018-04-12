@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import InputField from '../InputField/InputField';
+import { minPasswordLength } from '../../configs/config.json';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -50,6 +51,7 @@ class LoginForm extends React.Component {
             type='password'
             onChange={this.handlePasswordChange}
             labelText='Пароль'
+            minLength={minPasswordLength}
             required='required'
           />
           <input
