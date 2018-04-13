@@ -6,6 +6,11 @@
   text-align: center;
 }
 
+.form--question-right {
+  text-align: right;
+  font-size: 0.8em;
+}
+
 .question--text {
   margin: 0.5em;
 }
@@ -43,8 +48,8 @@
   padding-bottom: 0.7em;
 }
 
-.label-move-up~.form--placeholder,
-.form--field:focus~.form--placeholder {
+.label-move-up ~ .form--placeholder,
+.form--field:focus ~ .form--placeholder {
   font-size: 0.8em;
   left: 3.5em;
   top: 1.7em;
