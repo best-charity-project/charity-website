@@ -4,26 +4,11 @@ import EducationRoute from '../EducationRouteLanding/EducationRouteLanding';
 import AccessibilityMap from '../AccessibilityMapLanding/AccessibilityMapLanding';
 import { getNews } from '../../newsCalls';
 import ThreeNews from './ThreeNews/ThreeNews';
+import makeCancelablePromise from '../../utils/makeCancelablePromise';
 import './Home.css';
 import './ThreeNews/ThreeNews.css';
 
 class Home extends React.Component {
-  static makeCancelable(promise) {
-    let hasCanceled_ = false;
-
-    const wrappedPromise = new Promise((resolve, reject) => {
-      promise.then(val => (hasCanceled_ ? reject({ isCanceled: true }) : resolve(val)));
-      promise.catch(error => (hasCanceled_ ? reject({ isCanceled: true }) : reject(error)));
-    });
-
-    return {
-      promise: wrappedPromise,
-      cancel() {
-        hasCanceled_ = true;
-      },
-    };
-  }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -35,8 +20,15 @@ class Home extends React.Component {
     this.setNews();
   }
 
+  componentWillUnmount() {
+    this.cancelablePromise.cancel();
+  }
+
   setNews() {
-    getNews().then(news => this.setState({ news }));
+    this.cancelablePromise = makeCancelablePromise(getNews());
+    this.cancelablePromise.promise.then(news => this.setState({ news })).catch((err) => {
+      this.error = err;
+    });
   }
 
   render() {
