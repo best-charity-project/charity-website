@@ -12,6 +12,10 @@
     "path": "/news"
   },
   {
+    "name": "Календарь",
+    "path": "/calendar"
+  },
+  {
     "name": "О нас",
     "path": "/about"
   },
