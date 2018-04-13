@@ -9,12 +9,12 @@ const Modal = props => (
       <p className='modal-window--question'>Вы уверены, что хотите удалить документ?</p>
       <ControlButton
         text='Удалить'
-        className='control-button control-button--red'
+        className='control-button control-button-warning'
         onButtonClick={props.onConfirm}
       />
       <ControlButton
         text='Отмена'
-        className='control-button control-button--green'
+        className='control-button control-button-secondary'
         onButtonClick={props.toggle}
       />
     </div>

@@ -16,7 +16,7 @@ const NewsCard = (item) => {
   return (
     <div className='news-card' key={item._id}>
       <SingleNews title={item.title} newsText={item.newsText} />
-      <DetailsButton className='control-button control-button--blue' text={text} url={link} />
+      <DetailsButton className='control-button control-button-primary' text={text} url={link} />
     </div>
   );
 };

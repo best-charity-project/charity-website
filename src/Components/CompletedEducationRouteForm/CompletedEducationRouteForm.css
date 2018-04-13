@@ -1,0 +1,7 @@
+.education-route--user-cards {
+  display: flex;
+  margin: 0 auto;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  justify-content: center;
+}

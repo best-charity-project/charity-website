@@ -1,0 +1,65 @@
+.education-route--results-table {
+  width: 95%;
+  margin: 2em auto;
+}
+
+.header-row {
+  background-color: #5b94a6;
+  color: #fff;
+}
+
+.results-body--results-row {
+  margin-bottom: 1em;
+}
+
+.row--field {
+  padding: 1em;
+}
+
+.results-row--field {
+  background-color: #fff;
+  padding: 1em 0.5em;
+  text-align: center;
+}
+
+.results-body--results-row:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+}
+
+.results-row--field:nth-child(2n + 1) {
+  background-color: #fafafa;
+}
+
+.results-row--header {
+  display: none;
+}
+
+.field--list {
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .education-route--results-table,
+  .results-table--header,
+  .header-row,
+  .row--field,
+  .results-table--results-body,
+  .results-body--results-row,
+  .results-row--header,
+  .results-row--field {
+    display: block;
+  }
+
+  .results-row--header {
+    display: block;
+    font-weight: bold;
+    font-size: 1em;
+    text-align: center;
+    background-color: #b4e9fa;
+    padding: 1em 0.5em;
+  }
+
+  .header-row {
+    display: none;
+  }
+}

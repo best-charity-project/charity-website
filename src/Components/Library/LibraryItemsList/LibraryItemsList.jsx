@@ -53,7 +53,7 @@ class LibraryItemsList extends React.Component {
       <div key={item._id} className='library-item'>
         <LibraryItem {...item} />
         <DetailsButton
-          className='control-button control-button--blue'
+          className='control-button control-button-primary'
           text='Подробнее'
           url={item.url}
         />

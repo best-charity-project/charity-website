@@ -13,7 +13,7 @@
 .form--input {
   width: 80%;
   border: none;
-  background-color: #f6f6f6;
+  background-color: #f0f0f0;
   padding: 1em;
   display: block;
   margin: 0 auto;
@@ -43,8 +43,19 @@
   margin: 1em auto;
 }
 
+.field-wide {
+  width: 17em;
+}
+
+.field-narrow {
+  width: 4.1em;
+}
+
 @media (max-width: 576px) {
   .form {
     width: 90%;
+  }
+  .field-wide {
+    min-width: 90%;
   }
 }
