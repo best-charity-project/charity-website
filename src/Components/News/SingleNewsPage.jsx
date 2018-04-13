@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getNewsById } from '../../newsCalls';
+import makeCancelablePromise from '../../utils/makeCancelablePromise';
 import './SingleNewsPage.css';
 
 class SingleNewsPage extends React.Component {
@@ -18,11 +19,20 @@ class SingleNewsPage extends React.Component {
     this.setNews();
   }
 
+  componentWillUnmount() {
+    this.cancelablePromise.cancel();
+  }
+
   setNews() {
     const { id } = this.props.match.params;
-    getNewsById(id).then((news) => {
-      this.setState({ news });
-    });
+    this.cancelablePromise = makeCancelablePromise(getNewsById(id));
+    this.cancelablePromise.promise
+      .then((news) => {
+        this.setState({ news });
+      })
+      .catch((err) => {
+        this.error = err;
+      });
   }
 
   render() {

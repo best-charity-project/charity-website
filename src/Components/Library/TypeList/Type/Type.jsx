@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getLibraryItemsAmount } from '../../../../libraryCalls';
+import cancelablPromise from '../../../../utils/makeCancelablePromise';
 import './Type.css';
 
 class Type extends React.Component {
@@ -13,9 +14,18 @@ class Type extends React.Component {
   }
 
   componentDidMount() {
-    getLibraryItemsAmount(this.props.categoryTag, this.props.typeTag).then((amount) => {
-      this.setState({ amount });
-    });
+    this.prms = cancelablPromise(getLibraryItemsAmount(this.props.categoryTag, this.props.typeTag));
+    this.prms.promise
+      .then((amount) => {
+        this.setState({ amount });
+      })
+      .catch((err) => {
+        this.error = err;
+      });
+  }
+
+  componentWillUnmount() {
+    this.prms.cancel();
   }
 
   render() {

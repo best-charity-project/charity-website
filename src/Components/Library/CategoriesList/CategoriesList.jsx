@@ -2,21 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getLibraryCategories } from '../../../libraryCalls';
 import Category from '../Category/Category';
+import makeCancelablePromise from '../../../utils/makeCancelablePromise';
 import './CategoriesList.css';
 
-class CategoriesList extends React.Component {
+export default class CategoriesList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       categories: [],
     };
   }
+
   componentDidMount() {
     this.setCategories();
   }
-  setCategories() {
-    getLibraryCategories().then(categories => this.setState({ categories }));
+
+  componentWillUnmount() {
+    this.cancelablPromise.cancel();
   }
+
+  setCategories() {
+    this.cancelablPromise = makeCancelablePromise(getLibraryCategories());
+    this.cancelablPromise.promise.then(categories => this.setState({ categories })).catch((err) => {
+      this.error = err;
+    });
+  }
+
   render() {
     return (
       <div>
@@ -36,8 +47,6 @@ class CategoriesList extends React.Component {
     );
   }
 }
-
-export default CategoriesList;
 
 CategoriesList.propTypes = {
   match: PropTypes.shape({
