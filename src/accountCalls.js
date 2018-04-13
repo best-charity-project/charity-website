@@ -1,13 +1,13 @@
 import API from './api';
-import { getToken } from './Auth/Auth';
+import appendAuthorizationHeaders from './appendAuthorizationHeaders';
+
+const authHeader = appendAuthorizationHeaders();
 
 const restorePassword = email =>
   API.post('account/restore-password', { email }).then(response => response.data);
 
 const changePassword = data =>
-  API.post('account/change-password', data, {
-    headers: { Authorization: `Bearer ${getToken()}` },
-  }).then(response => response.data);
+  API.post('account/change-password', data, { headers: authHeader }).then(response => response.data);
 
 const changeForgottenPassword = data =>
   API.post('account/change-forgotten-password', data).then(response => response.data);
