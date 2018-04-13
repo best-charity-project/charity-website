@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getEducation } from '../../educationCalls';
 import EducationRouteCard from './EducationRouteCard/EducationRouteCard';
+import makeCancelablePromise from '../../utils/makeCancelablePromise';
 import './CompletedEducationRouteForm.css';
 
 export default class CompletedEducationRouteForm extends React.Component {
@@ -16,8 +17,15 @@ export default class CompletedEducationRouteForm extends React.Component {
     this.getEducationByUserId();
   }
 
+  componentWillUnmount() {
+    this.cancelablPromise.cancel();
+  }
+
   getEducationByUserId() {
-    getEducation(this.props.userId).then(usersCards => this.setState({ usersCards }));
+    this.cancelablPromise = makeCancelablePromise(getEducation(this.props.userId));
+    this.cancelablPromise.promise.then(usersCards => this.setState({ usersCards })).catch((err) => {
+      this.error = err;
+    });
   }
 
   render() {
