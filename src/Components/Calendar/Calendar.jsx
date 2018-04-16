@@ -2,102 +2,21 @@ import React, { Component } from 'react';
 import SmallCalendar from 'react-calendar';
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
+import { getEvents } from '../../eventsCalls';
 import '../../../node_modules/react-big-calendar/lib/css/react-big-calendar.css';
 import './Calendar.css';
 
 require('../../../node_modules/moment/locale/ru');
 
 class Calendar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      date: new Date(),
-      events: [
-        {
-          title: 'День рождения котика',
-          start: moment('2018-04-13T02:30:00').toDate(),
-          end: moment('2018-04-13T07:30:00').toDate(),
-        },
-        {
-          title: 'День рождения енота',
-          start: moment('2018-04-13T09:30:00').toDate(),
-          end: moment('2018-04-13T18:30:00').toDate(),
-        },
-        {
-          title: 'День рождения енота',
-          start: moment('2018-04-13T09:30:00').toDate(),
-          end: moment('2018-04-13T18:30:00').toDate(),
-        },
-        {
-          title: 'День рождения енота',
-          start: moment('2018-04-13T09:30:00').toDate(),
-          end: moment('2018-04-13T18:30:00').toDate(),
-        },
-        {
-          title: 'День рождения енота',
-          start: moment('2018-04-13T09:30:00').toDate(),
-          end: moment('2018-04-13T18:30:00').toDate(),
-        },
-        {
-          title: 'День рождения енота',
-          start: moment('2018-04-13T09:30:00').toDate(),
-          end: moment('2018-04-13T18:30:00').toDate(),
-        },
-        {
-          title: 'День рождения енота',
-          start: moment('2018-04-13T09:30:00').toDate(),
-          end: moment('2018-04-13T20:30:00').toDate(),
-        },
-        {
-          title: 'Ужин',
-          start: moment('2018-04-13T17:30:00').toDate(),
-          end: moment('2018-04-13T23:30:00').toDate(),
-        },
-        {
-          title: 'Вспомнить все',
-          start: moment('2018-04-16T11:30:00').toDate(),
-          end: moment('2018-04-16T18:30:00').toDate(),
-        },
-        {
-          title: 'В магазин',
-          start: moment('2018-04-03T11:30:00').toDate(),
-          end: moment('2018-04-03T18:30:00').toDate(),
-        },
-        {
-          title: '13 april',
-          start: moment('2018-04-09T11:30:00').toDate(),
-          end: moment('2018-04-09T18:30:00').toDate(),
-        },
-      ],
-    };
-    BigCalendar.momentLocalizer(moment);
-    this.setDayOfEvent = this.setDayOfEvent.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.onActiveDateChange = this.onActiveDateChange.bind(this);
-  }
-
-  componentDidMount() {
-    window.document.querySelector('.rbc-label').innerText = 'Весь день';
-    this.setDayOfEvent();
-  }
-
-  onChange(date) {
-    this.setState({ date });
-    this.setDayOfEvent();
-  }
-
-  onActiveDateChange() {
-    this.setDayOfEvent();
-  }
-
-  setDayOfEvent() {
+  static setDayOfEvent(events) {
     const a = window.document.querySelectorAll('time[datetime]');
     const allDate = [];
     const eventDate = [];
     a.forEach((day) => {
       allDate.push(day.dateTime.substring(0, 10));
     });
-    this.state.events.forEach((event) => {
+    events.forEach((event) => {
       eventDate.push(moment(event.start)
         .format('YYYY-MM-DD')
         .substring(0, 10));
@@ -111,6 +30,44 @@ class Calendar extends Component {
             }
           });
         }
+      });
+    });
+  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: new Date(),
+      events: [],
+    };
+    BigCalendar.momentLocalizer(moment);
+    this.onChange = this.onChange.bind(this);
+    this.onActiveDateChange = this.onActiveDateChange.bind(this);
+    this.getEvents = this.getEvents.bind(this);
+  }
+
+  componentDidMount() {
+    window.document.querySelector('.rbc-label').innerText = 'Весь день';
+    this.getEvents();
+  }
+
+  onChange(date) {
+    this.setState({ date });
+    Calendar.setDayOfEvent(this.state.events);
+  }
+
+  onActiveDateChange() {
+    Calendar.setDayOfEvent(this.state.events);
+  }
+
+  getEvents() {
+    getEvents().then((events) => {
+      events.forEach((event) => {
+        event.start = (new Date(event.start)); // eslint-disable-line
+        event.end = (new Date(event.end)); // eslint-disable-line
+      });
+      Calendar.setDayOfEvent(events);
+      this.setState({
+        events,
       });
     });
   }
@@ -146,6 +103,17 @@ class Calendar extends Component {
               showMultiDayTimes
               events={this.state.events}
               step={60}
+              min={new Date(
+                this.state.date.getFullYear(),
+                this.state.date.getMonth(),
+                this.state.date.getDate(), 8,
+              )}
+              max={
+                new Date(
+                  this.state.date.getFullYear(),
+                  this.state.date.getMonth(),
+                  this.state.date.getDate(), 22,
+                )}
             />
           </div>
         </div>
