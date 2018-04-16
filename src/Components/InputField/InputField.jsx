@@ -15,8 +15,8 @@ export default class InputField extends React.Component {
     });
   }
 
-  handleValueChange(e) {
-    this.props.onChange(e.target.value, e);
+  handleValueChange(event) {
+    this.props.onChange(event.target.value, event);
   }
 
   render() {

@@ -18,9 +18,9 @@ class OrganizationsForm extends React.Component {
     this.handleFieldChange = this.handleFieldChange.bind(this);
   }
 
-  handleFieldChange(value, e) {
+  handleFieldChange(value, event) {
     const fieldData = this.state;
-    fieldData[e.target.id] = e.target.value;
+    fieldData[event.target.id] = event.target.value;
     this.setState({ fieldData });
   }
 
@@ -54,7 +54,7 @@ class OrganizationsForm extends React.Component {
             type='text'
             labelText='Название организации'
             value={this.state.name}
-            onChange={(id, e) => this.handleFieldChange(id, e)}
+            onChange={(id, event) => this.handleFieldChange(id, event)}
             required='required'
           />
           <InputField
@@ -63,7 +63,7 @@ class OrganizationsForm extends React.Component {
             type='text'
             labelText='Краткая информация о деятельности организации'
             value={this.state.shortDescription}
-            onChange={(id, e) => this.handleFieldChange(id, e)}
+            onChange={(id, event) => this.handleFieldChange(id, event)}
             required='required'
           />
           <InputField
@@ -72,7 +72,7 @@ class OrganizationsForm extends React.Component {
             type='text'
             labelText='Контакты'
             value={this.state.contacts}
-            onChange={(id, e) => this.handleFieldChange(id, e)}
+            onChange={(id, event) => this.handleFieldChange(id, event)}
             required='required'
           />
           <InputField
@@ -81,7 +81,7 @@ class OrganizationsForm extends React.Component {
             type='text'
             labelText='Адрес сайта'
             value={this.state.url}
-            onChange={(id, e) => this.handleFieldChange(id, e)}
+            onChange={(id, event) => this.handleFieldChange(id, event)}
           />
           <input
             type='submit'
