@@ -2,6 +2,7 @@ import React from 'react';
 import { getLocations, filterEducationalRoutes } from '../../educationCalls';
 import ResultsTable from './ResultsTable';
 import programs from '../EducationRoute/programs.json';
+import InputField from '../InputField/InputField';
 import './EducationRouteSearch.css';
 
 class EducationRouteSearch extends React.Component {
@@ -19,7 +20,7 @@ class EducationRouteSearch extends React.Component {
       isOpenTable: false,
     };
     this.setRegion = this.setRegion.bind(this);
-    this.handleFieldChange = this.handleFieldChange.bind(this);
+    // this.handleFieldChange = this.handleFieldChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.showTable = this.showTable.bind(this);
   }
@@ -44,9 +45,9 @@ class EducationRouteSearch extends React.Component {
     return this.state.locations[this.state.regionIndex] || {};
   }
 
-  handleFieldChange(event) {
+  handleFieldChange(value, e) {
     const fieldData = this.state;
-    fieldData[event.target.id] = event.target.value;
+    fieldData[e.target.id] = e.target.value;
     this.setState({ fieldData });
   }
 
@@ -77,7 +78,7 @@ class EducationRouteSearch extends React.Component {
             <div className='filter--box'>
               <select
                 id='region'
-                className='form--field field-wide'
+                className='form--field field-medium'
                 onChange={this.setRegion}
                 value={this.state.regionIndex}
                 required
@@ -93,8 +94,8 @@ class EducationRouteSearch extends React.Component {
               </select>
               <select
                 id='regionDistricts'
-                className='form--field field-wide'
-                onChange={this.handleFieldChange}
+                className='form--field field-medium'
+                onChange={(e, id) => this.handleFieldChange(id, e)}
                 value={this.state.regionDistricts}
                 required
               >
@@ -109,9 +110,9 @@ class EducationRouteSearch extends React.Component {
               </select>
               <select
                 id='educationalInstitution'
-                onChange={this.handleFieldChange}
+                onChange={(e, id) => this.handleFieldChange(id, e)}
                 value={this.state.educationalInstitution}
-                className='form--field field-wide'
+                className='form--field field-medium'
                 required
               >
                 <option value='' disabled selected>
@@ -122,8 +123,8 @@ class EducationRouteSearch extends React.Component {
               </select>
               <select
                 id='program'
-                className='form--field field-wide'
-                onChange={this.handleFieldChange}
+                className='form--field field-medium'
+                onChange={(e, id) => this.handleFieldChange(id, e)}
                 value={this.state.program}
               >
                 <option value='' disabled selected>
@@ -131,36 +132,34 @@ class EducationRouteSearch extends React.Component {
                 </option>
                 {programs.map(program => <option key={program}>{program}</option>)}
               </select>
-              <p>
-                <label htmlFor='first-year' className='form--filter-label'>
-                  c
-                </label>
-                <input
-                  id='firstYear'
-                  value={this.state.firstYear}
-                  onChange={this.handleFieldChange}
-                  type='number'
-                  className='form--field field-narrow'
-                  placeholder='20__'
-                  min='2018'
-                  max='2100'
-                  required
-                />
-                <label htmlFor='last-year' className='form--filter-label'>
-                  по
-                </label>
-                <input
-                  id='lastYear'
-                  value={this.state.lastYear}
-                  onChange={this.handleFieldChange}
-                  type='number'
-                  className='form--field field-narrow'
-                  placeholder='20__'
-                  min='2018'
-                  max='2100'
-                  required
-                />
-              </p>
+              <label htmlFor='first-year' className='form--filter-label'>
+                c
+              </label>
+              <InputField
+                id='firstYear'
+                size='narrow'
+                value={this.state.firstYear}
+                onChange={(value, e) => this.handleFieldChange(value, e)}
+                type='number'
+                placeholder='20__'
+                min='2018'
+                max='2100'
+                required
+              />
+              <label htmlFor='last-year' className='form--filter-label'>
+                по
+              </label>
+              <InputField
+                id='lastYear'
+                size='narrow'
+                value={this.state.lastYear}
+                onChange={(value, e) => this.handleFieldChange(value, e)}
+                type='number'
+                placeholder='20__'
+                min='2018'
+                max='2100'
+                required
+              />
             </div>
             <input type='submit' className='control-button control-button-primary' value='Искать' />
           </form>

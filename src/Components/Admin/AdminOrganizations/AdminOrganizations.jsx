@@ -22,6 +22,7 @@ class AdminOrganizations extends React.Component {
   render() {
     return (
       <div className='admin-organizations'>
+        <h2 className='secondary-heading'>Заявки на добавление</h2>
         {this.state.pendingItems.map(item => <PendingItem key={item._id} {...item} />)}
       </div>
     );

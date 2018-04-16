@@ -11,8 +11,10 @@ import SingleNewsPage from '../News/SingleNewsPage';
 import LoginPage from '../Login/LoginPage';
 import SignupPage from '../Signup/SignupPage';
 import { getUserAuthInfo, logoutUser } from '../../Auth/Auth';
+import RestorePasswordPage from '../RestorePasswordPage/RestorePasswordPage';
 import UserAccount from '../UserAccount/UserAccount';
 import OrganizationsPage from '../Organizations/OrganizationsPage';
+import ChangeForgottenPasswordPage from '../ChangeForgottenPasswordPage/ChangeForgottenPasswordPage';
 import './App.css';
 
 export default class App extends React.Component {
@@ -34,7 +36,7 @@ export default class App extends React.Component {
       })
       .catch((err) => {
         if (err.response.status === 401) {
-          this.setState({ userInfo: { admin: false } });
+          this.setState({ userInfo: { admin: false, name: '' } });
         }
       });
   }
@@ -48,7 +50,7 @@ export default class App extends React.Component {
   onLogout() {
     logoutUser();
     this.setState({
-      userInfo: { admin: false },
+      userInfo: { admin: false, name: '' },
     });
   }
 
@@ -57,7 +59,7 @@ export default class App extends React.Component {
       <div className='app'>
         <Header {...this.state} onLogout={this.onLogout} />
         <Switch>
-          <Route exact path='/home' component={Home} />
+          <Route path='/home' component={Home} />
           <Route path='/admin' render={() => <Admin {...this.state} />} />
           <Route path='/about' component={About} />
           <Route path='/news/:id' component={SingleNewsPage} />
@@ -65,6 +67,8 @@ export default class App extends React.Component {
           <Route path='/library' render={() => <Library {...this.state} />} />
           <Route path='/login' render={() => <LoginPage onAuthChange={this.onAuthChange} />} />
           <Route path='/signup' render={() => <SignupPage onAuthChange={this.onAuthChange} />} />
+          <Route path='/restore-password' component={RestorePasswordPage} />
+          <Route path='/change-password/:token' component={ChangeForgottenPasswordPage} />
           <Route path='/account' render={() => <UserAccount {...this.state} />} />
           <Route path='/organizations' component={OrganizationsPage} />
           <Redirect to='/home' />

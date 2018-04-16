@@ -5,9 +5,7 @@ const authHeader = appendAuthorizationHeaders();
 
 const getOrganizations = () => API.get('organizations').then(response => response.data);
 
-const addOrganization = (organization) => {
-  API.post('organizations', organization, { headers: authHeader });
-};
+const addOrganization = organization => API.post('organizations', organization, { headers: authHeader }).then(res => res.data);
 
 const getPendingOrganizations = () =>
   API.get('organizations/pending').then(response => response.data);

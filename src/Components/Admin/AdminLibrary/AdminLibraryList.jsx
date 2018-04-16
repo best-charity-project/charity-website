@@ -24,8 +24,8 @@ class AdminLibraryList extends React.Component {
   render() {
     return (
       <div>
-        <img src={BackIcon} alt='иконка' className='library-items--icon' />
-        <NavLink to='/admin/library/libraryItems' className='library-items--link'>
+        <img src={BackIcon} alt='иконка' className='back-icon' />
+        <NavLink to='/admin/library/libraryItems' className='back-link'>
           Вернуться к списку
         </NavLink>
         {this.state.libraryItems.map(item => <AdminLibraryItem {...item} key={item._id} />)}

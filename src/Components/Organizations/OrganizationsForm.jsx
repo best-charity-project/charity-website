@@ -1,7 +1,9 @@
 import React from 'react';
-import { addOrganization } from '../../organizationsCalls';
-import InputField from '../FormFields/InputField';
-import TextareaField from '../FormFields/TextareaField';
+import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import InputField from '../InputField/InputField';
+import BackIcon from '../icons/back.svg';
+import './OrganizationsForm.css';
 
 class OrganizationsForm extends React.Component {
   constructor(props) {
@@ -48,7 +50,7 @@ class OrganizationsForm extends React.Component {
     const {
       name, shortDescription, contacts, url,
     } = this.state;
-    addOrganization({
+    this.props.onSubmit({
       name,
       shortDescription,
       contacts,
@@ -58,30 +60,50 @@ class OrganizationsForm extends React.Component {
 
   render() {
     return (
-      <div className='form'>
-        <form name='addOrganization' onSubmit={this.handleSubmit}>
+      <div className='organizations'>
+        <h2 className='secondary-heading'>Добавление организации</h2>
+        <div className='organizations--back-link'>
+          <img src={BackIcon} alt='иконка' className='back-icon' />
+          <NavLink to='/organizations' className='back-link'>
+          Вернуться к списку организаций
+          </NavLink>
+        </div>
+        <form name='addOrganization' className='form-box' onSubmit={this.handleSubmit}>
           <InputField
             id='name'
+            size='wide'
             type='text'
-            label='Название организации'
+            labelText='Название организации'
+            value={this.state.name}
             onChange={this.handleChangeName}
             required='required'
           />
-          <TextareaField
+          <InputField
             id='shortDescription'
+            size='wide'
             type='text'
-            label='Краткая информация о деятельности организации'
+            labelText='Краткая информация о деятельности организации'
+            value={this.state.shortDescription}
             onChange={this.handleChangeDescription}
             required='required'
           />
           <InputField
             id='contacts'
+            size='wide'
             type='text'
-            label='Контакты'
+            labelText='Контакты'
+            value={this.state.contacts}
             onChange={this.handleChangeContacts}
             required='required'
           />
-          <InputField id='url' type='text' label='Адрес сайта' onChange={this.handleChangeUrl} />
+          <InputField
+            id='url'
+            size='wide'
+            type='text'
+            labelText='Адрес сайта'
+            value={this.state.url}
+            onChange={this.handleChangeUrl}
+          />
           <input
             type='submit'
             value='Отправить'
@@ -94,3 +116,7 @@ class OrganizationsForm extends React.Component {
 }
 
 export default OrganizationsForm;
+
+OrganizationsForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
