@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { acceptPendingOrganizations, deleteOrganization } from '../../../organizationsCalls';
 import Message from '../../Message/Message';
+import Organization from '../../Organizations/Organization';
 import ControlButton from '../../ControlButton/ControlButton';
 import Modal from '../ModalWindow/ModalWindow';
 import './PendingItem.css';
@@ -52,12 +52,7 @@ class PendingItem extends React.Component {
   render() {
     return (
       <div className='admin-organizations--organization'>
-        <h2 className='organization--heading'>{this.props.name}</h2>
-        <p>{this.props.shortDescription}</p>
-        <p>{this.props.contacts}</p>
-        <Link to={this.props.url} target='_blank' rel='noopener noreferrer'>
-          {this.props.url}
-        </Link>
+        <Organization {...this.props} />
         <Message {...this.state.message} />
         <div className='item--buttons'>
           <ControlButton
