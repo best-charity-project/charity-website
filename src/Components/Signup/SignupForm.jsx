@@ -38,21 +38,21 @@ export default class SignupForm extends React.Component {
     this.toggleWindow = this.toggleWindow.bind(this);
   }
 
-  handleEmailChange(email) {
+  handleEmailChange(event) {
     this.setState({
-      email,
+      email: event.target.value,
     });
   }
 
-  handlePasswordChange(password) {
+  handlePasswordChange(event) {
     this.setState({
-      password,
+      password: event.target.value,
     });
   }
 
-  handleNameChange(name) {
+  handleNameChange(event) {
     this.setState({
-      name,
+      name: event.target.value,
     });
   }
 
@@ -62,15 +62,15 @@ export default class SignupForm extends React.Component {
     });
   }
 
-  handleOtherCountryChange(otherCountry) {
+  handleOtherCountryChange(event) {
     this.setState({
-      otherCountry,
+      otherCountry: event.target.value,
     });
   }
 
-  handleCityChange(city) {
+  handleCityChange(event) {
     this.setState({
-      city,
+      city: event.target.value,
     });
   }
 

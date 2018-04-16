@@ -44,7 +44,7 @@ class EducationRouteSearch extends React.Component {
     return this.state.locations[this.state.regionIndex] || {};
   }
 
-  handleFieldChange(value, event) {
+  handleFieldChange(event) {
     const fieldData = this.state;
     fieldData[event.target.id] = event.target.value;
     this.setState({ fieldData });
@@ -94,7 +94,7 @@ class EducationRouteSearch extends React.Component {
               <select
                 id='regionDistricts'
                 className='form--field field-medium'
-                onChange={(event, id) => this.handleFieldChange(id, event)}
+                onChange={event => this.handleFieldChange(event)}
                 value={this.state.regionDistricts}
                 required
               >
@@ -109,7 +109,7 @@ class EducationRouteSearch extends React.Component {
               </select>
               <select
                 id='educationalInstitution'
-                onChange={(event, id) => this.handleFieldChange(id, event)}
+                onChange={event => this.handleFieldChange(event)}
                 value={this.state.educationalInstitution}
                 className='form--field field-medium'
                 required
@@ -123,7 +123,7 @@ class EducationRouteSearch extends React.Component {
               <select
                 id='program'
                 className='form--field field-medium'
-                onChange={(event, id) => this.handleFieldChange(id, event)}
+                onChange={event => this.handleFieldChange(event)}
                 value={this.state.program}
               >
                 <option value='' disabled selected>
@@ -138,12 +138,12 @@ class EducationRouteSearch extends React.Component {
                 id='firstYear'
                 size='narrow'
                 value={this.state.firstYear}
-                onChange={(value, event) => this.handleFieldChange(value, event)}
+                onChange={event => this.handleFieldChange(event)}
                 type='number'
                 placeholder='20__'
                 min='2018'
                 max='2100'
-                required
+                required='required'
               />
               <label htmlFor='last-year' className='form--filter-label'>
                 по
@@ -152,12 +152,12 @@ class EducationRouteSearch extends React.Component {
                 id='lastYear'
                 size='narrow'
                 value={this.state.lastYear}
-                onChange={(value, event) => this.handleFieldChange(value, event)}
+                onChange={event => this.handleFieldChange(event)}
                 type='number'
                 placeholder='20__'
                 min='2018'
                 max='2100'
-                required
+                required='required'
               />
             </div>
             <input type='submit' className='control-button control-button-primary' value='Искать' />
