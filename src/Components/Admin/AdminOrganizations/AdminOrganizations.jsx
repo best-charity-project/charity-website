@@ -1,32 +1,29 @@
 import React from 'react';
-import { getPendingOrganizations } from '../../../organizationsCalls';
-import PendingItem from './PendingOrganization';
-import './AdminOrganizations.css';
+import { Route, Switch, NavLink, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import PendingOrganizations from './PendingOrganizations';
+import AcceptedOrganizations from './AcceptedOrganizations';
 
-class AdminOrganizations extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      pendingItems: [],
-    };
-  }
-
-  componentDidMount() {
-    this.setPendingItems();
-  }
-
-  setPendingItems() {
-    getPendingOrganizations().then(pendingItems => this.setState({ pendingItems }));
-  }
-
-  render() {
-    return (
-      <div className='admin-organizations'>
-        <h2 className='secondary-heading'>Заявки на добавление</h2>
-        {this.state.pendingItems.map(item => <PendingItem key={item._id} {...item} />)}
-      </div>
-    );
-  }
-}
+const AdminOrganizations = ({ match }) => (
+  <div className='library--admin'>
+    <NavLink to={`${match.url}/pending`} className='admin--library-link'>
+      Заявки на добавление
+    </NavLink>
+    <NavLink to={`${match.url}/accepted`} className='admin--library-link'>
+      Все организации
+    </NavLink>
+    <Switch>
+      <Route path={`${match.url}/pending`} component={PendingOrganizations} />
+      <Route path={`${match.url}/accepted`} component={AcceptedOrganizations} />
+      <Redirect to={`${match.url}/pending`} />
+    </Switch>
+  </div>
+);
 
 export default AdminOrganizations;
+
+AdminOrganizations.propTypes = {
+  match: PropTypes.shape({
+    url: PropTypes.string,
+  }).isRequired,
+};

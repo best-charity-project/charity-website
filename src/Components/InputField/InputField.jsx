@@ -49,12 +49,13 @@ InputField.defaultProps = {
   min: '',
   max: '',
   placeholder: '',
+  labelText: '',
 };
 
 InputField.propTypes = {
   size: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  labelText: PropTypes.string.isRequired,
+  labelText: PropTypes.string,
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,

@@ -6,10 +6,6 @@
   padding: 1em;
 }
 
-.form-box {
-  text-align: center;
-}
-
 .form--heading {
   font-size: 2em;
 }
@@ -32,10 +28,6 @@
   display: flex;
   margin: 1em;
   margin-left: 2.3em;
-}
-
-.textarea-field {
-  height: 4em;
 }
 
 .radio-input--label {

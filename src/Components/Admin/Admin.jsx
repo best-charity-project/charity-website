@@ -22,7 +22,7 @@ const Admin = ({ match, userInfo }) => (
           <Link to={`${match.url}/library`} className='sidebar--link'>
             Библиотека
           </Link>
-          <Link to={`${match.url}/organizations/pending`} className='sidebar--link'>
+          <Link to={`${match.url}/organizations/`} className='sidebar--link'>
             Организации
           </Link>
         </div>
@@ -31,7 +31,7 @@ const Admin = ({ match, userInfo }) => (
           <Route exact path={`${match.url}/news`} component={AdminNews} />
           <Route path={`${match.url}/addNews`} component={AddNews} />
           <Route path={`${match.url}/library`} component={AdminLibrary} />
-          <Route path={`${match.url}/organizations/pending`} component={AdminOrganizations} />
+          <Route path={`${match.url}/organizations/`} component={AdminOrganizations} />
           <Redirect to={`${match.url}/news`} />
         </Switch>
       </div>

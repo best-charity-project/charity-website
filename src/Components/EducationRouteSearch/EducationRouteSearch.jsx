@@ -20,7 +20,6 @@ class EducationRouteSearch extends React.Component {
       isOpenTable: false,
     };
     this.setRegion = this.setRegion.bind(this);
-    // this.handleFieldChange = this.handleFieldChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.showTable = this.showTable.bind(this);
   }
