@@ -42,8 +42,8 @@ class OrganizationsForm extends React.Component {
       <div className='organizations'>
         <h2 className='secondary-heading'>Добавление организации</h2>
         <div className='organizations--back-link'>
-          <img src={BackIcon} alt='иконка' className='back-icon' />
-          <NavLink to='/organizations' className='back-link'>
+          <img src={BackIcon} alt='иконка' className='move-back-icon' />
+          <NavLink to='/organizations' className='move-back-link'>
           Вернуться к списку организаций
           </NavLink>
         </div>
