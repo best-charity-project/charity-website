@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getNewsById } from '../../newsCalls';
-import makeCancelablePromise from '../../utils/makeCancelablePromise';
+import cancelablePromise from '../../utils/cancelablePromise';
+import uiLogger from '../../logdown/uiLogger';
 import './SingleNewsPage.css';
 
-class SingleNewsPage extends React.Component {
+export default class SingleNewsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,13 +26,13 @@ class SingleNewsPage extends React.Component {
 
   setNews() {
     const { id } = this.props.match.params;
-    this.cancelablePromise = makeCancelablePromise(getNewsById(id));
+    this.cancelablePromise = cancelablePromise(getNewsById(id));
     this.cancelablePromise.promise
       .then((news) => {
         this.setState({ news });
       })
       .catch((err) => {
-        this.error = err;
+        uiLogger.log(err);
       });
   }
 
@@ -44,8 +45,6 @@ class SingleNewsPage extends React.Component {
     );
   }
 }
-
-export default SingleNewsPage;
 
 SingleNewsPage.propTypes = {
   match: PropTypes.shape({

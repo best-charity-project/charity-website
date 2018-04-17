@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getLibraryCategories } from '../../../libraryCalls';
 import Category from '../Category/Category';
-import makeCancelablePromise from '../../../utils/makeCancelablePromise';
+import cancelablePromise from '../../../utils/cancelablePromise';
+import uiLogger from '../../../logdown/uiLogger';
 import './CategoriesList.css';
 
 export default class CategoriesList extends React.Component {
@@ -18,14 +19,16 @@ export default class CategoriesList extends React.Component {
   }
 
   componentWillUnmount() {
-    this.cancelablPromise.cancel();
+    this.cancelablePromise.cancel();
   }
 
   setCategories() {
-    this.cancelablPromise = makeCancelablePromise(getLibraryCategories());
-    this.cancelablPromise.promise.then(categories => this.setState({ categories })).catch((err) => {
-      this.error = err;
-    });
+    this.cancelablePromise = cancelablePromise(getLibraryCategories());
+    this.cancelablePromise.promise
+      .then(categories => this.setState({ categories }))
+      .catch((err) => {
+        uiLogger.log(err);
+      });
   }
 
   render() {

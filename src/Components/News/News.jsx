@@ -1,10 +1,11 @@
 import React from 'react';
+import uiLogger from '../../logdown/uiLogger';
 import { getNews } from '../../newsCalls';
 import NewsCard from './NewsCard';
-import makeCancelablePromise from '../../utils/makeCancelablePromise';
+import cancelablePromise from '../../utils/cancelablePromise';
 import './News.css';
 
-class News extends React.Component {
+export default class News extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,9 +22,9 @@ class News extends React.Component {
   }
 
   setNews() {
-    this.cancelablePromise = makeCancelablePromise(getNews());
+    this.cancelablePromise = cancelablePromise(getNews());
     this.cancelablePromise.promise.then(news => this.setState({ news })).catch((err) => {
-      this.error = err;
+      uiLogger.log(err);
     });
   }
 
@@ -36,5 +37,3 @@ class News extends React.Component {
     );
   }
 }
-
-export default News;

@@ -4,9 +4,10 @@ import InputMask from 'react-input-mask';
 import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
 import { getLocations, addEducation } from '../../educationCalls';
+import uiLogger from '../../logdown/uiLogger';
 import programs from './programs.json';
 import InvalidInputMessage from './InvalidInputMessage/InvalidInputMessage';
-import makeCancelablePromise from '../../utils/makeCancelablePromise';
+import cancelablePromise from '../../utils/cancelablePromise';
 import './EducationRoute.css';
 import './SelectStyles.css';
 
@@ -66,13 +67,13 @@ export default class EducationRoute extends React.Component {
 
   setCategories() {
     this.setState({ name: this.props.name });
-    this.cancelablePromise = makeCancelablePromise(getLocations());
+    this.cancelablePromise = cancelablePromise(getLocations());
     this.cancelablePromise.promise
       .then((locations) => {
         this.setState({ locations });
       })
       .catch((err) => {
-        this.error = err;
+        uiLogger.log(err);
       });
   }
 

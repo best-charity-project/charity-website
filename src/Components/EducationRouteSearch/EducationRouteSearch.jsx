@@ -2,10 +2,11 @@ import React from 'react';
 import { getLocations, filterEducationalRoutes } from '../../educationCalls';
 import ResultsTable from './ResultsTable';
 import programs from '../EducationRoute/programs.json';
-import makeCancelablePromise from '../../utils/makeCancelablePromise';
+import cancelablePromise from '../../utils/cancelablePromise';
+import uiLogger from '../../logdown/uiLogger';
 import './EducationRouteSearch.css';
 
-class EducationRouteSearch extends React.Component {
+export default class EducationRouteSearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,13 +35,13 @@ class EducationRouteSearch extends React.Component {
   }
 
   setCategories() {
-    this.cancelablePromise = makeCancelablePromise(getLocations());
+    this.cancelablePromise = cancelablePromise(getLocations());
     this.cancelablePromise.promise
       .then((locations) => {
         this.setState({ locations });
       })
       .catch((err) => {
-        this.error = err;
+        uiLogger.log(err);
       });
   }
 
@@ -204,5 +205,3 @@ class EducationRouteSearch extends React.Component {
     );
   }
 }
-
-export default EducationRouteSearch;

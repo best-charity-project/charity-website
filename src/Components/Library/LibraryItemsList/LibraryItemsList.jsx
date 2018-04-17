@@ -4,9 +4,10 @@ import URLSearchParams from 'url-search-params';
 import { fullTextLibrarySearch, getLibraryItems } from '../../../libraryCalls';
 import LibraryItem from '../LibraryItem/LibraryItem';
 import DetailsButton from '../../DetailsButton/DetailsButton';
-import makeCancelablePromise from '../../../utils/makeCancelablePromise';
+import cancelablePromise from '../../../utils/cancelablePromise';
+import uiLogger from '../../../logdown/uiLogger';
 
-class LibraryItemsList extends React.Component {
+export default class LibraryItemsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,24 +28,28 @@ class LibraryItemsList extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.cancelablePromise.cancel();
+  }
+
   setSearchTextResult(urlParams) {
     const urlParamsQuery = new URLSearchParams(urlParams);
     const textSearch = encodeURIComponent(urlParamsQuery.get('textSearch'));
     const types = urlParamsQuery.get('types');
-    this.cancelablePromise = makeCancelablePromise(fullTextLibrarySearch(textSearch, types));
+    this.cancelablePromise = cancelablePromise(fullTextLibrarySearch(textSearch, types));
     this.cancelablePromise.promise
       .then(libraryItems => this.setState({ libraryItems }))
       .catch((err) => {
-        this.error = err;
+        uiLogger.log(err);
       });
   }
 
   setLibraryItems({ category, type }) {
-    this.cancelablePromise = makeCancelablePromise(getLibraryItems(category, type));
+    this.cancelablePromise = cancelablePromise(getLibraryItems(category, type));
     this.cancelablePromise.promise
       .then(libraryItems => this.setState({ libraryItems }))
       .catch((err) => {
-        this.error = err;
+        uiLogger.log(err);
       });
   }
 
@@ -61,8 +66,6 @@ class LibraryItemsList extends React.Component {
     ));
   }
 }
-
-export default LibraryItemsList;
 
 LibraryItemsList.propTypes = {
   location: PropTypes.shape({

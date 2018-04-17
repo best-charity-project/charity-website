@@ -4,11 +4,12 @@ import EducationRoute from '../EducationRouteLanding/EducationRouteLanding';
 import AccessibilityMap from '../AccessibilityMapLanding/AccessibilityMapLanding';
 import { getNews } from '../../newsCalls';
 import ThreeNews from './ThreeNews/ThreeNews';
-import makeCancelablePromise from '../../utils/makeCancelablePromise';
+import cancelablePromise from '../../utils/cancelablePromise';
+import uiLogger from '../../logdown/uiLogger';
 import './Home.css';
 import './ThreeNews/ThreeNews.css';
 
-class Home extends React.Component {
+export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,9 +26,9 @@ class Home extends React.Component {
   }
 
   setNews() {
-    this.cancelablePromise = makeCancelablePromise(getNews());
+    this.cancelablePromise = cancelablePromise(getNews());
     this.cancelablePromise.promise.then(news => this.setState({ news })).catch((err) => {
-      this.error = err;
+      uiLogger.log(err);
     });
   }
 
@@ -44,5 +45,3 @@ class Home extends React.Component {
     );
   }
 }
-
-export default Home;

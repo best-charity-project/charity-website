@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getLibraryItemsAmount } from '../../../../libraryCalls';
-import cancelablPromise from '../../../../utils/makeCancelablePromise';
+import cancelablePromise from '../../../../utils/cancelablePromise';
+import uiLogger from '../../../../logdown/uiLogger';
 import './Type.css';
 
-class Type extends React.Component {
+export default class Type extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,18 +15,19 @@ class Type extends React.Component {
   }
 
   componentDidMount() {
-    this.prms = cancelablPromise(getLibraryItemsAmount(this.props.categoryTag, this.props.typeTag));
-    this.prms.promise
+    this.cancelablePromise =
+    cancelablePromise(getLibraryItemsAmount(this.props.categoryTag, this.props.typeTag));
+    this.cancelablePromise.promise
       .then((amount) => {
         this.setState({ amount });
       })
       .catch((err) => {
-        this.error = err;
+        uiLogger.log(err);
       });
   }
 
   componentWillUnmount() {
-    this.prms.cancel();
+    this.cancelablePromise.cancel();
   }
 
   render() {
@@ -40,8 +42,6 @@ class Type extends React.Component {
     );
   }
 }
-
-export default Type;
 
 Type.propTypes = {
   categoryTag: PropTypes.string.isRequired,

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import uiLogger from '../../logdown/uiLogger';
 import { getEducation } from '../../educationCalls';
 import EducationRouteCard from './EducationRouteCard/EducationRouteCard';
-import makeCancelablePromise from '../../utils/makeCancelablePromise';
+import cancelablePromise from '../../utils/cancelablePromise';
 import './CompletedEducationRouteForm.css';
 
 export default class CompletedEducationRouteForm extends React.Component {
@@ -18,14 +19,16 @@ export default class CompletedEducationRouteForm extends React.Component {
   }
 
   componentWillUnmount() {
-    this.cancelablPromise.cancel();
+    this.cancelablePromise.cancel();
   }
 
   getEducationByUserId() {
-    this.cancelablPromise = makeCancelablePromise(getEducation(this.props.userId));
-    this.cancelablPromise.promise.then(usersCards => this.setState({ usersCards })).catch((err) => {
-      this.error = err;
-    });
+    this.cancelablePromise = cancelablePromise(getEducation(this.props.userId));
+    this.cancelablePromise.promise
+      .then(usersCards => this.setState({ usersCards }))
+      .catch((err) => {
+        uiLogger.log(err);
+      });
   }
 
   render() {
