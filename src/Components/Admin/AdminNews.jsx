@@ -1,7 +1,6 @@
 import React from 'react';
 import AdminNewsItem from './AdminNewsItem';
 import { getNews } from '../../newsCalls';
-import uiLogger from '../../logdown/uiLogger';
 import cancelablePromise from '../../utils/cancelablePromise';
 
 export default class AdminNews extends React.Component {
@@ -25,7 +24,7 @@ export default class AdminNews extends React.Component {
     this.cancelablePromise.promise
       .then(news => this.setState({ news }))
       .catch((err) => {
-        uiLogger.log(err);
+        window.console.log(err);
       });
   }
 

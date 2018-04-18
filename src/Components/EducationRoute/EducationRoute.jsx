@@ -4,7 +4,6 @@ import InputMask from 'react-input-mask';
 import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
 import { getLocations, addEducation } from '../../educationCalls';
-import uiLogger from '../../logdown/uiLogger';
 import programs from './programs.json';
 import InvalidInputMessage from './InvalidInputMessage/InvalidInputMessage';
 import cancelablePromise from '../../utils/cancelablePromise';
@@ -73,7 +72,7 @@ export default class EducationRoute extends React.Component {
         this.setState({ locations });
       })
       .catch((err) => {
-        uiLogger.log(err);
+        window.console.log(err);
       });
   }
 

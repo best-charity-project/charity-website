@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getNewsById } from '../../newsCalls';
 import cancelablePromise from '../../utils/cancelablePromise';
-import uiLogger from '../../logdown/uiLogger';
 import './SingleNewsPage.css';
 
 export default class SingleNewsPage extends React.Component {
@@ -32,7 +31,7 @@ export default class SingleNewsPage extends React.Component {
         this.setState({ news });
       })
       .catch((err) => {
-        uiLogger.log(err);
+        window.console.log(err);
       });
   }
 

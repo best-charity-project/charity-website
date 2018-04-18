@@ -3,7 +3,6 @@ import { getLocations, filterEducationalRoutes } from '../../educationCalls';
 import ResultsTable from './ResultsTable';
 import programs from '../EducationRoute/programs.json';
 import cancelablePromise from '../../utils/cancelablePromise';
-import uiLogger from '../../logdown/uiLogger';
 import './EducationRouteSearch.css';
 
 export default class EducationRouteSearch extends React.Component {
@@ -41,7 +40,7 @@ export default class EducationRouteSearch extends React.Component {
         this.setState({ locations });
       })
       .catch((err) => {
-        uiLogger.log(err);
+        window.console.log(err);
       });
   }
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import uiLogger from '../../logdown/uiLogger';
 import { getEducation } from '../../educationCalls';
 import EducationRouteCard from './EducationRouteCard/EducationRouteCard';
 import cancelablePromise from '../../utils/cancelablePromise';
@@ -27,7 +26,7 @@ export default class CompletedEducationRouteForm extends React.Component {
     this.cancelablePromise.promise
       .then(usersCards => this.setState({ usersCards }))
       .catch((err) => {
-        uiLogger.log(err);
+        window.console.log(err);
       });
   }
 

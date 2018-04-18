@@ -5,7 +5,6 @@ import AccessibilityMap from '../AccessibilityMapLanding/AccessibilityMapLanding
 import { getNews } from '../../newsCalls';
 import ThreeNews from './ThreeNews/ThreeNews';
 import cancelablePromise from '../../utils/cancelablePromise';
-import uiLogger from '../../logdown/uiLogger';
 import './Home.css';
 import './ThreeNews/ThreeNews.css';
 
@@ -28,7 +27,7 @@ export default class Home extends React.Component {
   setNews() {
     this.cancelablePromise = cancelablePromise(getNews());
     this.cancelablePromise.promise.then(news => this.setState({ news })).catch((err) => {
-      uiLogger.log(err);
+      window.console.log(err);
     });
   }
 

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getLibraryItemsAmount } from '../../../../libraryCalls';
 import cancelablePromise from '../../../../utils/cancelablePromise';
-import uiLogger from '../../../../logdown/uiLogger';
 import './Type.css';
 
 export default class Type extends React.Component {
@@ -16,13 +15,13 @@ export default class Type extends React.Component {
 
   componentDidMount() {
     this.cancelablePromise =
-    cancelablePromise(getLibraryItemsAmount(this.props.categoryTag, this.props.typeTag));
+      cancelablePromise(getLibraryItemsAmount(this.props.categoryTag, this.props.typeTag));
     this.cancelablePromise.promise
       .then((amount) => {
         this.setState({ amount });
       })
       .catch((err) => {
-        uiLogger.log(err);
+        window.console.log(err);
       });
   }
 

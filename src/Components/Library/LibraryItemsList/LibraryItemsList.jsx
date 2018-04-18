@@ -5,7 +5,6 @@ import { fullTextLibrarySearch, getLibraryItems } from '../../../libraryCalls';
 import LibraryItem from '../LibraryItem/LibraryItem';
 import DetailsButton from '../../DetailsButton/DetailsButton';
 import cancelablePromise from '../../../utils/cancelablePromise';
-import uiLogger from '../../../logdown/uiLogger';
 
 export default class LibraryItemsList extends React.Component {
   constructor(props) {
@@ -40,7 +39,7 @@ export default class LibraryItemsList extends React.Component {
     this.cancelablePromise.promise
       .then(libraryItems => this.setState({ libraryItems }))
       .catch((err) => {
-        uiLogger.log(err);
+        window.console.log(err);
       });
   }
 
@@ -49,7 +48,7 @@ export default class LibraryItemsList extends React.Component {
     this.cancelablePromise.promise
       .then(libraryItems => this.setState({ libraryItems }))
       .catch((err) => {
-        uiLogger.log(err);
+        window.console.log(err);
       });
   }
 

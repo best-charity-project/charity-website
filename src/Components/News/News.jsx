@@ -1,5 +1,4 @@
 import React from 'react';
-import uiLogger from '../../logdown/uiLogger';
 import { getNews } from '../../newsCalls';
 import NewsCard from './NewsCard';
 import cancelablePromise from '../../utils/cancelablePromise';
@@ -24,7 +23,7 @@ export default class News extends React.Component {
   setNews() {
     this.cancelablePromise = cancelablePromise(getNews());
     this.cancelablePromise.promise.then(news => this.setState({ news })).catch((err) => {
-      uiLogger.log(err);
+      window.console.log(err);
     });
   }
 

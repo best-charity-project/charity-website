@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { getLibraryCategories } from '../../../libraryCalls';
 import Category from '../Category/Category';
 import cancelablePromise from '../../../utils/cancelablePromise';
-import uiLogger from '../../../logdown/uiLogger';
 import './CategoriesList.css';
 
 export default class CategoriesList extends React.Component {
@@ -27,7 +26,7 @@ export default class CategoriesList extends React.Component {
     this.cancelablePromise.promise
       .then(categories => this.setState({ categories }))
       .catch((err) => {
-        uiLogger.log(err);
+        window.console.log(err);
       });
   }
 
