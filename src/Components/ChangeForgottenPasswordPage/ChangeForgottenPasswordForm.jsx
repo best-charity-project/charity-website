@@ -13,9 +13,9 @@ export default class ChangeForgotenPasswordForm extends React.Component {
     this.handleNewPasswordChange = this.handleNewPasswordChange.bind(this);
   }
 
-  handleNewPasswordChange(newPassword) {
+  handleNewPasswordChange(event) {
     this.setState({
-      newPassword,
+      newPassword: event.target.value,
     });
   }
 

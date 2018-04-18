@@ -17,15 +17,15 @@ class LoginForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleEmailChange(email) {
+  handleEmailChange(event) {
     this.setState({
-      email,
+      email: event.target.value,
     });
   }
 
-  handlePasswordChange(password) {
+  handlePasswordChange(event) {
     this.setState({
-      password,
+      password: event.target.value,
     });
   }
 

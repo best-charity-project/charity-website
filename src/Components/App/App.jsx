@@ -14,6 +14,7 @@ import { getUserAuthInfo, logoutUser } from '../../Auth/Auth';
 import RestorePasswordPage from '../RestorePasswordPage/RestorePasswordPage';
 import UserAccount from '../UserAccount/UserAccount';
 import Calendar from '../Calendar/Calendar';
+import OrganizationsPage from '../Organizations/OrganizationsPage';
 import ChangeForgottenPasswordPage from '../ChangeForgottenPasswordPage/ChangeForgottenPasswordPage';
 import './App.css';
 
@@ -71,6 +72,7 @@ export default class App extends React.Component {
           <Route path='/restore-password' component={RestorePasswordPage} />
           <Route path='/change-password/:token' component={ChangeForgottenPasswordPage} />
           <Route path='/account' render={() => <UserAccount {...this.state} />} />
+          <Route path='/organizations' component={OrganizationsPage} />
           <Redirect to='/home' />
         </Switch>
         <Footer />
