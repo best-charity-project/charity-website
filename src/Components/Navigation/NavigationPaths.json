@@ -22,5 +22,9 @@
   {
     "name": "Кабинет",
     "path": "/account"
+  },
+  {
+    "name": "Организации",
+    "path": "/organizations"
   }
 ]

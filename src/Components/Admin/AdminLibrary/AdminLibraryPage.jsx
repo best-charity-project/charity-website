@@ -6,7 +6,7 @@ import EditLibraryItem from './EditLibraryItem';
 import AdminLibraryList from './AdminLibraryList';
 
 const AdminLibraryPage = ({ match }) => (
-  <div className='admin--library-items'>
+  <div className='tabs-box'>
     <Switch>
       <Route exact path={`${match.url}`} component={CategoriesList} />
       <Route path={`${match.url}/:category/:type/edit/:id`} component={EditLibraryItem} />

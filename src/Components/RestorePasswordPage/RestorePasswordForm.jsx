@@ -13,9 +13,9 @@ export default class RestorePasswordForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleEmailChange(email) {
+  handleEmailChange(event) {
     this.setState({
-      email,
+      email: event.target.value,
     });
   }
 
