@@ -96,9 +96,10 @@ class Calendar extends Component {
               endAccessor='end'
               formats={formats}
               date={this.state.date}
+              onNavigate
               toolbar={false}
               views={['day']}
-              view='day'
+              defaultView='day'
               showMultiDayTimes
               events={this.state.events}
               step={60}
