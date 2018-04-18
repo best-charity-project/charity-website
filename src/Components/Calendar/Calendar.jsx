@@ -10,10 +10,10 @@ require('../../../node_modules/moment/locale/ru');
 
 class Calendar extends Component {
   static setDayOfEvent(events) {
-    const a = window.document.querySelectorAll('time[datetime]');
+    const tagsTime = window.document.querySelectorAll('time[datetime]');
     const allDate = [];
     const eventDate = [];
-    a.forEach((day) => {
+    tagsTime.forEach((day) => {
       allDate.push(day.dateTime.substring(0, 10));
     });
     events.forEach((event) => {
@@ -24,7 +24,7 @@ class Calendar extends Component {
     allDate.forEach((dateOfDay) => {
       eventDate.forEach((dateOfEvent) => {
         if (dateOfDay === dateOfEvent) {
-          a.forEach((day) => {
+          tagsTime.forEach((day) => {
             if (day.dateTime.substring(0, 10) === dateOfDay) {
               day.classList.add('event-day');
             }
@@ -103,6 +103,7 @@ class Calendar extends Component {
               showMultiDayTimes
               events={this.state.events}
               step={60}
+              timeslots={1}
               min={new Date(
                 this.state.date.getFullYear(),
                 this.state.date.getMonth(),
