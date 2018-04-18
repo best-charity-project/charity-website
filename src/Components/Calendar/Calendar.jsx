@@ -90,7 +90,6 @@ class Calendar extends Component {
           />
           <div className='calendar--schedule'>
             <BigCalendar
-              popup
               allDayAccessor='allDay'
               titleAccessor='title'
               startAccessor='start'
