@@ -13,6 +13,7 @@ import SignupPage from '../Signup/SignupPage';
 import { getUserAuthInfo, logoutUser } from '../../Auth/Auth';
 import RestorePasswordPage from '../RestorePasswordPage/RestorePasswordPage';
 import UserAccount from '../UserAccount/UserAccount';
+import Calendar from '../Calendar/Calendar';
 import OrganizationsPage from '../Organizations/OrganizationsPage';
 import ChangeForgottenPasswordPage from '../ChangeForgottenPasswordPage/ChangeForgottenPasswordPage';
 import './App.css';
@@ -64,6 +65,7 @@ export default class App extends React.Component {
           <Route path='/about' component={About} />
           <Route path='/news/:id' component={SingleNewsPage} />
           <Route path='/news' component={News} />
+          <Route path='/calendar' component={Calendar} />
           <Route path='/library' render={() => <Library {...this.state} />} />
           <Route path='/login' render={() => <LoginPage onAuthChange={this.onAuthChange} />} />
           <Route path='/signup' render={() => <SignupPage onAuthChange={this.onAuthChange} />} />
