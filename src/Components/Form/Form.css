@@ -47,11 +47,21 @@
   width: 17em;
 }
 
+.form--inputs-group {
+  display: inherit;
+}
+
 @media (max-width: 576px) {
   .form {
     width: 90%;
   }
   .field-wide {
     min-width: 90%;
+  }
+  .filter--box .field-medium {
+    width: 90%;
+  }
+  .form--inputs-group .field-narrow {
+    width: 4em;
   }
 }

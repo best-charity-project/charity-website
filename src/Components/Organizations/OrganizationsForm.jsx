@@ -44,7 +44,7 @@ class OrganizationsForm extends React.Component {
         <div className='organizations--back-link'>
           <img src={BackIcon} alt='иконка' className='move-back-icon' />
           <NavLink to='/organizations' className='move-back-link'>
-          Вернуться к списку организаций
+            Вернуться к списку организаций
           </NavLink>
         </div>
         <form name='addOrganization' className='organizations--form' onSubmit={this.handleSubmit}>
@@ -78,7 +78,7 @@ class OrganizationsForm extends React.Component {
           <InputField
             id='url'
             size='wide'
-            type='text'
+            type='url'
             labelText='Адрес сайта'
             value={this.state.url}
             onChange={event => this.handleFieldChange(event)}

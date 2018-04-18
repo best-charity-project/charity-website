@@ -29,8 +29,6 @@ export default class InputField extends React.Component {
           type={this.props.type}
           className={this.getClasses()}
           minLength={this.props.minLength}
-          min={this.props.min}
-          max={this.props.max}
           placeholder={this.props.placeholder}
           required={this.props.required}
         />
@@ -46,8 +44,6 @@ InputField.defaultProps = {
   required: '',
   minLength: '',
   size: '',
-  min: '',
-  max: '',
   placeholder: '',
   labelText: '',
 };
@@ -61,7 +57,5 @@ InputField.propTypes = {
   value: PropTypes.string.isRequired,
   required: PropTypes.string,
   minLength: PropTypes.string,
-  min: PropTypes.string,
-  max: PropTypes.string,
   placeholder: PropTypes.string,
 };

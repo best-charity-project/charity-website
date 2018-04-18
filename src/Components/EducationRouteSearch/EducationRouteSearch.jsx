@@ -2,7 +2,6 @@ import React from 'react';
 import { getLocations, filterEducationalRoutes } from '../../educationCalls';
 import ResultsTable from './ResultsTable';
 import programs from '../EducationRoute/programs.json';
-import InputField from '../InputField/InputField';
 import './EducationRouteSearch.css';
 
 class EducationRouteSearch extends React.Component {
@@ -131,34 +130,36 @@ class EducationRouteSearch extends React.Component {
                 </option>
                 {programs.map(program => <option key={program}>{program}</option>)}
               </select>
-              <label htmlFor='first-year' className='form--filter-label'>
-                c
-              </label>
-              <InputField
-                id='firstYear'
-                size='narrow'
-                value={this.state.firstYear}
-                onChange={event => this.handleFieldChange(event)}
-                type='number'
-                placeholder='20__'
-                min='2018'
-                max='2100'
-                required='required'
-              />
-              <label htmlFor='last-year' className='form--filter-label'>
-                по
-              </label>
-              <InputField
-                id='lastYear'
-                size='narrow'
-                value={this.state.lastYear}
-                onChange={event => this.handleFieldChange(event)}
-                type='number'
-                placeholder='20__'
-                min='2018'
-                max='2100'
-                required='required'
-              />
+              <div className='form--inputs-group'>
+                <label htmlFor='first-year' className='form--filter-label'>
+                  c
+                </label>
+                <input
+                  id='firstYear'
+                  value={this.state.firstYear}
+                  onChange={event => this.handleFieldChange(event)}
+                  type='number'
+                  className='form--field field-narrow'
+                  placeholder='20__'
+                  min='2018'
+                  max='2100'
+                  required
+                />
+                <label htmlFor='last-year' className='form--filter-label'>
+                  по
+                </label>
+                <input
+                  id='lastYear'
+                  value={this.state.lastYear}
+                  onChange={event => this.handleFieldChange(event)}
+                  type='number'
+                  className='form--field field-narrow'
+                  placeholder='20__'
+                  min='2018'
+                  max='2100'
+                  required
+                />
+              </div>
             </div>
             <input type='submit' className='control-button control-button-primary' value='Искать' />
           </form>

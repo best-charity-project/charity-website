@@ -30,6 +30,9 @@ class AddOrganization extends React.Component {
       <div>
         <Message {...this.state.message} />
         <OrganizationsForm onSubmit={this.handleFormSubmit} />
+        <p className='add-organization-item-comment'>
+          *** Информация отобразится в разделе после одобрения модератором
+        </p>
       </div>
     );
   }
