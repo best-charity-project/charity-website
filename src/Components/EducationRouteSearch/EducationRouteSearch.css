@@ -17,13 +17,17 @@
 }
 
 .form--filter-label {
-  margin-left: 0.8em;
+  margin: 3em 0 0 0.8em;
 }
 
 .field-wide {
+  width: 30em;
+}
+
+.field-medium {
   width: 17em;
 }
 
 .field-narrow {
-  width: 4.1em;
+  width: 8em;
 }

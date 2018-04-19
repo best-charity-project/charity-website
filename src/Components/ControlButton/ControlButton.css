@@ -33,6 +33,10 @@
   background-color: #37b3d8;
 }
 
+.control-button-tertiary {
+  background-color: #1d6e87;
+}
+
 .control-button-secondary:hover {
   background-color: rgb(92, 185, 120);
 }

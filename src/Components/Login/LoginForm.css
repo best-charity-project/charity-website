@@ -24,12 +24,13 @@
 }
 
 .form--field {
-  margin: 2em 1em;
+  margin: 2em;
   border: none;
   border-bottom: 1px solid #37b3d8;
   padding: 1em;
   outline: none;
   box-shadow: none;
+  width: 90%;
 }
 
 .form--placeholder {
@@ -41,7 +42,7 @@
 }
 
 .form--box .field--select {
-  width: 70%;
+  width: 80%;
   font: inherit;
   padding-left: 0;
   color: inherit;
