@@ -18,12 +18,14 @@ export default class Form extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { title, newsText, url } = nextProps.news;
-    this.setState({
-      title,
-      newsText,
-      url,
-    });
+    if (nextProps.news) {
+      const { title, newsText, url } = nextProps.news;
+      this.setState({
+        title,
+        newsText,
+        url,
+      });
+    }
   }
 
   handleChangeTitle(event) {
