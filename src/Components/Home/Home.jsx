@@ -1,6 +1,7 @@
 import React from 'react';
 import BigImage from '../img/front.jpg';
 import EducationRoute from '../EducationRouteLanding/EducationRouteLanding';
+import LegalInfo from '../LegalInfo/LegalInfo';
 import AccessibilityMap from '../AccessibilityMapLanding/AccessibilityMapLanding';
 import CalendarLanding from '../CalendarLanding/CalendarLanding';
 import { getNews } from '../../newsCalls';
@@ -34,6 +35,7 @@ class Home extends React.Component {
         <CalendarLanding />
         <EducationRoute />
         <AccessibilityMap />
+        <LegalInfo />
       </div>
     );
   }
