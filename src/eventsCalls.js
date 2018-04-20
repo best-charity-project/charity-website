@@ -3,11 +3,16 @@ import appendAuthorizationHeaders from './appendAuthorizationHeaders';
 
 const authHeader = appendAuthorizationHeaders();
 
-const getEvents = (amount) => {
+function setCalendarUrl(amount) {
   let url = 'calendar';
   if (amount) {
     url = `calendar?count=${amount}`;
   }
+  return url;
+}
+
+const getEvents = (amount) => {
+  const url = setCalendarUrl(amount);
   return API.get(url).then(response => response.data);
 };
 

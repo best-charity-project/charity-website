@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getEvents } from '../../eventsCalls';
 import calendarImage from '../img/calendar.jpg';
 import CalendarEvent from '../CalendarEvent/CalendarEvent';
+import { countOfCalledEvents } from '../../configs/config.json';
 import './CalendarLanding.css';
 
 export default class CalendarLanding extends React.Component {
@@ -19,8 +20,7 @@ export default class CalendarLanding extends React.Component {
   }
 
   setEvents() {
-    const CountOfCalledEvents = 2;
-    getEvents(CountOfCalledEvents).then(events => this.setState({ events }));
+    getEvents(countOfCalledEvents).then(events => this.setState({ events }));
   }
 
   render() {
