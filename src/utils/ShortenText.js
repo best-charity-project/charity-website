@@ -1,4 +1,4 @@
-import { MAX_DESCRIPTION_SIZE } from '../../../configs/config.json';
+import { MAX_DESCRIPTION_SIZE } from '../configs/config.json';
 
 export default (text) => {
   if (!text) {
@@ -11,4 +11,3 @@ export default (text) => {
 
   return text;
 };
-
