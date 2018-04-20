@@ -1,5 +1,5 @@
 .navigation {
-  background-color: #ECEFF1;
+  background-color: white;
   height: 4em;
   width: 100%;
   z-index: 1;
@@ -7,39 +7,14 @@
   position: fixed;
 }
 
-.navigation--menu {
-  width: 100%;
+.navigation--menu-wrapper {
   display: flex;
-  flex-direction: column;
-  top: 0;
+  flex-direction: row;
   position: absolute;
-  align-items: center;
+  top: 0;
+  right: 0;
+  align-items: flex-end;
   height: 100%;
-}
-
-.navigation--element.active {
-  background-color: #1d6e87;
-  opacity: .7;
-  color: white;
-}
-
-.navigation--element {
-  color: rgb(51, 51, 51);
-  padding: 1em 0.5em;
-  text-decoration: none;
-  font-size: 1.2em;
-  transition: .5s all ease;
-}
-
-@media (hover: hover) {
-  .navigation--element.active:hover {
-    opacity: .7;
-  }
-  .navigation--element:hover {
-    background-color: #1d6e87;
-    opacity: .35;
-    color: white;
-  }
 }
 
 .navigation--button {
@@ -48,52 +23,69 @@
   padding: 1em;
   margin: 1em;
   align-self: flex-end;
-  transition: .3s all ease;
   outline: none;
   border: none;
   background-color: inherit;
   display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .navigation--button.navigation--button-open {
   transform: rotate(90deg);
-  transition: .3s all ease;
+  transition: 0.3s all ease;
 }
 
-@media (max-width: 575px) {
+.element--navigation {
+  color: rgb(51, 51, 51);
+  text-decoration: none;
+  font-size: 1.2em;
+  padding-bottom: 1.25em;
+  transition: 0.5s border-color ease;
+  border-color: transparent;
+}
+
+.menu--element {
+  height: 100%;
+  align-items: flex-end;
+  display: flex;
+  margin: 0 0.4em;
+}
+
+.element--navigation.active {
+  border-bottom: 4px solid #1d6e87;
+  padding-bottom: calc(1.25em - 4px);
+}
+@media (min-width: 1024px) {
+  .menu--element:first-child {
+    position: fixed;
+    left: 0;
+  }
+}
+
+@media (hover: hover) {
+  .menu--element:hover .element--navigation {
+    border-bottom: 4px solid rgb(47, 179, 219);
+    padding-bottom: calc(1.25em - 4px);
+  }
+}
+
+@media (max-width: 1024px) {
+  @media (hover: hover) {
+    .menu--element:hover .element--navigation {
+      border-bottom: none;
+      padding-bottom: calc(1.25em);
+    }
+  }
   .navigation--button {
     display: block;
   }
-  .navigation-menu {
-    display: none;
-  }
-  .navigation--element {
-    display: none;
-    text-align: center;
-    transition: .5s all ease;
-  }
-  .navigation--button+li .navigation--element {
-    border-top: 1px solid #2E2E2E;
-  }
-  .navigation--menu li {
-    width: 100%;
-  }
-  .navigation--button.navigation--button-open~li .navigation--element {
-    display: block;
-    width: inherit;
-    background-color: #ECEFF1;
-    margin: 0;
-  }
-  .navigation--button.navigation--button-open~li .navigation--element.active {
-    background-color: #1d6e87;
-    opacity: 1;
-    color: white;
-  }
-}
-
-@media (min-width: 576px) {
-  .navigation--menu {
-    flex-direction: row;
+  .navigation--menu-wrapper {
+    flex-direction: column;
     justify-content: flex-end;
+    position: relative;
+    margin-top: 4em;
+    width: 50%;
   }
 }

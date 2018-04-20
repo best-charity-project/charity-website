@@ -18,9 +18,9 @@
 
 .login-panel {
   display: flex;
-  height: inherit;
   align-items: center;
   margin-left: 1em;
+  height: 4em;
 }
 
 .login-panel--heading {
