@@ -15,13 +15,13 @@ export default class InputField extends React.Component {
     });
   }
 
-  handleValueChange(e) {
-    this.props.onChange(e.target.value);
+  handleValueChange(event) {
+    this.props.onChange(event);
   }
 
   render() {
     return (
-      <div className='form--box'>
+      <div className={`form--box field-${this.props.size}`}>
         <input
           id={this.props.id}
           value={this.props.value}
@@ -29,6 +29,7 @@ export default class InputField extends React.Component {
           type={this.props.type}
           className={this.getClasses()}
           minLength={this.props.minLength}
+          placeholder={this.props.placeholder}
           required={this.props.required}
         />
         <label htmlFor={this.props.id} className='form--placeholder'>
@@ -42,14 +43,19 @@ export default class InputField extends React.Component {
 InputField.defaultProps = {
   required: '',
   minLength: '',
+  size: '',
+  placeholder: '',
+  labelText: '',
 };
 
 InputField.propTypes = {
+  size: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  labelText: PropTypes.string.isRequired,
+  labelText: PropTypes.string,
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   required: PropTypes.string,
   minLength: PropTypes.string,
-  value: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
 };

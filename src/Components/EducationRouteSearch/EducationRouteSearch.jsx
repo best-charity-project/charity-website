@@ -19,7 +19,6 @@ class EducationRouteSearch extends React.Component {
       isOpenTable: false,
     };
     this.setRegion = this.setRegion.bind(this);
-    this.handleFieldChange = this.handleFieldChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.showTable = this.showTable.bind(this);
   }
@@ -77,7 +76,7 @@ class EducationRouteSearch extends React.Component {
             <div className='filter--box'>
               <select
                 id='region'
-                className='form--field field-wide'
+                className='form--field field-medium'
                 onChange={this.setRegion}
                 value={this.state.regionIndex}
                 required
@@ -93,8 +92,8 @@ class EducationRouteSearch extends React.Component {
               </select>
               <select
                 id='regionDistricts'
-                className='form--field field-wide'
-                onChange={this.handleFieldChange}
+                className='form--field field-medium'
+                onChange={event => this.handleFieldChange(event)}
                 value={this.state.regionDistricts}
                 required
               >
@@ -109,9 +108,9 @@ class EducationRouteSearch extends React.Component {
               </select>
               <select
                 id='educationalInstitution'
-                onChange={this.handleFieldChange}
+                onChange={event => this.handleFieldChange(event)}
                 value={this.state.educationalInstitution}
-                className='form--field field-wide'
+                className='form--field field-medium'
                 required
               >
                 <option value='' disabled selected>
@@ -122,8 +121,8 @@ class EducationRouteSearch extends React.Component {
               </select>
               <select
                 id='program'
-                className='form--field field-wide'
-                onChange={this.handleFieldChange}
+                className='form--field field-medium'
+                onChange={event => this.handleFieldChange(event)}
                 value={this.state.program}
               >
                 <option value='' disabled selected>
@@ -131,14 +130,14 @@ class EducationRouteSearch extends React.Component {
                 </option>
                 {programs.map(program => <option key={program}>{program}</option>)}
               </select>
-              <p>
+              <div className='form--inputs-group'>
                 <label htmlFor='first-year' className='form--filter-label'>
                   c
                 </label>
                 <input
                   id='firstYear'
                   value={this.state.firstYear}
-                  onChange={this.handleFieldChange}
+                  onChange={event => this.handleFieldChange(event)}
                   type='number'
                   className='form--field field-narrow'
                   placeholder='20__'
@@ -152,7 +151,7 @@ class EducationRouteSearch extends React.Component {
                 <input
                   id='lastYear'
                   value={this.state.lastYear}
-                  onChange={this.handleFieldChange}
+                  onChange={event => this.handleFieldChange(event)}
                   type='number'
                   className='form--field field-narrow'
                   placeholder='20__'
@@ -160,7 +159,7 @@ class EducationRouteSearch extends React.Component {
                   max='2100'
                   required
                 />
-              </p>
+              </div>
             </div>
             <input type='submit' className='control-button control-button-primary' value='Искать' />
           </form>

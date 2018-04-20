@@ -21,7 +21,7 @@ class PendingItemsList extends React.Component {
 
   render() {
     return (
-      <div className='admin--library-items'>
+      <div className='tabs-box'>
         <h2 className='library-items--heading'>Заявки на добавление в библиотеку </h2>
         {this.state.pendingItems.map(item => <PendingItem key={item._id} {...item} />)}
       </div>
