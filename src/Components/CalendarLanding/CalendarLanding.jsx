@@ -37,6 +37,7 @@ export default class CalendarLanding extends React.Component {
                 url={event.url}
                 start={event.start}
                 end={event.end}
+                key={event._id}
               />
             ))}
           </div>
