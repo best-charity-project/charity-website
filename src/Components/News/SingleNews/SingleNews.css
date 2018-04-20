@@ -24,3 +24,9 @@
     height: auto;
   }
 }
+
+@media (max-width: 576px) {
+  .single-news--title {
+    font-size: 1em;
+  }
+}
