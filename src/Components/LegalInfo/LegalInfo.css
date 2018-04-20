@@ -1,6 +1,5 @@
 .LegalInfo {
   flex-direction: column;
-  background-color: #fff;
   display: flex;
 }
 
@@ -32,6 +31,9 @@
 @media (max-width: 1200px) {
   .LegalInfo--image {
     display: none;
+  }
+  .LegalInfo .card--heading {
+    margin-bottom: 1em;
   }
 }
 

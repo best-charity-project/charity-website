@@ -7,6 +7,7 @@ export default () => (
   <div className='LegalInfo'>
     <h1 className='LegalInfo primary-heading'>Правовая информация</h1>
     <div className='LegalInfo--content'>
+      <img src={lawImage} alt='Правовая информация' className='LegalInfo--image' />
       <div className='LegalInfo--cards'>
         <Card
           heading='«Белорусская ассоциация
@@ -26,7 +27,6 @@ export default () => (
           classNameLink='card--link'
         />
       </div>
-      <img src={lawImage} alt='Правовая информация' className='LegalInfo--image' />
     </div>
   </div>
 );
