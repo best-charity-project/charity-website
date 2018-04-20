@@ -9,29 +9,29 @@
   margin-bottom: 1em;
 }
 
-.event--title {
+.calendar-event--title {
   font-size: 1.3em;
   text-align: center;
   padding: 0.5em 0;
   font-weight: bold;
 }
 
-.time--box--value {
+.time-box--value {
   padding: 0.2em 0px;
 }
 
-.time--box {
+.time-box {
   display: inline-block;
   margin: 1em;
 }
 
-.event--time-wrapper {
+.calendar-event--time-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
-.event--link {
+.calendar-event--link {
   text-decoration: none;
   color: inherit;
   border-bottom: 2px solid rgb(92, 185, 120);
@@ -40,7 +40,7 @@
   margin-bottom: 0.5em;
 }
 
-.event--description {
+.calendar-event--description {
   text-align: justify;
   line-height: 1.5;
   text-indent: 2em;
