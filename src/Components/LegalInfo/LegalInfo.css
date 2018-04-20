@@ -1,0 +1,48 @@
+.LegalInfo {
+  flex-direction: column;
+  background-color: #fff;
+  display: flex;
+}
+
+.LegalInfo--content {
+  display: flex;
+  flex-direction: row;
+  width: 65%;
+  margin: 0 auto;
+  margin-bottom: 1.5em;
+}
+
+.LegalInfo--cards {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.LegalInfo--cards .card {
+  width: 100%;
+  padding-bottom: 1em;
+}
+
+.LegalInfo--image {
+  width: 400px;
+  height: 350px;
+  margin-left: 5em;
+}
+
+@media (max-width: 1200px) {
+  .LegalInfo--image {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .LegalInfo.primary-heading {
+    font-size: 2em;
+  }
+  .LegalInfo--content {
+    width: 90%;
+  }
+  .LegalInfo .card--heading {
+    font-size: unset;
+  }
+}
