@@ -5,8 +5,6 @@ const authHeader = appendAuthorizationHeaders();
 
 const getEvents = () => API.get('calendar').then(response => response.data);
 
-const addEvents = (event) => {
-  API.post('calendar', event, { headers: authHeader });
-};
+const addEvents = event => API.post('calendar', event, { headers: authHeader }).then(res => res.data);
 
 export { getEvents, addEvents };

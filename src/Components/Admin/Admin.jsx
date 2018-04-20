@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import AdminNews from './AdminNews';
 import EditNews from './AddEditNews/EditNews';
 import AddNews from './AddEditNews/AddNews';
+import AddEvent from './AdminEvents/AddEvent';
 import AdminLibrary from './AdminLibrary';
 import AdminOrganizations from './AdminOrganizations/AdminOrganizations';
 import '../Sidebar/Sidebar.css';
@@ -19,6 +20,9 @@ const Admin = ({ match, userInfo }) => (
           <Link to={`${match.url}/addNews`} className='sidebar--link'>
             Добавить новость
           </Link>
+          <Link to={`${match.url}/calendar`} className='sidebar--link'>
+            Добавить событие
+          </Link>
           <Link to={`${match.url}/library`} className='sidebar--link'>
             Библиотека
           </Link>
@@ -30,6 +34,7 @@ const Admin = ({ match, userInfo }) => (
           <Route path={`${match.url}/news/edit/:id`} component={EditNews} />
           <Route exact path={`${match.url}/news`} component={AdminNews} />
           <Route path={`${match.url}/addNews`} component={AddNews} />
+          <Route path={`${match.url}/calendar`} component={AddEvent} />
           <Route path={`${match.url}/library`} component={AdminLibrary} />
           <Route path={`${match.url}/organizations/`} component={AdminOrganizations} />
           <Redirect to={`${match.url}/news`} />
