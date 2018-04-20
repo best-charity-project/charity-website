@@ -1,13 +1,11 @@
 import API from './api';
 import appendAuthorizationHeaders from './appendAuthorizationHeaders';
 
-const authHeader = appendAuthorizationHeaders();
-
 const restorePassword = email =>
   API.post('account/restore-password', { email }).then(response => response.data);
 
 const changePassword = data =>
-  API.post('account/change-password', data, { headers: authHeader }).then(response => response.data);
+  API.post('account/change-password', data, { headers: appendAuthorizationHeaders() }).then(response => response.data);
 
 const changeForgottenPassword = data =>
   API.post('account/change-forgotten-password', data).then(response => response.data);

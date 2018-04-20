@@ -32,7 +32,7 @@ class EditNews extends React.Component {
   handleNewsUpdate(news) {
     updateNews(this.props.match.params.id, news)
       .then((data) => {
-        this.setState({ message: { type: 'success', text: data.message } });
+        this.setState({ message: { type: 'success', text: data.message }, newsToEdit: null });
       })
       .catch((err) => {
         this.setState({ message: { type: 'error', text: err.response.data.message } });
