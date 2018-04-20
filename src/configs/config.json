@@ -6,5 +6,5 @@
   "redirectTime": 5000,
   "MAX_DESCRIPTION_SIZE": 240,
   "minPasswordLength": "6",
-  "CountOfCalledEvents": 2
+  "countOfCalledEvents": 2
 }
