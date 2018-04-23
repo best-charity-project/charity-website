@@ -1,6 +1,7 @@
 .message {
   width: 20em;
   position: fixed;
+  z-index: 1;
   top: 6em;
   right: 0;
   font-size: 1.2em;

@@ -106,117 +106,114 @@ class EventsForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form className='form events-form' onSubmit={this.handleSubmit}>
-          <div className='events-form--field-box'>
-            <InputField
-              id='title'
-              type='text'
-              size='wide'
-              value={this.state.title}
-              onChange={this.setTitle}
-              labelText='Заголовок события'
-              required='required'
-            />
-          </div>
-          <div className='events-form--field-box'>
-            <InputMask
-              id='start-day'
-              value={this.state.startDay}
-              onChange={this.setStartDay}
-              type='text'
-              mask='99/99/9999'
-              className={`${EventsForm.getClasses(this.state.startDay)} form--field field-narrow`}
-              required
-            />
-            <label htmlFor='start-time' className='form--placeholder form--placeholder-small'>
-            Дата начала
-            </label>
-          </div>
-          <div className='events-form--field-box'>
-            <InputMask
-              value={this.state.startTime}
-              onChange={this.setStartTime}
-              id='start-time'
-              type='text'
-              mask='99:99'
-              className={`${EventsForm.getClasses(this.state.startTime)} form--field field-narrow`}
-            />
-            <label
-              htmlFor='start-time'
-              className='form--placeholder form--placeholder-small'
-            >Время начала
-            </label>
-          </div>
-          <div className='events-form--field-box'>
-            <InputMask
-              value={this.state.endDay}
-              onChange={this.setEndDay}
-              id='end-day'
-              type='text'
-              mask='99/99/9999'
-              className={`${EventsForm.getClasses(this.state.endDay)} form--field field-narrow`}
-              required
-            />
-            <label
-              htmlFor='end-day'
-              className='form--placeholder form--placeholder-small'
-            >Дата окончания
-            </label>
-          </div>
-          <div className='events-form--field-box'>
-            <InputMask
-              value={this.state.endTime}
-              onChange={this.setEndTime}
-              id='end-time'
-              type='text'
-              mask='99:99'
-              className={`${EventsForm.getClasses(this.state.endTime)} form--field field-narrow`}
-            />
-            <label
-              htmlFor='end-time'
-              className='form--placeholder form--placeholder-small'
-            >
-            Время окончания
-            </label>
-          </div>
-          <div className='events-form--field-box'>
-            <input
-              type='checkbox'
-              className='field-box--checkbox'
-              value={this.state.allDay}
-              onChange={this.state.setAllDay}
-            />
-            <span>Мероприятие длится целый день</span>
-          </div>
-          <div className='events-form--field-box'>
-            <textarea
-              id='description'
-              value={this.state.description}
-              onChange={this.setDescription}
-              type='text'
-              className={`events-description ${EventsForm.getClasses(this.state.description)}`}
-              required
-            />
-            <label htmlFor='description' className='form--placeholder'>Описание события</label>
-          </div>
-          <div className='events-form--field-box'>
-            <InputField
-              id='url'
-              size='medium'
-              type='url'
-              value={this.state.url}
-              onChange={this.setUrl}
-              labelText='Ссылка на событие'
-            />
-          </div>
-          <input
-            type='submit'
-            className='control-button control-button-primary'
-            value='Отправить'
+      <form className='form events-form' onSubmit={this.handleSubmit}>
+        <div className='events-form--field-box'>
+          <InputField
+            id='title'
+            type='text'
+            size='medium'
+            value={this.state.title}
+            onChange={this.setTitle}
+            labelText='Заголовок события'
+            required='required'
           />
-        </form>
-      </div>
+        </div>
+        <div className='events-form--field-box'>
+          <InputMask
+            id='start-day'
+            value={this.state.startDay}
+            onChange={this.setStartDay}
+            type='text'
+            mask='99/99/9999'
+            className={`${EventsForm.getClasses(this.state.startDay)} form--field field-narrow`}
+            required
+          />
+          <label htmlFor='start-time' className='form--placeholder form--placeholder-small'>
+          Дата начала
+          </label>
+        </div>
+        <div className='events-form--field-box'>
+          <InputMask
+            value={this.state.startTime}
+            onChange={this.setStartTime}
+            id='start-time'
+            type='text'
+            mask='99:99'
+            className={`${EventsForm.getClasses(this.state.startTime)} form--field field-narrow`}
+          />
+          <label
+            htmlFor='start-time'
+            className='form--placeholder form--placeholder-small'
+          >Время начала
+          </label>
+        </div>
+        <div className='events-form--field-box'>
+          <InputMask
+            value={this.state.endDay}
+            onChange={this.setEndDay}
+            id='end-day'
+            type='text'
+            mask='99/99/9999'
+            className={`${EventsForm.getClasses(this.state.endDay)} form--field field-narrow`}
+            required
+          />
+          <label
+            htmlFor='end-day'
+            className='form--placeholder form--placeholder-small'
+          >Дата окончания
+          </label>
+        </div>
+        <div className='events-form--field-box'>
+          <InputMask
+            value={this.state.endTime}
+            onChange={this.setEndTime}
+            id='end-time'
+            type='text'
+            mask='99:99'
+            className={`${EventsForm.getClasses(this.state.endTime)} form--field field-narrow`}
+          />
+          <label
+            htmlFor='end-time'
+            className='form--placeholder form--placeholder-small'
+          >
+          Время окончания
+          </label>
+        </div>
+        <div className='events-form--field-box'>
+          <input
+            type='checkbox'
+            value={this.state.allDay}
+            onChange={this.state.setAllDay}
+          />
+          <span>Мероприятие длится целый день</span>
+        </div>
+        <div className='events-form--field-box'>
+          <textarea
+            id='description'
+            value={this.state.description}
+            onChange={this.setDescription}
+            type='text'
+            className={`events-description ${EventsForm.getClasses(this.state.description)}`}
+            required
+          />
+          <label htmlFor='description' className='form--placeholder'>Описание события</label>
+        </div>
+        <div className='events-form--field-box'>
+          <InputField
+            id='url'
+            size='medium'
+            type='url'
+            value={this.state.url}
+            onChange={this.setUrl}
+            labelText='Ссылка на событие'
+          />
+        </div>
+        <input
+          type='submit'
+          className='control-button control-button-primary'
+          value='Отправить'
+        />
+      </form>
     );
   }
 }

@@ -27,7 +27,7 @@ class AddEvent extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='admin-events'>
         <h1 className='secondary-heading'>Добавление события</h1>
         <Message {...this.state.message} />
         <EventForm onSubmit={this.handleFormSubmit} buttonText='Добавить событие' />
