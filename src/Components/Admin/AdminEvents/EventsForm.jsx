@@ -182,6 +182,7 @@ class EventsForm extends React.Component {
         <div className='events-form--field-box'>
           <input
             type='checkbox'
+            className='field-box--checkbox'
             value={this.state.allDay}
             onChange={this.state.setAllDay}
           />

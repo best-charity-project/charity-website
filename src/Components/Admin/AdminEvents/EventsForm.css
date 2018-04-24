@@ -31,19 +31,18 @@
 }
 
 @media (max-width: 576px) {
-  .events-form {
-    width: 90%;
-  }
+  .events-form,
+  .events-form--field-box,
   .events-description {
     width: 90%;
+  }
+  .events-form--field-box .field-narrow {
+    width: 80%;
   }
   .events-form--field-box {
     display: block;
   }
-  .events-form--field-box .form--placeholder-small {
-    left: 4em;
-  }
-  .events-form--field-box .field-narrow {
-    width: 12em;
+  .field-box--checkbox {
+    margin-left: 1em;
   }
 }
