@@ -36,7 +36,6 @@ export default class RestorePasswordForm extends React.Component {
         >
           <InputField
             id='email'
-            size='medium'
             type='email'
             value={this.state.email}
             onChange={this.handleEmailChange}
