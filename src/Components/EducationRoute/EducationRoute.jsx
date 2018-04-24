@@ -10,6 +10,7 @@ import InvalidInputMessage from './InvalidInputMessage/InvalidInputMessage';
 import Message from '../Message/Message';
 import createMessage from '../Message/createMessage';
 import { redirectTime } from '../../configs/config.json';
+import cancelablePromise from '../../utils/cancelablePromise';
 import './EducationRoute.css';
 import './SelectStyles.css';
 
@@ -55,6 +56,10 @@ class EducationRoute extends React.Component {
     this.setCategories();
   }
 
+  componentWillUnmount() {
+    this.cancelablePromise.cancel();
+  }
+
   setFirstYear(event) {
     this.setState({
       firstYear: event.target.value,
@@ -69,9 +74,14 @@ class EducationRoute extends React.Component {
 
   setCategories() {
     this.setState({ name: this.props.name });
-    getLocations().then((locations) => {
-      this.setState({ locations });
-    });
+    this.cancelablePromise = cancelablePromise(getLocations());
+    this.cancelablePromise.promise
+      .then((locations) => {
+        this.setState({ locations });
+      })
+      .catch((err) => {
+        window.console.log(err);
+      });
   }
 
   setName(event) {

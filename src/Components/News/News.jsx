@@ -1,9 +1,10 @@
 import React from 'react';
 import { getNews } from '../../newsCalls';
 import NewsCard from './NewsCard';
+import cancelablePromise from '../../utils/cancelablePromise';
 import './News.css';
 
-class News extends React.Component {
+export default class News extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,8 +16,15 @@ class News extends React.Component {
     this.setNews();
   }
 
+  componentWillUnmount() {
+    this.cancelablePromise.cancel();
+  }
+
   setNews() {
-    getNews().then(news => this.setState({ news }));
+    this.cancelablePromise = cancelablePromise(getNews());
+    this.cancelablePromise.promise.then(news => this.setState({ news })).catch((err) => {
+      window.console.log(err);
+    });
   }
 
   render() {
@@ -28,5 +36,3 @@ class News extends React.Component {
     );
   }
 }
-
-export default News;

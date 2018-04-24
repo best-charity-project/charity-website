@@ -4,6 +4,7 @@ import { getEducation, deleteEducation, updateEducation } from '../../educationC
 import EducationRouteCard from './EducationRouteCard/EducationRouteCard';
 import createMessage from '../Message/createMessage';
 import Message from '../Message/Message';
+import cancelablePromise from '../../utils/cancelablePromise';
 import './CompletedEducationRouteForm.css';
 
 export default class CompletedEducationRouteForm extends React.Component {
@@ -24,15 +25,19 @@ export default class CompletedEducationRouteForm extends React.Component {
     this.getEducationByUserId();
   }
 
-  onEducationRouteCardDelete(id) {
-    deleteEducation(id).then((data) => {
+  componentWillUnmount() {
+    this.cancelablePromise.cancel();
+  }
+
+  onEducationRouteCardEdit(id, educationToEdit) {
+    updateEducation(id, educationToEdit).then((data) => {
       this.setMessage(data);
       this.getEducationByUserId();
     });
   }
 
-  onEducationRouteCardEdit(id, educationToEdit) {
-    updateEducation(id, educationToEdit).then((data) => {
+  onEducationRouteCardDelete(id) {
+    deleteEducation(id).then((data) => {
       this.setMessage(data);
       this.getEducationByUserId();
     });
@@ -47,7 +52,11 @@ export default class CompletedEducationRouteForm extends React.Component {
   }
 
   getEducationByUserId() {
-    getEducation(this.props.userId).then(usersCards => this.setState({ usersCards }));
+    this.cancelablePromise = cancelablePromise(getEducation(this.props.userId));
+    this.cancelablePromise.promise
+      .then(usersCards => this.setState({ usersCards })).catch((err) => {
+        window.console.log(err);
+      });
   }
 
   render() {
