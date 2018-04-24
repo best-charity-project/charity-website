@@ -2,9 +2,10 @@ import React from 'react';
 import { getLocations, filterEducationalRoutes } from '../../educationCalls';
 import ResultsTable from './ResultsTable';
 import programs from '../EducationRoute/programs.json';
+import cancelablePromise from '../../utils/cancelablePromise';
 import './EducationRouteSearch.css';
 
-class EducationRouteSearch extends React.Component {
+export default class EducationRouteSearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,10 +28,19 @@ class EducationRouteSearch extends React.Component {
     this.setCategories();
   }
 
+  componentWillUnmount() {
+    this.cancelablePromise.cancel();
+  }
+
   setCategories() {
-    getLocations().then((locations) => {
-      this.setState({ locations });
-    });
+    this.cancelablePromise = cancelablePromise(getLocations());
+    this.cancelablePromise.promise
+      .then((locations) => {
+        this.setState({ locations });
+      })
+      .catch((err) => {
+        window.console.log(err);
+      });
   }
 
   setRegion(event) {
@@ -193,5 +203,3 @@ class EducationRouteSearch extends React.Component {
     );
   }
 }
-
-export default EducationRouteSearch;

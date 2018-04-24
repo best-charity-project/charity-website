@@ -2,9 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getLibraryItemsAmount } from '../../../../libraryCalls';
+import cancelablePromise from '../../../../utils/cancelablePromise';
 import './Type.css';
 
-class Type extends React.Component {
+export default class Type extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,9 +14,19 @@ class Type extends React.Component {
   }
 
   componentDidMount() {
-    getLibraryItemsAmount(this.props.categoryTag, this.props.typeTag).then((amount) => {
-      this.setState({ amount });
-    });
+    this.cancelablePromise =
+      cancelablePromise(getLibraryItemsAmount(this.props.categoryTag, this.props.typeTag));
+    this.cancelablePromise.promise
+      .then((amount) => {
+        this.setState({ amount });
+      })
+      .catch((err) => {
+        window.console.log(err);
+      });
+  }
+
+  componentWillUnmount() {
+    this.cancelablePromise.cancel();
   }
 
   render() {
@@ -30,8 +41,6 @@ class Type extends React.Component {
     );
   }
 }
-
-export default Type;
 
 Type.propTypes = {
   categoryTag: PropTypes.string.isRequired,
