@@ -3,9 +3,7 @@ import appendAuthorizationHeaders from './appendAuthorizationHeaders';
 
 const getLocations = () => API.get('locations').then(response => response.data);
 
-const addEducation = (education) => {
-  API.post('education', education, { headers: appendAuthorizationHeaders() });
-};
+const addEducation = education => API.post('education', education, { headers: appendAuthorizationHeaders() }).then(response => response.data);
 
 const filterEducationalRoutes = (
   region,
