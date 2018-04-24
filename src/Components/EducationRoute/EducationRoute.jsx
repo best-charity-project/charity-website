@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import InputMask from 'react-input-mask';
 import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
 import { getLocations, addEducation } from '../../educationCalls';
 import programs from './programs.json';
 import InvalidInputMessage from './InvalidInputMessage/InvalidInputMessage';
+import Message from '../Message/Message';
+import createMessage from '../Message/createMessage';
+import { redirectTime } from '../../configs/config.json';
 import './EducationRoute.css';
 import './SelectStyles.css';
 
@@ -22,9 +26,13 @@ const defaultValues = {
   lastYear: '',
   program: '',
   isOpen: false,
+  message: {
+    type: '',
+    text: '',
+  },
 };
 
-export default class EducationRoute extends React.Component {
+class EducationRoute extends React.Component {
   constructor(props) {
     super(props);
     this.state = defaultValues;
@@ -133,6 +141,12 @@ export default class EducationRoute extends React.Component {
     }
   }
 
+  redirect() {
+    setTimeout(() => {
+      this.props.history.push('education-route-users-form');
+    }, redirectTime);
+  }
+
   addEducationRoute(event) {
     event.preventDefault();
     const {
@@ -163,8 +177,15 @@ export default class EducationRoute extends React.Component {
       firstYear,
       lastYear,
       regionIndex,
+    }).then((data) => {
+      if (data.error) {
+        this.setState({ message: createMessage('error', data.error) });
+        return;
+      }
+      this.setState({ message: createMessage('success', data.message) });
     });
     this.setState(defaultValues);
+    this.redirect();
   }
 
   render() {
@@ -357,12 +378,18 @@ export default class EducationRoute extends React.Component {
             />
           </form>
         </div>
+        <Message {...this.state.message} />
       </div>
     );
   }
 }
 
+export default withRouter(EducationRoute);
+
 EducationRoute.propTypes = {
   userId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
