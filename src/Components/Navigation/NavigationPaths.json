@@ -16,10 +16,6 @@
     "path": "/calendar"
   },
   {
-    "name": "О нас",
-    "path": "/about"
-  },
-  {
     "name": "Организации",
     "path": "/organizations"
   }
