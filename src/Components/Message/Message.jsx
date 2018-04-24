@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './Message.css';
 import { confirmMessageTimer } from '../../configs/config.json';
 
-class Message extends React.Component {
+export default class Message extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +17,12 @@ class Message extends React.Component {
     this.setState({
       visible: true,
     });
+    clearTimeout(this.timerID);
     this.hide();
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timerID);
   }
 
   getClass() {
@@ -29,7 +34,7 @@ class Message extends React.Component {
   }
 
   hide() {
-    setTimeout(() => {
+    this.timerID = setTimeout(() => {
       this.setState({ visible: false });
     }, confirmMessageTimer);
   }
@@ -40,8 +45,6 @@ class Message extends React.Component {
     );
   }
 }
-
-export default Message;
 
 Message.defaultProps = {
   text: '',

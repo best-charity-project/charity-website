@@ -1,6 +1,7 @@
 import React from 'react';
 import AdminNewsItem from './AdminNewsItem';
 import { getNews } from '../../newsCalls';
+import cancelablePromise from '../../utils/cancelablePromise';
 
 export default class AdminNews extends React.Component {
   constructor(props) {
@@ -14,8 +15,17 @@ export default class AdminNews extends React.Component {
     this.setNews();
   }
 
+  componentWillUnmount() {
+    this.cancelablePromise.cancel();
+  }
+
   setNews() {
-    getNews().then(news => this.setState({ news }));
+    this.cancelablePromise = cancelablePromise(getNews());
+    this.cancelablePromise.promise
+      .then(news => this.setState({ news }))
+      .catch((err) => {
+        window.console.log(err);
+      });
   }
 
   render() {
