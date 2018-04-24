@@ -20,14 +20,6 @@
     "path": "/about"
   },
   {
-    "name": "Администратор",
-    "path": "/admin"
-  },
-  {
-    "name": "Кабинет",
-    "path": "/account"
-  },
-  {
     "name": "Организации",
     "path": "/organizations"
   }

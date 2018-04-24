@@ -43,6 +43,11 @@ class Navigation extends React.Component {
             <li className='menu--element'>
               <LoginPanel onLogout={this.logout} {...this.props} />
             </li>
+            <li className='menu--element menu--website-name'>
+              <p className='element--navigation navigation--website-name' href=''>
+                ON-INFO.BY
+              </p>
+            </li>
             <NavigationList {...this.props} onClick={this.setStateToFalse} />
             <li className='menu--element'>
               <a className='element--navigation' target='_blank' href={forumURL}>
