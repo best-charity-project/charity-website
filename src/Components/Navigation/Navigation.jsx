@@ -37,14 +37,27 @@ class Navigation extends React.Component {
   render() {
     return (
       <nav className='navigation'>
-        <LoginPanel onLogout={this.logout} {...this.props} />
-        <ul className='navigation--menu'>
+        <div className='navigation--menu'>
           <button className={this.getImageClass()} onClick={this.toggleClass} />
-          <NavigationList {...this.props} onClick={this.setStateToFalse} />
-          <a className='navigation--element' target='_blank' href={forumURL}>
-            Форум
-          </a>
-        </ul>
+          <ul className='navigation--menu-wrapper'>
+            <li className='menu--element'>
+              <button className='menu--login-pannel' onClick={this.setStateToFalse}>
+                <LoginPanel onLogout={this.logout} {...this.props} />
+              </button>
+            </li>
+            <li className='menu--element menu--website-name'>
+              <p className='element--navigation navigation--website-name' href=''>
+                ON-INFO.BY
+              </p>
+            </li>
+            <NavigationList {...this.props} onClick={this.setStateToFalse} />
+            <li className='menu--element'>
+              <a className='element--navigation' target='_blank' href={forumURL}>
+                Форум
+              </a>
+            </li>
+          </ul>
+        </div>
       </nav>
     );
   }

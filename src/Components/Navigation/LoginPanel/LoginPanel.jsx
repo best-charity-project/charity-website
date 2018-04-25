@@ -8,7 +8,19 @@ const LoginPanel = ({ userInfo, onLogout }) => {
   if (userInfo.name) {
     return (
       <div className='login-panel'>
-        <h1 className='login-panel--heading'>{userInfo.name}</h1>
+        <div>
+          <h1 className='login-panel--heading'>{userInfo.name}</h1>
+          {userInfo.admin && (
+            <Link className='login-panel--navigation' to='/admin'>
+              Администратор
+            </Link>
+          )}
+          {!userInfo.admin && (
+            <Link className='login-panel--navigation' to='/account'>
+              Кабинет
+            </Link>
+          )}
+        </div>
         <ControlButton onButtonClick={onLogout} text='Выйти' className='login-panel--btn' />
       </div>
     );
