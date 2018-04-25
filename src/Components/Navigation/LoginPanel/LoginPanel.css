@@ -50,11 +50,16 @@
 @media (max-width: 1023px) {
   .login-panel {
     background-color: #4a4848;
+    width: 100%;
   }
   .login-panel--navigation {
     color: white;
   }
   .login-panel--heading {
     color: #b4e9fa;
+  }
+  .login-panel--link {
+    color: #b4e9fa;
+    border-color: #b4e9fa;
   }
 }
