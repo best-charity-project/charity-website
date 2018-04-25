@@ -41,6 +41,11 @@
   transition: 0.3s ease all;
 }
 
+.form--placeholder-small {
+  font-size: 0.8em;
+  top: 3.5em;
+}
+
 .form--box .field--select {
   width: 80%;
   font: inherit;

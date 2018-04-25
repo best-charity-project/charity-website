@@ -72,7 +72,7 @@ export default class App extends React.Component {
           <Route path='/restore-password' component={RestorePasswordPage} />
           <Route path='/change-password/:token' component={ChangeForgottenPasswordPage} />
           <Route path='/account' render={() => <UserAccount {...this.state} />} />
-          <Route path='/organizations' component={OrganizationsPage} />
+          <Route path='/organizations' render={() => <OrganizationsPage {...this.state} />} />
           <Redirect to='/home' />
         </Switch>
         <Footer />
