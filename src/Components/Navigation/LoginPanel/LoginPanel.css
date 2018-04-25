@@ -53,13 +53,16 @@
     border-color: #b4e9fa;
     color: #b4e9fa;
   }
+
   .login-panel {
     background-color: #4a4848;
     width: 100%;
   }
+
   .login-panel--navigation {
     color: white;
   }
+
   .login-panel--heading {
     color: #b4e9fa;
   }

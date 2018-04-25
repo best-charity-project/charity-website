@@ -72,12 +72,14 @@
     position: fixed;
     left: 0;
   }
+
   @media (hover: hover) {
     .menu--element:hover .element--navigation {
       border-bottom: 4px solid rgb(47, 179, 219);
       padding-bottom: calc(1.25em - 4px);
     }
   }
+
   .menu--login-pannel {
     background-color: inherit;
     border: none;
@@ -158,6 +160,7 @@
     color: #b4e9fa;
     padding-top: 0.25em;
   }
+
   .menu--login-pannel {
     background-color: inherit;
     border: none;
@@ -181,6 +184,7 @@
   .navigation--menu-wrapper {
     width: 60%;
   }
+
   .navigation--button-open {
     margin-right: calc(60% + 1em);
   }
