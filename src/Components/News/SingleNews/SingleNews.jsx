@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './SingleNews.css';
-import shortenText from './ShortenText';
+import shortenText from '../../../utils/ShortenText';
 
 const SingleNews = function SingleNews({ title, newsText }) {
   return (

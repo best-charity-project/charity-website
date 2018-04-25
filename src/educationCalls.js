@@ -1,12 +1,10 @@
 import API from './api';
 import appendAuthorizationHeaders from './appendAuthorizationHeaders';
 
-const authHeader = appendAuthorizationHeaders();
-
 const getLocations = () => API.get('locations').then(response => response.data);
 
 const addEducation = (education) => {
-  API.post('education', education, { headers: authHeader });
+  API.post('education', education, { headers: appendAuthorizationHeaders() });
 };
 
 const filterEducationalRoutes = (
@@ -39,11 +37,11 @@ const filterEducationalRoutes = (
 
 const getEducation = userId =>
   API.get(`education?userId=${userId}`, {
-    headers: authHeader,
+    headers: appendAuthorizationHeaders(),
   }).then(response => response.data);
 
 const deleteEducation = id =>
-  API.delete(`education/${id}`, { headers: authHeader }).then(res => res.data);
+  API.delete(`education/${id}`, { headers: appendAuthorizationHeaders() }).then(res => res.data);
 
 const updateEducation = (id, education) => {
   const {
@@ -74,7 +72,7 @@ const updateEducation = (id, education) => {
       program,
       region,
     },
-    { headers: authHeader },
+    { headers: appendAuthorizationHeaders() },
   ).then(res => res.data);
 };
 
