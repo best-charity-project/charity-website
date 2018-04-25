@@ -19,16 +19,12 @@
 }
 
 .navigation--button {
-  background-image: url('../img/NavMenu.svg');
-  background-size: 2em;
+  background: url('../img/NavMenu.svg') center/2em no-repeat;
   padding: 2.4em;
   margin: 0;
-  background-repeat: no-repeat;
-  background-position: center;
   align-self: flex-end;
   outline: none;
   border: none;
-  background-color: inherit;
   display: none;
   position: absolute;
   top: 0;
@@ -41,10 +37,8 @@
 .navigation--button.navigation--button-open {
   transform: rotate(90deg);
   transition: 0.5s all ease;
-  background-color: #4a4848;
   padding: 2.4em;
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: #b4e9fa;
   margin-top: 0em;
 }
 
@@ -113,6 +107,7 @@
   .menu--element {
     height: 3em;
     margin: 0;
+    width: 100%;
   }
 
   .menu--element:first-child {
@@ -180,8 +175,13 @@
   .navigation--button.navigation--button-open {
     margin-right: 31em;
   }
+}
 
-  .menu--element {
-    width: 100%;
+@media (max-width: 414px) {
+  .navigation--menu-wrapper {
+    width: 60%;
+  }
+  .navigation--button-open {
+    margin-right: calc(60% + 1em);
   }
 }

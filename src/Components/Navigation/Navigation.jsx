@@ -46,9 +46,7 @@ class Navigation extends React.Component {
               </button>
             </li>
             <li className='menu--element menu--website-name'>
-              <p className='element--navigation navigation--website-name' href=''>
-                ON-INFO.BY
-              </p>
+              <p className='element--navigation navigation--website-name'>ON-INFO.BY</p>
             </li>
             <NavigationList {...this.props} onClick={this.setStateToFalse} />
             <li className='menu--element'>
