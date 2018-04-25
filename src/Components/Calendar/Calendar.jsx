@@ -62,8 +62,8 @@ class Calendar extends Component {
   getEvents() {
     getEvents().then((events) => {
       events.forEach((event) => {
-        event.start = (new Date(event.start)); // eslint-disable-line
-        event.end = (new Date(event.end)); // eslint-disable-line
+        event.start = new Date(event.start); // eslint-disable-line
+        event.end = new Date(event.end); // eslint-disable-line
       });
       Calendar.setDayOfEvent(events);
       this.setState({
@@ -104,17 +104,22 @@ class Calendar extends Component {
               events={this.state.events}
               step={60}
               timeslots={1}
-              min={new Date(
-                this.state.date.getFullYear(),
-                this.state.date.getMonth(),
-                this.state.date.getDate(), 8,
-              )}
+              min={
+                new Date(
+                  this.state.date.getFullYear(),
+                  this.state.date.getMonth(),
+                  this.state.date.getDate(),
+                  8,
+                )
+              }
               max={
                 new Date(
                   this.state.date.getFullYear(),
                   this.state.date.getMonth(),
-                  this.state.date.getDate(), 22,
-                )}
+                  this.state.date.getDate(),
+                  22,
+                )
+              }
             />
           </div>
         </div>
