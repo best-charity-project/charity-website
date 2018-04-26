@@ -9,22 +9,61 @@
   text-transform: uppercase;
   padding: 0.7em 0;
   border: 1px solid #1d6e87;
+  cursor: pointer;
+  margin-left: 0;
+  background-color: inherit;
 }
 
-.login-panel--btn {
-  cursor: pointer;
-  background-color: #eceff1;
+@media (min-width: 540px) and (max-width: 1023px) {
+  .login-panel--btn {
+    margin-right: 0;
+  }
 }
 
 .login-panel {
   display: flex;
-  height: inherit;
   align-items: center;
-  margin-left: 1em;
+  height: 4em;
+  padding: 0 1em;
+  margin-left: -1em;
 }
 
 .login-panel--heading {
   color: #1d6e87;
   font-size: 1.2em;
   margin-right: 1em;
+}
+
+.login-panel--navigation {
+  color: rgb(51, 51, 51);
+  font-size: 1.2em;
+}
+
+.login-panel--navigation:hover {
+  color: #999;
+}
+
+.login-panel--navigation ~ .login-panel--btn {
+  margin-left: 1em;
+}
+
+@media (max-width: 1023px) {
+  .login-panel--btn,
+  .login-panel--link {
+    border-color: #b4e9fa;
+    color: #b4e9fa;
+  }
+
+  .login-panel {
+    background-color: #4a4848;
+    width: 100%;
+  }
+
+  .login-panel--navigation {
+    color: white;
+  }
+
+  .login-panel--heading {
+    color: #b4e9fa;
+  }
 }

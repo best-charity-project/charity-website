@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Select, { Option } from 'rc-select';
 import InputMask from 'react-input-mask';
-import { getLocations, deleteEducation, updateEducation } from '../../../educationCalls';
+import { getLocations } from '../../../educationCalls';
 import Modal from '../../Admin/ModalWindow/ModalWindow';
-import Message from '../../Message/Message';
 import InvalidInputMessage from '../../EducationRoute/InvalidInputMessage/InvalidInputMessage';
 import programs from '../../EducationRoute/programs.json';
 import './EducationRouteCard.css';
@@ -14,10 +13,6 @@ export default class EducationRouteCard extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
-      message: {
-        type: '',
-        text: '',
-      },
       isInvalidMessageOpen: false,
       isEdited: false,
       educationToEdit: {
@@ -169,7 +164,7 @@ export default class EducationRouteCard extends React.Component {
       this.isRegionDistricts();
     } else {
       this.handleEditClick();
-      updateEducation(this.props._id, this.state.educationToEdit);
+      this.props.onEdit(this.props._id, this.state.educationToEdit);
     }
   }
 
@@ -203,13 +198,7 @@ export default class EducationRouteCard extends React.Component {
   }
 
   deleteItem() {
-    deleteEducation(this.props._id)
-      .then((data) => {
-        this.setState({ message: { type: 'success', text: data.message } });
-      })
-      .catch((err) => {
-        this.setState({ message: { type: 'error', text: err.response.data.message } });
-      });
+    this.props.onDelete(this.props._id);
     this.toggleModal();
   }
 
@@ -428,7 +417,6 @@ export default class EducationRouteCard extends React.Component {
             />
           )}
           {this.state.isOpen && <Modal onConfirm={this.deleteItem} toggle={this.toggleModal} />}
-          <Message {...this.state.message} />
         </div>
       </form>
     );
@@ -449,4 +437,6 @@ EducationRouteCard.propTypes = {
   regionIndex: PropTypes.number.isRequired,
   region: PropTypes.string.isRequired,
   regionDistricts: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };

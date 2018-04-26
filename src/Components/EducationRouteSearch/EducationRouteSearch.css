@@ -25,9 +25,15 @@
 }
 
 .field-medium {
-  width: 17em;
+  width: 25.5em;
 }
 
 .field-narrow {
   width: 8em;
+}
+
+@media (max-width: 576px) {
+  .field-medium {
+    width: 90%;
+  }
 }

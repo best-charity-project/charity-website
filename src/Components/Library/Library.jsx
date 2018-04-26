@@ -6,7 +6,7 @@ import LibraryItemsList from './LibraryItemsList/LibraryItemsList';
 import CategoriesList from './CategoriesList/CategoriesList';
 import AddLibraryItem from './Form/AddLibraryItem';
 import LibraryDefault from './LibraryDefault/LibraryDefault';
-import RedirectToAuthorization from './RedirectToAuthorization/RedirectToAuthorization';
+import RedirectToAuthorization from '../RedirectToAuthorization/RedirectToAuthorization';
 import './Library.css';
 
 const Library = ({ match, userInfo }) => (
