@@ -30,6 +30,7 @@ export default class InputField extends React.Component {
           className={this.getClasses()}
           minLength={this.props.minLength}
           placeholder={this.props.placeholder}
+          pattern={this.props.pattern}
           required={this.props.required}
         />
         <label htmlFor={this.props.id} className='form--placeholder'>
@@ -46,6 +47,7 @@ InputField.defaultProps = {
   size: '',
   placeholder: '',
   labelText: '',
+  pattern: '(.*?)',
 };
 
 InputField.propTypes = {
@@ -58,4 +60,5 @@ InputField.propTypes = {
   required: PropTypes.string,
   minLength: PropTypes.string,
   placeholder: PropTypes.string,
+  pattern: PropTypes.string,
 };
