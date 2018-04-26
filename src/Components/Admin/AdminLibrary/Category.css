@@ -1,0 +1,39 @@
+.oneCategory {
+  cursor: pointer;
+  border-bottom: 2px solid lightgrey;
+}
+
+.oneCategory:last-child {
+  border-bottom: none;
+}
+
+.oneCategory:hover {
+  background-color: lightgrey;
+}
+
+.oneCategory--title {
+  width: 95%;
+  display: inline-block;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+@media (max-width: 1024px) {
+  .oneCategory--title {
+    width: 88%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.oneCategory--image {
+  width: 5%;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  display: inline-block;
+}
+
+.oneCategory--image img {
+  width: 15px;
+}
