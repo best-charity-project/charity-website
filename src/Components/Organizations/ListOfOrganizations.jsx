@@ -5,7 +5,7 @@ import { getOrganizations } from '../../organizationsCalls';
 import Organization from './Organization';
 import './ListOfOrganizations.css';
 
-class OrganizationsPage extends React.Component {
+class ListOfOrganizations extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,7 +29,7 @@ class OrganizationsPage extends React.Component {
         </h1>
         <div className='organizations--box'>
           <Link
-            to={`${this.props.match.url}/addOrganization`}
+            to={`${this.props.match.url}/${this.props.userInfo ? 'addOrganization' : 'login'}`}
             className='control-button control-button-tertiary control-button-small'
           >
             Добавить организацию
@@ -41,10 +41,15 @@ class OrganizationsPage extends React.Component {
   }
 }
 
-export default OrganizationsPage;
+export default ListOfOrganizations;
 
-OrganizationsPage.propTypes = {
+ListOfOrganizations.defaultProps = {
+  userInfo: '',
+};
+
+ListOfOrganizations.propTypes = {
   match: PropTypes.shape({
     url: PropTypes.string,
   }).isRequired,
+  userInfo: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
