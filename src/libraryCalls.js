@@ -9,6 +9,12 @@ const getLibraryItemsAmount = (categoryTag, type) =>
 
 const getLibraryCategories = () => API.get('categories').then(response => response.data);
 
+const addCategory = category =>
+  API.post('categories', category, { headers: appendAuthorizationHeaders() }).then(res => res.data);
+
+const deleteCategory = id =>
+  API.delete(`categories/${id}`, { headers: appendAuthorizationHeaders() }).then(res => res.data);
+
 const addLibraryItem = libraryItem =>
   API.post('library', libraryItem, { headers: appendAuthorizationHeaders() }).then(res => res.data);
 
@@ -53,4 +59,6 @@ export {
   getItemById,
   fullTextLibrarySearch,
   getLibraryItemsAmount,
+  addCategory,
+  deleteCategory,
 };
