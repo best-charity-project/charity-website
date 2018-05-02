@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import deleteIcon from '../../img/delete.svg';
-import './Category.css';
+import './AdminCategory.css';
 
-const Category = (props) => {
+const AdminCategory = (props) => {
   function onDelete() {
-    props.onDelete(props._id);
+    props.onDelete(props.category);
   }
   return (
     <li className='oneCategory'>
-      <div className='oneCategory--title'>{props.title}</div>
+      <div className='oneCategory--title'>{props.category.title}</div>
       <button onClick={onDelete} className='oneCategory--image'>
         <img src={deleteIcon} alt='delete-icon' />
       </button>
@@ -17,10 +17,13 @@ const Category = (props) => {
   );
 };
 
-export default Category;
+export default AdminCategory;
 
-Category.propTypes = {
+AdminCategory.propTypes = {
   onDelete: PropTypes.func.isRequired,
-  _id: PropTypes.string.isRequired,
+  category: PropTypes.shape({
+    tag: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  }).isRequired,
   title: PropTypes.string.isRequired,
 };
