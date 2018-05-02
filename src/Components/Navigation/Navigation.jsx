@@ -41,9 +41,15 @@ class Navigation extends React.Component {
           <button className={this.getImageClass()} onClick={this.toggleClass} />
           <ul className='navigation--menu-wrapper'>
             <li className='menu--element'>
-              <button className='menu--login-pannel' onClick={this.setStateToFalse}>
+              <div
+                role='button'
+                tabIndex='0'
+                className='menu--login-pannel'
+                onClick={this.setStateToFalse}
+                onKeyDown={this.setStateToFalse}
+              >
                 <LoginPanel onLogout={this.logout} {...this.props} />
-              </button>
+              </div>
             </li>
             <li className='menu--element menu--website-name'>
               <p className='element--navigation navigation--website-name'>ON-INFO.BY</p>
