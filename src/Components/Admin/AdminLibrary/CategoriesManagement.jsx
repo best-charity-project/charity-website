@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
-import Category from './Category';
-import Modal from '../ModalWindow/ModalWindow';
-import { getLibraryCategories, deleteCategory } from '../../../libraryCalls';
+import AdminCategory from './AdminCategory';
+import { getLibraryCategories, deleteCategory, moveItems } from '../../../libraryCalls';
+import DeleteCategoryModal from '../../DeleteCategoryModal/DeleteCategoryModal';
 import './CategoriesManagement.css';
 
 class CategoriesManagement extends React.Component {
@@ -12,7 +12,7 @@ class CategoriesManagement extends React.Component {
     this.state = {
       categories: [],
       isOpen: false,
-      categoryIdToDelete: '',
+      categoryToDelete: null,
     };
     this.onCategoryDelete = this.onCategoryDelete.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -23,13 +23,28 @@ class CategoriesManagement extends React.Component {
     this.getCategories();
   }
 
-  onCategoryDelete(id) {
-    this.setState({ categoryIdToDelete: id });
+  onCategoryDelete(category) {
+    this.setState({ categoryToDelete: category });
     this.toggleModal();
   }
 
-  onDelete() {
-    deleteCategory(this.state.categoryIdToDelete)
+  onDelete(categoryTitle) {
+    if (categoryTitle) {
+      const result = this.state.categories.filter(category => category.title === categoryTitle);
+      const categoryToMoveItems = result[0];
+      moveItems(this.state.categoryToDelete.tag, categoryToMoveItems.tag)
+        .then(() => deleteCategory(this.state.categoryToDelete._id))
+        .then((data) => {
+          this.props.showMessage({ type: 'success', text: data.message });
+          this.toggleModal();
+          this.getCategories();
+        })
+        .catch((err) => {
+          this.props.showMessage({ type: 'error', text: err.response.data.message });
+        });
+      return;
+    }
+    deleteCategory(this.state.categoryToDelete._id)
       .then((data) => {
         this.props.showMessage({ type: 'success', text: data.message });
         this.toggleModal();
@@ -63,10 +78,21 @@ class CategoriesManagement extends React.Component {
         </Link>
         <ul className='categories-management--categories'>
           {this.state.categories.map(category => (
-            <Category key={category._id} onDelete={this.onCategoryDelete} {...category} />
+            <AdminCategory
+              key={category._id}
+              onDelete={this.onCategoryDelete}
+              category={category}
+            />
           ))}
         </ul>
-        {this.state.isOpen && <Modal onConfirm={this.onDelete} toggle={this.toggleModal} />}
+        {this.state.isOpen && (
+          <DeleteCategoryModal
+            onConfirm={this.onDelete}
+            toggle={this.toggleModal}
+            category={this.state.categoryToDelete}
+            categories={this.state.categories}
+          />
+        )}
       </div>
     );
   }
