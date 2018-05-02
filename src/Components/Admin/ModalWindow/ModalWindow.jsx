@@ -5,7 +5,7 @@ import './ModalWindow.css';
 
 const Modal = props => (
   <div className='modal'>
-    <div className='modal--window'>
+    <div className='modal-window'>
       <p className='modal-window--question'>Вы уверены, что хотите удалить документ?</p>
       <ControlButton
         text='Удалить'
