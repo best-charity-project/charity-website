@@ -25,5 +25,4 @@ AdminCategory.propTypes = {
     tag: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
   }).isRequired,
-  title: PropTypes.string.isRequired,
 };
