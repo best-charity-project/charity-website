@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import AdminCategory from './AdminCategory';
 import { getLibraryCategories, deleteCategory, moveItems } from '../../../libraryCalls';
 import DeleteCategoryModal from '../../DeleteCategoryModal/DeleteCategoryModal';
+import cancelablePromise from '../../../utils/cancelablePromise';
 import './CategoriesManagement.css';
 
 class CategoriesManagement extends React.Component {
@@ -21,6 +22,10 @@ class CategoriesManagement extends React.Component {
 
   componentDidMount() {
     this.getCategories();
+  }
+
+  componentWillUnmount() {
+    this.cancelablePromise.cancel();
   }
 
   onCategoryDelete(category) {
@@ -56,9 +61,12 @@ class CategoriesManagement extends React.Component {
   }
 
   getCategories() {
-    getLibraryCategories().then((categories) => {
-      this.setState({ categories });
-    });
+    this.cancelablePromise = cancelablePromise(getLibraryCategories());
+    this.cancelablePromise.promise
+      .then(categories => this.setState({ categories }))
+      .catch((err) => {
+        window.console.log(err);
+      });
   }
 
   toggleModal() {
