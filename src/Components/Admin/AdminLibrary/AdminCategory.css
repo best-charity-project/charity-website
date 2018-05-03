@@ -1,39 +1,64 @@
-.oneCategory {
+.adminCategory {
   cursor: pointer;
   border-bottom: 2px solid lightgrey;
 }
 
-.oneCategory:last-child {
+.adminCategory:last-child {
   border-bottom: none;
 }
 
-.oneCategory:hover {
-  background-color: lightgrey;
+.adminCategory:hover {
+  background-color: #dedede;
 }
 
-.oneCategory--title {
-  width: 95%;
+.adminCategory--title {
+  width: 88%;
+  font-size: 1em;
+  border: none;
+  background-color: transparent;
   display: inline-block;
   padding-top: 1em;
   padding-bottom: 1em;
 }
 
-@media (max-width: 1024px) {
-  .oneCategory--title {
-    width: 88%;
-    padding-left: 0;
-    padding-right: 0;
+.adminCategory--controls {
+  display: inline-block;
+  height: 1em;
+  margin-left: 1em;
+  width: 8%;
+}
+
+@media (max-width: 768px) {
+  .adminCategory--title {
+    width: 82%;
+  }
+  .adminCategory--controls {
+    width: 14%;
   }
 }
 
-.oneCategory--image {
-  width: 5%;
+@media (max-width: 576px) {
+  .adminCategory--title {
+    width: 71%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .adminCategory--controls {
+    width: 22%;
+  }
+}
+
+.adminCategory--image {
   border: none;
   cursor: pointer;
   background-color: transparent;
   display: inline-block;
 }
 
-.oneCategory--image img {
-  width: 15px;
+.adminCategory--image img {
+  width: 16px;
+}
+
+.adminCategory--image:last-child {
+  float: right;
 }

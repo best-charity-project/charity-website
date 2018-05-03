@@ -3,6 +3,11 @@
   margin: 0 auto;
 }
 
+.categories-management .control-button {
+  background-color: #5cb978;
+  margin: unset;
+}
+
 .categories-management--categories {
   margin-top: 1em;
 }

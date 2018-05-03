@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import AdminCategory from './AdminCategory';
-import { getLibraryCategories, deleteCategory, moveItems } from '../../../libraryCalls';
+import {
+  getLibraryCategories,
+  deleteCategory,
+  moveItems,
+  updateCategory,
+} from '../../../libraryCalls';
 import DeleteCategoryModal from '../../DeleteCategoryModal/DeleteCategoryModal';
 import cancelablePromise from '../../../utils/cancelablePromise';
 import './CategoriesManagement.css';
@@ -18,6 +23,7 @@ class CategoriesManagement extends React.Component {
     this.onCategoryDelete = this.onCategoryDelete.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.onDelete = this.onDelete.bind(this);
+    this.onSave = this.onSave.bind(this);
   }
 
   componentDidMount() {
@@ -60,11 +66,20 @@ class CategoriesManagement extends React.Component {
       });
   }
 
+  onSave(id, categoryTitle) {
+    updateCategory(id, { title: categoryTitle })
+      .then((data) => {
+        this.props.showMessage({ type: 'success', text: data.message });
+      })
+      .catch((err) => {
+        this.props.showMessage({ type: 'error', text: err.response.data.message });
+      });
+  }
+
   getCategories() {
     this.cancelablePromise = cancelablePromise(getLibraryCategories());
     this.cancelablePromise.promise
-      .then(categories => this.setState({ categories }))
-      .catch((err) => {
+      .then(categories => this.setState({ categories })).catch((err) => {
         window.console.log(err);
       });
   }
@@ -89,6 +104,7 @@ class CategoriesManagement extends React.Component {
             <AdminCategory
               key={category._id}
               onDelete={this.onCategoryDelete}
+              onSave={this.onSave}
               category={category}
             />
           ))}
