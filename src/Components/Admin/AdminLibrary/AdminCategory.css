@@ -1,5 +1,7 @@
 .adminCategory {
-  cursor: pointer;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
   border-bottom: 2px solid lightgrey;
 }
 
@@ -12,8 +14,9 @@
 }
 
 .adminCategory--title {
-  width: 88%;
+  width: 67%;
   font-size: 1em;
+  outline: none;
   border: none;
   background-color: transparent;
   display: inline-block;
@@ -22,43 +25,19 @@
 }
 
 .adminCategory--controls {
-  display: inline-block;
-  height: 1em;
-  margin-left: 1em;
-  width: 8%;
+  height: 80%;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
-@media (max-width: 768px) {
-  .adminCategory--title {
-    width: 82%;
-  }
-  .adminCategory--controls {
-    width: 14%;
-  }
-}
-
-@media (max-width: 576px) {
-  .adminCategory--title {
-    width: 71%;
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .adminCategory--controls {
-    width: 22%;
-  }
-}
-
-.adminCategory--image {
+.adminCategory--button {
   border: none;
   cursor: pointer;
   background-color: transparent;
-  display: inline-block;
 }
 
-.adminCategory--image img {
-  width: 16px;
-}
-
-.adminCategory--image:last-child {
-  float: right;
+.adminCategory--button img {
+  width: 1.2em;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
 }

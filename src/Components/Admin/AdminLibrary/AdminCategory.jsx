@@ -40,11 +40,11 @@ export default class AdminCategory extends React.Component {
         />
         <div className='adminCategory--controls'>
           {this.state.hasValueChanged && (
-            <button onClick={this.handleSave} className='adminCategory--image'>
+            <button onClick={this.handleSave} className='adminCategory--button'>
               <img src={checkIcon} alt='edit-icon' />
             </button>
           )}
-          <button onClick={this.handleDelete} className='adminCategory--image'>
+          <button onClick={this.handleDelete} className='adminCategory--button'>
             <img src={deleteIcon} alt='delete-icon' />
           </button>
         </div>
