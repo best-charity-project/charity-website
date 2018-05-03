@@ -3,7 +3,7 @@
   margin: 0 auto;
 }
 
-.categories-management .control-button {
+.categories-management .control-button.control-button-tertiary {
   background-color: #5cb978;
   margin: unset;
 }
