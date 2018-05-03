@@ -22,6 +22,9 @@ const addCategory = category =>
 const deleteCategory = id =>
   API.delete(`categories/${id}`, { headers: appendAuthorizationHeaders() }).then(res => res.data);
 
+const updateCategory = (id, data) =>
+  API.put(`categories/edit/${id}`, data, { headers: appendAuthorizationHeaders() }).then(res => res.data);
+
 const addLibraryItem = libraryItem =>
   API.post(libraryPath, libraryItem, { headers: appendAuthorizationHeaders() })
     .then(res => res.data);
@@ -75,4 +78,5 @@ export {
   addCategory,
   deleteCategory,
   moveItems,
+  updateCategory,
 };
