@@ -18,13 +18,17 @@ class CategoriesManagementPage extends React.Component {
     this.showMessage = this.showMessage.bind(this);
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.timerID);
+  }
+
   showMessage(message) {
     this.setState({ message });
     this.clearMessage();
   }
 
   clearMessage() {
-    setTimeout(() => {
+    this.timerID = setTimeout(() => {
       this.setState({ message: null });
     }, clearMessageTimer);
   }
