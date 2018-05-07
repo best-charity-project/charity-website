@@ -1,15 +1,23 @@
-.organizations {
-  max-width: 80em;
-  background-color: #fff;
+.list-of-organizations {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 10em);
 }
 
-.organizations-heading {
+.list-of-organizations--heading {
   padding: 0 2em;
   line-height: 1.5;
 }
 
 .organizations--box {
-  width: 80%;
-  display: block;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  max-width: 60em;
+  margin: 1em auto;
+  padding-bottom: 1em;
+}
+
+.list-of-organizations--items {
+  margin: 2em 4.2em;
 }
