@@ -1,7 +1,6 @@
 .list-of-organizations {
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 10em);
 }
 
 .list-of-organizations--heading {
@@ -16,8 +15,9 @@
   max-width: 60em;
   margin: 1em auto;
   padding-bottom: 1em;
+  min-height: calc(100vh - 11.5em);
 }
 
 .list-of-organizations--items {
-  margin: 2em 4.2em;
+  margin: 3% 5%;
 }
