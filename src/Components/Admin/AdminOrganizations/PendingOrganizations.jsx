@@ -24,7 +24,6 @@ export default class PendingOrganizations extends React.Component {
 
   setPendingItems() {
     this.cancelablePromise = cancelablePromise(getPendingOrganizations());
-
     this.cancelablePromise.promise
       .then(pendingItems => this.setState({ pendingItems }))
       .catch((err) => {

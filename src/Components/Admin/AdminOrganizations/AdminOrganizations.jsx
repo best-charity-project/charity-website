@@ -19,7 +19,7 @@ export default class AdminOrganizations extends React.Component {
   }
 
   componentWillUnmount() {
-    clearTimeout(this.timerID);
+    clearTimeout(this.timerId);
   }
 
   showMessage(message) {
@@ -28,7 +28,7 @@ export default class AdminOrganizations extends React.Component {
   }
 
   clearMessage() {
-    this.timerID = setTimeout(() => {
+    this.timerId = setTimeout(() => {
       this.setState({ message: null });
     }, clearMessageTimer);
   }
