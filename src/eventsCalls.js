@@ -16,6 +16,9 @@ const getEvents = (amount) => {
   return API.get(url).then(response => response.data);
 };
 
-const addEvents = event => API.post('calendar', event, { headers: authHeader }).then(res => res.data);
+const addEvents = event =>
+  API.post('calendar', event, { headers: authHeader }).then(res => res.data);
 
-export { getEvents, addEvents };
+const getEventById = id => API.get(`calendar/${id}`).then(response => response.data);
+
+export { getEvents, addEvents, getEventById };
