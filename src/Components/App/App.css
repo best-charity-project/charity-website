@@ -9,7 +9,7 @@ body {
   flex-grow: 1;
   position: relative;
   margin: 0 auto;
-  min-height: calc(100vh - 4em);
+  min-height: calc(100vh - 5em);
 }
 
 .indent::before {

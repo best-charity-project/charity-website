@@ -14,8 +14,9 @@ export default class Type extends React.Component {
   }
 
   componentDidMount() {
-    this.cancelablePromise =
-      cancelablePromise(getLibraryItemsAmount(this.props.categoryTag, this.props.typeTag));
+    const { categoryTag } = this.props;
+    const type = this.props.typeTag;
+    this.cancelablePromise = cancelablePromise(getLibraryItemsAmount({ categoryTag, type }));
     this.cancelablePromise.promise
       .then((amount) => {
         this.setState({ amount });

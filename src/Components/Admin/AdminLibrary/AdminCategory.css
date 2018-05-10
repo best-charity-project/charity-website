@@ -1,0 +1,43 @@
+.adminCategory {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  border-bottom: 2px solid lightgrey;
+}
+
+.adminCategory:last-child {
+  border-bottom: none;
+}
+
+.adminCategory:hover {
+  background-color: #dedede;
+}
+
+.adminCategory--title {
+  width: 67%;
+  font-size: 1em;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  display: inline-block;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.adminCategory--controls {
+  height: 80%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.adminCategory--button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.adminCategory--button img {
+  width: 1.2em;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+}

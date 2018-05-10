@@ -1,9 +1,10 @@
 import React from 'react';
 import { getPendingItems } from '../../../libraryCalls';
 import PendingItem from './PendingItem';
+import cancelablePromise from '../../../utils/cancelablePromise';
 import './PendingItemsPage.css';
 
-class PendingItemsList extends React.Component {
+export default class PendingItemsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,8 +16,17 @@ class PendingItemsList extends React.Component {
     this.setCategories();
   }
 
+  componentWillUnmount() {
+    this.cancelablePromise.cancel();
+  }
+
   setCategories() {
-    getPendingItems().then(pendingItems => this.setState({ pendingItems }));
+    this.cancelablePromise = cancelablePromise(getPendingItems());
+    getPendingItems()
+      .then(pendingItems => this.setState({ pendingItems }))
+      .catch((err) => {
+        window.console.log(err);
+      });
   }
 
   render() {
@@ -28,5 +38,3 @@ class PendingItemsList extends React.Component {
     );
   }
 }
-
-export default PendingItemsList;
