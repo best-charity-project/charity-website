@@ -44,9 +44,12 @@ class EditLibraryItem extends React.Component {
 
   render() {
     return (
-      <div>
-        <img src={BackIcon} alt='иконка' className='library-items--icon' />
-        <NavLink to='/admin/library/libraryItems' className='library-items--link'>
+      <div className='edit-library-item'>
+        <img src={BackIcon} alt='иконка' className='edit-library-item--icon move-back-icon' />
+        <NavLink
+          to='/admin/library/libraryItems'
+          className='edit-library-item--link move-back-link'
+        >
           Вернуться к списку
         </NavLink>
         <h1 className='secondary-heading'>Редактирование документа</h1>

@@ -1,0 +1,16 @@
+.delete-category-modal .form--box {
+  width: 100%;
+}
+
+.delete-category-modal--input {
+  display: flex;
+  margin-bottom: 0.5em;
+}
+
+.delete-category-modal .form--field {
+  margin: 0.5em;
+}
+
+.delete-category-modal--buttons {
+  margin-top: 2em;
+}
