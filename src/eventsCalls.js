@@ -1,8 +1,6 @@
 import API from './api';
 import appendAuthorizationHeaders from './appendAuthorizationHeaders';
 
-const authHeader = appendAuthorizationHeaders();
-
 function setCalendarUrl(amount) {
   let url = 'calendar';
   if (amount) {
@@ -17,7 +15,7 @@ const getEvents = (amount) => {
 };
 
 const addEvents = event =>
-  API.post('calendar', event, { headers: authHeader }).then(res => res.data);
+  API.post('calendar', event, { headers: appendAuthorizationHeaders() }).then(res => res.data);
 
 const getEventById = id => API.get(`calendar/${id}`).then(response => response.data);
 
