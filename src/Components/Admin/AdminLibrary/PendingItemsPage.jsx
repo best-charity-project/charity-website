@@ -1,10 +1,11 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { getPendingItems } from '../../../libraryCalls';
 import PendingItem from './PendingItem';
 import cancelablePromise from '../../../utils/cancelablePromise';
 import './PendingItemsPage.css';
 
-export default class PendingItemsList extends React.Component {
+class PendingItemsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,8 +34,12 @@ export default class PendingItemsList extends React.Component {
     return (
       <div className='tabs-box'>
         <h2 className='library-items--heading'>Заявки на добавление в библиотеку </h2>
-        {this.state.pendingItems.map(item => <PendingItem key={item._id} {...item} />)}
+        {this.state.pendingItems.map(item => (
+          <PendingItem key={item._id} {...item} {...this.props} />
+        ))}
       </div>
     );
   }
 }
+
+export default withRouter(PendingItemsPage);

@@ -6,7 +6,7 @@ import EducationRouteSearch from '../EducationRouteSearch/EducationRouteSearch';
 import ChangePasswordPage from '../ChangePasswordPage/ChangePasswordPage';
 import CompletedEducationRouteForm from '../CompletedEducationRouteForm/CompletedEducationRouteForm';
 
-const UserAccount = ({ userInfo, match }) => (
+const UserAccount = ({ userInfo, match, showMessage }) => (
   <div className='account indent'>
     {userInfo.name && (
       <div className='sidebar'>
@@ -28,14 +28,17 @@ const UserAccount = ({ userInfo, match }) => (
         <Switch>
           <Route
             path={`${match.url}/education-route-add-form`}
-            render={() => <EducationRoute {...userInfo} />}
+            render={() => <EducationRoute {...userInfo} showMessage={showMessage} />}
           />
           <Route
             path={`${match.url}/education-route-users-form`}
-            render={() => <CompletedEducationRouteForm {...userInfo} />}
+            render={() => <CompletedEducationRouteForm {...userInfo} showMessage={showMessage} />}
           />
           <Route path={`${match.url}/education-route-search`} component={EducationRouteSearch} />
-          <Route path={`${match.url}/change-password`} component={ChangePasswordPage} />
+          <Route
+            path={`${match.url}/change-password`}
+            render={() => <ChangePasswordPage showMessage={showMessage} />}
+          />
         </Switch>
       </div>
     )}
@@ -54,4 +57,5 @@ UserAccount.propTypes = {
   match: PropTypes.shape({
     url: PropTypes.string,
   }).isRequired,
+  showMessage: PropTypes.func.isRequired,
 };

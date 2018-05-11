@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { acceptPendingOrganizations, deleteOrganization } from '../../../organizationsCalls';
-import Message from '../../Message/Message';
 import Organization from '../../Organizations/Organization';
 import ControlButton from '../../ControlButton/ControlButton';
 import Modal from '../ModalWindow/ModalWindow';
@@ -12,10 +11,6 @@ class PendingItem extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
-      message: {
-        type: '',
-        text: '',
-      },
     };
     this.acceptOrganization = this.acceptOrganization.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -25,10 +20,10 @@ class PendingItem extends React.Component {
   acceptOrganization() {
     acceptPendingOrganizations(this.props._id)
       .then((data) => {
-        this.setState({ message: { type: 'success', text: data.message } });
+        this.props.showMessage({ type: 'success', text: data.message });
       })
       .catch((err) => {
-        this.setState({ message: { type: 'error', text: err.response.data.message } });
+        this.props.showMessage({ type: 'error', text: err.response.data.message });
       });
   }
 
@@ -41,10 +36,10 @@ class PendingItem extends React.Component {
   rejectOrganization() {
     deleteOrganization(this.props._id)
       .then((data) => {
-        this.setState({ message: { type: 'success', text: data.message } });
+        this.props.showMessage({ type: 'success', text: data.message });
       })
       .catch((err) => {
-        this.setState({ message: { type: 'error', text: err.response.data.message } });
+        this.props.showMessage({ type: 'error', text: err.response.data.message });
       });
     this.toggleModal();
   }
@@ -53,7 +48,6 @@ class PendingItem extends React.Component {
     return (
       <div className='admin-organizations--organization'>
         <Organization {...this.props} />
-        <Message {...this.state.message} />
         <div className='item--buttons'>
           <ControlButton
             text='Одобрить заявку'
@@ -82,4 +76,5 @@ PendingItem.propTypes = {
   shortDescription: PropTypes.string.isRequired,
   contacts: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
+  showMessage: PropTypes.func.isRequired,
 };

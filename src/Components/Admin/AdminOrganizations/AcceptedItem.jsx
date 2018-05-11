@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { deleteOrganization } from '../../../organizationsCalls';
 import Organization from '../../Organizations/Organization';
-import Message from '../../Message/Message';
 import ControlButton from '../../ControlButton/ControlButton';
 import Modal from '../ModalWindow/ModalWindow';
 
@@ -11,10 +10,6 @@ class AcceptedItem extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
-      message: {
-        type: '',
-        text: '',
-      },
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.rejectOrganization = this.rejectOrganization.bind(this);
@@ -29,10 +24,10 @@ class AcceptedItem extends React.Component {
   rejectOrganization() {
     deleteOrganization(this.props._id)
       .then((data) => {
-        this.setState({ message: { type: 'success', text: data.message } });
+        this.props.showMessage({ type: 'success', text: data.message });
       })
       .catch((err) => {
-        this.setState({ message: { type: 'error', text: err.response.data.message } });
+        this.props.showMessage({ type: 'error', text: err.response.data.message });
       });
     this.toggleModal();
   }
@@ -41,7 +36,6 @@ class AcceptedItem extends React.Component {
     return (
       <div className='admin-organizations--organization'>
         <Organization {...this.props} />
-        <Message {...this.state.message} />
         <div className='item--buttons'>
           <ControlButton
             text='Удалить'
@@ -61,4 +55,5 @@ export default AcceptedItem;
 
 AcceptedItem.propTypes = {
   _id: PropTypes.string.isRequired,
+  showMessage: PropTypes.func.isRequired,
 };

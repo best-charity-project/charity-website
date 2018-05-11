@@ -5,7 +5,7 @@ import ListOfOrganizations from './ListOfOrganizations';
 import AddOrganization from './AddOrganization';
 import RedirectToAuthorization from '../RedirectToAuthorization/RedirectToAuthorization';
 
-const OrganizationsPage = ({ match, userInfo }) => (
+const OrganizationsPage = ({ match, userInfo, showMessage }) => (
   <div className='organizations indent'>
     <Switch>
       <Route
@@ -13,7 +13,10 @@ const OrganizationsPage = ({ match, userInfo }) => (
         path={`${match.url}/`}
         render={() => <ListOfOrganizations userInfo={userInfo.name} match={match} />}
       />
-      <Route path={`${match.url}/addOrganization`} component={AddOrganization} />
+      <Route
+        path={`${match.url}/addOrganization`}
+        render={() => <AddOrganization showMessage={showMessage} />}
+      />
       <Route path={`${match.url}/login`} component={RedirectToAuthorization} />
     </Switch>
   </div>
@@ -21,13 +24,12 @@ const OrganizationsPage = ({ match, userInfo }) => (
 
 export default withRouter(OrganizationsPage);
 
-OrganizationsPage.defaultProps = {
-  userInfo: '',
-};
-
 OrganizationsPage.propTypes = {
   match: PropTypes.shape({
     url: PropTypes.string,
   }).isRequired,
-  userInfo: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  userInfo: PropTypes.shape({
+    name: PropTypes.string,
+  }).isRequired,
+  showMessage: PropTypes.func.isRequired,
 };

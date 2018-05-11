@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { acceptPendingItems, deleteLibraryItems } from '../../../libraryCalls';
-import Message from '../../Message/Message';
 import ControlButton from '../../ControlButton/ControlButton';
 import Modal from '../ModalWindow/ModalWindow';
 import './PendingItem.css';
@@ -11,10 +10,6 @@ class PendingItem extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
-      message: {
-        type: '',
-        text: '',
-      },
     };
     this.acceptItem = this.acceptItem.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -24,10 +19,10 @@ class PendingItem extends React.Component {
   acceptItem() {
     acceptPendingItems(this.props._id)
       .then((data) => {
-        this.setState({ message: { type: 'success', text: data.message } });
+        this.props.showMessage({ type: 'success', text: data.message });
       })
       .catch((err) => {
-        this.setState({ message: { type: 'error', text: err.response.data.message } });
+        this.props.showMessage({ type: 'error', text: err.response.data.message });
       });
   }
 
@@ -40,10 +35,10 @@ class PendingItem extends React.Component {
   rejectItem() {
     deleteLibraryItems(this.props._id)
       .then((data) => {
-        this.setState({ message: { type: 'success', text: data.message } });
+        this.props.showMessage({ type: 'success', text: data.message });
       })
       .catch((err) => {
-        this.setState({ message: { type: 'error', text: err.response.data.message } });
+        this.props.showMessage({ type: 'error', text: err.response.data.message });
       });
     this.toggleModal();
   }
@@ -54,7 +49,6 @@ class PendingItem extends React.Component {
         <a href={this.props.url} className='single-item--link'>
           <h2>{this.props.title}</h2>
         </a>
-        <Message {...this.state.message} />
         <p className='single-item--text'>{this.props.description}</p>
         <div className='item--buttons'>
           <ControlButton
@@ -81,4 +75,5 @@ PendingItem.propTypes = {
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  showMessage: PropTypes.func.isRequired,
 };

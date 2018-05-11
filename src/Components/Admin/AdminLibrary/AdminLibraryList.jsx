@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { getLibraryItems } from '../../../libraryCalls';
 import AdminLibraryItem from './AdminLibraryItem';
 import BackIcon from '../../icons/back.svg';
@@ -28,13 +28,15 @@ class AdminLibraryList extends React.Component {
         <NavLink to='/admin/library/libraryItems' className='move-back-link'>
           Вернуться к списку
         </NavLink>
-        {this.state.libraryItems.map(item => <AdminLibraryItem {...item} key={item._id} />)}
+        {this.state.libraryItems.map(item => (
+          <AdminLibraryItem {...this.props} {...item} key={item._id} />
+        ))}
       </div>
     );
   }
 }
 
-export default AdminLibraryList;
+export default withRouter(AdminLibraryList);
 
 AdminLibraryList.propTypes = {
   match: PropTypes.shape({

@@ -21,11 +21,9 @@ export default class AdminNews extends React.Component {
 
   setNews() {
     this.cancelablePromise = cancelablePromise(getNews());
-    this.cancelablePromise.promise
-      .then(news => this.setState({ news }))
-      .catch((err) => {
-        window.console.log(err);
-      });
+    this.cancelablePromise.promise.then(news => this.setState({ news })).catch((err) => {
+      window.console.log(err);
+    });
   }
 
   render() {
@@ -34,7 +32,9 @@ export default class AdminNews extends React.Component {
         <div className='news-admin'>
           <h2 className='secondary-heading'>Список всех новостей</h2>
           <div className='news-list'>
-            {this.state.news.map(item => <AdminNewsItem key={item._id} {...item} />)}
+            {this.state.news.map(item => (
+              <AdminNewsItem key={item._id} {...item} {...this.props} />
+            ))}
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ import AdminLibrary from './AdminLibrary';
 import AdminOrganizations from './AdminOrganizations/AdminOrganizations';
 import '../Sidebar/Sidebar.css';
 
-const Admin = ({ match, userInfo }) => (
+const Admin = ({ match, userInfo, showMessage }) => (
   <div className='admin indent'>
     {userInfo.admin && (
       <div className='sidebar'>
@@ -31,12 +31,31 @@ const Admin = ({ match, userInfo }) => (
           </Link>
         </div>
         <Switch>
-          <Route path={`${match.url}/news/edit/:id`} component={EditNews} />
-          <Route exact path={`${match.url}/news`} component={AdminNews} />
-          <Route path={`${match.url}/addNews`} component={AddNews} />
-          <Route path={`${match.url}/calendar`} component={AddEvent} />
-          <Route path={`${match.url}/library`} component={AdminLibrary} />
-          <Route path={`${match.url}/organizations/`} component={AdminOrganizations} />
+          <Route
+            path={`${match.url}/news/edit/:id`}
+            render={() => <EditNews match={match} showMessage={showMessage} />}
+          />
+          <Route
+            exact
+            path={`${match.url}/news`}
+            render={() => <AdminNews showMessage={showMessage} />}
+          />
+          <Route
+            path={`${match.url}/addNews`}
+            render={() => <AddNews showMessage={showMessage} />}
+          />
+          <Route
+            path={`${match.url}/calendar`}
+            render={() => <AddEvent showMessage={showMessage} />}
+          />
+          <Route
+            path={`${match.url}/library`}
+            render={() => <AdminLibrary match={match} showMessage={showMessage} />}
+          />
+          <Route
+            path={`${match.url}/organizations`}
+            render={() => <AdminOrganizations match={match} showMessage={showMessage} />}
+          />
           <Redirect to={`${match.url}/news`} />
         </Switch>
       </div>
@@ -55,4 +74,5 @@ Admin.propTypes = {
   userInfo: PropTypes.shape({
     admin: PropTypes.bool,
   }).isRequired,
+  showMessage: PropTypes.func.isRequired,
 };

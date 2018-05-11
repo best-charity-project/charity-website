@@ -16,6 +16,8 @@ import UserAccount from '../UserAccount/UserAccount';
 import CalendarPage from '../CalendarPage/CalendarPage';
 import OrganizationsPage from '../Organizations/OrganizationsPage';
 import ChangeForgottenPasswordPage from '../ChangeForgottenPasswordPage/ChangeForgottenPasswordPage';
+import Message from '../Message/Message';
+import { clearMessageTimer } from '../../configs/config.json';
 import './App.css';
 
 export default class App extends React.Component {
@@ -23,9 +25,14 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       userInfo: {},
+      message: {
+        type: '',
+        text: '',
+      },
     };
     this.onAuthChange = this.onAuthChange.bind(this);
     this.onLogout = this.onLogout.bind(this);
+    this.showMessage = this.showMessage.bind(this);
   }
 
   componentDidMount() {
@@ -55,13 +62,27 @@ export default class App extends React.Component {
     });
   }
 
+  showMessage({ type, text }) {
+    this.setState({ message: { type, text } });
+    this.clearMessage();
+  }
+
+  clearMessage() {
+    this.timerID = setTimeout(() => {
+      this.setState({ message: null });
+    }, clearMessageTimer);
+  }
+
   render() {
     return (
       <div className='app'>
         <Header {...this.state} onLogout={this.onLogout} />
         <Switch>
           <Route path='/home' component={Home} />
-          <Route path='/admin' render={() => <Admin {...this.state} />} />
+          <Route
+            path='/admin'
+            render={() => <Admin {...this.state} showMessage={this.showMessage} />}
+          />
           <Route path='/about' component={About} />
           <Route path='/news/:id' component={SingleNewsPage} />
           <Route path='/news' component={News} />
@@ -69,12 +90,27 @@ export default class App extends React.Component {
           <Route path='/library' render={() => <Library {...this.state} />} />
           <Route path='/login' render={() => <LoginPage onAuthChange={this.onAuthChange} />} />
           <Route path='/signup' render={() => <SignupPage onAuthChange={this.onAuthChange} />} />
-          <Route path='/restore-password' component={RestorePasswordPage} />
-          <Route path='/change-password/:token' component={ChangeForgottenPasswordPage} />
-          <Route path='/account' render={() => <UserAccount {...this.state} />} />
-          <Route path='/organizations' render={() => <OrganizationsPage {...this.state} />} />
+          <Route
+            path='/restore-password'
+            render={() => <RestorePasswordPage showMessage={this.showMessage} />}
+          />
+          <Route
+            path='/change-password/:token'
+            render={() => <ChangeForgottenPasswordPage showMessage={this.showMessage} />}
+          />
+          <Route
+            path='/account'
+            render={() => <UserAccount {...this.state} showMessage={this.showMessage} />}
+          />
+          <Route
+            path='/organizations'
+            render={() => (
+              <OrganizationsPage userInfo={this.state.userInfo} showMessage={this.showMessage} />
+            )}
+          />
           <Redirect to='/home' />
         </Switch>
+        <Message {...this.state.message} />
         <Footer />
       </div>
     );
