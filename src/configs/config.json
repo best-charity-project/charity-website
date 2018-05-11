@@ -4,6 +4,7 @@
   "accessibilityMapURL": "http://freeway.by",
   "confirmMessageTimer": 4000,
   "redirectTime": 5000,
+  "clearMessageTimer": 4000,
   "MAX_DESCRIPTION_SIZE": 240,
   "minPasswordLength": "6",
   "countOfCalledEvents": 2

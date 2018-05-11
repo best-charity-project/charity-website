@@ -1,0 +1,19 @@
+.categories-management {
+  width: 68%;
+  margin: 0 auto;
+}
+
+.categories-management .control-button.control-button-tertiary {
+  background-color: #5cb978;
+  margin: unset;
+}
+
+.categories-management--categories {
+  margin-top: 1em;
+}
+
+@media (max-width: 576px) {
+  .categories-management {
+    width: 100%;
+  }
+}
