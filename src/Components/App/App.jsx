@@ -35,8 +35,8 @@ export default class App extends React.Component {
           userInfo,
         });
       })
-      .catch((err) => {
-        if (err.response.status === 401) {
+      .catch(({ response }) => {
+        if (response && response.status === 401) {
           this.setState({ userInfo: { admin: false, name: '' } });
         }
       });
