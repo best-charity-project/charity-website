@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Link, Redirect, withRouter } from 'react-router-dom';
+import { Route, Switch, NavLink, Redirect, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AdminNews from './AdminNews';
 import EditNews from './AddEditNews/EditNews';
@@ -14,21 +14,21 @@ const Admin = ({ match, userInfo, showMessage }) => (
     {userInfo.admin && (
       <div className='sidebar'>
         <div className='sidebar--navigation'>
-          <Link to={`${match.url}/news`} className='sidebar--link'>
+          <NavLink to={`${match.url}/news`} className='sidebar--link'>
             Посмотреть все новости
-          </Link>
-          <Link to={`${match.url}/addNews`} className='sidebar--link'>
+          </NavLink>
+          <NavLink to={`${match.url}/addNews`} className='sidebar--link'>
             Добавить новость
-          </Link>
-          <Link to={`${match.url}/calendar`} className='sidebar--link'>
+          </NavLink>
+          <NavLink to={`${match.url}/calendar`} className='sidebar--link'>
             Добавить событие
-          </Link>
-          <Link to={`${match.url}/library`} className='sidebar--link'>
+          </NavLink>
+          <NavLink to={`${match.url}/library`} className='sidebar--link'>
             Библиотека
-          </Link>
-          <Link to={`${match.url}/organizations/`} className='sidebar--link'>
+          </NavLink>
+          <NavLink to={`${match.url}/organizations/`} className='sidebar--link'>
             Организации
-          </Link>
+          </NavLink>
         </div>
         <Switch>
           <Route

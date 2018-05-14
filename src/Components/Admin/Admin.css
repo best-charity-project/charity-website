@@ -7,6 +7,10 @@
   background-color: #fff;
 }
 
+.sidebar--link.active {
+  background-color: #37b3d8;
+}
+
 @media (max-width: 1200px) {
   .news-card {
     width: 90%;

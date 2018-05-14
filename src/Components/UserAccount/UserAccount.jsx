@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch, Link, Redirect, withRouter } from 'react-router-dom';
+import { Route, Switch, NavLink, Redirect, withRouter } from 'react-router-dom';
 import EducationRoute from '../EducationRoute/EducationRoute';
 import EducationRouteSearch from '../EducationRouteSearch/EducationRouteSearch';
 import ChangePasswordPage from '../ChangePasswordPage/ChangePasswordPage';
@@ -12,18 +12,18 @@ const UserAccount = ({ userInfo, match, showMessage }) => (
       <div className='sidebar'>
         <div className='sidebar--navigation'>
           <p className='sidebar--header'>Образовательный маршрут:</p>
-          <Link to={`${match.url}/education-route-add-form`} className='sidebar--link'>
+          <NavLink to={`${match.url}/education-route-add-form`} className='sidebar--link'>
             Заполнить новую карту
-          </Link>
-          <Link to={`${match.url}/education-route-users-form`} className='sidebar--link'>
+          </NavLink>
+          <NavLink to={`${match.url}/education-route-users-form`} className='sidebar--link'>
             Просмотр заполненных карт
-          </Link>
-          <Link to={`${match.url}/education-route-search`} className='sidebar--link'>
+          </NavLink>
+          <NavLink to={`${match.url}/education-route-search`} className='sidebar--link'>
             поиск участников
-          </Link>
-          <Link to={`${match.url}/change-password`} className='sidebar--link'>
+          </NavLink>
+          <NavLink to={`${match.url}/change-password`} className='sidebar--link'>
             Сменить пароль
-          </Link>
+          </NavLink>
         </div>
         <Switch>
           <Route
