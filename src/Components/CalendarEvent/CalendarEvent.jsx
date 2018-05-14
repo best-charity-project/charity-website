@@ -24,7 +24,7 @@ const CalendarEvent = ({
       to={url || `calendar/${id}`}
       className='calendar-event--link'
       rel='noopener noreferrer'
-      target='_blank'
+      target={url ? '_blank' : ''}
     >
       подробнее
     </Link>
