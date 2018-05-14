@@ -97,7 +97,6 @@
     justify-content: flex-end;
     position: relative;
     width: 80%;
-    padding-top: 1em;
     padding-left: 1em;
   }
 
@@ -115,7 +114,6 @@
   .menu--element:first-child {
     order: 1;
     flex-grow: 1;
-    padding-bottom: 1em;
   }
 
   .navigation--menu-wrapper {
@@ -152,13 +150,13 @@
     margin-left: -1em;
     margin-top: -1em;
     margin-bottom: 1em;
-    height: 3em;
+    height: 4em;
     background-color: #4a4848;
   }
 
   .navigation--website-name {
     color: #b4e9fa;
-    padding-top: 0.25em;
+    padding-top: 1em;
   }
 
   .menu--login-pannel {
@@ -166,26 +164,26 @@
     border: none;
     outline: none;
     width: 100%;
-    margin-left: -0.65em;
+    margin-left: -1em;
   }
 }
 
 @media (min-width: 540px) and (max-width: 1023px) {
   .navigation--menu-wrapper {
-    width: 25em;
+    width: 17em;
   }
 
   .navigation--button.navigation--button-open {
-    margin-right: 31em;
+    margin-right: 21.5em;
   }
 }
 
 @media (max-width: 414px) {
   .navigation--menu-wrapper {
-    width: 60%;
+    width: 76%;
   }
 
   .navigation--button-open {
-    margin-right: calc(60% + 1em);
+    margin-right: calc(60% + 5em);
   }
 }

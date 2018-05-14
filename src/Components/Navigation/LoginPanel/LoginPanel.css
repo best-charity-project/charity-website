@@ -24,8 +24,7 @@
   display: flex;
   align-items: center;
   height: 4em;
-  padding: 0 1em;
-  margin-left: -1em;
+  padding: 0 0.5em;
 }
 
 .login-panel--heading {
