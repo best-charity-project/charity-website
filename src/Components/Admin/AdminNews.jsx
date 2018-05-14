@@ -9,6 +9,7 @@ export default class AdminNews extends React.Component {
     this.state = {
       news: [],
     };
+    this.setNews = this.setNews.bind(this);
   }
 
   componentDidMount() {
@@ -33,7 +34,7 @@ export default class AdminNews extends React.Component {
           <h2 className='secondary-heading'>Список всех новостей</h2>
           <div className='news-list'>
             {this.state.news.map(item => (
-              <AdminNewsItem key={item._id} {...item} {...this.props} />
+              <AdminNewsItem key={item._id} {...item} {...this.props} setNews={this.setNews} />
             ))}
           </div>
         </div>
