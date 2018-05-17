@@ -1,12 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import logo from './img/logo.svg';
+import logo from "../../Assets/images/logo.svg"
 import "./Navigation.css"
+import MainLogo from "../MainLogo/MainLogo"
+
+
 const Navigation = ()=>{
     return (
-        <div>
-            <NavLink to="/"><img src={ logo } alt=" " className="main-logo"/></NavLink>
-        </div>          
+        <MainLogo/>         
     )
 }
 export default Navigation;

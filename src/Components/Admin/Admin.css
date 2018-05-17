@@ -33,7 +33,7 @@ input[type=text], input[type=password] {
 }
 
 .username-div:before{
-    content: url(img/user.png);
+    content: url(../../Assets/images/Authentification/avatar.svg);
     overflow: hidden;
     background-repeat: no-repeat;
     height: 25px;
@@ -43,7 +43,7 @@ input[type=text], input[type=password] {
     margin-left: 65px;
 }
 .password-div:before{
-    content: url(img/password.png);
+    content: url(../../Assets/images/Authentification/keyhole.svg);
     overflow: hidden;
     background-repeat: no-repeat;
     height: 25px;
