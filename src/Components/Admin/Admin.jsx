@@ -33,7 +33,7 @@ const Admin = ({ match, userInfo, showMessage }) => (
         <Switch>
           <Route
             path={`${match.url}/news/edit/:id`}
-            render={() => <EditNews match={match} showMessage={showMessage} />}
+            render={() => <EditNews showMessage={showMessage} />}
           />
           <Route
             exact
@@ -50,11 +50,11 @@ const Admin = ({ match, userInfo, showMessage }) => (
           />
           <Route
             path={`${match.url}/library`}
-            render={() => <AdminLibrary match={match} showMessage={showMessage} />}
+            render={() => <AdminLibrary showMessage={showMessage} />}
           />
           <Route
             path={`${match.url}/organizations`}
-            render={() => <AdminOrganizations match={match} showMessage={showMessage} />}
+            render={() => <AdminOrganizations showMessage={showMessage} />}
           />
           <Redirect to={`${match.url}/news`} />
         </Switch>

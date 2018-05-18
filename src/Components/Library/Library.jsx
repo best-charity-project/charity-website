@@ -23,7 +23,7 @@ const Library = ({ match, userInfo }) => (
       </div>
       <div className='library--board'>
         <div className='board--header'>
-          <Search match={match} />
+          <Search />
         </div>
         <Switch>
           <Route exact path={`${match.url}/`} component={LibraryDefault} />
