@@ -7,27 +7,29 @@ import RedirectToAuthorization from '../RedirectToAuthorization/RedirectToAuthor
 
 const OrganizationsPage = ({ match, userInfo }) => (
   <div className='organizations indent'>
-    <Switch>
-      <Route
-        exact
-        path={`${match.url}/`}
-        render={() => <ListOfOrganizations userInfo={userInfo.name} match={match} />}
-      />
-      <Route path={`${match.url}/addOrganization`} component={AddOrganization} />
-      <Route path={`${match.url}/login`} component={RedirectToAuthorization} />
-    </Switch>
+    <div className='organizations--box'>
+      <Switch>
+        <Route
+          exact
+          path={`${match.url}/`}
+          render={() => <ListOfOrganizations userInfo={userInfo} match={match} />}
+        />
+        <Route path={`${match.url}/addOrganization`} component={AddOrganization} />
+        <Route path={`${match.url}/login`} component={RedirectToAuthorization} />
+      </Switch>
+    </div>
   </div>
 );
 
 export default withRouter(OrganizationsPage);
 
-OrganizationsPage.defaultProps = {
-  userInfo: '',
-};
-
 OrganizationsPage.propTypes = {
   match: PropTypes.shape({
     url: PropTypes.string,
   }).isRequired,
-  userInfo: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  userInfo: PropTypes.shape({
+    name: PropTypes.string,
+    _id: PropTypes.string,
+    admin: PropTypes.bool,
+  }).isRequired,
 };

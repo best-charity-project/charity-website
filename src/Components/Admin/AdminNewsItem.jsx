@@ -61,6 +61,7 @@ class AdminNewsItem extends React.Component {
     deleteNews(this.props._id)
       .then((data) => {
         this.setState({ message: { type: 'success', text: data.message } });
+        this.props.setNews();
       })
       .catch((err) => {
         this.setState({ message: { type: 'error', text: err.response.data.message } });
@@ -110,4 +111,5 @@ AdminNewsItem.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  setNews: PropTypes.func.isRequired,
 };

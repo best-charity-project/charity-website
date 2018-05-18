@@ -1,21 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { acceptPendingOrganizations, deleteOrganization } from '../../../organizationsCalls';
-import Message from '../../Message/Message';
 import Organization from '../../Organizations/Organization';
 import ControlButton from '../../ControlButton/ControlButton';
 import Modal from '../ModalWindow/ModalWindow';
 import './PendingItem.css';
 
-class PendingItem extends React.Component {
+export default class PendingItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isOpen: false,
-      message: {
-        type: '',
-        text: '',
-      },
     };
     this.acceptOrganization = this.acceptOrganization.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -25,10 +20,11 @@ class PendingItem extends React.Component {
   acceptOrganization() {
     acceptPendingOrganizations(this.props._id)
       .then((data) => {
-        this.setState({ message: { type: 'success', text: data.message } });
+        this.props.setPendingItems();
+        this.props.showMessage({ type: 'success', text: data.message });
       })
       .catch((err) => {
-        this.setState({ message: { type: 'error', text: err.response.data.message } });
+        this.props.showMessage({ type: 'error', text: err.response.data.message });
       });
   }
 
@@ -41,10 +37,11 @@ class PendingItem extends React.Component {
   rejectOrganization() {
     deleteOrganization(this.props._id)
       .then((data) => {
-        this.setState({ message: { type: 'success', text: data.message } });
+        this.props.showMessage({ type: 'success', text: data.message });
+        this.props.setPendingItems();
       })
       .catch((err) => {
-        this.setState({ message: { type: 'error', text: err.response.data.message } });
+        this.props.showMessage({ type: 'error', text: err.response.data.message });
       });
     this.toggleModal();
   }
@@ -53,7 +50,6 @@ class PendingItem extends React.Component {
     return (
       <div className='admin-organizations--organization'>
         <Organization {...this.props} />
-        <Message {...this.state.message} />
         <div className='item--buttons'>
           <ControlButton
             text='Одобрить заявку'
@@ -74,9 +70,9 @@ class PendingItem extends React.Component {
   }
 }
 
-export default PendingItem;
-
 PendingItem.propTypes = {
+  setPendingItems: PropTypes.func.isRequired,
+  showMessage: PropTypes.func.isRequired,
   _id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   shortDescription: PropTypes.string.isRequired,
