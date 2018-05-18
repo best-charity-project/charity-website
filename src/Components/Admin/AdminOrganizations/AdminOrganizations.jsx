@@ -3,8 +3,6 @@ import { Route, Switch, NavLink, Redirect, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import PendingOrganizations from './PendingOrganizations';
 import AcceptedOrganizations from './AcceptedOrganizations';
-// import Message from '../../Message/Message';
-// import { clearMessageTimer } from '../../../configs/config.json';
 
 const AdminOrganizations = ({ match, showMessage }) => (
   <div className='library--admin'>
