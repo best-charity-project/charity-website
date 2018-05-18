@@ -1,0 +1,14 @@
+.Footer{
+  display: block;
+  margin-top:-40px;
+  height: 40px;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  color: #9b9b9b;
+  text-align:top;
+  padding-bottom: 20px;
+}
+.Footer p{
+	display: block;
+}

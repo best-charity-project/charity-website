@@ -1,0 +1,22 @@
+html,body{
+	height: 100%;
+}
+.main{
+	display: flex;
+	overflow: hidden;
+}
+.AboutUs{
+	flex-grow: 1;
+	flex-direction: row;
+	display: flex;
+}
+.main_picture{
+	width: 70%;
+	max-width: 700px;
+	margin-left: 10px;
+}
+.main_picture img {
+	height: 100%;
+	width: 100%;
+
+}

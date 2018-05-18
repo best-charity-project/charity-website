@@ -1,0 +1,33 @@
+.Subscribe{
+	margin-top: 40px;
+}
+.wrapper_input {
+	position: relative;
+	display: inline-block;
+}
+
+input[type="email"]::-webkit-input-placeholder { color: #9b9b9b;   font-size: 14px;}
+input[type="email"]:-ms-input-placeholder { color: #9b9b9b;  font-size: 14px;}
+input[type="email"]::-ms-input-placeholder {color: #9b9b9b;  font-size: 14px;}
+input[type="email"]::placeholder { color: #9b9b9b;   font-size: 14px;} 
+
+.wrapper_input:after{
+	position: absolute;
+	content: url(../../../../../Assets/images/mail.svg);
+	height: 35px;
+	top: 13px;
+	right: 15px;
+	width: 20px;
+	background-repeat: no-repeat;
+
+}
+
+
+@media (min-width: 1024px) and (max-width: 1348px) {
+.input_email{
+	width: 320px;
+}
+.button_subscribe{
+    width: 130px;
+}
+}

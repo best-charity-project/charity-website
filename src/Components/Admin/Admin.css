@@ -52,7 +52,7 @@ input[type=text], input[type=password] {
     position: absolute;
     margin-left: 65px;
 }
-button {
+.password-btn {
     background-color: #76bf23;
     color: #ffffff;
     font-size: 20px;
