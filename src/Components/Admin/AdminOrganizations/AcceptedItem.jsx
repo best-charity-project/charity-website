@@ -5,7 +5,7 @@ import Organization from '../../Organizations/Organization';
 import ControlButton from '../../ControlButton/ControlButton';
 import Modal from '../ModalWindow/ModalWindow';
 
-class AcceptedItem extends React.Component {
+export default class AcceptedItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,6 +24,7 @@ class AcceptedItem extends React.Component {
   rejectOrganization() {
     deleteOrganization(this.props._id)
       .then((data) => {
+        this.props.setOrganizations();
         this.props.showMessage({ type: 'success', text: data.message });
       })
       .catch((err) => {
@@ -51,9 +52,8 @@ class AcceptedItem extends React.Component {
   }
 }
 
-export default AcceptedItem;
-
 AcceptedItem.propTypes = {
   _id: PropTypes.string.isRequired,
+  setOrganizations: PropTypes.func.isRequired,
   showMessage: PropTypes.func.isRequired,
 };

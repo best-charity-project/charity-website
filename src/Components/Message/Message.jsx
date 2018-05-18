@@ -17,12 +17,12 @@ export default class Message extends React.Component {
     this.setState({
       visible: true,
     });
-    clearTimeout(this.timerID);
+    clearTimeout(this.timerId);
     this.hide();
   }
 
   componentWillUnmount() {
-    clearTimeout(this.timerID);
+    clearTimeout(this.timerId);
   }
 
   getClass() {
@@ -34,7 +34,7 @@ export default class Message extends React.Component {
   }
 
   hide() {
-    this.timerID = setTimeout(() => {
+    this.timerId = setTimeout(() => {
       this.setState({ visible: false });
     }, confirmMessageTimer);
   }

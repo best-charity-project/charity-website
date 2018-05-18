@@ -6,7 +6,7 @@ import ControlButton from '../../ControlButton/ControlButton';
 import Modal from '../ModalWindow/ModalWindow';
 import './PendingItem.css';
 
-class PendingItem extends React.Component {
+export default class PendingItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +20,7 @@ class PendingItem extends React.Component {
   acceptOrganization() {
     acceptPendingOrganizations(this.props._id)
       .then((data) => {
+        this.props.setPendingItems();
         this.props.showMessage({ type: 'success', text: data.message });
       })
       .catch((err) => {
@@ -37,6 +38,7 @@ class PendingItem extends React.Component {
     deleteOrganization(this.props._id)
       .then((data) => {
         this.props.showMessage({ type: 'success', text: data.message });
+        this.props.setPendingItems();
       })
       .catch((err) => {
         this.props.showMessage({ type: 'error', text: err.response.data.message });
@@ -68,13 +70,12 @@ class PendingItem extends React.Component {
   }
 }
 
-export default PendingItem;
-
 PendingItem.propTypes = {
+  setPendingItems: PropTypes.func.isRequired,
+  showMessage: PropTypes.func.isRequired,
   _id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   shortDescription: PropTypes.string.isRequired,
   contacts: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-  showMessage: PropTypes.func.isRequired,
 };

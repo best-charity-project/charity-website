@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getOrganizations } from '../../organizationsCalls';
 import Organization from './Organization';
 import './ListOfOrganizations.css';
 
-class ListOfOrganizations extends React.Component {
+export default class ListOfOrganizations extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,13 +23,13 @@ class ListOfOrganizations extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1 className='organizations-heading secondary-heading'>
+      <div className='list-of-organizations'>
+        <h1 className='list-of-organizations--heading secondary-heading'>
           Справочник организаций занимающихся вопросами людей с особыми потребностями
         </h1>
-        <div className='organizations--box'>
+        <div className='list-of-organizations--items'>
           <Link
-            to={`${this.props.match.url}/${this.props.userInfo ? 'addOrganization' : 'login'}`}
+            to={`${this.props.match.url}/${this.props.userInfo.name ? 'addOrganization' : 'login'}`}
             className='control-button control-button-tertiary control-button-small'
           >
             Добавить организацию
@@ -41,15 +41,11 @@ class ListOfOrganizations extends React.Component {
   }
 }
 
-export default ListOfOrganizations;
-
-ListOfOrganizations.defaultProps = {
-  userInfo: '',
-};
+withRouter(ListOfOrganizations);
 
 ListOfOrganizations.propTypes = {
   match: PropTypes.shape({
     url: PropTypes.string,
   }).isRequired,
-  userInfo: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  userInfo: PropTypes.shape({ name: PropTypes.string }).isRequired,
 };
