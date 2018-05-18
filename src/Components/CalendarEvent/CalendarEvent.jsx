@@ -6,7 +6,7 @@ import shortenText from '../../utils/ShortenText';
 import './CalendarEvent.css';
 
 const CalendarEvent = ({
-  title, description, url, start, end,
+  id, title, description, url, start, end,
 }) => (
   <div className='calendar-event'>
     <h2 className='calendar-event--title'>{title}</h2>
@@ -20,7 +20,7 @@ const CalendarEvent = ({
         <p className='time-box--value'>Время окончания: {moment(end).format('HH:mm')}</p>
       </div>
     </div>
-    <Link to={url} className='calendar-event--link' rel='noopener noreferrer'>
+    <Link to={url || `calendar/${id}`} className='calendar-event--link' rel='noopener noreferrer'>
       подробнее
     </Link>
   </div>
@@ -34,6 +34,7 @@ CalendarEvent.defaultProps = {
 };
 
 CalendarEvent.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   url: PropTypes.string,

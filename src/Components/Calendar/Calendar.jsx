@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import SmallCalendar from 'react-calendar';
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
@@ -59,6 +60,10 @@ class Calendar extends Component {
     Calendar.setDayOfEvent(this.state.events);
   }
 
+  onEventClick(event) {
+    this.props.history.push(`${this.props.match.url}/${event._id}`);
+  }
+
   getEvents() {
     getEvents().then((events) => {
       events.forEach((event) => {
@@ -77,51 +82,49 @@ class Calendar extends Component {
       dayFormat: 'LL',
     };
     return (
-      <div className='calendar indent'>
-        <h1 className='primary-heading'>Календарь событий</h1>
-        <div className='calendar-wrapper'>
-          <SmallCalendar
-            minDetail='month'
-            onChange={this.onChange}
-            value={this.state.date}
-            showNeighboringMonth={false}
-            showNavigation
-            onActiveDateChange={this.onActiveDateChange}
+      <div className='calendar-wrapper'>
+        <SmallCalendar
+          minDetail='month'
+          onChange={this.onChange}
+          value={this.state.date}
+          showNeighboringMonth={false}
+          showNavigation
+          onActiveDateChange={this.onActiveDateChange}
+        />
+        <div className='calendar--schedule'>
+          <BigCalendar
+            allDayAccessor='allDay'
+            titleAccessor='title'
+            startAccessor='start'
+            endAccessor='end'
+            formats={formats}
+            date={this.state.date}
+            onNavigate
+            toolbar={false}
+            views={['day']}
+            defaultView='day'
+            showMultiDayTimes
+            events={this.state.events}
+            step={60}
+            timeslots={1}
+            min={
+              new Date(
+                this.state.date.getFullYear(),
+                this.state.date.getMonth(),
+                this.state.date.getDate(),
+                8,
+              )
+            }
+            max={
+              new Date(
+                this.state.date.getFullYear(),
+                this.state.date.getMonth(),
+                this.state.date.getDate(),
+                22,
+              )
+            }
+            onSelectEvent={event => this.onEventClick(event)}
           />
-          <div className='calendar--schedule'>
-            <BigCalendar
-              allDayAccessor='allDay'
-              titleAccessor='title'
-              startAccessor='start'
-              endAccessor='end'
-              formats={formats}
-              date={this.state.date}
-              onNavigate
-              toolbar={false}
-              views={['day']}
-              defaultView='day'
-              showMultiDayTimes
-              events={this.state.events}
-              step={60}
-              timeslots={1}
-              min={
-                new Date(
-                  this.state.date.getFullYear(),
-                  this.state.date.getMonth(),
-                  this.state.date.getDate(),
-                  8,
-                )
-              }
-              max={
-                new Date(
-                  this.state.date.getFullYear(),
-                  this.state.date.getMonth(),
-                  this.state.date.getDate(),
-                  22,
-                )
-              }
-            />
-          </div>
         </div>
       </div>
     );
@@ -129,3 +132,12 @@ class Calendar extends Component {
 }
 
 export default Calendar;
+
+Calendar.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  match: PropTypes.shape({
+    url: PropTypes.string.isRequired,
+  }).isRequired,
+};
