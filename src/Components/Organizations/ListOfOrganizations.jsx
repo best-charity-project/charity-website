@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getOrganizations } from '../../organizationsCalls';
 import Organization from './Organization';
@@ -41,7 +41,7 @@ class ListOfOrganizations extends React.Component {
   }
 }
 
-export default ListOfOrganizations;
+export default withRouter(ListOfOrganizations);
 
 ListOfOrganizations.propTypes = {
   match: PropTypes.shape({

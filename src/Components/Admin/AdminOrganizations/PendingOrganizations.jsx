@@ -1,11 +1,12 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { getPendingOrganizations } from '../../../organizationsCalls';
 import PendingItem from './PendingItem';
 import cancelablePromise from '../../../utils/cancelablePromise';
 import './PendingOrganizations.css';
 import '../../Tabs/Tabs.css';
 
-export default class PendingOrganizations extends React.Component {
+class PendingOrganizations extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,3 +48,5 @@ export default class PendingOrganizations extends React.Component {
     );
   }
 }
+
+export default withRouter(PendingOrganizations);

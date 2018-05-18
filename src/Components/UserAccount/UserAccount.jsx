@@ -1,41 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch, Link, Redirect, withRouter } from 'react-router-dom';
+import { Route, Switch, NavLink, Redirect, withRouter } from 'react-router-dom';
 import EducationRoute from '../EducationRoute/EducationRoute';
 import EducationRouteSearch from '../EducationRouteSearch/EducationRouteSearch';
 import ChangePasswordPage from '../ChangePasswordPage/ChangePasswordPage';
 import CompletedEducationRouteForm from '../CompletedEducationRouteForm/CompletedEducationRouteForm';
 
-const UserAccount = ({ userInfo, match }) => (
+const UserAccount = ({ userInfo, match, showMessage }) => (
   <div className='account indent'>
     {userInfo.name && (
       <div className='sidebar'>
         <div className='sidebar--navigation'>
           <p className='sidebar--header'>Образовательный маршрут:</p>
-          <Link to={`${match.url}/education-route-add-form`} className='sidebar--link'>
+          <NavLink to={`${match.url}/education-route-add-form`} className='sidebar--link'>
             Заполнить новую карту
-          </Link>
-          <Link to={`${match.url}/education-route-users-form`} className='sidebar--link'>
+          </NavLink>
+          <NavLink to={`${match.url}/education-route-users-form`} className='sidebar--link'>
             Просмотр заполненных карт
-          </Link>
-          <Link to={`${match.url}/education-route-search`} className='sidebar--link'>
+          </NavLink>
+          <NavLink to={`${match.url}/education-route-search`} className='sidebar--link'>
             поиск участников
-          </Link>
-          <Link to={`${match.url}/change-password`} className='sidebar--link'>
+          </NavLink>
+          <NavLink to={`${match.url}/change-password`} className='sidebar--link'>
             Сменить пароль
-          </Link>
+          </NavLink>
         </div>
         <Switch>
           <Route
             path={`${match.url}/education-route-add-form`}
-            render={() => <EducationRoute {...userInfo} />}
+            render={() => <EducationRoute {...userInfo} showMessage={showMessage} />}
           />
           <Route
             path={`${match.url}/education-route-users-form`}
-            render={() => <CompletedEducationRouteForm {...userInfo} />}
+            render={() => <CompletedEducationRouteForm {...userInfo} showMessage={showMessage} />}
           />
           <Route path={`${match.url}/education-route-search`} component={EducationRouteSearch} />
-          <Route path={`${match.url}/change-password`} component={ChangePasswordPage} />
+          <Route
+            path={`${match.url}/change-password`}
+            render={() => <ChangePasswordPage showMessage={showMessage} />}
+          />
         </Switch>
       </div>
     )}
@@ -54,4 +57,5 @@ UserAccount.propTypes = {
   match: PropTypes.shape({
     url: PropTypes.string,
   }).isRequired,
+  showMessage: PropTypes.func.isRequired,
 };

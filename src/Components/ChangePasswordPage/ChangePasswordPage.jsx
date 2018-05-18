@@ -1,37 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ChangePasswordForm from './ChangePasswordForm';
 import { changePassword } from '../../accountCalls';
-import Message from '../Message/Message';
 import './ChangePasswordPage.css';
 
-export default class ChangePasswordPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: {
-        type: '',
-        text: '',
-      },
-    };
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+const ChangePasswordPage = ({ showMessage }) => {
+  function handleFormSubmit(formData) {
+    changePassword(formData)
+      .then((data) => {
+        showMessage({ type: 'success', text: data.message });
+      })
+      .catch((err) => {
+        showMessage({ type: 'error', text: err.response.data.message });
+      });
   }
+  return (
+    <div className='changePasswordPage'>
+      <ChangePasswordForm buttonText='Отправить' onSubmit={handleFormSubmit} />
+    </div>
+  );
+};
 
-  handleFormSubmit(formData) {
-    changePassword(formData).then((data) => {
-      if (data.error) {
-        this.setState({ message: { type: 'error', text: data.error } });
-        return;
-      }
-      this.setState({ message: { type: 'success', text: data.message } });
-    });
-  }
+export default ChangePasswordPage;
 
-  render() {
-    return (
-      <div className='changePasswordPage'>
-        <Message {...this.state.message} />
-        <ChangePasswordForm buttonText='Отправить' onSubmit={this.handleFormSubmit} />
-      </div>
-    );
-  }
-}
+ChangePasswordPage.propTypes = {
+  showMessage: PropTypes.func.isRequired,
+};

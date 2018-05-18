@@ -20,7 +20,12 @@ const CalendarEvent = ({
         <p className='time-box--value'>Время окончания: {moment(end).format('HH:mm')}</p>
       </div>
     </div>
-    <Link to={url || `calendar/${id}`} className='calendar-event--link' rel='noopener noreferrer'>
+    <Link
+      to={url || `calendar/${id}`}
+      className='calendar-event--link'
+      rel='noopener noreferrer'
+      target={url ? '_blank' : ''}
+    >
       подробнее
     </Link>
   </div>

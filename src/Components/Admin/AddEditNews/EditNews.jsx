@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import Form from '../Form/Form';
 import { updateNews, getNewsById } from '../../../newsCalls';
-import Message from '../../Message/Message';
 import './AddEditNews.css';
 
 class EditNews extends React.Component {
@@ -10,10 +10,6 @@ class EditNews extends React.Component {
     super(props);
     this.state = {
       newsToEdit: null,
-      message: {
-        type: '',
-        text: '',
-      },
     };
     this.handleNewsUpdate = this.handleNewsUpdate.bind(this);
   }
@@ -32,10 +28,11 @@ class EditNews extends React.Component {
   handleNewsUpdate(news) {
     updateNews(this.props.match.params.id, news)
       .then((data) => {
-        this.setState({ message: { type: 'success', text: data.message }, newsToEdit: null });
+        this.setState({ newsToEdit: news });
+        this.props.showMessage({ type: 'success', text: data.message });
       })
       .catch((err) => {
-        this.setState({ message: { type: 'error', text: err.response.data.message } });
+        this.props.showMessage({ type: 'error', text: err.response.data.message });
       });
   }
 
@@ -43,7 +40,6 @@ class EditNews extends React.Component {
     return (
       <div className='admin-form-news'>
         <h1 className='secondary-heading'>Редактирование новости</h1>
-        <Message {...this.state.message} />
         <Form
           news={this.state.newsToEdit}
           onSubmit={this.handleNewsUpdate}
@@ -54,7 +50,7 @@ class EditNews extends React.Component {
   }
 }
 
-export default EditNews;
+export default withRouter(EditNews);
 
 EditNews.propTypes = {
   match: PropTypes.shape({
@@ -62,4 +58,5 @@ EditNews.propTypes = {
       id: PropTypes.string,
     }),
   }).isRequired,
+  showMessage: PropTypes.func.isRequired,
 };

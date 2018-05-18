@@ -4,17 +4,21 @@ import PropTypes from 'prop-types';
 import ListOfOrganizations from './ListOfOrganizations';
 import AddOrganization from './AddOrganization';
 import RedirectToAuthorization from '../RedirectToAuthorization/RedirectToAuthorization';
+import './OrganizationsPage.css';
 
-const OrganizationsPage = ({ match, userInfo }) => (
+const OrganizationsPage = ({ match, userInfo, showMessage }) => (
   <div className='organizations indent'>
     <div className='organizations--box'>
       <Switch>
         <Route
           exact
           path={`${match.url}/`}
-          render={() => <ListOfOrganizations userInfo={userInfo} match={match} />}
+          render={() => <ListOfOrganizations userInfo={userInfo} />}
         />
-        <Route path={`${match.url}/addOrganization`} component={AddOrganization} />
+        <Route
+          path={`${match.url}/addOrganization`}
+          render={() => <AddOrganization showMessage={showMessage} />}
+        />{' '}
         <Route path={`${match.url}/login`} component={RedirectToAuthorization} />
       </Switch>
     </div>
@@ -29,7 +33,6 @@ OrganizationsPage.propTypes = {
   }).isRequired,
   userInfo: PropTypes.shape({
     name: PropTypes.string,
-    _id: PropTypes.string,
-    admin: PropTypes.bool,
   }).isRequired,
+  showMessage: PropTypes.func.isRequired,
 };

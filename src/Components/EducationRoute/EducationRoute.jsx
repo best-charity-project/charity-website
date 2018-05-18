@@ -7,8 +7,6 @@ import 'rc-select/assets/index.css';
 import { getLocations, addEducation } from '../../educationCalls';
 import programs from './programs.json';
 import InvalidInputMessage from './InvalidInputMessage/InvalidInputMessage';
-import Message from '../Message/Message';
-import createMessage from '../Message/createMessage';
 import { redirectTime } from '../../configs/config.json';
 import cancelablePromise from '../../utils/cancelablePromise';
 import './EducationRoute.css';
@@ -27,10 +25,6 @@ const defaultValues = {
   lastYear: '',
   program: '',
   isOpen: false,
-  message: {
-    type: '',
-    text: '',
-  },
 };
 
 class EducationRoute extends React.Component {
@@ -187,13 +181,13 @@ class EducationRoute extends React.Component {
       firstYear,
       lastYear,
       regionIndex,
-    }).then((data) => {
-      if (data.error) {
-        this.setState({ message: createMessage('error', data.error) });
-        return;
-      }
-      this.setState({ message: createMessage('success', data.message) });
-    });
+    })
+      .then((data) => {
+        this.props.showMessage({ type: 'success', text: data.message });
+      })
+      .catch((err) => {
+        this.props.showMessage({ type: 'error', text: err.response.data.message });
+      });
     this.setState(defaultValues);
     this.redirect();
   }
@@ -388,7 +382,6 @@ class EducationRoute extends React.Component {
             />
           </form>
         </div>
-        <Message {...this.state.message} />
       </div>
     );
   }
@@ -402,4 +395,5 @@ EducationRoute.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  showMessage: PropTypes.func.isRequired,
 };

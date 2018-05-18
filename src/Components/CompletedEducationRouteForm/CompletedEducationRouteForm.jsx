@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getEducation, deleteEducation, updateEducation } from '../../educationCalls';
 import EducationRouteCard from './EducationRouteCard/EducationRouteCard';
-import createMessage from '../Message/createMessage';
-import Message from '../Message/Message';
 import cancelablePromise from '../../utils/cancelablePromise';
 import './CompletedEducationRouteForm.css';
 
@@ -12,10 +10,6 @@ export default class CompletedEducationRouteForm extends React.Component {
     super(props);
     this.state = {
       usersCards: [],
-      message: {
-        type: '',
-        text: '',
-      },
     };
     this.onEducationRouteCardDelete = this.onEducationRouteCardDelete.bind(this);
     this.onEducationRouteCardEdit = this.onEducationRouteCardEdit.bind(this);
@@ -30,31 +24,31 @@ export default class CompletedEducationRouteForm extends React.Component {
   }
 
   onEducationRouteCardEdit(id, educationToEdit) {
-    updateEducation(id, educationToEdit).then((data) => {
-      this.setMessage(data);
-      this.getEducationByUserId();
-    });
+    updateEducation(id, educationToEdit)
+      .then((data) => {
+        this.props.showMessage({ type: 'success', text: data.message });
+        this.getEducationByUserId();
+      })
+      .catch((err) => {
+        this.props.showMessage({ type: 'error', text: err.response.data.message });
+      });
   }
 
   onEducationRouteCardDelete(id) {
-    deleteEducation(id).then((data) => {
-      this.setMessage(data);
-      this.getEducationByUserId();
-    });
-  }
-
-  setMessage(data) {
-    if (data.error) {
-      this.setState({ message: createMessage('error', data.error) });
-      return;
-    }
-    this.setState({ message: createMessage('success', data.message) });
+    deleteEducation(id)
+      .then((data) => {
+        this.props.showMessage({ type: 'success', text: data.message });
+        this.getEducationByUserId();
+      })
+      .catch((err) => {
+        this.props.showMessage({ type: 'error', text: err.response.data.message });
+      });
   }
 
   getEducationByUserId() {
     this.cancelablePromise = cancelablePromise(getEducation(this.props.userId));
-    this.cancelablePromise.promise
-      .then(usersCards => this.setState({ usersCards })).catch((err) => {
+    this.cancelablePromise.promise.then(usersCards => this.setState({ usersCards }))
+      .catch((err) => {
         window.console.log(err);
       });
   }
@@ -74,7 +68,6 @@ export default class CompletedEducationRouteForm extends React.Component {
             />
           ))}
         </div>
-        <Message {...this.state.message} />
       </div>
     );
   }
@@ -82,4 +75,5 @@ export default class CompletedEducationRouteForm extends React.Component {
 
 CompletedEducationRouteForm.propTypes = {
   userId: PropTypes.string.isRequired,
+  showMessage: PropTypes.func.isRequired,
 };

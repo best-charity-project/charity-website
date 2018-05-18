@@ -1,37 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import RestorePasswordForm from './RestorePasswordForm';
 import { restorePassword } from '../../accountCalls';
-import Message from '../Message/Message';
-import createMessage from '../Message/createMessage';
 
-export default class RestorePasswordPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: {
-        type: '',
-        text: '',
-      },
-    };
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+const RestorePasswordPage = ({ showMessage }) => {
+  function handleFormSubmit(email) {
+    restorePassword(email)
+      .then((data) => {
+        showMessage({ type: 'success', text: data.message });
+      })
+      .catch((err) => {
+        showMessage({ type: 'error', text: err.response.data.message });
+      });
   }
+  return (
+    <div className='indent'>
+      <RestorePasswordForm buttonText='Отправить' onSubmit={handleFormSubmit} />
+    </div>
+  );
+};
 
-  handleFormSubmit(email) {
-    restorePassword(email).then((data) => {
-      if (data.error) {
-        this.setState({ message: createMessage('error', data.error) });
-        return;
-      }
-      this.setState({ message: createMessage('success', data.message) });
-    });
-  }
+export default RestorePasswordPage;
 
-  render() {
-    return (
-      <div className='indent'>
-        <Message {...this.state.message} />
-        <RestorePasswordForm buttonText='Отправить' onSubmit={this.handleFormSubmit} />
-      </div>
-    );
-  }
-}
+RestorePasswordPage.propTypes = {
+  showMessage: PropTypes.func.isRequired,
+};

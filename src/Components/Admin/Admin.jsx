@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Link, Redirect, withRouter } from 'react-router-dom';
+import { Route, Switch, NavLink, Redirect, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AdminNews from './AdminNews';
 import EditNews from './AddEditNews/EditNews';
@@ -9,34 +9,53 @@ import AdminLibrary from './AdminLibrary';
 import AdminOrganizations from './AdminOrganizations/AdminOrganizations';
 import '../Sidebar/Sidebar.css';
 
-const Admin = ({ match, userInfo }) => (
+const Admin = ({ match, userInfo, showMessage }) => (
   <div className='admin indent'>
     {userInfo.admin && (
       <div className='sidebar'>
         <div className='sidebar--navigation'>
-          <Link to={`${match.url}/news`} className='sidebar--link'>
+          <NavLink to={`${match.url}/news`} className='sidebar--link'>
             Посмотреть все новости
-          </Link>
-          <Link to={`${match.url}/addNews`} className='sidebar--link'>
+          </NavLink>
+          <NavLink to={`${match.url}/addNews`} className='sidebar--link'>
             Добавить новость
-          </Link>
-          <Link to={`${match.url}/calendar`} className='sidebar--link'>
+          </NavLink>
+          <NavLink to={`${match.url}/calendar`} className='sidebar--link'>
             Добавить событие
-          </Link>
-          <Link to={`${match.url}/library`} className='sidebar--link'>
+          </NavLink>
+          <NavLink to={`${match.url}/library`} className='sidebar--link'>
             Библиотека
-          </Link>
-          <Link to={`${match.url}/organizations/`} className='sidebar--link'>
+          </NavLink>
+          <NavLink to={`${match.url}/organizations/`} className='sidebar--link'>
             Организации
-          </Link>
+          </NavLink>
         </div>
         <Switch>
-          <Route path={`${match.url}/news/edit/:id`} component={EditNews} />
-          <Route exact path={`${match.url}/news`} component={AdminNews} />
-          <Route path={`${match.url}/addNews`} component={AddNews} />
-          <Route path={`${match.url}/calendar`} component={AddEvent} />
-          <Route path={`${match.url}/library`} component={AdminLibrary} />
-          <Route path={`${match.url}/organizations/`} component={AdminOrganizations} />
+          <Route
+            path={`${match.url}/news/edit/:id`}
+            render={() => <EditNews showMessage={showMessage} />}
+          />
+          <Route
+            exact
+            path={`${match.url}/news`}
+            render={() => <AdminNews showMessage={showMessage} />}
+          />
+          <Route
+            path={`${match.url}/addNews`}
+            render={() => <AddNews showMessage={showMessage} />}
+          />
+          <Route
+            path={`${match.url}/calendar`}
+            render={() => <AddEvent showMessage={showMessage} />}
+          />
+          <Route
+            path={`${match.url}/library`}
+            render={() => <AdminLibrary showMessage={showMessage} />}
+          />
+          <Route
+            path={`${match.url}/organizations`}
+            render={() => <AdminOrganizations showMessage={showMessage} />}
+          />
           <Redirect to={`${match.url}/news`} />
         </Switch>
       </div>
@@ -55,4 +74,5 @@ Admin.propTypes = {
   userInfo: PropTypes.shape({
     admin: PropTypes.bool,
   }).isRequired,
+  showMessage: PropTypes.func.isRequired,
 };
