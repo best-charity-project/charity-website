@@ -6,11 +6,11 @@ import React, { Component } from 'react';
 class Subscribe extends Component {
   render() {
     return (
-  <div className = 'Subscribe'> 
-      <div className = 'wrapper_input'>
-        <Input type = 'email' name = 'input_email' placeholder = "Введите адрес электронной почти"/>
+  <div className = 'subscribe'> 
+      <div className = 'wrapper-input'>
+        <Input type = 'email' name = 'input-email' placeholder = "Введите адрес электронной почти"/>
       </div>
-      <Button name = 'button_subscribe' label = "ПОДПИСАТЬСЯ"/>
+      <Button name = 'button-subscribe' label = "подписаться"/>
   </div>
     );
   }

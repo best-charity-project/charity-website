@@ -5,9 +5,9 @@ import mainpage from '../../../Assets/images/main.png'
 class AboutUs extends Component {
   render() {
     return (
-  <div className= 'AboutUs'> 
-  <div className = 'main_picture'><img src ={mainpage } /></div>
-  <TextAboutUs className = 'TextAboutUs'/>
+  <div className= 'about-us'> 
+  <div className = 'main-picture'><img src ={mainpage } /></div>
+  <TextAboutUs className = 'text-about-us'/>
 
   </div>
     );

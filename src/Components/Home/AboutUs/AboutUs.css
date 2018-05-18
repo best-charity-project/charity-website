@@ -5,17 +5,17 @@ html,body{
 	display: flex;
 	overflow: hidden;
 }
-.AboutUs{
+.about-us{
 	flex-grow: 1;
 	flex-direction: row;
 	display: flex;
 }
-.main_picture{
+.main-picture{
 	width: 70%;
 	max-width: 700px;
 	margin-left: 10px;
 }
-.main_picture img {
+.main-picture img {
 	height: 100%;
 	width: 100%;
 

@@ -7,7 +7,6 @@ constructor(props){
 }
 	
   render() {
-    console.log(this.state)
     return (
   <div className = 'mainList'> 
      <ul>

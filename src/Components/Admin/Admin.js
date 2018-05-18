@@ -1,6 +1,6 @@
 import React from "react"
 
-import "./admin.css" 
+import "./Admin.css" 
 
 export default class Admin extends React.Component {
     state = {

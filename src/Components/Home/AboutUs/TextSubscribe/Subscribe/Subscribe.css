@@ -1,7 +1,7 @@
-.Subscribe{
+.subscribe{
 	margin-top: 40px;
 }
-.wrapper_input {
+.wrapper-input {
 	position: relative;
 	display: inline-block;
 }
@@ -11,7 +11,7 @@ input[type="email"]:-ms-input-placeholder { color: #9b9b9b;  font-size: 14px;}
 input[type="email"]::-ms-input-placeholder {color: #9b9b9b;  font-size: 14px;}
 input[type="email"]::placeholder { color: #9b9b9b;   font-size: 14px;} 
 
-.wrapper_input:after{
+.wrapper-input:after{
 	position: absolute;
 	content: url(../../../../../Assets/images/mail.svg);
 	height: 35px;
@@ -23,11 +23,11 @@ input[type="email"]::placeholder { color: #9b9b9b;   font-size: 14px;}
 }
 
 
-@media (min-width: 1024px) and (max-width: 1348px) {
-.input_email{
-	width: 320px;
-}
-.button_subscribe{
+/*@media (min-width: 1024px) and (max-width: 1348px) {
+.input-email{
+	width: 250px;
+}}*/
+/*.button-subscribe{
     width: 130px;
 }
-}
+}*/
