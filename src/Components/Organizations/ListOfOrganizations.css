@@ -9,13 +9,10 @@
 }
 
 .organizations--box {
-  display: flex;
-  flex-direction: column;
   background-color: #fff;
   max-width: 60em;
-  margin: 1em auto;
-  padding-bottom: 1em;
-  min-height: calc(100vh - 11.5em);
+  margin-top: 1em;
+  min-height: calc(100vh - 30em);
 }
 
 .list-of-organizations--items {
