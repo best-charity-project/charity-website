@@ -3,7 +3,7 @@ import './menu.css'
 class Logo extends Component {
   render() {
     return (
-  <div className = 'Logo'> 
+  <div className = 'logo'> 
   </div>
     );
   }

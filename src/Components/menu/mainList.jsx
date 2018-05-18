@@ -6,14 +6,25 @@ constructor(props){
 	super(props);
 	this.state = this.props
 }
-	
+	handlerClick = (e)=>{
+    let mas = e.target.parentNode.parentNode.childNodes;
+    for (var i = 0; i < mas.length; i++) {
+      if (mas[i].firstChild.classList.contains('active')) {
+        mas[i].firstChild.classList.remove('active');
+      }
+    }
+   e.target.classList.add('active')
+
+  }
   render() {
-console.log(this.props)
     return (
-  <div className = 'mainList'> 
-     <ul>
+  <div className = 'main-list'> 
+     <ul onClick = {this.handlerClick}>
       {this.state.list.map(function(el,index) {
-    return  <NavLink to={el.url}><li key = {new Date()}>{el.name}</li></NavLink>
+        if (index ==0) {
+          return <NavLink  to={el.url}><li key = {index} className = 'active'>{el.name}</li></NavLink>
+        }
+     return <NavLink  to={el.url}><li key = {index}>{el.name}</li></NavLink>
       })}
       </ul>
   </div>

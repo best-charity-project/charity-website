@@ -1,4 +1,5 @@
-.Logo{
+.logo{
+
 	background-image: url(../../Assets/images/svg/on-info-logo.svg);
 	background-repeat: no-repeat;
 	width: 155px;
@@ -10,12 +11,12 @@
 	flex-grow: 0;
 	justify-content: space-between;
 }
-.mainList{
+.main-list{
 	margin-left: 57px;
 	margin-top: 7px;
 	list-style: none;;
 }
-.mainList li{
+.main-list li{
 	text-transform: uppercase;
 	font-size: 18px;
 	margin-right: 40px;
@@ -23,12 +24,12 @@
     color: #9b9b9b;
 
 }
-.mediaList{
+.media-list{
 	margin-top: 8px;
 	margin-right: 40px;
 	list-style: none;
 }
-.mediaList li{
+.media-list li{
 	background-repeat: no-repeat;
 	display: inline-block;
 	background-position: center;
@@ -36,15 +37,19 @@
 	height: 20px;
 	margin-left: 15px;
 }
-.mediaList li:first-child{
+
+.media-list li:first-child{
 	background-image:url(../../Assets/images/svg/Facebook.svg);
 }
-.mediaList li:nth-child(2){
+.media-list li:nth-child(2){
 	background-image:url(../../Assets/images/svg/youtube.svg);
 }
-.mediaList li:nth-child(3){
+.media-list li:nth-child(3){
 	background-image:url(../../Assets/images/svg/instagram.svg);
 }
-.mediaList li:nth-child(4){
+.media-list li:nth-child(4){
 	background-image:url(../../Assets/images/svg/vk.svg);
+}
+.main-list .active{
+	color: black;
 }

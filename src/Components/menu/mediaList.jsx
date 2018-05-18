@@ -4,7 +4,7 @@ class MedialList extends Component {
 	
   render() {
     return (
-  <div className = 'mediaList'> 
+  <div className = 'media-list'> 
       <ul>
         <li></li>
         <li></li>
