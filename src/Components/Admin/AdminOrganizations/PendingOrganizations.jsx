@@ -6,7 +6,7 @@ import cancelablePromise from '../../../utils/cancelablePromise';
 import './PendingOrganizations.css';
 import '../../Tabs/Tabs.css';
 
-export default class PendingOrganizations extends React.Component {
+class PendingOrganizations extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -49,4 +49,4 @@ export default class PendingOrganizations extends React.Component {
   }
 }
 
-withRouter(PendingOrganizations);
+export default withRouter(PendingOrganizations);

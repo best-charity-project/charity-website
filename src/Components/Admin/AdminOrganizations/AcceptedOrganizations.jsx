@@ -4,7 +4,7 @@ import { getOrganizations } from '../../../organizationsCalls';
 import AcceptedItem from './AcceptedItem';
 import cancelablePromise from '../../../utils/cancelablePromise';
 
-export default class AcceptedOrganizations extends React.Component {
+class AcceptedOrganizations extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,4 +47,4 @@ export default class AcceptedOrganizations extends React.Component {
   }
 }
 
-withRouter(AcceptedOrganizations);
+export default withRouter(AcceptedOrganizations);

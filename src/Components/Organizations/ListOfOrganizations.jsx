@@ -5,7 +5,7 @@ import { getOrganizations } from '../../organizationsCalls';
 import Organization from './Organization';
 import './ListOfOrganizations.css';
 
-export default class ListOfOrganizations extends React.Component {
+class ListOfOrganizations extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +41,7 @@ export default class ListOfOrganizations extends React.Component {
   }
 }
 
-withRouter(ListOfOrganizations);
+export default withRouter(ListOfOrganizations);
 
 ListOfOrganizations.propTypes = {
   match: PropTypes.shape({

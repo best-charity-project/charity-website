@@ -10,7 +10,7 @@ import './Admin.css';
 import './AdminNewsItem.css';
 import '../ControlButton/ControlButton.css';
 
-export default class AdminNewsItem extends React.Component {
+class AdminNewsItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -90,7 +90,8 @@ export default class AdminNewsItem extends React.Component {
     );
   }
 }
-withRouter(AdminNewsItem);
+
+export default withRouter(AdminNewsItem);
 
 AdminNewsItem.defaultProps = {
   url: '',
