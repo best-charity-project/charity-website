@@ -29,30 +29,27 @@
 	margin-right: 40px;
 	list-style: none;
 }
-.media-list li{
-	background-repeat: no-repeat;
+.media-list li{	
 	display: inline-block;
-	background-position: center;
-	width: 33px;
-	height: 20px;
+	margin-left: 10px;
 }
 .media-list a{
-	margin-left: 5px;
-	display: inline-block;
-	background-position: bottom;
 	background-repeat: no-repeat;
-	
+	width: 33px;
+	height: 20px;
+	background-position: bottom;
+	display: inline-block;
 }
-.media-list a:first-child{
+.media-list li:first-child a{
 	background-image:url(../../Assets/images/svg/Facebook.svg);
 }
-.media-list a:nth-child(2){
+.media-list li:nth-child(2) a{
 	background-image:url(../../Assets/images/svg/youtube.svg);
 }
-.media-list a:nth-child(3){
+.media-list li:nth-child(3) a{
 	background-image:url(../../Assets/images/svg/instagram.svg);
 }
-.media-list a:nth-child(4){
+.media-list li:nth-child(4) a{
 	background-image:url(../../Assets/images/svg/vk.svg);
 }
 .main-list .active{

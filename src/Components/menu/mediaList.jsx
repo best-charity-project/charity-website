@@ -7,10 +7,10 @@ class MedialList extends Component {
     return (
   <div className = 'media-list'> 
       <ul>
-        <a href = '#'><li></li></a>
-        <a href = '#'><li></li></a>
-        <a href = '#'><li></li></a>
-        <a href = '#'><li></li></a>
+        <li><a href = 'https://www.facebook.com/'></a></li>
+         <li><a href = 'https://www.youtube.com/'></a></li>
+        <li><a href = 'https://www.instagram.com/?hl=ru'></a></li>
+        <li><a href = 'https://vk.com/'></a></li>
       </ul>
   </div>
     );
