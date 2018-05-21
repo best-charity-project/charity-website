@@ -10,7 +10,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className = "Container">
+        <div className = "container">
           <Switch>
             <Route path="/" component={Home} exact />
             <Route path="/admin-panel" component={Admin}/>

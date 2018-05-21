@@ -35,19 +35,24 @@
 	background-position: center;
 	width: 33px;
 	height: 20px;
-	margin-left: 15px;
 }
-
-.media-list li:first-child{
+.media-list a{
+	margin-left: 5px;
+	display: inline-block;
+	background-position: bottom;
+	background-repeat: no-repeat;
+	
+}
+.media-list a:first-child{
 	background-image:url(../../Assets/images/svg/Facebook.svg);
 }
-.media-list li:nth-child(2){
+.media-list a:nth-child(2){
 	background-image:url(../../Assets/images/svg/youtube.svg);
 }
-.media-list li:nth-child(3){
+.media-list a:nth-child(3){
 	background-image:url(../../Assets/images/svg/instagram.svg);
 }
-.media-list li:nth-child(4){
+.media-list a:nth-child(4){
 	background-image:url(../../Assets/images/svg/vk.svg);
 }
 .main-list .active{

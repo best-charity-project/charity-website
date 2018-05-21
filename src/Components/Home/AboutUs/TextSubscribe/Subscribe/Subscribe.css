@@ -21,13 +21,3 @@ input[type="email"]::placeholder { color: #9b9b9b;   font-size: 14px;}
 	background-repeat: no-repeat;
 
 }
-
-
-/*@media (min-width: 1024px) and (max-width: 1348px) {
-.input-email{
-	width: 250px;
-}}*/
-/*.button-subscribe{
-    width: 130px;
-}
-}*/

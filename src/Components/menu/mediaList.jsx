@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {NavLink} from "react-router-dom";
 import './menu.css'
 class MedialList extends Component {
 	
@@ -6,10 +7,10 @@ class MedialList extends Component {
     return (
   <div className = 'media-list'> 
       <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <a href = '#'><li></li></a>
+        <a href = '#'><li></li></a>
+        <a href = '#'><li></li></a>
+        <a href = '#'><li></li></a>
       </ul>
   </div>
     );
