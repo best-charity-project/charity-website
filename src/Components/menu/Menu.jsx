@@ -7,7 +7,12 @@ class Menu extends Component {
     return (
   <div className ={'menu '+ this.props.name }> 
       <Logo/>
-      <MainList list = {[{name: 'о нас', url :'/'},{name: 'новости', url :'/news'}]} onClick = {this.handlerClick}/>
+      <MainList list = {[
+        {name: 'о нас', url :'/'},
+        {name: 'новости', url :'/news'}]} 
+        onClick = {this.handlerClick}
+        classActive = 'active-link-client'
+        className = 'menu-list-client'/>
        <MediaList/>
   </div>
     );
