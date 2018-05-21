@@ -3,9 +3,6 @@ import Logo from './logo'
 import MainList from './mainList'
 import MediaList from './mediaList'
 class Menu extends Component {
-handlerClick = (e)=>{
-console.log(e.target)
-}
   render() {
     return (
   <div className ={'menu '+ this.props.name }> 

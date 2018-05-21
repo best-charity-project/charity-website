@@ -7,7 +7,7 @@ class Input extends Component {
  return(
  		<div>
  		<label htmlFor = {this.props.id}> </label>
-			<input  className = {this.props.nameClass} id = {this.props.id} type = {this.props.type} name = {this.props.name} placeholder = {this.props.placeholder}/> 
+			<input  type = {this.props.type} className = {this.props.nameClass} id = {this.props.id}  name = {this.props.name} placeholder = {this.props.placeholder}/> 
 		</div>
 		)
 }
