@@ -7,9 +7,8 @@ handlerClick = (e)=>{
 console.log(e.target)
 }
   render() {
-  	
     return (
-  <div className = 'menu'> 
+  <div className ={'menu '+ this.props.name }> 
       <Logo/>
       <MainList list = {[{name: 'о нас', url :'/'},{name: 'новости', url :'/news'}]} onClick = {this.handlerClick}/>
        <MediaList/>

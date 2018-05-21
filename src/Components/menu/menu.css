@@ -8,6 +8,9 @@
 }
 .menu{
 	display: flex;
+}
+.client-menu{
+	flex-direction: row;
 	flex-grow: 0;
 	justify-content: space-between;
 }
