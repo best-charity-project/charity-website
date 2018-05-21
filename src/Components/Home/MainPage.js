@@ -8,7 +8,7 @@ class Home extends Component {
   render() {
     return (
 		<div className="main">
-		<Menu name = 'main-menu'/>
+		<Menu name = 'client-menu'/>
 			<AboutUs/>
 			<Footer/>
 		</div>
