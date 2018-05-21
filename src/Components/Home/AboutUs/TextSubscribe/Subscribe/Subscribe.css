@@ -1,5 +1,6 @@
 .subscribe{
 	margin-top: 40px;
+	margin-right: 0;
 }
 .wrapper-input {
 	position: relative;
@@ -21,3 +22,4 @@ input[type="email"]::placeholder { color: #9b9b9b;   font-size: 14px;}
 	background-repeat: no-repeat;
 
 }
+

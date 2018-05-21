@@ -8,7 +8,7 @@ class Subscribe extends Component {
     return (
   <div className = 'subscribe'> 
       <div className = 'wrapper-input'>
-        <Input type = 'email' name = 'input-email' placeholder = "Введите адрес электронной почти"/>
+        <Input type = 'email' nameClass = 'input-email' placeholder = "Введите адрес электронной почти" name = 'email'/>
       </div>
       <Button name = 'button-subscribe' label = "подписаться"/>
   </div>
