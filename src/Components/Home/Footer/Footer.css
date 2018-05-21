@@ -1,0 +1,21 @@
+.footer{
+  display: block;
+  margin-top:-40px;
+  height: 40px;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  color: #9b9b9b;
+  text-align:top;
+  padding-bottom: 20px;
+}
+.footer {
+	display: block;
+}
+.link-on-main-page{
+  display: inline-block;
+}
+.link-on-main-page a{
+  text-decoration: none;
+  color: #9b9b9b;;
+}

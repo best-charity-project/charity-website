@@ -1,0 +1,57 @@
+.logo{
+
+	background-image: url(../../Assets/images/svg/on-info-logo.svg);
+	background-repeat: no-repeat;
+	width: 155px;
+	height: 55px;
+
+}
+.menu{
+	display: flex;
+	flex-grow: 0;
+	justify-content: space-between;
+}
+.main-list{
+	margin-left: 57px;
+	margin-top: 7px;
+	list-style: none;;
+}
+.main-list li{
+	text-transform: uppercase;
+	font-size: 18px;
+	margin-right: 40px;
+	display: inline-block;
+    color: #9b9b9b;
+
+}
+.media-list{
+	margin-top: 8px;
+	margin-right: 40px;
+	list-style: none;
+}
+.media-list li{	
+	display: inline-block;
+	margin-left: 10px;
+}
+.media-list a{
+	background-repeat: no-repeat;
+	width: 33px;
+	height: 20px;
+	background-position: bottom;
+	display: inline-block;
+}
+.media-list li:first-child a{
+	background-image:url(../../Assets/images/svg/Facebook.svg);
+}
+.media-list li:nth-child(2) a{
+	background-image:url(../../Assets/images/svg/youtube.svg);
+}
+.media-list li:nth-child(3) a{
+	background-image:url(../../Assets/images/svg/instagram.svg);
+}
+.media-list li:nth-child(4) a{
+	background-image:url(../../Assets/images/svg/vk.svg);
+}
+.main-list .active{
+	color: black;
+}
