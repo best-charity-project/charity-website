@@ -7,7 +7,6 @@ handlerClick = (e)=>{
 console.log(e.target)
 }
   render() {
-  	console.log('"'+ this.props.name +'menu'+"'")
     return (
   <div className ={'menu '+ this.props.name }> 
       <Logo/>
