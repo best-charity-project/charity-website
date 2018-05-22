@@ -1,0 +1,9 @@
+.about-us{
+	flex-grow: 1;
+	flex-direction: row;
+	display: flex;
+}
+.main-picture img{
+	height: 100%;
+}
+
