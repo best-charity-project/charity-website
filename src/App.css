@@ -4,13 +4,12 @@
   padding: 0;
   margin: 0;
   font-family: 'Montserrat';
-  font-weight: 600;
+  font-weight: 400;
 }
 
-.container{
+.container-main{
   height: 100%;
   display: flex;
-  padding: 20px 20px 0 20px
 }
 #root{
 	height: 100%;

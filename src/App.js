@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className = "container">
+        <div className = "container-main">
           <Switch>
             <Route path="/" component={Home} exact />
             <Route path="/admin-panel" component={Admin}/>

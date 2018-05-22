@@ -1,0 +1,9 @@
+.datepicker {
+    margin:25px;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+.datepicker > div {
+    margin: 0 10px;
+}

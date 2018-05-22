@@ -1,0 +1,20 @@
+.wrapper {
+    max-width: 80%;
+    margin: 0 auto;
+}
+.toolbar {
+    border: 1px solid #ced0da;
+    margin-bottom: 0;
+    background-color: #f8f8f8;
+}
+.editor {
+    padding: 0 20px;
+    border: 1px solid #ced0da;
+    min-height: 250px;
+    margin-top: -1px;
+}
+.rdw-option-wrapper {
+    background-color: #f8f8f8;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box; 
+} 
