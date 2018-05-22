@@ -4,7 +4,6 @@ import {BrowserRouter , Route , Switch , NavLink } from "react-router-dom";
 import "./NavBar.css"
 
 import logo from "../../Assets/images/logo.svg"
-// import MenuNavbar from "../NavBar/MenuNavbar"
 import MainList from "../menu/mainList"
 
 
