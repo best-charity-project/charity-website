@@ -4,7 +4,7 @@ import "./AdminMain.css"
 const AdminMain = ()=>{
     return (
         <div>
-            <h1>HOME</h1>
+            <p>HOMIEZ PAGE YEAHH</p>
         </div>          
     )
 }

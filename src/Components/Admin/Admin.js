@@ -37,7 +37,7 @@ export default class Admin extends React.Component {
         )  
         } else {
             return (
-                <div className="wrapper-admin authForm">
+                <div className="wrapper-admin auth-form">
                     <form className = 'user-form' onSubmit={this.onSubmit}>
                         <div className="container-admin">
                             <div className='username-div'>
