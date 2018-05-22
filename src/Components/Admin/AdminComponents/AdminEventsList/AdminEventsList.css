@@ -5,7 +5,6 @@
 }
 .events-list-admin .events-list-header {
     line-height: 2.5;
-    font-weight: 600;
     padding: 5px 50px 5px 20px;
     border-bottom: 1px solid #d3d3d3;
     display: flex;
@@ -14,6 +13,7 @@
 .events-list-admin .events-list-header div {
     flex-basis: 50%;
     text-align: center;
+    font-weight: 600;
 }
 .events-list-admin .events-list-header div:first-child {
     flex-basis: 25%;
