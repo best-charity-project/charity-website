@@ -1,0 +1,18 @@
+.event-title div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:25px;
+}
+.change-state-buttons {
+    margin: 25px 0px;
+    text-align: center;
+}
+#title {
+    margin: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #d3d3d3;
+}
+#title:focus {
+    outline: none;
+}
