@@ -8,8 +8,7 @@ constructor(props){
    this.state = this.props
 }
    handlerClick = (e)=>{
-  console.log()
-  let mas = e.target.parentNode.parentNode.childNodes;
+   let mas = e.target.parentNode.parentNode.childNodes;
   for (var i = 0; i < mas.length; i++) {
     if (mas[i].firstChild.classList.contains(this.props.classActive)) {
       mas[i].firstChild.classList.remove(this.props.classActive);

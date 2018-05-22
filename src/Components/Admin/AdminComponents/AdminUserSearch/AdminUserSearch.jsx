@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Input from '../../../input/Input'
 import './AdminUserSearch.css';
-import searchImg from '../../../../Assets/images/Search.svg';
+import searchImg from '../../../../../src/Assets/images/Search.svg';
 
 class AdminUserSearch extends Component {
     render() {
