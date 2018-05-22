@@ -35,16 +35,16 @@ class AdminUsersContent extends Component {
         }
 
         return(
-                <div>
-                    <AdminUserSearch findUser={this.findUser} />
-                    <AdminUsersList users={this.state.filteredUsers} loading={this.state.isLoading} /> 
-                </div>
+            <div>
+                <AdminUserSearch findUser={this.findUser} />
+                <AdminUsersList users={this.state.filteredUsers} loading={this.state.isLoading} /> 
+            </div>
         )
     }
 
     findUser = (email) => {
         if(!email) {
-            fetch(URL)
+             fetch(URL)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -52,7 +52,7 @@ class AdminUsersContent extends Component {
                     throw new Error('Something went wrong ...')
                 }
             })
-            .then(data => this.setState({users: data}))
+            .then(data => this.setState({filteredUsers: data}))
             .catch(error => this.setState({error}))
         } else {
             const {users} = this.state

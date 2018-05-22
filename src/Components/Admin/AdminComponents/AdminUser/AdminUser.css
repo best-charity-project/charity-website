@@ -4,6 +4,9 @@
     display: flex;
     justify-content: space-between;
 }
+.admin-part-user div {
+    align-self: center;
+}
 .admin-part-user.unsubscribed {
     color: #cccccc;
 }
