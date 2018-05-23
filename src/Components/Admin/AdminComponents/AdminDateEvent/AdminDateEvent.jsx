@@ -6,8 +6,11 @@ import 'rc-datepicker/lib/style.css';
 import './AdminDateEvent.css'; 
 
 class AdminDateEvent extends Component {
-    state = {
-        selectedDate: moment().format()
+    state = {selectedDate: ''}
+    componentDidMount() {
+        this.setState({
+            selectedDate: moment().format()
+        })
     }
     render() {
         return (
@@ -26,7 +29,7 @@ class AdminDateEvent extends Component {
     onChange = (date) => {
         this.setState({
             selectedDate: date
-        });
+        })
     }
 }
 

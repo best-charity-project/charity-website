@@ -10,7 +10,6 @@ class AdminUsersContent extends Component {
         isLoading: true,
         error: null
     }
-
     componentDidMount() {
         fetch(URL)
             .then(response => {
@@ -23,17 +22,14 @@ class AdminUsersContent extends Component {
             .then(data => this.setState({users: data, filteredUsers: data, isLoading: false}))
             .catch(error => this.setState({error, isLoading: false}))
     }
-
     render() {
         const {isLoading, error} = this.state
         if (isLoading) {
             return <p>Loading ...</p>
         }
-        
         if (error) {
             return <p>{error.message}</p>;
         }
-
         return(
             <div>
                 <AdminUserSearch findUser={this.findUser} />
@@ -41,19 +37,18 @@ class AdminUsersContent extends Component {
             </div>
         )
     }
-
     findUser = (email) => {
         if(!email) {
-             fetch(URL)
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                } else {
-                    throw new Error('Something went wrong ...')
-                }
-            })
-            .then(data => this.setState({filteredUsers: data}))
-            .catch(error => this.setState({error}))
+            fetch(URL)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json()
+                    } else {
+                        throw new Error('Something went wrong ...')
+                    }
+                })
+                .then(data => this.setState({filteredUsers: data}))
+                .catch(error => this.setState({error}))
         } else {
             const {users} = this.state
             this.setState({
@@ -64,5 +59,6 @@ class AdminUsersContent extends Component {
         }
     }
 }
+
 export default AdminUsersContent;
 

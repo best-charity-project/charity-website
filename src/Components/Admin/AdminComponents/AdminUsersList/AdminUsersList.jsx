@@ -11,7 +11,6 @@ class AdminUsersList extends Component {
                     <div>Пользователь</div>
                     <div>Подписка</div>
                 </div>
-
                 <div>
                     {this.props.users.map(user => 
                         <AdminUser user = {user} key = {user.id} />

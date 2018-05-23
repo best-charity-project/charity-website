@@ -3,7 +3,6 @@ import {Editor} from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './AdminTextEvent.css';
 
-
 class AdminTextEvent extends Component {
     render() {
         return (
@@ -13,7 +12,7 @@ class AdminTextEvent extends Component {
                     toolbarClassName="toolbar"
                     editorClassName="editor"
                     localization={{
-                        locale: 'ru',
+                        locale: 'ru'
                     }}
                     toolbar={{
                         image: {previewImage: true,
@@ -21,27 +20,27 @@ class AdminTextEvent extends Component {
                     }}
                 />
             </div>
-        );
+        )
     }
     uploadImageCallBack(file) {
         return new Promise(
             (resolve, reject) => {
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', 'https://...');
-                xhr.setRequestHeader('Authorization', 'Client-ID XXXXX');
-                const data = new FormData();
-                data.append('image', file);
-                xhr.send(data);
+                const xhr = new XMLHttpRequest()
+                xhr.open('POST', 'https://...')
+                xhr.setRequestHeader('Authorization', 'Client-ID XXXXX')
+                const data = new FormData()
+                data.append('image', file)
+                xhr.send(data)
                 xhr.addEventListener('load', () => {
                     const response = JSON.parse(xhr.responseText);
-                    resolve(response);
-                });
+                    resolve(response)
+                })
                 xhr.addEventListener('error', () => {
-                    const error = JSON.parse(xhr.responseText);
-                    reject(error);
-                });
+                    const error = JSON.parse(xhr.responseText)
+                    reject(error)
+                })
             }
-        );
+        )
     }
 }
 

@@ -10,9 +10,12 @@ class AdminUser extends Component {
         return (
             <div className={this.state.isSubscribe ? "admin-part-user" : "admin-part-user unsubscribed"}>
                 <div>{this.props.user.login}</div>
-                <Button name = "button-admin" label = {this.state.isSubscribe ? 'Отписать' : 'Подписать'} clickHandler = {this.handleClick} />
+                <Button 
+                    name = "button-admin" 
+                    label = {this.state.isSubscribe ? 'Отписать' : 'Подписать'} 
+                    clickHandler = {this.handleClick} 
+                />
             </div>
-
         ) 
     }
     handleClick = () => {
