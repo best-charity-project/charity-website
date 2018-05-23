@@ -1,0 +1,11 @@
+.input-email{
+	height: 45px;
+  	background-color: #e8e6e2;
+  	border: solid 2px #979797;
+	padding: 10px 30px 10px 10px;
+	width: 380px;
+}
+@media (min-width: 1024px) and (max-width: 1348px) {
+.input-email{
+	width: 320px;
+}}

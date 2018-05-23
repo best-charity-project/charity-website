@@ -1,18 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
 import './Footer.css';
+import {NavLink} from "react-router-dom";
 
-export default () => (
-  <div className='footer'>
-    <div>
-      <Link to='/about' className='footer-about'>
-        О нас
-      </Link>
-    </div>
-    <div>
-      <p className='footer--content'>Phone: +375-25-555-5555</p>
-      <p className='footer--content'>mail@mail.com</p>
-      <p className='footer--content'>&#169; Vasilij Pupkin</p>
-    </div>
-  </div>
-);
+class Footer extends Component {
+	
+  render() {
+    return (
+  		<div className = 'footer-client'> 
+			<span>&#169; </span>
+			<div className = "link-on-main-page">
+				<NavLink to="/"> on-info</NavLink>
+			</div>
+			<span>, {(new Date()).getFullYear()}</span>
+  		</div>
+    );
+  }
+}
+
+export default Footer;

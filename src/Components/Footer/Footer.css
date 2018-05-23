@@ -1,27 +1,23 @@
-.footer {
-  background-color: #f8f8f8;
-  line-height: 22px;
-  letter-spacing: 0.4px;
-  height: 4em;
-  display: flex;
-  justify-content: space-between;
-}
-
-.footer--content {
-  text-decoration: none;
-  color: rgb(51, 51, 51);
-  text-align: right;
-  padding-right: 1em;
-}
-
-.footer-about {
-  margin: 1em;
-  padding: 0.25em;
+.footer-client{
+  padding: 0 8px;
   display: block;
-  font-size: 1.2em;
-  color: inherit;
+  margin-top:-40px;
+  height: 40px;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  color: #9b9b9b;
+  text-align:top;
+  padding-bottom: 20px;
 }
-
-.footer-about:hover {
-  color: black;
+.link-on-main-page{
+  font-weight: 600;
+  display: inline-block;
+}
+.footer-client span{
+  font-weight: 600;
+}
+.link-on-main-page a{  
+  text-decoration: none;
+  color: #9b9b9b;;
 }

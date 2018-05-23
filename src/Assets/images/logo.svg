@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="155px" height="30px" viewBox="0 0 155 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>Logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Index-Copy" transform="translate(-25.000000, -25.000000)">
+            <g id="Logo" transform="translate(25.000000, 25.000000)">
+                <text id="ON-INFO" font-family="Montserrat-SemiBold, Montserrat" font-size="25" font-weight="500" fill="#3B3F48">
+                    <tspan x="40" y="24">ON-INFO</tspan>
+                </text>
+                <g id="logo">
+                    <g id="SvgjsG1067">
+                        <path d="M0,12.3344216 C0,21.8908203 7.7232514,29.6322441 17.2572173,29.6322441 L17.2572173,27.1505436 C9.09052558,27.1505436 2.47587485,20.520329 2.47587485,12.3344216 L0,12.3344216 Z" id="Shape" fill="#9B9B9B" fill-rule="nonzero"></path>
+                        <path d="M17.2572173,2.48170044 C11.7881206,2.48170044 7.3906712,6.88949674 7.3906712,12.3344216 C7.3906712,17.8163867 11.7881206,22.224183 17.2572173,22.224183 L17.2572173,24.7058835 C10.4577997,24.7058835 4.9517497,19.186878 4.9517497,12.3714619 C4.91479635,5.51900546 10.4577997,0 17.2572173,0 L17.2572173,2.48170044 Z" id="Shape" fill="#B1B1B2" fill-rule="nonzero"></path>
+                        <path d="M22.1720136,12.3344216 C22.1720136,9.63047932 19.9548122,7.40806101 17.2572173,7.40806101 C14.5226689,7.40806101 12.3424209,9.63047932 12.3424209,12.3344216 C12.3424209,15.0383639 14.5596223,17.2607822 17.2572173,17.2607822 L17.2572173,19.7424826 C13.1923481,19.7424826 9.86654605,16.4088551 9.86654605,12.3344216 C9.86654605,8.25998803 13.1923481,4.92636057 17.2572173,4.92636057 C21.3220864,4.92636057 24.6478885,8.25998803 24.6478885,12.3344216 L22.1720136,12.3344216 Z" id="Shape" fill="#CECDCE" fill-rule="nonzero"></path>
+                        <rect id="Rectangle" fill="#459369" x="20.0704225" y="15.1764706" width="4.92957746" height="14.8235294"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
