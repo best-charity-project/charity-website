@@ -8,8 +8,8 @@
 }
 .error-div:before{
     content: ''; 
-    position: absolute; /* Абсолютное позиционирование */
+    position: absolute;
     left: 20px; 
-    bottom: 35px; /* Положение треугольника */
+    bottom: 35px;
 	border: 10px solid transparent;	border-bottom: 10px solid white;
 }

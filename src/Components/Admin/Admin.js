@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {BrowserRouter , Route , Switch , NavLink } from "react-router-dom";
-
 import AdminMain from "./AdminMain/AdminMain"
 import AdminEvents from "./AdminEvents/AdminEvents"
 import NavBar from "../NavBar/NavBar"
@@ -12,7 +11,6 @@ export default class Admin extends React.Component {
     state = {
         loggedIn: false
     }
-    componentDidMount
     onLogout = () => {
         this.setState({loggedIn:false})
     }
@@ -34,7 +32,7 @@ export default class Admin extends React.Component {
                         <Route path="/admin-panel/events" component={AdminEvents}/>
                     </Switch>
                     </div>
-              </div>          
+            </div>          
         )  
         } else {
             return (
