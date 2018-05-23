@@ -1,5 +1,5 @@
 .logo{
-	background-image: url(../../Assets/images/svg/on-info-logo.svg);
+	background-image: url(../../Assets/AssetsSvg/on-info-logo.svg);
 	background-repeat: no-repeat;
 	width: 155px;
 	height: 55px;
@@ -41,16 +41,16 @@
 	display: inline-block;
 }
 .social-icons li:first-child a{
-	background-image:url(../../Assets/images/svg/Facebook.svg);
+	background-image:url(../../Assets/AssetsSvg/Facebook.svg);
 }
 .social-icons li:nth-child(2) a{
-	background-image:url(../../Assets/images/svg/youtube.svg);
+	background-image:url(../../Assets/AssetsSvg/youtube.svg);
 }
 .social-icons li:nth-child(3) a{
-	background-image:url(../../Assets/images/svg/instagram.svg);
+	background-image:url(../../Assets/AssetsSvg/instagram.svg);
 }
 .social-icons li:nth-child(4) a{
-	background-image:url(../../Assets/images/svg/vk.svg);
+	background-image:url(../../Assets/AssetsSvg/vk.svg);
 }
 .menu-links-client .active-link-client{
 	color: black;

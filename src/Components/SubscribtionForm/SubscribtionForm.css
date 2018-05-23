@@ -25,7 +25,7 @@ input[type="email"]::placeholder {
 
 .wrapper-input:after{
 	position: absolute;
-	content: url(../../Assets/images/mail.svg);
+	content: url(../../Assets/AssetsSvg/mail.svg);
 	height: 35px;
 	top: 13px;
 	right: 15px;
