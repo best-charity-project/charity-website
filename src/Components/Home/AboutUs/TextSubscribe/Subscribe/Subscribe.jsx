@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
  import './Subscribe.css';
- import Input from '../../../../input/Input'
-  import Button from '../../../../button/button'
+ import Input from '../../../../Input/Input'
+  import Button from '../../../../Button/Button'
 
 class Subscribe extends Component {
   render() {

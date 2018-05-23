@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Button from '../../../button/button';
+import Button from '../../../Button/Button';
 import './AdminEvent.css';
 
 class AdminEvent extends Component {

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import AdminEventsList from '../AdminEventsList/AdminEventsList';
-import Button from '../../../button/button';
+import Button from '../../../Button/Button';
 import AdminCreateEvent from '../AdminCreateEvent/AdminCreateEvent';
 import './AdminEventsContent.css';
 

@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../../Assets/images/logo.svg"
 import "./Navigation.css"
 import MainLogo from "../MainLogo/MainLogo"
-import Button from "../button/button"
+import Button from "../Button/Button"
 
 
  class Navigation extends Component{

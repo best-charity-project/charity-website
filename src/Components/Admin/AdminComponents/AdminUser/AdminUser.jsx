@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Button from '../../../button/button';
+import Button from '../../../Button/Button';
 import './AdminUser.css';
 
 class AdminUser extends Component {
