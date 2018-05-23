@@ -25,14 +25,14 @@ body{
 }
 .menu-list-admin a:first-child li:before{
     content: '';
-    background-image: url(../../Assets/images/AdminPanel/mbri-users.svg);
+    background-image: url(../../Assets/AssetsSvg/mbri-users.svg);
     background-repeat: no-repeat;
     width: 40px;
     height: 30px;
 }
 .menu-list-admin a:nth-child(2) li:before{
     content: '';
-    background-image: url(../../Assets/images/AdminPanel/mbri-calendar.svg);
+    background-image: url(../../Assets/AssetsSvg/mbri-calendar.svg);
     background-repeat: no-repeat;
     width: 40px;
     height: 30px;
