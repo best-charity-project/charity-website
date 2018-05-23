@@ -11,20 +11,12 @@
 	flex-grow: 0;
 	justify-content: space-between;
 }
-<<<<<<< HEAD:src/Components/Menu/Menu.css
 .menu-links-client {
-=======
-.menu-list-client{
->>>>>>> new-version-create-react-app:src/Components/menu/menu.css
 	margin-left: 57px;
 	margin-top: 7px;
 	list-style: none;;
 }
-<<<<<<< HEAD:src/Components/Menu/Menu.css
 .menu-links-client li{
-=======
-.menu-list-client li{
->>>>>>> new-version-create-react-app:src/Components/menu/menu.css
 	text-transform: uppercase;
 	font-size: 18px;
 	margin-right: 40px;
@@ -60,10 +52,6 @@
 .social-icons li:nth-child(4) a{
 	background-image:url(../../Assets/images/svg/vk.svg);
 }
-<<<<<<< HEAD:src/Components/Menu/Menu.css
 .menu-links-client .active-link-client{
-=======
-.menu-list-client .active-link-client{
->>>>>>> new-version-create-react-app:src/Components/menu/menu.css
 	color: black;
 }

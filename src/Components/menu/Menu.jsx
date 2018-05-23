@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import Logo from './logo'
-import MainList from './mainList'
-import MediaList from './mediaList'
+import Logo from '../Menu/Logo';
+import MenuLinks from '../Menu/MenuLinks';
+import SocialLinks from '../Menu/SocialLinks';
+
 class Menu extends Component {
   render() {
     return (
   <div className ={'menu '+ this.props.name }> 
       <Logo/>
-      <MainList list = {[
-        {name: 'о нас', url :'/'},
-        {name: 'новости', url :'/news'}]} 
-        onClick = {this.handlerClick}
-        classActive = 'active-link-client'
-        className = 'menu-list-client'/>
-       <MediaList/>
+      <MenuLinks
+       list = {[{name: 'о нас', url :'/'},{name: 'новости', url :'/news'}]} 
+       onClick = {this.handlerClick}
+       classActive = 'active-link-client'
+       className = 'menu-links-client'/>
+       <SocialLinks />
   </div>
     );
   }
