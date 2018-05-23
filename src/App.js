@@ -6,6 +6,8 @@ import Navigation from "./Components/Navigation/Navigation";
 import Error from "./Components/Error/Error";
 import Admin from "./Components/Admin/Admin";
 
+import "./App.css"
+
 class App extends Component {
   render() {
     return (
