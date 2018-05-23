@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import {BrowserRouter , Route , Switch , NavLink } from "react-router-dom";
-
-import "./NavBar.css"
-
-import logo from "../../Assets/images/logo.svg"
-import MainList from "../menu/mainList"
-
+import "./NavBar.css";
+import logo from "../../Assets/AssetsSvg/on-info-logo.svg";
+import MainList from "../Menu/MenuLinks";
 
 const NavBar = ()=>{
     return (
