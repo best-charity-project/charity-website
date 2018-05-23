@@ -1,25 +1,22 @@
 .logo{
-
 	background-image: url(../../Assets/images/svg/on-info-logo.svg);
 	background-repeat: no-repeat;
 	width: 155px;
 	height: 55px;
 
 }
-.menu{
-	display: flex;
-}
 .client-menu{
+	display: flex;
 	flex-direction: row;
 	flex-grow: 0;
 	justify-content: space-between;
 }
-.menu-list-client{
+.menu-links-client {
 	margin-left: 57px;
 	margin-top: 7px;
 	list-style: none;;
 }
-.menu-list-client li{
+.menu-links-client li{
 	text-transform: uppercase;
 	font-size: 18px;
 	margin-right: 40px;
@@ -27,34 +24,34 @@
     color: #9b9b9b;
 
 }
-.media-list{
+.social-icons{
 	margin-top: 8px;
 	margin-right: 40px;
 	list-style: none;
 }
-.media-list li{	
+.social-icons li{	
 	display: inline-block;
 	margin-left: 10px;
 }
-.media-list a{
+.social-icons a{
 	background-repeat: no-repeat;
 	width: 33px;
 	height: 20px;
 	background-position: bottom;
 	display: inline-block;
 }
-.media-list li:first-child a{
+.social-icons li:first-child a{
 	background-image:url(../../Assets/images/svg/Facebook.svg);
 }
-.media-list li:nth-child(2) a{
+.social-icons li:nth-child(2) a{
 	background-image:url(../../Assets/images/svg/youtube.svg);
 }
-.media-list li:nth-child(3) a{
+.social-icons li:nth-child(3) a{
 	background-image:url(../../Assets/images/svg/instagram.svg);
 }
-.media-list li:nth-child(4) a{
+.social-icons li:nth-child(4) a{
 	background-image:url(../../Assets/images/svg/vk.svg);
 }
-.menu-list-client .active-link-client{
+.menu-links-client .active-link-client{
 	color: black;
 }

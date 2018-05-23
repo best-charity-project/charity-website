@@ -1,4 +1,4 @@
-.footer{
+.footer-client{
   display: block;
   margin-top:-40px;
   height: 40px;
@@ -8,9 +8,6 @@
   color: #9b9b9b;
   text-align:top;
   padding-bottom: 20px;
-}
-.footer {
-	display: block;
 }
 .link-on-main-page{
   display: inline-block;

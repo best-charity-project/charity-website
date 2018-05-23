@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import './input.css';
+import './TextField.css';
 
-class Input extends Component {
+class TextField extends Component {
   render() {
-  	console.log(this.props)
  return(
  		<div>
  		<label htmlFor = {this.props.id}> </label>
@@ -13,4 +12,4 @@ class Input extends Component {
 }
 }
 
-export default Input;
+export default TextField;
