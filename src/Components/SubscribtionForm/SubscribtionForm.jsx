@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './SubscribtionForm.css';
 import TextField from '../TextField/TextField';
-import Button from '../Button/Butt';
+import Button from '../Button/Button';
 import Error from "../ErrorEmail/ErrorEmail";
 import '../ErrorEmail/ErrorEmail.css';
 
