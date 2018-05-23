@@ -1,24 +1,24 @@
 import React, {Component} from 'react';
-import Input from '../../../Input/Input';
+import TextField from '../../../TextField/TextField';
 import './AdminUserSearch.css';
-import searchImg from '../../../../../src/Assets/images/Search.svg';
+import searchImg from '../../../../../src/Assets/AssetsSvg/Search.svg';
 
 class AdminUserSearch extends Component {
     render() {
         return (
             <div className="search-user">
                 <img src={searchImg} />
-                <Input 
+                <TextField 
                     type="search" 
                     nameClass="admin-search-input" 
-                    clickHandler={this.onSearch} 
+                    onChangeValue={this.onSearch} 
                     placeholder="Поиск пользователя" 
                 />
             </div>
         )
     }
-    onSearch = (event) => {
-        this.props.findUser(event.target.value.toLowerCase());
+    onSearch = (value) => {
+        this.props.findUser(value.toLowerCase());
     }
 }
 

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import {BrowserRouter , Route , Switch , NavLink } from "react-router-dom";
-
-import AdminMain from "./AdminMain/AdminMain"
-import AdminEvents from "./AdminEvents/AdminEvents"
-import NavBar from "../NavBar/NavBar"
-import Navigation from "../Navigation/Navigation"
-
+import AdminMain from "../../Components/Admin/AdminMain/AdminMain";
+import AdminEvents from "../../Components/Admin/AdminEvents/AdminEvents";
+import NavBar from "../../Components/NavBar/NavBar";
+import Navigation from "../../Components/Navigation/Navigation";
 import "./Admin.css";
 
 export default class Admin extends React.Component {

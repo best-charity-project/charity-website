@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import AdminDateEvent from '../AdminDateEvent/AdminDateEvent';
 import AdminTextEvent from '../AdminTextEvent/AdminTextEvent';
 import Button from '../../../Button/Button';
-import Input from '../../../Input/Input';
+import TextField from '../../../TextField/TextField';
 import './AdminCreateEvent.css';
 
 class AdminCreateEvent extends Component {
@@ -11,7 +11,7 @@ class AdminCreateEvent extends Component {
             <div>
                 <AdminDateEvent /> 
                 <div className="event-title">
-                    <Input 
+                    <TextField 
                         id = "title" 
                         type = "text" 
                         name = "title" 

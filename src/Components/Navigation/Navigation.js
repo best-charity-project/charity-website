@@ -10,6 +10,7 @@ import Button from "../Button/Button"
      render(){
         return (
             <div className="container-min">
+                <img src={logo} className="main-logo"/>
                 <Button label="Выйти" name="button-admin-exit" clickHandler ={this.props.onLogout}/>
             </div>            
         )
