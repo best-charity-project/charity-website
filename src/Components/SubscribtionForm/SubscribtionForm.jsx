@@ -3,8 +3,7 @@ import './SubscribtionForm.css';
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
 import Error from "../ErrorEmail/ErrorEmail";
-import '../ErrorEmail/ErrorEmail.css'
-
+import '../ErrorEmail/ErrorEmail.css';
 
 class SubscribtionForm extends Component {
   constructor(props){
@@ -34,20 +33,20 @@ class SubscribtionForm extends Component {
   render() {
     return (
       <div className = 'subscribtion-form'> 
-          <div className = 'wrapper-input'>
-         
+          <div className = 'wrapper-input'>         
             <TextField 
-            type = 'email' 
-            nameClass = 'input-email' 
-            placeholder = "Введите адрес электронной почты" 
-            name = 'email' 
-            onChangeValue = {this.getValue}
-            onFocusInput = {this.onFocusInput} />
+              type = 'email' 
+              nameClass = 'input-email' 
+              placeholder = "Введите адрес электронной почты" 
+              name = 'email' 
+              onChangeValue = {this.getValue}
+              onFocusInput = {this.onFocusInput}
+             />
             {!(this.state.error) ?  <Error />: null }
           </div>
           <Button name = 'button-subscribe' 
-           label = "подписаться" 
-           clickHandler = {this.clickHandler}/>
+            label = "подписаться" 
+            clickHandler = {this.clickHandler}/>
       </div>
     );
   }

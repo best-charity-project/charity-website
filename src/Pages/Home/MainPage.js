@@ -6,7 +6,7 @@ import "../Home/MainPage.css"
 class Home extends Component {
   render() {
     return (
-			<div className="main-page-client">
+		<div className="main-page-client">
 			<Menu name = 'client-menu'/>
 				<AboutUs/>
 				<Footer/>

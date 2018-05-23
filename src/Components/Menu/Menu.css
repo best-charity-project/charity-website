@@ -2,13 +2,13 @@
 	background-image: url(../../Assets/images/svg/on-info-logo.svg);
 	background-repeat: no-repeat;
 	width: 155px;
-	height: 55px;
+	height: 35px;
 
 }
 .client-menu{
+	padding:0 15px;
 	display: flex;
-	flex-direction: row;
-	flex-grow: 0;
+	/* flex-grow: 0; */
 	justify-content: space-between;
 }
 .menu-links-client {
@@ -16,13 +16,18 @@
 	margin-top: 7px;
 	list-style: none;;
 }
-.menu-links-client li{
+.menu-links-client li{	
 	text-transform: uppercase;
 	font-size: 18px;
 	margin-right: 40px;
 	display: inline-block;
-    color: #9b9b9b;
-
+	color: #9b9b9b;
+	font-weight: 600;
+	
+}
+.menu-links-client li a{
+	text-decoration: none;
+	color: #9b9b9b;
 }
 .social-icons{
 	margin-top: 8px;
