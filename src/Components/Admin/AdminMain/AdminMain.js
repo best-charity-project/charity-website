@@ -1,11 +1,13 @@
-import React from "react"
+import React from "react";
+import "./AdminMain.css";
+import AdminUsersContent from '../AdminComponents/AdminUsersContent/AdminUsersContent';
 
-import "./AdminMain.css"
-const AdminMain = ()=>{
+const AdminMain = () => {
     return (
-        <div>
-            <p>HOMIEZ PAGE YEAHH</p>
+        <div className="admin-content">
+            <AdminUsersContent />
         </div>          
     )
 }
+
 export default AdminMain;

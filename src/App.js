@@ -4,7 +4,7 @@ import './App.css';
 import Home from "./Pages/Home/MainPage";
 import Navigation from "./Components/Navigation/Navigation";
 import Error from "./Components/Error/Error";
-import Admin from "./Components/Admin/Admin";
+import Admin from "./Pages/Admin/Admin";
 
 import "./App.css"
 
@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className = "container">
+        <div className = "container-main">
           <Switch>
             <Route path="/" component={Home} exact />
             <Route path="/admin-panel" component={Admin}/>

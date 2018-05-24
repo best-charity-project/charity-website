@@ -9,7 +9,7 @@ class TextField extends Component {
   render() {
  return(
  		<div>
- 		<label htmlFor = {this.props.id}> </label>
+ 		<label htmlFor = {this.props.id}>{this.props.title}</label>
 			<input  
 			type = {this.props.type} 
 			className = {this.props.nameClass} 

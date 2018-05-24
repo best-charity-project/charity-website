@@ -1,10 +1,14 @@
-import React from "react"
+import React from "react";
+import AdminEventsContent from '../AdminComponents/AdminEventsContent/AdminEventsContent';
+import './AdminEvents.css';
 
-const AdminEvents = ()=>{
+const AdminEvents = () => {
     return (
-        <div>
-            <p>EVENTS</p>
+        <div className="admin-content">
+            <AdminEventsContent />
         </div>          
     )
 }
+
 export default AdminEvents;
+
