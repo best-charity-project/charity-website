@@ -5,6 +5,7 @@ import AdminEvents from "../../Components/Admin/AdminEvents/AdminEvents";
 import NavBar from "../../Components/NavBar/NavBar";
 import Navigation from "../../Components/Navigation/Navigation";
 import "./Admin.css";
+import Button from "../../Components/Button/Button"
 
 export default class Admin extends React.Component {
     state = {
@@ -47,7 +48,7 @@ export default class Admin extends React.Component {
                                 <input type="password" placeholder="Enter Password" name="password" required className="password-input" />
                             </div>
                             
-                            <button type="submit" className="password-btn">Sign In</button>
+                            <Button type="submit" name="button-admin-login" label="Sign In" />
                         </div>
                     </form>
                 </div>          

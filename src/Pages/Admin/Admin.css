@@ -63,14 +63,3 @@ input[type=text], input[type=password] {
     position: absolute;
     margin-left: 65px;
 }
-.password-btn {
-    background-color: #4CAF50;
-    color: #ffffff;
-    font-size: 20px;
-    padding: 14px 20px;
-    margin: 20px auto 5px 55px;
-    border: none;
-    cursor: pointer;
-    width: 300px;
-    border-radius: 5px;
-}
