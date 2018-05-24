@@ -8,6 +8,17 @@
     background-color: #e8e6e2;
     border: solid 2px #979797;
 }
+.button-admin-login {
+    background-color: #4CAF50;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 14px 20px;
+    margin: 20px auto 5px 55px;
+    border: none;
+    cursor: pointer;
+    width: 300px;
+    border-radius: 5px;
+}
 .button-admin-exit{
     background-color: #4CAF50;
     color: #fff;

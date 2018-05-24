@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import {BrowserRouter , Route , Switch , NavLink } from "react-router-dom";
+
 import AdminMain from "../../Components/Admin/AdminMain/AdminMain";
 import AdminEvents from "../../Components/Admin/AdminEvents/AdminEvents";
 import NavBar from "../../Components/NavBar/NavBar";
 import Navigation from "../../Components/Navigation/Navigation";
+import Button from "../../Components/Button/Button";
+
 import "./Admin.css";
 
 export default class Admin extends React.Component {
@@ -47,7 +50,7 @@ export default class Admin extends React.Component {
                                 <input type="password" placeholder="Enter Password" name="password" required className="password-input" />
                             </div>
                             
-                            <button type="submit" className="password-btn">Sign In</button>
+                            <Button type="submit" name="button-admin-login" label="Sign In" />
                         </div>
                     </form>
                 </div>          
