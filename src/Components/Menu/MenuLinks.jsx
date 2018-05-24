@@ -25,7 +25,7 @@ handlerClick = (e)=>{
            if (index === 0) {
              return <NavLink   to={el.url} key = {index}><li  className = {classActive}>{el.name}</li></NavLink>
            }
-           return <NavLink  to='/' key = {index}><li >{el.name}</li></NavLink>
+           return <NavLink  to={el.url} key = {index}><li >{el.name}</li></NavLink>
          })}
          </ul>
      </div>
