@@ -13,7 +13,7 @@ class AdminUsersList extends Component {
                 </div>
                 <div>
                     {this.props.users.map(user => 
-                        <AdminUser user = {user} key = {user.id} />
+                        <AdminUser user = {user} key = {user._id} />
                     )}
                 </div>   
             </div>    
