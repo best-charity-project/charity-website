@@ -18,7 +18,7 @@ class AdminTextEvent extends Component {
                         image: {previewImage: true,
                                 uploadCallback: this.uploadImageCallBack}
                     }}
-                />
+                /> 
             </div>
         )
     }

@@ -30,6 +30,7 @@ class AdminDateEvent extends Component {
         this.setState({
             selectedDate: date
         })
+        this.props.onSelectData(date); 
     }
 }
 

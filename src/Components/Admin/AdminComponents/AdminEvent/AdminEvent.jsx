@@ -6,8 +6,8 @@ class AdminEvent extends Component {
     render() {
         return (
             <div className="event-admin">
-                <div>{this.props.event.login}</div>
-                <div>{this.props.event.id}</div>
+                <div>{this.props.event.name}</div>
+                <div>{this.props.event.date}</div>
                 <div>
                     <Button 
                         name = "button-admin admin-cancel" 
