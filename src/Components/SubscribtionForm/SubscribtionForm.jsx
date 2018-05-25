@@ -13,8 +13,8 @@ class SubscribtionForm extends Component {
       error:true
     }
   }
- onFocusInput = () => {
-   this.setState({error:true})
+  onFocusInput = () => {
+    this.setState({error:true})
  }
   getValue = (str) => {
     const newValue = str;
@@ -22,12 +22,38 @@ class SubscribtionForm extends Component {
   }
 
   clickHandler = (e) => {
-    this.validation();
+    e.preventDefault();
+    if(!this.validation()){
+      this.setState({value:''})
+    }
   }
-
+ 
   validation = () => {
     const newValue = this.state.value;
-      this.setState({error: /[0-9a-z_]+@[0-9a-z_]+\.[a-z]{2,5}/i.test(newValue)})
+    if(/[0-9a-z_]+@[0-9a-z_]+\.[a-z]{2,5}/i.test(newValue)){
+      this.setState({error: /[0-9a-z_]+@[0-9a-z_]+\.[a-z]{2,5}/i.test(newValue)});
+      this.onSubscribe();
+      return true;
+    }else{
+        this.setState({error: /[0-9a-z_]+@[0-9a-z_]+\.[a-z]{2,5}/i.test(newValue)});
+        return false;
+      }
+  }
+  onSubscribe = () => {
+    const newValue = this.state.value;
+    console.log(newValue);
+    fetch('http://localhost:3001/api/subscription', {
+      method: 'post',
+      headers:{
+         Accept:'application/json',
+        'Content-Type':'application/json',
+      },
+      credentials: 'cors',
+      body: JSON.stringify({email: newValue})
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
   }
 
   render() {
@@ -41,6 +67,7 @@ class SubscribtionForm extends Component {
               name = 'email' 
               onChangeValue = {this.getValue}
               onFocusInput = {this.onFocusInput}
+              onSubscribe = {this.onSubscribe}
              />
             {!(this.state.error) ?  <Error />: null }
           </div>
