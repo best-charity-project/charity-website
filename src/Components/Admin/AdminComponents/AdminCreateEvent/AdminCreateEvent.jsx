@@ -4,33 +4,33 @@ import AdminTextEvent from '../AdminTextEvent/AdminTextEvent';
 import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
 import './AdminCreateEvent.css';
+import MyEditor from  "../AdminEditor/AdminEditor";
 
 class AdminCreateEvent extends Component {
     state = {
         name: '',
-        date:''
+        date:'',
+        text : ''
     }
 
     getValue = (str) => {
         const newValue = str;
-        console.log(str)
-        this.setState({name:str})
-        // this.setState({value:newValue});
+        this.setState({name:str});
       }
-      getData = (str) =>{
+      getDate = (str) =>{
           let milissecCount = Date.parse(str);
           let date = new Date(milissecCount);
           let day = ((date.getDate()-1)<=10)?'0'+(date.getDate()):(date.getDate());
           let month= ((date.getMonth()-1)<10)?'0'+(date.getMonth()+1):(date.getMonth()-1);
-          console.log(date.getMonth())
           let newDate = day+'.'+month+'.'+date.getFullYear();
-          console.log(newDate)
-        this.setState({date:newDate})
+          this.setState({date:newDate})
       }
 
-      saveEvent = () =>{
-        alert('rfrf');
-        console.log(this.state);
+      getCurrentText = (str) =>{
+        this.setState({text:str});
+    }
+
+      sandEvent = () =>{
         fetch('http://localhost:3001/api/admin-panel/events', {
             method: 'POST',
             headers: {
@@ -41,15 +41,15 @@ class AdminCreateEvent extends Component {
             body: JSON.stringify(this.state),
         })
             .then(response => response.json())
-            .then(data => console.log(data));
       }
+   
     render() {
-        
-
         return(
-            <div>
-                <AdminDateEvent onSelectData= {this.getData}/> 
+            <div className = 'modal-window'> 
+                <div className = "date-and-input">
+                <AdminDateEvent onSelectData= {this.getDate}/> 
                 <div className="event-title">
+                <p>Название события</p>
                 <TextField 
                     id = "title" 
                     type = 'text' 
@@ -58,13 +58,13 @@ class AdminCreateEvent extends Component {
                     onChangeValue = {this.getValue}
                     />
                 </div>
-                <AdminTextEvent/>  
+                </div>
+                <MyEditor getCurrentText = {this.getCurrentText} />
                 <div className="change-state-buttons">  
                     <Button 
-
                         name = "button-admin button-admin-background" 
                         label = 'Сохранить' 
-                        clickHandler = {this.saveEvent} 
+                        clickHandler = {this.sandEvent}
                     />
                     <Button 
                         name = "button-admin button-admin-background" 

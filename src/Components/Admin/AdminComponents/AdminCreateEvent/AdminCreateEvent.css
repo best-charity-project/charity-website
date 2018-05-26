@@ -1,8 +1,12 @@
-.event-title div {
+.date-and-input{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin:25px;
+    padding-left: 40px;
+    margin-top: 10px;
+    flex-direction: column;
+}
+.event-title {
+    display: flex;
+    margin:15px 0;
 }
 .change-state-buttons {
     margin: 25px 0px;

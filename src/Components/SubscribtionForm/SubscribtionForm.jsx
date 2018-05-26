@@ -31,7 +31,6 @@ class SubscribtionForm extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className = 'subscribtion-form'> 
           <div className = 'wrapper-input'>         

@@ -98,6 +98,5 @@
   },
   "devDependencies": {
     "eslint-config-react": "^1.1.7"
-  },
-  "proxy":"http://localhost:3001"
+  }
 }

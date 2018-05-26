@@ -10,8 +10,9 @@ class AdminDateEvent extends Component {
     componentDidMount() {
         this.setState({
             selectedDate: moment().format()
-        })
+        })        
     }
+
     render() {
         return (
             <div className="datepicker">
@@ -32,6 +33,7 @@ class AdminDateEvent extends Component {
         })
         this.props.onSelectData(date); 
     }
+    
 }
 
 export default AdminDateEvent;
