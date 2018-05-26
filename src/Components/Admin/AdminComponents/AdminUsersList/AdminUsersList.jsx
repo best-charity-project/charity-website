@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import AdminUser from '../AdminUser/AdminUser';
 import './AdminUsersList.css';
-const URL = 'https://api.github.com/users';
 
 class AdminUsersList extends Component {
     render() {
