@@ -8,6 +8,9 @@ class AdminUser extends Component {
         isSubscribe: true,
         error: null
     }
+    componentDidMount() {
+        this.setState({isSubscribe: this.props.user.isSubscribeStatus})
+    }
     render() {
         const {isSubscribe, error} = this.state;
         if (error) {
@@ -26,7 +29,7 @@ class AdminUser extends Component {
         ) 
     }
     handleClick = () => {
-        fetch(URL + '/api/subscribers/' + this.props.user._id + '/subscribe', {
+        fetch(URL + '/api/subscription/' + this.props.user._id + '/subscribe', {
             method: 'PUT',
             headers: {
                 Accept: 'application/json',
@@ -41,7 +44,7 @@ class AdminUser extends Component {
                     throw new Error('Something went wrong ...')
                 }
             })
-            .then(data => this.setState({isSubscribe: data.subscriber.isSubscribed}))
+            .then(data => this.setState({isSubscribe: data.subscriber.isSubscribeStatus}))
             .catch(error => this.setState({error}))
     }
 }
