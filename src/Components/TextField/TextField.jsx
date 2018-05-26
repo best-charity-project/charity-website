@@ -11,6 +11,7 @@ class TextField extends Component {
  		<div>
  		<label htmlFor = {this.props.id}>{this.props.title}</label>
 			<input  
+			value = {this.props.value}
 			type = {this.props.type} 
 			className = {this.props.nameClass} 
 			id = {this.props.id}  

@@ -1,15 +1,22 @@
 import React, {Component} from 'react';
 import Button from '../../../Button/Button';
 import './AdminUser.css';
+const URL = 'http://localhost:3001';
 
 class AdminUser extends Component {
     state = {
-        isSubscribe: true
+        isSubscribe: true,
+        error: null
     }
     render() {
+        const {isSubscribe, error} = this.state;
+        if (error) {
+            return <p>{error.message}</p>
+        }
+
         return (
             <div className={this.state.isSubscribe ? "admin-part-user" : "admin-part-user unsubscribed"}>
-                <div>{this.props.user.login}</div>
+                <div>{this.props.user.email}</div>
                 <Button 
                     name = "button-admin" 
                     label = {this.state.isSubscribe ? 'Отписать' : 'Подписать'} 
@@ -19,9 +26,23 @@ class AdminUser extends Component {
         ) 
     }
     handleClick = () => {
-        this.setState({
-            isSubscribe: !this.state.isSubscribe
-        })
+        fetch(URL + '/api/subscribers/' + this.props.user._id + '/subscribe', {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            credentials: 'cors'
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    throw new Error('Something went wrong ...')
+                }
+            })
+            .then(data => this.setState({isSubscribe: data.subscriber.isSubscribed}))
+            .catch(error => this.setState({error}))
     }
 }
 
