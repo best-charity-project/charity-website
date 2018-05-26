@@ -13,21 +13,31 @@ class SubscribtionForm extends Component {
       error:true
     }
   }
+
  onFocusInput = () => {
    this.setState({error:true})
  }
+ 
   getValue = (str) => {
     const newValue = str;
     this.setState({value:newValue});
   }
 
   clickHandler = (e) => {
-    this.validation();
+    if(this.validation()){
+      this.setState({value:''})
+    }
   }
 
   validation = () => {
     const newValue = this.state.value;
-      this.setState({error: /[0-9a-z_]+@[0-9a-z_]+\.[a-z]{2,5}/i.test(newValue)})
+    if(/[0-9a-z_]+@[0-9a-z_]+\.[a-z]{2,5}/i.test(newValue)){
+      this.setState({error: /[0-9a-z_]+@[0-9a-z_]+\.[a-z]{2,5}/i.test(newValue)});
+      return true;
+    }else{
+        this.setState({error: /[0-9a-z_]+@[0-9a-z_]+\.[a-z]{2,5}/i.test(newValue)});
+        return false;
+      }
   }
 
   render() {
@@ -41,8 +51,9 @@ class SubscribtionForm extends Component {
               name = 'email' 
               onChangeValue = {this.getValue}
               onFocusInput = {this.onFocusInput}
+              value = {this.state.value}
              />
-            {!(this.state.error) ?  <Error />: null }
+            {!(this.state.error) ?  <Error /> : null }
           </div>
           <Button name = 'button-subscribe' 
             label = "подписаться" 

@@ -10,9 +10,7 @@ class Footer extends Component {
     return (
   		<div className = 'footer-client'> 
 			<span>&#169; </span>
-			<div className = "link-on-main-page">
-				<NavLink to="/"> on-info</NavLink>
-			</div>
+				<NavLink to="/" className = 'link-on-main-page'> on-info</NavLink>
 			<span>, {(new Date()).getFullYear()}</span>
   		</div>
     );
