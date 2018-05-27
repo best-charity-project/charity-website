@@ -21,7 +21,7 @@ class AdminDateEvent extends Component {
                     <DatePickerInput
                         locale = 'ru'
                         onChange={this.onChange}
-                        value={this.state.selectedDate}
+                        value={this.props.date}
                     />
                 </div>
             </div>
