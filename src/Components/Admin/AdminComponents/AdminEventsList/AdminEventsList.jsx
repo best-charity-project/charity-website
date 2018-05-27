@@ -8,7 +8,7 @@ class AdminEventsList extends Component {
         error: null
     }
     componentDidMount() {
-        fetch('http://localhost:3001/api/admin-panel/events')
+        fetch('http://localhost:3001/api/events')
         .then(response => response.json())
         .then(data => {
             this.setState({events : data.events});
@@ -39,7 +39,7 @@ class AdminEventsList extends Component {
     }
     deleteEvent = (user) => {
         let id = user._id
-        fetch('http://localhost:3001/api/admin-panel/events', {
+        fetch('http://localhost:3001/api/events', {
             method: 'DELETE',
             headers: {
                 Accept: 'application/json',

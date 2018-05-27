@@ -6,12 +6,6 @@ import 'rc-datepicker/lib/style.css';
 import './AdminDateEvent.css'; 
 
 class AdminDateEvent extends Component {
-    state = {selectedDate: ''}
-    componentDidMount() {
-        this.setState({
-            selectedDate: moment().format()
-        })        
-    }
 
     render() {
         return (
@@ -21,7 +15,7 @@ class AdminDateEvent extends Component {
                     <DatePickerInput
                         locale = 'ru'
                         onChange={this.onChange}
-                        value={this.state.selectedDate}
+                        value={this.props.date}
                     />
                 </div>
             </div>
@@ -37,5 +31,4 @@ class AdminDateEvent extends Component {
 }
 
 export default AdminDateEvent;
-
 
