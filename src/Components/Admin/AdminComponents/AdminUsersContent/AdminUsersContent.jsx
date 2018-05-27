@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import AdminUserSearch from '../AdminUserSearch/AdminUserSearch';
 import AdminUsersList from '../AdminUsersList/AdminUsersList';
-const URL = 'https://api.github.com/users';
+const URL = 'http://localhost:3001';
 
 class AdminUsersContent extends Component {
     state = {
@@ -11,7 +11,10 @@ class AdminUsersContent extends Component {
         error: null
     }
     componentDidMount() {
-        fetch(URL)
+        fetch(URL + '/api/subscription', { 
+            method: 'GET',
+            mode: 'cors'
+            })
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -19,7 +22,7 @@ class AdminUsersContent extends Component {
                     throw new Error('Something went wrong ...')
                 }
             })
-            .then(data => this.setState({users: data, filteredUsers: data, isLoading: false}))
+            .then(data => this.setState({users: data.subscribers, filteredUsers: data.subscribers, isLoading: false}))
             .catch(error => this.setState({error, isLoading: false}))
     }
     render() {
@@ -39,7 +42,10 @@ class AdminUsersContent extends Component {
     }
     findUser = (email) => {
         if(!email) {
-            fetch(URL)
+            fetch(URL + '/api/subscription', {
+                method: 'GET', 
+                mode: 'cors'
+                })
                 .then(response => {
                     if (response.ok) {
                         return response.json()
@@ -47,13 +53,13 @@ class AdminUsersContent extends Component {
                         throw new Error('Something went wrong ...')
                     }
                 })
-                .then(data => this.setState({filteredUsers: data}))
+                .then(data => this.setState({filteredUsers: data.subscribers}))
                 .catch(error => this.setState({error}))
         } else {
             const {users} = this.state
             this.setState({
                 filteredUsers: users.filter((item) => {
-                    return item.login.includes(email)
+                    return item.email.includes(email)
                 })
             })
         }
@@ -61,4 +67,6 @@ class AdminUsersContent extends Component {
 }
 
 export default AdminUsersContent;
+
+
 

@@ -1,26 +1,45 @@
 import React, { Component } from 'react';
 import './TextField.css';
+import Error from "../ErrorEmail/ErrorEmail";
+import '../ErrorEmail/ErrorEmail.css';
 
 class TextField extends Component {
-	valueChange = (e)=>{
-		let value = e.target.value;
-		this.props.onChangeValue(value);
+	state = {
+		value:null,
+		error:false
+	}
+	validateField = (newValue) => {
+		let resultValidation = /[0-9a-z_]+@[0-9a-z_]+\.[a-z]{2,5}/i.test(newValue);
+		this.setState({error:resultValidation})
+	}
+
+	valueChange = (e) => {
+		const newValue = e.target.value;
+		this.setState({value:e.target.value}, () =>{
+			
+			this.props.onChangeValue(this.state);
+		});
+		this.validateField(newValue);	
 	}
   render() {
  return(
  		<div className = 'container-for-input'> 
  		<label htmlFor = {this.props.id}>{this.props.title}</label>
 			<input  
+			value = {this.props.value}
 			type = {this.props.type} 
 			className = {this.props.nameClass} 
 			id = {this.props.id}  
 			name = {this.props.name} 
 			placeholder = {this.props.placeholder} 
 			onChange = {this.valueChange}
-			onFocus = {this.props.onFocusInput}/> 
+			onFocus = {this.props.onFocusInput} 
+			/> 
+			{((this.props.sendToValidation)&&!(this.state.error))? <Error/> : null}
 		</div>
+
 		)
-}
+	}
 }
 
 export default TextField;

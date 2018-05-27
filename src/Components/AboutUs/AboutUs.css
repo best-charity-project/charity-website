@@ -1,9 +1,14 @@
 .about-us{
+	background-color: #ebeae6;
 	flex-grow: 1;
 	flex-direction: row;
 	display: flex;
-}
-.main-picture img{
-	height: 100%;
-}
+	justify-content: flex-end;
 
+}
+.with-picture{
+	
+	background: url(../../Assets/AssetsImg/main1.png) no-repeat;
+	background-size: auto 100%;
+	background-position: 20px 10px;
+}

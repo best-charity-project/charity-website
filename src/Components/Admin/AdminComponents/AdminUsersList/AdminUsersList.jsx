@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import AdminUser from '../AdminUser/AdminUser';
 import './AdminUsersList.css';
-const URL = 'https://api.github.com/users';
 
 class AdminUsersList extends Component {
     render() {
@@ -13,7 +12,7 @@ class AdminUsersList extends Component {
                 </div>
                 <div>
                     {this.props.users.map(user => 
-                        <AdminUser user = {user} key = {user.id} />
+                        <AdminUser user = {user} key = {user._id} />
                     )}
                 </div>   
             </div>    
