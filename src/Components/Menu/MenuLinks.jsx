@@ -7,7 +7,6 @@ constructor(props){
     this.state = this.props
 }
 handlerClick = (e)=>{
-  console.log()
   let linksArray = e.target.parentNode.parentNode.childNodes;
   for (var i = 0; i <linksArray.length; i++) {
     if (linksArray[i].firstChild.classList.contains(this.props.classActive)) {

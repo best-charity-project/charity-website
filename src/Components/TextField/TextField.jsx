@@ -8,7 +8,7 @@ class TextField extends Component {
 	}
   render() {
  return(
- 		<div>
+ 		<div className = 'container-for-input'> 
  		<label htmlFor = {this.props.id}>{this.props.title}</label>
 			<input  
 			value = {this.props.value}

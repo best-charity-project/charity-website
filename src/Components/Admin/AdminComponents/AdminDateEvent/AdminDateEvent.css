@@ -1,9 +1,13 @@
 .datepicker {
-    margin:25px;
     display: flex;
-    justify-content: center;
+    
     align-items: baseline;
 }
 .datepicker > div {
-    margin: 0 10px;
+    margin-right: 52px;
+}
+.modal-window{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

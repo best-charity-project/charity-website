@@ -1,34 +1,22 @@
 import React, {Component} from 'react';
 import AdminEvent from '../AdminEvent/AdminEvent';
 import './AdminEventsList.css';
-const URL = 'https://api.github.com/users';
 
 class AdminEventsList extends Component {
     state = {
-        events: [], 
         isLoading: true,
         error: null
     }
     componentDidMount() {
-        fetch(URL)
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                } else {
-                    throw new Error('Something went wrong ...')
-                }
-            })
-            .then(data => this.setState({events: data, isLoading: false}))
-            .catch(error => this.setState({ error, isLoading: false }))
-    }
+        fetch('http://localhost:3001/api/events')
+        .then(response => response.json())
+        .then(data => {
+            this.setState({events : data.events});
+        })
+        .catch(error => this.setState({ error, isLoading: false }))
+        }
+
     render() {
-        const {events, isLoading, error} = this.state;
-        if (isLoading) {
-            return <p>Loading ...</p>
-        }
-        if (error) {
-            return <p>{error.message}</p>
-        }
         return (
             <div className="events-list-admin">
                 <div className="events-list-header">
@@ -36,23 +24,34 @@ class AdminEventsList extends Component {
                     <div>Дата проведения</div>
                     <div>Удалить событие</div>
                 </div>
-                <div>
-                    {events.map(user => 
+                <div>                    
+                    {(this.state.events)?
+                        this.state.events.map(user => 
                         <AdminEvent 
                             event = {user} 
-                            key = {user.id} 
-                            deleteHandler = {() => this.deleteEvent(user.id)} 
+                            key = {user._id} 
+                            deleteHandler = {() => this.deleteEvent(user)} 
                         />
-                    )}
+                        ):null}
                 </div>  
             </div>  
         )
     }
-    deleteEvent = (id) => {
-        this.setState({
-            events: this.state.events.filter(user => user.id !== id)
+    deleteEvent = (user) => {
+        let id = user._id
+        fetch('http://localhost:3001/api/events', {
+            method: 'DELETE',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            credentials: 'cors',
+            body: JSON.stringify(user),
         })
+            this.setState({            
+                events: this.state.events.filter(user => user._id !== id)
+            })
+            
+      }
     }
-}
-
 export default AdminEventsList;

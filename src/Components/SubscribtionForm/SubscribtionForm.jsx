@@ -43,7 +43,6 @@ class SubscribtionForm extends Component {
     }
     onSubscribe = () => {
         const newValue = this.state.value;
-        console.log(newValue);
         fetch('http://localhost:3001/api/subscription', {
             method: 'post',
             headers: {
