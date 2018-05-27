@@ -1,10 +1,25 @@
 import React, { Component } from 'react';
 import './TextField.css';
+import Error from "../ErrorEmail/ErrorEmail";
+import '../ErrorEmail/ErrorEmail.css';
 
 class TextField extends Component {
-	valueChange = (e)=>{
-		let value = e.target.value;
-		this.props.onChangeValue(value);
+	state = {
+		value:null,
+		error:false
+	}
+	validateField = (newValue) => {
+		let resultValidation = /[0-9a-z_]+@[0-9a-z_]+\.[a-z]{2,5}/i.test(newValue);
+		this.setState({error:resultValidation})
+	}
+
+	valueChange = (e) => {
+		const newValue = e.target.value;
+		this.setState({value:e.target.value}, () =>{
+			
+			this.props.onChangeValue(this.state);
+		});
+		this.validateField(newValue);	
 	}
   render() {
  return(
@@ -20,7 +35,9 @@ class TextField extends Component {
 			onChange = {this.valueChange}
 			onFocus = {this.props.onFocusInput} 
 			/> 
+			{((this.props.sendToValidation)&&!(this.state.error))? <Error/> : null}
 		</div>
+
 		)
 	}
 }

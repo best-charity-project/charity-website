@@ -2,48 +2,40 @@ import React, {Component} from 'react';
 import './SubscribtionForm.css';
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
-import Error from "../ErrorEmail/ErrorEmail";
-import '../ErrorEmail/ErrorEmail.css';
+
 
 class SubscribtionForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: '',
-            error: true
+            value:'',                      
+            valid:false,
+            sendToValidation :false
         }
     }
 
     onFocusInput = () => {
-        this.setState({error: true})
+        this.setState({sendToValidation:false})
     }
-
-    getValue = (str) => {
-        const newValue = str;
-        this.setState({value: newValue});
-    }
-
-    clickHandler = (e) => {
-        e.preventDefault();
-        if (this.validation()) {
-            this.setState({value: ''})
-        }
-    }
-
-    validation = () => {
-        const newValue = this.state.value;
-        if (/[0-9a-z_]+@[0-9a-z_]+\.[a-z]{2,5}/i.test(newValue)) {
-            this.setState({error: /[0-9a-z_]+@[0-9a-z_]+\.[a-z]{2,5}/i.test(newValue)});
+ 
+    getValidation = (obj) => {
+       this.setState({value:obj.value,valid:obj.error});
+     }
+     clickHandler = () => {
+        this.setState({sendToValidation:true});
+        if(this.state.valid){
             this.onSubscribe();
-            return true;
-        } else {
-            this.setState({error: /[0-9a-z_]+@[0-9a-z_]+\.[a-z]{2,5}/i.test(newValue)});
-            return false;
+            this.setState({value:''})
         }
     }
+    
     onSubscribe = () => {
         const newValue = this.state.value;
+<<<<<<< HEAD
+        fetch('http://localhost:3001/api/subscription/newsubscription', {
+=======
         fetch('http://localhost:3001/api/subscription', {
+>>>>>>> new-version-create-react-app
             method: 'post',
             headers: {
                 Accept: 'application/json',
@@ -56,22 +48,22 @@ class SubscribtionForm extends Component {
             .then(data => console.log(data))
             .catch(err => console.log(err));
     }
-
     render() {
         return (
             <div className='subscribtion-form'>
                 <div className='wrapper-input'>
-                    <TextField
+                    <TextField 
+                        value = {this.state.value}
+                        sendToValidation = {this.state.sendToValidation}
                         type='email'
                         nameClass='input-email'
                         placeholder="Введите адрес электронной почты"
                         name='email'
-                        onChangeValue={this.getValue}
+                        onChangeValue={this.getValidation}
                         onFocusInput={this.onFocusInput}
                         onSubscribe={this.onSubscribe}
-                        value={this.state.value}
                     />
-                    {!(this.state.error) ? <Error/> : null}
+                    
                 </div>
                 <Button name='button-subscribe'
                         label="подписаться"
