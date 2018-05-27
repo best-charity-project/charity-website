@@ -6,13 +6,18 @@
   font-size: 16px;
   font-weight: 500;
   color: #9b9b9b;
-  text-align:top;
-  padding-bottom: 20px;
+  text-align:top;  
+  padding-left: 8px;
 }
 .link-on-main-page{
   display: inline-block;
-}
-.link-on-main-page a{
+  font-weight: 600;
   text-decoration: none;
   color: #9b9b9b;;
+}
+.link-on-main-page a{
+  font-weight: 600;
+}
+.footer-client span{
+  font-weight: 600;
 }
