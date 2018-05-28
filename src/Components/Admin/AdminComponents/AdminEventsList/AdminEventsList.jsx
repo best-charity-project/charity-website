@@ -6,15 +6,14 @@ class AdminEventsList extends Component {
     state = {
         isLoading: true,
         error: null
-    }
+    };
     componentDidMount() {
-        fetch('http://localhost:3001/api/events')
-        .then(response => response.json())
-        .then(data => {
-            this.setState({events : data.events});
-        })
-        .catch(error => this.setState({ error, isLoading: false }))
-        }
+        this.updateEventsList();
+    }
+    componentWillUpdate() {
+        this.updateEventsList();
+    }
+
 
     render() {
         return (
@@ -52,6 +51,14 @@ class AdminEventsList extends Component {
                 events: this.state.events.filter(user => user._id !== id)
             })
             
-      }
+      };
+      updateEventsList() {
+        fetch('http://localhost:3001/api/events')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ events: data.events });
+            })
+            .catch(error => this.setState({ error, isLoading: false }));
+    }
     }
 export default AdminEventsList;

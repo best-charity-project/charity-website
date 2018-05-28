@@ -37,7 +37,10 @@ class AdminCreateEvent extends Component {
             body: JSON.stringify(this.state),
         })
             .then(response => response.json());
+            this.setState({name:''})
             this.props.saveEvent()
+            
+            
       }
    cancel = ()=>{
        this.props.cancel()
@@ -50,6 +53,7 @@ class AdminCreateEvent extends Component {
                 <div className="event-title">
                 <p>Название события</p>
                 <TextField 
+                    value = {this.state.name}
                     id = "title" 
                     type = 'text' 
                     nameClass = 'event-title-input'
