@@ -17,7 +17,7 @@ class TextField extends Component {
 		const newValue = e.target.value;
 		this.setState({value:e.target.value}, () =>{
 			
-			this.props.onChangeValue(this.state);
+			this.props.onChangeValue(this.state.value); 
 		});
 		this.validateField(newValue);	
 	}

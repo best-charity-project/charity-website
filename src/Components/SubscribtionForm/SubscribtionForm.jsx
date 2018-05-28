@@ -31,11 +31,7 @@ class SubscribtionForm extends Component {
     
     onSubscribe = () => {
         const newValue = this.state.value;
-<<<<<<< HEAD
         fetch('http://localhost:3001/api/subscription/newsubscription', {
-=======
-        fetch('http://localhost:3001/api/subscription', {
->>>>>>> new-version-create-react-app
             method: 'post',
             headers: {
                 Accept: 'application/json',
