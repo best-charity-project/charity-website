@@ -1,61 +1,73 @@
 import React, { Component } from 'react';
-import {BrowserRouter , Route , Switch , NavLink } from "react-router-dom";
+import {BrowserRouter , Route , Switch , NavLink, Link } from "react-router-dom";
 
 import AdminMain from "../../Components/Admin/AdminMain/AdminMain";
 import AdminEvents from "../../Components/Admin/AdminEvents/AdminEvents";
 import NavBar from "../../Components/NavBar/NavBar";
 import Navigation from "../../Components/Navigation/Navigation";
 import Button from "../../Components/Button/Button";
+import { signInUser } from "../../Components/Admin/Auth";
 
 import "./Admin.css";
 
 export default class Admin extends React.Component {
-    state = {
-        loggedIn: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+        };
+        this.handleLogin = this.handleLogin.bind(this);
+        this.handlePassword = this.handlePassword.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
-    componentDidMount
-    onLogout = () => {
-        this.setState({loggedIn:false})
+
+    handleLogin(event) {
+        this.setState({
+            email: event.target.value,
+        });
     }
-    onSubmit = e => {
+
+    handlePassword(event) {
+        this.setState({
+            password: event.target.value,
+        });
+    }
+
+    handleSubmit(e) {
         e.preventDefault();
-        this.setState({ loggedIn: true })
+        signInUser(this.state);
     }
 
     render() {
-        const { loggedIn } = this.state
-        if (loggedIn) {
-            return (
-                <div className="wrapper-admin">
-                    <Navigation onLogout={this.onLogout} />
-                    <div className="main-admin">
-                    <NavBar/>
-                    <Switch>
-                        <Route path="/admin-panel" component={AdminMain} exact />
-                        <Route path="/admin-panel/events" component={AdminEvents}/>
-                    </Switch>
-                    </div>
-              </div>          
-        )  
-        } else {
             return (
                 <div className="wrapper-admin auth-form">
-                    <form className = 'user-form' onSubmit={this.onSubmit}>
+                    <form className = 'user-form' onSubmit={this.handleSubmit}>
                         <div className="container-admin">
                             <div className='username-div'>
-                                <input type="text" placeholder="Enter Username" name="username" required className="username-input"/>
+                                <input  type="text" 
+                                        placeholder="Enter Username" 
+                                        name="username" 
+                                        required 
+                                        className="username-input" 
+                                        onChange={this.handleLogin}/>
                             </div>
         
                             <div className="password-div">
-                                <input type="password" placeholder="Enter Password" name="password" required className="password-input" />
+                                <input  type="password" 
+                                        placeholder="Enter Password" 
+                                        name="password" 
+                                        required 
+                                        className="password-input" 
+                                        onChange={this.handlePassword}/>
                             </div>
                             
-                            <Button type="submit" name="button-admin-login" label="Sign In" />
+                            <Button type="submit" name="button-admin-login" label="Sign In">
+                                <Link to="/dashboard"></Link>
+                            </Button>
                         </div>
                     </form>
                 </div>          
             )  
         }
-        
-    }
 }

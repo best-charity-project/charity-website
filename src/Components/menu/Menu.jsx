@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Logo from '../Menu/Logo';
-import MenuLinks from '../Menu/MenuLinks';
-import SocialLinks from '../Menu/SocialLinks';
+import Logo from '../menu/Logo';
+import MenuLinks from '../menu/MenuLinks';
+import SocialLinks from '../menu/SocialLinks';
 
 class Menu extends Component {
   render() {
