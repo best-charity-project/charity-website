@@ -21,3 +21,9 @@
 	line-height: 2;
 	max-width: 263px;
 }
+.admin-event-info .event-info-input{
+	padding: 5px 15px;
+	height: 35px;
+	width: 265px;
+
+}

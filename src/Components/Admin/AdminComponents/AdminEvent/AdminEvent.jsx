@@ -1,13 +1,17 @@
 import React, {Component} from 'react';
 import Button from '../../../Button/Button';
+
 import moment from 'moment';
 import './AdminEvent.css';
 
 class AdminEvent extends Component {
+    state = {
+        eventInfo :false
+    }
    render() {
        return (
-           <div className="event-admin">
-               <div>{this.props.event.name}</div>
+           <div className="event-admin"  id = {this.props.event._id} >
+               <div onClick = {this.props.clickHandler}>{this.props.event.name}</div>
                <div>{moment(this.props.event.date).format('DD-MM-YYYY')}</div>
                <div>
                    <Button
