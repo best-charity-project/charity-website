@@ -4,7 +4,7 @@ const setToken = data => {
 
 const signInUser = credentials => {
     console.log(credentials);
-    fetch('http://localhost:3001/api/auth', {
+    return fetch('http://localhost:3001/api/auth', {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -12,8 +12,6 @@ const signInUser = credentials => {
         },
         credentials: 'cors',
         body: JSON.stringify(credentials),
-    })
-        .then(response => response.json())
-        .then(data => setToken(data));
+    });
 };
-export { signInUser };
+export { signInUser, setToken };

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import {BrowserRouter , Route , Switch , NavLink, Link } from "react-router-dom";
+import { BrowserRouter, Route, Switch, NavLink, Link } from 'react-router-dom';
 
-import AdminMain from "../../Components/Admin/AdminMain/AdminMain";
-import AdminEvents from "../../Components/Admin/AdminEvents/AdminEvents";
-import NavBar from "../../Components/NavBar/NavBar";
-import Navigation from "../../Components/Navigation/Navigation";
-import Button from "../../Components/Button/Button";
-import { signInUser } from "../../Components/Admin/Auth";
-
-import "./Admin.css";
+import AdminMain from '../../Components/Admin/AdminMain/AdminMain';
+import AdminEvents from '../../Components/Admin/AdminEvents/AdminEvents';
+import NavBar from '../../Components/NavBar/NavBar';
+import Navigation from '../../Components/Navigation/Navigation';
+import Button from '../../Components/Button/Button';
+import { signInUser, setToken } from '../../Components/Admin/Auth';
+import getToken from '../../Components/Admin/Auth/GetToken';
+import './Admin.css';
 
 export default class Admin extends React.Component {
     constructor(props) {
@@ -20,6 +20,11 @@ export default class Admin extends React.Component {
         this.handleLogin = this.handleLogin.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    componentDidMount() {
+        if (getToken() && getToken() !== 'undefined') {
+            this.props.history.push('/dashboard');
+        }
     }
 
     handleLogin(event) {
@@ -36,38 +41,45 @@ export default class Admin extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        signInUser(this.state);
+        signInUser(this.state)
+            .then(response => response.json())
+            .then(data => {
+                setToken(data);
+                this.props.history.push('/dashboard');
+            });
     }
 
     render() {
-            return (
-                <div className="wrapper-admin auth-form">
-                    <form className = 'user-form' onSubmit={this.handleSubmit}>
-                        <div className="container-admin">
-                            <div className='username-div'>
-                                <input  type="text" 
-                                        placeholder="Enter Username" 
-                                        name="username" 
-                                        required 
-                                        className="username-input" 
-                                        onChange={this.handleLogin}/>
-                            </div>
-        
-                            <div className="password-div">
-                                <input  type="password" 
-                                        placeholder="Enter Password" 
-                                        name="password" 
-                                        required 
-                                        className="password-input" 
-                                        onChange={this.handlePassword}/>
-                            </div>
-                            
-                            <Button type="submit" name="button-admin-login" label="Sign In">
-                                <Link to="/dashboard"></Link>
-                            </Button>
+        return (
+            <div className="wrapper-admin auth-form">
+                <form className="user-form" onSubmit={this.handleSubmit}>
+                    <div className="container-admin">
+                        <div className="username-div">
+                            <input
+                                type="text"
+                                placeholder="Enter Username"
+                                name="username"
+                                required
+                                className="username-input"
+                                onChange={this.handleLogin}
+                            />
                         </div>
-                    </form>
-                </div>          
-            )  
-        }
+
+                        <div className="password-div">
+                            <input
+                                type="password"
+                                placeholder="Enter Password"
+                                name="password"
+                                required
+                                className="password-input"
+                                onChange={this.handlePassword}
+                            />
+                        </div>
+
+                        <Button type="submit" name="button-admin-login" label="Sign In" />
+                    </div>
+                </form>
+            </div>
+        );
+    }
 }

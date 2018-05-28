@@ -20,8 +20,8 @@ class App extends Component {
           <Switch>
             <Route path="/" component={Home} exact />
             <Route path="/admin-panel" component={Admin}/>
+            <PrivateRoute path="/dashboard" component={AdminMain}/>
             <Route component={Error}/>
-            <PrivateRoute authed={GetToken} path="/dashboard" component={AdminMain}/>
           </Switch>
         </div>
       </BrowserRouter>
