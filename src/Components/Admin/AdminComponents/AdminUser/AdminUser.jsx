@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Button from '../../../Button/Button';
 import './AdminUser.css';
-const URL = 'http://localhost:3001';
+import { server } from '../../../../api'
 
 class AdminUser extends Component {
     state = {
@@ -29,7 +29,7 @@ class AdminUser extends Component {
         ) 
     }
     handleClick = () => {
-        fetch(URL + '/api/subscription/' + this.props.user._id + '/subscribe', {
+        fetch(`${server}/api/subscription/${this.props.user._id}/subscribe`, {
             method: 'PUT',
             headers: {
                 Accept: 'application/json',
