@@ -29,7 +29,7 @@ class AdminUser extends Component {
         ) 
     }
     handleClick = () => {
-        fetch(`${server}/api/subscription/${this.props.user._id}/subscribe`, {
+        fetch(`${server}/subscription/${this.props.user._id}/subscribe`, {
             method: 'PUT',
             headers: {
                 Accept: 'application/json',

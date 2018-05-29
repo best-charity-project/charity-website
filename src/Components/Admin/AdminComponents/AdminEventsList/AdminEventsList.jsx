@@ -39,7 +39,7 @@ class AdminEventsList extends Component {
     }
     deleteEvent = (user) => {
         let id = user._id
-        fetch(`${ server }/api/events`, {
+        fetch(`${ server }/events`, {
             method: 'DELETE',
             headers: {
                 Accept: 'application/json',
@@ -54,7 +54,7 @@ class AdminEventsList extends Component {
             
       };
       updateEventsList() {
-        fetch(`${ server }/api/events`)
+        fetch(`${ server }/events`)
             .then(response => response.json())
             .then(data => {
                 this.setState({ events: data.events });

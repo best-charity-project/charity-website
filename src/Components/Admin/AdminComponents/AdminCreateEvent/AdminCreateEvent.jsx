@@ -29,7 +29,7 @@ class AdminCreateEvent extends Component {
     }
 
       sendEvent = () =>{
-        fetch(`${ server }/api/events`, {
+        fetch(`${ server }/events`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
