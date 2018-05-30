@@ -6,8 +6,7 @@ import AdminEvents from '../../Components/Admin/AdminEvents/AdminEvents';
 import NavBar from '../../Components/NavBar/NavBar';
 import Navigation from '../../Components/Navigation/Navigation';
 import Button from '../../Components/Button/Button';
-import { signInUser, setToken } from '../../Components/Admin/Auth';
-import getToken from '../../Components/Admin/Auth/GetToken';
+import { signInUser, setToken, getToken } from '../../Components/Admin/Auth';
 import './Admin.css';
 
 export default class Admin extends React.Component {

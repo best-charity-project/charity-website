@@ -4,13 +4,15 @@ body{
 .navbar{
     background-color: rgb(49, 49, 49);
     color:#fff;
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    top: 50px;
+    left: 0;
 }
 .container-nav{
     display: flex;
     flex-direction: column;
-}
-.menu-list-admin ul{
-    
 }
 .menu-list-admin li{
     min-width: 280px;

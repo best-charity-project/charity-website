@@ -10,7 +10,7 @@ import "./App.css"
 import AdminMain from './Components/Admin/AdminMain/AdminMain';
 import { fakeAuth } from './Components/Admin/Auth/PrivateRoute';
 import PrivateRoute from "../src/Components/Admin/Auth/PrivateRoute";
-import GetToken from './Components/Admin/Auth/GetToken';
+import { getToken } from './Components/Admin/Auth';
 
 class App extends Component {
   render() {

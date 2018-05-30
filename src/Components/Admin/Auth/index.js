@@ -2,8 +2,11 @@ const setToken = data => {
     sessionStorage.setItem('token', data.token);
 };
 
+const getToken = () => window.sessionStorage.getItem('token');
+
+const removeToken = () => window.sessionStorage.removeItem('token');
+
 const signInUser = credentials => {
-    console.log(credentials);
     return fetch('http://localhost:3001/api/auth', {
         method: 'POST',
         headers: {
@@ -14,4 +17,4 @@ const signInUser = credentials => {
         body: JSON.stringify(credentials),
     });
 };
-export { signInUser, setToken };
+export { signInUser, setToken, getToken, removeToken };

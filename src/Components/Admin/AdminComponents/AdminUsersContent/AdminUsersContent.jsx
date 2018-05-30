@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import AdminUserSearch from '../AdminUserSearch/AdminUserSearch';
 import AdminUsersList from '../AdminUsersList/AdminUsersList';
+import "./AdminUsersContent.css";
 const URL = 'http://localhost:3001';
 
 class AdminUsersContent extends Component {
@@ -34,7 +35,7 @@ class AdminUsersContent extends Component {
             return <p>{error.message}</p>;
         }
         return(
-            <div>
+            <div className="users-list-section">
                 <AdminUserSearch findUser={this.findUser} />
                 <AdminUsersList users={this.state.filteredUsers} loading={this.state.isLoading} /> 
             </div>
