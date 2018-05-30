@@ -3,6 +3,7 @@ import AdminUserSearch from '../AdminUserSearch/AdminUserSearch';
 import AdminUsersList from '../AdminUsersList/AdminUsersList';
 import "./AdminUsersContent.css";
 const URL = 'http://localhost:3001';
+import { server } from '../../../../api'
 
 class AdminUsersContent extends Component {
     state = {
@@ -12,7 +13,7 @@ class AdminUsersContent extends Component {
         error: null
     }
     componentDidMount() {
-        fetch(URL + '/api/subscription', { 
+        fetch(`${ server }/subscription`, { 
             method: 'GET',
             mode: 'cors'
             })
@@ -43,7 +44,7 @@ class AdminUsersContent extends Component {
     }
     findUser = (email) => {
         if(!email) {
-            fetch(URL + '/api/subscription', {
+            fetch(`${ server }/subscription`, {
                 method: 'GET', 
                 mode: 'cors'
                 })

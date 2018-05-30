@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './SubscribtionForm.css';
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
+import { server } from '../../api';
 
 
 class SubscribtionForm extends Component {
@@ -19,7 +20,7 @@ class SubscribtionForm extends Component {
     }
  
     getValidation = (obj) => {
-       this.setState({value:obj.value,valid:obj.error});
+       this.setState({value:obj.value, valid:obj.error});
      }
      clickHandler = () => {
         this.setState({sendToValidation:true});
@@ -31,7 +32,7 @@ class SubscribtionForm extends Component {
     
     onSubscribe = () => {
         const newValue = this.state.value;
-        fetch('http://localhost:3001/api/subscription/newsubscription', {
+        fetch(` ${server}/subscription/newsubscription`, {
             method: 'post',
             headers: {
                 Accept: 'application/json',
@@ -49,7 +50,7 @@ class SubscribtionForm extends Component {
             <div className='subscribtion-form'>
                 <div className='wrapper-input'>
                     <TextField 
-                        value = {this.state.value}
+                        value = {this.state.value }
                         sendToValidation = {this.state.sendToValidation}
                         type='email'
                         nameClass='input-email'
