@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import AdminEvent from '../AdminEvent/AdminEvent';
 import './AdminEventsList.css';
+import { server } from '../../../../api';
 
 class AdminEventsList extends Component {
     state = {
@@ -38,7 +39,7 @@ class AdminEventsList extends Component {
     }
     deleteEvent = (user) => {
         let id = user._id
-        fetch('http://localhost:3001/api/events', {
+        fetch(`${ server }/events`, {
             method: 'DELETE',
             headers: {
                 Accept: 'application/json',
@@ -49,11 +50,10 @@ class AdminEventsList extends Component {
         })
             this.setState({            
                 events: this.state.events.filter(user => user._id !== id)
-            })
-            
+            })  
       };
       updateEventsList() {
-        fetch('http://localhost:3001/api/events')
+        fetch(`${ server }/events`)
             .then(response => response.json())
             .then(data => {
                 this.setState({ events: data.events });

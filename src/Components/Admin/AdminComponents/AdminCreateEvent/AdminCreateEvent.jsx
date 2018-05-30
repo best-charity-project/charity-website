@@ -5,6 +5,8 @@ import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
 import './AdminCreateEvent.css';
 import MyEditor from  "../AdminEditor/AdminEditor";
+import { server } from '../../../../api';
+
 
 class AdminCreateEvent extends Component { 
     state = {
@@ -27,7 +29,7 @@ class AdminCreateEvent extends Component {
     }
 
       sendEvent = () =>{
-        fetch('http://localhost:3001/api/events', {
+        fetch(`${ server }/events`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -39,8 +41,6 @@ class AdminCreateEvent extends Component {
             .then(response => response.json());
             this.setState({name:''})
             this.props.saveEvent()
-            
-            
       }
    cancel = ()=>{
        this.props.cancel()

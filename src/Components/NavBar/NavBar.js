@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-import {BrowserRouter , Route , Switch , NavLink } from "react-router-dom";
+import React from 'react';
 import "./NavBar.css";
-import logo from "../../Assets/AssetsSvg/on-info-logo.svg";
 import MainList from "../Menu/MenuLinks";
 
 const NavBar = ()=>{

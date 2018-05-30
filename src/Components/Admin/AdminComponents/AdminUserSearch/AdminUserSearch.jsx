@@ -7,7 +7,7 @@ class AdminUserSearch extends Component {
     render() {
         return (
             <div className="search-user">
-                <img src={searchImg} />
+                <img src={searchImg} alt='' />
                 <TextField 
                     type="search" 
                     nameClass="admin-search-input" 
