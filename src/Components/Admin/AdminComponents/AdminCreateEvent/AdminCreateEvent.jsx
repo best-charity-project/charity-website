@@ -41,8 +41,6 @@ class AdminCreateEvent extends Component {
             .then(response => response.json());
             this.setState({name:''})
             this.props.saveEvent()
-            
-            
       }
    cancel = ()=>{
        this.props.cancel()

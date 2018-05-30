@@ -50,8 +50,7 @@ class AdminEventsList extends Component {
         })
             this.setState({            
                 events: this.state.events.filter(user => user._id !== id)
-            })
-            
+            })  
       };
       updateEventsList() {
         fetch(`${ server }/events`)
