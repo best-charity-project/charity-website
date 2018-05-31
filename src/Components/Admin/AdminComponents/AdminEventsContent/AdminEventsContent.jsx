@@ -32,7 +32,7 @@ class AdminEventsContent extends Component {
         )
     }
     getList =()=>{
-        fetch('http://localhost:3001/api/events')
+        fetch(`${ server }/events`)
         .then(response => response.json())
         .then(data => {         
               this.setState({ events: data.events }              

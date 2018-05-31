@@ -6,7 +6,6 @@ import { Editor } from 'react-draft-wysiwyg';
 class ControlledEditor extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
         editorState: EditorState.createEmpty(),
       }
@@ -28,8 +27,6 @@ class ControlledEditor extends Component {
     const currentText = content.getPlainText()
     this.props.getCurrentText(currentText)
   };
-
-
 
   render() {
 

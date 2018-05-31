@@ -15,7 +15,6 @@ const content = ContentState.createFromText(plainText);
      
 } 
 componentWillUpdate(nextprops, nextState){
-
   if(nextprops.isOpen === true){
     this.setState({editorState: EditorState.createEmpty()})
     this.props.UpdateState(nextprops.isOpen )

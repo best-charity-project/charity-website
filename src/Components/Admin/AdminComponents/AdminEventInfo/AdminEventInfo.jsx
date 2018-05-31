@@ -4,6 +4,7 @@ import AdminDateEvent from '../AdminDateEvent/AdminDateEvent';
 import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
 import MyEditor from  "../AdminEditor/AdminEditorInfo";
+import { server } from "../../../../api";
 
 class AdminEventInfo extends Component {
 
@@ -70,7 +71,7 @@ updateEvent = () =>{
     
     sendUpdateEvent = () =>{
         const id = this.state.id
-        const URL = 'http://localhost:3001/api/events/'+id;
+        const URL = `${ server }/events/`+id;
         fetch(URL, {
             method: 'PUT',
             headers: {

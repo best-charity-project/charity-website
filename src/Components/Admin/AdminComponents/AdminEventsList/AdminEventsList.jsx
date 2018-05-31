@@ -59,12 +59,11 @@ componentWillReceiveProps(nexprops, nextstate){
                 events: this.state.events.filter(user => user._id !== id)
             })  
       };
-<<<<<<< HEAD
 
     getEventInfo = (e) => {
         this.setState({getEventInfo: !this.state.getEventInfo});
         let id = e.target.parentNode.id;
-        const URL = `${ server }/events`+id;
+        const URL = `${ server }/events/`+id;
         fetch(URL)
         .then(response => response.json())
         .then(data => {
@@ -76,15 +75,6 @@ componentWillReceiveProps(nexprops, nextstate){
     closeInfo = (str) => {
         this.setState({getEventInfo : false, eventInfo:null});
         this.props.getUpdateEventsList();
-=======
-      updateEventsList() {
-        fetch(`${ server }/events`)
-            .then(response => response.json())
-            .then(data => {
-                this.setState({ events: data.events });
-            })
-            .catch(error => this.setState({ error, isLoading: false }));
->>>>>>> new-version-create-react-app
     }
     }
 export default AdminEventsList;
