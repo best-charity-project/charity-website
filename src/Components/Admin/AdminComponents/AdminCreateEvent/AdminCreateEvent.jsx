@@ -35,7 +35,6 @@ class AdminCreateEvent extends Component {
             body: JSON.stringify(this.state),
             })
             .then(response => response.json())
-            .then(data => console.log(data))
             this.setState({name:'', text:'', isOpen: !this.state.isOpen})
             this.props.saveEvent()       
             

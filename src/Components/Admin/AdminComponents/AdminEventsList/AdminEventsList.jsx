@@ -4,15 +4,22 @@ import './AdminEventsList.css';
 import EventInfo from '../AdminEventInfo/AdminEventInfo';
 
 class AdminEventsList extends Component {
-    intervalId = null;
-    state = {      
+    state = {    
+        events:this.props.events,  
         isLoading: true,
         error: null,
         getEventInfo : false,
         eventInfo:null
     };
+componentWillReceiveProps(nexprops, nextstate){
 
+    if(nexprops.length != this.state.events.length){
+        this.setState({events:nexprops.events})
+    }
+}
     render() {
+        console.log(this.state)
+        console.log(this.props.events)
         return (
             <div className="events-list-admin">
                 <div className="events-list-header">
@@ -22,8 +29,8 @@ class AdminEventsList extends Component {
                 </div>            
                 
                 <div>                    
-                    {(this.props.events)?
-                        this.props.events.map(user => 
+                    {
+                        this.state.events.map(user => 
                         <AdminEvent 
                         clickHandler = {this. getEventInfo }
                             event = {user} 
@@ -31,7 +38,7 @@ class AdminEventsList extends Component {
                             deleteHandler = {() => this.deleteEvent(user)                            
                             } 
                         />                        
-                        ):null}
+                        )}
                    {(this.state.eventInfo)? (<div className={this.state.getEventInfo ? 'event-info-container' : 'without-info'}>
                         <EventInfo event = {this.state.eventInfo} closeInfo = {this.closeInfo}/>
                     </div>): null}
