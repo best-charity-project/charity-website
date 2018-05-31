@@ -18,8 +18,6 @@ componentWillReceiveProps(nexprops, nextstate){
     }
 }
     render() {
-        console.log(this.state)
-        console.log(this.props.events)
         return (
             <div className="events-list-admin">
                 <div className="events-list-header">
