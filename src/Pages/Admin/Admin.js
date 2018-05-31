@@ -33,6 +33,7 @@ export default class Admin extends React.Component {
                     <Switch>
                         <Route path="/admin-panel" component={AdminMain} exact />
                         <Route path="/admin-panel/events" component={AdminEvents}/>
+                        {/* <Route path="/admin-panel/news" component={AdminNews}/> */}
                     </Switch>
                     </div>
               </div>          
