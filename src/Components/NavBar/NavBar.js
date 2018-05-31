@@ -8,8 +8,8 @@ const NavBar = ()=>{
                  <MainList
                      className="menu-list-admin" 
                      list = {[
-                         {name: 'Список пользователей', url :'/admin-panel'},
-                         {name: 'События', url :'/admin-panel/events'}
+                         {name: 'Список пользователей', url :'/dashboard'},
+                         {name: 'События', url :'/dashboard/events'}
                      ]} 
                      onClick = {this.handlerClick}
                      classActive = 'active-link-admin'/>
