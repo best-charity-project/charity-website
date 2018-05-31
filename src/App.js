@@ -5,7 +5,7 @@ import Home from "./Pages/Home/MainPage";
 import Navigation from "./Components/Navigation/Navigation";
 import Error from "./Components/Error/Error";
 import Admin from "./Pages/Admin/Admin";
-import PageNews from "./Pages/PageNews/PageNews";
+import PageNews from "./Pages/News/News";
 
 import "./App.css"
 

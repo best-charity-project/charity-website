@@ -33,7 +33,6 @@ class AdminCreateEvent extends Component {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            credentials: 'cors',
             body: JSON.stringify(this.state),
         })
             .then(response => response.json());

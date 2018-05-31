@@ -44,7 +44,6 @@ class AdminEventsList extends Component {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            credentials: 'cors',
             body: JSON.stringify(user),
         })
             this.setState({            
