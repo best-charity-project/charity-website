@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import MasonryLayout from 'react-masonry-layout';
 import Masonry from 'react-masonry-component';
 import New from '../News/News';
 import '../NewsList/NewsList.css'
@@ -29,11 +28,11 @@ class NewsList extends Component {
         console.log(news)
         return (
             <div className="news-list">
-            {/* <Masonry options = {masonryOptions}className = 'masonry-div'>  */}
+            <Masonry className = 'masonry-div'> 
                 {(news.length >0)?news.map(function(news){
                     return <New id = {news.id} name = {news.name} text = {news.text} date = {news.date}/>
                 }):null}
-                {/* </Masonry> */}
+                </Masonry>
             </div>
         ) 
     }

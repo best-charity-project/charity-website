@@ -12,7 +12,7 @@ class News extends Component {
 		  <div className = 'news-container'> 
         <Menu name = 'client-menu'/>
          <NewsListAndAside/>
-        <Footer />
+        <Footer name = ' footer footer-news'/>
   		</div>
     );
   }
