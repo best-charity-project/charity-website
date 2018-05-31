@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
 import AdminEvent from '../AdminEvent/AdminEvent';
 import './AdminEventsList.css';
+<<<<<<< HEAD
 import EventInfo from '../AdminEventInfo/AdminEventInfo';
+=======
+import { server } from '../../../../api';
+>>>>>>> new-version-create-react-app
 
 class AdminEventsList extends Component {
     state = {    
@@ -46,7 +50,7 @@ componentWillReceiveProps(nexprops, nextstate){
     }
     deleteEvent = (user) => {
         let id = user._id
-        fetch('http://localhost:3001/api/events', {
+        fetch(`${ server }/events`, {
             method: 'DELETE',
             headers: {
                 Accept: 'application/json',
@@ -56,9 +60,9 @@ componentWillReceiveProps(nexprops, nextstate){
         })
             this.setState({            
                 events: this.state.events.filter(user => user._id !== id)
-            })
-            
+            })  
       };
+<<<<<<< HEAD
 
     getEventInfo = (e) => {
         this.setState({getEventInfo: !this.state.getEventInfo});
@@ -75,6 +79,15 @@ componentWillReceiveProps(nexprops, nextstate){
     closeInfo = (str) => {
         this.setState({getEventInfo : false, eventInfo:null});
         this.props.getUpdateEventsList();
+=======
+      updateEventsList() {
+        fetch(`${ server }/events`)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ events: data.events });
+            })
+            .catch(error => this.setState({ error, isLoading: false }));
+>>>>>>> new-version-create-react-app
     }
     }
 export default AdminEventsList;

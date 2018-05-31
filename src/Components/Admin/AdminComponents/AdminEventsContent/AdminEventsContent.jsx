@@ -3,6 +3,7 @@ import AdminEventsList from '../AdminEventsList/AdminEventsList';
 import Button from '../../../Button/Button';
 import AdminCreateEvent from '../AdminCreateEvent/AdminCreateEvent';
 import './AdminEventsContent.css';
+import { server } from "../../../../api"
 
 class AdminEventsContent extends Component {
     state = {

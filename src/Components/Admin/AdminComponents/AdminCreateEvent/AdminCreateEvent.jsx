@@ -5,6 +5,8 @@ import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
 import './AdminCreateEvent.css';
 import MyEditor from  "../AdminEditor/AdminEditor";
+import { server } from '../../../../api';
+
 
 class AdminCreateEvent extends Component { 
     state = {
@@ -26,18 +28,25 @@ class AdminCreateEvent extends Component {
     }
 
       sendEvent = () =>{
-        fetch('http://localhost:3001/api/events', {
+        fetch(`${ server }/events`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(this.state),
+<<<<<<< HEAD
             })
             .then(response => response.json())
             this.setState({name:'', text:'', isOpen: !this.state.isOpen})
             this.props.saveEvent()       
             
+=======
+        })
+            .then(response => response.json());
+            this.setState({name:''})
+            this.props.saveEvent()
+>>>>>>> new-version-create-react-app
       }
       cancel = () => {  
        this.setState({name:'', text:'',data:''})     
