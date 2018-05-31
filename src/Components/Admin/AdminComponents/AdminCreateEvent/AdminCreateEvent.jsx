@@ -35,18 +35,11 @@ class AdminCreateEvent extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(this.state),
-<<<<<<< HEAD
             })
             .then(response => response.json())
             this.setState({name:'', text:'', isOpen: !this.state.isOpen})
             this.props.saveEvent()       
             
-=======
-        })
-            .then(response => response.json());
-            this.setState({name:''})
-            this.props.saveEvent()
->>>>>>> new-version-create-react-app
       }
       cancel = () => {  
        this.setState({name:'', text:'',data:''})     

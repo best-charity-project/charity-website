@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import AdminEvent from '../AdminEvent/AdminEvent';
 import './AdminEventsList.css';
-<<<<<<< HEAD
 import EventInfo from '../AdminEventInfo/AdminEventInfo';
-=======
 import { server } from '../../../../api';
->>>>>>> new-version-create-react-app
 
 class AdminEventsList extends Component {
     state = {    
@@ -67,7 +64,7 @@ componentWillReceiveProps(nexprops, nextstate){
     getEventInfo = (e) => {
         this.setState({getEventInfo: !this.state.getEventInfo});
         let id = e.target.parentNode.id;
-        const URL = 'http://localhost:3001/api/events/'+id;
+        const URL = `${ server }/events`+id;
         fetch(URL)
         .then(response => response.json())
         .then(data => {
