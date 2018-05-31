@@ -3,21 +3,49 @@ import './AdminEventInfo.css';
 import AdminDateEvent from '../AdminDateEvent/AdminDateEvent';
 import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
-import MyEditor from  "../AdminEditor/AdminEditor";
-class AdminEventInfo extends Component {
-    closeInfo = () => {
-        this.props.closeInfo(false)
-    }
+import MyEditor from  "../AdminEditor/AdminEditorInfo";
 
+class AdminEventInfo extends Component {
+
+    constructor (props){
+        super(props);
+        this.state = {
+            op:'',
+            id:this.props.event._id,
+            date : this.props.event.date,
+            text:this.props.event.text,
+            name:this.props.event.name,
+            getInfo:false
+        }
+    }
     
+
+closeInfo = () => {
+    this.setState({getInfo:true})
+    this.props.closeInfo(false)
+}
+getCurrentText = (str) =>{
+    this.setState({text:str});
+}
+getValue = (str) => {
+    this.setState({name : str})
+}
+getDate = (str) =>{
+    this.setState({date:str})
+}
+updateEvent = () =>{
+    this.props.closeInfo(false);
+    this.sendUpdateEvent();
+}
     render() {
          return (
             <div className = 'admin-event-info'>
             <Button name = 'admin-info-button' clickHandler ={this.closeInfo}/>          
-            <div> 
+            <div className = 'event-input-container'> 
                 <p className = 'name-event'> Название события  </p>
                 <TextField 
-                  value = {this.props.event.name}
+                  value = {this.state.name}
+                  onChangeValue = {this.getValue}
                   id = "title" 
                   type = 'text' 
                   nameClass = 'event-info-input'
@@ -25,18 +53,36 @@ class AdminEventInfo extends Component {
                 />
             </div>
             <div>
-                <AdminDateEvent date = {this.props.event.date} />                       
+                <AdminDateEvent onSelectData= {this.getDate} date = {this.state.date}  />                       
              </div>
-             
-             <div className = 'event-info-text'>
-                 <div >
-                 <p>{this.props.event.text}
-                 </p>
-                 </div>
-             </div>
+                <MyEditor text = {this.props.event.text} getCurrentText = {this.getCurrentText}/>
+                <div className="change-state-buttons">  
+                    <Button 
+                        name = "button-admin button-admin-background" 
+                        label = 'Сохранить' 
+                        clickHandler = {this.updateEvent}
+                    />
+                </div> 
+           
             </div>    
         )
-    }
+    }  
+    
+    sendUpdateEvent = () =>{
+        const id = this.state.id
+        const URL = 'http://localhost:3001/api/events/'+id;
+        fetch(URL, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(this.state),
+        })
+            .then(response => response.json())
+            
+            
+      }  
 }
 
 export default AdminEventInfo;
