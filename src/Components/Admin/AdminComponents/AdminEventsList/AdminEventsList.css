@@ -22,3 +22,9 @@
 .events-list-admin .events-list-header div:last-child{
     flex-basis: 25%;
 }
+.event-info-container{
+    display:block;
+}
+.without-info{
+    display:none
+}

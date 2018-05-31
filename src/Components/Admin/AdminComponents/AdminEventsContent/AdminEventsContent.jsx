@@ -6,7 +6,12 @@ import './AdminEventsContent.css';
 import { server } from "../../../../api"
 
 class AdminEventsContent extends Component {
-    state = {isOpen: false}
+    state = {
+        isOpen: false,
+    }
+    componentDidMount(){
+       this.getList()
+    }
     render() {
         return(
             <div>
@@ -17,7 +22,7 @@ class AdminEventsContent extends Component {
                         clickHandler = {this.addEvent} 
                     />
                 </div>     
-                <AdminEventsList />  
+               {(this.state.events)?<AdminEventsList events = {this.state.events} getUpdateEventsList = {this.getUpdateEventsList}/> : null} 
                 <div className={this.state.isOpen ? 'overlay' : 'overlay hidden'}>
                     <div className="modal-new-event-field">
                         <AdminCreateEvent cancel = {this.cancel} saveEvent = {this.saveEvent} />
@@ -26,10 +31,22 @@ class AdminEventsContent extends Component {
             </div>
         )
     }
+    getList =()=>{
+        fetch(`${ server }/events`)
+        .then(response => response.json())
+        .then(data => {         
+              this.setState({ events: data.events }              
+            )})
+        .catch(error => this.setState({ error, isLoading: false }));
+    }
+    getUpdateEventsList = () =>{
+        setTimeout(this.getList,100)
+    }
     addEvent = () => {
-        this.setState({isOpen: true})
+        this.setState({isOpen: true});        
     }
     saveEvent = () => {
+        setTimeout(this.getList,0)
         this.setState({isOpen: false})
     }
     cancel = () => {
