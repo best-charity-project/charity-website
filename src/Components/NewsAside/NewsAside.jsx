@@ -14,7 +14,10 @@ class NewsAside extends Component {
     }
     getCurrentLink = (e) => {
         let currentLink = e.target;
-        this.setState({activeItem :e.target.innerText.toLowerCase()})
+        this.setState({activeItem :e.target.innerText.toLowerCase()}, () => {
+            this.props.getCurrentSourse('dqawdqww')
+        });
+        
     }
     render() {
         const {activeItem} = this.state;

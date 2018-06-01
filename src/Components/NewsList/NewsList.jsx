@@ -8,43 +8,53 @@ class NewsList extends Component {
         super(props);
         this.state = {
             news: {},
+            currentSourse :this.props.currentSourse,
+            filterNew : ''
         }
     }
   
-
+componentWillReceiveProps (nextprop){
+    if(nextprop.currentSourse != this.props.currentSourse){
+        this.filterNew(nextprop.currentSourse)
+    }
+}
        componentDidMount(){      
-         this.getNews();
-          
+         this.getNews();  
+             
        }    
-   
+       filterNew = (value) =>{
+           console.log(this.props.currentSourse)
+        let filterArray =this.state.news.filter (news => {
+            return (news.name === value)
+        })
+        this.setState({filterNew:filterArray })
+       }
+      
+       
     render() {
-        const masonryOptions = {
-            itemSelector: '.New',
-            gutter: 10,
-            isFitWidth: true
-        };
-        console.log(this.state)
-        const {news} = this.state;
-        console.log(news)
+        const {news, filterNew} = this.state;
         return (
             <div className="news-list">
             <Masonry className = 'masonry-div'> 
-                {(news.length >0)?news.map(function(news){
-                    return <New id = {news.id} name = {news.name} text = {news.text} date = {news.date}/>
+                {(filterNew.length >0)?filterNew.map(function(news){
+                    return <New id = {news._id} name = {news.name} text = {news.text} date = {news.date}/>
                 }):null}
                 </Masonry>
             </div>
         ) 
     }
+    
 getNews= () => {
     fetch('http://localhost:3001/api/events')
     .then(response => response.json())
     .then(data => {
-        console.log(data)
-        this.setState({news: data.events });
+        this.setState({news: data.events }, () => {
+            this.filterNew(this.props.currentSourse)
+        });
     })
     .catch(error => this.setState({ error, isLoading: false }));
 }
 }
 
 export default NewsList;
+
