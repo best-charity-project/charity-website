@@ -8,6 +8,9 @@
     display: flex;
     margin:15px 0;
 }
+.event-title p{
+    align-self: center;
+}
 .change-state-buttons {
     margin: 25px 0px;
     text-align: center;

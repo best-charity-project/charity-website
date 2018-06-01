@@ -1,62 +1,84 @@
 import React, { Component } from 'react';
-import {BrowserRouter , Route , Switch , NavLink } from "react-router-dom";
+import { BrowserRouter, Route, Switch, NavLink, Link } from 'react-router-dom';
 
-import AdminMain from "../../Components/Admin/AdminMain/AdminMain";
-import AdminEvents from "../../Components/Admin/AdminEvents/AdminEvents";
-import NavBar from "../../Components/NavBar/NavBar";
-import Navigation from "../../Components/Navigation/Navigation";
-import Button from "../../Components/Button/Button";
-
-import "./Admin.css";
+import AdminMain from '../../Components/Admin/AdminMain/AdminMain';
+import AdminEvents from '../../Components/Admin/AdminEvents/AdminEvents';
+import NavBar from '../../Components/NavBar/NavBar';
+import Navigation from '../../Components/Navigation/Navigation';
+import Button from '../../Components/Button/Button';
+import { signInUser, setToken, getToken } from '../../Components/Admin/Auth';
+import './Admin.css';
 
 export default class Admin extends React.Component {
-    state = {
-        loggedIn: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+        };
+        this.handleLogin = this.handleLogin.bind(this);
+        this.handlePassword = this.handlePassword.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
-    componentDidMount
-    onLogout = () => {
-        this.setState({loggedIn:false})
+    componentDidMount() {
+        if (getToken() && getToken() !== 'undefined') {
+            this.props.history.push('/admin-panel/dashboard');
+        }
     }
-    onSubmit = e => {
+
+    handleLogin(event) {
+        this.setState({
+            email: event.target.value,
+        });
+    }
+
+    handlePassword(event) {
+        this.setState({
+            password: event.target.value,
+        });
+    }
+
+    handleSubmit(e) {
         e.preventDefault();
-        this.setState({ loggedIn: true })
+        signInUser(this.state)
+            .then(response => response.json())
+            .then(data => {
+                setToken(data);
+                this.props.history.push('/admin-panel/dashboard');
+            });
     }
 
     render() {
-        const { loggedIn } = this.state
-        if (loggedIn) {
-            return (
-                <div className="wrapper-admin">
-                    <Navigation onLogout={this.onLogout} />
-                    <div className="main-admin">
-                    <NavBar/>
-                    <Switch>
-                        <Route path="/admin-panel" component={AdminMain} exact />
-                        <Route path="/admin-panel/events" component={AdminEvents}/>
-                        {/* <Route path="/admin-panel/news" component={AdminNews}/> */}
-                    </Switch>
-                    </div>
-              </div>          
-        )  
-        } else {
-            return (
-                <div className="wrapper-admin auth-form">
-                    <form className = 'user-form' onSubmit={this.onSubmit}>
-                        <div className="container-admin">
-                            <div className='username-div'>
-                                <input type="text" placeholder="Enter Username" name="username" required className="username-input"/>
-                            </div>
-        
-                            <div className="password-div">
-                                <input type="password" placeholder="Enter Password" name="password" required className="password-input" />
-                            </div>
-                            
-                            <Button type="submit" name="button-admin-login" label="Sign In" />
+        return (
+            <div className="wrapper-admin auth-form">
+                <form className="user-form" onSubmit={this.handleSubmit}>
+                    <div className="container-admin">
+                        <div className="username-div">
+                            <input
+                                type="text"
+                                placeholder="Enter Username"
+                                name="username"
+                                required
+                                className="username-input"
+                                onChange={this.handleLogin}
+                            />
                         </div>
-                    </form>
-                </div>          
-            )  
-        }
-        
+
+                        <div className="password-div">
+                            <input
+                                type="password"
+                                placeholder="Enter Password"
+                                name="password"
+                                required
+                                className="password-input"
+                                onChange={this.handlePassword}
+                            />
+                        </div>
+
+                        <Button type="submit" name="button-admin-login" label="Sign In" />
+                    </div>
+                </form>
+            </div>
+        );
     }
 }

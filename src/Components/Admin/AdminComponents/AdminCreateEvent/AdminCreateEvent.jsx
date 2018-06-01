@@ -5,6 +5,8 @@ import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
 import './AdminCreateEvent.css';
 import MyEditor from  "../AdminEditor/AdminEditor";
+import { server } from '../../../../api';
+
 
 class AdminCreateEvent extends Component { 
     state = {
@@ -13,7 +15,6 @@ class AdminCreateEvent extends Component {
         text : '',
         isOpen: false
     }
-
     getValue = (str) => {
         const newValue = str;
         this.setState({name:str});
@@ -27,23 +28,27 @@ class AdminCreateEvent extends Component {
     }
 
       sendEvent = () =>{
-        fetch('http://localhost:3001/api/events', {
+        fetch(`${ server }/events`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(this.state),
-        })
-            .then(response => response.json());
-            this.setState({name:''})
-            this.props.saveEvent()
-            
+            })
+            .then(response => response.json())
+            this.setState({name:'', text:'',date:new Date(), isOpen: !this.state.isOpen})
+            this.props.saveEvent()       
             
       }
-   cancel = ()=>{
-       this.props.cancel()
-   }
+      cancel = () => {  
+       this.setState({name:'', text:'',data:''})     
+       this.props.cancel();
+       this.setState({isOpen: !this.state.isOpen})
+     }
+     UpdateStateEditor = (str) =>{
+         this.setState({isOpen: !str})
+     }
     render() {
         return(
             <div className = 'modal-window'> 
@@ -61,7 +66,7 @@ class AdminCreateEvent extends Component {
                     />
                 </div>
                 </div>
-                <MyEditor getCurrentText = {this.getCurrentText} value = {this.state.date} />
+                <MyEditor getCurrentText = {this.getCurrentText} text = {this.state.text} isOpen = {this.state.isOpen} UpdateState = {this.UpdateStateEditor}/>
                 <div className="change-state-buttons">  
                     <Button 
                         name = "button-admin button-admin-background" 

@@ -1,8 +1,7 @@
 .logo{
-	background-image: url(../../Assets/AssetsSvg/on-info-logo.svg);
-	background-repeat: no-repeat;
 	width: 155px;
 	height: 55px;
+	padding-top: 10px;
 }
 .client-menu{
 	

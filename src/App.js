@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter , Route , Switch } from "react-router-dom";
+import {BrowserRouter , Route , Switch, Redirect } from "react-router-dom";
 import './App.css';
 import Home from "./Pages/Home/MainPage";
 import Navigation from "./Components/Navigation/Navigation";
@@ -9,6 +9,11 @@ import PageNews from "./Pages/News/News";
 import FullNew from './Components/FullNew/FullNew'
 
 import "./App.css"
+import AdminMain from './Components/Admin/AdminMain/AdminMain';
+import AdminEvents from './Components/Admin/AdminEvents/AdminEvents';
+import { fakeAuth } from './Components/Admin/Auth/PrivateRoute';
+import PrivateRoute from "../src/Components/Admin/Auth/PrivateRoute";
+import { getToken } from './Components/Admin/Auth';
 
 class App extends Component {
   render() {
