@@ -1,7 +1,9 @@
+import { server } from '../../../../api';
 import React, {Component} from 'react';
 import AdminUserSearch from '../AdminUserSearch/AdminUserSearch';
 import AdminUsersList from '../AdminUsersList/AdminUsersList';
-import { server } from '../../../../api'
+import "../../../../App.css";
+
 
 class AdminUsersContent extends Component {
     state = {
@@ -34,7 +36,7 @@ class AdminUsersContent extends Component {
             return <p>{error.message}</p>;
         }
         return(
-            <div>
+            <div className="list-container">
                 <AdminUserSearch findUser={this.findUser} />
                 <AdminUsersList users={this.state.filteredUsers} loading={this.state.isLoading} /> 
             </div>

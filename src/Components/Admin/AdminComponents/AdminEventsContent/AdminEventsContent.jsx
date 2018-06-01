@@ -3,6 +3,7 @@ import AdminEventsList from '../AdminEventsList/AdminEventsList';
 import Button from '../../../Button/Button';
 import AdminCreateEvent from '../AdminCreateEvent/AdminCreateEvent';
 import './AdminEventsContent.css';
+import "../../../../App.css";
 import { server } from "../../../../api"
 
 class AdminEventsContent extends Component {
@@ -14,7 +15,7 @@ class AdminEventsContent extends Component {
     }
     render() {
         return(
-            <div>
+            <div className="list-container">
                 <div className="new-event">
                     <Button 
                         name = "button-admin" 

@@ -3,6 +3,7 @@
 	background-repeat: no-repeat;
 	width: 155px;
 	height: 55px;
+	padding-top: 10px;
 }
 .client-menu{
 	display: flex;
