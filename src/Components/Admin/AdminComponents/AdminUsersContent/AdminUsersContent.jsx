@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import AdminUserSearch from '../AdminUserSearch/AdminUserSearch';
 import AdminUsersList from '../AdminUsersList/AdminUsersList';
 import "../../../../App.css";
-const URL = 'http://localhost:3001';
+
 
 class AdminUsersContent extends Component {
     state = {

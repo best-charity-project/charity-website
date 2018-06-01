@@ -15,7 +15,7 @@ class Navigation extends Component{
 
     handleLogout() {
         removeToken()
-            this.props.history.push('/admin-panel');
+            this.props.history.push('/login');
     }
     
     render(){

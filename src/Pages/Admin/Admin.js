@@ -22,7 +22,7 @@ export default class Admin extends React.Component {
     }
     componentDidMount() {
         if (getToken() && getToken() !== 'undefined') {
-            this.props.history.push('/dashboard');
+            this.props.history.push('/admin-panel/dashboard');
         }
     }
 
@@ -44,7 +44,7 @@ export default class Admin extends React.Component {
             .then(response => response.json())
             .then(data => {
                 setToken(data);
-                this.props.history.push('/dashboard');
+                this.props.history.push('/admin-panel/dashboard');
             });
     }
 

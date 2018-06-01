@@ -1,3 +1,5 @@
+import { server } from "../../../api";
+
 const setToken = data => {
     sessionStorage.setItem('token', data.token);
 };
@@ -7,7 +9,7 @@ const getToken = () => window.sessionStorage.getItem('token');
 const removeToken = () => window.sessionStorage.removeItem('token');
 
 const signInUser = credentials => {
-    return fetch('http://localhost:3001/api/auth', {
+    return fetch(`${ server }/auth`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
