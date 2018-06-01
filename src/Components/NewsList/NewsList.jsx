@@ -37,7 +37,8 @@ render() {
          <div className={this.props.name}>
             <Masonry className = 'masonry-div'> 
                 {(filterNew.length >0)?filterNew.map(function(news){
-                    return <New id = {news._id} name = {news.title} text = {news.shortText} date = {news.date}/>
+                    console.log(news)
+                    return <New id = {news._id} name = {news.title} text = {news.shortText} date = {news.date} key = {news._id}/>
                 }):null}
             </Masonry>
          </div>
