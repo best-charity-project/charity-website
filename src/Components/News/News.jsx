@@ -13,11 +13,11 @@ class News extends Component {
             <div id = {this.props.id} className = 'news' onClick = {this.Click}>
                 <NavLink to={`/news/${this.props.id}`} >
                <p className = 'news-date'>{moment(this.props.date).format('DD MMMM YYYY')} </p>
-               <div className = 'news-text'>  
-                   <p >{this.props.name} </p>
-                   <span> {this.props.text}</span>
+
+                   <p className = 'new-title'>{this.props.name} </p>
+                   <span className = 'new-text'> {this.props.text}</span>
                    
-                </div>
+
                 </NavLink>
             </div>
         ) 

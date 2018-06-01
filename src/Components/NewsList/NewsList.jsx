@@ -18,41 +18,41 @@ componentWillReceiveProps (nextprop){
         this.filterNew(nextprop.currentSourse)
     }
 }
-       componentDidMount(){      
-         this.getNews();  
-             
-       }    
-       filterNew = (value) =>{
-           console.log(this.props.currentSourse)
+componentDidMount(){      
+    this.getNews();              
+}    
+ filterNew = (value) =>{
+    if(value.length === 0){
+        this.setState({filterNew: this.state.news}) 
+    }else{
         let filterArray =this.state.news.filter (news => {
-            return (news.name === value)
-        })
-        this.setState({filterNew:filterArray })
-       }
-      
-       
-    render() {
-        const {news, filterNew} = this.state;
-        return (
-            <div className="news-list">
+            return (news.source === value)
+           })
+           this.setState({filterNew:filterArray })
+    }
+}     
+render() {
+     const {news, filterNew} = this.state;
+    return (
+         <div className={this.props.name}>
             <Masonry className = 'masonry-div'> 
                 {(filterNew.length >0)?filterNew.map(function(news){
-                    return <New id = {news._id} name = {news.name} text = {news.text} date = {news.date}/>
+                    return <New id = {news._id} name = {news.title} text = {news.shortText} date = {news.date}/>
                 }):null}
-                </Masonry>
-            </div>
+            </Masonry>
+         </div>
         ) 
     }
     
 getNews= () => {
-    fetch('http://localhost:3001/api/events')
+    fetch('http://localhost:3001/api/news')
     .then(response => response.json())
     .then(data => {
-        this.setState({news: data.events }, () => {
-            this.filterNew(this.props.currentSourse)
+        console.log(data)
+        this.setState({news: data.news }, () => {
+            this.filterNew('')
         });
     })
-    .catch(error => this.setState({ error, isLoading: false }));
 }
 }
 

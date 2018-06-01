@@ -16,16 +16,24 @@
     font-size: 12px;
     font-weight: 600;
 }
-.news-text{
+/* .news-text{
     padding:0 20px;
     color: #3b3f48;
+} */
+.news a{
+    text-decoration: none;
 }
-.news-text p{
+.new-title{
+    padding:0 20px;
     font-size: 16px;
     font-weight: 600;
+    color: #3b3f48;
 }
-.news-text span{
+.new-text{
+    display: inline-block;
+    padding:0 20px;
     margin-top: 10px;
     font-size: 14px;
+    color: #3b3f48;
 
 }

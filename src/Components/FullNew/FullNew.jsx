@@ -10,29 +10,28 @@ class FullNew extends Component {
         this.getInfoAboutNew()
     }
     render() {
-        console.log(this.state)
+        console.log(this.state.new)
         return (
             <div>
             {(this.state.new)? (<div>
-                <p> {this.state.new.name}</p>                
-                <p> {this.state.new.text}</p>
-                <p> {this.state.new.date}</p>
+                <p> {this.state.new.title}</p>                
+                <p> {this.state.new.fullText}</p>
+                <p> {this.state.new.createdAt}</p>
             </div>): null }
             </div>
         ) 
     }
     getInfoAboutNew = () =>{
         const id = this.props.match.params.id;
-        console.log(id)
-        var URL = 'http://localhost:3001/api/events/'+id;
-        console.log(URL)
+        var URL = 'http://localhost:3001/api/news/'+id;
         fetch(URL)
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            this.setState({new:data });
+            this.setState({new:data.news }, () => {
+                console.log(this.state)
+            });
         })
-        .catch(error => this.setState({ error, isLoading: false }));
     }
 }
 
