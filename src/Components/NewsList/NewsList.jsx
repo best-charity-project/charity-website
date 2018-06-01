@@ -37,8 +37,7 @@ render() {
          <div className={this.props.name}>
             <Masonry className = 'masonry-div'> 
                 {(filterNew.length >0)?filterNew.map(function(news){
-                    console.log(news)
-                    return <New id = {news._id} name = {news.title} text = {news.shortText} date = {news.date} key = {news._id}/>
+                    return <New id = {news._id} name = {news.title} text = {news.shortText} date = {news.date} key = {news._id} img = {news.image}/>
                 }):null}
             </Masonry>
          </div>
@@ -49,7 +48,6 @@ getNews= () => {
     fetch('http://localhost:3001/api/news')
     .then(response => response.json())
     .then(data => {
-        console.log(data)
         this.setState({news: data.news }, () => {
             this.filterNew('')
         });

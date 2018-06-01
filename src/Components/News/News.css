@@ -16,10 +16,10 @@
     font-size: 12px;
     font-weight: 600;
 }
-/* .news-text{
-    padding:0 20px;
-    color: #3b3f48;
-} */
+.news img {
+    width:100%;
+    margin-top: 10px;
+}
 .news a{
     text-decoration: none;
 }

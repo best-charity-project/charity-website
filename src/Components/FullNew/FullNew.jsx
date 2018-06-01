@@ -10,11 +10,10 @@ class FullNew extends Component {
         this.getInfoAboutNew()
     }
     render() {
-        console.log(this.state.new)
         return (
             <div>
             {(this.state.new)? (<div>
-                <p> {this.state.new.title}</p>                
+                <p> {this.state.new.title}</p>               
                 <p> {this.state.new.fullText}</p>
                 <p> {this.state.new.createdAt}</p>
             </div>): null }
@@ -27,10 +26,7 @@ class FullNew extends Component {
         fetch(URL)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
-            this.setState({new:data.news }, () => {
-                console.log(this.state)
-            });
+            this.setState({new:data.news });
         })
     }
 }
