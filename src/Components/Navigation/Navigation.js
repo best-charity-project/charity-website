@@ -3,7 +3,8 @@ import { NavLink, withRouter } from "react-router-dom";
 import logo from "../../Assets/AssetsSvg/on-info-logo.svg"
 import "./Navigation.css";
 import Button from "../Button/Button"
-import { removeToken } from "../Admin/Auth/"
+import { removeToken } from "../Admin/Auth/";
+import Logo from "../Menu/Logo";
 
 
 class Navigation extends Component{
@@ -21,7 +22,7 @@ class Navigation extends Component{
     render(){
         return (
             <div className="container-min">
-                <img src={logo} className="main-logo"/>
+                <Logo/>
                 <Button label="Выйти" name="button-admin-exit" clickHandler={this.handleLogout}/>
             </div>            
         )
