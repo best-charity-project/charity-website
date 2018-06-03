@@ -60,3 +60,10 @@
     min-width: auto;
     border-radius: 5px;
 }
+.admin-info-button{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+}
