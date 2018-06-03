@@ -3,6 +3,8 @@ import {BrowserRouter , Route , Switch , NavLink } from "react-router-dom";
 
 import AdminMain from "../../Components/Admin/AdminMain/AdminMain";
 import AdminEvents from "../../Components/Admin/AdminEvents/AdminEvents";
+import AdminNewsBlock from "../../Components/Admin/AdminNewsBlock/AdminNewsBlock";
+import AdminAddNews from "../../Components/Admin/AdminAddNews/AdminAddNews";
 import NavBar from "../../Components/NavBar/NavBar";
 import Navigation from "../../Components/Navigation/Navigation";
 import Button from "../../Components/Button/Button";
@@ -32,8 +34,9 @@ export default class Admin extends React.Component {
                     <NavBar/>
                     <Switch>
                         <Route path="/admin-panel" component={AdminMain} exact />
-                        <Route path="/admin-panel/events" component={AdminEvents}/>
-                        {/* <Route path="/admin-panel/news" component={AdminNews}/> */}
+                        <Route path="/admin-panel/events" component={AdminEvents} />
+                        <Route path="/admin-panel/news" component={AdminNewsBlock} exact />
+                        <Route path="/admin-panel/news/create" component={AdminAddNews} />
                     </Switch>
                     </div>
               </div>          

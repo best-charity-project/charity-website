@@ -11,7 +11,7 @@ class PageNews extends Component {
         error: null
     }
     componentDidMount() {
-        fetch(URL + '/api/news', { 
+       /*  fetch(URL + '/api/news', { 
             method: 'GET',
             mode: 'cors'
             })
@@ -39,7 +39,7 @@ class PageNews extends Component {
                   <NewsAside filterNews = {this.filterNews}/>
                   <NewsList news = {this.state.filteredNews} loading={this.state.isLoading} />
             </div>
-        ) 
+        )  */
     }
     filterNews = (source) => {
        /*  if(creator) {

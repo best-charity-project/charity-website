@@ -1,0 +1,19 @@
+.new-news {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #d3d3d3;
+}
+.new-news div {
+    flex-basis: 22%;
+    text-align: center;
+}
+.new-news div:first-child {
+    flex-basis: 78%;
+    text-align: left;
+}
+.new-news .search-news {
+    border: none;
+}
+.new-news .button-new-news{
+    align-self: center;
+}

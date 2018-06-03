@@ -16,8 +16,8 @@ class AdminNews extends Component {
        return (
            <div className="news-admin">
                <div>{this.props.news.title}</div>
-               <div readonly>{moment(this.props.event.date).format('DD-MM-YYYY')}</div>
-               <div>{this.props.news.status}</div>
+               <div readOnly>{moment(this.props.news.createdAt).format('DD-MM-YYYY')}</div>
+               <div>{this.props.news.isPublic ? 'Да' : 'Нет'}</div>
                <div>
                    <Button
                        name = "button-admin admin-cancel"

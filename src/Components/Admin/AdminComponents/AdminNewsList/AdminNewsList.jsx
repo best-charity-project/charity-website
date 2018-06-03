@@ -9,13 +9,13 @@ class AdminNewsList extends Component {
             <div className="news-list-admin">
                 <div className="news-list-header">
                     <div>Название новости</div>
-                    <div>Дата публикации</div>
-                    <div>Статус</div>
+                    <div>Дата создания</div>
+                    <div>Опубликовано</div>
                     <div>Удалить новость</div>
                 </div>
                 <div>                    
                     {this.props.news.map(item => 
-                            <AdminUser news = {item} key = {item._id} />
+                            <AdminNews news = {item} key = {item._id} />
                     )}
                 </div>  
             </div>  
