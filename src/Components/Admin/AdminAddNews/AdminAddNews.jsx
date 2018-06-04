@@ -52,10 +52,6 @@ class AdminAddNews extends Component {
                         : null
                     }
                 </div>
-                
-                {/* <div>Дата создания</div>
-                <div>Опубликовано</div>
-                <div>Удалить новость</div> */}
             </form>  
         )
     }
