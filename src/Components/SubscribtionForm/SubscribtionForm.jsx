@@ -42,8 +42,6 @@ class SubscribtionForm extends Component {
             body: JSON.stringify({email: newValue})
         })
             .then(res => res.json())
-            .then(data => console.log(data))
-            .catch(err => console.log(err));
     }
     render() {
         return (

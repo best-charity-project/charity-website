@@ -19,6 +19,9 @@
 .event-name{
     cursor: pointer;
 }
-.event-name:hover{
+.event-name{
     text-decoration: underline;
+}
+.event-name:hover{
+    text-decoration: none;
 }

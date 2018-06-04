@@ -29,7 +29,6 @@ getCurrentText = (str) =>{
     this.setState({text:str});
 }
 getValue = (str) => {
-    console.log(str)
     this.setState({name : str.value})
 }
 getDate = (str) =>{
