@@ -6,7 +6,7 @@ import TextField from '../../../TextField/TextField';
 import './AdminCreateEvent.css';
 import MyEditor from  "../AdminEditor/AdminEditor";
 import { server } from '../../../../api';
-
+import Editor from  "../AdminEditor/AdminEditor";
 
 class AdminCreateEvent extends Component { 
     state = {
@@ -15,14 +15,12 @@ class AdminCreateEvent extends Component {
         text : '',
         isOpen: false
     }
-    getValue = (str) => {
-        const newValue = str;
-        this.setState({name:str});
+    getValue = (obj) => {
+        this.setState({name:obj.value});
       }
       getDate = (str) =>{
           this.setState({date:str})
       }
-
       getCurrentText = (str) =>{
         this.setState({text:str});
     }
@@ -46,9 +44,6 @@ class AdminCreateEvent extends Component {
        this.props.cancel();
        this.setState({isOpen: !this.state.isOpen})
      }
-     UpdateStateEditor = (str) =>{
-         this.setState({isOpen: !str})
-     }
     render() {
         return(
             <div className = 'modal-window'> 
@@ -66,7 +61,7 @@ class AdminCreateEvent extends Component {
                     />
                 </div>
                 </div>
-                <MyEditor getCurrentText = {this.getCurrentText} text = {this.state.text} isOpen = {this.state.isOpen} UpdateState = {this.UpdateStateEditor}/>
+                <Editor text = {this.state.text} getCurrentText = {this.getCurrentText}/>
                 <div className="change-state-buttons">  
                     <Button 
                         name = "button-admin button-admin-background" 

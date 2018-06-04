@@ -10,20 +10,25 @@
 .footer{
   font-family: Montserrat;
   font-size: 16px;
-  font-weight: 500;
-  color: #9b9b9b;
+  color: #3b3f48;
   text-align:top;  
-  padding-left: 8px;
+  padding-left: 20px;
+}
+.footer-client a{
+  color: #3b3f48; 
 }
 .link-on-main-page{
   display: inline-block;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
-  color: #9b9b9b;;
 }
-.link-on-main-page a{
-  font-weight: 600;
+.footer-client span{
+  font-weight: 500;
 }
-.footer span{
-  font-weight: 600;
+.copyright{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  padding-top: 10px;
 }

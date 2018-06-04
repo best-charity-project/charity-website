@@ -3,7 +3,7 @@ import './AdminEventInfo.css';
 import AdminDateEvent from '../AdminDateEvent/AdminDateEvent';
 import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
-import MyEditor from  "../AdminEditor/AdminEditorInfo";
+import MyEditor from  "../AdminEditor/AdminEditor";
 import { server } from "../../../../api";
 
 class AdminEventInfo extends Component {
@@ -11,7 +11,6 @@ class AdminEventInfo extends Component {
     constructor (props){
         super(props);
         this.state = {
-            op:'',
             id:this.props.event._id,
             date : this.props.event.date,
             text:this.props.event.text,
@@ -29,7 +28,7 @@ getCurrentText = (str) =>{
     this.setState({text:str});
 }
 getValue = (str) => {
-    this.setState({name : str})
+    this.setState({name : str.value})
 }
 getDate = (str) =>{
     this.setState({date:str})
@@ -41,7 +40,6 @@ updateEvent = () =>{
     render() {
          return (
             <div className = 'admin-event-info'>
-            <Button name = 'admin-info-button' clickHandler ={this.closeInfo}/>          
             <div className = 'event-input-container'> 
                 <p className = 'name-event'> Название события  </p>
                 <TextField 
@@ -63,6 +61,11 @@ updateEvent = () =>{
                         label = 'Сохранить' 
                         clickHandler = {this.updateEvent}
                     />
+                     <Button 
+                        name = "button-admin button-admin-background" 
+                        label = 'Закрыть' 
+                        clickHandler = {this.closeInfo} 
+                    /> 
                 </div> 
            
             </div>    
