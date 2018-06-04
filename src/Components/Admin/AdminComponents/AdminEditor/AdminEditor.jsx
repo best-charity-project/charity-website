@@ -4,24 +4,26 @@ import { Editor } from 'react-draft-wysiwyg';
 
 
 class ControlledEditor extends Component {
-  state = {
-    editorState: EditorState.createEmpty(),
+  constructor(props) {
+    super(props);
+    this.state = {
+        editorState: EditorState.createEmpty(),
+      }
   }
+  componentWillReceiveProps(nextprops){
+    if(this.props.text && !nextprops.text){
+      this.setState({editorState: EditorState.createEmpty()})
+    }
+  }
+  componentDidMount (){  
+      const plainText = this.props.text ;
+      const content = ContentState.createFromText(plainText);
+      if(content){
+          this.setState({ editorState: EditorState.createWithContent(content)})
+      }   
+    }  
 
-componentDidMount (){     
-const plainText = this.props.text ;
-const content = ContentState.createFromText(plainText);
-    this.setState({ editorState: EditorState.createWithContent(content)})
-     
-} 
-componentWillUpdate(nextprops, nextState){
-  if(nextprops.isOpen === true){
-    this.setState({editorState: EditorState.createEmpty()})
-    this.props.UpdateState(nextprops.isOpen )
-  }
-}
   onEditorStateChange =(editorState) => {
-    if(this.props)
     this.setState({
       editorState,
     });
@@ -31,8 +33,9 @@ componentWillUpdate(nextprops, nextState){
   };
 
   render() {
-    const  editorState  = this.state.editorState;
+    const { editorState } = this.state;
     return (
+      <div>
       <Editor
         editorState={editorState}
         wrapperClassName="wrapper"
@@ -47,6 +50,7 @@ componentWillUpdate(nextprops, nextState){
         }}
         onEditorStateChange={this.onEditorStateChange}
       />
+      </div>
     )
   }
 }

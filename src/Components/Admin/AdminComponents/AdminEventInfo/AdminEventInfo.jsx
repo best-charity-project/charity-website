@@ -3,7 +3,7 @@ import './AdminEventInfo.css';
 import AdminDateEvent from '../AdminDateEvent/AdminDateEvent';
 import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
-import MyEditor from  "../AdminEditor/AdminEditorInfo";
+import MyEditor from  "../AdminEditor/AdminEditor";
 import { server } from "../../../../api";
 
 class AdminEventInfo extends Component {
@@ -11,7 +11,6 @@ class AdminEventInfo extends Component {
     constructor (props){
         super(props);
         this.state = {
-            op:'',
             id:this.props.event._id,
             date : this.props.event.date,
             text:this.props.event.text,
