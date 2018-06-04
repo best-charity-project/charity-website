@@ -1,29 +1,43 @@
 import React, {Component} from 'react';
 import '../News/News.css';
 import moment from 'moment';
-import {Link,Switch,NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
+import { server } from '../../../src/api';
+import Menu from '../Menu/Menu';
+import '../FullNew/FullNew.css';
+import Footer from '../Footer/Footer';
+
 class FullNew extends Component {
     state = {
-
+        new:{}
     }
     componentDidMount(){
         this.getInfoAboutNew()
     }
     render() {
         return (
-            <div>
-            {(this.state.new)? (<div>
-                <p> {this.state.new.title}</p>               
-                <p> {this.state.new.fullText}</p>
-                <p> {this.state.new.createdAt}</p>
-            </div>): null }
+            <div className = 'full-new-container'>
+                <div className = 'full-new-menu-container'> 
+                    <Menu name = 'full-new-menu'/>
+                </div>
+                <div className = 'aside-and-text-full-new'>
+                    <div class = 'aside-full-new'>
+                        <p><NavLink to = '/news'> Новости </NavLink></p>    
+                    </div>
+                    {(this.state.new)? (<div class = 'full-new'>
+                        <img src = {this.state.new.image} alt = 'image for new' /> 
+                        <p className = 'full-new-date'>{moment(this.state.new.createdAt).format('DD MMMM YYYY')} </p>
+                        <p className = 'full-new-title'> {this.state.new.title}</p>               
+                        <span> {this.state.new.fullText}</span>
+                    </div>): null }
+                </div>
+                <Footer name = 'full-new-footer'/>
             </div>
         ) 
     }
     getInfoAboutNew = () =>{
         const id = this.props.match.params.id;
-        var URL = 'http://localhost:3001/api/news/'+id;
-        fetch(URL)
+        fetch(`${server}/news/`+id)
         .then(response => response.json())
         .then(data => {
             this.setState({new:data.news });
