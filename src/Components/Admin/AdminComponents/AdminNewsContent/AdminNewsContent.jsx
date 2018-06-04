@@ -4,6 +4,7 @@ import AdminNewsSearch from '../AdminNewsSearch/AdminNewsSearch';
 import Button from '../../../Button/Button';
 import './AdminNewsContent.css';
 import { server } from '../../../../../src/api';
+import { Route } from 'react-router-dom'
 
 class AdminNewsContent extends Component {
     state = {
@@ -40,20 +41,19 @@ class AdminNewsContent extends Component {
             <div>
                 <div className="new-news">
                     <AdminNewsSearch findNews = {this.findNews} /> 
-                    <div className="button-new-news">
-                        <Button 
-                            name = "button-admin" 
-                            label = {'Создать'} 
-                            clickHandler = {this.addNews} 
-                        />
+                    <div className="button-new-news">                     
+                        <Route render={({ history}) => (
+                            <Button 
+                                name = "button-admin" 
+                                label = {'Создать'} 
+                                clickHandler = {() => { history.push('/admin-panel/news/create') }}
+                            />
+                         )} />
                     </div>
                 </div>  
                 <AdminNewsList news = {this.state.filteredNews} loading={this.state.isLoading} />  
             </div>
         )
-    }
-    addNews = () => {
-        window.location = '/admin-panel/news/create';
     }
     findNews = (title) => {
         if(!title) {
