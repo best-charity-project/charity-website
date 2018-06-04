@@ -44,9 +44,6 @@ class AdminCreateEvent extends Component {
        this.props.cancel();
        this.setState({isOpen: !this.state.isOpen})
      }
-    //  UpdateStateEditor = (str) =>{
-    //      this.setState({isOpen: !str})
-    //  }
     render() {
         return(
             <div className = 'modal-window'> 
