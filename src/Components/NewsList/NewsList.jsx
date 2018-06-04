@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import Masonry from 'react-masonry-component';
 import New from '../News/News';
-import '../NewsList/NewsList.css'
+import '../NewsList/NewsList.css';
+import { server } from '../../../src/api';
 
 class NewsList extends Component {
     constructor(props){
@@ -45,7 +46,7 @@ render() {
     }
     
 getNews= () => {
-    fetch('http://localhost:3001/api/news')
+    fetch(`${server}/news`)
     .then(response => response.json())
     .then(data => {
         this.setState({news: data.news }, () => {
