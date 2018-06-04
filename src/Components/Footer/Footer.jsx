@@ -8,11 +8,12 @@ class Footer extends Component {
 	}
   render() {
     return (
-  		<div className = 'footer-client'> 
-			<span className = 'copyright'>&#169; </span>
+			<div className = 'footer-client'> 
+				<span className = 'copyright'>&#169; </span>
 				<NavLink to="/" className = 'link-on-main-page'> on-info</NavLink>
-			<span>, {(new Date()).getFullYear()}</span>
-  		</div>
+				<span>, {(new Date()).getFullYear()}</span>
+		</div>
+  	
     );
   }
 }
