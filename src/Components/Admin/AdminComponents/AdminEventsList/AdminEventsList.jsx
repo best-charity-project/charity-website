@@ -13,7 +13,6 @@ class AdminEventsList extends Component {
         eventInfo:null
     };
 componentWillReceiveProps(nexprops, nextstate){
-
     if(nexprops.length != this.state.events.length){
         this.setState({events:nexprops.events})
     }

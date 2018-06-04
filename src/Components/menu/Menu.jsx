@@ -12,7 +12,7 @@ class Menu extends Component {
        list = {[
          {name: 'о нас', url :'/'},
          {name: 'новости', url :'/news'},
-         {name: 'проекты', url :'/news'}
+         {name: 'проекты', url :'/projects'}
          ]} 
        onClick = {this.handlerClick}
        classActive = 'active-link-client'

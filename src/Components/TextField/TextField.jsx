@@ -5,7 +5,7 @@ import '../ErrorEmail/ErrorEmail.css';
 
 class TextField extends Component {
 	state = {
-		value:null,
+		value:'',
 		error:false,
 	}
 	
@@ -13,9 +13,7 @@ class TextField extends Component {
 	valueChange = (e) => {
 		const newValue = e.target.value;
 		this.setState({value:e.target.value}, () =>{
-			if(this.props.onChangeValue) {
-				this.props.onChangeValue(this.state.value); 
-			}
+			this.props.onChangeValue(this.state); 
 		});
 		this.validateField(newValue);	
 

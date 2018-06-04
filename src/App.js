@@ -30,7 +30,7 @@ class App extends Component {
             <PrivateRoute  path="/admin-panel/news" component={AdminNewsBlock} exact />
             <PrivateRoute path="/admin-panel/news/create" component={AdminAddNews} />
             <Route path="/news/:id" component={FullNew} />
-            <Route path="/news" component={PageNews}/>
+            <Route path="/news" component={PageNews} />
             <Route component={Error} />
           </Switch>
         </div>
