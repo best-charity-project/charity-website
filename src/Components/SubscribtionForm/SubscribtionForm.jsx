@@ -20,6 +20,7 @@ class SubscribtionForm extends Component {
     }
  
     getValidation = (obj) => {
+        console.log(obj)
        this.setState({value:obj.value, valid:obj.error});
      }
      clickHandler = () => {
@@ -32,6 +33,7 @@ class SubscribtionForm extends Component {
     
     onSubscribe = () => {
         const newValue = this.state.value;
+        console.log(newValue)
         fetch(` ${server}/subscription/newsubscription`, {
             method: 'post',
             headers: {
