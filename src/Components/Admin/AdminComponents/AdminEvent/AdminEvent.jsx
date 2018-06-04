@@ -11,7 +11,7 @@ class AdminEvent extends Component {
    render() {
        return (
            <div className="event-admin"  id = {this.props.event._id} >
-               <div onClick = {this.props.clickHandler}>{this.props.event.name}</div>
+               <div onClick = {this.props.clickHandler} className = 'event-name'>{this.props.event.name}</div>
                <div>{moment(this.props.event.date).format('DD-MM-YYYY')}</div>
                <div>
                    <Button

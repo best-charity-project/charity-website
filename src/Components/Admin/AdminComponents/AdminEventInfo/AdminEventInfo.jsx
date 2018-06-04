@@ -29,7 +29,7 @@ getCurrentText = (str) =>{
     this.setState({text:str});
 }
 getValue = (str) => {
-    this.setState({name : str})
+    this.setState({name : str.value})
 }
 getDate = (str) =>{
     this.setState({date:str})
@@ -41,7 +41,6 @@ updateEvent = () =>{
     render() {
          return (
             <div className = 'admin-event-info'>
-            <Button name = 'admin-info-button' clickHandler ={this.closeInfo}/>          
             <div className = 'event-input-container'> 
                 <p className = 'name-event'> Название события  </p>
                 <TextField 
@@ -63,6 +62,11 @@ updateEvent = () =>{
                         label = 'Сохранить' 
                         clickHandler = {this.updateEvent}
                     />
+                     <Button 
+                        name = "button-admin button-admin-background" 
+                        label = 'Закрыть' 
+                        clickHandler = {this.closeInfo} 
+                    /> 
                 </div> 
            
             </div>    
