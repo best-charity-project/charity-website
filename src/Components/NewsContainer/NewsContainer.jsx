@@ -9,11 +9,11 @@ class News extends Component {
   }
   render() {
     return (
-		  <div className = 'news-container'> 
+      <div className = 'news-container'> 
         <Menu name = 'client-menu'/>
-         <NewsListAndAside/>
+        <NewsListAndAside/>
         <Footer name = ' footer footer-news'/>
-  		</div>
+    </div>
     );
   }
 
