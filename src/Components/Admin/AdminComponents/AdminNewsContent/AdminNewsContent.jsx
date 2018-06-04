@@ -4,6 +4,7 @@ import AdminNewsSearch from '../AdminNewsSearch/AdminNewsSearch';
 import Button from '../../../Button/Button';
 import './AdminNewsContent.css';
 const URL = 'http://localhost:3001';
+import { server } from '../../../src/api';
 
 class AdminNewsContent extends Component {
     state = {
@@ -13,7 +14,7 @@ class AdminNewsContent extends Component {
         error: null
     }
     componentDidMount() {
-        fetch(URL + '/api/news?isAdmin=true', { 
+        fetch(`${server}/news?isAdmin=true`, { 
             method: 'GET',
             mode: 'cors'
             })
