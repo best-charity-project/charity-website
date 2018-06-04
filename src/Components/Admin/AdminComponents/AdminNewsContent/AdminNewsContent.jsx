@@ -3,8 +3,7 @@ import AdminNewsList from '../AdminNewsList/AdminNewsList';
 import AdminNewsSearch from '../AdminNewsSearch/AdminNewsSearch';
 import Button from '../../../Button/Button';
 import './AdminNewsContent.css';
-const URL = 'http://localhost:3001';
-import { server } from '../../../src/api';
+import { server } from '../../../../../src/api';
 
 class AdminNewsContent extends Component {
     state = {
@@ -58,7 +57,7 @@ class AdminNewsContent extends Component {
     }
     findNews = (title) => {
         if(!title) {
-            fetch(URL + '/api/news', {
+            fetch(`${server}/news`, {
                 method: 'GET', 
                 mode: 'cors'
                 })
