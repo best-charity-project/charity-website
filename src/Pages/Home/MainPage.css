@@ -1,8 +1,7 @@
 .main-page-client{
 	display: flex;
 	flex-direction: column;
-	height: 100%;
-	overflow: hidden;
+	min-height: 100%;
 }
 .main-page-client li{
 	font-weight: 600;

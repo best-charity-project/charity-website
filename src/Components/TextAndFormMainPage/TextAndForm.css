@@ -1,6 +1,6 @@
 .text-and-form{	
-	margin-top: 250px;
-	margin-right: 500px; 
+	width: 50%;
+	margin-top: 220px;
 }
 .text-and-form h2{
 	font-size: 42px;
@@ -26,3 +26,8 @@
 	margin-right: -20px;
 }
 }
+@media  (max-width: 1298px) {
+	.text-and-form{	
+		margin-right:0 ;
+	}
+	}
