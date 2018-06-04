@@ -16,3 +16,9 @@
 .event-admin div:last-child {
     flex-basis: 25%;
 }
+.event-name{
+    cursor: pointer;
+}
+.event-name:hover{
+    text-decoration: underline;
+}

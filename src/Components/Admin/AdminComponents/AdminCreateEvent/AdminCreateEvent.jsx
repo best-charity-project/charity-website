@@ -16,8 +16,8 @@ class AdminCreateEvent extends Component {
         isOpen: false
     }
     getValue = (str) => {
-        const newValue = str;
-        this.setState({name:str});
+        const newValue = str.value;
+        this.setState({name:newValue});
       }
       getDate = (str) =>{
           this.setState({date:str})
