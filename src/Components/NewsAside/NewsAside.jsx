@@ -10,14 +10,13 @@ class NewsAside extends Component {
         }
     }
     componentDidMount(){
-        this.setState({activeItem : 'все', newsSources: ['все','организаторы', 'спонсоры','активисты','волонтеры']})
+        this.setState({activeItem : 'все', newsSources: this.props.listSourse})
     }
     getCurrentLink = (e) => {
         let currentLink = e.target;
         this.setState({activeItem :e.target.innerText.toLowerCase()}, () => {
             this.props.getCurrentSourse(this.state.activeItem)
-        });
-        
+        });        
     }
     render() {
         const {activeItem} = this.state;
@@ -28,8 +27,7 @@ class NewsAside extends Component {
                         if(activeItem === el){
                             return <li className ='active-link-news' key = {index}>{el}</li>
                         }                      
-                            return <li key = {index}>{el}</li>
-                        
+                        return <li key = {index}>{el}</li>                    
                     
                     })}
                 </ul>
