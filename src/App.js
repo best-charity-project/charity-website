@@ -5,7 +5,8 @@ import Home from "./Pages/Home/MainPage";
 import Navigation from "./Components/Navigation/Navigation";
 import Error from "./Components/Error/Error";
 import Admin from "./Pages/Admin/Admin";
-
+import Events from './Pages/Events/Events'
+import Projects from './Pages/Projects/Projects'
 import "./App.css"
 import AdminMain from './Components/Admin/AdminMain/AdminMain';
 import AdminEvents from './Components/Admin/AdminEvents/AdminEvents';
@@ -21,6 +22,8 @@ class App extends Component {
           <Switch>
             <Route path="/" component={Home} exact />
             <Route path="/login" component={Admin} />
+            <Route path="/events" component={Events} />
+            <Route path="/projects" component={Projects}/>
             <PrivateRoute path="/admin-panel/dashboard" component={AdminMain} />
             <PrivateRoute path="/admin-panel/events" component={AdminEvents} />
             <Route component={Error} />

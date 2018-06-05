@@ -11,8 +11,9 @@ class Menu extends Component {
       <MenuLinks
        list = {[
          {name: 'о нас', url :'/'},
-         {name: 'новости', url :'/news'},
-         {name: 'проекты', url :'/news'}
+         {name: 'активности', url :'/projects'},
+         {name: 'новости', url :'/news'}
+         
          ]} 
        onClick = {this.handlerClick}
        classActive = 'active-link-client'
