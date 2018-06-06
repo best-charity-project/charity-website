@@ -24,12 +24,14 @@ class FullNew extends Component {
                     <div class = 'aside-full-new'>
                         <p><NavLink to = '/news'> Новости </NavLink></p>    
                     </div>
+                    <div className = 'full-new-list-container'>
                     {(this.state.new)? (<div class = 'full-new'>
                         <img src = {this.state.new.image} alt = 'image for new' /> 
                         <p className = 'full-new-date'>{moment(this.state.new.createdAt).format('DD MMMM YYYY')} </p>
                         <p className = 'full-new-title'> {this.state.new.title}</p>               
                         <span> {this.state.new.fullText}</span>
                     </div>): null }
+                    </div>
                 </div>
                 <Footer name = 'full-new-footer'/>
             </div>
