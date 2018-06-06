@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import '../News/News.css';
 import moment from 'moment';
 import {Link,Switch,NavLink} from "react-router-dom";
-import FullNew from '../FullNew/FullNew'
+import FullNews from '../FullNews/FullNews'
 class News extends Component {
     Click = () => {
-        <FullNew />
+        <FullNews />
     }
     render() {
         moment.lang('ru');

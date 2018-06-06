@@ -4,10 +4,10 @@ import moment from 'moment';
 import {NavLink} from "react-router-dom";
 import { server } from '../../../src/api';
 import Menu from '../Menu/Menu';
-import '../FullNew/FullNew.css';
+import '../FullNews/FullNews.css';
 import Footer from '../Footer/Footer';
 
-class FullNew extends Component {
+class FullNews extends Component {
     state = {
         new:{}
     }
@@ -47,4 +47,4 @@ class FullNew extends Component {
     }
 }
 
-export default FullNew;
+export default FullNews;
