@@ -4,6 +4,7 @@
 	padding-top: 10px;
 }
 .client-menu{
+	
 	display: flex;
 	padding: 20px;
 	flex-direction: row;
@@ -15,11 +16,20 @@
 	margin-top: 7px;
 	list-style: none;;
 }
-.menu-links-client li{
+.menu-links-client ul {
+	list-style: none;
+}
+.menu-links-client ul li {
+	display: inline-block;
+}
+.menu-links-client a {
+	text-decoration: none;
+}
+.menu-links-client a{
+	font-weight: 600;
 	text-transform: uppercase;
 	font-size: 18px;
 	margin-right: 40px;
-	display: inline-block;
     color: #9b9b9b;
 }
 .social-icons{
