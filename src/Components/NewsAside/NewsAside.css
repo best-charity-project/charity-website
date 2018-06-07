@@ -2,8 +2,8 @@
     box-sizing: border-box;
 }
 .news-aside{
-   width: 350px;
-   padding-top: 70px;
+   width: 300px;
+   padding-top: 20px;
 }
 .link-news{
     list-style: none;

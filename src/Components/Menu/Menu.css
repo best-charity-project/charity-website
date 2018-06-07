@@ -3,7 +3,7 @@
 	height: 55px;
 	padding-top: 10px;
 }
-.menu{
+.menu{	
 	display: flex;
 	padding: 20px;
 	flex-direction: row;
@@ -61,4 +61,10 @@
 }
 .menu-links-client .active-link-client{
 	color: black;
+}
+.events-menu{
+	width: 100%;
+	z-index: 999;
+	position: fixed;
+	background-color: #e8e6e2;
 }
