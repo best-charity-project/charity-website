@@ -15,7 +15,7 @@ class AdminNewsList extends Component {
                 </div>
                 <div>                    
                     {this.props.news.map(item => 
-                            <AdminNews news = {item} key = {item._id} />
+                            <AdminNews news = {item} key = {item._id}  deleteHandler = {() => this.props.deleteNews(item)}/>
                     )}
                 </div>  
             </div>  
