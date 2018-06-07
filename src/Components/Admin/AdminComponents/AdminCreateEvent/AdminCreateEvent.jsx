@@ -40,9 +40,8 @@ class AdminCreateEvent extends Component {
             
       }
       cancel = () => {  
-       this.setState({title:'', text:'',data:''})     
+       this.setState({title:'', text:'',data:'',isOpen: !this.state.isOpen})     
        this.props.cancel();
-       this.setState({isOpen: !this.state.isOpen})
      }
     render() {
         return(
