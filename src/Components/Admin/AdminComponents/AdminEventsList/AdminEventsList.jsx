@@ -53,9 +53,10 @@ componentWillReceiveProps(nexprops, nextstate){
             },
             body: JSON.stringify(user),
         })
-            this.setState({            
-                events: this.state.events.filter(user => user._id !== id)
-            })  
+        .then(response => response.json())
+        .then(data =>  this.setState({            
+            events: data.events}))
+             
       };
 
     getEventInfo = (e) => {
