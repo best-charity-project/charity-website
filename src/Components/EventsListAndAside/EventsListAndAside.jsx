@@ -9,7 +9,6 @@ class EventsListAndAside extends Component {
     }
     componentDidMount(){
         this.getEventsList();
-
     }
     getCurrentSourse = (str) => {
         var newStr = str[0].toUpperCase() + str.slice(1);
@@ -17,20 +16,20 @@ class EventsListAndAside extends Component {
             this.filterArray('')
         }):this.setState({currentSourse:newStr} , () => {
             this.filterArray(this.state.currentSourse)
-        });
-        
+        });        
     }
+
     render() {
         return (
             <div className = 'events-aside-list'>
                 <EventsAside 
-                getCurrentSourse = {this.getCurrentSourse} 
-                listSourse = {['все','организаторы', 'спонсоры','активисты','волонтеры']} 
+                    getCurrentSourse = {this.getCurrentSourse} 
+                    listSourse = {['все','организаторы', 'спонсоры','активисты','волонтеры']} 
                 />
                 <EventsList 
-                currentSourse = {this.state.currentSourse} 
-                name = "events-list" 
-                array = {this.state.filterArray}
+                    currentSourse = {this.state.currentSourse} 
+                    name = "events-list" 
+                    array = {this.state.filterArray}
                 /> 
             </div>
         ) 
