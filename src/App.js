@@ -16,6 +16,7 @@ import AdminAddNews from './Components/Admin/AdminAddNews/AdminAddNews';
 import { fakeAuth } from './Components/Admin/Auth/PrivateRoute';
 import PrivateRoute from "../src/Components/Admin/Auth/PrivateRoute";
 import { getToken } from './Components/Admin/Auth';
+import Events from './Pages/Events/Events';
 
 class App extends Component {
   render() {
@@ -31,6 +32,7 @@ class App extends Component {
             <PrivateRoute path="/admin-panel/news/create" component={AdminAddNews} />
             <Route path="/news/:id" component={FullNew} />
             <Route path="/news" component={PageNews} />
+            <Route path="/events" component={Events} />
             <Route component={Error} />
           </Switch>
         </div>
