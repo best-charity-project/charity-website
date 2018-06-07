@@ -7,7 +7,6 @@ import { server } from '../../../src/api';
 class EventsList extends Component {
     
     render() {
-        console.log(this.props)
         return (
          <div className={this.props.name}>
             <Masonry className = 'masonry-div'> 
