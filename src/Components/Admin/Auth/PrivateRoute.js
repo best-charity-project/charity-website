@@ -12,7 +12,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                 ) : (
                     <Redirect
                         to={{
-                            pathname: '/admin-panel/dashboard',
+                            pathname: '/login',
                             state: { from: props.location },
                         }}
                     />
