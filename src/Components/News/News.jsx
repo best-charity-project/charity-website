@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 import FullNew from '../FullNew/FullNew'
 class News extends Component {
     Click = () => {
-        <FullNew />
+        <FullNews />
     }
     render() {
         moment.lang('ru');

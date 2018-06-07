@@ -6,7 +6,7 @@ import Navigation from "./Components/Navigation/Navigation";
 import Error from "./Components/Error/Error";
 import Admin from "./Pages/Admin/Admin";
 import PageNews from "./Pages/News/News";
-import FullNew from './Components/FullNew/FullNew';
+import FullNews from './Components/FullNews/FullNews';
 
 import "./App.css"
 import AdminMain from './Components/Admin/AdminMain/AdminMain';
@@ -30,7 +30,7 @@ class App extends Component {
             <PrivateRoute path="/admin-panel/events" component={AdminEvents} />
             <PrivateRoute  path="/admin-panel/news" component={AdminNewsBlock} exact />
             <PrivateRoute path="/admin-panel/news/create" component={AdminAddNews} />
-            <Route path="/news/:id" component={FullNew} />
+            <Route path="/news/:id" component={FullNews} />
             <Route path="/news" component={PageNews} />
             <Route path="/events" component={Events} />
             <Route component={Error} />

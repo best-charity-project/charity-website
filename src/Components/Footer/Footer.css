@@ -10,7 +10,6 @@
 .footer{
   font-family: Montserrat;
   font-size: 16px;
-  color: #3b3f48;
   text-align:top;  
   padding-left: 20px;
 }
@@ -24,8 +23,10 @@
 }
 .footer-client span{
   font-weight: 500;
+  color: #3b3f48;
 }
 .copyright{
+  color: #3b3f48;
   display: inline-block;
   width: 20px;
   height: 20px;
