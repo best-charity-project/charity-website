@@ -38,7 +38,7 @@ class AdminNewsContent extends Component {
         }
 
         return(
-            <div>
+            <div className="admin-position-content">
                 <div className="new-news">
                     <AdminNewsSearch findNews = {this.findNews} /> 
                     <div className="button-new-news">                     
