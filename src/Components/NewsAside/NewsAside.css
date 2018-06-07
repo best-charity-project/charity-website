@@ -3,11 +3,11 @@
 }
 .news-aside{
    width: 300px;
-   padding-top: 70px;
+   padding-top: 20px;
 }
 .link-news{
     list-style: none;
-    margin:50px 0 0 20px;
+    margin:50px 0 0 10px;
 }
 .link-news li{  
     padding-left: 50px;
