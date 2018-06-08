@@ -23,6 +23,7 @@ class AdminAddNews extends Component {
         this.setState({source: 'organizers'})
     }
     render() {
+        let infoAboutNews = this.props.location.state.detail;
         return (
             <div className="admin-content">
                 <Navigation onLogout={this.onLogout} />
