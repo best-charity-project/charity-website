@@ -13,8 +13,8 @@ class AdminNews extends Component {
             return <p>{error.message}</p>
         }
        return (
-           <div className="news-admin">
-               <div>{this.props.news.title}</div>
+           <div className="news-admin" id = {this.props.news._id}>
+               <div onClick = {this.props.showNews} className = 'news-admin-title'>{this.props.news.title}</div>
                <div readOnly>{moment(this.props.news.createdAt).format('DD-MM-YYYY')}</div>
                <div>{this.props.news.isPublic ? 'Да' : 'Нет'}</div>
                <div>
@@ -27,7 +27,6 @@ class AdminNews extends Component {
            </div>
        )
     }
-
 }
 
 export default AdminNews;
