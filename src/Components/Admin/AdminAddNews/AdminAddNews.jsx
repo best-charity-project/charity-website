@@ -19,6 +19,7 @@ class AdminAddNews extends Component {
     }
     cropperRef = React.createRef()
     render() {
+        let infoAboutNews = this.props.location.state.detail;
         return (
             <div className="admin-content">
                 <Navigation onLogout={this.onLogout} />
