@@ -26,6 +26,7 @@ class App extends Component {
           <Switch>
             <Route path="/" component={Home} exact />
             <Route path="/login" component={Admin} />
+            <PrivateRoute path="/admin-panel" component={AdminMain} exact/>
             <PrivateRoute path="/admin-panel/dashboard" component={AdminMain} />
             <PrivateRoute path="/admin-panel/events" component={AdminEvents} />
             <PrivateRoute  path="/admin-panel/news" component={AdminNewsBlock} exact />

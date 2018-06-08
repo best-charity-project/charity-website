@@ -82,7 +82,7 @@ class AdminUploadImage extends Component {
         this.setState({loaded: true})
     }
     handleClick = (e) => {
-        e.preventDefault
+        e.preventDefault()
         let img = this.cropperRef.current.crop()
         this.setState({image: img})
         this.props.onCropImage(img)
