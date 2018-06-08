@@ -5,6 +5,10 @@
 }
 
 .img-container {
+    width: 30%;
+}
+
+.img-placeholder {
     height: 500px;
     width: 300px;
     margin-left: 100px;
@@ -16,7 +20,11 @@
 .text-container {
     padding-top: 50px;
     margin-left: 100px;
-    height: 420px;  
+}
+
+.project-section {
+    width: 70%;
+    padding-right: 50px;
 }
 
 .project-date { 
@@ -29,7 +37,6 @@
 }
 
 .project-desc {
-    width: 700px;
     margin-bottom: 20px;
 }
 

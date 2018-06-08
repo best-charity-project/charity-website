@@ -12,8 +12,10 @@ class Projects extends Component {
 			<div className="main-page-client">
 			<Menu name = 'client-menu'/>
                 <div className="projects-page-content">
-                    <div className="img-container"></div>
-                    <div>
+                    <div className="img-container">
+                        <div className="img-placeholder"></div>
+                    </div>
+                    <div className="project-section">
                         <div className="text-container">
                         <div className="project-date">
                             <p>Lorem ipsum dorem sit amet</p>
