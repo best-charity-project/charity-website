@@ -18,18 +18,23 @@ class AdminAddNews extends Component {
         imageData: ''
     }
     cropperRef = React.createRef()
+
+    componentDidMount() {
+        this.setState({source: 'organizers'})
+    }
     render() {
         return (
             <div className="admin-content">
                 <Navigation onLogout={this.onLogout} />
                 <NavBar />
-                <div className = "form-create-news">
+                <form className = "form-create-news" encType="multipart/form-data" method="post">
                     <div className="admin-title-news">
                         <TextField 
                             id = "title-news" 
                             title = "Название новости:" 
                             type = "text"
                             name = "title-news"
+                            value = {this.state.title}
                             onChangeValue = {this.onChangeValue}
                         />
                     </div>
@@ -38,7 +43,7 @@ class AdminAddNews extends Component {
                         <AdminUploadImage 
                             id = "image-news"
                             name = "image-news"
-                            
+                            onCropImage = {this.onCropImage}
                         />
                     </div>
                     <hr />
@@ -93,12 +98,15 @@ class AdminAddNews extends Component {
                             clickHandler = {this.onCancel}
                         />
                     </div>
-                </div>  
+                </form>  
             </div>
         )
     }
-    onChangeValue = (obj) => {
-        this.setState({title: obj.value});
+    onCropImage = (image) => {
+        this.setState({imageData: image})
+    }
+    onChangeValue = (object) => {
+        this.setState({title: object.value});
     }
     getCurrentTextShort = (str) => {
         this.setState({shortText: str});
@@ -113,7 +121,7 @@ class AdminAddNews extends Component {
 
     }
     onPublish = () => {
-        this.setState({isPublic: true}, this.onDraft)
+        this.setState({isPublic: true}, this.sendNews)
             /* this.props.saveNews() */ 
     }
     onCancel = () => {
@@ -122,11 +130,16 @@ class AdminAddNews extends Component {
             shortText: '',
             fullText: '',
             source: '',
-            isPublic: '',
+            isPublic: false,
             imageData: ''
-        })     
+        })    
+        //todo: return to previous page 
     }
     onDraft = () => {
+        this.setState({isPublic: false}, this.sendNews)
+         /* this.props.saveNews() */ 
+    }
+    sendNews = () => {
         fetch(`${server}/news`, {
             method: 'POST',
             headers: {
@@ -141,9 +154,10 @@ class AdminAddNews extends Component {
             shortText: '',
             fullText: '',
             source: '',
-            isPublic: '',
+            isPublic: false,
             imageData: ''
         })
+         /* this.props.saveNews() */ 
     }
     //todo: сохранить в описании 200 символов из полного описания, если короткое не заполнено
 }

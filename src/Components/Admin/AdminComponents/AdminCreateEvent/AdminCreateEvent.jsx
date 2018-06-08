@@ -25,7 +25,7 @@ class AdminCreateEvent extends Component {
         this.setState({text:str});
     }
 
-      sendEvent = () =>{
+    sendEvent = () =>{
         fetch(`${ server }/events`, {
             method: 'POST',
             headers: {
@@ -36,9 +36,8 @@ class AdminCreateEvent extends Component {
             })
             .then(response => response.json())
             this.setState({title:'', text:'',date:new Date(), isOpen: !this.state.isOpen})
-            this.props.saveEvent()       
-            
-      }
+            this.props.saveEvent()           
+    }
       cancel = () => {  
        this.setState({title:'', text:'',data:'',isOpen: !this.state.isOpen})     
        this.props.cancel();

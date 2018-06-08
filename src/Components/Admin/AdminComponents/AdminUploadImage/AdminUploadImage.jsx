@@ -30,7 +30,7 @@ class AdminUploadImage extends Component {
                     </div>
                 </div>  
                 <div className = "position-cropper">
-                    <div></div>
+                    <div>&nbsp;</div>
                     <div>
                         <Cropper 
                             src = {this.state.url}
@@ -82,8 +82,10 @@ class AdminUploadImage extends Component {
         this.setState({loaded: true})
     }
     handleClick = (e) => {
-        e.preventDefault()
-        this.setState({image: this.cropperRef.current.crop()})
+        e.preventDefault
+        let img = this.cropperRef.current.crop()
+        this.setState({image: img})
+        this.props.onCropImage(img)
     }
 }
 

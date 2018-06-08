@@ -37,7 +37,6 @@ class ControlledEditor extends Component {
         (resolve, reject) => {
             const xhr = new XMLHttpRequest();
             xhr.open('POST', 'https://...');
-            xhr.setRequestHeader('Authorization', 'Client-ID XXXXX');
             const data = new FormData();
             data.append('image', file);
             xhr.send(data);
