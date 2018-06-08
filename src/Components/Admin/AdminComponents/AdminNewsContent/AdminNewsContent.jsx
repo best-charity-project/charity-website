@@ -51,10 +51,25 @@ class AdminNewsContent extends Component {
                          )} />
                     </div>
                 </div>  
-                <AdminNewsList news = {this.state.filteredNews} loading={this.state.isLoading} />  
+                <AdminNewsList news = {this.state.filteredNews} loading={this.state.isLoading}  deleteNews = {this.deleteNews}/> 
             </div>
         )
     }
+    deleteNews = (news) =>{
+            let id = news._id
+            fetch(`${ server }/news/`+id, {
+                method: 'DELETE',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(news),
+            })
+                this.setState({            
+                    filteredNews: this.state.filteredNews.filter(news => news._id !== id)
+                }) 
+    } 
+
     findNews = (title) => {
         if(!title) {
             fetch(`${server}/news`, {

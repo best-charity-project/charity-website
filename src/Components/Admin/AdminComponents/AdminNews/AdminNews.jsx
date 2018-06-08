@@ -21,7 +21,7 @@ class AdminNews extends Component {
                    <Button
                        name = "button-admin admin-cancel"
                        label = {<span aria-hidden="true">&times;</span>}
-                       clickHandler = {this.deleteHandler}
+                       clickHandler = {this.props.deleteHandler }
                    />
                </div>
            </div>
