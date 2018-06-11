@@ -9,7 +9,7 @@ class Home extends Component {
 			<div className="main-page-client">
 		  	<Menu name = 'client-menu'/>
 				<AboutUs/>
-				<Footer name = 'footer footer-client'/>
+				<Footer name = 'footer-client'/>
 			</div>
     );
   }
