@@ -42,6 +42,16 @@ class AdminAddNews extends Component {
                 <Navigation onLogout={this.onLogout} />
                 <NavBar />
                 <form className = "form-create-news" encType="multipart/form-data" method="post">
+                    <div className = "news-status">
+                        <span>{this.state.isPublic ? "Статус новости: опубликована" : "Статус новости: черновик"}</span>
+                        <Route render={({history}) => (
+                            <Button 
+                                label={"Опубликовать"}
+                                name = "button-admin"
+                                clickHandler = {this.onPublish}
+                            />
+                        )} />
+                    </div>
                     <div className="admin-title-news">
                         <TextField 
                             id = "title-news" 
@@ -90,6 +100,9 @@ class AdminAddNews extends Component {
                             </select>
                         </div>
                     </div>
+                    <div className = 'button-info'>
+                        <span>* При нажатии на кнопку "Сохранить" новость сохраняется как черновик</span>
+                    </div>
                     <div className="admin-buttons">
                         <Route render={({history}) => (
                             <Button 
@@ -100,14 +113,7 @@ class AdminAddNews extends Component {
                         )} />
                         <Route render={({history}) => (
                             <Button 
-                                label={"Опубликовать"}
-                                name = "button-admin"
-                                clickHandler = {this.onPublish}
-                            />
-                        )} />
-                        <Route render={({history}) => (
-                            <Button 
-                                label={"Сохранить черновик"}
+                                label={"Сохранить"}
                                 name = "button-admin"
                                 clickHandler = {this.onDraft}
                             />
@@ -184,20 +190,21 @@ class AdminAddNews extends Component {
 
         fetch(`${server}/news`, {
             method: 'POST',
-            headers: {
+           /*  headers: {
                 'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
                 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-                },
+                }, */
             body: formData
         })
-        .then(response => console.log(JSON.stringify(response)) /* .json())  */)
+        .then(res => res.json())
+        .then(data => console.log(data))
         this.setState({
-            title: '',
-            shortText: '',
-            fullText: '',
-            source: '',
+            title: "",
+            shortText: "",
+            fullText: "",
+            source: "",
             isPublic: false,
-            imageData: ''
+            imageData: ""
         })
         this.props.history.push({
             pathname: '/admin-panel/news'

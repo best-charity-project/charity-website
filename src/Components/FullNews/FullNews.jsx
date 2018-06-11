@@ -26,7 +26,7 @@ class FullNews extends Component {
                     </div>
                     <div className = 'full-new-list-container'>
                     {(this.state.new)? (<div class = 'full-new'>
-                        <img src = {this.state.new.image} alt = 'image for new' /> 
+                        <img src = {this.state.new.image} alt = 'image for news' /> 
                         <p className = 'full-new-date'>{moment(this.state.new.createdAt).format('DD MMMM YYYY')} </p>
                         <p className = 'full-new-title'> {this.state.new.title}</p>               
                         <span> {this.state.new.fullText}</span>
