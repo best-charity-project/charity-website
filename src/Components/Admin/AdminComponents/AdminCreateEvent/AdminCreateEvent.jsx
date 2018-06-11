@@ -10,13 +10,13 @@ import Editor from  "../AdminEditor/AdminEditor";
 
 class AdminCreateEvent extends Component { 
     state = {
-        name: '',
+        title: '',
         date:new Date(),
         text : '',
         isOpen: false
     }
     getValue = (obj) => {
-        this.setState({name:obj.value});
+        this.setState({title:obj.value});
       }
       getDate = (str) =>{
           this.setState({date:str})
@@ -35,14 +35,13 @@ class AdminCreateEvent extends Component {
             body: JSON.stringify(this.state),
             })
             .then(response => response.json())
-            this.setState({name:'', text:'',date:new Date(), isOpen: !this.state.isOpen})
+            this.setState({title:'', text:'',date:new Date(), isOpen: !this.state.isOpen})
             this.props.saveEvent()       
             
       }
       cancel = () => {  
-       this.setState({name:'', text:'',data:''})     
+       this.setState({title:'', text:'',data:'',isOpen: !this.state.isOpen})     
        this.props.cancel();
-       this.setState({isOpen: !this.state.isOpen})
      }
     render() {
         return(
@@ -52,7 +51,7 @@ class AdminCreateEvent extends Component {
                 <div className="event-title">
                 <p>Название события</p>
                 <TextField 
-                    value = {this.state.name}
+                    value = {this.state.title}
                     id = "title" 
                     type = 'text' 
                     nameClass = 'event-title-input'

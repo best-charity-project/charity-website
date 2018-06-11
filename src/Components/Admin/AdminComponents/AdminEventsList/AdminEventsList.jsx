@@ -13,7 +13,6 @@ class AdminEventsList extends Component {
         eventInfo:null
     };
 componentWillReceiveProps(nexprops, nextstate){
-
     if(nexprops.length != this.state.events.length){
         this.setState({events:nexprops.events})
     }
@@ -28,10 +27,9 @@ componentWillReceiveProps(nexprops, nextstate){
                 </div>            
                 
                 <div>                    
-                    {
-                        this.state.events.map(user => 
+                    {this.state.events.map(user => 
                         <AdminEvent 
-                        clickHandler = {this. getEventInfo }
+                            clickHandler = {this. getEventInfo }
                             event = {user} 
                             key = {user._id} 
                             deleteHandler = {() => this.deleteEvent(user)                            

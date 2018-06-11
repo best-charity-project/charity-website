@@ -9,7 +9,8 @@ const NavBar = ()=>{
                      className="menu-list-admin" 
                      list = {[
                          {name: 'Список пользователей', url :'/admin-panel/dashboard'},
-                         {name: 'События', url :'/admin-panel/events'}
+                         {name: 'События', url :'/admin-panel/events'},
+                         {name: 'Новости', url : '/admin-panel/news'}
                      ]} 
                      onClick = {this.handlerClick}
                      classActive = 'active-link-admin'/>
