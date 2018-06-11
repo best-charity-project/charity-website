@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import AdminDateEvent from '../AdminDateEvent/AdminDateEvent';
-import AdminTextEvent from '../AdminTextEvent/AdminTextEvent';
 import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
 import './AdminCreateEvent.css';
-import MyEditor from  "../AdminEditor/AdminEditor";
 import { server } from '../../../../api';
 import Editor from  "../AdminEditor/AdminEditor";
 

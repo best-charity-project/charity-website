@@ -19,7 +19,12 @@ class AdminNewsList extends Component {
                 </div>
                 <div>                    
                     {this.props.news.map(item => 
-                            <AdminNews news = {item} key = {item._id}  deleteHandler = {() => this.props.deleteNews(item)} showNews= {this. getInfoNews}/>
+                        <AdminNews 
+                            news = {item} 
+                            key = {item._id}  
+                            deleteHandler = {() => this.props.deleteNews(item)} 
+                            showNews= {this.getInfoNews}
+                        />
                     )}
                 </div>  
             </div>  
@@ -31,13 +36,11 @@ class AdminNewsList extends Component {
         fetch(URL)
         .then(response => response.json())
         .then(data => {
-            this.setState({ newsInfo: data.news } ,() => {
-
-        });
+            this.setState({ newsInfo: data.news });
             this.props.history.push({
                 pathname: '/admin-panel/news/create',
                 state: { detail: this.state.newsInfo}
-              })
+            })
         })
 
     }

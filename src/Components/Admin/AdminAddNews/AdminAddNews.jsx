@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
-import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage'
+import {Route} from 'react-router-dom';
+import {withRouter} from "react-router-dom";
+
+import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';
 import TextField from '../../TextField/TextField';
 import ControlledEditor from  '../AdminComponents/AdminEditor/AdminEditor';
 import Button from '../../Button/Button';
@@ -21,9 +24,19 @@ class AdminAddNews extends Component {
 
     componentDidMount() {
         this.setState({source: 'organizers'})
+        if (this.props.location.state) {
+            let infoAboutNews = this.props.location.state.detail;
+            this.setState({
+                title: this.props.location.state.detail.title,
+                shortText: this.props.location.state.detail.shortText,
+                fullText: this.props.location.state.detail.fullText,
+                source: this.props.location.state.detail.source,
+                isPublic: this.props.location.state.detail.isPublic,
+                imageData: this.props.location.state.detail.imageData
+            })
+        }
     }
     render() {
-        let infoAboutNews = this.props.location.state.detail;
         return (
             <div className="admin-content">
                 <Navigation onLogout={this.onLogout} />
@@ -78,28 +91,36 @@ class AdminAddNews extends Component {
                         </div>
                     </div>
                     <div className="admin-buttons">
-                        <Button 
-                            label = {"Предпросмотр"} 
-                            name = "button-admin"
-                            clickHandler = {this.onPreview}
-                        />
-                        <Button 
-                            label={"Опубликовать"}
-                            name = "button-admin"
-                            clickHandler = {this.onPublish}
-                        />
-                        <Button 
-                            label={"Сохранить черновик"}
-                            name = "button-admin"
-                            clickHandler = {this.onDraft}
-                        />
-                        <Button 
-                            label={"Отмена"}
-                            name = "button-admin"
-                            clickHandler = {this.onCancel}
-                        />
+                        <Route render={({history}) => (
+                            <Button 
+                                label = {"Предпросмотр"} 
+                                name = "button-admin"
+                                clickHandler = {this.onPreview}
+                            />
+                        )} />
+                        <Route render={({history}) => (
+                            <Button 
+                                label={"Опубликовать"}
+                                name = "button-admin"
+                                clickHandler = {this.onPublish}
+                            />
+                        )} />
+                        <Route render={({history}) => (
+                            <Button 
+                                label={"Сохранить черновик"}
+                                name = "button-admin"
+                                clickHandler = {this.onDraft}
+                            />
+                        )} />
+                        <Route render={({history}) => (
+                            <Button 
+                                label={"Отмена"}
+                                name = "button-admin"
+                                clickHandler = {this.onCancel}
+                            />
+                        )} />
                     </div>
-                </form>  
+                </form>   
             </div>
         )
     }
@@ -109,23 +130,37 @@ class AdminAddNews extends Component {
     onChangeValue = (object) => {
         this.setState({title: object.value});
     }
-    getCurrentTextShort = (str) => {
-        this.setState({shortText: str});
-    }
     getCurrentTextFull = (str) => {
         this.setState({fullText: str});
+    }
+    getCurrentTextShort = (str) => {
+        this.setState({shortText: str})
     }
     handleChange = (event) => {
         this.setState({source: event.target.value})
     }
-    onPreview = () => {
-
+    checkText = () => {
+        if (!this.state.shortText) {
+            let newText = this.state.fullText.slice(0, 200) 
+            if (this.state.fullText.length >= 201) {newText = newText + "..."}
+            this.setState({shortText: newText}, this.sendNews)
+        } else {
+            this.sendNews()
+        }
     }
-    onPublish = () => {
-        this.setState({isPublic: true}, this.sendNews)
+    onPreview = (e) => {
+        e.preventDefault()
+        /* this.props.history.push({
+            pathname: '/admin-panel/news'
+        })   */
+    }
+    onPublish = (e) => {
+        e.preventDefault()
+        this.setState({isPublic: true}, this.checkText)
             /* this.props.saveNews() */ 
     }
-    onCancel = () => {
+    onCancel = (e) => {
+        e.preventDefault()
         this.setState({
             title: '',
             shortText: '',
@@ -133,23 +168,29 @@ class AdminAddNews extends Component {
             source: '',
             isPublic: false,
             imageData: ''
-        })    
-        //todo: return to previous page 
+        }) 
+        this.props.history.push({
+            pathname: '/admin-panel/news'
+        })  
     }
-    onDraft = () => {
-        this.setState({isPublic: false}, this.sendNews)
+    onDraft = (e) => {
+        e.preventDefault()
+        this.setState({isPublic: false}, this.checkText)
          /* this.props.saveNews() */ 
     }
     sendNews = () => {
+        let formData  = new FormData();
+        Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
+
         fetch(`${server}/news`, {
             method: 'POST',
             headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(this.state),
+                'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                },
+            body: formData
         })
-        .then(response => response.json())
+        .then(response => console.log(JSON.stringify(response)) /* .json())  */)
         this.setState({
             title: '',
             shortText: '',
@@ -158,9 +199,11 @@ class AdminAddNews extends Component {
             isPublic: false,
             imageData: ''
         })
+        this.props.history.push({
+            pathname: '/admin-panel/news'
+        })  
          /* this.props.saveNews() */ 
     }
-    //todo: сохранить в описании 200 символов из полного описания, если короткое не заполнено
 }
 
-export default AdminAddNews;
+export default withRouter(AdminAddNews);

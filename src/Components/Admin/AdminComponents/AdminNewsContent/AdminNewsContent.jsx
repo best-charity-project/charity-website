@@ -51,7 +51,11 @@ class AdminNewsContent extends Component {
                          )} />
                     </div>
                 </div>  
-                <AdminNewsList news = {this.state.filteredNews} loading={this.state.isLoading}  deleteNews = {this.deleteNews}/> 
+                <AdminNewsList 
+                    news = {this.state.filteredNews} 
+                    loading={this.state.isLoading}  
+                    deleteNews = {this.deleteNews}
+                /> 
             </div>
         )
     }
