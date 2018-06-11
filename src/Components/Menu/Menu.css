@@ -28,11 +28,11 @@
 .activity:after{
 	content: '';
 	display: inline-block;
-    background-image: url(../../Assets/AssetsSvg/arrow-down.svg);
-    background-repeat: no-repeat;
-    width: 20px;
+	background-image: url(../../Assets/AssetsSvg/arrow-down.svg);
+	background-repeat: no-repeat;
+	width: 20px;
 	height: 15px;
-	margin-left: 5px;
+	margin-left: 5px; 
 	vertical-align: bottom;
 }
 .activeDropMenu{	
