@@ -27,16 +27,7 @@ class App extends Component {
             <Route path="/" component={Home} exact />
             <Route path="/projects" component={Projects} />
             <Route path="/login" component={Admin} />
-			      <Route 
-				      path="/admin-panel" 
-				      render={() => {
-					    return (
-              <Switch>
-                <Redirect from='/admin-panel' to='/admin-panel/dashboard'/>
-                <PrivateRoute path='/admin-panel/dashboard' component={AdminMain}/>
-              </Switch>
-					    );
-				      }}/>  
+            <PrivateRoute path="/admin-panel" component={AdminMain} exact/>
             <PrivateRoute path="/admin-panel/dashboard" component={AdminMain} />
             <PrivateRoute path="/admin-panel/events" component={AdminEvents} />
             <PrivateRoute  path="/admin-panel/news" component={AdminNewsBlock} exact />

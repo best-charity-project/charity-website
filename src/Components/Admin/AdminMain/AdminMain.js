@@ -10,6 +10,10 @@ const AdminMain = () => {
     return (
         <div className="admin-content">
             <Navigation onLogout={this.onLogout} />
+            <Switch>
+                    <Route path="/admin-panel/dashboard" component={AdminUsersContent} exact />
+                    <Route path="/admin-panel/dashboard/events" component={AdminEvents}/>
+            </Switch>
             <NavBar/>
         </div>          
     )
