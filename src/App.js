@@ -28,6 +28,7 @@ class App extends Component {
             <Route path="/projects" component={Projects} />
             <Route path="/login" component={Admin} />
             <Route path="/events" component={Events} />
+            <PrivateRoute path="/admin-panel" component={AdminMain} exact/>
             <PrivateRoute path="/admin-panel/dashboard" component={AdminMain} />
             <PrivateRoute path="/admin-panel/events" component={AdminEvents} />
             <PrivateRoute  path="/admin-panel/news" component={AdminNewsBlock} exact />
