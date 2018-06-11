@@ -14,7 +14,7 @@ class AdminEventInfo extends Component {
             id:this.props.event._id,
             date : this.props.event.date,
             text:this.props.event.text,
-            name:this.props.event.name,
+            title:this.props.event.title,
             getInfo:false
         }
     }
@@ -28,7 +28,7 @@ getCurrentText = (str) =>{
     this.setState({text:str});
 }
 getValue = (str) => {
-    this.setState({name : str.value})
+    this.setState({title : str.value})
 }
 getDate = (str) =>{
     this.setState({date:str})
@@ -43,7 +43,7 @@ updateEvent = () =>{
             <div className = 'event-input-container'> 
                 <p className = 'name-event'> Название события  </p>
                 <TextField 
-                  value = {this.state.name}
+                  value = {this.state.title}
                   onChangeValue = {this.getValue}
                   id = "title" 
                   type = 'text' 

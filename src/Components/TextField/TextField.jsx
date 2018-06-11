@@ -25,7 +25,7 @@ class TextField extends Component {
     render() {
     	return(
  			<div className = 'container-for-input'> 
- 				<label htmlFor = {this.props.id}>{this.props.title}</label>
+ 				{this.props.label? <label htmlFor = {this.props.id}>{this.props.label}</label>: null}
 					<input  
 					value = {this.props.value}
 					type = {this.props.type} 
