@@ -17,7 +17,6 @@ import AdminAddNews from './Components/Admin/AdminAddNews/AdminAddNews';
 import { fakeAuth } from './Components/Admin/Auth/PrivateRoute';
 import PrivateRoute from "../src/Components/Admin/Auth/PrivateRoute";
 import { getToken } from './Components/Admin/Auth';
-import Events from './Pages/Events/Events';
 
 class App extends Component {
   render() {
