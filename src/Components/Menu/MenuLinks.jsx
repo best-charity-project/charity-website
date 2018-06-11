@@ -10,21 +10,32 @@ constructor(props){
     }
 }
 getCurrentLink = (e) => {
-  (e.target.innerText === 'АКТИВНОСТИ')?this.setState({isOpenDropMenu: !this.state.isOpenDropMenu}):this.setState({isOpenDropMenu: false});
+  if(e.target.parentNode.classList.contains("activity")){
+    this.setState({isOpenDropMenu: !this.state.isOpenDropMenu})
+    e.target.parentNode.classList.toggle('activeDropMenu')
+  }
+  
 }
 render() {
-  console.log(this.state)
   const classActive= this.props.classActive;
+  let {isOpenDropMenu} = this.state;
   return (
     <div className = {this.props.className}>
        <ul onClick = {this.getCurrentLink}>
          {this.state.list.map(function(el,index) {
-           return <NavLink to={el.url} key = {index}>
-             <li  className = {(el.url === window.location.pathname) ? classActive : null}>{el.name}
-            </li>
-           </NavLink>
+           if(index === 1){
+              return <li  key = {index} className = 'activity'>
+              <NavLink to={el.url} >
+                  {el.name}
+              </NavLink>
+              {(isOpenDropMenu) ?<DropMenu/>: null }
+              </li>          
+           }else{
+              return <li  className = {(el.url === window.location.pathname) ? classActive : null} key = {index}>
+                  <NavLink to={el.url} >{el.name}</NavLink>
+              </li>
+              }
          })}
-         {this.state.isOpenDropMenu? <DropMenu name = 'drop-menu'/> : null}
         </ul>
     </div>
   );

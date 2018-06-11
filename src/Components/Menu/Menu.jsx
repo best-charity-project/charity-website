@@ -11,7 +11,7 @@ class Menu extends Component {
       <MenuLinks
        list = {[
          {name: 'о нас', url :'/'},
-         {name: 'активности', url :'/projects'},
+         {name: 'активности', url :'/'},
          {name: 'новости', url :'/news'}
          
          ]} 
