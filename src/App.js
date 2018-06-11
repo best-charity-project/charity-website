@@ -6,8 +6,7 @@ import Projects from "./Pages/Projects/Projects";
 import Navigation from "./Components/Navigation/Navigation";
 import Error from "./Components/Error/Error";
 import Admin from "./Pages/Admin/Admin";
-import Events from './Pages/Events/Events'
-import Projects from './Pages/Projects/Projects'
+import Events from './Pages/Events/Events';
 import PageNews from "./Pages/News/News";
 import FullNews from './Components/FullNews/FullNews';
 import "./App.css"
