@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import '../News/News.css';
 import moment from 'moment';
 import {NavLink} from "react-router-dom";
-import FullNews from '../FullNews/FullNews'
-
+import FullNews from '../FullNews/FullNews';
 
 class News extends Component {
     Click = () => {
@@ -17,7 +16,7 @@ class News extends Component {
                 {(!this.props.event)?(
                         <NavLink to={`/news/${this.props.id}`} >
                             <p className = 'news-date'>{moment(this.props.date).format('DD MMMM YYYY')} </p>
-                            <img src = {require(`./${this.props.img}`)} alt = 'image for news' />
+                            <img src = {`http://localhost:3001/images/${this.props.img}`} alt = 'image for news' />
                             <p className = 'new-title'>{this.props.name} </p>
                             <span className = 'new-text'> {this.props.text}</span>                
                         </NavLink>):(
