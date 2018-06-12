@@ -241,111 +241,22 @@ class AdminAddNews extends Component {
          /* this.props.saveNews() */ 
     }
     sendNews = () => {
-        let body = {
-            title: this.state.title,
-            shortText: this.state.shortText,
-            fullText: this.state.fullText,
-            source: this.state.source,
-            isPublic: this.state.isPublic
-        }
+        let formData  = new FormData();
+        Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
 
-        fetch(`${server}/news`, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(body),
-            })
-            .then(response => response.json())
-            .then(data => data.news._id)
-            .then(id => this.sendImage(id))
-            this.setState({
-                title: '',
-                shortText: '',
-                fullText: '',
-                source: '',
-                isPublic: false
-            })
-            this.props.history.push({
-                pathname: '/admin-panel/news'
-            })  
-            /* this.props.saveNews()  */          
-    }
-    sendImage = (id) => {
-        /* let formData  = new FormData();
-        formData.append(imageData, this.state.imageData); */
-
-        fetch(`${server}/news/` + id, {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/octet-stream',
-                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-                }, 
-            body: this.state
-        })
-        .then(res => res.json())
-        .then(data => console.log(data))
-        /* this.setState({
-            imageData: ''
-        }) */
-         /* this.props.saveNews() */ 
-    }
-       /*  axios.post(`${server}/news`, {formData})
-            .then(res => {
-              console.log(res);
-              console.log(res.data);
-            })*/
-        // }
-     /*    axios({
+        axios({
             method: 'post',
             url: `${server}/news`,
             data: formData,
-            config: {headers: {'Content-Type': 'multipart/form-data'}},
+            config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
         })
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (response) {
-            console.log(response);
-        }); */
-        /*
         .then(function (response) {
             console.log(response);
           })
           .catch(function (error) {
             console.log(error);
-          });  */
-
-        /* axios.post(`${server}/news`, {formData})
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          }); */
-/*         let formData  = new FormData();
-        Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
-        console.log(formData);
-
-        <Post url="${server}/news" data={formData}>
-            {(error, response, isLoading, onReload) => {
-            if(error) {
-                return (<div>Something bad happened: {error.message} <button onClick={() => onReload({ params: { reload: true } })}>Retry</button></div>)
-            }
-            else if(isLoading) {
-                return (<div>Loading...</div>)
-            }
-            else if(response !== null) {
-                return (<div>{response.data.message} <button onClick={() => onReload({ params: { refresh: true } })}>Refresh</button></div>)
-            }
-            return (console.log('test done'))
-            }}
-      </Post> */
-        /* let formData  = new FormData();
-        Object.keys(this.state).forEach(key => formData.append(key, this.state[key])); */
-
-        
+          });
+    }
 }
 
 export default withRouter(AdminAddNews);
