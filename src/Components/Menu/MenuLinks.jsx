@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link,Switch,NavLink} from "react-router-dom";
-import DropMenu from '../Menu/DropMenu';
+import DropMenu from '../DropMenu/DropMenu';
 class MenuLinks extends Component {
 constructor(props){
    super(props);
@@ -10,9 +10,9 @@ constructor(props){
     }
 }
 getCurrentLink = (e) => {
-  if(e.target.parentNode.classList.contains("activity")){
+  if(e.target.classList.contains("activity")){
     this.setState({isOpenDropMenu: !this.state.isOpenDropMenu})
-    e.target.parentNode.classList.toggle('activeDropMenu')
+    e.target.classList.toggle('activeDropMenu')
   }
   
 }
@@ -25,9 +25,7 @@ render() {
          {this.state.list.map(function(el,index) {
            if(index === 1){
               return <li  key = {index} className = 'activity'>
-              <NavLink to={el.url} >
-                  {el.name}
-              </NavLink>
+                  {el.name}             
               {(isOpenDropMenu) ?<DropMenu/>: null }
               </li>          
            }else{

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {NavLink} from "react-router-dom";
 import eventsImg from '../../Assets/AssetsSvg/event.svg';
 import projectsImg from '../../Assets/AssetsSvg/idea.svg';
+import '../DropMenu/DropMenu.css'
 
 class DropMenu extends Component {
 	constructor(props){
