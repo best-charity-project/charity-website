@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {BrowserRouter , Route , Switch, Redirect } from "react-router-dom";
 import './App.css';
 import Home from "./Pages/Home/MainPage";
+import Projects from "./Pages/Projects/Projects";
 import Navigation from "./Components/Navigation/Navigation";
 import Error from "./Components/Error/Error";
 import Admin from "./Pages/Admin/Admin";
@@ -25,7 +26,9 @@ class App extends Component {
         <div className = "container-main">
           <Switch>
             <Route path="/" component={Home} exact />
+            <Route path="/projects" component={Projects} />
             <Route path="/login" component={Admin} />
+            <PrivateRoute path="/admin-panel" component={AdminMain} exact/>
             <PrivateRoute path="/admin-panel/dashboard" component={AdminMain} />
             <PrivateRoute path="/admin-panel/events" component={AdminEvents} />
             <PrivateRoute  path="/admin-panel/news" component={AdminNewsBlock} exact />

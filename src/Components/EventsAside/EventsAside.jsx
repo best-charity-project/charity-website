@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './EventsAside.css';
 
-class NewsAside extends Component {
+class EventsAside extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -36,4 +36,4 @@ class NewsAside extends Component {
     }
 }
 
-export default NewsAside;
+export default EventsAside;

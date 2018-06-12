@@ -1,6 +1,5 @@
 .aside-and-text-full-new{
     display: flex;
-    margin-top: 100px;
     flex-grow: 1;
     margin-bottom: 30px;
 }
@@ -47,8 +46,7 @@
     display: block;
     padding: 7px 30px;
 }
-.full-new-date{
-    
+.full-new-date{    
     color: #ffc757;
     font-size: 12px;
     font-weight: 600;
@@ -58,6 +56,7 @@
     font-weight: 600;
 }
 .full-new-list-container{
+    width: 100%;
     margin-left: 250px;
     margin-right: 30px;
 }
@@ -66,11 +65,8 @@
     position:fixed;
     bottom: 0;
 }
-.full-new-menu-container{
-    position: fixed;
-    overlow-y: scroll;
-    height: 80px;
-    background-color: #e8e6e2;
-    top: 0;
-    width: 100%;
+.full-new-container{    
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
