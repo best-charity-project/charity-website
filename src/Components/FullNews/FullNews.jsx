@@ -21,7 +21,7 @@ class FullNews extends Component {
                     <Menu name = 'full-new-menu'/>
                 </div>
                 <div className = 'aside-and-text-full-new'>
-                    <div class = 'aside-full-new'>
+                    <div className = 'aside-full-new'>
                         <p><NavLink to = '/news'> Новости </NavLink></p>    
                     </div>
                     <div className = 'full-new-list-container'>

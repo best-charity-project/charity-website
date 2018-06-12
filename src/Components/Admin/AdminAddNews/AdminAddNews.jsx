@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
 import {withRouter} from "react-router-dom";
+import moment from 'moment';
 
 import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';
 import TextField from '../../TextField/TextField';
@@ -18,7 +19,8 @@ class AdminAddNews extends Component {
         fullText: '',
         source: '',
         isPublic: false,
-        imageData: ''
+        imageData: '',
+        isPreview: false,
     }
     cropperRef = React.createRef()
 
@@ -41,92 +43,138 @@ class AdminAddNews extends Component {
             <div className="admin-content">
                 <Navigation onLogout={this.onLogout} />
                 <NavBar />
-                <form className = "form-create-news" encType="multipart/form-data" method="post">
-                    <div className = "news-status">
-                        <span>{this.state.isPublic ? "Статус новости: опубликована" : "Статус новости: черновик"}</span>
-                        <Route render={({history}) => (
-                            <Button 
-                                label={"Опубликовать"}
-                                name = "button-admin"
-                                clickHandler = {this.onPublish}
-                            />
-                        )} />
-                    </div>
-                    <div className="admin-title-news">
-                        <TextField 
-                            id = "title-news" 
-                            title = "Название новости:" 
-                            type = "text"
-                            name = "title-news"
-                            value = {this.state.title}
-                            onChangeValue = {this.onChangeValue}
-                        />
-                    </div>
-                    <hr />
-                    <div>
-                        <AdminUploadImage 
-                            id = "image-news"
-                            name = "image-news"
-                            onCropImage = {this.onCropImage}
-                        />
-                    </div>
-                    <hr />
-                    <div className="text-news">
-                        <div>Краткое описание:</div>
-                        <ControlledEditor 
-                            text = {this.state.shortText} 
-                            getCurrentText = {this.getCurrentTextShort}
-                        />
-                    </div>
-                    <hr />
-                    <div className="text-news">
-                        <div className="full-text-news">Полное описание:</div>
-                        <ControlledEditor 
-                            text = {this.state.fullText} 
-                            getCurrentText = {this.getCurrentTextFull}
-                        /> 
-                    </div>
-                    <hr />
-                    <div className="text-news">
-                        <div className = "news-source">
-                            <label>Источник:</label>
+                {!this.state.isPreview ? 
+                    <form className = "form-create-news" encType="multipart/form-data" method="post">
+                        <div className = "news-status">
+                            <span>{this.state.isPublic ? "Статус новости: опубликована" : "Статус новости: черновик"}</span>
+                            <Route render={({history}) => (
+                                <Button 
+                                    label={"Опубликовать"}
+                                    name = "button-admin"
+                                    clickHandler = {this.onPublish}
+                                />
+                            )} />
                         </div>
+                        <div className="admin-title-news">
+                            <TextField 
+                                id = "title-news" 
+                                title = "Название новости:" 
+                                type = "text"
+                                name = "title-news"
+                                value = {this.state.title}
+                                onChangeValue = {this.onChangeValue}
+                            />
+                        </div>
+                        <hr />
                         <div>
-                            <select value={this.state.source} onChange={this.handleChange}>
-                                <option value="organizers">Организаторы</option>
-                                <option value="sponsors">Спонсоры</option>
-                                <option value="activists">Активисты</option>
-                                <option value="volunteers">Волонтеры</option>
-                            </select>
+                            <AdminUploadImage 
+                                id = "image-news"
+                                name = "image-news"
+                                imageData = {this.state.imageData}
+                                onCropImage = {this.onCropImage}
+                                ratio = {8 /3}
+                            />
+                        </div>
+                        <hr />
+                        <div className="text-news">
+                            <div>Краткое описание:</div>
+                            <ControlledEditor 
+                                text = {this.state.shortText} 
+                                getCurrentText = {this.getCurrentTextShort}
+                            />
+                        </div>
+                        <hr />
+                        <div className="text-news">
+                            <div className="full-text-news">Полное описание:</div>
+                            <ControlledEditor 
+                                text = {this.state.fullText} 
+                                getCurrentText = {this.getCurrentTextFull}
+                            /> 
+                        </div>
+                        <hr />
+                        <div className="text-news">
+                            <div className = "news-source">
+                                <label>Источник:</label>
+                            </div>
+                            <div>
+                                <select value={this.state.source} onChange={this.handleChange}>
+                                    <option value="organizers">Организаторы</option>
+                                    <option value="sponsors">Спонсоры</option>
+                                    <option value="activists">Активисты</option>
+                                    <option value="volunteers">Волонтеры</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className = 'button-info'>
+                            <span>* При нажатии на кнопку "Сохранить" новость сохраняется как черновик</span>
+                        </div>
+                        <div className="admin-buttons">
+                            <Route render={({history}) => (
+                                <Button 
+                                    label = {"Предпросмотр"} 
+                                    name = "button-admin"
+                                    clickHandler = {this.onPreview}
+                                />
+                            )} />
+                            <Route render={({history}) => (
+                                <Button 
+                                    label={"Опубликовать"}
+                                    name = "button-admin"
+                                    clickHandler = {this.onPublish}
+                                />
+                            )} />
+                            <Route render={({history}) => (
+                                <Button 
+                                    label={"Сохранить"}
+                                    name = "button-admin"
+                                    clickHandler = {this.onDraft}
+                                />
+                            )} />
+                            <Route render={({history}) => (
+                                <Button 
+                                    label={"Отмена"}
+                                    name = "button-admin"
+                                    clickHandler = {this.onCancel}
+                                />
+                            )} />
+                        </div>
+                    </form>  : 
+
+                    <div className = 'full-news-list-container'>
+                        <div className = 'full-news'>
+                            <div><img src = {this.state.imageData} alt = "" /></div > 
+                            <p className = 'full-news-date'>{moment().format('DD MMMM YYYY')} </p>
+                            <p className = 'full-news-title'> {this.state.title}</p>               
+                            <span> {this.state.fullText}</span>
+                        </div>
+                        <div className = 'button-info'>
+                            <span>* При нажатии на кнопку "Сохранить" новость сохраняется как черновик</span>
+                        </div>
+                        <div className="admin-buttons">
+                            <Route render={({history}) => (
+                                <Button 
+                                    label={"Опубликовать"}
+                                    name = "button-admin"
+                                    clickHandler = {this.onPublish}
+                                />
+                            )} />
+                            <Route render={({history}) => (
+                                <Button 
+                                    label={"Сохранить"}
+                                    name = "button-admin"
+                                    clickHandler = {this.onDraft}
+                                />
+                            )} />
+                            <Route render={({history}) => (
+                                <Button 
+                                    label={"Отмена"}
+                                    name = "button-admin"
+                                    clickHandler = {this.onCancelPreview}
+                                />
+                            )} />
                         </div>
                     </div>
-                    <div className = 'button-info'>
-                        <span>* При нажатии на кнопку "Сохранить" новость сохраняется как черновик</span>
-                    </div>
-                    <div className="admin-buttons">
-                        <Route render={({history}) => (
-                            <Button 
-                                label = {"Предпросмотр"} 
-                                name = "button-admin"
-                                clickHandler = {this.onPreview}
-                            />
-                        )} />
-                        <Route render={({history}) => (
-                            <Button 
-                                label={"Сохранить"}
-                                name = "button-admin"
-                                clickHandler = {this.onDraft}
-                            />
-                        )} />
-                        <Route render={({history}) => (
-                            <Button 
-                                label={"Отмена"}
-                                name = "button-admin"
-                                clickHandler = {this.onCancel}
-                            />
-                        )} />
-                    </div>
-                </form>   
+                }
             </div>
         )
     }
@@ -156,9 +204,9 @@ class AdminAddNews extends Component {
     }
     onPreview = (e) => {
         e.preventDefault()
-        /* this.props.history.push({
-            pathname: '/admin-panel/news'
-        })   */
+        this.setState({
+            isPreview: true
+        })
     }
     onPublish = (e) => {
         e.preventDefault()
@@ -178,6 +226,12 @@ class AdminAddNews extends Component {
         this.props.history.push({
             pathname: '/admin-panel/news'
         })  
+    }
+    onCancelPreview = (e) => {
+        e.preventDefault()
+        this.setState({
+           isPreview: false
+        })
     }
     onDraft = (e) => {
         e.preventDefault()
@@ -199,12 +253,12 @@ class AdminAddNews extends Component {
         .then(res => res.json())
         .then(data => console.log(data))
         this.setState({
-            title: "",
-            shortText: "",
-            fullText: "",
-            source: "",
+            title: '',
+            shortText: '',
+            fullText: '',
+            source: '',
             isPublic: false,
-            imageData: ""
+            imageData: ''
         })
         this.props.history.push({
             pathname: '/admin-panel/news'
