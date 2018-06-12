@@ -16,6 +16,7 @@ class AdminNewsList extends Component {
                     <div>Дата создания</div>
                     <div>Опубликовано</div>
                     <div>Удалить новость</div>
+                    <div>Статус</div>
                 </div>
                 <div>                    
                     {this.props.news.map(item => 
