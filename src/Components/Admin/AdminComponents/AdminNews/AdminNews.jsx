@@ -23,10 +23,25 @@ class AdminNews extends Component {
                        label = {<span aria-hidden="true">&times;</span>}
                        clickHandler = {this.props.deleteHandler }
                    />
-               </div>
+                   </div>
+                <div>                
+                    <Button
+                        name = {this.props.news.isPublic? 'button-publish-news':'button-not-publish-news'}
+                        label = {this.props.news.isPublic? 'Опубликована':'Опубликовать'}
+                        clickHandler = {this.publishNews}
+                    />
+                </div>
+               
            </div>
        )
     }
+    // publishNews = (e) => {
+    //    if(this.props.news.isPublic){
+    //        e.preventDefault();
+    //    }else{
+    //        alert('rfrf')
+    //    }
+    // }
 }
 
 export default AdminNews;
