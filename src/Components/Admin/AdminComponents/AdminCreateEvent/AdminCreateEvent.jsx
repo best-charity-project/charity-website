@@ -49,8 +49,8 @@ class AdminCreateEvent extends Component {
                 <div className = "date-and-input">
                 <AdminDateEvent onSelectData= {this.getDate} date = {this.state.date} /> 
                 <div className="event-title">
-                <p>Название события</p>
                 <TextField 
+                    label = 'Название события'
                     value = {this.state.title}
                     id = "title" 
                     type = 'text' 

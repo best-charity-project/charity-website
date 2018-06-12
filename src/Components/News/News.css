@@ -6,7 +6,7 @@
     height: auto;
     border-radius: 3px;
     padding: 15px 0;
-    margin-bottom: 10px;
+    margin: 5px;
     background-color:#ffffff;
 }
 .news-date{
@@ -15,10 +15,11 @@
     padding-left: 20px;
     font-size: 12px;
     font-weight: 600;
+    margin-bottom: 5px;
 }
 .news img {
+    display:block;
     width:100%;
-    margin-top: 10px;
 }
 .news a{
     text-decoration: none;
@@ -32,7 +33,7 @@
 .new-text{
     display: inline-block;
     padding:0 20px;
-    margin-top: 10px;
+    margin-top: 5px;
     font-size: 14px;
     color: #3b3f48;
 

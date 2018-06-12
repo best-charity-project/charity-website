@@ -17,9 +17,7 @@ class FullNews extends Component {
     render() {
         return (
             <div className = 'full-new-container'>
-                <div className = 'full-new-menu-container'> 
                     <Menu name = 'full-new-menu'/>
-                </div>
                 <div className = 'aside-and-text-full-new'>
                     <div class = 'aside-full-new'>
                         <p><NavLink to = '/news'> Новости </NavLink></p>    

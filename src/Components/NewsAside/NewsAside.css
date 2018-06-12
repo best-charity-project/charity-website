@@ -2,8 +2,9 @@
     box-sizing: border-box;
 }
 .news-aside{
-   width: 300px;
-   padding-top: 20px;
+    position: fixed;
+    top: 100px;
+    width: 300px;
 }
 .link-news{
     list-style: none;
