@@ -35,7 +35,7 @@ class AdminAddNews extends Component {
                 fullText: this.props.location.state.detail.fullText,
                 source: this.props.location.state.detail.source,
                 isPublic: this.props.location.state.detail.isPublic,
-                imageData: this.props.location.state.detail.imageData
+                imageData: this.props.location.state.detail.image
             })
         }
     }
