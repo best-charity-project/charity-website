@@ -4,13 +4,15 @@ import {withRouter} from "react-router-dom";
 import moment from 'moment';
 import axios from 'axios';
 
+import {server} from '../../../api';
 import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';
 import TextField from '../../TextField/TextField';
 import ControlledEditor from  '../AdminComponents/AdminEditor/AdminEditor';
 import Button from '../../Button/Button';
 import Navigation from '../../Navigation/Navigation';
 import NavBar from '../../NavBar/NavBar';
-import {server} from '../../../api';
+import AdminPreview from '../AdminComponents/AdminPreview/AdminPreview'
+
 import './AdminAddNews.css';
 
 class AdminAddNews extends Component {
@@ -142,40 +144,14 @@ class AdminAddNews extends Component {
                         </div>
                     </form>  : 
 
-                    <div className = 'full-news-list-container'>
-                        <div className = 'full-news'>
-                            <div><img src = {this.state.imageData} alt = "" /></div > 
-                            <p className = 'full-news-date'>{moment().format('DD MMMM YYYY')} </p>
-                            <p className = 'full-news-title'> {this.state.title}</p>               
-                            <span> {this.state.fullText}</span>
-                        </div>
-                        <div className = 'button-info'>
-                            <span>* При нажатии на кнопку "Сохранить" новость сохраняется как черновик</span>
-                        </div>
-                        <div className="admin-buttons">
-                            <Route render={({history}) => (
-                                <Button 
-                                    label={"Опубликовать"}
-                                    name = "button-admin"
-                                    clickHandler = {this.onPublish}
-                                />
-                            )} />
-                            <Route render={({history}) => (
-                                <Button 
-                                    label={"Сохранить"}
-                                    name = "button-admin"
-                                    clickHandler = {this.onDraft}
-                                />
-                            )} />
-                            <Route render={({history}) => (
-                                <Button 
-                                    label={"Отмена"}
-                                    name = "button-admin"
-                                    clickHandler = {this.onCancelPreview}
-                                />
-                            )} />
-                        </div>
-                    </div>
+                    <AdminPreview 
+                        imageData = {this.state.imageData}
+                        title = {this.state.title}
+                        fullText = {this.state.fullText}
+                        onPublish = {this.onPublish}
+                        onDraft = {this.onDraft}
+                        getNewStatePreview = {this.getNewStatePreview}
+                    />
                 }
             </div>
         )
@@ -229,12 +205,6 @@ class AdminAddNews extends Component {
             pathname: '/admin-panel/news'
         })  
     }
-    onCancelPreview = (e) => {
-        e.preventDefault()
-        this.setState({
-           isPreview: false
-        })
-    }
     onDraft = (e) => {
         e.preventDefault()
         this.setState({isPublic: false}, this.checkText)
@@ -256,6 +226,11 @@ class AdminAddNews extends Component {
           .catch(function (error) {
             console.log(error);
           });
+    }
+    getNewStatePreview = () => {
+        this.setState({
+            isPreview: false
+        })
     }
 }
 
