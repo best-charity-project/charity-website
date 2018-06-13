@@ -7,7 +7,7 @@ class AdminNewsSearch extends Component {
     render() {
         return (
             <div className="search-news">
-                <img src={searchImg} />
+                <img src={searchImg} alt='' />
                 <TextField 
                     type="search" 
                     nameClass="admin-search-input" 
@@ -17,8 +17,8 @@ class AdminNewsSearch extends Component {
             </div>
         )
     }
-    onSearch = (value) => {
-        this.props.findNews(value.toLowerCase());
+    onSearch = (v) => {
+        this.props.findNews(v.value.toLowerCase());
     }
 }
 
