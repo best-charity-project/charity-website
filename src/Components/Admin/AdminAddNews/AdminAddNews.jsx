@@ -71,7 +71,7 @@ class AdminAddNews extends Component {
                         </div>
                         <hr />
                         <div>
-                            <AdminUploadImage 
+                            <AdminUploadIm  
                                 id = "image-news"
                                 name = "image-news"
                                 imageData = {this.state.imageData}
