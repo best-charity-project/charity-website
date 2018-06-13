@@ -24,7 +24,9 @@ body{
     align-items: center;
     color: #fff;
 }
-.menu-list-admin a{
+.menu-list-admin li a{
+    background-color:  rgb(49, 49, 49);
+    color: #fff;
     text-decoration: none;
 }
 .menu-list-admin a:first-child li:before{
