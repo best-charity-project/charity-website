@@ -16,12 +16,18 @@ class ControlledEditor extends Component {
         if (this.props.text && !nextprops.text) {
             this.setState({ editorState: EditorState.createEmpty() })
         }
+        if(!this.props.text && nextprops.text){
+            const plainText = nextprops.text;
+            const content = ContentState.createFromText(plainText);
+            this.setState({ editorState: EditorState.createWithContent(content) })
+        }
     }
     componentDidMount() {
         const plainText = this.props.text;
         const content = ContentState.createFromText(plainText);
         if (content) {
             this.setState({ editorState: EditorState.createWithContent(content) })
+
         }
     }
 
