@@ -31,13 +31,14 @@ class AdminAddNews extends Component {
         this.setState({source: 'organizers'})
         if (this.props.location.state) {
             let infoAboutNews = this.props.location.state.detail;
+
             this.setState({
                 title: this.props.location.state.detail.title,
                 shortText: this.props.location.state.detail.shortText,
                 fullText: this.props.location.state.detail.fullText,
                 source: this.props.location.state.detail.source,
                 isPublic: this.props.location.state.detail.isPublic,
-                imageData: this.props.location.state.detail.image
+                imageData: this.props.location.state.detail.image,
             })
         }
     }
@@ -71,7 +72,7 @@ class AdminAddNews extends Component {
                         </div>
                         <hr />
                         <div>
-                            <AdminUploadIm  
+                            <AdminUploadImage 
                                 id = "image-news"
                                 name = "image-news"
                                 imageData = {this.state.imageData}
@@ -188,7 +189,7 @@ class AdminAddNews extends Component {
     }
     onPublish = (e) => {
         e.preventDefault()
-        this.setState({isPublic: true}, this.checkText)
+        this.setState({isPublic: true}, this.props.location.state.detail._id ? this.onChangeNews : this.checkText)
             /* this.props.saveNews() */ 
     }
     onCancel = (e) => {
@@ -207,8 +208,35 @@ class AdminAddNews extends Component {
     }
     onDraft = (e) => {
         e.preventDefault()
-        this.setState({isPublic: false}, this.checkText)
+        this.setState({isPublic: false}, this.props.location.state.detail._id ? this.onChangeNews : this.checkText)
          /* this.props.saveNews() */ 
+    }
+    onChangeNews = (id) => {
+        let formData  = new FormData();
+        Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
+
+        axios({
+            method: 'put',
+            url: `${server}/news/` + this.props.location.state.detail._id,
+            data: formData,
+            config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
+        })
+        .then(function (response) {
+            this.setState({
+                title: '',
+                shortText: '',
+                fullText: '',
+                source: '',
+                isPublic: false,
+                imageData: ''
+            }) 
+            this.props.history.push({
+                pathname: '/admin-panel/news'
+            })  
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     }
     sendNews = () => {
         let formData  = new FormData();
@@ -221,7 +249,17 @@ class AdminAddNews extends Component {
             config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
         })
         .then(function (response) {
-            console.log(response);
+            this.setState({
+                title: '',
+                shortText: '',
+                fullText: '',
+                source: '',
+                isPublic: false,
+                imageData: ''
+            }) 
+            this.props.history.push({
+                pathname: '/admin-panel/news'
+            })  
           })
           .catch(function (error) {
             console.log(error);

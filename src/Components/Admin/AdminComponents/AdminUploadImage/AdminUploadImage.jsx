@@ -17,7 +17,6 @@ class AdminUploadImage extends Component {
             null
     }
     render() {
-        console.log(this.state.previousImg)
         return (
             <div>
                 <div className = "admin-image">
