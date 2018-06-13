@@ -7,8 +7,6 @@ import Navigation from '../../Navigation/Navigation';
 const AdminEvents = () => {
     return (
         <div className="admin-content">
-            <Navigation onLogout={this.onLogout} />
-            <NavBar />
             <AdminEventsContent />
         </div>          
     )
