@@ -10,9 +10,14 @@
     margin-top: 50px;
     padding-left: 60px;
 }
-.full-news img{
+.full-news img {
     display: block;
     width: 100%;
+}
+.full-news span img {
+    display: block;
+    width: 100%;
+    padding: 0 30px;
 }
 .full-news p {
     padding-left:30px;
