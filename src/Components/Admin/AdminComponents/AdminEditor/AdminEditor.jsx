@@ -44,7 +44,6 @@ class ControlledEditor extends Component {
     }
 
     render() {
-        console.log(this.props)
         const { editorContent } = this.state;
         return (
             <div>
