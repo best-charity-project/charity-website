@@ -7,7 +7,7 @@ class Menu extends Component {
   render() {
     return (
   <div className ={'menu '+ this.props.name }> 
-      <Logo name = 'client-logo'/>
+      <Logo/>
       <MenuLinks
        list = {[
          {name: 'о нас', url :'/'},
