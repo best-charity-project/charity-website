@@ -14,10 +14,10 @@ class AdminAddNews extends Component {
         return (
             <div className = 'full-news-list-container'>
                 <div className = 'full-news'>
-                    <div><img src = {this.props.imageData} alt = "" /></div > 
+                    <div><img src = {this.props.imageData ? this.props.imageData : 'http://localhost:3001/images/' + this.props.image} alt = "" /></div > 
                     <p className = 'full-news-date'>{moment().format('DD MMMM YYYY')} </p>
                     <p className = 'full-news-title'> {this.props.title}</p>               
-                    <span> {this.props.fullText}</span>
+                    <span dangerouslySetInnerHTML={{__html: this.props.fullText}}/>
                 </div>
                 <div className = 'button-info'>
                     <span>* При нажатии на кнопку "Сохранить" новость сохраняется как черновик</span>

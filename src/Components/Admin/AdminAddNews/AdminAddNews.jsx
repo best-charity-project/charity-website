@@ -24,10 +24,11 @@ class AdminAddNews extends Component {
         isPublic: false,
         imageData: '',
         isPreview: false,
+        image: ''
     }
     cropperRef = React.createRef()
 
-    componentDidMount() {
+    componentWillMount() {
         this.setState({source: 'organizers'})
         if (this.props.location.state) {
             let infoAboutNews = this.props.location.state.detail;
@@ -38,7 +39,7 @@ class AdminAddNews extends Component {
                 fullText: this.props.location.state.detail.fullText,
                 source: this.props.location.state.detail.source,
                 isPublic: this.props.location.state.detail.isPublic,
-                imageData: this.props.location.state.detail.image,
+                image: this.props.location.state.detail.image
             })
         }
     }
@@ -76,6 +77,7 @@ class AdminAddNews extends Component {
                                 id = "image-news"
                                 name = "image-news"
                                 imageData = {this.state.imageData}
+                                image = {this.state.image}
                                 onCropImage = {this.onCropImage}
                                 ratio = {8 /3}
                             />
@@ -147,6 +149,7 @@ class AdminAddNews extends Component {
 
                     <AdminPreview 
                         imageData = {this.state.imageData}
+                        image = {this.state.image}
                         title = {this.state.title}
                         fullText = {this.state.fullText}
                         onPublish = {this.onPublish}
@@ -172,6 +175,11 @@ class AdminAddNews extends Component {
     handleChange = (event) => {
         this.setState({source: event.target.value})
     }
+    getNewStatePreview = () => {
+        this.setState({
+            isPreview: false
+        })
+    }
     checkText = () => {
         if (!this.state.shortText) {
             let newText = this.state.fullText.slice(0, 200) 
@@ -189,8 +197,7 @@ class AdminAddNews extends Component {
     }
     onPublish = (e) => {
         e.preventDefault()
-        this.setState({isPublic: true}, this.props.location.state.detail._id ? this.onChangeNews : this.checkText)
-            /* this.props.saveNews() */ 
+        this.setState({isPublic: true}, this.checkText)
     }
     onCancel = (e) => {
         e.preventDefault()
@@ -200,7 +207,8 @@ class AdminAddNews extends Component {
             fullText: '',
             source: '',
             isPublic: false,
-            imageData: ''
+            imageData: '',
+            image: ''
         }) 
         this.props.history.push({
             pathname: '/admin-panel/news'
@@ -208,54 +216,31 @@ class AdminAddNews extends Component {
     }
     onDraft = (e) => {
         e.preventDefault()
-        this.setState({isPublic: false}, this.props.location.state.detail._id ? this.onChangeNews : this.checkText)
-         /* this.props.saveNews() */ 
-    }
-    onChangeNews = (id) => {
-        let formData  = new FormData();
-        Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
-
-        axios({
-            method: 'put',
-            url: `${server}/news/` + this.props.location.state.detail._id,
-            data: formData,
-            config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
-        })
-        .then(function (response) {
-            this.setState({
-                title: '',
-                shortText: '',
-                fullText: '',
-                source: '',
-                isPublic: false,
-                imageData: ''
-            }) 
-            this.props.history.push({
-                pathname: '/admin-panel/news'
-            })  
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        this.setState({isPublic: false}, this.checkText)
     }
     sendNews = () => {
         let formData  = new FormData();
         Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
 
+        let id = ''
+        if (this.props.location.state) {
+            id = this.props.location.state.detail._id
+        }
         axios({
-            method: 'post',
-            url: `${server}/news`,
+            method: id ? 'put' : 'post',
+            url: id ? `${server}/news/` + id : `${server}/news/`,
             data: formData,
             config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
         })
-        .then(function (response) {
+        .then(response => {
             this.setState({
                 title: '',
                 shortText: '',
                 fullText: '',
                 source: '',
                 isPublic: false,
-                imageData: ''
+                imageData: '',
+                image: ''
             }) 
             this.props.history.push({
                 pathname: '/admin-panel/news'
@@ -264,11 +249,6 @@ class AdminAddNews extends Component {
           .catch(function (error) {
             console.log(error);
           });
-    }
-    getNewStatePreview = () => {
-        this.setState({
-            isPreview: false
-        })
     }
 }
 

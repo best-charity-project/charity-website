@@ -16,13 +16,13 @@ class News extends Component {
                         <NavLink to={`/news/${this.props.id}`} >
                             <p className = 'news-date'>{moment(this.props.date).format('DD MMMM YYYY')} </p>
                             {this.props.img?<img src = {`http://localhost:3001/images/${this.props.img}`} alt = 'image for news' />: null}
-                            <p className = 'new-title'>{this.props.name} </p>
-                            <span className = 'new-text'> {this.props.text}</span>                
+                            <p className = 'news-title'>{this.props.name} </p>
+                            <span className = 'news-text' dangerouslySetInnerHTML={{__html: this.props.text}}/>                
                         </NavLink>):(
                         <div>
                             <p className = 'news-date'>{moment(this.props.date).format('DD MMMM YYYY')} </p>
-                            <p className = 'new-title'>{this.props.name} </p>
-                            <span className = 'new-text'> {this.props.text}</span>   
+                            <p className = 'news-title'>{this.props.name} </p>
+                            <span className = 'news-text' dangerouslySetInnerHTML={{__html: this.props.text}}/>   
                         </div>
                  )}
             </div>
