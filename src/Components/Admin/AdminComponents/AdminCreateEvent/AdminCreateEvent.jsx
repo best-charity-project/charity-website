@@ -51,6 +51,7 @@ class AdminCreateEvent extends Component {
                 <div className="event-title">
                 <p>Название события</p>
                 <TextField 
+                    label = 'Название события'
                     value = {this.state.title}
                     id = "title" 
                     type = 'text' 
