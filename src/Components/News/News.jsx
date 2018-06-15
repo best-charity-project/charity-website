@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import '../News/News.css';
 import moment from 'moment';
 import {NavLink} from "react-router-dom";
-import FullNews from '../FullNews/FullNews'
+import FullNews from '../FullNews/FullNews';
+
 class News extends Component {
     Click = () => {
         <FullNews />
@@ -14,14 +15,14 @@ class News extends Component {
                 {(!this.props.event)?(
                         <NavLink to={`/news/${this.props.id}`} >
                             <p className = 'news-date'>{moment(this.props.date).format('DD MMMM YYYY')} </p>
-                            <img src = {this.props.img} alt = 'image for new' />
-                            <p className = 'new-title'>{this.props.name} </p>
-                            <span className = 'new-text'> {this.props.text}</span>                
+                            {this.props.img?<img src = {`http://localhost:3001/images/${this.props.img}`} alt = 'image for news' />: null}
+                            <p className = 'news-title'>{this.props.name} </p>
+                            <span className = 'news-text' dangerouslySetInnerHTML={{__html: this.props.text}}/>                
                         </NavLink>):(
                         <div>
                             <p className = 'news-date'>{moment(this.props.date).format('DD MMMM YYYY')} </p>
-                            <p className = 'new-title'>{this.props.name} </p>
-                            <span className = 'new-text'> {this.props.text}</span>   
+                            <p className = 'news-title'>{this.props.name} </p>
+                            <span className = 'news-text' dangerouslySetInnerHTML={{__html: this.props.text}}/>   
                         </div>
                  )}
             </div>

@@ -4,7 +4,16 @@
     display: flex;
     justify-content: space-between;
 }
+.news-admin-title{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.news-admin-title:hover{
+    text-decoration: none;
+   
+}
 .news-admin div {
+    
     text-align: center;
     align-self: center;
     flex-basis: 25%;
