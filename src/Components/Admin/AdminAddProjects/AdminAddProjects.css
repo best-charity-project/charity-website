@@ -1,0 +1,99 @@
+form.form-create-projects {
+    padding: 10px 20px;
+    padding-left: 300px;
+}
+.projects-status {
+    margin: 0 10px 20px;
+    display: flex;
+}
+.projects-status > span {
+    flex-basis: 25%;
+    line-height: 1.5;
+}
+.container-for-input {
+    display: flex;
+}
+.container-for-input label,
+.admin-image label,
+.projects-source ,
+.datepicker label {
+    padding-right: 60px;
+    padding-left: 10px;
+    font-weight: 600;
+    text-align: right;
+    align-self: center;
+}
+.projects-sourse label {
+    font-weight: 600;
+}
+#name-projects {
+    margin-left: 0;
+    height: auto;
+    padding: 5px;
+    font-size: 16px;
+    outline: none;
+}
+.text-projects {
+    display: flex;
+}
+.text-projects > div:first-child {
+    flex-basis: 25%;
+    padding-right: 60px;
+    padding-left: 10px;
+    font-weight: 600;
+    text-align: right;
+    align-self: top;
+}
+.text-projects > div:last-child {
+    flex-basis: 75%;
+}
+.text-projects > div:last-child select {
+    font-family: 'Montserrat', sans-serif;
+    width: 300px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-left: 0;
+    height: auto;
+    padding: 5px;
+    outline: none;
+    flex-basis: 75%;
+}
+.text-projects .wrapper {
+    margin-left: 0;
+    max-width: 85%;
+}
+.text-projects .wrapper .editor {
+    background-color: #ffffff;
+}
+.text-projects .wrapper .rdw-option-wrapper {
+    margin: 0 3px;
+}
+hr {
+    margin: 30px 40px;
+}
+form.form-create-projects hr:nth-of-type(2) {
+    margin-top: 0;
+}
+.button-info {
+    margin-top: 50px;
+    padding-left: 10px;
+}
+.admin-buttons {
+    margin: 20px auto 30px;
+    display: flex;
+    justify-content: space-evenly
+}
+.admin-buttons > button {
+    margin: 0 10px;
+    font-size: 16px;
+}
+.projects-status > button {
+    margin: 0;
+    font-size: 16px;
+}
+.choose-file {
+    line-height: 1;
+}

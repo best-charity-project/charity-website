@@ -3,6 +3,9 @@
 # dependencies
 /node_modules
 
+
+/src/Components/menu
+
 # testing
 /coverage
 
