@@ -52,7 +52,7 @@ class AdminAddNews extends Component {
                 {!this.state.isPreview ? 
                     <form className = "form-create-news" encType="multipart/form-data" method="post">
                         <div className = "news-status">
-                            <span>{this.state.isPublic ? "Статус новости: опубликована" : "Статус новости: черновик"}</span>
+                            <span>Статус новости: {this.state.isPublic ? " опубликована" : " черновик"}</span>
                             <Route render={({history}) => (
                                 <Button 
                                     label={"Опубликовать"}
