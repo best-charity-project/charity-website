@@ -13,7 +13,6 @@ class Menu extends Component {
                         { name: 'о нас', url: '/' },
                         { name: 'активности', url: '/', dropdown: true },
                         { name: 'новости', url: '/news' },
-                        { name: 'проекты', url: '/projects' },
                     ]}
                     onClick={this.handlerClick}
                     classActive="active-link-client"
