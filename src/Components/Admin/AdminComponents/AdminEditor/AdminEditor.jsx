@@ -1,60 +1,54 @@
 import React, { Component } from 'react';
-import { EditorState, ContentState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
+import draftToHtml from 'draftjs-to-html';
+import { convertFromHTML, ContentState, convertToRaw } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import {server} from '../../../../api';
+import axios from 'axios';
 import './AdminEditor.css';
 
 class ControlledEditor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            editorState: EditorState.createEmpty()
-        }
-    }
-    componentWillReceiveProps(nextprops) {
-        if (this.props.text && !nextprops.text) {
-            this.setState({ editorState: EditorState.createEmpty() })
-        }
-    }
-    componentDidMount() {
-        const plainText = this.props.text;
-        const content = ContentState.createFromText(plainText);
-        if (content) {
-            this.setState({ editorState: EditorState.createWithContent(content) })
+            editorContent: ''
         }
     }
 
-    onEditorStateChange = (editorState) => {
-        this.setState({
-            editorState
-        });
-        const content = this.state.editorState.getCurrentContent();
-        const currentText = content.getPlainText()
-        this.props.getCurrentText(currentText)
+    componentDidMount() {
+        this.props.text ? 
+            this.setState({ editorContent: this.getInitialHTML(this.props.text)}) :
+            this.setState({ editorContent: '' }) 
+    }
+
+    getInitialHTML = (str) => {
+        const contentBlocks = convertFromHTML(str);
+        const contentState = ContentState.createFromBlockArray(contentBlocks);
+        return convertToRaw(contentState);
+    }
+
+    onEditorChange =(contentState) => {
+        let text = draftToHtml(contentState)
+        this.props.getCurrentText(text)
     }
 
     uploadImageCallBack = (file) => {
         let formData  = new FormData();
         formData.append('image', file);
-
-        fetch(`${server}/images`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
-                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-            },
-            body: formData
+        return axios({
+            method: 'post',
+            url: `${server}/uploadImages/`,
+            data: formData,
+            config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
         })
-        .then(response => console.log(response)/* response.json() */)
     }
 
     render() {
-        const { editorState } = this.state;
+        const { editorContent } = this.state;
         return (
             <div>
                 <Editor
-                    editorState={editorState}
+                    contentState={editorContent}
                     wrapperClassName="wrapper"
                     toolbarClassName="toolbar"
                     editorClassName="editor"
@@ -64,10 +58,14 @@ class ControlledEditor extends Component {
                     toolbar={{
                         image: {
                             previewImage: true,
-                            uploadCallback: this.uploadImageCallBack
+                            uploadCallback: this.uploadImageCallBack,
+                            defaultSize: {
+                                height: 'auto',
+                                width: '100%',
+                            },
                         }
                     }}
-                    onEditorStateChange={this.onEditorStateChange}
+                    onChange={this.onEditorChange}
                 />
             </div>
         )

@@ -13,7 +13,7 @@ class Events extends Component {
       <div className = 'events-container'> 
         <Menu name = 'events-menu'/>
         <EventsListAnsAside />
-        <Footer name = 'footer-events'/>
+        <Footer name = 'footer footer-events'/>
     </div>
     );
   }
