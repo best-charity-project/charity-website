@@ -59,6 +59,7 @@
     display: flex;
     justify-content: flex-end;
     align-self: flex-end;
+
 }
 
 .projects-list-action-btns button:hover {cursor: pointer;}

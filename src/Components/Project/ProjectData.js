@@ -9,12 +9,8 @@ class ProjectData extends Component {
     constructor() {
         super();
         this.state = {
-            projects: [],
-            slideCount: 0
+            projects: []
         }
-
-        this.nextProject = this.nextProject.bind(this);
-        this.previousProject = this.previousProject.bind(this);
     }
 
     componentDidMount() {
@@ -35,22 +31,11 @@ class ProjectData extends Component {
                                 image = {projects.image}
                                 shortText = {projects.shortText}
                                 fullText = {projects.fullText} 
-                                slideIndex = {this.state.slideCount} />) : null}
-                <div className="projects-list-action-btns">    
-                    <SliderPreviousBtn previousProject={this.previousProject}/>
-                    <SliderNextBtn nextProject={this.nextProject}/>                
-                </div>    
+                                slideIndex = {this.state.slideCount} />) : null}   
             </div>
         )
     }
 
-    previousProject() {
-        this.setState({ slideCount: this.slideCount - 1 })
-    }
-
-    nextProject() {
-        this.setState({ slideCount: this.state.slideCount + 1 })
-    }
 }
 
 export default ProjectData;
