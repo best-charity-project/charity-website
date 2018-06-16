@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { server } from "../../api";
+import axios from "axios";
 import Project from "../Project/Project";
 import SliderPreviousBtn from "../Slider/SliderButtons/SliderPreviousBtn";
 import SliderNextBtn from "../Slider/SliderButtons/SliderNextBtn";
@@ -17,13 +18,13 @@ class ProjectData extends Component {
     }
 
     componentDidMount() {
-        fetch(`${server}/projects`)
-            .then(response => response.json())
-            .then(data => {
-                this.setState({projects: data.projects });
-            })
-            .catch(error => this.setState({ error, isLoading: false }));
-        }
+        axios.get(`${server}/projects`)
+          .then(res => {
+            const projects = res.data;
+            this.setState({ projects });
+          })
+      }
+        
 
     render() {
         return(
