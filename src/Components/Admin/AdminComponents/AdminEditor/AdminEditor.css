@@ -27,3 +27,9 @@
 .rdw-image-alignment-options-popup {
     display: none;
 }
+.rdw-link-modal {
+    height: 215px;
+}
+.rdw-link-modal-target-option {
+    margin-bottom: 10px;
+}

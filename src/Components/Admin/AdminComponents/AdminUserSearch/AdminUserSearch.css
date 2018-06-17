@@ -13,3 +13,6 @@
 .search-user input:focus {
     outline: none;
 }
+.admin-search-input {
+	background-color: #e8e6e2;
+}
