@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { server } from "../../api";
 import axios from "axios";
+import _ from 'lodash';
+import findIndex from 'lodash';
 import AboutUs from "../../Components/AboutUs/AboutUs";
 import Footer from "../../Components/Footer/Footer";
 import Menu from "../../Components/Menu/Menu";
@@ -15,8 +17,10 @@ class Projects extends Component {
     constructor() {
         super();
         this.state = {
-            currentDisplayedProject: 0,
-            projects: []
+            currentDisplayedProject: {},
+            currentProjectIndex: 0,
+            projects: [],
+            isLastProject: false
         }
 
         this.nextProject = this.nextProject.bind(this);
@@ -24,26 +28,25 @@ class Projects extends Component {
     }
     
     componentDidMount() {
-            axios.get(`${server}/projects`)
-              .then(res => {
-                const projects = res.data;
+        axios.get(`${server}/projects`)
+            .then(res => {
+                let { projects } = res.data;
                 this.setState({ projects });
-                console.log(res.projects)
-            })
-
-        this.setState({
-            currentDisplayedProject: 0  
-        })
+                this.setState({ 
+                    currentDisplayedProject: projects[0] 
+                });
+            });
     }
-
+    
+    
     render() {
         return (
 			<div className="main-page-client">
                 <Menu name = 'client-menu'/>
-                <Project/>
+                <Project content={this.state.currentDisplayedProject}/>
                 <div className="projects-list-action-btns">
-                    <SliderPreviousBtn previousProject={this.previousProject}/>
-                    <SliderNextBtn nextProject={this.nextProject}/>          
+                    <SliderPreviousBtn disabled={this.state.isLastProject} previousProject={this.previousProject}/>
+                    <SliderNextBtn disabled={this.state.isLastProject} nextProject={this.nextProject}/>          
                 </div>
                 <Footer/>
 			</div>
@@ -51,11 +54,20 @@ class Projects extends Component {
     }
 
     previousProject() {
-        this.setState({ slideCount: this.slideCount - 1 })
+        let displayedProjectIndex = _.findIndex(this.state.projects, this.state.currentDisplayedProject)
+        this.setState({
+            currentDisplayedProject: this.state.projects[displayedProjectIndex - 1],
+            isLastProject: (this.state.projects.length - 1) === displayedProjectIndex
+        })
     }
 
     nextProject() {
-        this.setState({ slideCount: this.state.slideCount + 1 })
+        let displayedProjectIndex = _.findIndex(this.state.projects, this.state.currentDisplayedProject)
+        this.setState({
+            currentDisplayedProject: this.state.projects[displayedProjectIndex + 1],
+            isLastProject: (this.state.projects.length - 1) === displayedProjectIndex
+        })
+        console.log(this.state.isLastProject)
     }
 }
 

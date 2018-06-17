@@ -51,9 +51,6 @@
     border: solid 2px #9b9b9b;
 }
 
-.project-show-more-btn:hover {
-    cursor: pointer;
-}
 
 .projects-list-action-btns {
     display: flex;
@@ -65,6 +62,12 @@
 .projects-list-action-btns button:hover {cursor: pointer;}
 
 .projects-list-action-btns button:focus {outline:0;}
+
+.projects-list-action-btns button:disabled {
+    background-color: #c9cace;
+    border: solid 0.6px #c9cace;
+    cursor: not-allowed;
+}
 
 .prev {
     width: 40px;

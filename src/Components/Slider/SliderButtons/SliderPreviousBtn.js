@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 const SliderPreviousBtn = (props) => {
   return (
     <div>
-        <button onClick={props.previousProject} className="prev"></button>
+        <button disabled={props.disabled} onClick={props.previousProject} className="prev"></button>
     </div>
   );
 }
