@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Editor} from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
-import {convertFromHTML, ContentState, convertToRaw} from 'draft-js';
+import htmlToDraft from 'html-to-draftjs';
+import {ContentState, convertToRaw} from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import {server} from '../../../../api';
 import axios from 'axios';
@@ -22,7 +23,7 @@ class ControlledEditor extends Component {
     }
 
     getInitialHTML = (str) => {
-        const contentBlock = convertFromHTML(str);
+        const contentBlock = htmlToDraft(str);
         if (contentBlock.contentBlocks !== null) {
             const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks, contentBlock.entityMap);
             return convertToRaw(contentState);
@@ -64,7 +65,6 @@ class ControlledEditor extends Component {
                                 height: 'auto',
                                 width: '100%',
                             },
-                        urlEnabled: false,
                         }
                     }}
                     onChange={this.onEditorChange}

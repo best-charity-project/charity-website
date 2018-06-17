@@ -63,8 +63,8 @@ class AdminAddNews extends Component {
                         </div>
                         <div className="admin-title-news">
                             <TextField 
+                                label = "Название новости:"
                                 id = "title-news" 
-                                title = "Название новости:" 
                                 type = "text"
                                 name = "title-news"
                                 value = {this.state.title}
@@ -167,15 +167,11 @@ class AdminAddNews extends Component {
         this.setState({title: object.value});
     }
     getCurrentTextFull = (str) => {
-        this.setState({fullText: str}, (str) => this.getCurrentTextShort(str));
+        this.setState({fullText: str});
     }
     getCurrentTextShort = (str) => {
-        if (!str) {
-            let newText = this.state.fullText.slice(0, 400) 
-            if (this.state.fullText.length >= 401) {newText = newText + "</span><span>&hellip;</span>"}
-            this.setState({shortText: newText})
-        }
-    }
+        this.setState({shortText: str})
+    } 
     handleChange = (event) => {
         this.setState({source: event.target.value})
     }
@@ -184,17 +180,15 @@ class AdminAddNews extends Component {
             isPreview: false
         })
     }
-/*     checkText = () => {
-        console.log(11111111111111111, this.state.shortText)
-        if (!this.state.shortText || this.state.shortText == '<p></p>') {
-            let newText = this.state.fullText.slice(0, 400) 
-            console.log(222, newText)
-            if (this.state.fullText.length >= 401) {newText = newText + "</span><span>&hellip;</span>"}
+    checkText = () => {
+        if (!this.state.shortText || !this.state.shortText.replace(/<(.|\n)*?>/g, '').replace('\n', '')) {
+            let newText = this.state.fullText.replace(/<img[^>]* src=\"([^\"]*)\"[^>]*>/g, '') 
+            if (newText.length >= 401) {newText = newText.slice(0, 400) + "</span><span>&hellip;</span></p>"}
             this.setState({shortText: newText}, this.sendNews)
         } else {
             this.sendNews()
         }
-    } */
+    }
     onPreview = (e) => {
         e.preventDefault()
         this.setState({
@@ -203,11 +197,11 @@ class AdminAddNews extends Component {
     }
     onPublish = (e) => {
         e.preventDefault()
-        this.setState({isPublic: true}, this.sendNews)
+        this.setState({isPublic: true}, this.checkText)
     }
     onDraft = (e) => {
         e.preventDefault()
-        this.setState({isPublic: false}, this.sendNews)
+        this.setState({isPublic: false}, this.checkText)
     }
     onCancel = (e) => {
         e.preventDefault()
