@@ -7,11 +7,17 @@ class AdminUploadImage extends Component {
         url: '',
         loaded: false,
         image: '',
-        styles: {
-            container: {width: '90%'}
-        }
     }
-    cropperRef = React.createRef()
+    cropperRef = React.createRef();
+    cropperStyles = {container: {width: '90%'}};
+
+    componentWillMount() {
+        this.props.imageData ?
+            this.setState({image: this.props.imageData}) :
+            this.props.image ?
+                this.setState({image: 'http://localhost:3001/images/' + this.props.image}) :
+                null
+    }
     render() {
         return (
             <div>
@@ -34,11 +40,11 @@ class AdminUploadImage extends Component {
                     <div>
                         <Cropper 
                             src = {this.state.url}
-                            ratio = {16 / 9}
+                            ratio = {this.props.ratio}
                             width = {350}
                             onImgLoad = {this.handleImageLoaded}
                             ref = {this.cropperRef}
-                            styles = {this.state.styles} 
+                            styles = {this.cropperStyles}
                             originX = {200}
                             originY = {100}
                         />
@@ -90,3 +96,4 @@ class AdminUploadImage extends Component {
 }
 
 export default AdminUploadImage;
+

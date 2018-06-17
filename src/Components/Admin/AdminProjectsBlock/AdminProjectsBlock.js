@@ -7,7 +7,7 @@ import AdminProjectsContent from '../AdminComponents/AdminProjectsContent/AdminP
 const AdminProjectsBlock = () =>{
     return (
         <div className='admin-projects'>
-            <Navigation/>
+            <Navigation onLogout={this.onLogout}/>
             <NavBar />
             <AdminProjectsContent />
         </div>

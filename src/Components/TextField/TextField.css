@@ -12,6 +12,7 @@
 }}
 .admin-search-input {
 	background-color: #e8e6e2;
+	margin-left: -70px;
 }
 .event-title .event-title-input {
 	padding: 0 10px;

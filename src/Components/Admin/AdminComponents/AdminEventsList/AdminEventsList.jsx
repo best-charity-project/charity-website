@@ -23,9 +23,8 @@ componentWillReceiveProps(nexprops, nextstate){
                 <div className="events-list-header">
                     <div>Название события</div>
                     <div>Дата проведения</div>
-                    <div>Удалить событие</div>
+                    <div>Удалить событие</div>   
                 </div>            
-                
                 <div>                    
                     {this.state.events.map(user => 
                         <AdminEvent 

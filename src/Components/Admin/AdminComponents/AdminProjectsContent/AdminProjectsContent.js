@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-// import "../../../../App.css";
 import './AdminProjectsContent.css';
-// import AdminCreateProject from '../AdminCreateProject/AdminCreateProject';
 import AdminProjectsList from '../AdminProjectsList/AdminProjectsList';
 import AdminProjectsSearch from '../AdminProjectsSearch/AdminProjectsSearch';
-import { server } from "../../../../api"
-import { Route } from 'react-router-dom'
+import { server } from "../../../../api";
+import { Route } from 'react-router-dom';
 import Button from '../../../Button/Button';
 
 class AdminProjectsContent extends Component {
@@ -16,7 +14,7 @@ class AdminProjectsContent extends Component {
         error: null
     }
     componentDidMount(){
-        fetch(`${ server }/projects?isAdmin=true`,{
+        fetch(`${server}/projects?isAdmin=true`,{
             method: 'GET',
             mode: 'cors'
         })
@@ -60,15 +58,14 @@ class AdminProjectsContent extends Component {
                 </div>
                 <AdminProjectsList 
                     projects = {this.state.filteredProjects}
-                    loading={this.state.isLoading} 
-                    // getUpdateProjectsList = {this.getUpdateProjectsList}
-                    deleteProject = {this.deleteProject}
+                    loading={this.state.isLoading}
+                    deleteProject = {this.deleteProjects}
                     />
             </div>
         )
     }
-    deleteProject = (projects) => {
-        let id = projects._id
+    deleteProjects = (projects) => {
+        let id = projects._id;
         fetch(`${ server }/projects/${ id }`, {
             method: 'DELETE',
             headers: {
@@ -76,7 +73,7 @@ class AdminProjectsContent extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(projects),
-        })
+        });
             this.setState({            
                 filteredProjects: this.state.filteredProjects.filter(projects => projects._id !== id)
             })  
@@ -106,12 +103,6 @@ class AdminProjectsContent extends Component {
             })
         }
     }
-    // getUpdateProjectsList = () =>{
-    //     setTimeout(this.getList,100);
-    // }
-    // saveProject = () => {
-    //     setTimeout(this.getList,0)
-    // }
 
 }
 

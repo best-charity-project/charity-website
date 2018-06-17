@@ -189,11 +189,11 @@ class AdminAddProjects extends Component {
         .then(response=>{
             this.setState({
                 name: '',
-                imageData: '',
+                isPublic:false,
                 shortText: '',
                 fullText: '',
-                isPublic: false,
-                image: ''
+                imageData: '',
+                image:''
             }) 
             this.props.history.push({
                 pathname: '/admin-panel/projects'

@@ -1,0 +1,100 @@
+form.form-create-news {
+    padding: 65px 20px;
+    padding-left: 300px;
+}
+.news-status {
+    margin: 0 10px 20px;
+    display: flex;
+}
+.news-status > span {
+    flex-basis: 25%;
+    line-height: 1.5;
+}
+.container-for-input {
+    display: flex;
+}
+.container-for-input label,
+.admin-image label,
+.news-source {
+    padding-right: 60px;
+    padding-left: 10px;
+    font-weight: 600;
+    text-align: right;
+    align-self: center;
+}
+.news-sourse label {
+    font-weight: 600;
+}
+#title-news {
+    margin-left: 0;
+    height: auto;
+    padding: 5px;
+    font-size: 16px;
+    outline: none;
+}
+.text-news {
+    display: flex;
+}
+.text-news > div:first-child {
+    flex-basis: 25%;
+    padding-right: 60px;
+    padding-left: 10px;
+    font-weight: 600;
+    text-align: right;
+    align-self: top;
+}
+.text-news > div:last-child {
+    flex-basis: 75%;
+}
+.text-news > div:last-child select {
+    font-family: 'Montserrat', sans-serif;
+    width: 300px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-left: 0;
+    height: auto;
+    padding: 5px;
+    outline: none;
+    flex-basis: 75%;
+}
+.text-news .wrapper {
+    margin-left: 0;
+    max-width: 85%;
+}
+.text-news .wrapper .editor {
+    background-color: #ffffff;
+}
+.text-news .wrapper .rdw-option-wrapper {
+    margin: 0 3px;
+}
+hr {
+    margin: 30px 40px;
+}
+form.form-create-news hr:nth-of-type(2) {
+    margin-top: 0;
+}
+.button-info {
+    margin-top: 50px;
+    padding-left: 10px;
+}
+.admin-buttons {
+    margin: 20px auto 30px;
+    display: flex;
+    justify-content: space-evenly
+}
+.admin-buttons > button {
+    margin: 0 10px;
+    font-size: 16px;
+}
+.news-status > button {
+    margin: 0;
+    font-size: 16px;
+}
+.choose-file {
+    line-height: 1;
+}
+
+

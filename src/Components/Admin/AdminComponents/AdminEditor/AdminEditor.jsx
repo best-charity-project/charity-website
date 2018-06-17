@@ -1,57 +1,74 @@
 import React, { Component } from 'react';
-import { EditorState, ContentState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
-
+import draftToHtml from 'draftjs-to-html';
+import { convertFromHTML, ContentState, convertToRaw } from 'draft-js';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import {server} from '../../../../api';
+import axios from 'axios';
+import './AdminEditor.css';
 
 class ControlledEditor extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        editorState: EditorState.createEmpty(),
-      }
-  }
-  componentWillReceiveProps(nextprops){
-    if(this.props.text && !nextprops.text){
-      this.setState({editorState: EditorState.createEmpty()})
+    constructor(props) {
+        super(props);
+        this.state = {
+            editorContent: ''
+        }
     }
-  }
-  componentDidMount (){  
-      const plainText = this.props.text ;
-      const content = ContentState.createFromText(plainText);
-      if(content){
-          this.setState({ editorState: EditorState.createWithContent(content)})
-      }   
-    }  
 
-  onEditorStateChange =(editorState) => {
-    this.setState({
-      editorState,
-    });
-    const content = this.state.editorState.getCurrentContent();
-    const currentText = content.getPlainText()
-    this.props.getCurrentText(currentText)
-  };
+    componentDidMount() {
+        this.props.text ? 
+            this.setState({ editorContent: this.getInitialHTML(this.props.text)}) :
+            this.setState({ editorContent: '' }) 
+    }
 
-  render() {
-    const { editorState } = this.state;
-    return (
-      <div>
-      <Editor
-        editorState={editorState}
-        wrapperClassName="wrapper"
-        toolbarClassName="toolbar"
-        editorClassName="editor"
-        localization={{
-            locale: 'ru'
-        }}
-        toolbar={{
-            image: {previewImage: true,
-                    uploadCallback: this.uploadImageCallBack}
-        }}
-        onEditorStateChange={this.onEditorStateChange}
-      />
-      </div>
-    )
-  }
+    getInitialHTML = (str) => {
+        const contentBlocks = convertFromHTML(str);
+        const contentState = ContentState.createFromBlockArray(contentBlocks);
+        return convertToRaw(contentState);
+    }
+
+    onEditorChange =(contentState) => {
+        let text = draftToHtml(contentState)
+        this.props.getCurrentText(text)
+    }
+
+    uploadImageCallBack = (file) => {
+        let formData  = new FormData();
+        formData.append('image', file);
+        return axios({
+            method: 'post',
+            url: `${server}/uploadImages/`,
+            data: formData,
+            config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
+        })
+    }
+
+    render() {
+        const { editorContent } = this.state;
+        return (
+            <div>
+                <Editor
+                    contentState={editorContent}
+                    wrapperClassName="wrapper"
+                    toolbarClassName="toolbar"
+                    editorClassName="editor"
+                    localization={{
+                        locale: 'ru'
+                    }}
+                    toolbar={{
+                        image: {
+                            previewImage: true,
+                            uploadCallback: this.uploadImageCallBack,
+                            defaultSize: {
+                                height: 'auto',
+                                width: '100%',
+                            },
+                        }
+                    }}
+                    onChange={this.onEditorChange}
+                />
+            </div>
+        )
+    }
 }
 export default ControlledEditor;

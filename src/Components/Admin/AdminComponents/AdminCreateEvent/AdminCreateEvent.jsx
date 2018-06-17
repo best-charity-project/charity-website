@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import AdminDateEvent from '../AdminDateEvent/AdminDateEvent';
-import AdminTextEvent from '../AdminTextEvent/AdminTextEvent';
 import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
 import './AdminCreateEvent.css';
-import MyEditor from  "../AdminEditor/AdminEditor";
 import { server } from '../../../../api';
 import Editor from  "../AdminEditor/AdminEditor";
 
@@ -25,7 +23,7 @@ class AdminCreateEvent extends Component {
         this.setState({text:str});
     }
 
-      sendEvent = () =>{
+    sendEvent = () =>{
         fetch(`${ server }/events`, {
             method: 'POST',
             headers: {
@@ -36,9 +34,8 @@ class AdminCreateEvent extends Component {
             })
             .then(response => response.json())
             this.setState({title:'', text:'',date:new Date(), isOpen: !this.state.isOpen})
-            this.props.saveEvent()       
-            
-      }
+            this.props.saveEvent()           
+    }
       cancel = () => {  
        this.setState({title:'', text:'',data:'',isOpen: !this.state.isOpen})     
        this.props.cancel();
@@ -51,6 +48,7 @@ class AdminCreateEvent extends Component {
                 <div className="event-title">
                 <p>Название события</p>
                 <TextField 
+                    label = 'Название события'
                     value = {this.state.title}
                     id = "title" 
                     type = 'text' 
