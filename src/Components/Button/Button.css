@@ -67,7 +67,8 @@
     width: 25px;
     height: 25px;
 }
-.button-publish-news{
+.button-publish-news {
+    outline: none;
     background-color: #e8e6e2;
     border-radius: 15px;
     padding: 5px 10px;
@@ -75,6 +76,7 @@
     color: #cccccc;
     border: 1px solid #cccccc;
 }
+
 .button-not-publish-news{
     cursor: pointer;
     outline: none;

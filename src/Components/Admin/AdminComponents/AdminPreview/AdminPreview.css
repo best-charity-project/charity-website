@@ -20,8 +20,22 @@
     padding: 0 30px;
 }
 .full-news p {
-    padding-left:30px;
+    padding:0 30px;
     margin-top: 10px;
+}
+
+.full-news ul,
+.full-news ol {
+    padding: 0 46px;
+    margin-top: 10px;
+}
+.full-news h1,
+.full-news h2, 
+.full-news h3, 
+.full-news h4,
+.full-news h5,
+.full-news h6 {
+    padding: 0 30px;
 }
 .full-news span{
     display: block;

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Editor } from 'react-draft-wysiwyg';
+import React, {Component} from 'react';
+import {Editor} from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
-import { convertFromHTML, ContentState, convertToRaw } from 'draft-js';
+import {convertFromHTML, ContentState, convertToRaw} from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import {server} from '../../../../api';
 import axios from 'axios';
@@ -22,11 +22,12 @@ class ControlledEditor extends Component {
     }
 
     getInitialHTML = (str) => {
-        const contentBlocks = convertFromHTML(str);
-        const contentState = ContentState.createFromBlockArray(contentBlocks);
-        return convertToRaw(contentState);
+        const contentBlock = convertFromHTML(str);
+        if (contentBlock.contentBlocks !== null) {
+            const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks, contentBlock.entityMap);
+            return convertToRaw(contentState);
+        }
     }
-
     onEditorChange =(contentState) => {
         let text = draftToHtml(contentState)
         this.props.getCurrentText(text)
@@ -63,6 +64,7 @@ class ControlledEditor extends Component {
                                 height: 'auto',
                                 width: '100%',
                             },
+                        urlEnabled: false,
                         }
                     }}
                     onChange={this.onEditorChange}

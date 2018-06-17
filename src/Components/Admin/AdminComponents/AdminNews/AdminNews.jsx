@@ -36,7 +36,7 @@ class AdminNews extends Component {
                    </div>
                 <div>                
                     <Button
-                        name = {this.state.isPublic? 'button-publish-news':'button-not-publish-news'}
+                        name = {this.state.isPublic ? 'button-publish-news':'button-not-publish-news'}
                         label = {this.state.isPublic? 'Опубликовано':'Опубликовать'}
                         clickHandler = {this.publishNews}
                     />

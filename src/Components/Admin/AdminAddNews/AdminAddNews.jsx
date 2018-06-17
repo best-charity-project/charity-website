@@ -167,10 +167,14 @@ class AdminAddNews extends Component {
         this.setState({title: object.value});
     }
     getCurrentTextFull = (str) => {
-        this.setState({fullText: str});
+        this.setState({fullText: str}, (str) => this.getCurrentTextShort(str));
     }
     getCurrentTextShort = (str) => {
-        this.setState({shortText: str})
+        if (!str) {
+            let newText = this.state.fullText.slice(0, 400) 
+            if (this.state.fullText.length >= 401) {newText = newText + "</span><span>&hellip;</span>"}
+            this.setState({shortText: newText})
+        }
     }
     handleChange = (event) => {
         this.setState({source: event.target.value})
@@ -180,15 +184,17 @@ class AdminAddNews extends Component {
             isPreview: false
         })
     }
-    checkText = () => {
-        if (!this.state.shortText) {
-            let newText = this.state.fullText.slice(0, 200) 
-            if (this.state.fullText.length >= 201) {newText = newText + "..."}
+/*     checkText = () => {
+        console.log(11111111111111111, this.state.shortText)
+        if (!this.state.shortText || this.state.shortText == '<p></p>') {
+            let newText = this.state.fullText.slice(0, 400) 
+            console.log(222, newText)
+            if (this.state.fullText.length >= 401) {newText = newText + "</span><span>&hellip;</span>"}
             this.setState({shortText: newText}, this.sendNews)
         } else {
             this.sendNews()
         }
-    }
+    } */
     onPreview = (e) => {
         e.preventDefault()
         this.setState({
@@ -197,7 +203,11 @@ class AdminAddNews extends Component {
     }
     onPublish = (e) => {
         e.preventDefault()
-        this.setState({isPublic: true}, this.checkText)
+        this.setState({isPublic: true}, this.sendNews)
+    }
+    onDraft = (e) => {
+        e.preventDefault()
+        this.setState({isPublic: false}, this.sendNews)
     }
     onCancel = (e) => {
         e.preventDefault()
@@ -213,10 +223,6 @@ class AdminAddNews extends Component {
         this.props.history.push({
             pathname: '/admin-panel/news'
         })  
-    }
-    onDraft = (e) => {
-        e.preventDefault()
-        this.setState({isPublic: false}, this.checkText)
     }
     sendNews = () => {
         let formData  = new FormData();

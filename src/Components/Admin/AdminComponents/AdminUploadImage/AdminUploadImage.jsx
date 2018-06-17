@@ -10,6 +10,7 @@ class AdminUploadImage extends Component {
     }
     cropperRef = React.createRef() 
     cropperStyles = {container: {width: '90%'}}
+
     componentWillMount() {
         this.props.imageData ? 
             this.setState({image: this.props.imageData}) :
