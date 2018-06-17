@@ -50,7 +50,7 @@ class ControlledEditor extends Component {
         return (
             <div>
                 <Editor
-                    contentState={editorContent}
+					contentState={editorContent}
                     wrapperClassName="wrapper"
                     toolbarClassName="toolbar"
                     editorClassName="editor"
@@ -65,7 +65,11 @@ class ControlledEditor extends Component {
                                 height: 'auto',
                                 width: '100%',
                             },
-                        }
+						},
+						blockType: {
+							inDropdown: true,
+							options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'],
+						}
                     }}
                     onChange={this.onEditorChange}
                 />

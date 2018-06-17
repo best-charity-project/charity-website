@@ -33,3 +33,9 @@
 .rdw-link-modal-target-option {
     margin-bottom: 10px;
 }
+.rdw-block-dropdown {
+    width: 130px;
+}
+.rdw-dropdown-optionwrapper {
+    width: 100%;
+}

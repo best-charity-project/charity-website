@@ -64,3 +64,17 @@
     display: flex;
     flex-direction: column;
  }
+.client-news .full-news ul,
+.client-news .full-news ol {
+    padding: 0 60px;
+    margin: 16px 0;
+}
+.client-news .full-news h1,
+.client-news .full-news h2, 
+.client-news .full-news h3, 
+.client-news .full-news h3, 
+.client-news .full-news h4,
+.client-news .full-news h5,
+.client-news .full-news h6 {
+    padding: 0 30px;
+}
