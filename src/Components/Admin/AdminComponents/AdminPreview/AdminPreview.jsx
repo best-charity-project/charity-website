@@ -24,7 +24,6 @@ class AdminAddNews extends Component {
                         <p className = 'full-news-date'>{moment().format('DD MMMM YYYY')} </p>
                         <p className = 'full-news-title'> {this.props.title}</p>               
                         <span dangerouslySetInnerHTML={{__html: this.props.fullText}}/>
-                       {/*  <span>{this.props.fullText}</span> */}
                     </div>
                     <div className = 'button-info'>
                         <span>* При нажатии на кнопку "Сохранить" новость сохраняется как черновик</span>
