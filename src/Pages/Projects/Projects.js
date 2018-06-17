@@ -55,20 +55,18 @@ class Projects extends Component {
         let displayedProjectIndex = _.findIndex(this.state.projects, this.state.currentDisplayedProject);
         this.setState({
             currentDisplayedProject: this.state.projects[displayedProjectIndex - 1],
-            isFirstProject: displayedProjectIndex === 0,
+            isFirstProject: displayedProjectIndex - 1 === 0,
             isLastProject: false,
         });
     }
 
     nextProject() {
         let displayedProjectIndex = _.findIndex(this.state.projects, this.state.currentDisplayedProject);
-        console.log(this.state.projects.length);
         this.setState({
             currentDisplayedProject: this.state.projects[displayedProjectIndex + 1],
-            isLastProject: this.state.projects.length - 1 === displayedProjectIndex,
+            isLastProject: this.state.projects.length - 1 === displayedProjectIndex + 1,
             isFirstProject: false,
         });
-        console.log(this.state.isLastProject);
     }
 }
 
