@@ -63,8 +63,8 @@ class AdminAddNews extends Component {
                         </div>
                         <div className="admin-title-news">
                             <TextField 
+                                label = "Название новости:"
                                 id = "title-news" 
-                                title = "Название новости:" 
                                 type = "text"
                                 name = "title-news"
                                 value = {this.state.title}
@@ -171,7 +171,7 @@ class AdminAddNews extends Component {
     }
     getCurrentTextShort = (str) => {
         this.setState({shortText: str})
-    }
+    } 
     handleChange = (event) => {
         this.setState({source: event.target.value})
     }
@@ -181,9 +181,9 @@ class AdminAddNews extends Component {
         })
     }
     checkText = () => {
-        if (!this.state.shortText) {
-            let newText = this.state.fullText.slice(0, 200) 
-            if (this.state.fullText.length >= 201) {newText = newText + "..."}
+        if (!this.state.shortText || !this.state.shortText.replace(/<(.|\n)*?>/g, '').replace('\n', '')) {
+            let newText = this.state.fullText.replace(/<img[^>]* src=\"([^\"]*)\"[^>]*>/g, '') 
+            if (newText.length >= 401) {newText = newText.slice(0, 400) + "</span><span>&hellip;</span></p>"}
             this.setState({shortText: newText}, this.sendNews)
         } else {
             this.sendNews()
@@ -199,6 +199,10 @@ class AdminAddNews extends Component {
         e.preventDefault()
         this.setState({isPublic: true}, this.checkText)
     }
+    onDraft = (e) => {
+        e.preventDefault()
+        this.setState({isPublic: false}, this.checkText)
+    }
     onCancel = (e) => {
         e.preventDefault()
         this.setState({
@@ -213,10 +217,6 @@ class AdminAddNews extends Component {
         this.props.history.push({
             pathname: '/admin-panel/news'
         })  
-    }
-    onDraft = (e) => {
-        e.preventDefault()
-        this.setState({isPublic: false}, this.checkText)
     }
     sendNews = () => {
         let formData  = new FormData();

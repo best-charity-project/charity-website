@@ -27,3 +27,15 @@
 .rdw-image-alignment-options-popup {
     display: none;
 }
+.rdw-link-modal {
+    height: 215px;
+}
+.rdw-link-modal-target-option {
+    margin-bottom: 10px;
+}
+.rdw-block-dropdown {
+    width: 130px;
+}
+.rdw-dropdown-optionwrapper {
+    width: 100%;
+}

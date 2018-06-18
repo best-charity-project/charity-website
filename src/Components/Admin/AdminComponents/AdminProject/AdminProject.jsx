@@ -24,8 +24,8 @@ class AdminProject extends Component {
     }
    render() {
        return (
-           <div className="project-admin"  id = {this.state.id} >
-               <div onClick = {this.props.showProjects}>{this.state.name}</div>
+           <div className="projects-admin"  id = {this.state.id} >
+               <div onClick = {this.props.showProjects} className="projects-admin-title">{this.state.name}</div>
                <div>{moment(this.state.date).format('DD-MM-YYYY')}</div>
                <div>{this.state.isPublic ? 'Да' : 'Нет'}</div>
                <div>

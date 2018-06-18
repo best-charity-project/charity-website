@@ -44,7 +44,7 @@ class AdminProjectsContent extends Component {
         }
         return(
             <div className="list-container">
-                <div className="new-project">
+                <div className="new-projects">
                     <AdminProjectsSearch findProjects = {this.findProjects} />
                     <div className="button-new-projects">
                         <Route render={( {history} ) => (

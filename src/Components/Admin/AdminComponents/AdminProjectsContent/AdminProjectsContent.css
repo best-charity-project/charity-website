@@ -1,26 +1,23 @@
-.new-project {
-    text-align: right;
-    padding:30px 20px 10px; 
-} 
-.overlay {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgba(43, 40, 38, 0.6);
-	z-index: 1000;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.new-projects {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #d3d3d3;
 }
-.hidden {
-	display: none; 
+.new-projects div {
+    flex-basis: 22%;
+    text-align: center;
 }
-.modal-new-project-field {
-	width: 60%;
-	background-color: #ffffff;
-	border-radius: 5px;
-} 
+.new-projects div:first-child {
+    flex-basis: 78%;
+    text-align: left;
+}
+.new-projects .search-projects {
+    border: none;
+}
+.new-projects .button-new-projects{
+    align-self: center;
+}
+.admin-position-content {
+    padding-left: 300px;
+    padding-top: 55px;
+}

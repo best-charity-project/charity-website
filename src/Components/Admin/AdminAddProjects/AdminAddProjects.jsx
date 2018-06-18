@@ -25,7 +25,7 @@ class AdminAddProjects extends Component {
     }
     cropperRef = React.createRef()
 
-    componentDidMount() {
+    componentWillMount() {
         if (this.props.location.state) {
             let infoAboutProjects = this.props.location.state.detail;
             this.setState({
@@ -46,9 +46,7 @@ class AdminAddProjects extends Component {
             <NavBar />
             <form className="list-container" encType="multipart/form-data" method="post">
                 <div className = "projects-status">
-                    <span>
-                        {this.state.isPublic ? "Статус новости: опубликована" : "Статус новости: черновик"}
-                    </span>
+                    <span>Статус проекта: {this.state.isPublic ? " опубликована" : " черновик"}</span>
                 </div>
                 <div className="date-projects-container">
                     <AdminDateEvent onSelectData= {this.getDate} date = {this.state.date} />
@@ -56,7 +54,7 @@ class AdminAddProjects extends Component {
                 <div className="admin-name-projects">
                         <TextField 
                             id = "name-projects" 
-                            title = "Название проекта:" 
+                            label = "Название проекта:"
                             type = "text"
                             name = "name-projects"
                             value = {this.state.name}
@@ -134,9 +132,9 @@ class AdminAddProjects extends Component {
         this.setState({imageData: image})
     }
     checkText = () => {
-        if (!this.state.shortText) {
-            let newText = this.state.fullText.slice(0, 200) 
-            if (this.state.fullText.length >= 201) {newText = newText + "..."}
+        if (!this.state.shortText || !this.state.shortText.replace(/<(.|\n)*?>/g, '').replace('\n', '')) {
+            let newText = this.state.fullText.replace(/<img[^>]* src=\"([^\"]*)\"[^>]*>/g, '')
+            if (newText.length >= 401) {newText = newText.slice(0, 400) + "</span><span>&hellip;</span></p>"}
             this.setState({shortText: newText}, this.sendProjects)
         } else {
             this.sendProjects()
@@ -146,13 +144,13 @@ class AdminAddProjects extends Component {
         e.preventDefault()
         this.setState({
             isPublic: true
-        }, this.checkText())
+        }, this.checkText)
     }
     onDraft = (e) => {
         e.preventDefault()
         this.setState({
             isPublic: false
-        }, this.checkText())
+        }, this.checkText)
     }
     onCancel = (e) => {
         e.preventDefault()

@@ -34,9 +34,7 @@ class AdminUser extends Component {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
-            },
-            credentials: 'cors'
-            })
+            }})
             .then(response => {
                 if (response.ok) {
                     return response.json()
