@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { server } from '../../api';
+import moment from 'moment';
 
 class Project extends Component {
     render() {
@@ -12,7 +12,9 @@ class Project extends Component {
                 </div>
                 <div className="project-section">
                     <div className="text-container">
-                        <div className="project-date">{this.props.content.date}</div>
+                        <div className="project-date">
+                            {moment(this.props.content.date).format('Do MMMM YYYY, h:mm')}
+                        </div>
                         <div className="project-title">{this.props.content.name}</div>
                         <div className="project-desc">{this.props.content.shortText}</div>
                         <button className="project-show-more-btn">читать далее</button>
