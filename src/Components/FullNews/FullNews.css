@@ -45,10 +45,11 @@
     width: 100%;
     padding: 0 30px;;
  }
- .client-news .full-news-date {
+ .client-news .full-news-list-container .full-news-date {
     color: #ffc757;
     font-size: 12px;
     font-weight: 600;
+    padding-top: 15px;
  }
  .client-news .full-news-title {
     font-size: 28px;

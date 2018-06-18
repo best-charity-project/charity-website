@@ -76,7 +76,7 @@ class AdminNewsContent extends Component {
 
     findNews = (title) => {
         if(!title) {
-            fetch(`${server}/news`, {
+            fetch(`${server}/news?isAdmin=true`, {
                 method: 'GET', 
                 mode: 'cors'
                 })
@@ -93,7 +93,7 @@ class AdminNewsContent extends Component {
             const {news} = this.state
             this.setState({
                 filteredNews: news.filter((item) => {
-                    return item.title.includes(title)
+                    return item.title.toLowerCase().includes(title)
                 })
             })
         }
