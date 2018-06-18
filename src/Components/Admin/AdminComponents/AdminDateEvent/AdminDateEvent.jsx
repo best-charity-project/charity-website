@@ -10,7 +10,7 @@ class AdminDateEvent extends Component {
     render() {
         return (
             <div className="datepicker">
-                <div>Дата события</div>
+                <label>Дата события</label>
                 <div>
                     <DatePickerInput
                         locale = 'ru'

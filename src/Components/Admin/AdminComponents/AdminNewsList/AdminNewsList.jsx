@@ -43,7 +43,6 @@ class AdminNewsList extends Component {
                 state: { detail: this.state.newsInfo}
             })
         })
-
     }
 }
 

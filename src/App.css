@@ -1,13 +1,12 @@
-*{
+* {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: 'Montserrat';
 }
 .container-main{
   height: 100%;
 }
-html,body{
+html, body{
   height: 100%;
 }
 #root{
@@ -15,4 +14,15 @@ html,body{
 }
 .list-container { 
   margin-left: 300px;
+  padding-top: 55px;
+}
+html,
+body,
+button,
+input,
+div,
+span,
+a, 
+li {
+  font-family: 'Montserrat';
 }

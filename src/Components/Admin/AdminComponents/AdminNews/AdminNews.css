@@ -10,10 +10,8 @@
 }
 .news-admin-title:hover{
     text-decoration: none;
-   
 }
 .news-admin div {
-    
     text-align: center;
     align-self: center;
     flex-basis: 25%;

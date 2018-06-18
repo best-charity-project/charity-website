@@ -1,20 +1,20 @@
-body{
+body {
     font-family: 'Montserrat', sans-serif;
 }
-.navbar{
+.navbar {
     background-color: rgb(49, 49, 49);
-    color:#fff;
+    color: #fff;
     height: 100%;
     width: 300px;
     position: fixed;
     top: 55px;
     left: 0;
 }
-.container-nav{
+.container-nav {
     display: flex;
     flex-direction: column;
 }
-.menu-list-admin li{
+.menu-list-admin li {
     min-width: 280px;
     list-style: none;
     margin-right: 0px;
@@ -24,30 +24,31 @@ body{
     align-items: center;
     color: #fff;
 }
-.menu-list-admin a{
+.menu-list-admin li a {
+    color: #fff;
     text-decoration: none;
 }
-.menu-list-admin a:first-child li:before{
+.menu-list-admin a:first-child li:before {
     content: '';
     background-image: url(../../Assets/AssetsSvg/mbri-users.svg);
     background-repeat: no-repeat;
     width: 40px;
     height: 30px;
 }
-.menu-list-admin a:nth-child(2) li:before{
+.menu-list-admin a:nth-child(2) li:before {
     content: '';
     background-image: url(../../Assets/AssetsSvg/mbri-calendar.svg);
     background-repeat: no-repeat;
     width: 40px;
     height: 30px;
 }
-.menu-list-admin a:nth-child(3) li:before{
+.menu-list-admin a:nth-child(3) li:before {
     content: '';
     background-image: url(../../Assets/AssetsSvg/news.svg);
     background-repeat: no-repeat;
     width: 40px;
     height: 30px;
 }
-.active-link-admin{
+.active-link-admin {
     background-color: #111;
 }

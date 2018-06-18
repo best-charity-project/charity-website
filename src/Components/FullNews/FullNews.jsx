@@ -9,31 +9,33 @@ import Footer from '../Footer/Footer';
 
 class FullNews extends Component {
     state = {
-        new:{}
+        news:{}
     }
     componentDidMount(){
         this.getInfoAboutNew()
     }
     render() {
         return (
-            <div className = 'full-new-container'>
-                <div className = 'full-new-menu-container'> 
-                    <Menu name = 'full-new-menu'/>
-                </div>
-                <div className = 'aside-and-text-full-new'>
-                    <div className = 'aside-full-new'>
-                        <p><NavLink to = '/news'> Новости </NavLink></p>    
+            <div className = 'client-news'>
+                <div className = 'full-news-container'>
+                    <Menu name = 'full-news-menu'/>
+                    <div className = 'aside-and-text-full-news'>
+                        <div className = 'aside-full-news'>
+                            <p><NavLink to = '/news'> Новости </NavLink></p>    
+                        </div>
+                        <div className = 'full-news-list-container'>
+                        {(this.state.news)? (<div className = 'full-news'>
+                            {this.state.news.image ? 
+                                <img src = {'http://localhost:3001/images/' + this.state.news.image} alt = 'image for news' /> :
+                                null}
+                            <p className = 'full-news-date'>{moment(this.state.news.createdAt).format('DD MMMM YYYY')} </p>
+                            <p className = 'full-news-title'> {this.state.news.title}</p>               
+                            <span dangerouslySetInnerHTML={{__html: this.state.news.fullText}}/>
+                        </div>): null }
+                        </div>
                     </div>
-                    <div className = 'full-new-list-container'>
-                    {(this.state.new)? (<div class = 'full-new'>
-                        <img src = {this.state.new.image} alt = 'image for news' /> 
-                        <p className = 'full-new-date'>{moment(this.state.new.createdAt).format('DD MMMM YYYY')} </p>
-                        <p className = 'full-new-title'> {this.state.new.title}</p>               
-                        <span> {this.state.new.fullText}</span>
-                    </div>): null }
-                    </div>
+                    <Footer name = 'full-news-footer'/>
                 </div>
-                <Footer name = 'full-new-footer'/>
             </div>
         ) 
     }
@@ -42,7 +44,7 @@ class FullNews extends Component {
         fetch(`${server}/news/`+id)
         .then(response => response.json())
         .then(data => {
-            this.setState({new:data.news });
+            this.setState({news:data.news });
         })
     }
 }

@@ -4,13 +4,15 @@ import {withRouter} from "react-router-dom";
 import moment from 'moment';
 import axios from 'axios';
 
+import {server} from '../../../api';
 import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';
 import TextField from '../../TextField/TextField';
 import ControlledEditor from  '../AdminComponents/AdminEditor/AdminEditor';
 import Button from '../../Button/Button';
 import Navigation from '../../Navigation/Navigation';
 import NavBar from '../../NavBar/NavBar';
-import {server} from '../../../api';
+import AdminPreview from '../AdminComponents/AdminPreview/AdminPreview'
+
 import './AdminAddNews.css';
 
 class AdminAddNews extends Component {
@@ -22,20 +24,22 @@ class AdminAddNews extends Component {
         isPublic: false,
         imageData: '',
         isPreview: false,
+        image: ''
     }
     cropperRef = React.createRef()
 
-    componentDidMount() {
+    componentWillMount() {
         this.setState({source: 'organizers'})
         if (this.props.location.state) {
             let infoAboutNews = this.props.location.state.detail;
+
             this.setState({
                 title: this.props.location.state.detail.title,
                 shortText: this.props.location.state.detail.shortText,
                 fullText: this.props.location.state.detail.fullText,
                 source: this.props.location.state.detail.source,
                 isPublic: this.props.location.state.detail.isPublic,
-                imageData: this.props.location.state.detail.imageData
+                image: this.props.location.state.detail.image
             })
         }
     }
@@ -48,7 +52,7 @@ class AdminAddNews extends Component {
                 {!this.state.isPreview ? 
                     <form className = "form-create-news" encType="multipart/form-data" method="post">
                         <div className = "news-status">
-                            <span>{this.state.isPublic ? "Статус новости: опубликована" : "Статус новости: черновик"}</span>
+                            <span>Статус новости: {this.state.isPublic ? " опубликована" : " черновик"}</span>
                             <Route render={({history}) => (
                                 <Button 
                                     label={"Опубликовать"}
@@ -59,8 +63,8 @@ class AdminAddNews extends Component {
                         </div>
                         <div className="admin-title-news">
                             <TextField 
+                                label = "Название новости:"
                                 id = "title-news" 
-                                title = "Название новости:" 
                                 type = "text"
                                 name = "title-news"
                                 value = {this.state.title}
@@ -73,6 +77,7 @@ class AdminAddNews extends Component {
                                 id = "image-news"
                                 name = "image-news"
                                 imageData = {this.state.imageData}
+                                image = {this.state.image}
                                 onCropImage = {this.onCropImage}
                                 ratio = {8 /3}
                             />
@@ -142,40 +147,15 @@ class AdminAddNews extends Component {
                         </div>
                     </form>  : 
 
-                    <div className = 'full-news-list-container'>
-                        <div className = 'full-news'>
-                            <div><img src = {this.state.imageData} alt = "" /></div > 
-                            <p className = 'full-news-date'>{moment().format('DD MMMM YYYY')} </p>
-                            <p className = 'full-news-title'> {this.state.title}</p>               
-                            <span> {this.state.fullText}</span>
-                        </div>
-                        <div className = 'button-info'>
-                            <span>* При нажатии на кнопку "Сохранить" новость сохраняется как черновик</span>
-                        </div>
-                        <div className="admin-buttons">
-                            <Route render={({history}) => (
-                                <Button 
-                                    label={"Опубликовать"}
-                                    name = "button-admin"
-                                    clickHandler = {this.onPublish}
-                                />
-                            )} />
-                            <Route render={({history}) => (
-                                <Button 
-                                    label={"Сохранить"}
-                                    name = "button-admin"
-                                    clickHandler = {this.onDraft}
-                                />
-                            )} />
-                            <Route render={({history}) => (
-                                <Button 
-                                    label={"Отмена"}
-                                    name = "button-admin"
-                                    clickHandler = {this.onCancelPreview}
-                                />
-                            )} />
-                        </div>
-                    </div>
+                    <AdminPreview 
+                        imageData = {this.state.imageData}
+                        image = {this.state.image}
+                        title = {this.state.title}
+                        fullText = {this.state.fullText}
+                        onPublish = {this.onPublish}
+                        onDraft = {this.onDraft}
+                        getNewStatePreview = {this.getNewStatePreview}
+                    />
                 }
             </div>
         )
@@ -191,14 +171,19 @@ class AdminAddNews extends Component {
     }
     getCurrentTextShort = (str) => {
         this.setState({shortText: str})
-    }
+    } 
     handleChange = (event) => {
         this.setState({source: event.target.value})
     }
+    getNewStatePreview = () => {
+        this.setState({
+            isPreview: false
+        })
+    }
     checkText = () => {
-        if (!this.state.shortText) {
-            let newText = this.state.fullText.slice(0, 200) 
-            if (this.state.fullText.length >= 201) {newText = newText + "..."}
+        if (!this.state.shortText || !this.state.shortText.replace(/<(.|\n)*?>/g, '').replace('\n', '')) {
+            let newText = this.state.fullText.replace(/<img[^>]* src=\"([^\"]*)\"[^>]*>/g, '') 
+            if (newText.length >= 401) {newText = newText.slice(0, 400) + "</span><span>&hellip;</span></p>"}
             this.setState({shortText: newText}, this.sendNews)
         } else {
             this.sendNews()
@@ -213,7 +198,10 @@ class AdminAddNews extends Component {
     onPublish = (e) => {
         e.preventDefault()
         this.setState({isPublic: true}, this.checkText)
-            /* this.props.saveNews() */ 
+    }
+    onDraft = (e) => {
+        e.preventDefault()
+        this.setState({isPublic: false}, this.checkText)
     }
     onCancel = (e) => {
         e.preventDefault()
@@ -223,35 +211,40 @@ class AdminAddNews extends Component {
             fullText: '',
             source: '',
             isPublic: false,
-            imageData: ''
+            imageData: '',
+            image: ''
         }) 
         this.props.history.push({
             pathname: '/admin-panel/news'
         })  
     }
-    onCancelPreview = (e) => {
-        e.preventDefault()
-        this.setState({
-           isPreview: false
-        })
-    }
-    onDraft = (e) => {
-        e.preventDefault()
-        this.setState({isPublic: false}, this.checkText)
-         /* this.props.saveNews() */ 
-    }
     sendNews = () => {
         let formData  = new FormData();
         Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
 
+        let id = ''
+        if (this.props.location.state) {
+            id = this.props.location.state.detail._id
+        }
         axios({
-            method: 'post',
-            url: `${server}/news`,
+            method: id ? 'put' : 'post',
+            url: id ? `${server}/news/` + id : `${server}/news/`,
             data: formData,
             config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
         })
-        .then(function (response) {
-            console.log(response);
+        .then(response => {
+            this.setState({
+                title: '',
+                shortText: '',
+                fullText: '',
+                source: '',
+                isPublic: false,
+                imageData: '',
+                image: ''
+            }) 
+            this.props.history.push({
+                pathname: '/admin-panel/news'
+            })  
           })
           .catch(function (error) {
             console.log(error);

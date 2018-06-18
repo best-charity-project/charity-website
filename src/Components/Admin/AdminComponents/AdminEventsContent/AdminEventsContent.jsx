@@ -4,6 +4,8 @@ import Button from '../../../Button/Button';
 import AdminCreateEvent from '../AdminCreateEvent/AdminCreateEvent';
 import './AdminEventsContent.css';
 import "../../../../App.css";
+import Navigation from '../../../Navigation/Navigation';
+import NavBar from '../../../NavBar/NavBar';
 import { server } from "../../../../api"
 
 class AdminEventsContent extends Component {
@@ -15,6 +17,9 @@ class AdminEventsContent extends Component {
     }
     render() {
         return(
+            <div>
+            <Navigation onLogout={this.onLogout} />
+                <NavBar />
             <div className="list-container">
                 <div className="new-event">
                     <Button 
@@ -29,6 +34,7 @@ class AdminEventsContent extends Component {
                         <AdminCreateEvent cancel = {this.cancel} saveEvent = {this.saveEvent} />
                     </div>
                 </div>
+            </div>
             </div>
         )
     }
