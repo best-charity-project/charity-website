@@ -40,7 +40,7 @@ class AdminProjectsList extends Component {
         fetch(URL)
         .then(response => response.json())
         .then(data => {
-            this.setState({ projectInfo: data.projects });
+            this.setState({ projectInfo: data });
             this.props.history.push({
                 pathname: '/admin-panel/projects/create',
                 state: { detail: this.state.projectInfo}
