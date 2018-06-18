@@ -1,0 +1,15 @@
+.search-projects {
+    border: 1px solid #d3d3d3;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    line-height: 3;
+}
+.search-projects input {
+    border: none;
+    line-height: 3;
+    padding-left: 10px;
+}
+.search-projects input:focus {
+    outline: none;
+}
