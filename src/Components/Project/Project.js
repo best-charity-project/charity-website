@@ -7,7 +7,7 @@ class Project extends Component {
             <div className="projects-page-content">
                 <div className="img-container">
                     <div className="img-placeholder">
-                        <img src={`${server}/images/${this.props.content.image}`} />
+                        <img src={`http://localhost:3001/images/${this.props.content.image}`} />
                     </div>
                 </div>
                 <div className="project-section">
