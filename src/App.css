@@ -23,6 +23,7 @@ input,
 div,
 span,
 a, 
-li {
+li,
+textarea {
   font-family: 'Montserrat';
 }

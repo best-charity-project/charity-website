@@ -9,12 +9,13 @@ class NewsContainer extends Component {
   state = {
     events: {}
   }
+  vocabulary = {'Все': 'all','Организаторы': 'organizers', 'Спонсоры': 'sponsors','Активисты': 'activists','Волонтеры': 'volunteers'}
   componentDidMount(){      
     this.getNews();              
 }  
 
 getNewSourse = (str) => {
-       (str ==='Все')? this.filterArray(''): this.filterArray(str);
+       (str ==='Все')? this.filterArray(''): this.filterArray(this.vocabulary[str]);
 }
 
 getNews= () => {
@@ -42,7 +43,7 @@ filterArray = (value) =>{
     return (
       <div className = 'news-container'> 
         <Menu name = 'client-menu'/>
-        <NewsListAndAside array = {this.state.filterArray}  listSourse ={['все','организаторы', 'спонсоры','активисты','волонтеры']} getNewSourse = {this.getNewSourse}/>
+        <NewsListAndAside array = {this.state.filterArray} listSourse ={['все','организаторы', 'спонсоры','активисты','волонтеры']} getNewSourse = {this.getNewSourse}/>
         <Footer name = ' footer footer-news'/>
       </div>
     );
