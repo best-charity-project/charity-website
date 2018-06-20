@@ -20,6 +20,14 @@
     border-radius: 5px;
 }
 
+.full-text-card{ 
+    background-color: #ffffff;
+    box-shadow: 6px 6px 10px #A9A9A9;
+    border-radius: 5px;    
+    width: 100%;
+    padding-right: 50px;
+}
+
 .text-container {
     padding-top: 50px;
     margin-left: 100px;
@@ -42,6 +50,10 @@
 
 .project-desc {
     margin-bottom: 20px;
+}
+
+.show-more-container {
+    margin-left: 100px;
 }
 
 .project-show-more-btn {
