@@ -9,6 +9,8 @@ import Navigation from '../../Navigation/Navigation';
 import ControlledEditor from  "../AdminComponents/AdminEditor/AdminEditor";
 import AdminDateEvent from '../AdminComponents/AdminDateEvent/AdminDateEvent';
 import Button from '../../Button/Button';
+import AdminProjectPreview from '../AdminComponents/AdminProjectPreview/AdminProjectPreview'
+
 
 import './AdminAddProjects.css';
 import { server } from "../../../api";
@@ -18,6 +20,7 @@ class AdminAddProjects extends Component {
         name: '',
         date:new Date(),
         isPublic:false,
+        isPreview:false,
         shortText: '',
         fullText: '',
         imageData: '',
@@ -44,6 +47,7 @@ class AdminAddProjects extends Component {
             <div className="admin-content"> 
             <Navigation onLogout={this.onLogout}/>
             <NavBar />
+            {!this.state.isPreview ? 
             <form className="list-container" encType="multipart/form-data" method="post">
                 <div className = "projects-status">
                     <span>Статус проекта: {this.state.isPublic ? " опубликована" : " черновик"}</span>
@@ -51,6 +55,7 @@ class AdminAddProjects extends Component {
                 <div className="date-projects-container">
                     <AdminDateEvent onSelectData= {this.getDate} date = {this.state.date} />
                 </div>
+                <hr />
                 <div className="admin-name-projects">
                         <TextField 
                             id = "name-projects" 
@@ -69,7 +74,7 @@ class AdminAddProjects extends Component {
                         imageData = {this.state.imageData}
                         image = {this.state.image}
                         onCropImage = {this.onCropImage}
-                        ratio = {8 /3}
+                        ratio = {2.5/4}
                     />
                 </div>
                 <hr />
@@ -90,6 +95,13 @@ class AdminAddProjects extends Component {
                     </div>
                 <hr />
                 <div className="admin-buttons">
+                    <Route render={({history}) => (
+                                <Button 
+                                    label = {"Предпросмотр"} 
+                                    name = "button-admin"
+                                    clickHandler = {this.onPreview}
+                                />
+                            )} />
                     <Route render={({history}) => (
                         <Button 
                             label={"Опубликовать"}
@@ -112,7 +124,17 @@ class AdminAddProjects extends Component {
                         />
                     )} />
                 </div>
-            </form>  
+            </form> :
+            <AdminProjectPreview 
+            imageData = {this.state.imageData}
+            image = {this.state.image}
+            name = {this.state.name}
+            fullText = {this.state.fullText}
+            onPublish = {this.onPublish}
+            onDraft = {this.onDraft}
+            getNewStatePreview = {this.getNewStatePreview}
+            />
+            } 
             </div>
         )
     }
@@ -130,6 +152,11 @@ class AdminAddProjects extends Component {
     }
     onCropImage = (image) => {
         this.setState({imageData: image})
+    }
+    getNewStatePreview = () => {
+        this.setState({
+            isPreview: false
+        })
     }
     checkText = () => {
         if (!this.state.shortText || !this.state.shortText.replace(/<(.|\n)*?>/g, '').replace('\n', '')) {
@@ -151,6 +178,12 @@ class AdminAddProjects extends Component {
         this.setState({
             isPublic: false
         }, this.checkText)
+    }
+    onPreview = (e)=>{
+        e.preventDefault()
+        this.setState({
+            isPreview:true
+        })
     }
     onCancel = (e) => {
         e.preventDefault()

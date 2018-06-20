@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import moment from 'moment';
 
 class Project extends Component {
+    constructor() {
+        super();
+        this.state = {
+            isFullText: false
+        }
+    }
+
+    componentWillReceiveProps() {
+        this.setState({
+            isFullText: false
+        })
+    }
+    
     render() {
         return (
             <div className="projects-page-content">
@@ -16,8 +29,13 @@ class Project extends Component {
                             {moment(this.props.content.date).format('Do MMMM YYYY, h:mm')}
                         </div>
                         <div className="project-title">{this.props.content.name}</div>
-                        <div className="project-desc">{this.props.content.shortText}</div>
-                        <button className="project-show-more-btn">читать далее</button>
+                        <div className="project-desc">
+                            {
+                                !this.state.isFullText ? this.props.content.shortText : this.props.content.fullText    
+                            }
+                        </div>
+                        <button onClick = {() => this.setState({ isFullText: !this.state.isFullText})} 
+                                className="project-show-more-btn">читать далее</button>
                     </div>
                 </div>
             </div>
