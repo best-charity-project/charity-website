@@ -25,13 +25,12 @@ class MenuLinks extends Component {
                               {isOpenDropMenu ? <ul className = 'submenu-client'>
                                 {el.child.map(function(el, index){
                                   const images = require.context('../../Assets/AssetsSvg', true);
-                                  return 
-                                    <li  key={index}>
-                                      <NavLink to={el.url}>
-                                        <img src = {images(`./${el.icon}`)}/>
-                                        {el.name}
-                                      </NavLink>
-                                    </li>
+                                  return <li  key={index}>
+                                          <NavLink to={el.url}>
+                                            <img src = {images(`./${el.icon}`)}/>
+                                            {el.name}
+                                          </NavLink>
+                                        </li>
                                 })} 
                               </ul> : null}                           
                               </li>
