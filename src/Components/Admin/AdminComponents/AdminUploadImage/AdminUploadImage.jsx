@@ -78,11 +78,6 @@ class AdminUploadImage extends Component {
             </div>
         )
     }
-    deleteImage = (image) =>{
-        this.setState({            
-            image: ''
-        }) 
-    } 
     onChangeFile = (event) => {
         const imageType = /^image\//
         const file = event.target.files.item(0)
@@ -105,6 +100,12 @@ class AdminUploadImage extends Component {
         let img = this.cropperRef.current.crop()
         this.setState({image: img})
         this.props.onCropImage(img)
+    }
+    deleteImage = (e) => {
+        e.preventDefault()
+        this.setState({
+            image: '',
+        }, this.props.deleteImage)
     }
 }
 
