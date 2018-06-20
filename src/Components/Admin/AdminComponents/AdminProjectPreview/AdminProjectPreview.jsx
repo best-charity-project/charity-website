@@ -6,6 +6,7 @@ import axios from 'axios';
 import Button from '../../../Button/Button';
 import {server} from '../../../../api';
 import './AdminProjectPreview.css';
+import '../../../../Pages/Projects/Projects.css'
 
 class AdminProjectPreview extends Component {
 
