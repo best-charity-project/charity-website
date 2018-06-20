@@ -6,13 +6,13 @@
 }
 
 .img-container {
-    width: 30%;
+    width: 35%;
 }
 
 .img-placeholder {
-    height: 90%;
-    width: 90%;
-    margin-left: 100px;
+    height: 100%;
+    width: 100%;
+    margin-left: 30px;
     background-color: #ffffff;
     box-shadow: 6px 6px 10px #A9A9A9;
     border-radius: 5px;
@@ -24,7 +24,7 @@
 }
 
 .project-section {
-    width: 70%;
+    width: 65%;
     padding-right: 50px;
 }
 
@@ -51,14 +51,17 @@
     border: solid 2px #9b9b9b;
 }
 
+.project-show-more-btn:hover {cursor: pointer;}
+
+.project-show-more-btn:focus {outline:0;}
 
 .projects-list-action-btns {
     display: flex;
     justify-content: flex-end;
     align-self: flex-end;
-    position: absolute;
+    position: relative;
     right: 45px;
-    top: 80%;
+    bottom: 30px;
 }
 
 .projects-list-action-btns button:hover {cursor: pointer;}
