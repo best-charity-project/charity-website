@@ -5,13 +5,15 @@ class Project extends Component {
     constructor() {
         super();
         this.state = {
-            isFullText: false
+            isFullText: false,
+            fullTextView: false
         }
     }
 
     componentWillReceiveProps() {
         this.setState({
-            isFullText: false
+            isFullText: false,
+            fullTextView: false
         })
     }
     
@@ -23,20 +25,19 @@ class Project extends Component {
                         <img src={`http://localhost:3001/images/${this.props.content.image}`} />
                     </div>
                 </div>
-                <div className="project-section">
+                <div className={`project-section ${this.state.fullTextView ? "full-text-card" : ""}`}>
                     <div className="text-container">
                         <div className="project-date">
                             {moment(this.props.content.date).format('Do MMMM YYYY, h:mm')}
                         </div>
                         <div className="project-title">{this.props.content.name}</div>
                         <div className="project-desc">
-                            {
-                                !this.state.isFullText ? this.props.content.shortText : this.props.content.fullText    
-                            }
+                            <span dangerouslySetInnerHTML= {{__html: !this.state.isFullText ? this.props.content.shortText : this.props.content.fullText}}></span>
                         </div>
-                        <button onClick = {() => this.setState({ isFullText: !this.state.isFullText})} 
-                                className="project-show-more-btn">читать далее</button>
                     </div>
+                    <div className="show-more-container">
+                        <button onClick = {() => this.setState({ isFullText: !this.state.isFullText, fullTextView: !this.state.fullTextView})} className="project-show-more-btn">читать далее</button>
+                    </div>        
                 </div>
             </div>
         );
