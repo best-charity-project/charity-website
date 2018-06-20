@@ -24,12 +24,16 @@ class AdminAddNews extends Component {
         isPublic: false,
         imageData: '',
         isPreview: false,
-        image: ''
+        image: '',
+        value: 0
     }
     cropperRef = React.createRef()
 
     componentWillMount() {
-        this.setState({source: 'organizers'})
+        this.setState({
+            source: 'organizers',
+            value: 300 - this.state.shortText.length
+        })
         if (this.props.location.state) {
             let infoAboutNews = this.props.location.state.detail;
 
@@ -80,15 +84,27 @@ class AdminAddNews extends Component {
                                 image = {this.state.image}
                                 onCropImage = {this.onCropImage}
                                 ratio = {8 /3}
+                                deleteImage = {this.deleteImage}
                             />
                         </div>
                         <hr />
                         <div className="text-news">
                             <div>Краткое описание:</div>
-                            <ControlledEditor 
-                                text = {this.state.shortText} 
-                                getCurrentText = {this.getCurrentTextShort}
-                            />
+                            <div className = "admin-textarea">
+                                <textarea 
+                                    rows = "5"
+                                    value = {this.state.shortText}
+                                    onChange = {this.getCurrentTextShort}
+                                    maxLength = "300"
+                                ></textarea>
+                                <div className = "admin-textarea-description">
+                                    <span>Краткое описание не должно содержать более 300 символов</span>
+                                    <div>
+                                        <span>Количество оставшихся символов: </span>
+                                        <span readOnly className = "admin-textarea-symbols">{300 - this.state.value}</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <hr />
                         <div className="text-news">
@@ -169,8 +185,11 @@ class AdminAddNews extends Component {
     getCurrentTextFull = (str) => {
         this.setState({fullText: str});
     }
-    getCurrentTextShort = (str) => {
-        this.setState({shortText: str})
+    getCurrentTextShort = (event) => {
+        this.setState({
+            shortText: event.target.value,
+            value: event.target.value.length
+        })
     } 
     handleChange = (event) => {
         this.setState({source: event.target.value})
@@ -181,9 +200,9 @@ class AdminAddNews extends Component {
         })
     }
     checkText = () => {
-        if (!this.state.shortText || !this.state.shortText.replace(/<(.|\n)*?>/g, '').replace('\n', '')) {
-            let newText = this.state.fullText.replace(/<img[^>]* src=\"([^\"]*)\"[^>]*>/g, '') 
-            if (newText.length >= 401) {newText = newText.slice(0, 400) + "</span><span>&hellip;</span></p>"}
+        if (!this.state.shortText) {
+            let newText = this.state.fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
+            newText = newText.slice(0, 297) + '...'
             this.setState({shortText: newText}, this.sendNews)
         } else {
             this.sendNews()
@@ -221,7 +240,6 @@ class AdminAddNews extends Component {
     sendNews = () => {
         let formData  = new FormData();
         Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
-
         let id = ''
         if (this.props.location.state) {
             id = this.props.location.state.detail._id
@@ -249,6 +267,12 @@ class AdminAddNews extends Component {
           .catch(function (error) {
             console.log(error);
           });
+    }
+    deleteImage = () => {
+        this.setState({
+            imageData: '',
+            image: ''
+        })   
     }
 }
 

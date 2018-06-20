@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Cropper} from 'react-image-cropper';
+import Button from '../../../Button/Button';
 import './AdminUploadImage.css';
 
 class AdminUploadImage extends Component {
@@ -58,11 +59,18 @@ class AdminUploadImage extends Component {
                             : null
                         }
                         {this.state.image
-                            ? <img
-                                className = "after-img"
-                                src = {this.state.image}
-                                alt = ""
-                            />
+                            ? <div className = 'admin-title-image'> 
+                                <img
+                                    className = "after-img"
+                                    src = {this.state.image}
+                                    alt = ""
+                                />
+                                <Button 
+                                    name = "button-admin admin-cancel"
+                                    label = {<span aria-hidden="true">&times;</span>}
+                                    clickHandler = {this.deleteImage}
+                                />
+                              </div>                            
                             : null
                         }
                     </div>
@@ -92,6 +100,12 @@ class AdminUploadImage extends Component {
         let img = this.cropperRef.current.crop()
         this.setState({image: img})
         this.props.onCropImage(img)
+    }
+    deleteImage = (e) => {
+        e.preventDefault()
+        this.setState({
+            image: '',
+        }, this.props.deleteImage)
     }
 }
 

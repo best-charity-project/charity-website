@@ -34,7 +34,6 @@ label {
 .choose-file {
     text-align: center;
 }
-
 .preview-image {
     margin: 20px 0;
 }
@@ -51,3 +50,15 @@ label {
 .position-cropper > div:last-child {
     flex-basis: 75%;
 }
+.admin-title-image {
+    display: flex;
+    align-items: flex-start;
+}
+.admin-title-image button {
+    margin-left: 20px;
+}
+
+
+
+
+

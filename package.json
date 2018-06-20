@@ -40,6 +40,7 @@
     "raf": "3.4.0",
     "rc-datepicker": "^5.0.13",
     "react": "^16.3.2",
+    "react-confirm-alert": "^2.0.2",
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.3.2",
     "react-draft-wysiwyg": "^1.12.13",

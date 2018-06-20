@@ -60,23 +60,23 @@ class AdminNewsContent extends Component {
         )
     }
     deleteNews = (news) =>{
-            let id = news._id
-            fetch(`${ server }/news/`+id, {
-                method: 'DELETE',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(news),
-            })
-                this.setState({            
-                    filteredNews: this.state.filteredNews.filter(news => news._id !== id)
-                }) 
+        let id = news._id
+        fetch(`${ server }/news/`+id, {
+            method: 'DELETE',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(news),
+        })
+        this.setState({            
+            filteredNews: this.state.filteredNews.filter(news => news._id !== id)
+        }) 
     } 
 
     findNews = (title) => {
         if(!title) {
-            fetch(`${server}/news`, {
+            fetch(`${server}/news?isAdmin=true`, {
                 method: 'GET', 
                 mode: 'cors'
                 })
@@ -93,7 +93,7 @@ class AdminNewsContent extends Component {
             const {news} = this.state
             this.setState({
                 filteredNews: news.filter((item) => {
-                    return item.title.includes(title)
+                    return item.title.toLowerCase().includes(title)
                 })
             })
         }
