@@ -13,7 +13,6 @@ const NavBar = ()=>{
                          {name: 'Новости', url : '/admin-panel/news'},
                          {name: 'Проекты', url : '/admin-panel/projects'}
                      ]} 
-                     onClick = {this.handlerClick}
                      classActive = 'active-link-admin'/>
         </div>       
     )
