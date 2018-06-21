@@ -18,19 +18,18 @@ class Projects extends Component {
             currentProjectIndex: 0,
             projects: [],
             isLastProject: false,
-            isFirstProject: true,
+            isFirstProject: true
         };
-
         this.nextProject = this.nextProject.bind(this);
         this.previousProject = this.previousProject.bind(this);
     }
 
     componentDidMount() {
         axios.get(`${server}/projects`).then(res => {
-            let { projects } = res.data;
-            this.setState({ projects });
             this.setState({
-                currentDisplayedProject: projects[0],
+                currentDisplayedProject: res.data.projects[0],
+                projects: res.data.projects,
+                isLastProject: res.data.projects.length === 1 ? true : false    
             });
         });
     }
@@ -39,7 +38,7 @@ class Projects extends Component {
         return (
             <div className="main-page-client">
                 <Menu name="client-menu" />
-                <Project content={this.state.currentDisplayedProject} />
+                <Project content={this.state.currentDisplayedProject}/>
                 <div className="projects-list-action-btns">
                     <SliderPreviousBtn disabled={this.state.isFirstProject} previousProject={this.previousProject} />
                     <SliderNextBtn disabled={this.state.isLastProject} nextProject={this.nextProject} />
