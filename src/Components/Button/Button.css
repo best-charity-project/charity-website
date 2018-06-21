@@ -51,7 +51,9 @@
     color: #cccccc;
     border-color: #cccccc;
 }
-.button-admin:hover {
+.button-admin:hover,
+.button-publish-news:hover,
+.button-not-publish-news:hover {
     background-color: #4CAF50;
     color: #e8e6e2;
     border-color: #4CAF50;
