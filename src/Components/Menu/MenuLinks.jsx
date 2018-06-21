@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link, Switch, NavLink } from 'react-router-dom';
-import DropMenu from '../DropMenu/DropMenu';
 class MenuLinks extends Component {
     constructor(props) {
         super(props);
@@ -10,32 +9,41 @@ class MenuLinks extends Component {
         };
     }
     getCurrentLink = e => {
-        if (e.target.classList.contains('activity')) {
+        if (e.target.parentNode.parentNode.classList.contains('activity')) {
             this.setState({ isOpenDropMenu: !this.state.isOpenDropMenu });
-            e.target.classList.toggle('activeDropMenu');
+            e.target.parentNode.parentNode.classList.toggle('activeDropMenu');
         }
     };
     render() {
-        const classActive = this.props.classActive;
         let { isOpenDropMenu } = this.state;
         return (
-            <div className={this.props.className}>
-                <ul onClick={this.getCurrentLink}>
+            <div className = {this.props.className}>
+                <ul onClick = {this.getCurrentLink}>
                     {this.state.list.map(function(el, index) {
-                        if (el.dropdown) {
-                            return (
-                                <li key={index} className="activity">
-                                    {el.name}
-                                    {isOpenDropMenu ? <DropMenu /> : null}
-                                </li>
-                            );
-                        } else {
-                            return (
-                                <li className={el.url === window.location.pathname ? classActive : null} key={index}>
-                                    <NavLink to={el.url}>{el.name}</NavLink>
-                                </li>
-                            );
-                        }
+                          if(el.child){
+                            return <li key = {index} className = 'activity'>
+                            <div className = {isOpenDropMenu? 'wrapper-link-text link-active': 'wrapper-link-text' }>
+                              <p>{el.name}</p>
+                            </div>
+                            <div className  = 'container-drop-menu'>
+                              {isOpenDropMenu ? <ul className = 'submenu-client'>                              
+                                {el.child.map(function(el, index){
+                                  const images = require.context('../../Assets/AssetsSvg', true);
+                                  return <li  key={index}>
+                                          <NavLink to={el.url}>
+                                            <img src = {images(`./${el.icon}`)}/>
+                                            {el.name}
+                                          </NavLink>
+                                        </li>
+                                })}                                 
+                              </ul> : null}   
+                              </div>                        
+                              </li>
+                          }else{
+                            return <li  key = {index}>
+                                         <NavLink to = {el.url}>{el.name}</NavLink>
+                                     </li>
+                          }
                     })}
                 </ul>
             </div>

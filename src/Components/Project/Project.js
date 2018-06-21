@@ -6,14 +6,16 @@ class Project extends Component {
         super();
         this.state = {
             isFullText: false,
-            fullTextView: false
+            fullTextView: false,
+            buttonIsClicked: false
         }
     }
 
     componentWillReceiveProps() {
         this.setState({
             isFullText: false,
-            fullTextView: false
+            fullTextView: false,
+            buttonIsClicked: false
         })
     }
     
@@ -25,18 +27,26 @@ class Project extends Component {
                         <img src={`http://localhost:3001/images/${this.props.content.image}`} />
                     </div>
                 </div>
-                <div className={`project-section ${this.state.fullTextView ? "full-text-card" : ""}`}>
-                    <div className="text-container">
-                        <div className="project-date">
-                            {moment(this.props.content.date).format('Do MMMM YYYY, h:mm')}
-                        </div>
-                        <div className="project-title">{this.props.content.name}</div>
-                        <div className="project-desc">
-                            <span dangerouslySetInnerHTML= {{__html: !this.state.isFullText ? this.props.content.shortText : this.props.content.fullText}}></span>
+                <div className="project-section">
+                    <div className={this.state.fullTextView ? "full-text-card" : ""}>
+                        <div className="text-container">
+                            <div className="project-date">
+                                {moment(this.props.content.date).format('Do MMMM YYYY')}
+                            </div>
+                            <div className="project-title">{this.props.content.name}</div>
+                            <div className="project-desc">
+                                <span dangerouslySetInnerHTML= {{__html: !this.state.isFullText ? this.props.content.shortText : this.props.content.fullText}}></span>
+                            </div>
                         </div>
                     </div>
                     <div className="show-more-container">
-                        <button onClick = {() => this.setState({ isFullText: !this.state.isFullText, fullTextView: !this.state.fullTextView})} className="project-show-more-btn">читать далее</button>
+                        <button 
+                            onClick = {() => this.setState({ 
+                                isFullText: !this.state.isFullText, 
+                                fullTextView: !this.state.fullTextView, 
+                                buttonIsClicked: !this.state.buttonIsClicked
+                                })
+                            } className="project-show-more-btn">{!this.state.buttonIsClicked ? "читать далее" : "Менее"}</button>
                     </div>        
                 </div>
             </div>

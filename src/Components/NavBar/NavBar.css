@@ -15,10 +15,10 @@ body {
     flex-direction: column;
 }
 .menu-list-admin li {
+    padding: 25px 15px 20px 20px;
     min-width: 280px;
     list-style: none;
     margin-right: 0px;
-    padding: 25px 15px 20px 20px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -48,7 +48,4 @@ body {
     background-repeat: no-repeat;
     width: 40px;
     height: 30px;
-}
-.active-link-admin {
-    background-color: #111;
 }
