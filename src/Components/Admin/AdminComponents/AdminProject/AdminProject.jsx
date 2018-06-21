@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Button from '../../../Button/Button';
 
+import {confirmAlert} from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css'; 
 import moment from 'moment';
 import './AdminProject.css';
 import axios from 'axios';
@@ -32,7 +34,7 @@ class AdminProject extends Component {
                    <Button
                        name = "button-admin admin-cancel"
                        label = {<span aria-hidden="true">&times;</span>}
-                       clickHandler = {this.props.deleteHandler}
+                       clickHandler = {this.submit}
                    />
                </div>
                <div>                
@@ -44,6 +46,22 @@ class AdminProject extends Component {
                 </div>
            </div>
        )
+   }
+   submit = () =>{
+       confirmAlert({
+           title:'Подтвердите удаление проекта',
+           message: 'Вы точно хотите удалить проект?',
+           buttons:[
+               {
+                   label: 'Да',
+                   onClick: (item)=>this.props.deleteHandler(item)
+               },
+               {
+                   label: 'Нет',
+                   onClick: ()=>{}
+               }
+           ]
+       })
    }
    publishProjects = (e) => {
     if(this.props.projects.isPublic){

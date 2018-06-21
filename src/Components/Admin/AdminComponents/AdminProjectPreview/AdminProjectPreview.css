@@ -3,69 +3,15 @@
     margin-left: 250px;
     margin-right: 30px;
 }
-/* .admin-preview .projects-page-content{
-    
-}
-.admin-preview .full-projects {
-    width: 70%;
-    margin: 0 auto;
-    border-radius: 3px;
-    background-color: #ffffff;
-    padding-bottom: 20px;
-    box-shadow: 10px 10px 20px 0 rgba(0, 0, 0, 0.21);
-}
-
-.admin-preview .full-projects-list-container .button-info {
-    margin-top: 50px;
-    padding-left: 60px;
-}
-.admin-preview .full-projects img {
-    display: block;
-    width: 100%;
-}
-.admin-preview .full-projects span img {
-    display: block;
-    width: 100%;
-    padding: 0 30px;
-}
-.admin-preview .full-projects p {
-    padding: 0 30px;
-    margin-top: 10px;
-}
-.admin-preview .full-projects ul,
-.admin-preview .full-projects ol {
-    padding: 0 60px;
-    margin: 16px 0;
-}
-.admin-preview .full-projects h1,
-.admin-preview .full-projects h2, 
-.admin-preview .full-projects h3, 
-.admin-preview .full-projects h3, 
-.admin-preview .full-projects h4,
-.admin-preview .full-projects h5,
-.admin-preview .full-projects h6 {
-    padding: 0 30px;
-}
-.admin-preview .full-projects-date {
-    color: #ffc757;
-    font-size: 12px;
-    font-weight: 600;
-}
-.admin-preview .full-projects-title {
-    font-size: 28px;
-    font-weight: 600;
-}
-
-.admin-preview .full-projects-footer {
-    padding-left: 25px;
-    position:fixed;
-    bottom: 0;
-}
-.admin-preview .full-projects-menu-container {
-    position: fixed;
-    overlow-y: scroll;
-    height: 80px;
-    background-color: #e8e6e2;
-    top: 0;
-    width: 100%;
+/* hr {
+    margin: 30px 40px;
 } */
+.img-placeholder img{
+    height: 100%;
+    width:100%;
+}
+.image-container{
+    width: 35%;
+    max-width: 500px;
+    margin-left:70px;
+}

@@ -75,15 +75,20 @@ class AdminAddProjects extends Component {
                         image = {this.state.image}
                         onCropImage = {this.onCropImage}
                         ratio = {2.5/4}
+                        deleteImage = {this.deleteImage}
                     />
                 </div>
                 <hr />
                 <div className="text-projects">
                     <div>Краткое описание:</div>
-                        <ControlledEditor 
-                            text = {this.state.shortText} 
-                            getCurrentText = {this.getCurrentTextShort}
-                        />
+                        <div className = "admin-textarea">
+                            <textarea 
+                                    rows = "5"
+                                    value = {this.state.shortText}
+                                    onChange = {this.getCurrentTextShort}
+                                    maxLength = "300"
+                            ></textarea>
+                        </div>
                     </div>
                 <hr />
                     <div className="text-projects">
@@ -147,8 +152,8 @@ class AdminAddProjects extends Component {
     getCurrentTextFull = (str) => {
         this.setState({fullText: str});
     }
-    getCurrentTextShort = (str) => {
-        this.setState({shortText: str})
+    getCurrentTextShort = (obj) => {
+        this.setState({shortText: obj.value})
     }
     onCropImage = (image) => {
         this.setState({imageData: image})
@@ -159,9 +164,9 @@ class AdminAddProjects extends Component {
         })
     }
     checkText = () => {
-        if (!this.state.shortText || !this.state.shortText.replace(/<(.|\n)*?>/g, '').replace('\n', '')) {
-            let newText = this.state.fullText.replace(/<img[^>]* src=\"([^\"]*)\"[^>]*>/g, '')
-            if (newText.length >= 401) {newText = newText.slice(0, 400) + "</span><span>&hellip;</span></p>"}
+        if (!this.state.shortText) {
+            let newText = this.state.fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
+            newText = newText.slice(0, 297) + '...'
             this.setState({shortText: newText}, this.sendProjects)
         } else {
             this.sendProjects()
@@ -233,6 +238,12 @@ class AdminAddProjects extends Component {
         .catch(function (error) {
             console.log(error);
         });
+    }
+    deleteImage = () => {
+        this.setState({
+            imageData: '',
+            image: ''
+        })   
     } 
 }
 

@@ -97,3 +97,15 @@ form.form-create-projects hr:nth-of-type(2) {
 .choose-file {
     line-height: 1;
 }
+.admin-textarea {
+    display: flex;
+    flex-direction: column;
+}
+textarea {
+    margin-left: 0;
+    width: 85%;
+    max-height: 150px;
+    min-height: 50px;
+    font-size: 16px;
+    padding: 10px 20px;
+}

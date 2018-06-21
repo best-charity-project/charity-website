@@ -14,7 +14,7 @@ class AdminProjectPreview extends Component {
         return (
             <div className = 'admin-preview'>
                 <div className="projects-page-content">
-                    <div className="img-container">
+                    <div className="image-container">
                         <div className="img-placeholder">
                             <img  src = {this.props.imageData ? 
                                 this.props.imageData : 
@@ -40,6 +40,7 @@ class AdminProjectPreview extends Component {
                 {/* <div className = 'button-info'>
                         <span>* При нажатии на кнопку "Сохранить" новость сохраняется как черновик</span>
                     </div> */}
+                <hr/>
                 <div className="admin-buttons">
                         <Route render={({history}) => (
                             <Button 
