@@ -9,9 +9,15 @@
 .img-placeholder img{
     height: 100%;
     width:100%;
+    min-height: 750px;
+    max-height: 750px;
 }
 .image-container{
     width: 35%;
+    min-width: 409px;
     max-width: 500px;
     margin-left:70px;
+}
+.full-text-card{
+    margin-bottom: 10px;
 }

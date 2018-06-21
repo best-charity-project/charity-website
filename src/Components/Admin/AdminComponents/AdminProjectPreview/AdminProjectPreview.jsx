@@ -11,7 +11,6 @@ import '../../../../Pages/Projects/Projects.css'
 class AdminProjectPreview extends Component {
 
     render() {
-        console.log(this.props)
         return (
             <div className = 'admin-preview'>
                 <div className="projects-page-content">
@@ -25,22 +24,17 @@ class AdminProjectPreview extends Component {
                         </div > 
                     </div>
                         <div className="project-section">
+                        <div className="full-text-card">
                             <div className="text-container">
                                 <div className="project-date">
-
                                     <p className = 'full-projects-date'>{moment(this.props.date).format('Do MMMM YYYY')} </p>
                                 </div>
-                            
-                        
                         <div className="project-title"> {this.props.name}</div>   
                         <span dangerouslySetInnerHTML={{__html: this.props.fullText}}/>
-                    {/* </div> */}
+                        </div>
                         </div>
                     </div>
                 </div>
-                {/* <div className = 'button-info'>
-                        <span>* При нажатии на кнопку "Сохранить" новость сохраняется как черновик</span>
-                    </div> */}
                 <hr/>
                 <div className="admin-buttons">
                         <Route render={({history}) => (

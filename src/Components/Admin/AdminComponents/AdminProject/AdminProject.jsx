@@ -40,7 +40,7 @@ class AdminProject extends Component {
                <div>                
                     <Button
                         name = {this.state.isPublic? 'button-publish-projects':'button-not-publish-projects'}
-                        label = {this.state.isPublic? 'Опубликовано':'Опубликовать'}
+                        label = {this.state.isPublic? 'Отменить публикацию':'Опубликовать'}
                         clickHandler = {this.publishProjects}
                     />
                 </div>
@@ -80,15 +80,6 @@ class AdminProject extends Component {
             console.log(error);
           });
     })
-    
-    // if(this.props.projects.isPublic){
-        // e.preventDefault();
-    //     this.setState({isPublic:false}, this.sendPublishProjects)
-    //     console.log(this.props.projects.isPublic)
-    // }else{
-    //     this.setState({isPublic:true}, this.sendPublishProjects);
-    //     console.log(this.props.projects.isPublic)
-    // }
    }
 }
 

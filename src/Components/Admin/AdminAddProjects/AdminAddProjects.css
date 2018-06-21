@@ -13,6 +13,9 @@ form.form-create-projects {
 .container-for-input {
     display: flex;
 }
+.full-text-projects div{
+    overflow: scroll;
+}
 .container-for-input label,
 .admin-image label,
 .projects-source ,

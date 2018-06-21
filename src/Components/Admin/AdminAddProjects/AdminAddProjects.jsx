@@ -75,7 +75,7 @@ class AdminAddProjects extends Component {
                         imageData = {this.state.imageData}
                         image = {this.state.image}
                         onCropImage = {this.onCropImage}
-                        ratio = {3/5}
+                        ratio = {3.5/5}
                         deleteImage = {this.deleteImage}
                     />
                 </div>
