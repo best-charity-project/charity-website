@@ -20,7 +20,6 @@ class Projects extends Component {
             isLastProject: false,
             isFirstProject: true,
         };
-
         this.nextProject = this.nextProject.bind(this);
         this.previousProject = this.previousProject.bind(this);
     }
@@ -39,7 +38,7 @@ class Projects extends Component {
         return (
             <div className="main-page-client">
                 <Menu name="client-menu" />
-                <Project content={this.state.currentDisplayedProject} />
+                <Project content={this.state.currentDisplayedProject}/>
                 <div className="projects-list-action-btns">
                     <SliderPreviousBtn disabled={this.state.isFirstProject} previousProject={this.previousProject} />
                     <SliderNextBtn disabled={this.state.isLastProject} nextProject={this.nextProject} />
