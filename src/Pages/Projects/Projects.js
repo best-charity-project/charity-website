@@ -18,7 +18,7 @@ class Projects extends Component {
             currentProjectIndex: 0,
             projects: [],
             isLastProject: false,
-            isFirstProject: true,
+            isFirstProject: true
         };
         this.nextProject = this.nextProject.bind(this);
         this.previousProject = this.previousProject.bind(this);
@@ -26,10 +26,10 @@ class Projects extends Component {
 
     componentDidMount() {
         axios.get(`${server}/projects`).then(res => {
-            let { projects } = res.data;
-            this.setState({ projects });
             this.setState({
-                currentDisplayedProject: projects[0],
+                currentDisplayedProject: res.data.projects[0],
+                projects: res.data.projects,
+                isLastProject: res.data.projects.length === 1 ? true : false    
             });
         });
     }
