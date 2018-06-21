@@ -68,15 +68,17 @@
     height: 25px;
 }
 
-.button-publish-news{
-     background-color: #e8e6e2;
-     border-radius: 15px;
-     padding: 5px 10px;
-     min-width: 100px;
-     color: #cccccc;
-     border: 1px solid #cccccc;
+.button-publish-news {
+    cursor: pointer;
+    background-color: #e8e6e2;
+    border-radius: 15px;
+    padding: 5px 10px;
+    min-width: 180px;
+    color: #969696;
+    border: 1px solid #969696;
+    outline: none;
  }
-.button-not-publish-news{
+.button-not-publish-news {
     cursor: pointer;
     outline: none;
     background-color: #e8e6e2;
@@ -84,9 +86,9 @@
     border: 1px solid #4CAF50;
     border-radius: 15px;
     padding: 5px 10px;
-    min-width: 100px;
+    min-width: 180px;
 }
-.button-publish-projects{
+.button-publish-projects {
     cursor: pointer;
     outline: none;
     background-color: #e8e6e2;
@@ -96,7 +98,7 @@
     color: #cccccc;
     border: 1px solid #cccccc;
 }
-.button-not-publish-projects{
+.button-not-publish-projects {
     cursor: pointer;
     outline: none;
     background-color: #e8e6e2;
