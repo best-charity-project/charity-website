@@ -58,6 +58,7 @@ class AdminAddProjects extends Component {
                 <hr />
                 <div className="admin-name-projects">
                         <TextField 
+                            required
                             id = "name-projects" 
                             label = "Название проекта:"
                             type = "text"
@@ -74,7 +75,7 @@ class AdminAddProjects extends Component {
                         imageData = {this.state.imageData}
                         image = {this.state.image}
                         onCropImage = {this.onCropImage}
-                        ratio = {2.5/4}
+                        ratio = {3/5}
                         deleteImage = {this.deleteImage}
                     />
                 </div>
@@ -93,7 +94,8 @@ class AdminAddProjects extends Component {
                 <hr />
                     <div className="text-projects">
                         <div className="full-text-projects">Полное описание:</div>
-                            <ControlledEditor 
+                            <ControlledEditor
+                                required 
                                 text = {this.state.fullText} 
                                 getCurrentText = {this.getCurrentTextFull}
                             /> 
@@ -135,6 +137,7 @@ class AdminAddProjects extends Component {
             image = {this.state.image}
             name = {this.state.name}
             fullText = {this.state.fullText}
+            date = {this.state.date}
             onPublish = {this.onPublish}
             onDraft = {this.onDraft}
             getNewStatePreview = {this.getNewStatePreview}

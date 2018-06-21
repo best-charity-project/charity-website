@@ -64,26 +64,31 @@ class AdminProject extends Component {
        })
    }
    publishProjects = (e) => {
-    if(this.props.projects.isPublic){
-        e.preventDefault();
-    }else{
-        this.setState({isPublic:true}, () =>{
-            let formData  = new FormData();
-            Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
-            axios({
-                method: 'put',
-                url: `${server}/projects/${this.state.id}`,
-                data: formData,
-                config: {
-                    headers: {
-                        'Content-Type': 'multipart/form-data; charset=UTF-8'
-                    }},
-            })
-              .catch(function (error) {
-                console.log(error);
-              });
+    this.setState({isPublic: !this.state.isPublic}, () =>{
+        let formData  = new FormData();
+        Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
+        axios({
+            method: 'put',
+            url: `${server}/projects/${this.state.id}`,
+            data: formData,
+            config: {
+                headers: {
+                    'Content-Type': 'multipart/form-data; charset=UTF-8'
+                }},
         })
-    }
+          .catch(function (error) {
+            console.log(error);
+          });
+    })
+    
+    // if(this.props.projects.isPublic){
+        // e.preventDefault();
+    //     this.setState({isPublic:false}, this.sendPublishProjects)
+    //     console.log(this.props.projects.isPublic)
+    // }else{
+    //     this.setState({isPublic:true}, this.sendPublishProjects);
+    //     console.log(this.props.projects.isPublic)
+    // }
    }
 }
 

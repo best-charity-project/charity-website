@@ -11,6 +11,7 @@ import '../../../../Pages/Projects/Projects.css'
 class AdminProjectPreview extends Component {
 
     render() {
+        console.log(this.props)
         return (
             <div className = 'admin-preview'>
                 <div className="projects-page-content">
@@ -26,12 +27,12 @@ class AdminProjectPreview extends Component {
                         <div className="project-section">
                             <div className="text-container">
                                 <div className="project-date">
-                                    <p className = 'full-projects-date'>{moment(this.props.date).format('Do MMMM YYYY, h:mm')} </p>
+
+                                    <p className = 'full-projects-date'>{moment(this.props.date).format('Do MMMM YYYY')} </p>
                                 </div>
                             
                         
                         <div className="project-title"> {this.props.name}</div>   
-                        {/* <div className="project-desc">{this.props.fullText}</div> */}
                         <span dangerouslySetInnerHTML={{__html: this.props.fullText}}/>
                     {/* </div> */}
                         </div>

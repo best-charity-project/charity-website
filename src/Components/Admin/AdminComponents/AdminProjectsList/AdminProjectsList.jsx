@@ -35,11 +35,13 @@ class AdminProjectsList extends Component {
     }
    
       getProjectInfo = (e) => {
+          alert('tgtg')
         let id = e.target.parentNode.id;
         const URL = `${ server }/projects/${id}`;
         fetch(URL)
         .then(response => response.json())
         .then(data => {
+            console.log(data + ' в fetch ')
             this.setState({ projectInfo: data });
             this.props.history.push({
                 pathname: '/admin-panel/projects/create',
