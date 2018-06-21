@@ -9,9 +9,9 @@ class MenuLinks extends Component {
         };
     }
     getCurrentLink = e => {
-        if (e.target.classList.contains('activity')) {
+        if (e.target.parentNode.parentNode.classList.contains('activity')) {
             this.setState({ isOpenDropMenu: !this.state.isOpenDropMenu });
-            e.target.classList.toggle('activeDropMenu');
+            e.target.parentNode.parentNode.classList.toggle('activeDropMenu');
         }
     };
     render() {
@@ -21,8 +21,12 @@ class MenuLinks extends Component {
                 <ul onClick = {this.getCurrentLink}>
                     {this.state.list.map(function(el, index) {
                           if(el.child){
-                            return <li key = {index} className = 'activity'>{el.name}
-                              {isOpenDropMenu ? <ul className = 'submenu-client'>
+                            return <li key = {index} className = 'activity'>
+                            <div className = {isOpenDropMenu? 'wrapper-link-text link-active': 'wrapper-link-text' }>
+                              <p>{el.name}</p>
+                            </div>
+                            <div className  = 'container-drop-menu'>
+                              {isOpenDropMenu ? <ul className = 'submenu-client'>                              
                                 {el.child.map(function(el, index){
                                   const images = require.context('../../Assets/AssetsSvg', true);
                                   return <li  key={index}>
@@ -31,8 +35,9 @@ class MenuLinks extends Component {
                                             {el.name}
                                           </NavLink>
                                         </li>
-                                })} 
-                              </ul> : null}                           
+                                })}                                 
+                              </ul> : null}   
+                              </div>                        
                               </li>
                           }else{
                             return <li  key = {index}>
