@@ -20,7 +20,6 @@ class Projects extends Component {
             isLastProject: false,
             isFirstProject: true,
         };
-
         this.nextProject = this.nextProject.bind(this);
         this.previousProject = this.previousProject.bind(this);
     }
