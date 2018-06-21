@@ -7,7 +7,6 @@ class Project extends Component {
         this.state = {
             isFullText: false,
             fullTextView: false,
-            buttonText: "Читать далее",
             buttonIsClicked: false
         }
     }
@@ -47,7 +46,7 @@ class Project extends Component {
                                 fullTextView: !this.state.fullTextView, 
                                 buttonIsClicked: !this.state.buttonIsClicked
                                 })
-                            } className="project-show-more-btn">{!this.state.buttonIsClicked ? this.state.buttonText : "Менее"}</button>
+                            } className="project-show-more-btn">{!this.state.buttonIsClicked ? "читать далее" : "Менее"}</button>
                     </div>        
                 </div>
             </div>
