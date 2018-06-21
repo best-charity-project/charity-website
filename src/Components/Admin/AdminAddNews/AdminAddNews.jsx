@@ -25,6 +25,7 @@ class AdminAddNews extends Component {
         imageData: '',
         isPreview: false,
         image: '',
+        date: '',
         value: 0
     }
     cropperRef = React.createRef()
@@ -32,7 +33,6 @@ class AdminAddNews extends Component {
     componentWillMount() {
         this.setState({
             source: 'organizers',
-            value: 300 - this.state.shortText.length
         })
         if (this.props.location.state) {
             let infoAboutNews = this.props.location.state.detail;
@@ -43,7 +43,9 @@ class AdminAddNews extends Component {
                 fullText: this.props.location.state.detail.fullText,
                 source: this.props.location.state.detail.source,
                 isPublic: this.props.location.state.detail.isPublic,
-                image: this.props.location.state.detail.image
+                image: this.props.location.state.detail.image,
+                date: this.props.location.state.detail.createdAt,
+                value: this.props.location.state.detail.shortText.length
             })
         }
     }
@@ -171,6 +173,7 @@ class AdminAddNews extends Component {
                         onPublish = {this.onPublish}
                         onDraft = {this.onDraft}
                         getNewStatePreview = {this.getNewStatePreview}
+                        date = {this.state.date}
                     />
                 }
             </div>
@@ -202,7 +205,7 @@ class AdminAddNews extends Component {
     checkText = () => {
         if (!this.state.shortText) {
             let newText = this.state.fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
-            newText = newText.slice(0, 297) + '...'
+            newText = (newText.slice(0, 297) + '...').replace(/\n/, '')
             this.setState({shortText: newText}, this.sendNews)
         } else {
             this.sendNews()

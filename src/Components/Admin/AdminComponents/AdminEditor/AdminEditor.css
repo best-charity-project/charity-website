@@ -39,3 +39,8 @@
 .rdw-dropdown-optionwrapper {
     width: 100%;
 }
+.wrapper .editor  {
+    overflow-y: auto;
+    height: 200px;
+    margin-right: 0.5px;
+}

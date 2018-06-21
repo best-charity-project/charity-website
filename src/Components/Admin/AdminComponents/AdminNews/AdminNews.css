@@ -4,11 +4,26 @@
     display: flex;
     justify-content: space-between;
 }
-.news-admin-title{
+.news-admin .news-admin-checkbox {
+    display: flex;
+}
+.news-admin-checkbox input {
+    align-self: center;
+    margin-right: 10px;
+}
+.news-admin .news-admin-checkbox div:first-child {
+    flex-basis: 10%;
+}
+.news-admin .news-admin-checkbox div {
+    text-align: left;
+}
+.news-admin .news-admin-title {
     cursor: pointer;
     text-decoration: underline;
+    flex-basis: 90%;
+    text-align: left;
 }
-.news-admin-title:hover{
+.news-admin-title:hover {
     text-decoration: none;
 }
 .news-admin div {

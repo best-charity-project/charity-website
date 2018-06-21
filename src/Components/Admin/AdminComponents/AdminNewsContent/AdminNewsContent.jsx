@@ -4,14 +4,17 @@ import AdminNewsSearch from '../AdminNewsSearch/AdminNewsSearch';
 import Button from '../../../Button/Button';
 import './AdminNewsContent.css';
 import { server } from '../../../../../src/api';
-import { Route } from 'react-router-dom'
+import { Route } from 'react-router-dom';
+import axios from 'axios';
+import rubbishImg from '../../../../Assets/AssetsSvg/mbri-trash.svg';
 
 class AdminNewsContent extends Component {
     state = {
         news: [],
         filteredNews: [],
         isLoading: true,
-        error: null
+        error: null,
+        checkedIds: []
     }
     componentDidMount() {
         fetch(`${server}/news?isAdmin=true`, { 
@@ -42,38 +45,81 @@ class AdminNewsContent extends Component {
                 <div className="new-news">
                     <AdminNewsSearch findNews = {this.findNews} /> 
                     <div className="button-new-news">                     
-                        <Route render={({ history}) => (
+                        <Route render={({history}) => (
                             <Button 
                                 name = "button-admin" 
-                                label = {'Создать'} 
+                                label = "Создать" 
                                 clickHandler = {() => { history.push('/admin-panel/news/create') }}
                             />
-                         )} />
+                        )} />
                     </div>
                 </div>  
+                <Button
+                    name = "delete-news" 
+                    clickHandler = {this.deleteChosenNews}
+                    disabled = {this.state.checkedIds.length ? false : true}
+                    label = {<div>
+                                <img src={rubbishImg} alt='' />
+                                <span>Удалить</span>
+                            </div>}
+                />
                 <AdminNewsList 
                     news = {this.state.filteredNews} 
                     loading={this.state.isLoading}  
                     deleteNews = {this.deleteNews}
+                    checkId = {this.checkId}
                 /> 
             </div>
         )
     }
     deleteNews = (news) =>{
         let id = news._id
-        fetch(`${ server }/news/`+id, {
-            method: 'DELETE',
-            headers: {
+        axios({
+            method: 'delete',
+            url: `${server}/news/` + id,
+            data: news,
+            config: { headers: {
                 Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(news),
+                'Content-Type': 'application/json'
+            }}
         })
-        this.setState({            
-            filteredNews: this.state.filteredNews.filter(news => news._id !== id)
-        }) 
+        .then((result) => {
+            this.setState({            
+                filteredNews: this.state.filteredNews.filter(item => item._id !== result.data.news._id)
+            }) 
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     } 
-
+    checkId = (id) => {
+        let tempId = this.state.checkedIds;
+        if (~this.state.checkedIds.indexOf(id)) {
+            tempId.splice(tempId.indexOf(id), 1)
+        } else {
+            tempId.push(id)
+        }
+        this.setState({checkedIds: tempId})
+    }
+    deleteChosenNews = (news) => {
+        axios({
+            method: 'delete',
+            url: `${server}/news`,
+            data: {'checkedIds': this.state.checkedIds},
+            config: { headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }}
+        })
+        .then((result) => {
+            this.setState({            
+                filteredNews: this.state.filteredNews.filter(news => !~result.data.news.indexOf(news._id))
+            }) 
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    } 
     findNews = (title) => {
         if(!title) {
             fetch(`${server}/news?isAdmin=true`, {
