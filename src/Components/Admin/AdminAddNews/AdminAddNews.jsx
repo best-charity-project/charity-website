@@ -130,9 +130,9 @@ class AdminAddNews extends Component {
                                 </select>
                             </div>
                         </div>
-                        <div className = 'button-info'>
+                        {/* <div className = 'button-info'>
                             <span>* При нажатии на кнопку "Сохранить" новость сохраняется как черновик</span>
-                        </div>
+                        </div> */}
                         <div className="admin-buttons">
                             <Route render={({history}) => (
                                 <Button 
@@ -143,16 +143,16 @@ class AdminAddNews extends Component {
                             )} />
                             <Route render={({history}) => (
                                 <Button 
-                                    label={"Опубликовать"}
+                                    label={this.state.isPublic ? "Сохранить без публикации" : "Опубликовать"}
                                     name = "button-admin"
-                                    clickHandler = {this.onPublish}
+                                    clickHandler = {this.onSaveChangeStatus}
                                 />
                             )} />
                             <Route render={({history}) => (
                                 <Button 
-                                    label={"Сохранить"}
+                                    label={this.state.isPublic ? "Опубликовать" : "Сохранить без публикации"}
                                     name = "button-admin"
-                                    clickHandler = {this.onDraft}
+                                    clickHandler = {this.onSaveStatus}
                                 />
                             )} />
                             <Route render={({history}) => (
@@ -205,7 +205,11 @@ class AdminAddNews extends Component {
     checkText = () => {
         if (!this.state.shortText) {
             let newText = this.state.fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
-            newText = (newText.slice(0, 297) + '...').replace(/\n/, '')
+            if (newText.length > 300) {
+                newText = (newText.slice(0, 297) + '...').replace(/\n/, '')
+            } else {
+                newText = newText.replace(/\n/, '')
+            }
             this.setState({shortText: newText}, this.sendNews)
         } else {
             this.sendNews()
@@ -217,13 +221,13 @@ class AdminAddNews extends Component {
             isPreview: true
         })
     }
-    onPublish = (e) => {
+    onSaveChangeStatus = (e) => {
         e.preventDefault()
-        this.setState({isPublic: true}, this.checkText)
+        this.setState({isPublic: !this.state.isPublic}, this.checkText)
     }
-    onDraft = (e) => {
+    onSaveStatus = (e) => {
         e.preventDefault()
-        this.setState({isPublic: false}, this.checkText)
+        this.checkText()
     }
     onCancel = (e) => {
         e.preventDefault()
