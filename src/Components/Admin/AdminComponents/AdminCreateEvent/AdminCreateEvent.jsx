@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import AdminDateEvent from '../AdminDateEvent/AdminDateEvent';
+import AdminDatePicker from '../AdminDatePicker/AdminDatePicker';
+import AdminTimePicker from '../AdminTimePicker/AdminTimePicker';
 import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
 import './AdminCreateEvent.css';
@@ -11,6 +12,8 @@ class AdminCreateEvent extends Component {
         title: '',
         date:new Date(),
         text : '',
+        timeStart: '',
+        timeEnd: '',
         isOpen: false
     }
     getValue = (obj) => {
@@ -44,9 +47,7 @@ class AdminCreateEvent extends Component {
         return(
             <div className = 'modal-window'> 
                 <div className = "date-and-input">
-                <AdminDateEvent onSelectData= {this.getDate} date = {this.state.date} /> 
                 <div className="event-title">
-                <p>Название события</p>
                 <TextField 
                     label = 'Название события'
                     value = {this.state.title}
@@ -57,6 +58,9 @@ class AdminCreateEvent extends Component {
                     onChangeValue = {this.getValue}
                     />
                 </div>
+                <AdminDatePicker date = {this.state.date} onSelectData= {this.getDate} />
+                <AdminTimePicker label = 'Время начала события'/>
+                <AdminTimePicker label = 'Время окончания события'/>
                 </div>
                 <Editor text = {this.state.text} getCurrentText = {this.getCurrentText}/>
                 <div className="change-state-buttons">  

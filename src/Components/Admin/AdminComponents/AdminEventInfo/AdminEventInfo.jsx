@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './AdminEventInfo.css';
-import AdminDateEvent from '../AdminDateEvent/AdminDateEvent';
+import AdminDatePicker  from '../AdminDatePicker/AdminDatePicker';
 import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
 import MyEditor from  "../AdminEditor/AdminEditor";
@@ -52,7 +52,7 @@ updateEvent = () =>{
                 />
             </div>
             <div>
-                <AdminDateEvent onSelectData= {this.getDate} date = {this.state.date}  />                       
+                <AdminDatePicker onSelectData= {this.getDate} date = {this.state.date}  />                       
              </div>
                 <MyEditor text = {this.props.event.text} getCurrentText = {this.getCurrentText}/>
                 <div className="change-state-buttons">  

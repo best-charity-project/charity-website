@@ -7,7 +7,7 @@ import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadIma
 import NavBar from '../../NavBar/NavBar';
 import Navigation from '../../Navigation/Navigation';
 import ControlledEditor from  "../AdminComponents/AdminEditor/AdminEditor";
-import AdminDateEvent from '../AdminComponents/AdminDateEvent/AdminDateEvent';
+// import AdminDateEvent from '../AdminComponents/AdminDateEvent/AdminDateEvent';
 import Button from '../../Button/Button';
 
 import './AdminAddProjects.css';
@@ -49,7 +49,7 @@ class AdminAddProjects extends Component {
                     <span>Статус проекта: {this.state.isPublic ? " опубликована" : " черновик"}</span>
                 </div>
                 <div className="date-projects-container">
-                    <AdminDateEvent onSelectData= {this.getDate} date = {this.state.date} />
+                    {/* <AdminDateEvent onSelectData= {this.getDate} date = {this.state.date} /> */}
                 </div>
                 <div className="admin-name-projects">
                         <TextField 
