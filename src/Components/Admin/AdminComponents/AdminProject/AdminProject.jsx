@@ -15,12 +15,19 @@ class AdminProject extends Component {
     componentDidMount (){
         this.setState({
             id:this.props.projects._id,
-            isPublic:this.props.projects.isPublic,
-            date:this.props.projects.date,
-            name:this.props.projects.name,
-            shortText:this.props.projects.shortText,
-            fullText:this.props.projects.fullText,
             image:this.props.projects.image,
+            isPublic:this.props.projects.isPublic,
+            // date:this.props.projects.date,
+            name:this.props.projects.name,
+            organization:this.props.projects.organization,
+            head:this.props.projects.head,
+            contacts:this.props.projects.contacts,
+            address:this.props.projects.address,
+            site:this.props.projects.site,
+            video:this.props.projects.video,
+            // shortText:this.props.projects.shortText,
+            fullText:this.props.projects.fullText,
+            sourse: this.props.projects.sourse,
             createAt:this.props.projects.createAt
         })
     }
@@ -28,7 +35,7 @@ class AdminProject extends Component {
        return (
            <div className="projects-admin"  id = {this.state.id} >
                <div onClick = {this.props.showProjects} className="projects-admin-title">{this.state.name}</div>
-               <div>{moment(this.state.date).format('DD-MM-YYYY')}</div>
+               {/* <div>{moment(this.state.date).format('DD-MM-YYYY')}</div> */}
                <div>{this.state.isPublic ? 'Да' : 'Нет'}</div>
                <div>
                    <Button

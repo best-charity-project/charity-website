@@ -14,7 +14,7 @@ class AdminProjectsList extends Component {
             <div className="projects-list-admin">
                 <div className="projects-list-header">
                     <div>Название проекта</div>
-                    <div>Дата проведения</div>
+                    {/* <div>Дата проведения</div> */}
                     <div>Опубликовано</div>
                     <div>Удалить проект</div>
                     <div>Статус</div>

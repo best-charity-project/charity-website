@@ -13,9 +13,6 @@ form.form-create-projects {
 .container-for-input {
     display: flex;
 }
-.full-text-projects div{
-    overflow: scroll;
-}
 .container-for-input label,
 .admin-image label,
 .projects-source ,
@@ -29,7 +26,14 @@ form.form-create-projects {
 .projects-sourse label {
     font-weight: 600;
 }
-#name-projects {
+/* #name-projects {
+    margin-left: 0;
+    height: auto;
+    padding: 5px;
+    font-size: 16px;
+    outline: none;
+} */
+.admin-projects-text-container input {
     margin-left: 0;
     height: auto;
     padding: 5px;
