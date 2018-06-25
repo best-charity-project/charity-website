@@ -2,7 +2,6 @@
 	flex-grow: 1;
 	flex-direction: row;
     display: flex;
-    
 }
 
 .img-container {
@@ -25,11 +24,23 @@
     box-shadow: 6px 6px 10px #A9A9A9;
     border-radius: 5px;    
     width: 100%;
+    transition: 0.5s;
+}
+
+.player-wrapper {
+    position: relative;
+    padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+}
+  
+.react-player {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .text-container {
-    padding-top: 50px;
-    margin-left: 100px;
+    padding-top: 20px;
+    padding: 10px 20px 30px 20px;
 }
 
 .project-section {
@@ -44,15 +55,35 @@
 }
 
 .project-title {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+}
+
+.project-address {
+    margin-bottom: 20px;
 }
 
 .project-desc {
     margin-bottom: 20px;
 }
 
+.contact-info hr {
+    width: 30%;
+    margin: 10px 0;
+}
+
+.contact-info span {
+    margin: 40px;
+    margin: 0;
+}
+
+.contact-info-icon {
+    height: 40px;
+    width: 40px;
+    vertical-align: middle;
+}
+
 .show-more-container {
-    margin-left: 100px;
+    margin: 20px;
 }
 
 .project-show-more-btn {
