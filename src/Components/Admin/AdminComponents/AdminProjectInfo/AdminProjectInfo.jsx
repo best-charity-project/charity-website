@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './AdminProjectInfo.css';
-// import AdminDateEvent from '../AdminDateEvent/AdminDateEvent';
 import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
 import MyEditor from  "../AdminEditor/AdminEditor";
@@ -51,7 +50,6 @@ class AdminProjectInfo extends Component {
                />
            </div>
            <div>
-               {/* <AdminDateEvent onSelectData= {this.getDate} date = {this.state.date}  />                        */}
             </div>
                <MyEditor text = {this.props.project.text} getCurrentText = {this.getCurrentText}/>
                <div className="change-state-buttons">  
