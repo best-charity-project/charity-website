@@ -1,8 +1,7 @@
 .date-and-input{
-    display: flex;
-    padding-left: 40px;
+    width: 500px;
+    margin: 0 auto;
     margin-top: 10px;
-    flex-direction: column;
 }
 .event-title {
     display: flex;

@@ -1,5 +1,10 @@
 .rdt {
     position: relative;
+    display: inline-block;
+  }
+  .form-control{
+    padding: 0 10px;
+    max-width: 263px;
   }
   .rdtPicker {
     display: none;
