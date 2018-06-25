@@ -14,7 +14,8 @@ class EventsList extends Component {
                     return <News id = {el._id} 
                                 name = {el.title} 
                                 text = {el.text} 
-                                date = {el.date} 
+                                dateStart = {el.dateStart} 
+                                dateEnd = {el.dateEnd} 
                                 key = {el._id} 
                                 event = 'true'
                             />
