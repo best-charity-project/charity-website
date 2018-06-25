@@ -2,10 +2,12 @@
     position: relative;
     display: inline-block;
   }
-  .form-control{
-    padding: 0 10px;
+  .rdt .form-control{
+    padding: 5px 10px;
     max-width: 263px;
+    margin-left: 0;
   }
+
   .rdtPicker {
     display: none;
     position: absolute;

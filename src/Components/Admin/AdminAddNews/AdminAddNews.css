@@ -13,7 +13,6 @@ form.form-create-news {
 .container-for-input {
     display: flex;
 }
-.container-for-input label,
 .admin-image label,
 .news-source {
     padding-right: 60px;
