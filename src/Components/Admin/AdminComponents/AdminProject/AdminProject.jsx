@@ -7,6 +7,8 @@ import moment from 'moment';
 import './AdminProject.css';
 import axios from 'axios';
 import {server} from '../../../../api';
+import TextField from '../../../TextField/TextField'
+
 
 class AdminProject extends Component {
     state = {
@@ -17,7 +19,6 @@ class AdminProject extends Component {
             id:this.props.projects._id,
             image:this.props.projects.image,
             isPublic:this.props.projects.isPublic,
-            // date:this.props.projects.date,
             name:this.props.projects.name,
             organization:this.props.projects.organization,
             head:this.props.projects.head,
@@ -25,7 +26,6 @@ class AdminProject extends Component {
             address:this.props.projects.address,
             site:this.props.projects.site,
             video:this.props.projects.video,
-            // shortText:this.props.projects.shortText,
             fullText:this.props.projects.fullText,
             sourse: this.props.projects.sourse,
             createAt:this.props.projects.createAt
@@ -34,8 +34,14 @@ class AdminProject extends Component {
    render() {
        return (
            <div className="projects-admin"  id = {this.state.id} >
-               <div onClick = {this.props.showProjects} className="projects-admin-title">{this.state.name}</div>
-               {/* <div>{moment(this.state.date).format('DD-MM-YYYY')}</div> */}
+                <div className = "projects-admin-checkbox">
+                    <input 
+                        type = "checkbox" 
+                        name = "checkbox-id" 
+                        onChange = {this.checkId}
+                    />
+                    <div onClick = {this.props.showProjects} className="projects-admin-title">{this.state.name}</div>
+               </div>
                <div>{this.state.isPublic ? 'Да' : 'Нет'}</div>
                <div>
                    <Button
@@ -54,6 +60,15 @@ class AdminProject extends Component {
            </div>
        )
    }
+   checkId = () => {
+    this.props.checkId(this.state.id)
+    }
+    showProjects = () => {
+        this.props.showProjects(this.state.id)
+    }
+    handleClick = () => {
+        this.setState({isPublic: !this.state.isPublic}, this.sendStatus)
+    }
    submit = () =>{
        confirmAlert({
            title:'Подтвердите удаление проекта',

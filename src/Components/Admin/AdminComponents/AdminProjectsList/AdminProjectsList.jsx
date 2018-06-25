@@ -14,12 +14,10 @@ class AdminProjectsList extends Component {
             <div className="projects-list-admin">
                 <div className="projects-list-header">
                     <div>Название проекта</div>
-                    {/* <div>Дата проведения</div> */}
                     <div>Опубликовано</div>
                     <div>Удалить проект</div>
                     <div>Статус</div>
-                </div>            
-                
+                </div>      
                 <div>                    
                     {this.props.projects.map(item => 
                         <AdminProject
@@ -27,6 +25,7 @@ class AdminProjectsList extends Component {
                             projects = {item} 
                             key = {item._id} 
                             deleteHandler = {() => this.props.deleteProject(item)}
+                            checkId = {this.props.checkId}
                         />                        
                     )}
                 </div>  

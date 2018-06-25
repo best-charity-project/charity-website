@@ -64,6 +64,13 @@ class AdminAddProjects extends Component {
             <form className="list-container" encType="multipart/form-data" method="post">
                 <div className = "projects-status">
                     <span>Статус проекта: {this.state.isPublic ? " опубликована" : " черновик"}</span>
+                    <Route render={({history}) => (
+                                <Button 
+                                    label={"Опубликовать"}
+                                    name = "button-admin"
+                                    clickHandler = {this.onPublish}
+                                />
+                    )} />
                 </div>
                 {/* <div className="date-projects-container">
                     <AdminDateEvent onSelectData= {this.getDate} date = {this.state.date} />
@@ -176,7 +183,6 @@ class AdminAddProjects extends Component {
                 <div className="text-projects">
                     <div className="full-text-projects">Описание проекта:</div>
                     <ControlledEditor
-                        required 
                         text = {this.state.fullText} 
                         getCurrentText = {this.getCurrentTextFull}
                     /> 
@@ -341,7 +347,6 @@ class AdminAddProjects extends Component {
     sendProjects = () =>{
         let formData  = new FormData();
         Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
-
         let id = ''
         if (this.props.location.state) {
             id = this.props.location.state.detail._id
