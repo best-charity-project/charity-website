@@ -25,14 +25,14 @@ class AdminNewsList extends Component {
                             key = {item._id}  
                             deleteHandler = {() => this.props.deleteNews(item)} 
                             showNews= {this.getInfoNews}
+                            checkId = {this.props.checkId}
                         />
                     )}
                 </div>  
             </div>  
         )
     }
-    getInfoNews = (e) => {
-        let id = e.target.parentNode.id;
+    getInfoNews = (id) => {
         const URL = `${ server }/news/`+id;
         fetch(URL)
         .then(response => response.json())
