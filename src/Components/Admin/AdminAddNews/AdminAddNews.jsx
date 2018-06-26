@@ -12,7 +12,6 @@ import Button from '../../Button/Button';
 import Navigation from '../../Navigation/Navigation';
 import NavBar from '../../NavBar/NavBar';
 import AdminPreview from '../AdminComponents/AdminPreview/AdminPreview'
-
 import './AdminAddNews.css';
 
 class AdminAddNews extends Component {
@@ -61,9 +60,9 @@ class AdminAddNews extends Component {
                             <span>Статус новости: {this.state.isPublic ? " опубликована" : " черновик"}</span>
                             <Route render={({history}) => (
                                 <Button 
-                                    label={"Опубликовать"}
+                                    label={this.state.isPublic ? "Отменить публикацию" : "Опубликовать"}
                                     name = "button-admin"
-                                    clickHandler = {this.onPublish}
+                                    clickHandler = {this.onSaveChangeStatus}
                                 />
                             )} />
                         </div>
@@ -130,9 +129,6 @@ class AdminAddNews extends Component {
                                 </select>
                             </div>
                         </div>
-                        {/* <div className = 'button-info'>
-                            <span>* При нажатии на кнопку "Сохранить" новость сохраняется как черновик</span>
-                        </div> */}
                         <div className="admin-buttons">
                             <Route render={({history}) => (
                                 <Button 
@@ -143,14 +139,14 @@ class AdminAddNews extends Component {
                             )} />
                             <Route render={({history}) => (
                                 <Button 
-                                    label={this.state.isPublic ? "Сохранить без публикации" : "Опубликовать"}
+                                    label={this.state.isPublic ? "Отменить публикацию" : "Опубликовать"}
                                     name = "button-admin"
                                     clickHandler = {this.onSaveChangeStatus}
                                 />
                             )} />
                             <Route render={({history}) => (
                                 <Button 
-                                    label={this.state.isPublic ? "Опубликовать" : "Сохранить без публикации"}
+                                    label={this.state.isPublic ? "Сохранить" : "Сохранить без публикации"}
                                     name = "button-admin"
                                     clickHandler = {this.onSaveStatus}
                                 />
@@ -170,10 +166,11 @@ class AdminAddNews extends Component {
                         image = {this.state.image}
                         title = {this.state.title}
                         fullText = {this.state.fullText}
-                        onPublish = {this.onPublish}
-                        onDraft = {this.onDraft}
+                        onSaveChangeStatus = {this.onSaveChangeStatus}
+                        onSaveStatus = {this.onSaveStatus}
                         getNewStatePreview = {this.getNewStatePreview}
                         date = {this.state.date}
+                        isPublic = {this.state.isPublic}
                     />
                 }
             </div>
@@ -228,6 +225,14 @@ class AdminAddNews extends Component {
     onSaveStatus = (e) => {
         e.preventDefault()
         this.checkText()
+    }
+    onPublish = (e) => {
+        e.preventDefault()
+        this.setState({isPublic: true}, this.checkText)
+    }
+    onDraft = (e) => {
+        e.preventDefault()
+        this.setState({isPublic: false}, this.checkText)
     }
     onCancel = (e) => {
         e.preventDefault()

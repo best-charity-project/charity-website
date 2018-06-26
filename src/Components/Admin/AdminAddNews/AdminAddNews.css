@@ -76,12 +76,8 @@ hr {
 form.form-create-news hr:nth-of-type(2) {
     margin-top: 0;
 }
-/* .button-info {
-    margin-top: 50px;
-    padding-left: 10px;
-} */
-.admin-buttons {
-    margin: 20px auto 30px;
+form .admin-buttons {
+    margin: 60px auto 0px;
     display: flex;
     justify-content: space-evenly
 }

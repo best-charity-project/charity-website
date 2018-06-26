@@ -6,6 +6,8 @@ import './AdminNewsContent.css';
 import { server } from '../../../../../src/api';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
+import {confirmAlert} from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css'; 
 import rubbishImg from '../../../../Assets/AssetsSvg/mbri-trash.svg';
 
 class AdminNewsContent extends Component {
@@ -56,7 +58,7 @@ class AdminNewsContent extends Component {
                 </div>  
                 <Button
                     name = "delete-news" 
-                    clickHandler = {this.deleteChosenNews}
+                    clickHandler = {this.submit}
                     disabled = {this.state.checkedIds.length ? false : true}
                     label = {<div>
                                 <img src={rubbishImg} alt='' />
@@ -100,6 +102,22 @@ class AdminNewsContent extends Component {
             tempId.push(id)
         }
         this.setState({checkedIds: tempId})
+    }
+    submit = () => {
+        confirmAlert({
+          title: 'Подтвердите удаление новостей',
+          message: 'Вы точно хотите удалить ' + this.state.checkedIds.length + ' новости(ей)?',
+          buttons: [
+            {
+              label: 'Да',
+              onClick: (item) => this.deleteChosenNews(item)
+            },
+            {
+              label: 'Нет',
+              onClick: () => {}
+            }
+          ]
+        })
     }
     deleteChosenNews = (news) => {
         axios({

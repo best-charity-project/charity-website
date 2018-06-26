@@ -6,6 +6,7 @@ import {ContentState, convertToRaw} from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import {server} from '../../../../api';
 import axios from 'axios';
+import AdminSlider from './AdminSlider';
 import './AdminEditor.css';
 
 class ControlledEditor extends Component {
@@ -15,13 +16,13 @@ class ControlledEditor extends Component {
             editorContent: ''
         }
     }
-
+    
     componentDidMount() {
         this.props.text ? 
             this.setState({ editorContent: this.getInitialHTML(this.props.text)}) :
             this.setState({ editorContent: '' }) 
     }
-
+    
     getInitialHTML = (str) => {
         const contentBlock = htmlToDraft(str);
         if (contentBlock.contentBlocks !== null) {
@@ -54,6 +55,7 @@ class ControlledEditor extends Component {
                     wrapperClassName="wrapper"
                     toolbarClassName="toolbar"
                     editorClassName="editor"
+                    toolbarCustomButtons={[<AdminSlider />]}
                     localization={{
                         locale: 'ru'
                     }}
@@ -75,6 +77,6 @@ class ControlledEditor extends Component {
                 />
             </div>
         )
-    }
+    } 
 }
 export default ControlledEditor;

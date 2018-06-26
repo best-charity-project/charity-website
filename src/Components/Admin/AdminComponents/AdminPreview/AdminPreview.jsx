@@ -28,22 +28,22 @@ class AdminPreview extends Component {
                         <p className = 'full-news-title'> {this.props.title}</p>               
                         <span dangerouslySetInnerHTML={{__html: this.props.fullText}}/>
                     </div>
-                    <div className = 'button-info'>
-                        <span>* При нажатии на кнопку "Сохранить" новость сохраняется как черновик</span>
+                    <div className = 'status-info'>
+                        <span>Статус новости: {this.props.isPublic ? " опубликована" : " черновик"}</span>
                     </div>
                     <div className="admin-buttons">
                         <Route render={({history}) => (
                             <Button 
-                                label={"Опубликовать"}
+                                label={this.props.isPublic ? "Отменить публикацию" : "Опубликовать"}
                                 name = "button-admin"
-                                clickHandler = {this.props.onPublish}
+                                clickHandler = {this.props.onSaveChangeStatus}
                             />
                         )} />
                         <Route render={({history}) => (
                             <Button 
-                                label={"Сохранить"}
+                                label={this.props.isPublic ? "Сохранить" : "Сохранить без публикации"}
                                 name = "button-admin"
-                                clickHandler = {this.props.onDraft}
+                                clickHandler = {this.props.onSaveStatus}
                             />
                         )} />
                         <Route render={({history}) => (

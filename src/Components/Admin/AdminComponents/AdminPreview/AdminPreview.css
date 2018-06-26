@@ -9,9 +9,17 @@
     padding-bottom: 20px;
     box-shadow: 10px 10px 20px 0 rgba(0, 0, 0, 0.21);
 }
-.admin-preview .full-news-list-container .button-info {
-    margin-top: 50px;
-    padding-left: 60px;
+.admin-preview .full-news-list-container .status-info {
+    width: 70%;
+    margin: 30px auto;
+}
+.admin-preview .full-news-list-container .admin-buttons {
+    width: 70%;
+    margin: 30px auto;
+    justify-content: space-between;
+}
+.admin-preview .full-news-list-container .admin-buttons > button {
+    margin: 0;
 }
 .admin-preview .full-news img {
     display: block;
