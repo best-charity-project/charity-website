@@ -3,27 +3,22 @@ import AdminFilter from '../AdminFilter/AdminFilter';
 import TextField from '../../../TextField/TextField';
 import Button from '../../../Button/Button';
 import { server } from '../../../../api';
-import '../AdminFiltersForPages/AdminFiltersForPages.css'
+import axios from 'axios';
+import '../AdminFiltersForPages/AdminFiltersForPages.css';
 class FiltersForPages extends Component {
 state = {
-    title:'events',
-filters:[
-        {
-            name: 'здоровье'
-        },
-        {
-            name: 'спортивные'
-        },
-        {
-            name: 'культурные'
-        }
-    ]
+    type:this.props.type,
+    filters: this.props.list,
+    title:'',
+    isOpen: false
 }
-// showFiltersList = () => {
-//     alert('rfrf')
-// }
+componentWillReceiveProps(curprops, nextprops){
+    if( curprops.list != this.state.filters){
+        this.setState({filters:curprops.list })
+    }
+}
 addFilter = () => {
-    alert('rfr');
+    //проверка на пустую строку
     fetch(`${ server }/filters`, {
         method: 'POST',
         headers: {
@@ -32,25 +27,66 @@ addFilter = () => {
         },
         body: JSON.stringify(this.state),
         })
+        
         .then(response => response.json())
-        .then(data => console.log(data)) 
+        this.props.getNewFilterList();
+        this.setState({title: ''})
+        
+}
+getValue = (str) => {
+    this.setState({title: str.value})
+    
+}
+deleteFilter= (filter) =>{
+    console.log(filter)
+    let id = filter._id
+ 
+    axios({
+        method: 'delete',
+        url: `${server}/filters/` + id,
+        config: { headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        }}
+    })
+    .then((result) => {
+        this.setState({            
+            filters: this.state.filters.filter(item => item._id !== result.data.filter._id)
+        }) 
+    })
+}
+showFilterList = () => {
+    this.setState({isOpen: !this.state.isOpen})
+}
+onKeyPress  = (e) => {
+    (e.charCode === 13)? this.addFilter(): null
 }
     render() {
         return (
-            <div className="filters-for-pages" onClick  = {this.showFiltersList}>
-               <p className = 'filter-title'> {this.props.title}</p>
-               <TextField />
+            <div className="filters-for-pages">
+               <p className = 'filter-title' onClick = {this.showFilterList}> {this.props.title}</p>
+               {this.state.isOpen ? 
+               <div>
+               <div className = 'input-button-filters-page'>
+               <TextField
+                    onKeyPress = {this.onKeyPress}
+                    label = 'Добавить фильтр :'
+                    value = {this.state.title}
+                    onChangeValue = {this.getValue}
+               />
                <Button                        
                        clickHandler = {this.addFilter}                        
                        label = 'Добавить'
                    />
+                   </div>
                <div className = 'filters-list'>
                     <ul>
-                   {this.state.filters.map ( (el, index) =>
-                       <AdminFilter filter = {el} key = {index}/>
-                    )} 
+                   {this.state.filters? this.state.filters.map ( (el, index) =>
+                       <AdminFilter filter = {el} key = {index} deleteHandler = {() => this.deleteFilter(el) }/>
+                    ): null} 
                     </ul>
-               </div>
+               </div> </div>: null}
+               
             </div>  
         )
     }

@@ -3,7 +3,7 @@ import {Route} from 'react-router-dom';
 import {withRouter} from "react-router-dom";
 import moment from 'moment';
 import axios from 'axios';
-
+import _ from 'lodash';
 import {server} from '../../../api';
 import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';
 import TextField from '../../TextField/TextField';
@@ -11,7 +11,8 @@ import ControlledEditor from  '../AdminComponents/AdminEditor/AdminEditor';
 import Button from '../../Button/Button';
 import Navigation from '../../Navigation/Navigation';
 import NavBar from '../../NavBar/NavBar';
-import AdminPreview from '../AdminComponents/AdminPreview/AdminPreview'
+import AdminPreview from '../AdminComponents/AdminPreview/AdminPreview';
+import AdminSelectSearch from '../../Admin/AdminComponents/AdminSelectSearch/AdminSelectSearch'
 
 import './AdminAddNews.css';
 
@@ -20,7 +21,7 @@ class AdminAddNews extends Component {
         title: '',
         shortText: '',
         fullText: '',
-        source: '',
+        filters: '',
         isPublic: false,
         imageData: '',
         isPreview: false,
@@ -31,6 +32,7 @@ class AdminAddNews extends Component {
     cropperRef = React.createRef()
 
     componentWillMount() {
+        this.getFiltersList()
         this.setState({
             source: 'organizers',
         })
@@ -49,8 +51,20 @@ class AdminAddNews extends Component {
             })
         }
     }
-
+    // shouldComponentUpdate(nextProps, nextState){
+    //     if(this.state.filters!=nextState.filters){
+    //         console.log(nextState.filters)
+    //        this.setState({filters:nextState.filters})
+    //        return true;
+    //     }
+    // }
+// componentWillReceiveProps(curprops, nextprops){
+//         console.log(curprops)
+//         console.log(nextprops)
+    
+// }
     render() {
+        console.log(this.state)
         return (
             <div className="admin-content">
                 <Navigation onLogout={this.onLogout} />
@@ -122,12 +136,12 @@ class AdminAddNews extends Component {
                                 <label>Источник:</label>
                             </div>
                             <div>
-                                <select value={this.state.source} onChange={this.handleChange}>
-                                    <option value="organizers">Организаторы</option>
-                                    <option value="sponsors">Спонсоры</option>
-                                    <option value="activists">Активисты</option>
-                                    <option value="volunteers">Волонтеры</option>
-                                </select>
+                                {this.state.filters ? <AdminSelectSearch filtersList = {this.state.filters}/> : null}
+                                {/* <select  onChange={this.handleChange}>
+                                    {this.state.filters ? this.state.filters.map((el,index) => {
+                                    return  <option value={el.title} key = {index}>{el.title}</option>
+                                    }): null}
+                                 </select>  */}
                             </div>
                         </div>
                         <div className = 'button-info'>
@@ -277,6 +291,24 @@ class AdminAddNews extends Component {
             image: ''
         })   
     }
+    getFiltersList = () => {  
+        axios({
+            method: 'get',
+            url: `${ server }/filters`,
+        })
+        .then(res =>{
+            let filterList = res.data.filterList;
+            let filtersNews = _.filter(filterList , function(el){
+                if(el.type === 'news'){
+                    return el
+                }
+            })
+            this.setState({
+                filters:filtersNews,
+            })
+        })
+     
+      }
 }
 
 export default withRouter(AdminAddNews);
