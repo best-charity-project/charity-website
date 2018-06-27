@@ -43,6 +43,10 @@ form.form-create-projects {
 .text-projects {
     display: flex;
 }
+.projects-textfield {
+    display: flex;
+    flex-direction: column;
+}
 .text-projects > div:first-child {
     flex-basis: 25%;
     padding-right: 60px;
@@ -115,4 +119,44 @@ textarea {
     min-height: 50px;
     font-size: 16px;
     padding: 10px 20px;
+}
+.hidden {
+	display: none; 
+}
+.admin-textarea-description {
+    max-width: 85%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+.admin-textarea-description span,
+.admin-textarea-description div {
+    align-self: flex-end;
+    margin-top: 5px;
+}
+.admin-textarea-description input {
+    margin: 0 auto;
+    height: auto;
+    padding: 5px;
+    font-size: 16px;
+    width: 50px;
+    text-align: center;
+}
+.admin-textarea-symbols {
+    font-weight: 600;
+}
+
+.incorrect-value-container{
+    background-color: #fc5f5f;
+    max-width: 85%;
+    border-radius: 5px;
+    height: 30px;
+    text-align: center;
+}
+.incorrect-value-container div{
+    margin-top: 5px;
+}
+.incorrect-value-container div span{
+    color: black;
+    font-weight: 500;
 }

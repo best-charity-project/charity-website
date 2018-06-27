@@ -32,6 +32,8 @@ class AdminAddProjects extends Component {
         source: '',
         isPublic:false,
         isPreview:false,
+        isCorrectValue:false,
+        value:100
     }
     cropperRef = React.createRef()
     componentWillMount() {
@@ -56,6 +58,7 @@ class AdminAddProjects extends Component {
     }
     
     render() {
+        let newValue = this.state.fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '').length;
         return (
             <div className="admin-content"> 
             <Navigation onLogout={this.onLogout}/>
@@ -182,13 +185,28 @@ class AdminAddProjects extends Component {
                 </div> */}
                 <div className="text-projects">
                     <div className="full-text-projects">Описание проекта:</div>
+                    <div className="projects-textfield">
                     <ControlledEditor
                         text = {this.state.fullText} 
                         getCurrentText = {this.getCurrentTextFull}
-                    /> 
+                    />
+                    <div className= { this.onCorrectValue() ? "incorrect-value-container hidden" : "incorrect-value-container" }>
+                        <div>
+                            <span>Количество символов превышает 1000!</span>
+                        </div>
+                    </div> 
+                    <div className = "admin-textarea-description">
+                        <span>Краткое описание не должно содержать более 1000 символов</span>
+                        <div>
+                            <span>Количество оставшихся символов: </span>
+                            <span readOnly className = "admin-textarea-symbols">{this.state.value - newValue}</span>
+                        </div>
+                    </div>
+                    </div>
                 </div>
                 <hr />
                 <div className="text-projects">
+                
                             <div className = "projects-source">
                                 <label>Источник:</label>
                             </div>
@@ -208,22 +226,25 @@ class AdminAddProjects extends Component {
                 <div className="admin-buttons">
                     <Route render={({history}) => (
                         <Button 
+                            disabled={!this.onCorrectValue()}
                             label = {"Предпросмотр"} 
-                            name = "button-admin"
+                            name = {this.onCorrectValue() ? "button-admin":"button-publish-projects"}
                             clickHandler = {this.onPreview}
                         />
                     )} />
                     <Route render={({history}) => (
-                        <Button 
+                        <Button
+                            disabled={!this.onCorrectValue()}
                             label={"Опубликовать"}
-                            name = "button-admin"
+                            name = {this.onCorrectValue() ? "button-admin":"button-publish-projects"}
                             clickHandler = {this.onPublish}
                         />
                     )} />
                     <Route render={({history}) => (
                         <Button 
+                            disabled={!this.onCorrectValue()}
                             label={"Сохранить как черновик"}
-                            name = "button-admin"
+                            name = {this.onCorrectValue() ? "button-admin":"button-publish-projects"}
                             clickHandler = {this.onDraft}
                         />
                     )} />
@@ -255,6 +276,7 @@ class AdminAddProjects extends Component {
             } 
             </div>
         )
+        
     }
     getValue = (obj) => {
         this.setState({name: obj.value});
@@ -298,32 +320,36 @@ class AdminAddProjects extends Component {
         })
     }
     // checkText = () => {
-    //     if (!this.state.shortText) {
     //         let newText = this.state.fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
-    //         newText = newText.slice(0, 297) + '...'
-    //         this.setState({shortText: newText}, this.sendProjects)
-    //     } else {
-    //         this.sendProjects()
-    //     }
+           
     // }
+    onCorrectValue = () =>{
+        let newText = this.state.fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
+        return newText.length<=this.state.value
+    }
     onPublish = (e) => {
         e.preventDefault()
-        this.setState({
-            isPublic: true
-        }, this.sendProjects)
+        if(this.onCorrectValue()){
+            this.setState({
+                isPublic: true
+            }, this.sendProjects)
+        }
     }
     onDraft = (e) => {
-        console.log('sdads')
         e.preventDefault()
-        this.setState({
-            isPublic: false
-        }, this.sendProjects)
+        if(this.onCorrectValue()){
+            this.setState({
+                isPublic: false
+            }, this.sendProjects)
+        }
     }
     onPreview = (e)=>{
         e.preventDefault()
-        this.setState({
-            isPreview:true
-        })
+        if(this.onCorrectValue()){
+            this.setState({
+                isPreview:true
+            })
+        }
     }
     onCancel = (e) => {
         e.preventDefault()
