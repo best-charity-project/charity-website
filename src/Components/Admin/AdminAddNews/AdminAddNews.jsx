@@ -124,8 +124,9 @@ class AdminAddNews extends Component {
                                 <label>Источник:</label>
                             </div>
                             <div>
-                                {this.state.filters? <AdminSelectSearch 
-                                filtersList = {this.state.filters}
+                                {this.state.filters? 
+                                <AdminSelectSearch 
+                                    filtersList = {this.state.filters}
                                 />:null}
                               
                             </div>

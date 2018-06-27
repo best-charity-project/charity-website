@@ -5,16 +5,14 @@ import '../AdminFilter/AdminFilter.css';
 class AdminFilter extends Component {
     state = {
         title : '',
-        id: ''
+        id : ''
     }
-
    componentDidMount(){
        this.setState({
         title : this.props.filter.title,
-        id: this.props.filter._id
+        id : this.props.filter._id
        })
    }
-
     render() {
         return (
             <div  id = {this.state.id} className = 'admin-filter-container'>

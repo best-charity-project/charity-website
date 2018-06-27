@@ -9,14 +9,12 @@ import {server} from '../../../../api';
 
 class AdminSelectSearch extends Component {
     state = {
-        filters: this.props.filtersList,
-        addNewOption:false,
+        filters : this.props.filtersList,
+        addNewOption : false,
     }
-
     componentDidMount(){
         this.createOptions();
     }
-
     createOptions = () =>{
         let array = [];
         if(this.state.filters){
@@ -27,36 +25,34 @@ class AdminSelectSearch extends Component {
                 array.push(filter)
             })
         }
-     this.setState({filters:array})
+         this.setState({filters:array});
     }
-
     onChange = (e) => {
         (e)? this.setState ({value:e }): '';
-      }
-
+    }
     render() {
         const { selectedOption, addNewOption } = this.state;
         return (
-            <div className="select-component" onChange= {this.getOptions}>
+            <div className = "select-component" onChange = {this.getOptions}>
                 <Select                    
-                    id="my-select"
-                    value={this.state.value}
-                    placeholder="Введите источник"
-                    dropdownMenuStyle={{ maxHeight: 250 }}
-                    style={{ width: 500 }}
-                    onInputKeydown= {this.onSearch}
-                    onChange={this.onChange}
+                    id = "my-select"
+                    value = {this.state.value}
+                    placeholder = "Введите источник"
+                    dropdownMenuStyle = {{ maxHeight: 250 }}
+                    style = {{ width: 500 }}
+                    onInputKeydown = {this.onSearch}
+                    onChange = {this.onChange}
                     notFoundContent = 'Ничего не найдено'
                 >
                 {this.state.filters.map((filter,index) => {
                     return <Option 
                                 key = {index} 
-                                value={filter.label}>
-                            {filter.label}
+                                value = {filter.label}>
+                                {filter.label}
                             </Option>;
                 })}
                 </Select>
-                {addNewOption?<div className = 'input-buttom-select' >
+                {addNewOption ? <div className = 'input-buttom-select' >
                     <TextField
                             onKeyPress = {this.onKeyPress}
                             label = 'Добавить фильтр :'
@@ -64,7 +60,7 @@ class AdminSelectSearch extends Component {
                             onChangeValue = {this.getValue}
                     />
                     <Button   
-                                name = 'select-button'                     
+                            name = 'select-button'                     
                             clickHandler = {this.addNewFilter}                        
                             label = 'Добавить'
                         />
@@ -75,35 +71,34 @@ class AdminSelectSearch extends Component {
 
     getOptions = (e) => {
         let value = e.target.value;
-       let addNewOption = _.filter(this.state.filters, function(o) { 
-        return o.label.includes(value) });   
-       (!addNewOption.length)? this.setState({addNewOption:true}) : null;
-       (!e.target.value.length)? this.setState({addNewOption:false}) : null;
+        let addNewOption = _.filter(this.state.filters, function(o) { 
+        return o.label.includes(value)});   
+        (!addNewOption.length) ? this.setState({addNewOption : true}) : null;
+        (!e.target.value.length) ? this.setState({addNewOption : false}) : null;
     }
 
     getValue =(str) => {
-        this.setState({newFilterValue: str.value })
+        this.setState({newFilterValue : str.value })
     }
 
     addNewFilter = (e) => {
         e.preventDefault();
         fetch(`${ server }/filters`, {
-            method: 'POST',
-            headers: {
+            method : 'POST',
+            headers : {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
         },
-        body: JSON.stringify({title:this.state.newFilterValue, type:'news'}),
+        body : JSON.stringify({title:this.state.newFilterValue, type:'news'}),
         })
         this.setState({newFilterValue: ''})
         let arrayFilter = this.state.filters;
-        let lengthArray= arrayFilter.length;
+        let lengthArray = arrayFilter.length;
         let lastValue = arrayFilter[lengthArray-1].value;
         let newFilter = this.state.newFilterValue;
         arrayFilter.push({label:newFilter, value: lastValue ++} )          
         this.setState({filters: arrayFilter, addNewOption:false})
     }
-
 }
 
 export default AdminSelectSearch;

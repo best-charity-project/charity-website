@@ -12,37 +12,32 @@ class AdminFiltersContent extends Component {
     componentDidMount(){
         this.getFiltersList();       
     }
-
     componentWillReceiveProps(curprops, nextprops){
         if(curprops.list != nextprops.list){
             this.setState ({filters:nextprops.list})
         }
     }
-    
     getFiltersList = () => {  
         axios({
             method: 'get',
             url: `${ server }/filters`,
         })
         .then(res =>{
-            this.createFiltersLists(res)
+            this.createFiltersLists(res);
         })     
       }
-
-      getNewFilterList = () => {
-        setTimeout(this.getFiltersList,100)
+    getNewFilterList = () => {
+        setTimeout(this.getFiltersList,100);
       }
-
     render() {
         return (
             <div className="filters-content">
-                {this.state.filtersEvents ? <FiltersForPages title = 'События' type = 'events' list = {this.state.filtersEvents} getNewFilterList={this.getNewFilterList} />: null }
-                {this.state.filtersNews ?<FiltersForPages title = 'Новости' type = 'news' list = {this.state.filtersNews} getNewFilterList={this.getNewFilterList} /> :null}
-                {this.state.filtersProjects? <FiltersForPages title = 'Проекты' type = 'projects' list = {this.state.filtersProjects} getNewFilterList={this.getNewFilterList} />:null}            
+                {this.state.filtersEvents ? <FiltersForPages title = 'События' type = 'events' list = {this.state.filtersEvents} getNewFilterList = {this.getNewFilterList} /> : null }
+                {this.state.filtersNews ? <FiltersForPages title = 'Новости' type = 'news' list = {this.state.filtersNews} getNewFilterList = {this.getNewFilterList} /> : null}
+                {this.state.filtersProjects ? <FiltersForPages title = 'Проекты' type = 'projects' list = {this.state.filtersProjects} getNewFilterList = {this.getNewFilterList} /> :null}            
             </div>  
         )
     }
-    
     createFiltersLists = (res) => {
         let filterList = res.data.filterList;
         let filtersEvents = _.filter(filterList , function(el){
@@ -67,5 +62,4 @@ class AdminFiltersContent extends Component {
         })
     }
 }
-
 export default AdminFiltersContent;
