@@ -26,13 +26,6 @@ form.form-create-projects {
 .projects-sourse label {
     font-weight: 600;
 }
-/* #name-projects {
-    margin-left: 0;
-    height: auto;
-    padding: 5px;
-    font-size: 16px;
-    outline: none;
-} */
 .admin-projects-text-container input {
     margin-left: 0;
     height: auto;
@@ -107,6 +100,13 @@ form.form-create-projects hr:nth-of-type(2) {
 }
 .choose-file {
     line-height: 1;
+}
+.admin-media-image-projects,
+.admin-media-video-projects{
+    display:flex;
+}
+.admin-projects-media-buttons{
+    align-self: center;
 }
 .admin-textarea {
     display: flex;

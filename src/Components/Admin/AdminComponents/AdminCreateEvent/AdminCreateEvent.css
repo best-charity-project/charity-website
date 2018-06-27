@@ -1,25 +1,25 @@
 .date-and-input{
-    display: flex;
-    padding-left: 40px;
+    width: 500px;
+    margin: 0 auto;
     margin-top: 10px;
-    flex-direction: column;
-}
-.event-title {
-    display: flex;
-    margin:15px 0;
-}
-.event-title p{
-    align-self: center;
 }
 .change-state-buttons {
     margin: 25px 0px;
     text-align: center;
 }
 #title {
-    margin: 0 10px;
     border-radius: 5px;
     border: 1px solid #d3d3d3;
 }
 #title:focus {
     outline: none;
+}
+.container-for-input label{
+    align-self: center
+}
+.modal-window label {
+    font-weight: 600;
+    display: inline-block;
+    width: 180px;
+    margin-right: 20px;
 }

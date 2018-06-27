@@ -21,7 +21,11 @@ class ControlledEditor extends Component {
             this.setState({ editorContent: this.getInitialHTML(this.props.text)}) :
             this.setState({ editorContent: '' }) 
     }
-
+    componentWillReceiveProps(curprops, nextprops){
+        if(curprops.text!=nextprops.text && !this.state.editorContent){
+            this.setState({ editorContent: this.getInitialHTML(curprops.text)})
+        }
+    }
     getInitialHTML = (str) => {
         const contentBlock = htmlToDraft(str);
         if (contentBlock.contentBlocks !== null) {

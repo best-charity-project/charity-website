@@ -40,7 +40,7 @@ class AdminProject extends Component {
                         name = "checkbox-id" 
                         onChange = {this.checkId}
                     />
-                    <div onClick = {this.props.showProjects} className="projects-admin-title">{this.state.name}</div>
+                    <div onClick = {this.showProjects} className="projects-admin-title">{this.state.name}</div>
                </div>
                <div>{this.state.isPublic ? 'Да' : 'Нет'}</div>
                <div>
@@ -52,24 +52,39 @@ class AdminProject extends Component {
                </div>
                <div>                
                     <Button
-                        name = {this.state.isPublic? 'button-publish-projects':'button-not-publish-projects'}
-                        label = {this.state.isPublic? 'Отменить публикацию':'Опубликовать'}
-                        clickHandler = {this.publishProjects}
+                        name = {this.state.isPublic ? 'button-publish-projects':'button-not-publish-projects'}
+                        label = {this.state.isPublic ? 'Отменить публикацию':'Опубликовать'}
+                        clickHandler = {this.handleClick}
                     />
                 </div>
            </div>
        )
    }
    checkId = () => {
-    this.props.checkId(this.state.id)
+        this.props.checkId(this.state.id)
     }
     showProjects = () => {
         this.props.showProjects(this.state.id)
     }
     handleClick = () => {
-        this.setState({isPublic: !this.state.isPublic}, this.sendStatus)
+        this.setState({isPublic: !this.state.isPublic}, this.publishProjects)
     }
-   submit = () =>{
+    publishProjects = (e) => {
+        axios({
+                method: 'put',
+                url: `${server}/projects/${this.state.id}`,
+                data: {'isPublic':this.state.isPublic},
+                config: {
+                    headers: {
+                        Accept:'application/json',
+                        'Content-Type': 'multipart/form-data; charset=UTF-8'
+                    }},
+            })
+              .catch(function (error) {
+                console.log(error);
+              });
+    }
+    submit = () =>{
        confirmAlert({
            title:'Подтвердите удаление проекта',
            message: 'Вы точно хотите удалить проект?',
@@ -84,24 +99,6 @@ class AdminProject extends Component {
                }
            ]
        })
-   }
-   publishProjects = (e) => {
-    this.setState({isPublic: !this.state.isPublic}, () =>{
-        let formData  = new FormData();
-        Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
-        axios({
-            method: 'put',
-            url: `${server}/projects/${this.state.id}`,
-            data: formData,
-            config: {
-                headers: {
-                    'Content-Type': 'multipart/form-data; charset=UTF-8'
-                }},
-        })
-          .catch(function (error) {
-            console.log(error);
-          });
-    })
    }
 }
 

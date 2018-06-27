@@ -7,7 +7,6 @@ import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadIma
 import NavBar from '../../NavBar/NavBar';
 import Navigation from '../../Navigation/Navigation';
 import ControlledEditor from  "../AdminComponents/AdminEditor/AdminEditor";
-// import AdminDateEvent from '../AdminComponents/AdminDateEvent/AdminDateEvent';
 import Button from '../../Button/Button';
 import AdminProjectPreview from '../AdminComponents/AdminProjectPreview/AdminProjectPreview'
 
@@ -20,8 +19,6 @@ class AdminAddProjects extends Component {
         imageData: '',
         image:'',
         name: '',
-        // date:new Date(),
-        // shortText: '',
         organization:'',
         head:'',
         contacts:'',
@@ -32,17 +29,16 @@ class AdminAddProjects extends Component {
         source: '',
         isPublic:false,
         isPreview:false,
-        isCorrectValue:false,
-        value:100
+        value:1000,
+        addMediaImageCount:0,
+        addMediaVideoCount:0
     }
     cropperRef = React.createRef()
     componentWillMount() {
         if (this.props.location.state) {
-            // let infoAboutProjects = this.props.location.state.detail;
             this.setState({
                 image: this.props.location.state.detail.image,
                 name: this.props.location.state.detail.name,
-                // shortText: this.props.location.state.detail.shortText,
                 organization:this.props.location.state.detail.organization,
                 head:this.props.location.state.detail.head,
                 contacts:this.props.location.state.detail.contacts,
@@ -51,7 +47,6 @@ class AdminAddProjects extends Component {
                 video:this.props.location.state.detail.video,
                 fullText: this.props.location.state.detail.fullText,
                 source: this.props.location.state.detail.source,
-                // date: this.props.location.state.detail.date,
                 isPublic: this.props.location.state.detail.isPublic
             })
         }
@@ -64,21 +59,18 @@ class AdminAddProjects extends Component {
             <Navigation onLogout={this.onLogout}/>
             <NavBar />
             {!this.state.isPreview ? 
-            <form className="list-container" encType="multipart/form-data" method="post">
+            <form className="list-container"  encType="multipart/form-data" method="post" >
                 <div className = "projects-status">
                     <span>Статус проекта: {this.state.isPublic ? " опубликована" : " черновик"}</span>
                     <Route render={({history}) => (
-                                <Button 
-                                    label={"Опубликовать"}
-                                    name = "button-admin"
-                                    clickHandler = {this.onPublish}
-                                />
+                        <Button 
+                            label={"Опубликовать"}
+                            name = "button-admin"
+                            clickHandler = {this.onPublish}
+                        />
                     )} />
                 </div>
-                {/* <div className="date-projects-container">
-                    <AdminDateEvent onSelectData= {this.getDate} date = {this.state.date} />
-                </div> */}
-                 <hr />
+                <hr />
                 <div>
                     <AdminUploadImage 
                         id = "image-projects"
@@ -86,13 +78,12 @@ class AdminAddProjects extends Component {
                         imageData = {this.state.imageData}
                         image = {this.state.image}
                         onCropImage = {this.onCropImage}
-                        // ratio = {3.5/5}
                         deleteImage = {this.deleteImage}
                     />
                 </div>
                 <hr />
                 <div className='admin-projects-text-container'>
-                <div className="admin-name-projects">
+                    <div className="admin-name-projects">
                         <TextField 
                             required
                             id = "name-projects" 
@@ -102,9 +93,9 @@ class AdminAddProjects extends Component {
                             value = {this.state.name}
                             onChangeValue = {this.getValue}
                         />
-                </div>
-                <hr />
-                <div className="admin-organization-projects">
+                    </div>
+                    <hr />
+                    <div className="admin-organization-projects">
                         <TextField 
                             id = "organization-projects" 
                             label = "Организация:"
@@ -113,9 +104,9 @@ class AdminAddProjects extends Component {
                             value = {this.state.organization}
                             onChangeValue = {this.getOrganization}
                         />
-                </div>
-                <hr />
-                <div className="admin-head-projects">
+                    </div>
+                    <hr />
+                    <div className="admin-head-projects">
                         <TextField 
                             required
                             id = "head-projects" 
@@ -125,9 +116,9 @@ class AdminAddProjects extends Component {
                             value = {this.state.head}
                             onChangeValue = {this.getHead}
                         />
-                </div>
-                <hr />
-                <div className="admin-contacts-projects">
+                    </div>
+                    <hr />
+                    <div className="admin-contacts-projects">
                         <TextField 
                             required
                             id = "contacts-projects" 
@@ -137,8 +128,8 @@ class AdminAddProjects extends Component {
                             value = {this.state.contacts}
                             onChangeValue = {this.getContacts}
                         />
-                </div>
-                <div className="admin-address-projects">
+                    </div>
+                    <div className="admin-address-projects">
                         <TextField 
                             required
                             id = "address-projects" 
@@ -148,8 +139,8 @@ class AdminAddProjects extends Component {
                             value = {this.state.address}
                             onChangeValue = {this.getAddress}
                         />
-                </div>
-                <div className="admin-site-projects">
+                    </div>
+                    <div className="admin-site-projects">
                         <TextField
                             id = "site-projects" 
                             label = "Сайт:"
@@ -158,31 +149,43 @@ class AdminAddProjects extends Component {
                             value = {this.state.site}
                             onChangeValue = {this.getSite}
                         />
-                </div>
-                <hr />
-                <div className="admin-video-projects">
-                        <TextField
-                            id = "video-projects" 
-                            label = "Видео:"
-                            type = "text"
-                            name = "video-projects"
-                            value = {this.state.video}
-                            onChangeValue = {this.getVideo}
-                        />
-                </div>
-                <hr />
-                </div>
-                {/* <div className="text-projects">
-                    <div>Краткое описание:</div>
-                        <div className = "admin-textarea">
-                            <textarea 
-                                    rows = "5"
-                                    value = {this.state.shortText}
-                                    onChange = {this.getCurrentTextShort}
-                                    maxLength = "300"
-                            ></textarea>
+                    </div>
+                    <hr />
+                    <div className="admin-media-projects">
+                        <div className="admin-media-image-projects">
+                            <span>Изображение:</span>
+                            <AdminUploadImage 
+                                id = "image-projects"
+                                name = "image-projects"
+                                // imageData = {this.state.imageData}
+                                // image = {this.state.image}
+                                // onCropImage = {this.onCropImage}
+                                // deleteImage = {this.deleteImage}
+                            />
+                            <Button
+                                label={"Добавить фото"}
+                                clickHandler={this.addMediaImage}
+                                name = "admin-button admin-projects-media-buttons"
+                            />
                         </div>
-                </div> */}
+                        <div className="admin-media-video-projects">
+                            <TextField
+                                id = "video-projects" 
+                                label = "Видео:"
+                                type = "text"
+                                name = "video-projects"
+                                value = {this.state.video}
+                                onChangeValue = {this.getVideo}
+                            />
+                            <Button
+                                label = {"Добавить видео"}
+                                clickHandler = {this.addMediaVideo}
+                                name = "admin-button admin-projects-media-buttons"
+                            />
+                        </div>
+                    </div>
+                    <hr />
+                </div>
                 <div className="text-projects">
                     <div className="full-text-projects">Описание проекта:</div>
                     <div className="projects-textfield">
@@ -206,13 +209,11 @@ class AdminAddProjects extends Component {
                 </div>
                 <hr />
                 <div className="text-projects">
-                
                             <div className = "projects-source">
                                 <label>Источник:</label>
                             </div>
                             <div>
                                 <select value={this.state.source} onChange={this.handleChange}>
-                                    
                                     <option value="creative">Творческие</option>
                                     <option value="rehabilitative">Реабилитационные</option>
                                     <option value="educational">Образовательные</option>
@@ -268,7 +269,6 @@ class AdminAddProjects extends Component {
             site = {this.state.site}
             video = {this.state.video}
             fullText = {this.state.fullText}
-            // date = {this.state.date}
             onPublish = {this.onPublish}
             onDraft = {this.onDraft}
             getNewStatePreview = {this.getNewStatePreview}
@@ -276,14 +276,10 @@ class AdminAddProjects extends Component {
             } 
             </div>
         )
-        
     }
     getValue = (obj) => {
         this.setState({name: obj.value});
     }
-    // getDate = (str) =>{
-    //     this.setState({date:str})
-    // }
     getOrganization = (obj) =>{
         this.setState({organization:obj.value})
     }
@@ -308,9 +304,6 @@ class AdminAddProjects extends Component {
     handleChange = (event) => {
         this.setState({source: event.target.value})
     }
-    // getCurrentTextShort = (obj) => {
-    //     this.setState({shortText: obj.value})
-    // }
     onCropImage = (image) => {
         this.setState({imageData: image})
     }
@@ -319,10 +312,6 @@ class AdminAddProjects extends Component {
             isPreview: false
         })
     }
-    // checkText = () => {
-    //         let newText = this.state.fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
-           
-    // }
     onCorrectValue = () =>{
         let newText = this.state.fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
         return newText.length<=this.state.value
@@ -414,7 +403,16 @@ class AdminAddProjects extends Component {
             imageData: '',
             image: ''
         })   
+    }
+    addMediaImage = (e) => {
+        e.preventDefault()
+        this.state.addMediaImageCount++;
+        console.log(this.state.addMediaImageCount)
+    }
+    addMediaVideo = (e) =>{
+        e.preventDefault()
+        this.state.addMediaVideoCount++;
+        console.log(this.state.addMediaVideoCount)
     } 
 }
-
 export default withRouter(AdminAddProjects);
