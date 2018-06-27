@@ -13,6 +13,7 @@ class AdminSelectSearch extends Component {
         addNewOption : false,
     }
     componentDidMount(){
+        (this.props.value) ? this.setState({value:this.props.value}) : null;
         this.createOptions();
     }
     createOptions = () =>{
@@ -28,7 +29,10 @@ class AdminSelectSearch extends Component {
          this.setState({filters:array});
     }
     onChange = (e) => {
-        (e)? this.setState ({value:e }) : '';
+        (e)? this.setState ({value:e } ,() => {
+            this.props.getFilter(this.state.value);
+        }) : '';
+        
     }
     render() {
         const { selectedOption, addNewOption } = this.state;

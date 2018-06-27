@@ -21,7 +21,7 @@ class AdminAddNews extends Component {
         title: '',
         shortText: '',
         fullText: '',
-        filters: '',
+        filter: '',
         isPublic: false,
         imageData: '',
         isPreview: false,
@@ -42,6 +42,7 @@ class AdminAddNews extends Component {
                 fullText: this.props.location.state.detail.fullText,
                 isPublic: this.props.location.state.detail.isPublic,
                 image: this.props.location.state.detail.image,
+                filter: this.props.location.state.detail.filter,
                 date: this.props.location.state.detail.createdAt,
                 value: this.props.location.state.detail.shortText.length
             })
@@ -122,7 +123,9 @@ class AdminAddNews extends Component {
                             <div>
                                 {this.state.filters? 
                                     <AdminSelectSearch 
+                                        value = {this.state.filter}
                                         filtersList = {this.state.filters}
+                                        getFilter = {this.getFilter}
                                     />:null}
                               
                             </div>
@@ -195,6 +198,9 @@ class AdminAddNews extends Component {
         this.setState({
             isPreview: false
         })
+    }
+    getFilter = (str) => {
+        this.setState({filter: str});
     }
     checkText = () => {
         if (!this.state.shortText) {
