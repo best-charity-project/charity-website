@@ -28,18 +28,18 @@ class FiltersForPages extends Component {
         if(this.state.title){        
             this.createFilter();
             this.props.getNewFilterList();
-            this.setState({title: ''})
+            this.setState({title: ''});
         }        
     }
     getValue = (str) => {
-        this.setState({title: str.value})    
+        this.setState({title: str.value});    
     }
     deleteFilter= (filter) => {
         let id = filter._id; 
         this.removeFilter(id);
     }
     showFilterList = () => {
-        this.setState({isOpen: !this.state.isOpen})
+        this.setState({isOpen: !this.state.isOpen});
     }
     onKeyPress  = (e) => {
         (e.charCode === 13)? this.addFilter(): null;
@@ -52,14 +52,14 @@ class FiltersForPages extends Component {
                  <div>
                     <div className = 'input-button-filters-page'>
                         <TextField
-                                onKeyPress = {this.onKeyPress}
-                                label = 'Добавить фильтр :'
-                                value = {this.state.title}
-                                onChangeValue = {this.getValue}
+                            onKeyPress = {this.onKeyPress}
+                            label = 'Добавить фильтр :'
+                            value = {this.state.title}
+                            onChangeValue = {this.getValue}
                         />
                         <Button                        
-                                clickHandler = {this.addFilter}                        
-                                label = 'Добавить'
+                            clickHandler = {this.addFilter}                        
+                            label = 'Добавить'
                         />
                    </div>
                    <div className = 'filters-list'>

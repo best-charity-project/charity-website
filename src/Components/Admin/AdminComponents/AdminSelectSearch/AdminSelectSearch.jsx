@@ -22,13 +22,13 @@ class AdminSelectSearch extends Component {
                 let filter = {};
                 filter.label= item.title;
                 filter.value = index;
-                array.push(filter)
+                array.push(filter);
             })
         }
          this.setState({filters:array});
     }
     onChange = (e) => {
-        (e)? this.setState ({value:e }): '';
+        (e)? this.setState ({value:e }) : '';
     }
     render() {
         const { selectedOption, addNewOption } = this.state;
@@ -49,7 +49,7 @@ class AdminSelectSearch extends Component {
                                 key = {index} 
                                 value = {filter.label}>
                                 {filter.label}
-                            </Option>;
+                            </Option>
                 })}
                 </Select>
                 {addNewOption ? <div className = 'input-buttom-select' >
@@ -64,7 +64,7 @@ class AdminSelectSearch extends Component {
                             clickHandler = {this.addNewFilter}                        
                             label = 'Добавить'
                         />
-                        </div>:null}       
+                        </div> : null}       
             </div>
         )
     }
@@ -78,7 +78,7 @@ class AdminSelectSearch extends Component {
     }
 
     getValue =(str) => {
-        this.setState({newFilterValue : str.value })
+        this.setState({newFilterValue : str.value });
     }
 
     addNewFilter = (e) => {
@@ -91,13 +91,13 @@ class AdminSelectSearch extends Component {
         },
         body : JSON.stringify({title:this.state.newFilterValue, type:'news'}),
         })
-        this.setState({newFilterValue: ''})
+        this.setState({newFilterValue: ''});
         let arrayFilter = this.state.filters;
         let lengthArray = arrayFilter.length;
         let lastValue = arrayFilter[lengthArray-1].value;
         let newFilter = this.state.newFilterValue;
-        arrayFilter.push({label:newFilter, value: lastValue ++} )          
-        this.setState({filters: arrayFilter, addNewOption:false})
+        arrayFilter.push({label:newFilter, value: lastValue ++});          
+        this.setState({filters: arrayFilter, addNewOption:false});
     }
 }
 

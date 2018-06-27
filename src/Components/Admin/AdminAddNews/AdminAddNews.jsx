@@ -12,7 +12,7 @@ import Button from '../../Button/Button';
 import Navigation from '../../Navigation/Navigation';
 import NavBar from '../../NavBar/NavBar';
 import AdminPreview from '../AdminComponents/AdminPreview/AdminPreview';
-import AdminSelectSearch from '../../Admin/AdminComponents/AdminSelectSearch/AdminSelectSearch'
+import AdminSelectSearch from '../../Admin/AdminComponents/AdminSelectSearch/AdminSelectSearch';
 
 import './AdminAddNews.css';
 
@@ -32,7 +32,7 @@ class AdminAddNews extends Component {
     cropperRef = React.createRef()
 
     componentWillMount() {
-        this.getFiltersList()
+        this.getFiltersList();
         this.setState({
             source: 'organizers',
         })
@@ -125,9 +125,9 @@ class AdminAddNews extends Component {
                             </div>
                             <div>
                                 {this.state.filters? 
-                                <AdminSelectSearch 
-                                    filtersList = {this.state.filters}
-                                />:null}
+                                    <AdminSelectSearch 
+                                        filtersList = {this.state.filters}
+                                    />:null}
                               
                             </div>
                         </div>
