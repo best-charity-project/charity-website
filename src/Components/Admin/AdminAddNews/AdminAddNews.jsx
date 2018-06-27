@@ -33,9 +33,6 @@ class AdminAddNews extends Component {
 
     componentWillMount() {
         this.getFiltersList();
-        this.setState({
-            source: 'organizers',
-        })
         if (this.props.location.state) {
             let infoAboutNews = this.props.location.state.detail;
 
@@ -43,7 +40,6 @@ class AdminAddNews extends Component {
                 title: this.props.location.state.detail.title,
                 shortText: this.props.location.state.detail.shortText,
                 fullText: this.props.location.state.detail.fullText,
-                source: this.props.location.state.detail.source,
                 isPublic: this.props.location.state.detail.isPublic,
                 image: this.props.location.state.detail.image,
                 date: this.props.location.state.detail.createdAt,
@@ -195,9 +191,6 @@ class AdminAddNews extends Component {
             value: event.target.value.length
         })
     } 
-    handleChange = (event) => {
-        this.setState({source: event.target.value})
-    }
     getNewStatePreview = () => {
         this.setState({
             isPreview: false
@@ -232,7 +225,6 @@ class AdminAddNews extends Component {
             title: '',
             shortText: '',
             fullText: '',
-            source: '',
             isPublic: false,
             imageData: '',
             image: ''
@@ -259,7 +251,6 @@ class AdminAddNews extends Component {
                 title: '',
                 shortText: '',
                 fullText: '',
-                source: '',
                 isPublic: false,
                 imageData: '',
                 image: ''
