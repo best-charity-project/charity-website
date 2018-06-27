@@ -2,15 +2,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px 0;
+    margin: 20px;
     overflow-y: auto;
     max-height: 500px;
 }
-.modal-element .modal-window-new .admin-image {
-    margin-bottom: 0;
-}
+/* .modal-element .modal-window-new .admin-image {
+    margin-bottom: 20px;
+} */
 .modal-element .modal-window-new .admin-buttons {
     margin: 0 auto;
+}
+.modal-element .modal-window-new .admin-image {
+    margin: 10px 70px 20px 0;
+    min-height: 28px;
+}
+.modal-element .modal-window-new .admin-image label {
+    padding-right: 20px;
 }
 .modal-element .modal-window-new button,
 .modal-element .modal-window-new .admin-button  {
@@ -18,18 +25,44 @@
     font-size: 16px;
     min-height: 28px;
 }
-.modal-element .modal-window-new .button-admin.align {
+.modal-element .modal-window-new .after-img {
+    width: 500px;
+    margin-bottom: 20px;
+/*     position: absolute;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    right: 0px; */
+}
+.modal-element .modal-window-new .button-admin.add-image {
+    margin-bottom: 15px;
+}
+/* .modal-element .modal-window-new .button-admin.align {
     align-self: flex-start;
     margin-bottom: 20px;
     margin-left: 115px;
-}
-.modal-element .modal-window-new .position-cropper {
+} */
+/* .modal-element .modal-window-new .position-cropper {
     margin-top: 20px;
-}
-.modal-element .modal-window-new .position-cropper div:nth-child(2) div:first-child {
+} */
+/* .modal-element .modal-window-new .position-cropper div:nth-child(2) div:first-child {
     width: 100% !important;
+} */
+.modal-element .modal-window-new .image-array {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    min-height: min-content;
+}
+.modal-element .modal-window-new .admin-title-image {
+    margin-top: 10px;
+    margin-right: 20px;
+    min-height: min-content;
+    max-width: 870px;
+    flex-wrap: wrap;
 }
 .modal-element .modal-window-new .slider-image {
     margin-bottom: 20px;
-    margin-left: 40px;
+    max-width: 350px;
 }

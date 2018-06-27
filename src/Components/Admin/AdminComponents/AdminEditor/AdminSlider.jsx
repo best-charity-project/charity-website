@@ -20,13 +20,14 @@ class AdminSlider extends Component {
     }
     render() {
         return (
-            <div className = 'rdw-option-wrapper' aria-selected = 'false' title = 'Слайдер' onClick = {this.openModalWindow}>
+            <div className = 'rdw-option-wrapper' aria-selected = 'false' title = {!this.state.isOpen ? 'Слайдер' : null} onClick = {this.openModalWindow}>
                 <img src = {slider} alt = '' />
                 <div className = {this.state.isOpen ? 'overlay' : 'overlay hidden'} onClick = {this.closeModalWindow}>
                     <div className="modal-element">
                         <ModalWindow 
                             getUrl = {this.getUrl}
                             addSlider = {this.addSlider}
+                            isOpen = {this.state.isOpen}
                         />
                     </div>
                 </div>
@@ -40,7 +41,10 @@ class AdminSlider extends Component {
         if (e.target.className === 'overlay' || ~e.target.className.indexOf('close-window')) {
             e.preventDefault()
             e.stopPropagation()
-            this.setState({isOpen: false})
+            this.setState({
+                isOpen: false,
+                imageArr: []
+            })
         } 
     }
     addSlider = (e) => {
@@ -51,11 +55,7 @@ class AdminSlider extends Component {
             str += '<img src = "' + item + '" alt = "" />'
         })
         str += '</div>' 
-        str = draftToHtml(str)
-        console.log(111,str)
-        /* let parser = new DOMParser()
-        str = parser.parseFromString(str, "text/xml")
-        console.log(str) */
+        
 
         const {editorState, onChange} = this.props;
         const contentState = Modifier.replaceText(
@@ -65,7 +65,10 @@ class AdminSlider extends Component {
             editorState.getCurrentInlineStyle(),
         );
         onChange(EditorState.push(editorState, contentState, 'insert-characters'));
-        this.setState({isOpen: false})
+        this.setState({
+            isOpen: false,
+            imageArr: []
+        })
     }
 
     getUrl = (imageArr) => {

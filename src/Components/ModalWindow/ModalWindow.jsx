@@ -13,10 +13,15 @@ class ModalWindow extends Component {
         imageArr: []
     }
     cropperRef = React.createRef()
+
+    componentWillReceiveProps(nextProps) {
+        nextProps.isOpen ? null : this.setState({imageArr: []})
+    }
+
     render() {
         return(
             <div className = 'modal-window-new'> 
-                <AdminUploadImage 
+                {/* <AdminUploadImage 
                     id = "image"
                     name = "image"
                     imageData = {this.state.imageData}
@@ -24,26 +29,55 @@ class ModalWindow extends Component {
                     onCropImage = {this.onCropImage}
                     ratio = {8 /3}
                     deleteImage = {this.deleteImage}
-                />
+                /> */}
+                <div className = "admin-image">
+                    <label htmlFor = {this.props.id}>Фото:</label>
+                    <div className = "admin-button">
+                        <div className = "choose-file">
+                            <span>Выберите файл</span>
+                        </div>
+                        <input
+                            id = "slider-image" 
+                            type  = "file"
+                            name = "slider-image"
+                            onChange = {this.onChangeFile}
+                        />
+                    </div>
+                </div> 
+                {this.state.imageData
+                    ? /* <div className = 'admin-title-image'> 
+                        <img
+                            className = "after-img"
+                            src = {this.state.imageData}
+                            alt = ""
+                        />
+                        <Button 
+                            name = "button-admin admin-cancel"
+                            label = {<span aria-hidden="true">&times;</span>}
+                            clickHandler = {this.deleteImage}
+                        />
+                        </div>                            
+                    : null} 
                 {this.state.imageData ?
                     <Button 
-                        name = "button-admin align"
+                        name = "button-admin add-image"
                         clickHandler = {this.addImage}
                         label = "Добавить"
                     /> :
-                null}
-                <div>
+                null} */
+                <div className = "image-array">
                     {this.state.imageArr.map((link, index) =>
                         <div className = 'admin-title-image' key = {index} >
                             <img src = {link} alt = '' className = 'slider-image'/>
                             <Button 
                                 name = "button-admin admin-cancel"
                                 label = {<span aria-hidden="true">&times;</span>}
-                                clickHandler = {this.deleteGalleryImage}
+                                clickHandler = {(event) => this.deleteGalleryImage(event, index)}
                             />
                         </div>
                     )}
                 </div>
+                : null}
                 <div className = 'admin-buttons'>
                     {this.state.imageArr.length ?
                         <Button 
@@ -54,28 +88,46 @@ class ModalWindow extends Component {
                         null}
                     <Button 
                         name = "button-admin close-window"
-                        clickHandler = {this.props.closeModalWindow}
+                        clickHandler = {this.closeModalWindow}
                         label = "Отмена"
                     />
                 </div>
             </div>
         )
     }
-    onCropImage = (image) => {
-        this.setState({imageData: image})
+    onChangeFile = (event) => {
+        const imageType = /^image\//
+        const file = event.target.files.item(0)
+        const reader = new FileReader()
+
+        if (!file || !imageType.test(file.type)) {
+            return
+        }
+
+        reader.onload = (e) => {
+            this.setState({imageData: e.target.result}, this.addImage)
+        }
+        reader.readAsDataURL(file)
+        event.target.value = null
     }
-    deleteImage = () => {
-        this.setState({
-            imageData: '',
-            image: ''
-        })   
+    deleteGalleryImage = (event, index) => {
+       event.preventDefault()
+       let imageArr = this.state.imageArr
+       let deletedImage = imageArr.splice(index, 1)
+       axios({
+            method: 'delete',
+            url: `${server}/uploadGalleryImage/`,
+            data: deletedImage,
+            config: {headers: {'Content-Type': 'application/json; charset=UTF-8'}},
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+       this.setState({
+           imageArr: imageArr
+       })      
     }
-    deleteGalleryImage = (e) => {
-        e.preventDefault()
-        // todo!!!!!!!!!!!!!!!!!!!!!!!! 
-    }
-    addImage = (e) => {
-        e.preventDefault()
+    addImage = () => {
         let formData  = new FormData();
         formData.append('imageData', this.state.imageData);
         axios({
@@ -94,6 +146,12 @@ class ModalWindow extends Component {
         .catch(function (error) {
             console.log(error);
         });
+    }
+    closeModalWindow = (e) => {
+        e.preventDefault()
+        this.setState({
+            imageArr: []
+        })
     }
 }
 export default ModalWindow;
