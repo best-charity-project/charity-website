@@ -38,6 +38,17 @@
     left: 0;
 }
 
+.project-gallery {
+    display: flex;
+    justify-content: space-between;
+}
+
+.gallery-item {
+    height: 200px;
+    width: 200px;
+    background-color: #3b3f48;
+}
+
 .text-container {
     padding-top: 20px;
     padding: 10px 20px 30px 20px;
@@ -74,6 +85,10 @@
 .contact-info span {
     margin: 40px;
     margin: 0;
+}
+
+.contact-info p {
+    margin: 5px;
 }
 
 .contact-info-icon {

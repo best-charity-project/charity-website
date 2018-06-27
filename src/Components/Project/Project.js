@@ -33,12 +33,12 @@ class Project extends Component {
                     </div>
                 </div>
                 <div className="project-section">
-                    <div className={this.state.fullTextView ? "full-text-card" : ""}>
+                    <div>
                         <div className="text-container">
                             <div className="project-title"><h3>{this.props.content.name}</h3></div>
                             <div className="project-address">{this.props.content.address}</div>
                             <div className="project-desc">
-                                <span dangerouslySetInnerHTML= {{__html: !this.state.isFullText ? null : this.props.content.fullText}}></span>
+                                <span dangerouslySetInnerHTML= {{__html: this.props.content.fullText}}></span>
                             </div>
                             {this.state.fullTextView && this.props.content.video != "" ? 
                                 <div className="player-wrapper">
@@ -51,12 +51,20 @@ class Project extends Component {
                                 </div> : null }
                         </div>
                         {this.state.fullTextView ? 
+                            <div>
+                            <div className="project-gallery">
+                                <div className="gallery-item"></div>
+                                <div className="gallery-item"></div>
+                                <div className="gallery-item">VIDEO</div>
+                                <div className="gallery-item"></div>
+                            </div>
                             <div className="contact-info">
                                 <p>Контактная информация</p>
                                 <hr/>
-                                <img className="contact-info-icon" src={Organization}></img><span>{this.props.content.organization}</span><br/>
-                                <img className="contact-info-icon" src={Person}></img><span>{this.props.content.head}</span><br/>
-                                <img className="contact-info-icon" src={Phone}></img><span>{this.props.content.contacts}</span><br/>
+                                <span>{this.props.content.organization}</span><br/>
+                                <span>{this.props.content.head}</span><br/>
+                                <span>{this.props.content.contacts}</span><br/>
+                            </div>
                             </div> : null }
                     </div>
                     <div className="show-more-container">
