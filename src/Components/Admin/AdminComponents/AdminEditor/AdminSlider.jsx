@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {ContentState, convertToRaw, EditorState, Modifier} from 'draft-js';
 import PropTypes from 'prop-types';
-/* import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs'; */
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
 /* import {server} from '../../../../api';
 import axios from 'axios'; */
 import ModalWindow from '../../../ModalWindow/ModalWindow';
@@ -51,6 +51,8 @@ class AdminSlider extends Component {
             str += '<img src = "' + item + '" alt = "" />'
         })
         str += '</div>' 
+        str = draftToHtml(str)
+        console.log(111,str)
         /* let parser = new DOMParser()
         str = parser.parseFromString(str, "text/xml")
         console.log(str) */
