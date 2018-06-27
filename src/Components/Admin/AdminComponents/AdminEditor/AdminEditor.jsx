@@ -16,13 +16,13 @@ class ControlledEditor extends Component {
         }
     }
 
-    componentDidMount() {
+    componentDiddMount() {
         this.props.text ? 
             this.setState({ editorContent: this.getInitialHTML(this.props.text)}) :
             this.setState({ editorContent: '' }) 
     }
     componentWillReceiveProps(curprops, nextprops){
-        if(curprops.text!=nextprops.text){
+        if(curprops.text!=nextprops.text && !this.state.editorContent){
             this.setState({ editorContent: this.getInitialHTML(curprops.text)})
         }
     }

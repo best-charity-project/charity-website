@@ -1,16 +1,22 @@
 import React, {Component} from 'react';
-// import Select from 'react-select';
-// import 'react-select/dist/react-select.css';
-// import '../AdminSelectSearch/AdminSelectSearch.css'
 import Select, {Option, OptGroup} from 'rc-select';
 import 'rc-select/assets/index.css';
+import _ from 'lodash';
+import '../AdminSelectSearch/AdminSelectSearch.css';
+import TextField from '../../../TextField/TextField';
+import Button from '../../../Button/Button';
+import {server} from '../../../../api';
+
 class AdminSelectSearch extends Component {
     state = {
-        filters: this.props.filtersList
+        filters: this.props.filtersList,
+        addNewOption:false,
     }
+
     componentDidMount(){
-        this.createOptions()
+        this.createOptions();
     }
+
     createOptions = () =>{
         let array = [];
         if(this.state.filters){
@@ -20,41 +26,84 @@ class AdminSelectSearch extends Component {
                 filter.value = index;
                 array.push(filter)
             })
-
         }
      this.setState({filters:array})
     }
-    handleChange = (selectedOption) => {
-        this.setState({ selectedOption });
+
+    onChange = (e) => {
+        (e)? this.setState ({value:e }): '';
       }
+
     render() {
-        const { selectedOption } = this.state;
-        const value = selectedOption && selectedOption.value;
+        const { selectedOption, addNewOption } = this.state;
         return (
-            <div className="search-projects">
-                  <Select
-          disabled={this.state.disabled}
-          style={{ width: 500 }}
-          onChange={this.onChange}
-          onSelect={this.onSelect}
-          onInputKeyDown={this.onKeyDown}
-          notFoundContent=""
-          allowClear
-          placeholder="please select"
-          value={this.state.value}
-          combobox
-          backfill
-        >
-          <Option value="jack">
-            <b style={{ color: 'red' }}>jack</b>
-          </Option>
-          <Option value="lucy">lucy</Option>
-          <Option value="disabled" disabled>disabled</Option>
-          <Option value="yiminghe">yiminghe</Option>
-        </Select>
+            <div className="select-component" onChange= {this.getOptions}>
+                <Select                    
+                    id="my-select"
+                    value={this.state.value}
+                    placeholder="Введите источник"
+                    dropdownMenuStyle={{ maxHeight: 250 }}
+                    style={{ width: 500 }}
+                    onInputKeydown= {this.onSearch}
+                    onChange={this.onChange}
+                    notFoundContent = 'Ничего не найдено'
+                >
+                {this.state.filters.map((filter,index) => {
+                    return <Option 
+                                key = {index} 
+                                value={filter.label}>
+                            {filter.label}
+                            </Option>;
+                })}
+                </Select>
+                {addNewOption?<div className = 'input-buttom-select' >
+                    <TextField
+                            onKeyPress = {this.onKeyPress}
+                            label = 'Добавить фильтр :'
+                            value = {this.state.newFilterValue}
+                            onChangeValue = {this.getValue}
+                    />
+                    <Button   
+                                name = 'select-button'                     
+                            clickHandler = {this.addNewFilter}                        
+                            label = 'Добавить'
+                        />
+                        </div>:null}       
             </div>
         )
     }
+
+    getOptions = (e) => {
+        let value = e.target.value;
+       let addNewOption = _.filter(this.state.filters, function(o) { 
+        return o.label.includes(value) });   
+       (!addNewOption.length)? this.setState({addNewOption:true}) : null;
+       (!e.target.value.length)? this.setState({addNewOption:false}) : null;
+    }
+
+    getValue =(str) => {
+        this.setState({newFilterValue: str.value })
+    }
+
+    addNewFilter = (e) => {
+        e.preventDefault();
+        fetch(`${ server }/filters`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({title:this.state.newFilterValue, type:'news'}),
+        })
+        this.setState({newFilterValue: ''})
+        let arrayFilter = this.state.filters;
+        let lengthArray= arrayFilter.length;
+        let lastValue = arrayFilter[lengthArray-1].value;
+        let newFilter = this.state.newFilterValue;
+        arrayFilter.push({label:newFilter, value: lastValue ++} )          
+        this.setState({filters: arrayFilter, addNewOption:false})
+    }
+
 }
 
 export default AdminSelectSearch;

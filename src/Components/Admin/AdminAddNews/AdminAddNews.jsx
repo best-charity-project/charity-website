@@ -51,20 +51,8 @@ class AdminAddNews extends Component {
             })
         }
     }
-    // shouldComponentUpdate(nextProps, nextState){
-    //     if(this.state.filters!=nextState.filters){
-    //         console.log(nextState.filters)
-    //        this.setState({filters:nextState.filters})
-    //        return true;
-    //     }
-    // }
-// componentWillReceiveProps(curprops, nextprops){
-//         console.log(curprops)
-//         console.log(nextprops)
-    
-// }
+
     render() {
-        console.log(this.state)
         return (
             <div className="admin-content">
                 <Navigation onLogout={this.onLogout} />
@@ -136,12 +124,10 @@ class AdminAddNews extends Component {
                                 <label>Источник:</label>
                             </div>
                             <div>
-                                {this.state.filters ? <AdminSelectSearch filtersList = {this.state.filters}/> : null}
-                                {/* <select  onChange={this.handleChange}>
-                                    {this.state.filters ? this.state.filters.map((el,index) => {
-                                    return  <option value={el.title} key = {index}>{el.title}</option>
-                                    }): null}
-                                 </select>  */}
+                                {this.state.filters? <AdminSelectSearch 
+                                filtersList = {this.state.filters}
+                                />:null}
+                              
                             </div>
                         </div>
                         <div className = 'button-info'>

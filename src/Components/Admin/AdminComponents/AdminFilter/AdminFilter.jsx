@@ -1,12 +1,20 @@
 import React, {Component} from 'react';
 import Button from '../../../Button/Button';
-import '../AdminFilter/AdminFilter.css'
+import '../AdminFilter/AdminFilter.css';
+
 class AdminFilter extends Component {
     state = {
+        title : '',
+        id: ''
+    }
+
+   componentDidMount(){
+       this.setState({
         title : this.props.filter.title,
         id: this.props.filter._id
-    }
-   
+       })
+   }
+
     render() {
         return (
             <div  id = {this.state.id} className = 'admin-filter-container'>
@@ -15,7 +23,7 @@ class AdminFilter extends Component {
                        name = "button-admin "
                        label = {<span aria-hidden="true">&times;</span>}
                        clickHandler = {this.props.deleteHandler}
-                   />
+              />
             </div> 
         )
     }
