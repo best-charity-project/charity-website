@@ -7,11 +7,19 @@ import { server } from '../../../src/api';
 class NewsList extends Component {
     
     render() {
+        console.log(this.props)
         return (
          <div className={this.props.name}>
             <Masonry className = 'masonry-div'> 
                 {(this.props.array)?this.props.array.map(function(el){
-                    return <News id = {el._id} name = {el.title} text = {el.shortText} date = {el.date} key = {el._id} img = {(el.image!='undefined')?el.image:null}/>
+                    return <News 
+                                id = {el._id} 
+                                name = {el.title} 
+                                text = {el.shortText} 
+                                date = {el.createdAt} 
+                                key = {el._id} 
+                                img = {(el.image!='undefined')?el.image:null}
+                            />
                 }):null}
             </Masonry>
          </div>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Button from '../../../Button/Button';
 import '../AdminFilter/AdminFilter.css';
+import { defaultFormat } from 'moment';
 
 class AdminFilter extends Component {
     state = {
@@ -14,15 +15,21 @@ class AdminFilter extends Component {
        })
    }
     render() {
+        let defaultFilter = this.state.title.toLowerCase();
         return (
-            <div  id = {this.state.id} className = 'admin-filter-container'>
-              <span className = 'admin-filter-title'> {this.state.title}</span>
-              <Button
-                 name = "button-admin "
-                 label = {<span aria-hidden="true">&times;</span>}
-                 clickHandler = {this.props.deleteHandler}
-              />
-            </div> 
+            <div>
+                {defaultFilter !== 'все' ?
+                    <div  id = {this.state.id} className = 'admin-filter-container' >
+                        <span className = 'admin-filter-title' > {this.state.title}</span>
+                        <Button
+                            name = "button-admin "
+                            label = {<span aria-hidden="true">&times;</span>}
+                            clickHandler = {this.props.deleteHandler}
+                        />
+                    </div> 
+               : null}                
+            </div>
+           
         )
     }
 }
