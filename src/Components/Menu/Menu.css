@@ -159,9 +159,9 @@
     min-height: 100px;
 }
 .menu {
+	width: 100%;
+	background-color: #e8e6e2;
 	height: 80px;
-    width: 100%;
-    position: fixed;
-    z-index: 9999;
-    background-color: #e8e6e2;
+	position: fixed;
+	z-index: 9999;
 }

@@ -27,14 +27,14 @@ class NewsAside extends Component {
                         {this.state.filters ? this.state.filters.map((el,index)=> {
                             if(activeItem === el.title){
                                 return <li 
-                                            className ='active-link-news' 
-                                            key = {index}>
-                                            {el.title}
+                                          className ='active-link-news' 
+                                          key = {index}>
+                                          {el.title}
                                        </li>
                             }                      
                             return <li
-                                        key = {index}>
-                                        {el.title}
+                                      key = {index}>
+                                      {el.title}
                                    </li>                    
                         
                         }): null}
