@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Editor} from 'react-draft-wysiwyg';
-import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
+/* import draftToHtml from 'draftjs-to-html'; */
+/* import htmlToDraft from 'html-to-draftjs'; */
 import {ContentState, convertToRaw} from 'draft-js';
+import {convertToHTML, convertFromHTML, Middleware} from 'draft-convert';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import {server} from '../../../../api';
 import axios from 'axios';
@@ -24,14 +25,14 @@ class ControlledEditor extends Component {
     }
     
     getInitialHTML = (str) => {
-        const contentBlock = htmlToDraft(str);
+        const contentBlock = convertToHTML(str);
         if (contentBlock.contentBlocks !== null) {
             const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks, contentBlock.entityMap);
             return convertToRaw(contentState);
         }
     }
     onEditorChange =(contentState) => {
-        let text = draftToHtml(contentState)
+        let text = convertFromHTML(contentState)
         this.props.getCurrentText(text)
     }
 

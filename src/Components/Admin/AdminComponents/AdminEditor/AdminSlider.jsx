@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {ContentState, /* convertToRaw, */ EditorState, Modifier, convertFromHTML} from 'draft-js';
+import {ContentState, /* convertToRaw, */ EditorState, Modifier/* , convertFromHTML */} from 'draft-js';
 import PropTypes from 'prop-types';
+import {convertToHTML, convertFromHTML, Middleware} from 'draft-convert';
 /* import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs'; */
 /* import {server} from '../../../../api';
@@ -18,6 +19,13 @@ class AdminSlider extends Component {
         onChange: PropTypes.func,
         editorState: PropTypes.object
     }
+    decorator = new CompositeDecorator([
+        {
+          strategy: findImageEntities,
+          component: Image,
+        },
+    ]);
+ 
     render() {
         return (
             <div className = 'rdw-option-wrapper' aria-selected = 'false' title = {!this.state.isOpen ? 'Слайдер' : null} onClick = {this.openModalWindow}>
@@ -57,6 +65,7 @@ class AdminSlider extends Component {
         str += '</div>' 
         
         const blocksFromHTML = convertFromHTML(str);
+        console.log(blocksFromHTML)
         const state = ContentState.createFromBlockArray(
             blocksFromHTML.contentBlocks,
             blocksFromHTML.entityMap
