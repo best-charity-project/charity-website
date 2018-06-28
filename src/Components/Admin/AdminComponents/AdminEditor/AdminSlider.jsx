@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {ContentState, convertToRaw, EditorState, Modifier} from 'draft-js';
+import {ContentState, /* convertToRaw, */ EditorState, Modifier, convertFromHTML} from 'draft-js';
 import PropTypes from 'prop-types';
-import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
+/* import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs'; */
 /* import {server} from '../../../../api';
 import axios from 'axios'; */
 import ModalWindow from '../../../ModalWindow/ModalWindow';
@@ -56,13 +56,17 @@ class AdminSlider extends Component {
         })
         str += '</div>' 
         
+        const blocksFromHTML = convertFromHTML(str);
+        const state = ContentState.createFromBlockArray(
+            blocksFromHTML.contentBlocks,
+            blocksFromHTML.entityMap
+        );
 
         const {editorState, onChange} = this.props;
-        const contentState = Modifier.replaceText(
+        const contentState = Modifier.replaceWithFragment(
             editorState.getCurrentContent(),
             editorState.getSelection(),
-            str,
-            editorState.getCurrentInlineStyle(),
+            state.getBlockMap()
         );
         onChange(EditorState.push(editorState, contentState, 'insert-characters'));
         this.setState({
