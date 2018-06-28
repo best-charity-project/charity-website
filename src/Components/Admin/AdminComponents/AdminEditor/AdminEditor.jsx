@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Editor} from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
-import {ContentState, convertToRaw, convertFromHTML} from 'draft-js';
+import {ContentState, convertToRaw} from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import {server} from '../../../../api';
 import axios from 'axios';
@@ -74,6 +74,8 @@ class ControlledEditor extends Component {
 						}
                     }}
                     onChange={this.onEditorChange}
+                   /*  customBlockRenderFunc: PropTypes.func,
+                    customDecorators: PropTypes.array, */
                 />
             </div>
         )
