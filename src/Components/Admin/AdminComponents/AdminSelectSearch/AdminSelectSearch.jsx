@@ -13,8 +13,9 @@ class AdminSelectSearch extends Component {
         addNewOption : false,
     }
     componentDidMount(){
-        (this.props.value) ? this.setState({value:this.props.value}) : null;
+        (this.props.value) ? this.setState({value:this.props.value}) : this.setState({value:'все'});
         this.createOptions();
+        this.props.getFilter(this.state.value);
     }
     createOptions = () =>{
         let array = [];
@@ -38,10 +39,9 @@ class AdminSelectSearch extends Component {
         const { selectedOption, addNewOption } = this.state;
         return (
             <div className = "select-component" onChange = {this.getOptions}>
-                <Select                    
+                <Select                   
                     id = "my-select"
                     value = {this.state.value}
-                    placeholder = "Введите источник"
                     dropdownMenuStyle = {{ maxHeight: 250 }}
                     style = {{ width: 500 }}
                     onInputKeydown = {this.onSearch}

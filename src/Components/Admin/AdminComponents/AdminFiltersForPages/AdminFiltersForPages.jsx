@@ -76,15 +76,18 @@ class FiltersForPages extends Component {
         )
     }
     createFilter = () => {
-        axios({
-            method: 'post',
-            url: `${ server }/filters`,
-            data: this.state,
-            config: { headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            }},
-        })
+        if(this.state.title.toLowerCase() !== 'все'){
+            axios({
+                method: 'post',
+                url: `${ server }/filters`,
+                data: this.state,
+                config: { headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }},
+            })
+        }
+      
 
     }
     removeFilter = (id) => {
