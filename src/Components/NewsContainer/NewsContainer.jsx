@@ -25,7 +25,7 @@ getNews= () => {
   .then(response => response.json())
   .then(data => {
       this.setState({news: data.news }, () => {
-          this.filterArray('')
+          this.filterArray('');
       });
   })
 }
@@ -62,7 +62,11 @@ filterArray = (value) =>{
     return (
       <div className = 'news-container'> 
         <Menu name = 'client-menu'/>
-        <NewsListAndAside array = {this.state.filterArray} filters ={this.state.filters} getNewFilter = {this.getFilteredNews}/>
+        <NewsListAndAside 
+          array = {this.state.filterArray} 
+          filters ={this.state.filters} 
+          getNewFilter = {this.getFilteredNews}
+        />
         <Footer name = ' footer footer-news'/>
       </div>
     );

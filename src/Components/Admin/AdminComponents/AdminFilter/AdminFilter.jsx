@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Button from '../../../Button/Button';
 import '../AdminFilter/AdminFilter.css';
-import { defaultFormat } from 'moment';
 
 class AdminFilter extends Component {
     state = {

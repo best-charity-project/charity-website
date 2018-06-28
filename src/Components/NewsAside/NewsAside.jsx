@@ -15,7 +15,7 @@ class NewsAside extends Component {
     getCurrentFilter = (e) => {
         let currentFilter= e.target;
         this.setState({activeItem :e.target.innerText.toLowerCase()}, () => {
-            this.props.getCurrentFilter(this.state.activeItem)
+            this.props.getCurrentFilter(this.state.activeItem);
         });    
     }
     render() {
