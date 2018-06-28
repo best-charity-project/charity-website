@@ -22,7 +22,7 @@ class ControlledEditor extends Component {
             this.setState({ editorContent: '' }) 
     }
     componentWillReceiveProps(curprops, nextprops){
-        if(curprops.text!=nextprops.text){
+        if(curprops.text!=nextprops.text && !this.state.editorContent){
             this.setState({ editorContent: this.getInitialHTML(curprops.text)})
         }
     }

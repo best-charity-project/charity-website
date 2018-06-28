@@ -3,7 +3,7 @@ import {Route} from 'react-router-dom';
 import {withRouter} from "react-router-dom";
 import moment from 'moment';
 import axios from 'axios';
-
+import _ from 'lodash';
 import {server} from '../../../api';
 import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';
 import TextField from '../../TextField/TextField';
@@ -11,7 +11,8 @@ import ControlledEditor from  '../AdminComponents/AdminEditor/AdminEditor';
 import Button from '../../Button/Button';
 import Navigation from '../../Navigation/Navigation';
 import NavBar from '../../NavBar/NavBar';
-import AdminPreview from '../AdminComponents/AdminPreview/AdminPreview'
+import AdminPreview from '../AdminComponents/AdminPreview/AdminPreview';
+import AdminSelectSearch from '../../Admin/AdminComponents/AdminSelectSearch/AdminSelectSearch';
 
 import './AdminAddNews.css';
 
@@ -20,7 +21,7 @@ class AdminAddNews extends Component {
         title: '',
         shortText: '',
         fullText: '',
-        source: '',
+        filter: '',
         isPublic: false,
         imageData: '',
         isPreview: false,
@@ -31,9 +32,7 @@ class AdminAddNews extends Component {
     cropperRef = React.createRef()
 
     componentWillMount() {
-        this.setState({
-            source: 'organizers',
-        })
+        this.getFiltersList();
         if (this.props.location.state) {
             let infoAboutNews = this.props.location.state.detail;
 
@@ -41,9 +40,9 @@ class AdminAddNews extends Component {
                 title: this.props.location.state.detail.title,
                 shortText: this.props.location.state.detail.shortText,
                 fullText: this.props.location.state.detail.fullText,
-                source: this.props.location.state.detail.source,
                 isPublic: this.props.location.state.detail.isPublic,
                 image: this.props.location.state.detail.image,
+                filter: this.props.location.state.detail.filter,
                 date: this.props.location.state.detail.createdAt,
                 value: this.props.location.state.detail.shortText.length
             })
@@ -122,12 +121,13 @@ class AdminAddNews extends Component {
                                 <label>Источник:</label>
                             </div>
                             <div>
-                                <select value={this.state.source} onChange={this.handleChange}>
-                                    <option value="organizers">Организаторы</option>
-                                    <option value="sponsors">Спонсоры</option>
-                                    <option value="activists">Активисты</option>
-                                    <option value="volunteers">Волонтеры</option>
-                                </select>
+                                {this.state.filters? 
+                                    <AdminSelectSearch 
+                                        value = {this.state.filter}
+                                        filtersList = {this.state.filters}
+                                        getFilter = {this.getFilter}
+                                    />:null}
+                              
                             </div>
                         </div>
                         <div className = 'button-info'>
@@ -194,13 +194,13 @@ class AdminAddNews extends Component {
             value: event.target.value.length
         })
     } 
-    handleChange = (event) => {
-        this.setState({source: event.target.value})
-    }
     getNewStatePreview = () => {
         this.setState({
             isPreview: false
         })
+    }
+    getFilter = (str) => {
+        this.setState({filter: str});
     }
     checkText = () => {
         if (!this.state.shortText) {
@@ -231,7 +231,6 @@ class AdminAddNews extends Component {
             title: '',
             shortText: '',
             fullText: '',
-            source: '',
             isPublic: false,
             imageData: '',
             image: ''
@@ -258,7 +257,6 @@ class AdminAddNews extends Component {
                 title: '',
                 shortText: '',
                 fullText: '',
-                source: '',
                 isPublic: false,
                 imageData: '',
                 image: ''
@@ -277,6 +275,24 @@ class AdminAddNews extends Component {
             image: ''
         })   
     }
+    getFiltersList = () => {  
+        axios({
+            method: 'get',
+            url: `${ server }/filters`,
+        })
+        .then(res =>{
+            let filterList = res.data.filterList;
+            let filtersNews = _.filter(filterList , function(el){
+                if(el.type === 'news'){
+                    return el
+                }
+            })
+            this.setState({
+                filters:filtersNews,
+            })
+        })
+     
+      }
 }
 
 export default withRouter(AdminAddNews);
