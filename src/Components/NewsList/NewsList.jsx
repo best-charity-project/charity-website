@@ -8,9 +8,9 @@ class NewsList extends Component {
     
     render() {
         return (
-         <div className={this.props.name}>
+         <div className = {this.props.name}>
             <Masonry className = 'masonry-div'> 
-                {(this.props.array)?this.props.array.map(function(el){
+                {(this.props.array) ? this.props.array.map(function(el){
                     return <News 
                                 id = {el._id} 
                                 name = {el.title} 

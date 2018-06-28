@@ -64,7 +64,7 @@ filterArray = (value) =>{
         <Menu name = 'client-menu'/>
         <NewsListAndAside 
           array = {this.state.filterArray} 
-          filters ={this.state.filters} 
+          filters = {this.state.filters} 
           getNewFilter = {this.getFilteredNews}
         />
         <Footer name = ' footer footer-news'/>

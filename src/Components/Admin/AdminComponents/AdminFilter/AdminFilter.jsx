@@ -18,10 +18,10 @@ class AdminFilter extends Component {
         return (
             <div>
                 {defaultFilter !== 'все' ?
-                    <div  id = {this.state.id} className = 'admin-filter-container' >
-                        <span className = 'admin-filter-title' > {this.state.title}</span>
+                    <div  id = {this.state.id} className = 'admin-filter-container'>
+                        <span className = 'admin-filter-title'>{this.state.title}</span>
                         <Button
-                            name = "button-admin "
+                            name = "button-admin"
                             label = {<span aria-hidden="true">&times;</span>}
                             clickHandler = {this.props.deleteHandler}
                         />

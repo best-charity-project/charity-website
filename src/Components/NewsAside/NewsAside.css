@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 .news-aside{    
-    top: 0px;
+    top: 0;
 }
 .link-news{
     position: fixed;

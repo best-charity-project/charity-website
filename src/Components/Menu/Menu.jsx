@@ -34,11 +34,11 @@ class Menu extends Component {
     render() {
         return (
           <div className = 'menu-wrapper'>
-              <div className={'menu ' + this.props.name}>
-                  <Logo client="true" />
+              <div className = {'menu ' + this.props.name}>
+                  <Logo client ="true" />
                   <MenuLinks
                       list = {this.state.links}
-                      className="menu-links-client"
+                      className = "menu-links-client"
                   />
                   <SocialLinks />
               </div>
