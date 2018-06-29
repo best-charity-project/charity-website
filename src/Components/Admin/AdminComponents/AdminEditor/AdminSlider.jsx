@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ContentState, /* convertToRaw, */ EditorState, Modifier/* , convertFromHTML */} from 'draft-js';
+import {ContentState, /* convertToRaw, */ EditorState, Modifier, AtomicBlockUtils/* , convertFromHTML */} from 'draft-js';
 import PropTypes from 'prop-types';
 import {convertToHTML, convertFromHTML, Middleware} from 'draft-convert';
 /* import draftToHtml from 'draftjs-to-html';
@@ -19,12 +19,12 @@ class AdminSlider extends Component {
         onChange: PropTypes.func,
         editorState: PropTypes.object
     }
-    decorator = new CompositeDecorator([
+    /* decorator = new CompositeDecorator([
         {
           strategy: findImageEntities,
           component: Image,
         },
-    ]);
+    ]); */
  
     render() {
         return (
@@ -58,26 +58,38 @@ class AdminSlider extends Component {
     addSlider = (e) => {
         e.preventDefault()
         e.stopPropagation() 
-        let str = '<div class = "slider-image">' 
-        this.state.imageArr.forEach((item) => {
-            str += '<img src = "' + item + '" alt = "" />'
-        })
-        str += '</div>' 
-        
-        const blocksFromHTML = convertFromHTML(str);
-        console.log(blocksFromHTML)
-        const state = ContentState.createFromBlockArray(
+        const {editorState, onChange} = this.props;
+        let entityData = {}
+        let newEditorState = editorState
+        /* let str = '<div class = "slider-image">'  */
+
+
+        /* this.state.imageArr.forEach((item) => {
+            entityData = {} */
+
+
+            entityData.src = this.state.imageArr
+            /* entityData.width = 100 */
+            /* entityData.height = 200 */
+            /* str += '<img src = "' + item + '" alt = "" />' */
+            let entityKey = newEditorState.getCurrentContent().createEntity('IMAGE_SLIDER', 'MUTABLE', entityData).getLastCreatedEntityKey()
+            newEditorState = AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' ')
+    
+        /* str += '</div>'  */
+        /* const blocksFromHTML = convertFromHTML(str); */
+        /* const state = ContentState.createFromBlockArray(
             blocksFromHTML.contentBlocks,
             blocksFromHTML.entityMap
-        );
-
-        const {editorState, onChange} = this.props;
+        ); */
+       
+        /* 
         const contentState = Modifier.replaceWithFragment(
             editorState.getCurrentContent(),
             editorState.getSelection(),
             state.getBlockMap()
-        );
-        onChange(EditorState.push(editorState, contentState, 'insert-characters'));
+        ); */
+        /* onChange(EditorState.push(editorState, blocksFromHTML, 'insert-characters')); */
+        onChange(newEditorState)
         this.setState({
             isOpen: false,
             imageArr: []
