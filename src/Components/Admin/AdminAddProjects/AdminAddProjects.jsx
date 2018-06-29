@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Route, withRouter} from 'react-router-dom';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 import TextField from '../../TextField/TextField';
@@ -30,8 +31,9 @@ class AdminAddProjects extends Component {
         isPublic:false,
         isPreview:false,
         value:1000,
-        addMediaImageCount:0,
-        addMediaVideoCount:0
+        mediaImageArray:[],
+        mediaVideoArray:[],
+        mediaCounter:0
     }
     cropperRef = React.createRef()
     componentWillMount() {
@@ -154,19 +156,36 @@ class AdminAddProjects extends Component {
                     <div className="admin-media-projects">
                         <div className="admin-media-image-projects">
                             <span>Изображение:</span>
-                            <AdminUploadImage 
-                                id = "image-projects"
-                                name = "image-projects"
-                                // imageData = {this.state.imageData}
-                                // image = {this.state.image}
-                                // onCropImage = {this.onCropImage}
-                                // deleteImage = {this.deleteImage}
-                            />
-                            <Button
+                            <div className = "admin-button">
+                                {/* <label htmlfor="upload-photo">Выберите файл</label> */}
+                                <label htmlFor="upload-photo">Выберите файл</label>
+                                <input
+                                    id="upload-photo"
+                                    type  = "file"
+                                    onChange = {this.addMediaImage}
+                                />
+                            </div>
+                            {/* <input type="file" onChange={this.addMediaImage} value="godnvo"/> */}
+                            {/* <Button
                                 label={"Добавить фото"}
                                 clickHandler={this.addMediaImage}
-                                name = "admin-button admin-projects-media-buttons"
-                            />
+                                disabled={ this.state.addMediaCount > 3 }
+                                name = { this.state.addMediaCount < 3 ? "admin-button admin-projects-media-buttons" : "button-publish-projects"}
+                            /> */}
+                            {this.state.imageData ?
+                                <div>
+                                    {this.state.mediaImageArray.map( (link,index) => {
+                                        <div key={index}>
+                                            <img src={ link } alt=""/>
+                                            <Button 
+                                                name = "button-admin admin-cancel"
+                                                label = {<span aria-hidden="true">&times;</span>}
+                                                clickHandler = {(event) => this.deleteGalleryImage(event, index)}
+                                            />
+                                        </div>
+                                    })}
+                                </div>
+                            :null}
                         </div>
                         <div className="admin-media-video-projects">
                             <TextField
@@ -179,8 +198,9 @@ class AdminAddProjects extends Component {
                             />
                             <Button
                                 label = {"Добавить видео"}
+                                disabled={ this.state.addMediaCount > 3 }
                                 clickHandler = {this.addMediaVideo}
-                                name = "admin-button admin-projects-media-buttons"
+                                name = {this.state.addMediaCount > 3 ? "admin-button admin-projects-media-buttons" : "button-publish-projects"}
                             />
                         </div>
                     </div>
@@ -405,14 +425,23 @@ class AdminAddProjects extends Component {
         })   
     }
     addMediaImage = (e) => {
-        e.preventDefault()
-        this.state.addMediaImageCount++;
-        console.log(this.state.addMediaImageCount)
+        e.preventDefault();
+        this.state.mediaCounter++;
+        // this.state.addMediaCountImage++;
+        console.log(this.state.mediaCounter)
+        this.state.mediaImageArray.push(e.target.files[0])
+        console.log(this.state.mediaImageArray) 
+        // this.setState({
+        //     mediaArray:mediaArray.concat(<AdminUploadImage 
+        //         id = "image-projects"
+        //         name = "image-projects"
+        //     />)
+        // })
     }
-    addMediaVideo = (e) =>{
-        e.preventDefault()
-        this.state.addMediaVideoCount++;
-        console.log(this.state.addMediaVideoCount)
-    } 
+    // addMediaVideo = (e) =>{
+    //     e.preventDefault()
+    //     this.state.addMediaCountVideo++;
+    //     console.log(this.state.addMediaCount)
+    // } 
 }
 export default withRouter(AdminAddProjects);

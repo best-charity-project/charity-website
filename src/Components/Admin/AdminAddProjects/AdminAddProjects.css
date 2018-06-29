@@ -160,3 +160,8 @@ textarea {
     color: black;
     font-weight: 500;
 }
+#upload-photo {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+ }
