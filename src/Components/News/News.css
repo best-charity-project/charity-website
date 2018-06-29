@@ -1,12 +1,11 @@
 .news {
     box-shadow: 10px 10px 20px 0 rgba(0, 0, 0, 0.21);
     width: 350px;
-    margin-left:5px;;
     word-wrap: break-word;
     height: auto;
     border-radius: 3px;
     padding: 15px 0;
-    margin:5px;
+    margin:15px;
     background-color:#ffffff;
 }
 .news-date {

@@ -34,7 +34,6 @@ class AdminProjectsList extends Component {
     }
    
       getProjectInfo = (id) => {
-        // let id = e.target.parentNode.id;
         const URL = `${ server }/projects/${id}`;
         fetch(URL)
         .then(response => response.json())

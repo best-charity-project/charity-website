@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Route, withRouter} from 'react-router-dom';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
+import _ from 'lodash';
 
 import TextField from '../../TextField/TextField';
 import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';
@@ -10,6 +10,7 @@ import Navigation from '../../Navigation/Navigation';
 import ControlledEditor from  "../AdminComponents/AdminEditor/AdminEditor";
 import Button from '../../Button/Button';
 import AdminProjectPreview from '../AdminComponents/AdminProjectPreview/AdminProjectPreview'
+import AdminSelectSearch from '../../Admin/AdminComponents/AdminSelectSearch/AdminSelectSearch';
 
 
 import './AdminAddProjects.css';
@@ -25,18 +26,20 @@ class AdminAddProjects extends Component {
         contacts:'',
         address:'',
         site:'',
-        video:'',
+        mediaImageArray:[],
+        mediaImageData:'',
+        mediaImage:'',
+        mediaVideoArray:[],
+        mediaVideo:'',
         fullText: '',
-        source: '',
+        filter: '',
         isPublic:false,
         isPreview:false,
         value:1000,
-        mediaImageArray:[],
-        mediaVideoArray:[],
-        mediaCounter:0
     }
     cropperRef = React.createRef()
     componentWillMount() {
+        this.getFiltersList();
         if (this.props.location.state) {
             this.setState({
                 image: this.props.location.state.detail.image,
@@ -46,9 +49,10 @@ class AdminAddProjects extends Component {
                 contacts:this.props.location.state.detail.contacts,
                 address:this.props.location.state.detail.address,
                 site:this.props.location.state.detail.site,
-                video:this.props.location.state.detail.video,
+                mediaImageArray:this.props.location.state.detail.mediaImageArray,
+                mediaVideoArray:this.props.location.state.detail.mediaVideoArray,
                 fullText: this.props.location.state.detail.fullText,
-                source: this.props.location.state.detail.source,
+                filter: this.props.location.state.detail.filter,
                 isPublic: this.props.location.state.detail.isPublic
             })
         }
@@ -156,36 +160,28 @@ class AdminAddProjects extends Component {
                     <div className="admin-media-projects">
                         <div className="admin-media-image-projects">
                             <span>Изображение:</span>
-                            <div className = "admin-button">
-                                {/* <label htmlfor="upload-photo">Выберите файл</label> */}
+                            <div className = {this.state.mediaImageArray.length+this.state.mediaVideoArray.length<4?"admin-button":"button-projects-dislable"}>
                                 <label htmlFor="upload-photo">Выберите файл</label>
                                 <input
                                     id="upload-photo"
                                     type  = "file"
-                                    onChange = {this.addMediaImage}
+                                    onChange = {this.onChangeFile}
                                 />
                             </div>
-                            {/* <input type="file" onChange={this.addMediaImage} value="godnvo"/> */}
-                            {/* <Button
-                                label={"Добавить фото"}
-                                clickHandler={this.addMediaImage}
-                                disabled={ this.state.addMediaCount > 3 }
-                                name = { this.state.addMediaCount < 3 ? "admin-button admin-projects-media-buttons" : "button-publish-projects"}
-                            /> */}
-                            {this.state.imageData ?
-                                <div>
-                                    {this.state.mediaImageArray.map( (link,index) => {
-                                        <div key={index}>
-                                            <img src={ link } alt=""/>
+                            {/* {this.state.mediaImageData ? */}
+                                <div className="image-array">
+                                    {this.state.mediaImageArray.map( (link,index) => 
+                                        <div className="projects-gallery-container" key={index}>
+                                            <img src = { link } className="projects-media-gallery" alt=""/>
                                             <Button 
-                                                name = "button-admin admin-cancel"
+                                                name = {"button-admin admin-cancel"}
                                                 label = {<span aria-hidden="true">&times;</span>}
                                                 clickHandler = {(event) => this.deleteGalleryImage(event, index)}
                                             />
                                         </div>
-                                    })}
+                                    )}
                                 </div>
-                            :null}
+                            {/* :null}  */}
                         </div>
                         <div className="admin-media-video-projects">
                             <TextField
@@ -193,15 +189,28 @@ class AdminAddProjects extends Component {
                                 label = "Видео:"
                                 type = "text"
                                 name = "video-projects"
-                                value = {this.state.video}
+                                value = {this.state.mediaVideo}
                                 onChangeValue = {this.getVideo}
                             />
                             <Button
                                 label = {"Добавить видео"}
-                                disabled={ this.state.addMediaCount > 3 }
                                 clickHandler = {this.addMediaVideo}
-                                name = {this.state.addMediaCount > 3 ? "admin-button admin-projects-media-buttons" : "button-publish-projects"}
+                                name = {this.state.mediaImageArray.length+this.state.mediaVideoArray.length<4?"admin-button admin-projects-media-buttons":"button-projects-dislable"}
                             />
+                            {this.state.mediaVideoArray ?
+                                <div className="video-array">
+                                    { this.state.mediaVideoArray.map( (link,index) =>
+                                        <div className="projects-video-container" key = { index }>
+                                            <label> { link } </label>
+                                            <Button 
+                                                name = "button-admin admin-cancel"
+                                                label = {<span aria-hidden="true">&times;</span>}
+                                                clickHandler = {(event) => this.deleteGalleryVideo(event, index)}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            :null}
                         </div>
                     </div>
                     <hr />
@@ -229,19 +238,18 @@ class AdminAddProjects extends Component {
                 </div>
                 <hr />
                 <div className="text-projects">
-                            <div className = "projects-source">
-                                <label>Источник:</label>
-                            </div>
-                            <div>
-                                <select value={this.state.source} onChange={this.handleChange}>
-                                    <option value="creative">Творческие</option>
-                                    <option value="rehabilitative">Реабилитационные</option>
-                                    <option value="educational">Образовательные</option>
-                                    <option value="working">Трудовые</option>
-                                    <option value="other">Другие</option>
-                                    <option value="sport">Спортивные</option>
-                                </select>
-                            </div>
+                    <div className = "projects-source">
+                        <label>Источник:</label>
+                    </div>
+                    <div>
+                        {this.state.filters? 
+                            <AdminSelectSearch 
+                                value = {this.state.filter}
+                                filtersList = {this.state.filters}
+                                getFilter = {this.getFilter}
+                            />
+                        :null}
+                    </div>
                 </div>
                 <hr />
                 <div className="admin-buttons">
@@ -316,13 +324,13 @@ class AdminAddProjects extends Component {
         this.setState({site:obj.value})
     }
     getVideo = (obj) =>{
-        this.setState({video:obj.value})
+        this.setState({mediaVideo:obj.value})
     }
     getCurrentTextFull = (str) => {
         this.setState({fullText: str});
     }
-    handleChange = (event) => {
-        this.setState({source: event.target.value})
+    getFilter = (str) => {
+        this.setState({filter: str});
     }
     onCropImage = (image) => {
         this.setState({imageData: image})
@@ -386,6 +394,7 @@ class AdminAddProjects extends Component {
         if (this.props.location.state) {
             id = this.props.location.state.detail._id
         }
+        console.log(this.state.mediaImageArray)
         axios({
             method: id ? 'put' : 'post',
             url: id ? `${server}/projects/${id}` : `${server}/projects/`,
@@ -424,24 +433,102 @@ class AdminAddProjects extends Component {
             image: ''
         })   
     }
-    addMediaImage = (e) => {
-        e.preventDefault();
-        this.state.mediaCounter++;
-        // this.state.addMediaCountImage++;
-        console.log(this.state.mediaCounter)
-        this.state.mediaImageArray.push(e.target.files[0])
-        console.log(this.state.mediaImageArray) 
-        // this.setState({
-        //     mediaArray:mediaArray.concat(<AdminUploadImage 
-        //         id = "image-projects"
-        //         name = "image-projects"
-        //     />)
-        // })
+    onChangeFile = (e) => {
+        let reader = new FileReader(),
+            file = e.target.files.item(0),
+            type = /^image\//
+        if(!file || !type.test(file.type)){
+            return
+        }
+        reader.onload = (item) => {
+            this.setState({
+                mediaImageData:item.target.result
+            },this.addMediaImage)
+        }
+        reader.readAsDataURL(file)
+        e.target.value = null;
     }
-    // addMediaVideo = (e) =>{
-    //     e.preventDefault()
-    //     this.state.addMediaCountVideo++;
-    //     console.log(this.state.addMediaCount)
-    // } 
+    addMediaImage = (e) => {
+        let formData = new FormData();
+        formData.append('imageData',this.state.mediaImageData);
+        axios({
+            method:'post',
+            url: `${server}/uploadGalleryImage/`,
+            data:formData,
+            config:{
+                headers:{
+                    'Content-Type':'multipart/form-data; charset=UTF-8'
+                }
+            }
+        })
+        .then(res =>{
+            let mediaImageArray = this.state.mediaImageArray
+            mediaImageArray.push(res.data.link)
+            this.setState({
+                mediaImageArray:mediaImageArray
+            })
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+    deleteGalleryImage = (e, index) => {
+        e.preventDefault()
+        let mediaImageArray = this.state.mediaImageArray
+        let deletedImage = mediaImageArray.splice(index, 1)
+        axios({
+             method: 'delete',
+             url: `${server}/uploadGalleryImage/`,
+             data: deletedImage,
+             config: {
+                 headers: {
+                     'Content-Type': 'application/json; charset=UTF-8'
+                    }
+                },
+         })
+         .catch(err=> {
+             console.log(err);
+         });
+        this.setState({
+            mediaImageArray: mediaImageArray
+        })      
+     }
+    addMediaVideo = (e) =>{
+        e.preventDefault()
+        let mediaVideoArray = this.state.mediaVideoArray
+        mediaVideoArray.push(this.state.mediaVideo)
+        this.setState({
+            mediaVideoArray:mediaVideoArray
+        })
+        this.setState({
+            mediaVideo:''
+        })
+    }
+    deleteGalleryVideo = (e,index)=>{
+        e.preventDefault()
+        let mediaVideoArray = this.state.mediaVideoArray
+        let deletedVideo = mediaVideoArray.splice(index, 1)
+        this.setState({
+            mediaVideoArray: mediaVideoArray
+        })
+    }
+    getFiltersList = () => {  
+        axios({
+            method: 'get',
+            url: `${ server }/filters`,
+        })
+        .then(res =>{
+            let filterList = res.data.filterList;
+            let filtersProjects = _.filter(filterList , function(el){
+                if(el.type === 'projects'){
+                    return el
+                }
+            })
+            this.setState({
+                filters:filtersProjects,
+            })
+        })
+     
+      } 
 }
 export default withRouter(AdminAddProjects);

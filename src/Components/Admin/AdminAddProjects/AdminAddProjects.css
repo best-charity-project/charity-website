@@ -165,3 +165,13 @@ textarea {
     position: absolute;
     z-index: -1;
  }
+ .image-array {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    min-height: min-content;
+}
+.button-projects-dislable{
+    display:none;
+}

@@ -25,9 +25,10 @@ class AdminProject extends Component {
             contacts:this.props.projects.contacts,
             address:this.props.projects.address,
             site:this.props.projects.site,
-            video:this.props.projects.video,
+            mediaVideoArray:this.props.projects.mediaVideoArray,
+            mediaImagesArray:this.props.projects.mediaImagesArray,
             fullText:this.props.projects.fullText,
-            sourse: this.props.projects.sourse,
+            filter: this.props.projects.filter,
             createAt:this.props.projects.createAt
         })
     }
