@@ -7,6 +7,7 @@ import Menu from '../../Components/Menu/Menu';
 import '../Home/MainPage.css';
 import '../Projects/Projects.css';
 import Project from '../../Components/Project/Project';
+import ProjectGallery from '../../Components/ProjectGallery/ProjectGallery';
 import SliderPreviousBtn from '../../Components/Slider/SliderButtons/SliderPreviousBtn';
 import SliderNextBtn from '../../Components/Slider/SliderButtons/SliderNextBtn';
 
@@ -36,7 +37,7 @@ class Projects extends Component {
 
     render() {
         return (
-            <div className="main-page-client">
+            <div className="main-page-client"> 
                 <Menu name="client-menu" />
                 <Project content={this.state.currentDisplayedProject}/>
                 <div className="projects-list-action-btns">
