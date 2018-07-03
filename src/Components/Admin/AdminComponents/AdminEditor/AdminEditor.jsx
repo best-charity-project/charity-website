@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import {Editor} from 'react-draft-wysiwyg';
-import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs'; 
-import {ContentState, convertToRaw} from 'draft-js';
+import {Editor} from 'react-draft-wysiwyg'; 
+import {ContentState, EditorState} from 'draft-js';
 /* import {convertToHTML, convertFromHTML, Middleware} from 'draft-convert'; */
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import {server} from '../../../../api';
@@ -12,29 +10,25 @@ import customBlockRenderFunc from './Renderer';
 import './AdminEditor.css';
 
 class ControlledEditor extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            editorContent: ''
-        }
+    state = {
+        editorState: EditorState.createEmpty(),
     }
     
     componentDidMount() {
-        this.props.text ? 
-            this.setState({ editorContent: this.getInitialHTML(this.props.text)}) :
-            this.setState({ editorContent: '' }) 
+        this.props.initialEditorState ? 
+            this.setState({editorState: this.props.initialEditorState}) :
+            this.setState({editorState: EditorState.createEmpty()}) 
     }
     
-    getInitialHTML = (str) => {
-        const contentBlock = htmlToDraft(str);
-        if (contentBlock.contentBlocks !== null) {
-            const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks, contentBlock.entityMap);
-            return convertToRaw(contentState);
-        }
-    }
-    onEditorChange =(contentState) => {
-        let text = draftToHtml(contentState)
-        this.props.getCurrentText(text)
+    onChange = (editorState) => {
+        /* const currentContentState = this.state.editorState.getCurrentContent()
+        const newContentState = editorState.getCurrentContent()
+        const currentInlineStyle = this.state.editorState.getCurrentInlineStyle()
+        const newInlineStyle = editorState.getCurrentInlineStyle() */
+        /* if (currentContentState !== newContentState || currentInlineStyle !== newInlineStyle) { */
+        this.props.onEditorStateChange(editorState)
+        this.setState({editorState: editorState})
+        /* } */
     }
 
     uploadImageCallBack = (file) => {
@@ -49,11 +43,10 @@ class ControlledEditor extends Component {
     }
 
     render() {
-        const { editorContent } = this.state;
         return (
             <div>
                 <Editor
-					contentState={editorContent}
+					editorState={this.state.editorState}
                     wrapperClassName="wrapper"
                     toolbarClassName="toolbar"
                     editorClassName="editor"
@@ -75,10 +68,8 @@ class ControlledEditor extends Component {
 							options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'],
 						}
                     }}
-                    onChange={this.onEditorChange}
+                    onEditorStateChange={this.onChange}
                     customBlockRenderFunc={customBlockRenderFunc}
-                   /*  customBlockRenderFunc: PropTypes.func,
-                    customDecorators: PropTypes.array, */
                 />
             </div>
         )

@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
 import {withRouter} from "react-router-dom";
-import moment from 'moment';
 import axios from 'axios';
-
+import {EditorState, convertToRaw, convertFromRaw} from 'draft-js'
+import draftToHtml from 'draftjs-to-html';
 import {server} from '../../../api';
 import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';
 import TextField from '../../TextField/TextField';
@@ -18,7 +18,7 @@ class AdminAddNews extends Component {
     state = {
         title: '',
         shortText: '',
-        fullText: '',
+        fullTextEditorState: '',
         source: '',
         isPublic: false,
         imageData: '',
@@ -34,12 +34,12 @@ class AdminAddNews extends Component {
             source: 'organizers',
         })
         if (this.props.location.state) {
-            let infoAboutNews = this.props.location.state.detail;
+            let fullTextEditorState = EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.location.state.detail.fullText)));
 
             this.setState({
                 title: this.props.location.state.detail.title,
                 shortText: this.props.location.state.detail.shortText,
-                fullText: this.props.location.state.detail.fullText,
+                fullTextEditorState: fullTextEditorState,
                 source: this.props.location.state.detail.source,
                 isPublic: this.props.location.state.detail.isPublic,
                 image: this.props.location.state.detail.image,
@@ -111,8 +111,9 @@ class AdminAddNews extends Component {
                         <div className="text-news">
                             <div className="full-text-news">Полное описание:</div>
                             <ControlledEditor 
-                                text = {this.state.fullText} 
-                                getCurrentText = {this.getCurrentTextFull}
+                                initialEditorState = {this.state.fullTextEditorState} 
+                                onEditorStateChange = {this.onEditorStateChange}
+                                // ref-ссылка - в доке по реакту
                             /> 
                         </div>
                         <hr />
@@ -165,7 +166,7 @@ class AdminAddNews extends Component {
                         imageData = {this.state.imageData}
                         image = {this.state.image}
                         title = {this.state.title}
-                        fullText = {this.state.fullText}
+                        fullTextEditorState = {this.state.fullTextEditorState}
                         onSaveChangeStatus = {this.onSaveChangeStatus}
                         onSaveStatus = {this.onSaveStatus}
                         getNewStatePreview = {this.getNewStatePreview}
@@ -182,8 +183,8 @@ class AdminAddNews extends Component {
     onChangeValue = (object) => {
         this.setState({title: object.value});
     }
-    getCurrentTextFull = (str) => {
-        this.setState({fullText: str});
+    onEditorStateChange = (editorState) => {
+        this.setState({fullTextEditorState: editorState});
     }
     getCurrentTextShort = (event) => {
         this.setState({
@@ -201,7 +202,8 @@ class AdminAddNews extends Component {
     }
     checkText = () => {
         if (!this.state.shortText) {
-            let newText = this.state.fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
+            let fullText = draftToHtml(convertToRaw(this.state.fullTextEditorState.getCurrentContent()))
+            let newText = fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
             if (newText.length > 300) {
                 newText = (newText.slice(0, 297) + '...').replace(/\n/, '')
             } else {
@@ -239,7 +241,7 @@ class AdminAddNews extends Component {
         this.setState({
             title: '',
             shortText: '',
-            fullText: '',
+            fullTextEditorState: EditorState.createEmpty(),
             source: '',
             isPublic: false,
             imageData: '',
@@ -252,6 +254,7 @@ class AdminAddNews extends Component {
     sendNews = () => {
         let formData  = new FormData();
         Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
+        formData.append('fullText', JSON.stringify(convertToRaw(this.state.fullTextEditorState.getCurrentContent())))
         let id = ''
         if (this.props.location.state) {
             id = this.props.location.state.detail._id
@@ -266,7 +269,7 @@ class AdminAddNews extends Component {
             this.setState({
                 title: '',
                 shortText: '',
-                fullText: '',
+                fullTextEditorState: EditorState.createEmpty(),
                 source: '',
                 isPublic: false,
                 imageData: '',
