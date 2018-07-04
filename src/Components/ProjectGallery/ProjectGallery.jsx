@@ -18,6 +18,9 @@ export default class ProjectGallery extends Component {
                 </Modal>
                 <div className="video-placeholder" onClick={this.showModal}>
                 </div>
+                {this.props.content.mediaImageArray.map((item, i) => {
+                    <img src={item} key={i}/>
+                })}
             </div>
         );
     }

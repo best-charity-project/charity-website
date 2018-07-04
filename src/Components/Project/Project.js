@@ -32,7 +32,7 @@ class Project extends Component {
                             <p>{this.props.content.head}, {this.props.content.contacts}</p>
                             <p>{this.props.content.site}</p>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
         );
