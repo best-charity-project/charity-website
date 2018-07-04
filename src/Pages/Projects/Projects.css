@@ -2,7 +2,6 @@
 	flex-grow: 1;
 	flex-direction: row;
     display: flex;
-    
 }
 
 .img-container {
@@ -16,20 +15,34 @@
     max-height: 750px;
     margin-left: 30px;
     background-color: #ffffff;
-    box-shadow: 6px 6px 10px #A9A9A9;
     border-radius: 5px;
 }
 
-.full-text-card{ 
-    background-color: #ffffff;
-    box-shadow: 6px 6px 10px #A9A9A9;
-    border-radius: 5px;    
-    width: 100%;
+.player-wrapper {
+    position: relative;
+    padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+}
+  
+.react-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.project-gallery {
+    display: flex;
+    justify-content: space-between;
+}
+
+.gallery-item {
+    height: 200px;
+    width: 200px;
+    background-color: #3b3f48;
 }
 
 .text-container {
-    padding-top: 50px;
-    margin-left: 100px;
+    padding-top: 20px;
+    padding: 10px 20px 30px 20px;
 }
 
 .project-section {
@@ -44,15 +57,43 @@
 }
 
 .project-title {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+}
+
+.project-address {
+    margin-bottom: 20px;
 }
 
 .project-desc {
     margin-bottom: 20px;
 }
 
+.contact-info p {
+    margin: 5px;
+}
+
+.contact-info p:first-child {
+    margin-bottom: 15px;
+}
+
+.contact-info p:last-child {
+    color: #459369;
+}
+
+.contact-info-icon {
+    height: 40px;
+    width: 40px;
+    vertical-align: middle;
+}
+
+.video-placeholder {
+    width: 159px;
+    height: 135px;
+    background-color: #3b3f48;
+}
+
 .show-more-container {
-    margin-left: 100px;
+    margin: 20px;
 }
 
 .project-show-more-btn {
@@ -65,9 +106,13 @@
     border: solid 2px #9b9b9b;
 }
 
-.project-show-more-btn:hover {cursor: pointer;}
+.project-show-more-btn:hover {
+    cursor: pointer;
+}
 
-.project-show-more-btn:focus {outline:0;}
+.project-show-more-btn:focus {
+    outline:0;
+}
 
 .projects-list-action-btns {
     display: flex;
@@ -78,9 +123,13 @@
     bottom: 30px;
 }
 
-.projects-list-action-btns button:hover {cursor: pointer;}
+.projects-list-action-btns button:hover {
+    cursor: pointer;
+}
 
-.projects-list-action-btns button:focus {outline:0;}
+.projects-list-action-btns button:focus {
+    outline:0;
+}
 
 .projects-list-action-btns button:disabled {
     background-color: #c9cace;
@@ -117,3 +166,30 @@
     border: solid 1px #3b3f48;
     margin-left: 20px;
 }
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  
+  .modal-main {
+    position:fixed;
+    background: white;
+    width: 80%;
+    height: auto;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+  }
+  
+  .display-block {
+    display: block;
+  }
+  
+  .display-none {
+    display: none;
+  }

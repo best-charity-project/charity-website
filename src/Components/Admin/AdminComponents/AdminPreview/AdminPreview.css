@@ -28,7 +28,6 @@
 .admin-preview .full-news span img {
     display: block;
     width: 100%;
-    padding: 0 30px;
 }
 .admin-preview .full-news p {
     padding: 0 30px;
@@ -36,17 +35,8 @@
 }
 .admin-preview .full-news ul,
 .admin-preview .full-news ol {
-    padding: 0 60px;
-    margin: 16px 0;
-}
-.admin-preview .full-news h1,
-.admin-preview .full-news h2, 
-.admin-preview .full-news h3, 
-.admin-preview .full-news h3, 
-.admin-preview .full-news h4,
-.admin-preview .full-news h5,
-.admin-preview .full-news h6 {
     padding: 0 30px;
+    margin: 16px 0;
 }
 .admin-preview .full-news-date {
     color: #ffc757;
@@ -73,4 +63,11 @@
     background-color: #e8e6e2;
     top: 0;
     width: 100%;
+}
+.carousel .slider-wrapper > ul {
+    padding: 0;
+    margin: 0;
+} 
+.admin-preview .DraftEditor-root {
+    padding: 0 30px;
 }

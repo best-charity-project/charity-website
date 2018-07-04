@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+/* import ReactDOM from 'react-dom'; */
 import {Route} from 'react-router-dom';
 import {withRouter} from "react-router-dom";
 import axios from 'axios';
 import {EditorState, convertToRaw, convertFromRaw} from 'draft-js'
 import draftToHtml from 'draftjs-to-html';
+
 import {server} from '../../../api';
 import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';
 import TextField from '../../TextField/TextField';
@@ -112,6 +114,7 @@ class AdminAddNews extends Component {
                             <div className="full-text-news">Полное описание:</div>
                             <ControlledEditor 
                                 initialEditorState = {this.state.fullTextEditorState} 
+                                /* ref = {(node) => {this._ControlledEd = node}} */
                                 onEditorStateChange = {this.onEditorStateChange}
                                 // ref-ссылка - в доке по реакту
                             /> 
@@ -184,6 +187,7 @@ class AdminAddNews extends Component {
         this.setState({title: object.value});
     }
     onEditorStateChange = (editorState) => {
+        /* const ControlledEd = ReactDOM.findDOMNode(this._ControlledEd) */
         this.setState({fullTextEditorState: editorState});
     }
     getCurrentTextShort = (event) => {

@@ -50,7 +50,11 @@
     "react-image-cropper": "^1.3.0",
     "react-masonry-component": "^6.2.0",
     "react-masonry-layout": "^0.3.0",
+<<<<<<< HEAD
     "react-responsive-carousel": "^3.1.41",
+=======
+    "react-player": "^1.6.4",
+>>>>>>> 1517522393667ac8dcc01ffe766c4a02bd333587
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "resolve": "1.6.0",

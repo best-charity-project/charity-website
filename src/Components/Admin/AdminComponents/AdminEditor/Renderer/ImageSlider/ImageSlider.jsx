@@ -9,10 +9,14 @@ class ImageSlider extends Component {
         const entity = contentState.getEntity(block.getEntityAt(0));
         const {src} = entity.getData();
         return (
-            <Carousel>
+            <Carousel
+                showThumbs = {false}
+                infiniteLoop = {true}
+                statusFormatter = {(current, total) => `${current} из ${total}`}
+                >
                 {src.map((item, index) =>
-                    <div key={index}>
-                        <img src={item} />
+                    <div key = {index}>
+                        <img style = {{backgroundImage: `url(${item})`}} />
                     </div>
                 )}
             </Carousel>
