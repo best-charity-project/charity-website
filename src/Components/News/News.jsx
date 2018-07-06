@@ -3,10 +3,13 @@ import '../News/News.css';
 import moment from 'moment';
 import {NavLink} from "react-router-dom";
 import FullNews from '../FullNews/FullNews';
-
+import EventModal from '../EventModal/EventModal'
 class News extends Component {
-    Click = () => {
-        <FullNews />
+    state = {
+        isOpen: false
+    }
+    getEventWindow = () => {
+        this.setState({isOpen:!this.state.isOpen})
     }
     render() {
         moment.lang('ru');
@@ -19,12 +22,18 @@ class News extends Component {
                             <p className = 'news-title'>{this.props.name} </p>
                             <span className = 'news-text' dangerouslySetInnerHTML={{__html: this.props.text}}/>                
                         </NavLink>):(
-                        <div>
+                        <div onClick = {this.getEventWindow}>
+                        {console.log(this.props.event)}
                              <p className = 'news-date'>{moment(this.props.dateStart).format('DD MMMM YYYY') !== moment(this.props.dateEnd).format('DD MMMM YYYY') ? 
                              `${moment(this.props.dateStart).format('DD MMMM YYYY, h:mm')} - ${moment(this.props.dateEnd).format('DD MMMM YYYY, h:mm')}` : 
                              ` ${moment(this.props.dateStart).format('DD MMMM YYYY, h:mm')} - ${moment(this.props.dateEnd).format('h:mm')}`} </p>
                             <p className = 'news-title'>{this.props.name} </p>
-                            <span className = 'news-text' dangerouslySetInnerHTML={{__html: this.props.text}}/>   
+                            <span className = 'news-text' dangerouslySetInnerHTML={{__html: this.props.text}}/>
+                            <div className={this.state.isOpen ? 'overlay' : 'overlay hidden'}>
+                                <div className="modal-event-field">
+                                   <EventModal event = {this.props.event}/>
+                        </div>
+                </div>   
                         </div>
                  )}
             </div>

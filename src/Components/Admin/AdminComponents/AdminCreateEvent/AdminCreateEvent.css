@@ -1,61 +1,67 @@
-/* .date-and-input{
-    width: 500px;
-    margin: 0 auto;
-    margin-top: 10px;
+.admin-create-event{
+    padding: 65px 20px;
+    padding-left: 310px;
 }
-.change-state-buttons {
-    margin: 25px 0px;
-    text-align: center;
+.admin-create-event div{
+    margin-top: 15px;
 }
-#title {
-    border-radius: 5px;
-    border: 1px solid #d3d3d3;
-}
-#title:focus {
-    outline: none;
-}
-.container-for-input label{
-    align-self: center
-}
-.modal-window label {
-    font-weight: 600;
+.admin-create-event div label{
     display: inline-block;
-    width: 180px;
-    margin-right: 20px;
-} */
-.name-place-event,
-.date-start-end-event,
-.tickets-event,
-.speakers-button-event,
-.speakers-list-event ul,
-.contact-person-phone,
-.organization-website-event
-{
-    display: flex;
-
-}
-.name-place-event div,
-.date-start-end-event div,
-.tickets-event div,
-.contact-person-phone div,
-.organization-website-event div
-{
-    flex-basis: 50%;
-}
-
-.modal-window input{
-    font-family: 'Montserrat', sans-serif;
-    width: 250px;
-    padding: 0;
-    margin: 0;
-    border: 1px solid #ccc;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    border-radius: 5px;
-    font-size: 16px;
-}
-.modal-new-event-field .modal-window label{
+    width:180px;
+    margin-right: 50px;
+    align-self: center;
     font-weight: 600;
-    width: 130px;
-    margin-right: 20px;
+}
+.admin-create-event .container-for-input input{
+    margin: 0;
+    padding: 0;
+    width: 400px;
+    padding: 7px;
+}
+.admin-create-event .rdt input{
+    width: 300px;
+    margin: 0;
+    padding: 7px;
+
+}
+.admin-create-event .admin-event-organizers{
+    display: flex;
+}
+.admin-create-event .admin-event-organizers textarea{
+    width: 300px;
+    display: inline-block;
+}
+.admin-create-event .admin-event-organizers p{
+    font-weight: 600;
+    align-self: center;
+    width:180px;
+    margin-right: 50px;
+
+}
+.speakers-button-event{
+    display: flex;
+}
+.speakers-list-event ul {
+    display: flex;
+    list-style: none;
+}
+.event-delete-button{
+widows: 20px;
+border: 0;
+background-color: white;
+}
+
+.speakers-list-event ul li{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-right: 15px;
+    background-color: white;
+}
+.admin-create-event  .change-state-buttons{
+    display: flex;
+    justify-content: center;
+}
+#my-select div{
+margin-top: 0;
 }

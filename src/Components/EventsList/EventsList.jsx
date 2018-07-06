@@ -10,15 +10,8 @@ class EventsList extends Component {
         return (
          <div className={this.props.name}>
             <Masonry className = 'masonry-div'> 
-                {(this.props.array)?this.props.array.map(function(el){
-                    return <News id = {el._id} 
-                                name = {el.title} 
-                                text = {el.text} 
-                                dateStart = {el.dateStart} 
-                                dateEnd = {el.dateEnd} 
-                                key = {el._id} 
-                                event = 'true'
-                            />
+                {(this.props.array)?this.props.array.map(function(event){
+                    return <News event = {event} />
                 }):null}
             </Masonry>
          </div>

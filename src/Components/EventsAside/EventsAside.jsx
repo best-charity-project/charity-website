@@ -6,28 +6,31 @@ class NewsAside extends Component {
         super(props);
         this.state = {
             activeItem : '',
-            newsSources: []
+            filters: []
         }
     }
     componentDidMount(){
-        this.setState({activeItem : 'все', newsSources: this.props.listSourse})
+        this.setState({activeItem : 'все', filters:this.props.filters})
     }
-    getCurrentLink = (e) => {
-        let currentLink = e.target;
+    getCurrentFilter = (e) => {
+        let currentFilter = e.target;
         this.setState({activeItem :e.target.innerText.toLowerCase()}, () => {
-            this.props.getCurrentSourse(this.state.activeItem)
-        });        
+            this.props.getCurrentFilter(this.state.activeItem);
+        });    
     }
     render() {
-        const {activeItem} = this.state;
+        console.log(this.props)
+        const {activeItem,filters} = this.state;
         return (
             <div className="events-aside">
-              <ul className = 'link-news' onClick = {this.getCurrentLink}>
-                    {this.state.newsSources.map((el,index)=> {
-                        if(activeItem === el){
-                            return <li className ='active-link-news' key = {index}>{el}</li>
+              <ul className = 'link-news' onClick = {this. getCurrentFilter}>
+
+                    {this.props.filters.map((el,index)=> {
+                        console.log(el)
+                        if(activeItem === el.title){
+                            return <li className ='active-link-news' key = {index}>{el.title}</li>
                         }                      
-                        return <li key = {index}>{el}</li>                    
+                        return <li key = {index}>{el.title}</li>                    
                     
                     })}
                 </ul>

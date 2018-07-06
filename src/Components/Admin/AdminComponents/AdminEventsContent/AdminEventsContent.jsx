@@ -6,34 +6,38 @@ import './AdminEventsContent.css';
 import "../../../../App.css";
 import Navigation from '../../../Navigation/Navigation';
 import NavBar from '../../../NavBar/NavBar';
-import { server } from "../../../../api"
+import { server } from "../../../../api";
+import { Route } from 'react-router-dom';
 
 class AdminEventsContent extends Component {
-    state = {
-        isOpen: false,
+    state= {
+        events:{}
     }
     componentDidMount(){
        this.getList()
     }
     render() {
+        console.log(this.state.events)
         return(
             <div>
             <Navigation onLogout={this.onLogout} />
                 <NavBar />
             <div className="list-container">
                 <div className="new-event">
-                    <Button 
-                        name = "button-admin" 
-                        label = {'Создать'} 
-                        clickHandler = {this.addEvent} 
-                    />
+                <div className="button-new-news">                     
+                        <Route render={({history}) => (
+                            <Button 
+                                name = "button-admin" 
+                                label = "Создать" 
+                                clickHandler = {() => { history.push('/admin-panel/events/create') }}
+                            />
+                        )} />
                 </div>     
-               {(this.state.events)?<AdminEventsList events = {this.state.events} getUpdateEventsList = {this.getUpdateEventsList}/> : null} 
-                <div className={this.state.isOpen ? 'overlay' : 'overlay hidden'}>
-                    <div className="modal-new-event-field">
-                        <AdminCreateEvent cancel = {this.cancel} saveEvent = {this.saveEvent} />
-                    </div>
-                </div>
+               {(this.state.events.length>0)?<AdminEventsList 
+               events = {this.state.events} 
+               getUpdateEventsList = {this.getUpdateEventsList}/> 
+               : null} 
+            </div>
             </div>
             </div>
         )
@@ -54,10 +58,9 @@ class AdminEventsContent extends Component {
     }
     saveEvent = () => {
         setTimeout(this.getList,0)
-        this.setState({isOpen: false})
     }
     cancel = () => {
-        this.setState({isOpen: false})
+        
     }
 }
 

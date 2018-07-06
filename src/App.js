@@ -12,6 +12,7 @@ import FullNews from './Components/FullNews/FullNews';
 import "./App.css"
 import AdminMain from './Components/Admin/AdminMain/AdminMain';
 import AdminEvents from './Components/Admin/AdminEvents/AdminEvents';
+import AdminCreateEvent from './Components/Admin/AdminComponents/AdminCreateEvent/AdminCreateEvent'
 import AdminNewsBlock from './Components/Admin/AdminNewsBlock/AdminNewsBlock';
 import AdminAddNews from './Components/Admin/AdminAddNews/AdminAddNews';
 import AdminProjectsBlock from './Components/Admin/AdminProjectsBlock/AdminProjectsBlock';
@@ -33,7 +34,8 @@ class App extends Component {
             <Route path="/events" component={Events} />
             <PrivateRoute path="/admin-panel" component={AdminMain} exact/>
             <PrivateRoute path="/admin-panel/dashboard" component={AdminMain} />
-            <PrivateRoute path="/admin-panel/events" component={AdminEvents} />
+            <PrivateRoute path="/admin-panel/events" component={AdminEvents} exact />
+            <PrivateRoute path="/admin-panel/events/create" component={AdminCreateEvent} />
             <PrivateRoute  path="/admin-panel/news" component={AdminNewsBlock} exact />
             <PrivateRoute path="/admin-panel/news/create" component={AdminAddNews} />
             <PrivateRoute  path="/admin-panel/projects" component={AdminProjectsBlock} exact />
