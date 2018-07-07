@@ -16,13 +16,27 @@ form.form-create-projects {
 .container-for-input label,
 .admin-image label,
 .projects-source ,
-.datepicker label {
+.admin-media-projects label,
+.datepicker label,
+.admin-contacts-projects label {
     padding-right: 60px;
     padding-left: 10px;
     font-weight: 600;
     text-align: right;
     align-self: center;
 }
+.container-for-input label{
+    flex-basis: 25%;
+}
+/* .input-video-container{
+    display: flex;
+} */
+.input-video-container button{
+    margin-left: 400px;
+}
+/* .admin-media-video-projects label{
+    flex-basis: 100%
+}  */
 .projects-sourse label {
     font-weight: 600;
 }
@@ -102,8 +116,10 @@ form.form-create-projects hr:nth-of-type(2) {
     line-height: 1;
 }
 .admin-media-image-projects,
-.admin-media-video-projects{
+/* .admin-media-video-projects */
+{
     display:flex;
+    margin-bottom: 50px;
 }
 .admin-projects-media-buttons{
     align-self: center;
@@ -174,4 +190,45 @@ textarea {
 }
 .button-projects-dislable{
     display:none;
+}
+.projects-gallery-container{
+    max-width: 159px;
+    max-height: 135px;
+    margin: 5px;
+}
+.projects-gallery-container img{
+    height: 100%;
+    width: 100%;
+}
+.projects-gallery-container button{
+    margin-right: 20px;
+}
+.video-array{
+    margin: 10px 40px 5px 40px;
+    list-style-type: none;
+    text-align: center;
+}
+.projects-video-container{
+    padding: 5px 0;
+    border-bottom: 1px solid #d3d3d3;
+}
+.projects-video-container span{
+    margin-right: 30px;
+    
+}
+.projects-video-container button{
+    width: 30px;
+}
+.admin-contacts-projects input {
+    font-family: 'Montserrat', sans-serif;
+    width: 300px;
+    /* padding: 12px 20px; */
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    /* -webkit-box-sizing: border-box; */
+    box-sizing: border-box;
+    /* padding-left: 40px;
+    margin-left: 55px; */
+    border-radius: 5px;
+    /* font-size: 16px; */
 }

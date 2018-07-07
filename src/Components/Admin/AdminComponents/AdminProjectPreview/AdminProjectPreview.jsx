@@ -9,7 +9,6 @@ import './AdminProjectPreview.css';
 import '../../../../Pages/Projects/Projects.css'
 
 class AdminProjectPreview extends Component {
-
     render() {
         return (
             <div className = 'admin-preview'>
@@ -23,15 +22,31 @@ class AdminProjectPreview extends Component {
                                 null} alt = "" />
                         </div > 
                     </div>
-                        <div className="project-section">
+                    <div className="project-section">
                         <div className="full-text-card">
                             <div className="text-container">
-                                <div className="project-date">
-                                    <p className = 'full-projects-date'>{moment(this.props.date).format('Do MMMM YYYY')} </p>
+                                <div className="project-title">
+                                    <h3>{this.props.name}</h3>
                                 </div>
-                        <div className="project-title"> {this.props.name}</div>   
-                        <span dangerouslySetInnerHTML={{__html: this.props.fullText}}/>
-                        </div>
+                                <div className="project-address">{this.props.address}</div>
+                                <div className="project-desc">
+                                    <span dangerouslySetInnerHTML= {{__html: this.props.fullText}}></span>
+                                </div>
+                            </div>
+                            <div className="contact-info">
+                                <p>Контакты:</p>
+                                <p>{this.props.organization}</p>
+                                {console.log(this.props.headArray)}
+                                {console.log(this.props.contactsArray)}
+                                {console.log(this.props.name)}
+                                {/* {this.props.headArray.map( (link,index) => 
+                                        <div key={index}>{link}</div>
+                                )}, 
+                               {this.props.contactsArray.map( (link,index) =>
+                                        <div key={index}><p>{link}</p></div>
+                                )} */}
+                                <p>{this.props.site}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
