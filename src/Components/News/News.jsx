@@ -23,7 +23,6 @@ class News extends Component {
                             <span className = 'news-text' dangerouslySetInnerHTML={{__html: this.props.text}}/>                
                         </NavLink>):(
                         <div onClick = {this.getEventWindow}>
-                        {console.log(this.props.event)}
                              <p className = 'news-date'>{moment(this.props.dateStart).format('DD MMMM YYYY') !== moment(this.props.dateEnd).format('DD MMMM YYYY') ? 
                              `${moment(this.props.dateStart).format('DD MMMM YYYY, h:mm')} - ${moment(this.props.dateEnd).format('DD MMMM YYYY, h:mm')}` : 
                              ` ${moment(this.props.dateStart).format('DD MMMM YYYY, h:mm')} - ${moment(this.props.dateEnd).format('h:mm')}`} </p>

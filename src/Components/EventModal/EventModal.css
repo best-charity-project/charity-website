@@ -1,0 +1,72 @@
+.event-date-modal{
+    display: flex;
+    border-bottom: 1px solid #f0f0f0;
+}
+.day-event-modal{
+    font-family: Montserrat;
+    font-size: 55px;
+    color: #ffc757;
+}
+.month-event-modal{
+    font-family: Montserrat;
+    font-weight: 600;
+    color: #e8e6e2;
+    font-size: 14px;
+}
+.time-event-modal{
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    color: #ffc757;
+}
+.title-event-modal{
+    color: #3b3f48;
+    font-size: 25px;
+    font-weight: 600;
+    font-family: Montserrat;
+}
+.place-tickets-event-modal{
+    margin-top: 20px;
+}
+.place-tickets-event-modal span{
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 600;
+    color: #3b3f48;
+}
+.place-event-modal,
+.tickets-event-modal,
+.tickets-event-modal a{
+    color: #459369;
+    font-family: Montserrat;
+    font-size: 16px;
+}
+.info-event-modal{
+    padding: 0 25px;
+}
+.buttons-event-modal{
+    border-top: 1px solid #f0f0f0;
+    padding: 20px 10px;
+    display: flex;
+    justify-content: center;
+}
+.button-event{
+    width: 192px;
+    margin-right: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px 20px;    
+    font-size: 14px;
+    border-radius: 50px;
+    box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+.button-event-ticket{
+    color: #ffffff;
+    background-color: #459369;
+    border:2px solid #408761;
+}
+.button-event-close{
+    background-color: #f0f0f0;
+    border:2px solid #dcdad7;
+    color: #3b3f48;
+}
