@@ -7,17 +7,17 @@ import Menu from '../../Components/Menu/Menu';
 import '../Home/MainPage.css';
 import '../Projects/Projects.css';
 import Project from '../../Components/Project/Project';
-import ProjectGallery from '../../Components/ProjectGallery/ProjectGallery';
 import SliderPreviousBtn from '../../Components/Slider/SliderButtons/SliderPreviousBtn';
 import SliderNextBtn from '../../Components/Slider/SliderButtons/SliderNextBtn';
 
 class Projects extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             currentDisplayedProject: {},
             currentProjectIndex: 0,
             projects: [],
+            filterList: [],
             isLastProject: false,
             isFirstProject: true
         };
@@ -39,7 +39,7 @@ class Projects extends Component {
         return (
             <div className="main-page-client"> 
                 <Menu name="client-menu" />
-                <Project content={this.state.currentDisplayedProject}/>
+                {this.state.currentDisplayedProject.name ? <Project content={this.state.currentDisplayedProject}/> : null}
                 <div className="projects-list-action-btns">
                     <SliderPreviousBtn disabled={this.state.isFirstProject} previousProject={this.previousProject} />
                     <SliderNextBtn disabled={this.state.isLastProject} nextProject={this.nextProject} />

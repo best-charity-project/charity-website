@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import ReactPlayer from 'react-player';
 import ProjectGallery from '../../Components/ProjectGallery/ProjectGallery';
 
 
@@ -25,7 +24,7 @@ class Project extends Component {
                                 <span dangerouslySetInnerHTML= {{__html: this.props.content.fullText}}></span>
                             </div>
                         </div>
-                        <ProjectGallery content={this.props.content} />    
+                        {<ProjectGallery content={this.props.content} />}    
                         <div className="contact-info">
                             <p>Контактны:</p>
                             <p>{this.props.content.organization}</p>

@@ -6,46 +6,70 @@ export default class ProjectGallery extends Component {
     constructor() {
         super();
         this.state = {
-            show: false
-        }
+            show: false,
+            showVideo: false,
+            showImage: false,
+            link: ''
+        };
     }
 
-    render() {
-        return (
-            <div className="gallery">
-                <Modal show={this.state.show} handleClose={this.hideModal}>
-                    {this.props.content.video === "" ? null : <ReactPlayer url={this.props.content.video} controls /> }
-                </Modal>
-                <div className="video-placeholder" onClick={this.showModal}>
-                </div>
-                {this.props.content.mediaImageArray.map((item, i) => {
-                    <img src={item} key={i}/>
-                })}
-            </div>
-        );
-    }
-
-    showModal = () => {
+    showVideoModal = (e) => {
         this.setState({
-            show: true
+            show: true,
+            showVideo: true,
+            link: e
+        });
+
+    };
+
+
+    showImageModal = (e) => {
+        this.setState({
+            show: true,
+            showImage: true,
+            link: e
         });
     };
 
     hideModal = () => {
         this.setState({
-            show: false
-        })
-    }
-}
-    const Modal = ({ handleClose, show, children }) => {
-        const showHideClassName = show ? "modal display-block" : "modal display-none";
-    
+            show: false,
+            link: ''
+        });
+    }; 
+
+
+
+    render() {
+        let videos = this.props.content.mediaVideoArray
+        let image = this.props.content.mediaImageArray
+        let totalArray = [...videos,...image]
         return (
-            <div className={showHideClassName}>
-                <section className="modal-main">
-                    {children}
-                    <button onClick={handleClose}>close</button>            
-                </section>
+            <div>
+                {this.state.show ? <Modal show={this.state.show} handleClose={this.hideModal}>
+                {this.state.showVideo ? <ReactPlayer url={this.state.link} playing /> : <img src={this.state.link} alt=""/>}
+                </Modal> : null}
+                <div className="gallery">
+                    {totalArray.map((item, i) => {
+                    return item.includes('png') ? <img className="image-items" key={i} src={item} onClick={this.showImageModal}></img>
+                            : <div className="video-items" key={i} onClick={() => this.showVideoModal(item)}>i am video</div>    
+                    })}
+                </div>
             </div>
         );
-    };
+    }
+
+}
+
+const Modal = ({ handleClose, show, children }) => {
+    const showHideClassName = show ? "modal display-block" : "modal display-none";
+
+    return (
+        <div className={showHideClassName}>
+            <section className="modal-main">
+                {children}
+                <button onClick={handleClose}>X</button>            
+            </section>
+        </div>
+    );
+};
