@@ -29,6 +29,15 @@
     left: 0;
 }
 
+.project-filter {
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-end;
+    position: absolute;
+    right: 45px;
+    top: 70px;
+}
+
 .gallery {
     display: flex;
 }

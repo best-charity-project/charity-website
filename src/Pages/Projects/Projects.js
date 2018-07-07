@@ -9,6 +9,7 @@ import '../Projects/Projects.css';
 import Project from '../../Components/Project/Project';
 import SliderPreviousBtn from '../../Components/Slider/SliderButtons/SliderPreviousBtn';
 import SliderNextBtn from '../../Components/Slider/SliderButtons/SliderNextBtn';
+import ProjectsFilter from '../../Components/ProjectsFilter/ProjectsFilter';
 
 class Projects extends Component {
     constructor(props) {
@@ -17,7 +18,9 @@ class Projects extends Component {
             currentDisplayedProject: {},
             currentProjectIndex: 0,
             projects: [],
-            filterList: [],
+            filteredProjects: [],
+            filterValue: 'все',
+            filters: [],
             isLastProject: false,
             isFirstProject: true
         };
@@ -33,6 +36,25 @@ class Projects extends Component {
                 isLastProject: res.data.projects.length === 1 ? true : false    
             });
         });
+        this.getFiltersList();
+    }
+
+    getFiltersList = () => {  
+        axios({
+            method: 'get',
+            url: `${ server }/filters`,
+        })
+        .then(res =>{
+            let filterList = res.data.filterList;
+            let filtersProjects = _.filter(filterList , function(el){
+                if(el.type === 'projects'){
+                    return el
+                }
+            })
+            this.setState({
+                filters:filtersProjects,
+            })
+        })
     }
 
     render() {
@@ -40,6 +62,7 @@ class Projects extends Component {
             <div className="main-page-client"> 
                 <Menu name="client-menu" />
                 {this.state.currentDisplayedProject.name ? <Project content={this.state.currentDisplayedProject}/> : null}
+                {this.state.filters ? <ProjectsFilter filterValue={this.filterValue} filters={this.state.filters}/> : null}
                 <div className="projects-list-action-btns">
                     <SliderPreviousBtn disabled={this.state.isFirstProject} previousProject={this.previousProject} />
                     <SliderNextBtn disabled={this.state.isLastProject} nextProject={this.nextProject} />
@@ -65,6 +88,14 @@ class Projects extends Component {
             isLastProject: this.state.projects.length - 1 === displayedProjectIndex + 1,
             isFirstProject: false,
         });
+    }
+
+    filterValue = (str) => {
+        this.setState ({
+            filterValue: str
+        })
+        let test = this.state.projects.filter(project => project.filter === this.state.filterValue)
+        console.log(test)
     }
 }
 
