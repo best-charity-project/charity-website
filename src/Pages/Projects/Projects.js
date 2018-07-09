@@ -62,7 +62,7 @@ class Projects extends Component {
             <div className="main-page-client"> 
                 <Menu name="client-menu" />
                 {this.state.currentDisplayedProject.name ? <Project content={this.state.currentDisplayedProject}/> : null}
-                {this.state.filters ? <ProjectsFilter filterValue={this.filterValue} filters={this.state.filters}/> : null}
+                {this.state.filters ? <ProjectsFilter filterProjects={this.filterProjects} filters={this.state.filters}/> : null}
                 <div className="projects-list-action-btns">
                     <SliderPreviousBtn disabled={this.state.isFirstProject} previousProject={this.previousProject} />
                     <SliderNextBtn disabled={this.state.isLastProject} nextProject={this.nextProject} />
@@ -90,13 +90,17 @@ class Projects extends Component {
         });
     }
 
-    filterValue = (str) => {
-        this.setState ({
-            filterValue: str
-        })
-        let test = this.state.projects.filter(project => project.filter === this.state.filterValue)
-        console.log(test)
-    }
+    filterProjects = (value) =>{
+        if(value === 'все'){
+            this.setState({filteredProjects : this.state.projects}) 
+        }else{
+            let filterProjects =this.state.projects.filter (projects => {
+                return (projects.filter === value)
+           })
+         this.setState({filterProjects :filterProjects })
+        }
+      }
+      
 }
 
 export default Projects;

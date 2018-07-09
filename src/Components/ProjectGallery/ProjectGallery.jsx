@@ -47,7 +47,7 @@ export default class ProjectGallery extends Component {
         return (
             <div>
                 {this.state.show ? <Modal show={this.state.show} handleClose={this.hideModal}>
-                {this.state.showVideo ? <ReactPlayer url={this.state.link} playing /> : <img src={this.state.link} alt=""/>}
+                {this.state.showVideo ? <ReactPlayer url={this.state.link} controls /> : <img src={this.state.link} alt=""/>}
                 </Modal> : null}
                 <div className="gallery">
                     {totalArray.map((item, i) => {

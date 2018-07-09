@@ -25,7 +25,7 @@ class ProjectsFilter extends Component {
         this.setState( {
             value: e.target.value
         })
-        this.props.filterValue(e.target.value)
+        this.props.filterProjects(e.target.value)
     }
 }
 
