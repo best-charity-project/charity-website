@@ -9,10 +9,14 @@ class News extends Component {
         isOpen: false
     }
     getEventWindow = () => {
-        this.setState({isOpen:!this.state.isOpen})
+        this.setState({isOpen:true})
+    }
+    closeModalWindow = () =>{
+        this.setState({isOpen:false})
     }
     render() {
         moment.lang('ru');
+        console.log(this.state)
         return (
             <div id = {this.props.id} className = 'news' onClick = {this.Click}>
                 {(!this.props.event)?(
@@ -23,14 +27,12 @@ class News extends Component {
                             <span className = 'news-text' dangerouslySetInnerHTML={{__html: this.props.text}}/>                
                         </NavLink>):(
                         <div onClick = {this.getEventWindow}>
-                             <p className = 'news-date'>{moment(this.props.dateStart).format('DD MMMM YYYY') !== moment(this.props.dateEnd).format('DD MMMM YYYY') ? 
-                             `${moment(this.props.dateStart).format('DD MMMM YYYY, h:mm')} - ${moment(this.props.dateEnd).format('DD MMMM YYYY, h:mm')}` : 
-                             ` ${moment(this.props.dateStart).format('DD MMMM YYYY, h:mm')} - ${moment(this.props.dateEnd).format('h:mm')}`} </p>
-                            <p className = 'news-title'>{this.props.name} </p>
-                            <span className = 'news-text' dangerouslySetInnerHTML={{__html: this.props.text}}/>
+                             <p className = 'news-date'>{moment(this.props.event.dateStart).format('DD MMMM YYYY')} </p>
+                            <p className = 'news-title'>{this.props.event.title} </p>
+                            <span className = 'news-text' dangerouslySetInnerHTML={{__html: this.props.event.text}}/>
                             <div className={this.state.isOpen ? 'overlay' : 'overlay hidden'}>
                                 <div className="modal-event-field">
-                                   <EventModal event = {this.props.event}/>
+                                   <EventModal event = {this.props.event} closeModalWindow = {this.closeModalWindow}/>
                         </div>
                 </div>   
                         </div>
