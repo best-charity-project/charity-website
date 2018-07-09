@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {ContentState, /* convertToRaw, */ EditorState, Modifier, AtomicBlockUtils/* , convertFromHTML */} from 'draft-js';
+import {AtomicBlockUtils} from 'draft-js';
 import PropTypes from 'prop-types';
-/* import axios from 'axios'; */
+
 import ModalWindow from '../../../ModalWindow/ModalWindow';
-import slider from '../../../../Assets/AssetsSvg/mbri-image-slider.svg'
+import slider from '../../../../Assets/AssetsSvg/mbri-image-slider.svg';
 import './AdminSlider.css';
 
 class AdminSlider extends Component {
@@ -23,13 +23,14 @@ class AdminSlider extends Component {
                 <div className = {this.state.isOpen ? 'overlay' : 'overlay hidden'} onClick = {this.closeModalWindow}>
                     <div className="modal-element">
                         <ModalWindow 
+                            isOpen = {this.state.isOpen}
                             getUrl = {this.getUrl}
                             addSlider = {this.addSlider}
-                            isOpen = {this.state.isOpen}
+                            onChangeImageArr = {this.onChangeImageArr}
                         />
                     </div>
                 </div>
-          </div>
+            </div>
         );
     }
     openModalWindow = () => {
@@ -56,7 +57,7 @@ class AdminSlider extends Component {
 
         let entityKey = newEditorState.getCurrentContent().createEntity('IMAGE_SLIDER', 'MUTABLE', entityData).getLastCreatedEntityKey()
         newEditorState = AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' ')
-    
+
         onChange(newEditorState)
         
         this.setState({
@@ -66,6 +67,9 @@ class AdminSlider extends Component {
     }
 
     getUrl = (imageArr) => {
+        this.setState({imageArr: imageArr})
+    }
+    onChangeImageArr = (imageArr) => {
         this.setState({imageArr: imageArr})
     }
 }

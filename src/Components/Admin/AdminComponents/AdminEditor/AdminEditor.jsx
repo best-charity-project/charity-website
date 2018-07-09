@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Editor} from 'react-draft-wysiwyg'; 
-import {ContentState, EditorState} from 'draft-js';
-/* import {convertToHTML, convertFromHTML, Middleware} from 'draft-convert'; */
+import {EditorState, convertToRaw} from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import {server} from '../../../../api';
 import axios from 'axios';
+
+import {server} from '../../../../api';
 import AdminSlider from './AdminSlider';
 import customBlockRenderFunc from './Renderer';
 import './AdminEditor.css';
@@ -14,34 +14,13 @@ class ControlledEditor extends Component {
         editorState: EditorState.createEmpty(),
     }
     
-    componentDidMount() {
-        this.props.initialEditorState ? 
-            this.setState({editorState: this.props.initialEditorState}) :
+    componentWillReceiveProps(newProps) {
+        console.log('AdminEditor.componentWillRecieveProps', convertToRaw(newProps.initialEditorState.getCurrentContent()))
+        newProps.initialEditorState ? 
+            this.setState({editorState: newProps.initialEditorState}) :
             this.setState({editorState: EditorState.createEmpty()}) 
     }
     
-    onChange = (editorState) => {
-        /* const currentContentState = this.state.editorState.getCurrentContent()
-        const newContentState = editorState.getCurrentContent()
-        const currentInlineStyle = this.state.editorState.getCurrentInlineStyle()
-        const newInlineStyle = editorState.getCurrentInlineStyle() */
-        /* if (currentContentState !== newContentState || currentInlineStyle !== newInlineStyle) { */
-        this.props.onEditorStateChange(editorState)
-        this.setState({editorState: editorState})
-        /* } */
-    }
-
-    uploadImageCallBack = (file) => {
-        let formData  = new FormData();
-        formData.append('image', file);
-        return axios({
-            method: 'post',
-            url: `${server}/uploadImages/`,
-            data: formData,
-            config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
-        })
-    }
-
     render() {
         return (
             <div>
@@ -69,10 +48,30 @@ class ControlledEditor extends Component {
 						}
                     }}
                     onEditorStateChange={this.onChange}
-                    customBlockRenderFunc={customBlockRenderFunc}
+                    customBlockRenderFunc={this.customBlockRenderFuncWrap}
                 />
             </div>
         )
     } 
+    onChange = (editorState) => {
+        console.log('AdminEditor.onChange', convertToRaw(editorState.getCurrentContent()))
+        this.setState({editorState: editorState})
+        this.props.onEditorStateChange(editorState)
+    }
+
+    customBlockRenderFuncWrap = (block) => {
+        return customBlockRenderFunc(block, this.onChange)
+    }
+
+    uploadImageCallBack = (file) => {
+        let formData  = new FormData();
+        formData.append('image', file);
+        return axios({
+            method: 'post',
+            url: `${server}/uploadImages/`,
+            data: formData,
+            config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
+        })
+    }
 }
 export default ControlledEditor;

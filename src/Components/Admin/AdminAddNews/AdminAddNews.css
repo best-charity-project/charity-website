@@ -1,28 +1,28 @@
-form.form-create-news {
+.create-news {
     padding: 65px 20px;
     padding-left: 300px;
 }
-.news-status {
+.create-news .news-status {
     margin: 0 10px 20px;
     display: flex;
 }
-.news-status > span {
+.create-news .news-status > span {
     flex-basis: 25%;
     line-height: 1.5;
 }
-.container-for-input {
+.create-news .container-for-input {
     display: flex;
 }
-.container-for-input label,
-.admin-image label,
-.news-source {
+.create-news .container-for-input label,
+.create-news .admin-image label,
+.create-news .news-source {
     padding-right: 60px;
     padding-left: 10px;
     font-weight: 600;
     text-align: right;
     align-self: center;
 }
-.news-sourse label {
+.create-news .news-sourse label {
     font-weight: 600;
 }
 #title-news {
@@ -32,10 +32,10 @@ form.form-create-news {
     font-size: 16px;
     outline: none;
 }
-.text-news {
+.create-news .text-news {
     display: flex;
 }
-.text-news > div:first-child {
+.create-news .text-news > div:first-child {
     flex-basis: 25%;
     padding-right: 60px;
     padding-left: 10px;
@@ -43,10 +43,10 @@ form.form-create-news {
     text-align: right;
     align-self: top;
 }
-.text-news > div:last-child {
+.create-news .text-news > div:last-child {
     flex-basis: 75%;
 }
-.text-news > div:last-child select {
+.create-news .text-news > div:last-child select {
     font-family: 'Montserrat', sans-serif;
     width: 300px;
     margin: 8px 0;
@@ -60,43 +60,43 @@ form.form-create-news {
     outline: none;
     flex-basis: 75%;
 }
-.text-news .wrapper {
+.create-news .text-news .wrapper {
     margin-left: 0;
     max-width: 85%;
 }
-.text-news .wrapper .editor {
+.create-news .text-news .wrapper .editor {
     background-color: #ffffff;
 }
-.text-news .wrapper .rdw-option-wrapper {
+.create-news .text-news .wrapper .rdw-option-wrapper {
     margin: 0 3px;
 }
-hr {
+.create-news hr {
     margin: 30px 40px;
 }
-form.form-create-news hr:nth-of-type(2) {
+.create-news hr:nth-of-type(2) {
     margin-top: 0;
 }
-form .admin-buttons {
+.create-news .admin-buttons {
     margin: 60px auto 0px;
     display: flex;
     justify-content: space-evenly
 }
-.admin-buttons > button {
+.create-news .admin-buttons > button {
     margin: 0 10px;
     font-size: 16px;
 }
-.news-status > button {
+.create-news .news-status > button {
     margin: 0;
     font-size: 16px;
 }
-.choose-file {
+.create-news .choose-file {
     line-height: 1;
 }
-.admin-textarea {
+.create-news .admin-textarea {
     display: flex;
     flex-direction: column;
 }
-textarea {
+.create-news textarea {
     margin-left: 0;
     width: 85%;
     max-height: 150px;
@@ -104,21 +104,21 @@ textarea {
     font-size: 16px;
     padding: 10px 20px;
 }
-textarea:focus {
+.create-news textarea:focus {
     outline: none;
 }
-.admin-textarea-description {
+.create-news .admin-textarea-description {
     width: 85%;
     display: flex;
     flex-direction: column;
     padding: 5px;
 }
-.admin-textarea-description span,
-.admin-textarea-description div {
+.create-news .admin-textarea-description span,
+.create-news .admin-textarea-description div {
     align-self: flex-end;
     margin-top: 5px;
 }
-.admin-textarea-description input {
+.create-news .admin-textarea-description input {
     margin: 0 auto;
     height: auto;
     padding: 5px;
@@ -126,7 +126,7 @@ textarea:focus {
     width: 50px;
     text-align: center;
 }
-.admin-textarea-symbols {
+.create-news .admin-textarea-symbols {
     font-weight: 600;
 }
 

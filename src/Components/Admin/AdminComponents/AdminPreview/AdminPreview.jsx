@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
-import {Route} from 'react-router-dom';
-import {withRouter} from "react-router-dom";
+import {Route, withRouter} from 'react-router-dom';
 import moment from 'moment';
-import axios from 'axios';
 import {Editor} from 'draft-js';
-import blockRendererFn from '../AdminEditor/Renderer'
 import customRendererFn from '../AdminEditor/Renderer'
 
 import Button from '../../../Button/Button';
-import {server} from '../../../../api';
 import './AdminPreview.css';
 
 class AdminPreview extends Component {
@@ -29,7 +25,6 @@ class AdminPreview extends Component {
                                 moment().format('DD MMMM YYYY')} 
                         </p>
                         <p className = 'full-news-title'> {this.props.title}</p>               
-                        {/* <span dangerouslySetInnerHTML={{__html: this.props.fullText}}/> */}
                         <Editor 
                             editorState={this.props.fullTextEditorState} 
                             readOnly={true} 

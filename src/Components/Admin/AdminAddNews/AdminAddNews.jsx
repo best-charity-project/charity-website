@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-/* import ReactDOM from 'react-dom'; */
 import {Route} from 'react-router-dom';
 import {withRouter} from "react-router-dom";
 import axios from 'axios';
@@ -20,7 +19,7 @@ class AdminAddNews extends Component {
     state = {
         title: '',
         shortText: '',
-        fullTextEditorState: '',
+        fullTextEditorState: EditorState.createEmpty(),
         source: '',
         isPublic: false,
         imageData: '',
@@ -52,12 +51,13 @@ class AdminAddNews extends Component {
     }
 
     render() {
+        console.log('AdminAddNews.render', convertToRaw(this.state.fullTextEditorState.getCurrentContent()))
         return (
             <div className="admin-content">
                 <Navigation onLogout={this.onLogout} />
                 <NavBar />
                 {!this.state.isPreview ? 
-                    <form className = "form-create-news" encType="multipart/form-data" method="post">
+                    <div className = "create-news">
                         <div className = "news-status">
                             <span>Статус новости: {this.state.isPublic ? " опубликована" : " черновик"}</span>
                             <Route render={({history}) => (
@@ -114,9 +114,7 @@ class AdminAddNews extends Component {
                             <div className="full-text-news">Полное описание:</div>
                             <ControlledEditor 
                                 initialEditorState = {this.state.fullTextEditorState} 
-                                /* ref = {(node) => {this._ControlledEd = node}} */
                                 onEditorStateChange = {this.onEditorStateChange}
-                                // ref-ссылка - в доке по реакту
                             /> 
                         </div>
                         <hr />
@@ -152,7 +150,7 @@ class AdminAddNews extends Component {
                                 <Button 
                                     label={this.state.isPublic ? "Сохранить" : "Сохранить без публикации"}
                                     name = "button-admin"
-                                    clickHandler = {this.onSaveStatus}
+                                    clickHandler = {this.checkText}
                                 />
                             )} />
                             <Route render={({history}) => (
@@ -163,7 +161,7 @@ class AdminAddNews extends Component {
                                 />
                             )} />
                         </div>
-                    </form>  : 
+                    </div>  : 
 
                     <AdminPreview 
                         imageData = {this.state.imageData}
@@ -187,7 +185,7 @@ class AdminAddNews extends Component {
         this.setState({title: object.value});
     }
     onEditorStateChange = (editorState) => {
-        /* const ControlledEd = ReactDOM.findDOMNode(this._ControlledEd) */
+        console.log('AdminAddNews.onEditorStateChange', convertToRaw(editorState.getCurrentContent()))
         this.setState({fullTextEditorState: editorState});
     }
     getCurrentTextShort = (event) => {
@@ -205,43 +203,36 @@ class AdminAddNews extends Component {
         })
     }
     checkText = () => {
-        if (!this.state.shortText) {
-            let fullText = draftToHtml(convertToRaw(this.state.fullTextEditorState.getCurrentContent()))
-            let newText = fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
-            if (newText.length > 300) {
-                newText = (newText.slice(0, 297) + '...').replace(/\n/, '')
+        if (this.state.fullTextEditorState) {
+            if (!this.state.shortText) {
+                let fullText = draftToHtml(convertToRaw(this.state.fullTextEditorState.getCurrentContent()))
+                let newText = fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
+                if (newText.length > 300) {
+                    newText = (newText.slice(0, 297) + '...').replace(/\n/, '')
+                } else {
+                    newText = newText.replace(/\n/, '')
+                }
+                this.setState({shortText: newText}, this.sendNews)
             } else {
-                newText = newText.replace(/\n/, '')
+                this.sendNews()
             }
-            this.setState({shortText: newText}, this.sendNews)
-        } else {
-            this.sendNews()
         }
     }
-    onPreview = (e) => {
-        e.preventDefault()
+    onPreview = () => {
         this.setState({
             isPreview: true
         })
     }
-    onSaveChangeStatus = (e) => {
-        e.preventDefault()
+    onSaveChangeStatus = () => {
         this.setState({isPublic: !this.state.isPublic}, this.checkText)
     }
-    onSaveStatus = (e) => {
-        e.preventDefault()
-        this.checkText()
-    }
-    onPublish = (e) => {
-        e.preventDefault()
+    onPublish = () => {
         this.setState({isPublic: true}, this.checkText)
     }
-    onDraft = (e) => {
-        e.preventDefault()
+    onDraft = () => {
         this.setState({isPublic: false}, this.checkText)
     }
-    onCancel = (e) => {
-        e.preventDefault()
+    onCancel = () => {
         this.setState({
             title: '',
             shortText: '',

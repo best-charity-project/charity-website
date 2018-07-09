@@ -5,7 +5,8 @@ import Image from '../Image/Image'
 
 class CustomComponent extends Component {
     render() {
-        const {block, contentState} = this.props;    
+        console.log('CustomComponent', this.props)
+        const {block, contentState, blockProps} = this.props;    
         const entity = contentState.getEntity(block.getEntityAt(0));
 
         if (entity && entity.type === 'IMAGE') {
@@ -20,7 +21,7 @@ class CustomComponent extends Component {
 
         if (entity && entity.type === 'IMAGE_SLIDER') {
             return(
-                <ImageSlider contentState = {contentState} block = {block} />
+                <ImageSlider contentState = {contentState} block = {block} onChange = {blockProps.onChange}/>
             )
         }
     }
