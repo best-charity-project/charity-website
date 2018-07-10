@@ -20,6 +20,12 @@ class ControlledEditor extends Component {
             this.setState({editorState: newProps.initialEditorState}) :
             this.setState({editorState: EditorState.createEmpty()}) 
     }
+    componentDidMount() {
+        console.log('AdminEditor.componenDidMount', convertToRaw(this.props.initialEditorState.getCurrentContent()))
+        this.props.initialEditorState ? 
+            this.setState({editorState: this.props.initialEditorState}) :
+            this.setState({editorState: EditorState.createEmpty()}) 
+    }
     
     render() {
         return (
@@ -60,7 +66,7 @@ class ControlledEditor extends Component {
     }
 
     customBlockRenderFuncWrap = (block) => {
-        return customBlockRenderFunc(block, this.onChange)
+        return customBlockRenderFunc(block, this.onChange, true)
     }
 
     uploadImageCallBack = (file) => {

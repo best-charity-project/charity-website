@@ -36,7 +36,7 @@ class AdminAddNews extends Component {
         })
         if (this.props.location.state) {
             let fullTextEditorState = EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.location.state.detail.fullText)));
-
+            console.log('AdminAddNews.componentWillMount', convertToRaw(fullTextEditorState.getCurrentContent()))
             this.setState({
                 title: this.props.location.state.detail.title,
                 shortText: this.props.location.state.detail.shortText,
@@ -115,7 +115,7 @@ class AdminAddNews extends Component {
                             <ControlledEditor 
                                 initialEditorState = {this.state.fullTextEditorState} 
                                 onEditorStateChange = {this.onEditorStateChange}
-                            /> 
+                            />
                         </div>
                         <hr />
                         <div className="text-news">

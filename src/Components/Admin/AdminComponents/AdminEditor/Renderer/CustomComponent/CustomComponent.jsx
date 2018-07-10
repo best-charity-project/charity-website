@@ -21,7 +21,7 @@ class CustomComponent extends Component {
 
         if (entity && entity.type === 'IMAGE_SLIDER') {
             return(
-                <ImageSlider contentState = {contentState} block = {block} onChange = {blockProps.onChange}/>
+                <ImageSlider contentState = {contentState} block = {block} onChange = {blockProps.onChange} isAdmin = {blockProps.isAdmin}/>
             )
         }
     }

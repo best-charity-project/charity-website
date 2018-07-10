@@ -15,10 +15,23 @@ class AdminSlider extends Component {
         onChange: PropTypes.func,
         editorState: PropTypes.object
     }
+    componentDidMount(){
+        document.addEventListener('keyup', (e) => {
+            if (e.keyCode === 27) this.setState({
+                isOpen: false,
+                imageArr: []
+            });
+        });
+    }
  
     render() {
         return (
-            <div className = 'rdw-option-wrapper' aria-selected = 'false' title = {!this.state.isOpen ? 'Слайдер' : null} onClick = {this.openModalWindow}>
+            <div 
+                className = 'rdw-option-wrapper' 
+                aria-selected = 'false' 
+                title = {!this.state.isOpen ? 'Слайдер' : null} 
+                onClick = {this.openModalWindow}
+            >
                 <img src = {slider} alt = '' />
                 <div className = {this.state.isOpen ? 'overlay' : 'overlay hidden'} onClick = {this.closeModalWindow}>
                     <div className="modal-element">
@@ -46,6 +59,7 @@ class AdminSlider extends Component {
             })
         } 
     }
+
     addSlider = (e) => {
         e.preventDefault()
         e.stopPropagation() 
