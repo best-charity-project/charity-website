@@ -214,3 +214,45 @@
   .display-none {
     display: none;
   }
+
+.select-filter-button {
+    background-image: url('../../../src/Assets/AssetsSvg/filter-results-button.svg');
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-color: #e8e6e2;
+    border: none;
+    padding-right: 25px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.select-filter-button:hover {
+    cursor: pointer;
+}
+
+.select-filter-button:focus {
+    outline:0;
+}
+
+.project-filter {
+    margin-right: 20px;
+}
+
+.project-filter ul {
+    list-style-type: none;
+    display: none;
+    position: absolute;
+    margin-top: 20px;
+}
+
+.project-filter label {
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #9b9b9b;
+    margin-right: 10px;
+}
+
+.active + ul {
+    display: block;
+}

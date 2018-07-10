@@ -4,28 +4,38 @@ class ProjectsFilter extends Component {
     constructor() {
         super();
         this.state = {
-            value: ''
+            value: 'все',
+            active: false
         }
+        this.toggleClass= this.toggleClass.bind(this);
     }
+
+    toggleClass() {
+        const currentState = this.state.active;
+        this.setState({ active: !currentState });
+    };
 
     render() {
         return (
             <div className="project-filter">
-                <label htmlFor="">Фильтры:</label>
-                <select value={this.state.value} name="Фильтры" onChange={this.selectValue}>
+                <label>Фильтры:</label>
+                <button className={`select-filter-button ${this.state.active ? 'active' : null}`} 
+                onClick={this.toggleClass}>#{this.state.value}</button>
+                <ul value={this.state.value} name="Фильтры">
                     {this.props.filters.map((item, i) => {
-                        return <option key={i} value={item.title}>{item.title}</option>     
+                        return <li onClick={() => this.selectValue(item)} key={i} value={item.title}>{item.title}</li>     
                     })}
-                </select>
+                </ul>
             </div>
         );
     }
 
-    selectValue = (e) => {
-        this.setState( {
-            value: e.target.value
+    selectValue = (item) => {
+        this.setState({
+            value: item.title,
+            active: false
         })
-        this.props.filterProjects(e.target.value)
+        this.props.filterProjects(item.title)
     }
 }
 

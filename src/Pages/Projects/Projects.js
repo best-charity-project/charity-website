@@ -30,10 +30,10 @@ class Projects extends Component {
 
     componentDidMount() {
         axios.get(`${server}/projects`).then(res => {
-            this.setState({
+            this.setState({            
                 currentDisplayedProject: res.data.projects[0],
                 projects: res.data.projects,
-                isLastProject: res.data.projects.length === 1 ? true : false    
+                isLastProject: this.state.filteredProjects.length === 1 ? true : false
             });
         });
         this.getFiltersList();
@@ -58,10 +58,11 @@ class Projects extends Component {
     }
 
     render() {
+        console.log(this.state.isLastProject, this.state.isLastProject)
         return (
             <div className="main-page-client"> 
                 <Menu name="client-menu" />
-                {this.state.currentDisplayedProject.name ? <Project content={this.state.currentDisplayedProject}/> : null}
+                {this.state.currentDisplayedProject.name ? <Project content={this.state.currentDisplayedProject}/> : <p>нихера</p>}
                 {this.state.filters ? <ProjectsFilter filterProjects={this.filterProjects} filters={this.state.filters}/> : null}
                 <div className="projects-list-action-btns">
                     <SliderPreviousBtn disabled={this.state.isFirstProject} previousProject={this.previousProject} />
@@ -73,21 +74,22 @@ class Projects extends Component {
     }
 
     previousProject() {
-        let displayedProjectIndex = _.findIndex(this.state.projects, this.state.currentDisplayedProject);
+        let displayedProjectIndex = _.findIndex(this.state.filteredProjects, this.state.currentDisplayedProject);
         this.setState({
-            currentDisplayedProject: this.state.projects[displayedProjectIndex - 1],
+            currentDisplayedProject: this.state.filteredProjects[displayedProjectIndex - 1],
             isFirstProject: displayedProjectIndex - 1 === 0,
             isLastProject: false,
         });
     }
 
     nextProject() {
-        let displayedProjectIndex = _.findIndex(this.state.projects, this.state.currentDisplayedProject);
+        let displayedProjectIndex = _.findIndex(this.state.filteredProjects, this.state.currentDisplayedProject);
         this.setState({
-            currentDisplayedProject: this.state.projects[displayedProjectIndex + 1],
-            isLastProject: this.state.projects.length - 1 === displayedProjectIndex + 1,
+            currentDisplayedProject: this.state.filteredProjects[displayedProjectIndex + 1],
+            isLastProject: this.state.filteredProjects.length  === displayedProjectIndex + 1,
             isFirstProject: false,
         });
+        console.log(displayedProjectIndex, this.state.filteredProjects.length, this.state.currentDisplayedProject)
     }
 
     filterProjects = (value) =>{
@@ -97,10 +99,9 @@ class Projects extends Component {
             let filterProjects =this.state.projects.filter (projects => {
                 return (projects.filter === value)
            })
-         this.setState({filterProjects :filterProjects })
+           this.setState({currentDisplayedProject: filterProjects[0], filteredProjects: filterProjects })
         }
-      }
-      
+    }
 }
 
 export default Projects;
