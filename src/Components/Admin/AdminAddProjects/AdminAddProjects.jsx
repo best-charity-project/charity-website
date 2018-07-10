@@ -48,13 +48,13 @@ class AdminAddProjects extends Component {
             this.setState({
                 image: this.props.location.state.detail.image,
                 name: this.props.location.state.detail.name,
-                organization:this.props.location.state.detail.organization,
-                headArray:this.props.location.state.detail.headArray,
-                contactsArray:this.props.location.state.detail.contactsArray,
-                address:this.props.location.state.detail.address,
-                site:this.props.location.state.detail.site,
-                mediaImageArray:this.props.location.state.detail.mediaImageArray,
-                mediaVideoArray:this.props.location.state.detail.mediaVideoArray,
+                organization: this.props.location.state.detail.organization,
+                headArray: this.props.location.state.detail.headArray,
+                contactsArray: this.props.location.state.detail.contactsArray,
+                address: this.props.location.state.detail.address,
+                site: this.props.location.state.detail.site,
+                mediaImageArray: this.props.location.state.detail.mediaImageArray,
+                mediaVideoArray: this.props.location.state.detail.mediaVideoArray,
                 fullText: this.props.location.state.detail.fullText,
                 filter: this.props.location.state.detail.filter,
                 isPublic: this.props.location.state.detail.isPublic
@@ -437,7 +437,7 @@ class AdminAddProjects extends Component {
     addMediaVideo = (e) =>{
         e.preventDefault()
         let mediaVideoArray = this.state.mediaVideoArray
-        if(this.state.mediaVideo && /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})\/([\w\/\-\.]+)([\?].*)?$/igm.test(this.state.mediaVideo)) {
+        if(this.state.mediaVideo && /^(https?:\/\/)?([\da-zs\.-]+)\.([a-z\.]{2,6})\/([\w\/\-\.]+)([\?].*)?$/igm.test(this.state.mediaVideo)) {
             mediaVideoArray.push(this.state.mediaVideo)
             this.setState({
                 mediaVideoArray:mediaVideoArray
