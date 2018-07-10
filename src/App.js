@@ -16,6 +16,7 @@ import AdminNewsBlock from './Components/Admin/AdminNewsBlock/AdminNewsBlock';
 import AdminAddNews from './Components/Admin/AdminAddNews/AdminAddNews';
 import AdminProjectsBlock from './Components/Admin/AdminProjectsBlock/AdminProjectsBlock';
 import AdminAddProjects from './Components/Admin/AdminAddProjects/AdminAddProjects';
+import AdminFiltersBlock from './Components/Admin/AdminFiltersBlock/AdminFiltersBlock';
 import { fakeAuth } from './Components/Admin/Auth/PrivateRoute';
 import PrivateRoute from "../src/Components/Admin/Auth/PrivateRoute";
 import { getToken } from './Components/Admin/Auth';
@@ -37,6 +38,7 @@ class App extends Component {
             <PrivateRoute path="/admin-panel/news/create" component={AdminAddNews} />
             <PrivateRoute  path="/admin-panel/projects" component={AdminProjectsBlock} exact />
             <PrivateRoute path="/admin-panel/projects/create" component={AdminAddProjects} />
+            <PrivateRoute  path="/admin-panel/filters" component={AdminFiltersBlock} exact />
             <Route path="/news/:id" component={FullNews} />
             <Route path="/news" component={PageNews} />
             <Route path="/events" component={Events} />
