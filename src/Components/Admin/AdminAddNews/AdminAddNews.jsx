@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
 import {withRouter} from "react-router-dom";
 import axios from 'axios';
-import {EditorState, convertToRaw, convertFromRaw} from 'draft-js'
+import {EditorState, convertToRaw, convertFromRaw} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import _ from 'lodash';
 
@@ -172,7 +172,7 @@ class AdminAddNews extends Component {
                         title = {this.state.title}
                         fullTextEditorState = {this.state.fullTextEditorState}
                         onSaveChangeStatus = {this.onSaveChangeStatus}
-                        onSaveStatus = {this.onSaveStatus}
+                        sendNews = {this.sendNews}
                         getNewStatePreview = {this.getNewStatePreview}
                         date = {this.state.date}
                         isPublic = {this.state.isPublic}
@@ -274,10 +274,10 @@ class AdminAddNews extends Component {
             this.props.history.push({
                 pathname: '/admin-panel/news'
             })  
-          })
-          .catch(function (error) {
+        })
+        .catch(function (error) {
             console.log(error);
-          });
+        });
     }
     deleteImage = () => {
         this.setState({

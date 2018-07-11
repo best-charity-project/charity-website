@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
-import '../News/News.css';
+import {Editor, EditorState, convertFromRaw} from 'draft-js';
 import moment from 'moment';
 import {NavLink} from "react-router-dom";
+import axios from 'axios';
+
+import customRendererFn from '../Admin/AdminComponents/AdminEditor/Renderer';
+import '../News/News.css';
 import { server } from '../../../src/api';
 import Menu from '../Menu/Menu';
 import '../FullNews/FullNews.css';
@@ -9,10 +13,10 @@ import Footer from '../Footer/Footer';
 
 class FullNews extends Component {
     state = {
-        news:{}
+        news: {}
     }
     componentDidMount(){
-        this.getInfoAboutNew()
+        this.getInfoAboutNews()
     }
     render() {
         return (
@@ -29,8 +33,15 @@ class FullNews extends Component {
                                 <img src = {'http://localhost:3001/images/' + this.state.news.image} alt = 'image for news' /> :
                                 null}
                             <p className = 'full-news-date'>{moment(this.state.news.createdAt).format('DD MMMM YYYY')} </p>
-                            <p className = 'full-news-title'> {this.state.news.title}</p>               
-                            <span dangerouslySetInnerHTML={{__html: this.state.news.fullText}}/>
+                            <p className = 'full-news-title'> {this.state.news.title}</p>                           
+                            {this.state.news.fullText ?         
+                                <Editor 
+                                    editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(this.state.news.fullText)))} 
+                                    readOnly={true} 
+                                    blockRendererFn={customRendererFn}
+                                /> :
+                                null 
+                            }
                         </div>): null }
                         </div>
                     </div>
@@ -39,12 +50,17 @@ class FullNews extends Component {
             </div>
         ) 
     }
-    getInfoAboutNew = () =>{
+    getInfoAboutNews = () => {
         const id = this.props.match.params.id;
-        fetch(`${server}/news/`+id)
-        .then(response => response.json())
-        .then(data => {
-            this.setState({news:data.news });
+
+        axios.get(`${server}/news/`+id)
+        .then(response => {
+            this.setState({
+                news: response.data.news
+            })
+        })
+        .catch(error => {
+            console.log(error)
         })
     }
 }

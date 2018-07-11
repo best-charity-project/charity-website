@@ -96,6 +96,7 @@ class AdminNewsContent extends Component {
     } 
     checkId = (id) => {
         let tempId = this.state.checkedIds;
+        console.log(tempId)
         if (~this.state.checkedIds.indexOf(id)) {
             tempId.splice(tempId.indexOf(id), 1)
         } else {
@@ -131,8 +132,9 @@ class AdminNewsContent extends Component {
         })
         .then((result) => {
             this.setState({            
-                filteredNews: this.state.filteredNews.filter(news => !~result.data.news.indexOf(news._id))
-            }) 
+                filteredNews: this.state.filteredNews.filter(news => !~result.data.news.indexOf(news._id)),
+                checkedIds: []
+            }, () => console.log(this.state.filteredNews)) 
         })
         .catch(function (error) {
             console.log(error);

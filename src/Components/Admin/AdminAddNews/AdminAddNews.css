@@ -10,8 +10,14 @@
     flex-basis: 25%;
     line-height: 1.5;
 }
+.create-news .admin-title-news {
+    margin-top: 35px;
+}
 .create-news .container-for-input {
     display: flex;
+}
+.create-news .container-for-input label {
+    flex-basis: 25%;
 }
 .create-news .container-for-input label,
 .create-news .admin-image label,

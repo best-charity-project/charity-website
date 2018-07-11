@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import {EditorState, convertToRaw, convertFromRaw} from 'draft-js';
+import axios from 'axios';
+
 import AdminDatePicker from '../AdminDatePicker/AdminDatePicker';
 import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
@@ -9,61 +12,26 @@ import Editor from  "../AdminEditor/AdminEditor";
 class AdminCreateEvent extends Component { 
     state = {
         title: '',
-        dateStart:new Date(),
-        dateEnd:new Date(),
-        text : '',
-        isOpen: false
+        dateStart: new Date(),
+        dateEnd: new Date(),
+        textEditorState: EditorState.createEmpty(),
+        isOpen: false,
+        id: ''
     }
-    componentDidMount (){
+    componentWillMount (){
         if(this.props.event){
+            let textEditorState = EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.event.text)));
             this.setState({
                 id:this.props.event._id,
                 dateStart: this.props.event.dateStart,
                 dateEnd: this.props.event.dateEnd,
-                text:this.props.event.text,
+                textEditorState: textEditorState,
                 title:this.props.event.title,
-                getInfo:false
+                getInfo:false,
             })
         }
     }
-    getValue = (obj) => {
-        this.setState({title:obj.value});
-      }
-      getStartDate = (str) =>{
-          this.setState({dateStart:str})
-      }
-      getEndDate = (str) =>{
-        this.setState({dateEnd:str})
-    }
-      getCurrentText = (str) =>{
-        this.setState({text:str});
-    }
-
-    sendEvent = () =>{
-        fetch(`${ server }/events`, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(this.state),
-            })
-            .then(response => response.json())
-            this.setState({title:'', text:'',dateStart:new Date(),dateEnd:new Date(), isOpen: !this.state.isOpen})
-            this.props.saveEvent()           
-    }
-      cancel = () => {  
-       this.setState({title:'', text:'',data:'',isOpen: !this.state.isOpen})     
-       this.props.cancel();
-     }
-     closeInfo = () => {
-        this.setState({getInfo:true})
-        this.props.closeInfo(false)
-    }
-    updateEvent = () =>{
-        this.props.closeInfo(false);
-        this.sendUpdateEvent();
-    }
+    
     render() {
         return(
             <div className = 'modal-window'> 
@@ -90,7 +58,10 @@ class AdminCreateEvent extends Component {
                     label = 'Дата окончания'
                 />
                 </div>
-                <Editor text = {this.state.text} getCurrentText = {this.getCurrentText}/>
+                <Editor 
+                    initialEditorState = {this.state.textEditorState} 
+                    onEditorStateChange = {this.onEditorStateChange}
+                />
                 <div className="change-state-buttons">  
                     <Button 
                         name = "button-admin button-admin-background" 
@@ -100,26 +71,93 @@ class AdminCreateEvent extends Component {
                     <Button 
                         name = "button-admin button-admin-background" 
                         label = 'Отменить' 
-                        clickHandler = {this.props.event ?this.closeInfo: this.cancel}
+                        clickHandler = {this.props.event ? this.closeInfo : this.cancel}
                     /> 
                 </div> 
             </div>
         )
     }
-    sendUpdateEvent = () =>{
+    getValue = (obj) => {
+        this.setState({title:obj.value});
+    }
+    getStartDate = (str) =>{
+        this.setState({dateStart:str})
+    }
+    getEndDate = (str) =>{
+        this.setState({dateEnd:str})
+    }
+    onEditorStateChange = (editorState) => {
+        this.setState({textEditorState: editorState});
+    }
+
+    sendEvent = () =>{
+        const sendedBody = this.state;
+        sendedBody.text = JSON.stringify(convertToRaw(this.state.textEditorState.getCurrentContent()));
+        fetch(`${ server }/events`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(sendedBody)
+        })
+        .then(response => {
+            this.setState({
+                title: '', 
+                textEditorState: EditorState.createEmpty(),
+                dateStart: new Date(),
+                dateEnd: new Date(), 
+                isOpen: !this.state.isOpen
+            })
+            this.props.saveEvent()   
+        })
+        .catch(function (error) {
+            console.log(error);
+        });         
+    }
+    sendUpdateEvent = () => {
         const id = this.state.id
         const URL = `${ server }/events/`+id;
+        const sendedBody = this.state;
+        sendedBody.text = JSON.stringify(convertToRaw(this.state.textEditorState.getCurrentContent()));
         fetch(URL, {
             method: 'PUT',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(this.state),
+            body: JSON.stringify(sendedBody)
         })
-            .then(response => response.json())
-            
-            
-      } 
+        .then(response => {
+            this.setState({
+                title: '', 
+                textEditorState: EditorState.createEmpty(),
+                dateStart: new Date(),
+                dateEnd: new Date(), 
+                isOpen: !this.state.isOpen
+            })
+            this.props.saveEvent()   
+        })
+        .catch(function (error) {
+            console.log(error);
+        });   
+    }
+    cancel = () => {  
+        this.setState({
+           title:'', 
+           textEditorState: EditorState.createEmpty(),
+           data:'',
+           isOpen: !this.state.isOpen
+        })     
+        this.props.cancel();
+    }
+     closeInfo = () => {
+        this.setState({getInfo:true})
+        this.props.closeInfo(false)
+    }
+    updateEvent = () => {
+        this.props.closeInfo(false);
+        this.sendUpdateEvent();
+    }
 }
 export default AdminCreateEvent;

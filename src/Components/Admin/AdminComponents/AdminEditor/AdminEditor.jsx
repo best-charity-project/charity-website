@@ -14,12 +14,6 @@ class ControlledEditor extends Component {
         editorState: EditorState.createEmpty(),
     }
     
-    componentWillReceiveProps(newProps) {
-        console.log('AdminEditor.componentWillRecieveProps', convertToRaw(newProps.initialEditorState.getCurrentContent()))
-        newProps.initialEditorState ? 
-            this.setState({editorState: newProps.initialEditorState}) :
-            this.setState({editorState: EditorState.createEmpty()}) 
-    }
     componentDidMount() {
         console.log('AdminEditor.componenDidMount', convertToRaw(this.props.initialEditorState.getCurrentContent()))
         this.props.initialEditorState ? 

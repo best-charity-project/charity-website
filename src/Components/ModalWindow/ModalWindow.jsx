@@ -24,7 +24,7 @@ class ModalWindow extends Component {
                 <Button 
                     name = 'button-admin admin-cancel'
                     label = {<span aria-hidden='true'>&times;</span>} 
-                    clickHandler = {(event) => this.deleteGalleryImage(event, sortIndex)}
+                    clickHandler =  {() => this.deleteGalleryImage(sortIndex)} 
                 />
             </div>      
         );
@@ -81,13 +81,18 @@ class ModalWindow extends Component {
                             clickHandler = {this.props.addSlider}
                             label = 'Ok'
                         /> :
-                        null}
+                        null
+                    }
                     <Button 
                         name = 'button-admin close-window'
                         clickHandler = {this.closeModalWindow}
                         label = 'Отмена'
                     />
                 </div>
+                {/* {this.state.imageArr.length ?
+                    <div className = 'message-info'>*При удалении картинки, кнопка "Отмена" их не вернет</div> :
+                    null
+                } */}
             </div>
         )
     }
@@ -113,12 +118,14 @@ class ModalWindow extends Component {
         }, () => this.props.onChangeImageArr(this.state.imageArr));
     };
     shouldCancelStart = (e) => {
+        console.log(333)
         if (['button', 'span'].indexOf(e.target.tagName.toLowerCase()) !== -1) {
             return true
         }
     }
 
-    deleteGalleryImage = (event, index) => {
+    deleteGalleryImage = (index) => {
+        console.log(111)
        let imageArr = this.state.imageArr
        let deletedImage = imageArr.splice(index, 1)
        axios({
@@ -130,7 +137,7 @@ class ModalWindow extends Component {
         .catch(function (error) {
             console.log(error);
         });
-       this.setState({
+        this.setState({
            imageArr: imageArr
        })      
     }
@@ -148,7 +155,7 @@ class ModalWindow extends Component {
             imageArr.push(response.data.link)
             this.setState({
                 imageArr: imageArr
-            },  () => this.props.getUrl(this.state.imageArr)) 
+            }, this.props.getUrl(this.state.imageArr)) 
         })
         .catch(function (error) {
             console.log(error);

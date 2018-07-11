@@ -65,6 +65,7 @@ class ImageSlider extends Component {
                             imageArr = {this.state.src}
                             onChangeImageArr = {this.onChangeImageArr}
                             addSlider = {this.editSlider}
+                            getUrl = {this.getUrl}
                         />
                     </div>
                 </div>
@@ -121,6 +122,9 @@ class ImageSlider extends Component {
             isOpen: false,
             src: []
         })
+    }
+    getUrl = (imageArr) => {
+        this.setState({src: imageArr})
     }
 }
 export default ImageSlider;

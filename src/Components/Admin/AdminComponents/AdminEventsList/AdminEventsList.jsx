@@ -26,12 +26,12 @@ componentWillReceiveProps(nexprops, nextstate){
                     <div>Удалить событие</div>   
                 </div>            
                 <div>                    
-                    {this.state.events.map(user => 
+                    {this.state.events.map(item => 
                         <AdminEvent 
                             clickHandler = {this. getEventInfo }
-                            event = {user} 
-                            key = {user._id} 
-                            deleteHandler = {() => this.deleteEvent(user)                            
+                            event = {item} 
+                            key = {item._id} 
+                            deleteHandler = {() => this.deleteEvent(item)                            
                             } 
                         />                        
                         )}
@@ -45,15 +45,15 @@ componentWillReceiveProps(nexprops, nextstate){
             </div>  
         )
     }
-    deleteEvent = (user) => {
-        let id = user._id
+    deleteEvent = (item) => {
+        let id = item._id
         fetch(`${ server }/events`, {
             method: 'DELETE',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(user),
+            body: JSON.stringify(item),
         })
         .then(response => response.json())
         this.setState({events: this.state.events.filter(event => event._id != id)})  

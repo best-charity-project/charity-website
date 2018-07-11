@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Route, withRouter} from 'react-router-dom';
 import moment from 'moment';
 import {Editor} from 'draft-js';
-import customRendererFn from '../AdminEditor/Renderer'
+import customRendererFn from '../AdminEditor/Renderer';
 
 import Button from '../../../Button/Button';
 import './AdminPreview.css';
