@@ -27,12 +27,12 @@ class AdminAddNews extends Component {
         isPreview: false,
         image: '',
         date: '',
-        value: 0
+        value: ''
     }
-    cropperRef = React.createRef()
+    cropperRef = React.createRef();
 
     componentWillMount() {
-        this.getFiltersList();
+        this.getFiltersListByType();
         if (this.props.location.state) {
             let infoAboutNews = this.props.location.state.detail;
 
@@ -180,7 +180,7 @@ class AdminAddNews extends Component {
         )
     }
     onCropImage = (image) => {
-        this.setState({imageData: image})
+        this.setState({imageData: image});
     }
     onChangeValue = (object) => {
         this.setState({title: object.value});
@@ -197,54 +197,55 @@ class AdminAddNews extends Component {
     getNewStatePreview = () => {
         this.setState({
             isPreview: false
-        })
+        });
     }
     getFilter = (str) => {
-        this.setState({filter: str});
+        {str.length > 0 ? this.setState({filter : str}): null };
     }
     checkText = () => {
         if (!this.state.shortText) {
             let newText = this.state.fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
-            newText = (newText.slice(0, 297) + '...').replace(/\n/, '')
-            this.setState({shortText: newText}, this.sendNews)
+            newText = (newText.slice(0, 297) + '...').replace(/\n/, '');
+            this.setState({shortText: newText}, this.sendNews);
         } else {
-            this.sendNews()
+            this.sendNews();
         }
     }
     onPreview = (e) => {
         e.preventDefault()
         this.setState({
             isPreview: true
-        })
+        });
     }
     onPublish = (e) => {
         e.preventDefault()
-        this.setState({isPublic: true}, this.checkText)
+        this.setState({isPublic: true}, this.checkText);
     }
     onDraft = (e) => {
         e.preventDefault()
-        this.setState({isPublic: false}, this.checkText)
+        this.setState({isPublic: false}, this.checkText);
     }
     onCancel = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         this.setState({
             title: '',
             shortText: '',
             fullText: '',
+            filter:'',
             isPublic: false,
             imageData: '',
             image: ''
         }) 
         this.props.history.push({
             pathname: '/admin-panel/news'
-        })  
+        });
     }
     sendNews = () => {
         let formData  = new FormData();
         Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
-        let id = ''
+        let id = '';
         if (this.props.location.state) {
-            id = this.props.location.state.detail._id
+            id = this.props.location.state.detail._id;
         }
         axios({
             method: id ? 'put' : 'post',
@@ -255,6 +256,7 @@ class AdminAddNews extends Component {
         .then(response => {
             this.setState({
                 title: '',
+                filter:'',
                 shortText: '',
                 fullText: '',
                 isPublic: false,
@@ -275,24 +277,18 @@ class AdminAddNews extends Component {
             image: ''
         })   
     }
-    getFiltersList = () => {  
+    getFiltersListByType = () => {
         axios({
             method: 'get',
-            url: `${ server }/filters`,
+            url: `${ server }/filters?page=news`
+
         })
         .then(res =>{
-            let filterList = res.data.filterList;
-            let filtersNews = _.filter(filterList , function(el){
-                if(el.type === 'news'){
-                    return el
-                }
-            })
             this.setState({
-                filters:filtersNews,
+                filters:res.data.filterList,
             })
-        })
-     
-      }
+        })     
+    }
 }
 
 export default withRouter(AdminAddNews);
