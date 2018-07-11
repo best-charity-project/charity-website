@@ -96,13 +96,19 @@ class Projects extends Component {
         });
     }
 
-    checkIsProjectSingle() {}
+    checkIsProjectSingle() {
+        if (this.state.filteredProjects.length === 1) {
+            this.setState({ isLastProject: true, isFirstProject: true });
+        }
+    }
 
     filterProjects = value => {
         if (value === 'все') {
             this.setState({
                 filteredProjects: this.state.projects,
                 currentDisplayedProject: this.state.projects[0],
+                isFirstProject: true,
+                isLastProject: this.state.projects.length === 1,
             });
         } else {
             let filteredProjectsList = this.state.projects.filter(projects => {
@@ -111,10 +117,9 @@ class Projects extends Component {
             this.setState({
                 currentDisplayedProject: filteredProjectsList[0],
                 filteredProjects: filteredProjectsList,
+                isFirstProject: true,
+                isLastProject: filteredProjectsList.length === 1,
             });
-        }
-        if (this.state.filteredProjects.length === 1) {
-            this.setState({ isLastProject: true, isFirstProject: true });
         }
     };
 }
