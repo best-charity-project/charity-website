@@ -116,6 +116,8 @@ class Projects extends Component {
         if (this.state.filteredProjects.length === 1) {
             this.setState({ isLastProject: true, isFirstProject: true });
         }
+    
+        console.log(this.state.filteredProjects)
     };
 }
 
