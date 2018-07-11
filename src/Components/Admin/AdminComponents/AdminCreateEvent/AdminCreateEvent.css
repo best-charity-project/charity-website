@@ -62,10 +62,20 @@ background-color: white;
     display: flex;
     justify-content: center;
 }
+#my-select{
+    margin-top: 0;
+}
 #my-select div{
 margin-top: 0;
 }
-.select-wrapper-event{
-    display: flex;
-    justify-content: center;
+.event-source {
+    margin-top: 40px;
+    padding-left: 10px;
+    font-weight: 600;
+    text-align: right;
+    align-self: center;
+}
+.event label {
+    margin-right: 20px;
+    font-weight: 600;
 }

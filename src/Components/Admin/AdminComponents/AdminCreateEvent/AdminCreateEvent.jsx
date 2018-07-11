@@ -130,6 +130,7 @@ class AdminCreateEvent extends Component {
                             type = 'text' 
                             name = 'title' 
                             onChangeValue = {this.getValue}
+                            required
                             />
                     </div>
                     <div className = 'admin-event-place'>
@@ -286,6 +287,7 @@ class AdminCreateEvent extends Component {
         if (this.props.location.state) {
             id = this.props.location.state.detail._id
         }
+        console.log(this.state)
         axios({
             method: id ? 'put' : 'post',
             url: id ? `${server}/events/` + id : `${server}/events/`,

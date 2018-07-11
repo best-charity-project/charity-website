@@ -23,10 +23,12 @@ class TextField extends Component {
 		this.setState({error:resultValidation})
 	}
     render() {
+		console.log(this.props.required + this.props.label)
     	return(
  			<div className = 'container-for-input'> 
- 				{this.props.label? <label htmlFor = {this.props.id}>{this.props.label}</label>: null}
-					<input  
+			 <form>
+				 {this.props.label? <label htmlFor = {this.props.id}>{this.props.label}</label>: null}
+				 {this.props.required? <input
 					onKeyPress = {this.props.onKeyPress}
 					value = {this.props.value}
 					type = {this.props.type} 
@@ -36,8 +38,20 @@ class TextField extends Component {
 					placeholder = {this.props.placeholder} 
 					onChange = {this.valueChange}
 					onFocus = {this.props.onFocusInput} 
-					/> 
+					required
+					/> :<input
+					onKeyPress = {this.props.onKeyPress}
+					value = {this.props.value}
+					type = {this.props.type} 
+					className = {this.props.nameClass} 
+					id = {this.props.id}  
+					name = {this.props.name} 
+					placeholder = {this.props.placeholder} 
+					onChange = {this.valueChange}
+					onFocus = {this.props.onFocusInput} 
+					/>}
 				{((this.props.sendToValidation)&&!(this.state.error))? <Error/> : null}
+				</form>
 			</div>
 		)
 	}

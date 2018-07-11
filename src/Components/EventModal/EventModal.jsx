@@ -66,8 +66,7 @@ class EventModal extends Component {
         ) 
     }
     closeWindow = (e) => {
-        e.stopPropagation();
-        this.props.closeModalWindow(false);
+        this.props.closeModalWindow(e);
     }
 }
 
