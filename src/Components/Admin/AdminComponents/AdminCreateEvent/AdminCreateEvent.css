@@ -65,3 +65,7 @@ background-color: white;
 #my-select div{
 margin-top: 0;
 }
+.select-wrapper-event{
+    display: flex;
+    justify-content: center;
+}

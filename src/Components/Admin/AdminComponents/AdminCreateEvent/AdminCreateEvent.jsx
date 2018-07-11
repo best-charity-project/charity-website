@@ -251,7 +251,7 @@ class AdminCreateEvent extends Component {
                         />
                     </div>
                     <Editor text = {this.state.text} getCurrentText = {this.getCurrentText}/>
-                    <div>
+                    <div className = 'select-wrapper-event'>
                         {this.state.filters? 
                             <AdminSelectSearch 
                                 value = {this.state.filter}
