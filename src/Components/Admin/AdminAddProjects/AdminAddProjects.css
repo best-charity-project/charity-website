@@ -120,7 +120,7 @@ form.form-create-projects hr:nth-of-type(2) {
     margin-bottom: 50px;
 }
 .admin-projects-media-buttons{
-    margin-left:310px;
+    margin-left:325px;
     align-self: center;
 }
 .admin-textarea {
@@ -168,12 +168,13 @@ textarea {
     width:300px;
     height: auto;
     margin: 8px 0;
-    margin-left: 310px;
+    margin-left: 325px;
     padding:5px;
     font-size: 16px;
     border-radius: 5px;
     text-align: center;
     border:2px #fc5f5f solid;
+    font-size: 14px;
 }
 .incorrect-container div span{
     flex-basis: 25%;
@@ -248,3 +249,8 @@ textarea {
     border-radius: 5px;
     /* font-size: 16px; */
 }
+/* .add-info-projects,
+.admin-name-projects,
+.admin-site-projects{
+    display:flex;
+} */

@@ -141,6 +141,7 @@ class AdminAddProjects extends Component {
                     </div>
                     <hr />
                     <div className="admin-head-projects">
+                        <div className='add-info-projects'>
                         <TextField 
                             required
                             id = "head-projects" 
@@ -155,6 +156,7 @@ class AdminAddProjects extends Component {
                             clickHandler = {this.addHead}
                             name = {"admin-button admin-projects-media-buttons"}
                         />
+                        </div>
                         {this.state.headArray ?
                             <ul className="video-array">
                                 { this.state.headArray.map( (link,index) =>
@@ -172,6 +174,7 @@ class AdminAddProjects extends Component {
                     </div>
                     <hr />
                     <div className="admin-contacts-projects">
+                        <div className='add-info-projects'>
                         <div className="container-for-input">
                         <label>Телефон:</label>
                         <InputMask 
@@ -186,6 +189,7 @@ class AdminAddProjects extends Component {
                             clickHandler = {this.addContacts}
                             name = {"admin-button admin-projects-media-buttons"}
                         />
+                        </div>
                         {this.state.contactsArray ?
                             <ul className="video-array">
                                 { this.state.contactsArray.map( (link,index) =>
@@ -257,7 +261,8 @@ class AdminAddProjects extends Component {
                         </div>
                         <div className="admin-media-video-projects">
                             <div className="input-video-container">
-                            <TextField
+                                <div className='add-info-projects'>
+                                <TextField
                                 onKeyPress = {this.onKeyPress}
                                 id = "video-projects" 
                                 label = "Видео:"
@@ -266,16 +271,17 @@ class AdminAddProjects extends Component {
                                 value = {this.state.mediaVideo}
                                 onChangeValue = {this.getVideo}
                             />
-                            
                             <Button
                                 label = {"Добавить видео"}
                                 clickHandler = {this.addMediaVideo}
                                 name = {this.state.mediaImageArray.length+this.state.mediaVideoArray.length<4?"admin-button admin-projects-media-buttons":"button-projects-dislable"}
                             />
+                            </div>
                             <AdminValidationWindow
                                 className={this.state.isMediaVideoArray?'hidden':'incorrect-container video-projects-container'}
                                 title='Неправильно введена ссылка!' 
                             />
+                            
                                 <ul className="video-array">
                                     { this.state.mediaVideoArray.map( (link,index) =>
                                         <li className="projects-video-container" key = { index }>
