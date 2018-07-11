@@ -278,7 +278,6 @@ class AdminAddNews extends Component {
         })   
     }
     getFiltersListByType = (page) => {
-        console.log(page)
         axios({
             method: 'get',
             url: `${ server }/filters?page=${page}`
