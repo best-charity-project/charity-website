@@ -22,7 +22,7 @@ class Projects extends Component {
             filterValue: 'все',
             filters: [],
             isLastProject: false,
-            isFirstProject: true
+            isFirstProject: true,
         };
         this.nextProject = this.nextProject.bind(this);
         this.previousProject = this.previousProject.bind(this);
@@ -30,40 +30,45 @@ class Projects extends Component {
 
     componentDidMount() {
         axios.get(`${server}/projects`).then(res => {
-            this.setState({            
+            this.setState({
                 currentDisplayedProject: res.data.projects[0],
                 projects: res.data.projects,
-                isLastProject: this.state.filteredProjects.length === 1 ? true : false
+                filteredProjects: res.data.projects,
+                isLastProject: false,
             });
         });
         this.getFiltersList();
     }
 
-    getFiltersList = () => {  
+    getFiltersList = () => {
         axios({
             method: 'get',
-            url: `${ server }/filters`,
-        })
-        .then(res =>{
+            url: `${server}/filters`,
+        }).then(res => {
             let filterList = res.data.filterList;
-            let filtersProjects = _.filter(filterList , function(el){
-                if(el.type === 'projects'){
-                    return el
+            let filtersProjects = _.filter(filterList, function(el) {
+                if (el.type === 'projects') {
+                    return el;
                 }
-            })
+            });
             this.setState({
-                filters:filtersProjects,
-            })
-        })
-    }
+                filters: filtersProjects,
+            });
+        });
+    };
 
     render() {
-        console.log(this.state.isLastProject, this.state.isLastProject)
         return (
-            <div className="main-page-client"> 
+            <div className="main-page-client">
                 <Menu name="client-menu" />
-                {this.state.currentDisplayedProject.name ? <Project content={this.state.currentDisplayedProject}/> : <p>нихера</p>}
-                {this.state.filters ? <ProjectsFilter filterProjects={this.filterProjects} filters={this.state.filters}/> : null}
+                {this.state.currentDisplayedProject.name ? (
+                    <Project content={this.state.currentDisplayedProject} />
+                ) : (
+                    <p>нихера</p>
+                )}
+                {this.state.filters ? (
+                    <ProjectsFilter filterProjects={this.filterProjects} filters={this.state.filters} />
+                ) : null}
                 <div className="projects-list-action-btns">
                     <SliderPreviousBtn disabled={this.state.isFirstProject} previousProject={this.previousProject} />
                     <SliderNextBtn disabled={this.state.isLastProject} nextProject={this.nextProject} />
@@ -86,22 +91,32 @@ class Projects extends Component {
         let displayedProjectIndex = _.findIndex(this.state.filteredProjects, this.state.currentDisplayedProject);
         this.setState({
             currentDisplayedProject: this.state.filteredProjects[displayedProjectIndex + 1],
-            isLastProject: this.state.filteredProjects.length  === displayedProjectIndex + 1,
+            isLastProject: this.state.filteredProjects.length - 1 === displayedProjectIndex + 1,
             isFirstProject: false,
         });
-        console.log(displayedProjectIndex, this.state.filteredProjects.length, this.state.currentDisplayedProject)
     }
 
-    filterProjects = (value) =>{
-        if(value === 'все'){
-            this.setState({filteredProjects : this.state.projects}) 
-        }else{
-            let filterProjects =this.state.projects.filter (projects => {
-                return (projects.filter === value)
-           })
-           this.setState({currentDisplayedProject: filterProjects[0], filteredProjects: filterProjects })
+    checkIsProjectSingle() {}
+
+    filterProjects = value => {
+        if (value === 'все') {
+            this.setState({
+                filteredProjects: this.state.projects,
+                currentDisplayedProject: this.state.projects[0],
+            });
+        } else {
+            let filteredProjectsList = this.state.projects.filter(projects => {
+                return projects.filter === value;
+            });
+            this.setState({
+                currentDisplayedProject: filteredProjectsList[0],
+                filteredProjects: filteredProjectsList,
+            });
         }
-    }
+        if (this.state.filteredProjects.length === 1) {
+            this.setState({ isLastProject: true, isFirstProject: true });
+        }
+    };
 }
 
 export default Projects;
