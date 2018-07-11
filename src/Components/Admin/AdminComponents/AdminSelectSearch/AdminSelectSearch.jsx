@@ -37,6 +37,7 @@ class AdminSelectSearch extends Component {
     }
     render() {
         const { selectedOption, addNewOption } = this.state;
+        console.log(this.props.value)
         return (
             <div className = "select-component" onChange = {this.getOptions}>
                 <Select                   

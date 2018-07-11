@@ -42,7 +42,7 @@ class AdminAddProjects extends Component {
         isRight:false
     }
     cropperRef = React.createRef()
-    componentWillMount() {
+    componentDidMount() {
         this.getFiltersList();
         if (this.props.location.state) {
             this.setState({
@@ -61,9 +61,28 @@ class AdminAddProjects extends Component {
             })
         }
     }
+    getFiltersList = () => {  
+        axios({
+            method: 'get',
+            url: `${ server }/filters`,
+        })
+        .then(res =>{
+            let filterList = res.data.filterList;
+            let filtersProjects = _.filter(filterList , function(el){
+                if(el.type === 'projects'){
+                    return el
+                }
+            })
+            this.setState({
+                filters:filtersProjects,
+            })
+        })
+     
+      }
     
     render() {
         let newValue = this.state.fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '').length;
+        console.log(this.state.filter)
         return (
             <div className="admin-content"> 
             <Navigation onLogout={this.onLogout}/>
@@ -312,7 +331,7 @@ class AdminAddProjects extends Component {
                             <AdminSelectSearch 
                                 value = {this.state.filter}
                                 filtersList = {this.state.filters}
-                                getFilter = {this.getFilter}
+                                getFilter = {(e)=>{this.getFilter(e)}}
                             />
                         :null}
                     </div>
@@ -321,7 +340,7 @@ class AdminAddProjects extends Component {
                 <div className="admin-buttons">
                     <Route render={({history}) => (
                         <Button 
-                            disabled={!this.onRight()}
+                            disabled={!this.onRight}
                             label = {"Предпросмотр"} 
                             name = {this.onRight()? "button-admin":"button-publish-projects"}
                             clickHandler = {this.onPreview}
@@ -645,23 +664,6 @@ class AdminAddProjects extends Component {
         })      
      }
     
-    getFiltersList = () => {  
-        axios({
-            method: 'get',
-            url: `${ server }/filters`,
-        })
-        .then(res =>{
-            let filterList = res.data.filterList;
-            let filtersProjects = _.filter(filterList , function(el){
-                if(el.type === 'projects'){
-                    return el
-                }
-            })
-            this.setState({
-                filters:filtersProjects,
-            })
-        })
      
-      } 
 }
 export default withRouter(AdminAddProjects);
