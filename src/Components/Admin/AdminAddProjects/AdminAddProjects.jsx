@@ -12,6 +12,7 @@ import ControlledEditor from  "../AdminComponents/AdminEditor/AdminEditor";
 import Button from '../../Button/Button';
 import AdminProjectPreview from '../AdminComponents/AdminProjectPreview/AdminProjectPreview'
 import AdminSelectSearch from '../../Admin/AdminComponents/AdminSelectSearch/AdminSelectSearch';
+import AdminValidationWindow from '../AdminComponents/AdminValidationWindow/AdminValidationWindow';
 
 
 import './AdminAddProjects.css';
@@ -34,6 +35,7 @@ class AdminAddProjects extends Component {
         mediaImage:'',
         mediaVideoArray:[],
         mediaVideo:'',
+        isMediaVideoArray:true,
         fullText: '',
         filter: '',
         isPublic:false,
@@ -113,14 +115,17 @@ class AdminAddProjects extends Component {
                 <hr />
                 <div className='admin-projects-text-container'>
                     <div className="admin-name-projects">
-                        <TextField 
-                            required
+                        <TextField
                             id = "name-projects" 
                             label = "Название проекта:"
                             type = "text"
                             name = "name-projects"
                             value = {this.state.name}
                             onChangeValue = {this.getValue}
+                        />
+                        <AdminValidationWindow
+                            className={this.onCorrectTitle()?'hidden':'incorrect-container title-projects-container'}
+                            title='Данное поле необходимо заполнить'
                         />
                     </div>
                     <hr />
@@ -167,15 +172,6 @@ class AdminAddProjects extends Component {
                     </div>
                     <hr />
                     <div className="admin-contacts-projects">
-                        {/* <TextField 
-                            required
-                            id = "contacts-projects" 
-                            label = "Телефон:"
-                            type = "text"
-                            name = "contacts-projects"
-                            value = {this.state.contacts}
-                            onChangeValue = {this.getContacts}
-                        /> */}
                         <div className="container-for-input">
                         <label>Телефон:</label>
                         <InputMask 
@@ -225,10 +221,13 @@ class AdminAddProjects extends Component {
                             value = {this.state.site}
                             onChangeValue = {this.getSite}
                         />
+                        <AdminValidationWindow
+                            className={this.onCorrectSite()? "hidden" : "incorrect-container site-projects-container"}
+                            title ='Введите корректный сайт!'
+                        />
                     </div>
                     <hr />
                     <div className="admin-media-projects">
-                        {/* <div className="admin-media-image-projects"> */}
                         <div className="admin-image">
                             <label>Изображение:</label>
                             <div className = {this.state.mediaImageArray.length+this.state.mediaVideoArray.length<4?"admin-button":"button-projects-dislable"}>
@@ -243,30 +242,21 @@ class AdminAddProjects extends Component {
                                         multiple
                                     />
                             </div>
-                            
-                            
-                                
-                                <div className="image-array">
-                               
-                                    {this.state.mediaImageArray.map( (link,index) =>
-                                    //  {link.length !== 0 ?
-                                        
-                                    // { link !== '' ? 
-                                        <div className="projects-gallery-container" key={index}>
-                                            <img src = { link } className="projects-media-gallery" alt=""/>
-                                            <Button 
-                                                name = {"button-admin admin-cancel"}
-                                                label = {<span aria-hidden="true">&times;</span>}
-                                                clickHandler = {(event) => this.deleteGalleryImage(event, index)}
-                                            />
-                                        </div>
-                                        // :null}
-                                    )}
-                                </div>
-                             
+                            <div className="image-array">
+                               {this.state.mediaImageArray.map( (link,index) =>
+                                    <div className="projects-gallery-container" key={index}>
+                                        <img src = { link } className="projects-media-gallery" alt=""/>
+                                        <Button 
+                                            name = {"button-admin admin-cancel"}
+                                            label = {<span aria-hidden="true">&times;</span>}
+                                            clickHandler = {(event) => this.deleteGalleryImage(event, index)}
+                                        />
+                                    </div>
+                                )}
+                            </div>
                         </div>
                         <div className="admin-media-video-projects">
-                        <div className="input-video-container">
+                            <div className="input-video-container">
                             <TextField
                                 onKeyPress = {this.onKeyPress}
                                 id = "video-projects" 
@@ -276,13 +266,16 @@ class AdminAddProjects extends Component {
                                 value = {this.state.mediaVideo}
                                 onChangeValue = {this.getVideo}
                             />
+                            
                             <Button
                                 label = {"Добавить видео"}
                                 clickHandler = {this.addMediaVideo}
                                 name = {this.state.mediaImageArray.length+this.state.mediaVideoArray.length<4?"admin-button admin-projects-media-buttons":"button-projects-dislable"}
                             />
-                            </div>
-                            {/* {this.state.mediaVideoArray===[] ? */}
+                            <AdminValidationWindow
+                                className={this.state.isMediaVideoArray?'hidden':'incorrect-container video-projects-container'}
+                                title='Неправильно введена ссылка!' 
+                            />
                                 <ul className="video-array">
                                     { this.state.mediaVideoArray.map( (link,index) =>
                                         <li className="projects-video-container" key = { index }>
@@ -295,7 +288,7 @@ class AdminAddProjects extends Component {
                                         </li>
                                     )}
                                 </ul>
-                            {/* :null} */}
+                            </div>
                         </div>
                     </div>
                     <hr />
@@ -307,11 +300,10 @@ class AdminAddProjects extends Component {
                         text = {this.state.fullText} 
                         getCurrentText = {this.getCurrentTextFull}
                     />
-                    <div className= { this.onCorrectValue() ? "incorrect-value-container hidden" : "incorrect-value-container" }>
-                        <div>
-                            <span>Количество символов превышает 1000!</span>
-                        </div>
-                    </div> 
+                    <AdminValidationWindow 
+                        className={this.onCorrectFullText() ? "incorrect-value-container hidden" : "incorrect-value-container"}
+                        title='Количество символов превышает 1000!'
+                    />
                     <div className = "admin-textarea-description">
                         <span>Краткое описание не должно содержать более 1000 символов</span>
                         <div>
@@ -376,11 +368,12 @@ class AdminAddProjects extends Component {
             image = {this.state.image}
             name = {this.state.name}
             organization = {this.state.organization}
-            head = {this.state.head}
-            contacts = {this.state.contacts}
+            headArray = {this.state.headArray}
+            contactsArray = {this.state.contactsArray}
             address = {this.state.address}
             site = {this.state.site}
-            video = {this.state.video}
+            mediaImageArray = {this.state.mediaImageArray}
+            mediaVideoArray = {this.state.mediaVideoArray}
             fullText = {this.state.fullText}
             onPublish = {this.onPublish}
             onDraft = {this.onDraft}
@@ -456,15 +449,19 @@ class AdminAddProjects extends Component {
     addMediaVideo = (e) =>{
         e.preventDefault()
         let mediaVideoArray = this.state.mediaVideoArray
-        if(this.state.mediaVideo && /^(https?:\/\/)?([\da-zs\.-]+)\.([a-z\.]{2,6})\/([\w\/\-\.]+)([\?].*)?$/igm.test(this.state.mediaVideo)) {
+        if(this.state.mediaVideo && /^(https?:\/\/)?([\da-zа-я\.-]+)\.([a-zа-я\.]{2,6})\/([\w\/\-\.]+)([\?].*)?$/igm.test(this.state.mediaVideo)) {
             mediaVideoArray.push(this.state.mediaVideo)
             this.setState({
-                mediaVideoArray:mediaVideoArray
+                mediaVideoArray:mediaVideoArray,
+                mediaVideo:'',
+                isMediaVideoArray:true
             })
+            
+        }else{
             this.setState({
-                mediaVideo:''
+                isMediaVideoArray:false
             })
-        }else return false
+        } 
     }
     onKeyPress  = (e) => {
         (e.charCode === 13 && this.state.mediaImageArray.length+this.state.mediaVideoArray.length<4)? this.addMediaVideo(e): null;
@@ -491,24 +488,18 @@ class AdminAddProjects extends Component {
             isPreview: false
         })
     }
+    onCorrectTitle = () =>{
+        return /^[\w\W\s]+$/.test(this.state.name)
+    }
     onCorrectSite = () =>{
         return /^((https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\W\.-]*)*\/?)?$/.test(this.state.site)
     }
-    onCorrectValue = () =>{
+    onCorrectFullText = () =>{
         let newText = this.state.fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
         return newText.length<=this.state.value
     }
     onRight = ()=>{
-         return this.onCorrectSite() && this.onCorrectValue() 
-            
-            
-    //         alert('OK@@@')
-    //         // this.setState ( { isRight:true } )
-    //         return true
-    //     }else{
-    //         alert('GOVNO')
-    //         return this.setState( { isRight:false } );
-    //     }  
+         return this.onCorrectSite() && this.onCorrectFullText() && this.onCorrectTitle()
     }
     onPublish = (e) => {
         this.onRight()

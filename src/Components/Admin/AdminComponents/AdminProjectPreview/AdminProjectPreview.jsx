@@ -7,9 +7,11 @@ import Button from '../../../Button/Button';
 import {server} from '../../../../api';
 import './AdminProjectPreview.css';
 import '../../../../Pages/Projects/Projects.css'
+// import ProjectGallery from '../../Components/ProjectGallery/ProjectGallery';
 
 class AdminProjectPreview extends Component {
     render() {
+        console.log(this.props)
         return (
             <div className = 'admin-preview'>
                 <div className="projects-page-content">
@@ -33,19 +35,19 @@ class AdminProjectPreview extends Component {
                                     <span dangerouslySetInnerHTML= {{__html: this.props.fullText}}></span>
                                 </div>
                             </div>
+                            {/* {<ProjectGallery content={this.props} />} */}
                             <div className="contact-info">
                                 <p>Контакты:</p>
-                                <p>{this.props.organization}</p>
-                                {console.log(this.props.headArray)}
-                                {console.log(this.props.contactsArray)}
-                                {console.log(this.props.name)}
-                                {/* {this.props.headArray.map( (link,index) => 
-                                        <div key={index}>{link}</div>
-                                )}, 
-                               {this.props.contactsArray.map( (link,index) =>
+                                {this.props.organization?<p>{this.props.organization}</p>:null}
+                                {this.props.headArray ?
+                                    this.props.headArray.map( (link,index) => 
+                                        <div key={index}>{link},</div>
+                                ):null} 
+                               {this.props.contactsArray ? 
+                                    this.props.contactsArray.map( (link,index) =>
                                         <div key={index}><p>{link}</p></div>
-                                )} */}
-                                <p>{this.props.site}</p>
+                                ):null}
+                                {this.props.site?<p>{this.props.site}</p>:null}
                             </div>
                         </div>
                     </div>

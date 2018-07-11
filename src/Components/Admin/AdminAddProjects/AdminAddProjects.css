@@ -31,9 +31,7 @@ form.form-create-projects {
 /* .input-video-container{
     display: flex;
 } */
-.input-video-container button{
-    margin-left: 400px;
-}
+
 /* .admin-media-video-projects label{
     flex-basis: 100%
 }  */
@@ -122,6 +120,7 @@ form.form-create-projects hr:nth-of-type(2) {
     margin-bottom: 50px;
 }
 .admin-projects-media-buttons{
+    margin-left:310px;
     align-self: center;
 }
 .admin-textarea {
@@ -161,9 +160,26 @@ textarea {
 .admin-textarea-symbols {
     font-weight: 600;
 }
-
+.incorrect-container{
+    display:flex;
+}
+.incorrect-container div{
+    font-family: 'Montserrat', sans-serif;
+    width:300px;
+    height: auto;
+    margin: 8px 0;
+    margin-left: 310px;
+    padding:5px;
+    font-size: 16px;
+    border-radius: 5px;
+    text-align: center;
+    border:2px #fc5f5f solid;
+}
+.incorrect-container div span{
+    flex-basis: 25%;
+}
 .incorrect-value-container{
-    background-color: #fc5f5f;
+    border:2px #fc5f5f solid;
     max-width: 85%;
     border-radius: 5px;
     height: 30px;
