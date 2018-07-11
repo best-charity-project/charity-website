@@ -11,6 +11,7 @@ import SliderPreviousBtn from '../../Components/Slider/SliderButtons/SliderPrevi
 import SliderNextBtn from '../../Components/Slider/SliderButtons/SliderNextBtn';
 import ProjectsFilter from '../../Components/ProjectsFilter/ProjectsFilter';
 
+
 class Projects extends Component {
     constructor(props) {
         super(props);
@@ -96,13 +97,13 @@ class Projects extends Component {
         });
     }
 
-    checkIsProjectSingle() {}
-
     filterProjects = value => {
         if (value === 'все') {
             this.setState({
                 filteredProjects: this.state.projects,
                 currentDisplayedProject: this.state.projects[0],
+                isFirstProject: true,
+                isLastProject: this.state.projects.length === 1,
             });
         } else {
             let filteredProjectsList = this.state.projects.filter(projects => {
@@ -111,13 +112,10 @@ class Projects extends Component {
             this.setState({
                 currentDisplayedProject: filteredProjectsList[0],
                 filteredProjects: filteredProjectsList,
+                isFirstProject: true,
+                isLastProject: filteredProjectsList.length === 1,
             });
         }
-        if (this.state.filteredProjects.length === 1) {
-            this.setState({ isLastProject: true, isFirstProject: true });
-        }
-    
-        console.log(this.state.filteredProjects)
     };
 }
 

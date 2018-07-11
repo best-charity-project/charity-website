@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactPlayer from 'react-player';
+import Cross from '../../Assets/AssetsSvg/cross.svg';
 
 
 export default class ProjectGallery extends Component {
@@ -16,6 +17,7 @@ export default class ProjectGallery extends Component {
     showVideoModal = (e) => {
         this.setState({
             show: true,
+            showImage: false,
             showVideo: true,
             link: e
         });
@@ -27,6 +29,7 @@ export default class ProjectGallery extends Component {
         this.setState({
             show: true,
             showImage: true,
+            showVideo: false,
             link: e
         });
     };
@@ -47,12 +50,12 @@ export default class ProjectGallery extends Component {
         return (
             <div>
                 {this.state.show ? <Modal show={this.state.show} handleClose={this.hideModal}>
-                {this.state.showVideo ? <ReactPlayer url={this.state.link} controls /> : <img src={this.state.link} alt=""/>}
+                {this.state.showVideo ? <ReactPlayer className="test" url={this.state.link} controls /> : <img src={this.state.link} alt=""/>}
                 </Modal> : null}
                 <div className="gallery">
                     {totalArray.map((item, i) => {
                     return item.includes('png') ? <img className="image-items" key={i} src={item} onClick={this.showImageModal}></img>
-                            : <div className="video-items" key={i} onClick={() => this.showVideoModal(item)}>i am video</div>    
+                            : <div className="video-items" key={i} onClick={() => this.showVideoModal(item)}></div>    
                     })}
                 </div>
             </div>
@@ -66,9 +69,9 @@ const Modal = ({ handleClose, show, children }) => {
 
     return (
         <div className={showHideClassName}>
+           <button className="close-modal-btn" onClick={handleClose}></button>  
             <section className="modal-main">
-                {children}
-                <button onClick={handleClose}>X</button>            
+                {children}          
             </section>
         </div>
     );

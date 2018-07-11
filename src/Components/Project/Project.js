@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import ProjectGallery from '../../Components/ProjectGallery/ProjectGallery';
+import ProjectDefaultImg from '../../Assets/AssetsSvg/project-default.svg';
 
 
 class Project extends Component {
@@ -10,7 +11,7 @@ class Project extends Component {
             <div className="projects-page-content">
                 <div className="img-container">
                     <div className="img-placeholder">
-                        <img src={`http://localhost:3001/images/${this.props.content.image}`} />
+                         <img className="project-main-img" src={this.props.content.image ? `http://localhost:3001/images/${this.props.content.image}` : ProjectDefaultImg }/>
                     </div>
                 </div>
                 <div className="project-section">
@@ -28,7 +29,13 @@ class Project extends Component {
                         <div className="contact-info">
                             <p>Контактны:</p>
                             <p>{this.props.content.organization}</p>
-                            <p>{this.props.content.head}, {this.props.content.contacts}</p>
+                            <p>{this.props.content.headArray.map((item, i) => {
+                                    return <div><p key={i}>{item}</p></div>     
+                                    })
+                                }, {this.props.content.contactsArray.map((item, i) => {
+                                    return <p key={i}>{item}</p>     
+                                    })
+                                }</p>
                             <p>{this.props.content.site}</p>
                         </div>
                     </div>
