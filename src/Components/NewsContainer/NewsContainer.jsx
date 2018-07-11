@@ -13,7 +13,7 @@ class NewsContainer extends Component {
   }
   componentDidMount(){      
     this.getNews(); 
-    this.getFiltersListByType();             
+    this.getFiltersListByType('news');             
 }  
 
 getFilteredNews  = (str) => {
@@ -29,10 +29,10 @@ getNews= () => {
       });
   })
 }
-getFiltersListByType = () => {  
+getFiltersListByType = (page) => {  
   axios({
       method: 'get',
-      url: `${ server }/filters?page=news`,
+      url: `${ server }/filters?page=${page}`,
   })
   .then(res =>{
     this.setState({filters:res.data.filterList})

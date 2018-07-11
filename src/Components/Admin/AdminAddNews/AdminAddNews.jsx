@@ -32,7 +32,7 @@ class AdminAddNews extends Component {
     cropperRef = React.createRef();
 
     componentWillMount() {
-        this.getFiltersListByType();
+        this.getFiltersListByType('news');
         if (this.props.location.state) {
             let infoAboutNews = this.props.location.state.detail;
 
@@ -277,10 +277,11 @@ class AdminAddNews extends Component {
             image: ''
         })   
     }
-    getFiltersListByType = () => {
+    getFiltersListByType = (page) => {
+        console.log(page)
         axios({
             method: 'get',
-            url: `${ server }/filters?page=news`
+            url: `${ server }/filters?page=${page}`
 
         })
         .then(res =>{
