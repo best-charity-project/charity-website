@@ -59,7 +59,6 @@ class AdminSlider extends Component {
             })
         } 
     }
-
     addSlider = (e) => {
         e.preventDefault()
         e.stopPropagation() 

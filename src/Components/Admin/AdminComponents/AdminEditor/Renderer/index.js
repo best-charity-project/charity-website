@@ -1,14 +1,14 @@
 import CustomComponent from './CustomComponent/CustomComponent'
 
-const rendererFunc = (block, onChange, isAdmin) => {
+const rendererFunc = (block, onChange, editorRef, isAdmin) => {
     if (block.getType() === 'atomic') {
-        console.log('atomic', isAdmin)
         return {
             component: CustomComponent,
             editable: false,
             props: {
                 onChange: onChange,
-                isAdmin: isAdmin ? true : false
+                isAdmin: isAdmin ? true : false,
+                editorRef: editorRef
             }, 
         }
     }

@@ -12,6 +12,8 @@ class ModalWindow extends Component {
         image: '',
         imageArr: []
     }
+    /* modalRef = React.createRef() */
+
     componentWillReceiveProps(nextProps) {
         nextProps.isOpen ? null : this.setState({imageArr: []})
         nextProps.imageArr ? this.setState({imageArr: nextProps.imageArr}) : null
@@ -24,7 +26,7 @@ class ModalWindow extends Component {
                 <Button 
                     name = 'button-admin admin-cancel'
                     label = {<span aria-hidden='true'>&times;</span>} 
-                    clickHandler =  {() => this.deleteGalleryImage(sortIndex)} 
+                    clickHandler =  {() => {this.deleteGalleryImage(sortIndex)} }
                 />
             </div>      
         );
@@ -46,7 +48,7 @@ class ModalWindow extends Component {
         });   
 
         return(
-            <div className = 'modal-window-new'> 
+            <div className = 'modal-window-new' ref = {this.modalRef}> 
                  <div className = 'admin-image'>
                     <label htmlFor = {this.props.id}>Фото:</label>
                     <div className = 'admin-button'>
@@ -89,10 +91,6 @@ class ModalWindow extends Component {
                         label = 'Отмена'
                     />
                 </div>
-                {/* {this.state.imageArr.length ?
-                    <div className = 'message-info'>*При удалении картинки, кнопка "Отмена" их не вернет</div> :
-                    null
-                } */}
             </div>
         )
     }
@@ -118,7 +116,6 @@ class ModalWindow extends Component {
         }, () => this.props.onChangeImageArr(this.state.imageArr));
     };
     shouldCancelStart = (e) => {
-        console.log(333)
         if (['button', 'span'].indexOf(e.target.tagName.toLowerCase()) !== -1) {
             return true
         }
@@ -126,20 +123,22 @@ class ModalWindow extends Component {
 
     deleteGalleryImage = (index) => {
         console.log(111)
-       let imageArr = this.state.imageArr
-       let deletedImage = imageArr.splice(index, 1)
-       axios({
+        let imageArr = this.state.imageArr
+        let deletedImage = imageArr.splice(index, 1)
+        axios({
             method: 'delete',
             url: `${server}/uploadGalleryImage/`,
             data: deletedImage,
             config: {headers: {'Content-Type': 'application/json; charset=UTF-8'}},
         })
+        .then(response => {
+            this.setState({
+                imageArr: imageArr
+            }/* , () => this.modalRef.current.click() */) 
+        })
         .catch(function (error) {
             console.log(error);
-        });
-        this.setState({
-           imageArr: imageArr
-       })      
+        });     
     }
     addImage = () => {
         let formData  = new FormData();

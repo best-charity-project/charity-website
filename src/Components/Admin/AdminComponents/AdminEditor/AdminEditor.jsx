@@ -13,9 +13,12 @@ class ControlledEditor extends Component {
     state = {
         editorState: EditorState.createEmpty(),
     }
-    
+    setEditorReference = (ref) => {
+        this.currentEditor = ref
+    }
+
     componentDidMount() {
-        console.log('AdminEditor.componenDidMount', convertToRaw(this.props.initialEditorState.getCurrentContent()))
+        // console.log('AdminEditor.componenDidMount', convertToRaw(this.props.initialEditorState.getCurrentContent()))
         this.props.initialEditorState ? 
             this.setState({editorState: this.props.initialEditorState}) :
             this.setState({editorState: EditorState.createEmpty()}) 
@@ -25,6 +28,7 @@ class ControlledEditor extends Component {
         return (
             <div>
                 <Editor
+                    editorRef = {this.setEditorReference}
 					editorState={this.state.editorState}
                     wrapperClassName="wrapper"
                     toolbarClassName="toolbar"
@@ -54,13 +58,13 @@ class ControlledEditor extends Component {
         )
     } 
     onChange = (editorState) => {
-        console.log('AdminEditor.onChange', convertToRaw(editorState.getCurrentContent()))
+        // console.log('AdminEditor.onChange', convertToRaw(editorState.getCurrentContent()))
         this.setState({editorState: editorState})
         this.props.onEditorStateChange(editorState)
     }
 
     customBlockRenderFuncWrap = (block) => {
-        return customBlockRenderFunc(block, this.onChange, true)
+        return customBlockRenderFunc(block, this.onChange, this.currentEditor, true)
     }
 
     uploadImageCallBack = (file) => {

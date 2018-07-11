@@ -38,7 +38,7 @@ class AdminAddNews extends Component {
         this.getFiltersList();
         if (this.props.location.state) {
             let fullTextEditorState = EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.location.state.detail.fullText)));
-            console.log('AdminAddNews.componentWillMount', convertToRaw(fullTextEditorState.getCurrentContent()))
+            // console.log('AdminAddNews.componentWillMount', convertToRaw(fullTextEditorState.getCurrentContent()))
             this.setState({
                 title: this.props.location.state.detail.title,
                 shortText: this.props.location.state.detail.shortText,
@@ -53,7 +53,7 @@ class AdminAddNews extends Component {
     }
 
     render() {
-        console.log('AdminAddNews.render', convertToRaw(this.state.fullTextEditorState.getCurrentContent()))
+        // console.log('AdminAddNews.render', convertToRaw(this.state.fullTextEditorState.getCurrentContent()))
         return (
             <div className="admin-content">
                 <Navigation onLogout={this.onLogout} />
@@ -188,7 +188,7 @@ class AdminAddNews extends Component {
         this.setState({title: object.value});
     }
     onEditorStateChange = (editorState) => {
-        console.log('AdminAddNews.onEditorStateChange', convertToRaw(editorState.getCurrentContent()))
+        // console.log('AdminAddNews.onEditorStateChange', convertToRaw(editorState.getCurrentContent()))
         this.setState({fullTextEditorState: editorState});
     }
     getCurrentTextShort = (event) => {

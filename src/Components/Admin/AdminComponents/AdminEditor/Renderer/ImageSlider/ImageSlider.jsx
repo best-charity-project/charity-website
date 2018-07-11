@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {EditorState, AtomicBlockUtils, SelectionState, Modifier} from 'draft-js';
+import {EditorState, SelectionState, Modifier} from 'draft-js';
 import {Carousel} from 'react-responsive-carousel';
 
 import ModalWindow from '../../../../../ModalWindow/ModalWindow';
@@ -10,31 +10,32 @@ import '../../../../../../../node_modules/react-responsive-carousel/lib/styles/c
 class ImageSlider extends Component {
     state = {
         isOpen: false,
-        src: []
+        imageArr: []
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('ImageSlider.componentWillReceiveProps', nextProps)
+        // console.log('ImageSlider.componentWillReceiveProps', nextProps)
         const {block, contentState} = nextProps;   
         const entity = contentState.getEntity(block.getEntityAt(0));
-        this.setState({src: entity.getData().src})
+        this.setState({imageArr: entity.getData().src})
     }
 
     componentDidMount() {
-        console.log('ImageSlider.componentWillMount', this.props)
+        // console.log('ImageSlider.componentWillMount', this.props)
         const {block, contentState} = this.props;   
         const entity = contentState.getEntity(block.getEntityAt(0));
-        this.setState({src: entity.getData().src})
+        this.setState({imageArr: entity.getData().src})
 
         document.addEventListener('keyup', (e) => {
             if (e.keyCode === 27) this.setState({
                 isOpen: false,
-                src: entity.getData().src
+                imageArr: entity.getData().src
             });
         });
     }
 
     render() {
+        console.log('fjtvnhfogbnvortnbvogr')
         return (
             <div>
                 <Carousel
@@ -42,7 +43,7 @@ class ImageSlider extends Component {
                     infiniteLoop = {true}
                     statusFormatter = {(current, total) => `${current} из ${total}`}
                     >
-                    {this.state.src.map((item, index) =>
+                    {this.state.imageArr.map((item, index) =>
                         <div key = {index} >
                             {this.props.isAdmin ? 
                                 <Button 
@@ -62,10 +63,11 @@ class ImageSlider extends Component {
                     <div className="modal-element">
                         <ModalWindow 
                             isOpen = {this.state.isOpen}
-                            imageArr = {this.state.src}
                             onChangeImageArr = {this.onChangeImageArr}
                             addSlider = {this.editSlider}
                             getUrl = {this.getUrl}
+                            imageArr = {this.state.imageArr}
+                            editorRef = {this.props.editorRef}
                         />
                     </div>
                 </div>
@@ -73,34 +75,35 @@ class ImageSlider extends Component {
         )
     }
     openModalWindow = () => {
-        this.props.isAdmin ? 
-            this.setState({isOpen: true}) :
-            null
+        if (this.props.isAdmin) { 
+            this.setState({isOpen: true}) 
+            // this.props.editorRef.focus()
+        }
     }
     closeModalWindow = (e) => {
         if (e.target.className === 'overlay' || ~e.target.className.indexOf('close-window')) {
             this.setState({
                 isOpen: false,
-                src: []
+                imageArr: []
             })
         } 
     }
-    onChangeImageArr = (src) => {
-        this.setState({src: src})
+    onChangeImageArr = (imageArr) => {
+        this.setState({imageArr: imageArr})
     }
     editSlider = () => {
         const {contentState, onChange} = this.props
         let entityKey = this.props.block.getEntityAt(0)
         let newContentState = contentState.mergeEntityData(
             entityKey,
-            {src: this.state.src}
+            {imageArr: this.state.imageArr}
         )
 
         onChange(EditorState.createWithContent(newContentState))
 
         this.setState({
             isOpen: false,
-            src: []
+            imageArr: []
         })
     }
     deleteSlider = () => {
@@ -120,11 +123,11 @@ class ImageSlider extends Component {
         
         this.setState({
             isOpen: false,
-            src: []
+            imageArr: []
         })
     }
     getUrl = (imageArr) => {
-        this.setState({src: imageArr})
+        this.setState({imageArr: imageArr})
     }
 }
 export default ImageSlider;
