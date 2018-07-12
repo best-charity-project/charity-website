@@ -28,13 +28,6 @@ form.form-create-projects {
 .container-for-input label{
     flex-basis: 25%;
 }
-/* .input-video-container{
-    display: flex;
-} */
-
-/* .admin-media-video-projects label{
-    flex-basis: 100%
-}  */
 .projects-sourse label {
     font-weight: 600;
 }
@@ -113,8 +106,7 @@ form.form-create-projects hr:nth-of-type(2) {
 .choose-file {
     line-height: 1;
 }
-.admin-media-image-projects,
-/* .admin-media-video-projects */
+.admin-media-image-projects
 {
     display:flex;
     margin-bottom: 50px;
@@ -239,18 +231,8 @@ textarea {
 .admin-contacts-projects input {
     font-family: 'Montserrat', sans-serif;
     width: 300px;
-    /* padding: 12px 20px; */
     margin: 8px 0;
     border: 1px solid #ccc;
-    /* -webkit-box-sizing: border-box; */
     box-sizing: border-box;
-    /* padding-left: 40px;
-    margin-left: 55px; */
     border-radius: 5px;
-    /* font-size: 16px; */
 }
-/* .add-info-projects,
-.admin-name-projects,
-.admin-site-projects{
-    display:flex;
-} */
