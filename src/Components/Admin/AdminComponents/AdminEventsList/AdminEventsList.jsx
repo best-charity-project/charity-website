@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import AdminEvent from '../AdminEvent/AdminEvent';
 import './AdminEventsList.css';
-import EventInfo from '../AdminEventInfo/AdminEventInfo';
+import AdminCreateEvent from '../AdminCreateEvent/AdminCreateEvent';
 import { server } from '../../../../api';
 
 class AdminEventsList extends Component {
@@ -35,9 +35,12 @@ componentWillReceiveProps(nexprops, nextstate){
                             } 
                         />                        
                         )}
-                   {(this.state.eventInfo)? (<div className={this.state.getEventInfo ? 'event-info-container' : 'without-info'}>
-                        <EventInfo event = {this.state.eventInfo} closeInfo = {this.closeInfo}/>
-                    </div>): null}
+                   {(this.state.eventInfo)?<div className={this.state.eventInfo ? 'overlay' : 'overlay hidden'}>
+                        <div className="modal-new-event-field">
+                            <AdminCreateEvent closeInfo = {this.closeInfo} event = {this.state.eventInfo}  />
+                        </div>
+                    </div>:null}
+
                 </div>  
             </div>  
         )

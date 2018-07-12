@@ -27,6 +27,7 @@ class TextField extends Component {
  			<div className = 'container-for-input'> 
  				{this.props.label? <label htmlFor = {this.props.id}>{this.props.label}</label>: null}
 					<input  
+					onKeyPress = {this.props.onKeyPress}
 					value = {this.props.value}
 					type = {this.props.type} 
 					className = {this.props.nameClass} 

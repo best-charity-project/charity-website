@@ -2,7 +2,7 @@
     display: flex;
     margin-bottom: 20px;
 }
-label {
+.admin-image label {
     flex-basis: 25%;
 }
 .admin-button {
