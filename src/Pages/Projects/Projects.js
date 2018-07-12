@@ -65,7 +65,7 @@ class Projects extends Component {
                 {this.state.currentDisplayedProject.name ? (
                     <Project content={this.state.currentDisplayedProject} />
                 ) : (
-                    <p>нихера</p>
+                    <p>Что-то пошло не так... Команда разработчиков уже решает эту проблему</p>
                 )}
                 {this.state.filters ? (
                     <ProjectsFilter filterProjects={this.filterProjects} filters={this.state.filters} />
