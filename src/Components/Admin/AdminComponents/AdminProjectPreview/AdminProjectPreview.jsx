@@ -7,7 +7,8 @@ import Button from '../../../Button/Button';
 import {server} from '../../../../api';
 import './AdminProjectPreview.css';
 import '../../../../Pages/Projects/Projects.css'
-// import ProjectGallery from '../../Components/ProjectGallery/ProjectGallery';
+import ProjectGallery from '../../../ProjectGallery/ProjectGallery';
+import ProjectDefaultImg from '../../../../Assets/AssetsSvg/project-default.svg';
 
 class AdminProjectPreview extends Component {
     render() {
@@ -15,15 +16,11 @@ class AdminProjectPreview extends Component {
         return (
             <div className = 'admin-preview'>
                 <div className="projects-page-content">
-                    <div className="image-container">
-                        <div className="img-placeholder">
-                            <img  src = {this.props.imageData ? 
-                                this.props.imageData : 
-                                    this.props.image ?
-                                    `http://localhost:3001/images/${this.props.image}` :
-                                null} alt = "" />
-                        </div > 
+                <div className="img-container">
+                    <div className="img-placeholder">
+                         <img className="project-main-img" src={this.props.image ? `http://localhost:3001/images/${this.props.image}` : ProjectDefaultImg }/>
                     </div>
+                </div>
                     <div className="project-section">
                         <div className="full-text-card">
                             <div className="text-container">
@@ -35,9 +32,9 @@ class AdminProjectPreview extends Component {
                                     <span dangerouslySetInnerHTML= {{__html: this.props.fullText}}></span>
                                 </div>
                             </div>
-                            {/* {<ProjectGallery content={this.props} />} */}
+                            {<ProjectGallery content={this.props} />}
                             <div className="contact-info">
-                                <p>Контакты:</p>
+                                <p>Контактные данные:</p>
                                 {this.props.organization?<p>{this.props.organization}</p>:null}
                                 {this.props.headArray ?
                                     this.props.headArray.map( (link,index) => 

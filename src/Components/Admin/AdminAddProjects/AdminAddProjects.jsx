@@ -44,8 +44,8 @@ class AdminAddProjects extends Component {
         isRight:false
     }
     cropperRef = React.createRef()
-    componentDidMount() {
-        this.getFiltersList();
+    componentWillMount() {
+        this.getFiltersListByType('projects');
         if (this.props.location.state) {
             this.setState({
                 image: this.props.location.state.detail.image,
@@ -63,28 +63,21 @@ class AdminAddProjects extends Component {
             })
         }
     }
-    getFiltersList = () => {  
+    getFiltersListByType = (type) => {
         axios({
             method: 'get',
-            url: `${ server }/filters`,
+            url: `${ server }/filters?type=${type}`
+
         })
         .then(res =>{
-            let filterList = res.data.filterList;
-            let filtersProjects = _.filter(filterList , function(el){
-                if(el.type === 'projects'){
-                    return el
-                }
-            })
             this.setState({
-                filters:filtersProjects,
+                filters:res.data.filterList,
             })
-        })
-     
-      }
+        })     
+    }
     
     render() {
         let newValue = this.state.fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '').length;
-        console.log(this.state.filter)
         return (
             <div className="admin-content"> 
             <Navigation onLogout={this.onLogout}/>
@@ -329,7 +322,7 @@ class AdminAddProjects extends Component {
                             <AdminSelectSearch 
                                 value = {this.state.filter}
                                 filtersList = {this.state.filters}
-                                getFilter = {(e)=>{this.getFilter(e)}}
+                                getFilter = {this.getFilter}
                             />
                         :null}
                     </div>
@@ -484,7 +477,7 @@ class AdminAddProjects extends Component {
         this.setState({fullText: str});
     }
     getFilter = (str) => {
-        this.setState({filter: str});
+        {str.length > 0 ? this.setState({filter : str}): null };
     }
     onCropImage = (image) => {
         this.setState({imageData: image})
@@ -546,6 +539,7 @@ class AdminAddProjects extends Component {
             site:'',
             video:'',
             fullText: '',
+            filter:'',
             isPublic: false,
         }) 
         this.props.history.push({
@@ -581,6 +575,7 @@ class AdminAddProjects extends Component {
                 site:'',
                 video:'',
                 fullText: '',
+                filter:'',
                 isPublic: false,
                 mediaImageArray: []
             }) 
