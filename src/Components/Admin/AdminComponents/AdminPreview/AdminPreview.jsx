@@ -8,8 +8,7 @@ import Button from '../../../Button/Button';
 import {server} from '../../../../api';
 import './AdminPreview.css';
 
-class AdminAddNews extends Component {
-
+class AdminPreview extends Component {
     render() {
         return (
             <div className = 'admin-preview'>
@@ -20,8 +19,12 @@ class AdminAddNews extends Component {
                                 this.props.image ?
                                 'http://localhost:3001/images/' + this.props.image :
                                 null} alt = "" />
-                        </div > 
-                        <p className = 'full-news-date'>{moment().format('DD MMMM YYYY')} </p>
+                        </div> 
+                        <p className = 'full-news-date'>
+                            {this.props.date ? 
+                                moment(this.props.date).format('DD MMMM YYYY') : 
+                                moment().format('DD MMMM YYYY')} 
+                        </p>
                         <p className = 'full-news-title'> {this.props.title}</p>               
                         <span dangerouslySetInnerHTML={{__html: this.props.fullText}}/>
                     </div>
@@ -55,11 +58,10 @@ class AdminAddNews extends Component {
             </div>
         )
     }
-    
     onCancelPreview = (e) => {
         e.preventDefault()
         this.props.getNewStatePreview()
     }
 }
 
-export default withRouter(AdminAddNews);
+export default withRouter(AdminPreview);

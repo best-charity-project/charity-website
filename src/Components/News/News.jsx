@@ -20,7 +20,9 @@ class News extends Component {
                             <span className = 'news-text' dangerouslySetInnerHTML={{__html: this.props.text}}/>                
                         </NavLink>):(
                         <div>
-                            <p className = 'news-date'>{moment(this.props.date).format('DD MMMM YYYY')} </p>
+                             <p className = 'news-date'>{moment(this.props.dateStart).format('DD MMMM YYYY') !== moment(this.props.dateEnd).format('DD MMMM YYYY') ? 
+                             `${moment(this.props.dateStart).format('DD MMMM YYYY, h:mm')} - ${moment(this.props.dateEnd).format('DD MMMM YYYY, h:mm')}` : 
+                             ` ${moment(this.props.dateStart).format('DD MMMM YYYY, h:mm')} - ${moment(this.props.dateEnd).format('h:mm')}`} </p>
                             <p className = 'news-title'>{this.props.name} </p>
                             <span className = 'news-text' dangerouslySetInnerHTML={{__html: this.props.text}}/>   
                         </div>

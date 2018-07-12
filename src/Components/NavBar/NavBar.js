@@ -11,9 +11,9 @@ const NavBar = ()=>{
                          {name: 'Список пользователей', url :'/admin-panel/dashboard'},
                          {name: 'События', url :'/admin-panel/events'},
                          {name: 'Новости', url : '/admin-panel/news'},
-                         {name: 'Проекты', url : '/admin-panel/projects'}
+                         {name: 'Проекты', url : '/admin-panel/projects'},
+                         {name: 'Фильтры', url : '/admin-panel/filters'}
                      ]} 
-                     onClick = {this.handlerClick}
                      classActive = 'active-link-admin'/>
         </div>       
     )

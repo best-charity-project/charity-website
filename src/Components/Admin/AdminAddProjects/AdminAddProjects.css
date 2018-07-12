@@ -13,19 +13,6 @@ form.form-create-projects {
 .container-for-input {
     display: flex;
 }
-.container-for-input label,
-.admin-image label,
-.projects-source ,
-.datepicker label {
-    padding-right: 60px;
-    padding-left: 10px;
-    font-weight: 600;
-    text-align: right;
-    align-self: center;
-}
-.projects-sourse label {
-    font-weight: 600;
-}
 #name-projects {
     margin-left: 0;
     height: auto;

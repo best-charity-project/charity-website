@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import AdminDateEvent from '../AdminDateEvent/AdminDateEvent';
 import AdminTextEvent from '../AdminTextEvent/AdminTextEvent';
 import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
@@ -49,7 +48,6 @@ class AdminCreateProject extends Component {
         return(
             <div className = 'modal-window'> 
                 <div className = "date-and-input">
-                <AdminDateEvent onSelectData= {this.getDate} date = {this.state.date} /> 
                 <div className="project-title">
                 <p>Название проекта</p>
                 <TextField 

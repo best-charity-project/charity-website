@@ -21,3 +21,19 @@
     padding-left: 300px;
     padding-top: 55px;
 }
+.delete-news:disabled img {
+    opacity: 0.2;
+}
+.delete-news > div {
+    display: inline-block;
+    padding-right: 10px;
+    cursor: pointer;
+}
+.delete-news:disabled > div {
+    cursor: default;
+}
+.delete-news span {
+    padding-left: 10px;
+    font-size: 14px;
+}
+
