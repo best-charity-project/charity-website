@@ -44,7 +44,6 @@ class AdminSelectSearch extends Component {
                     value = {this.state.value}
                     dropdownMenuStyle = {{ maxHeight: 250 }}
                     onChange = {this.onChange}
-                    style = {{ width: 500 }}
                     notFoundContent = 'Ничего не найдено'
                 >
                 {this.state.filters.map((filter,index) => {

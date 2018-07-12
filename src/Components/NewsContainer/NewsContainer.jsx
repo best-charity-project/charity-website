@@ -29,10 +29,10 @@ getNews= () => {
       });
   })
 }
-getFiltersListByType = (page) => {  
+getFiltersListByType = (type) => {  
   axios({
       method: 'get',
-      url: `${ server }/filters?page=${page}`,
+      url: `${ server }/filters?type=${type}`,
   })
   .then(res =>{
     this.setState({filters:res.data.filterList})

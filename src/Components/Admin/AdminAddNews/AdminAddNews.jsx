@@ -277,10 +277,11 @@ class AdminAddNews extends Component {
             image: ''
         })   
     }
-    getFiltersListByType = (page) => {
+    //transfer to another file
+    getFiltersListByType = (type) => {
         axios({
             method: 'get',
-            url: `${ server }/filters?page=${page}`
+            url: `${ server }/filters?type=${type}`
 
         })
         .then(res =>{
