@@ -47,7 +47,6 @@ export default class ProjectGallery extends Component {
         let videos = this.props.content.mediaVideoArray
         let image = this.props.content.mediaImageArray
         let totalArray = [...videos,...image]
-        console.log(this.state.link)
         return (
             <div>
                 {this.state.show ? <Modal show={this.state.show} handleClose={this.hideModal}>
@@ -55,7 +54,6 @@ export default class ProjectGallery extends Component {
                 </Modal> : null}
                 <div className="gallery">
                     {totalArray.map((item, i) => {
-                        console.log(this.state.link)
                     return item.includes('png') ? <img className="image-items" key={i} src={item} onClick={()=>this.showImageModal(item)}></img>
                             : <div className="video-items" key={i} onClick={() => this.showVideoModal(item)}></div>    
                     })}
