@@ -26,8 +26,7 @@ class AdminCreateEvent extends Component {
         contactPhone:'',
         organization:'',
         website :'',
-        text : '',
-       
+        text : '',  
         
     }
     componentDidMount (){
