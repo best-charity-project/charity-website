@@ -1,8 +1,11 @@
-
 .select-component .container-for-input{
     display: inline-block;
 }
 
+.select-component .input-buttom-select{
+    display: inline-block;
+    margin-left: 15px;
+}
 .select-component  input:focus {
     outline: none;
 }
@@ -48,17 +51,11 @@
 .rc-select-arrow{
     margin-top: 7px;
 }
-.select-label{
-    font-weight: 600;
-    display: inline-block;
-    margin-right: 20px;
+#my-select{
+    width: 500px;
 }
-.select-wrapper-event{
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-}
-.input-buttom-select .container-for-input label{
-    margin: 0;
+.input-buttom-select
+ .container-for-input input{
+     width:200px;
+    margin-left: 15px;
 }

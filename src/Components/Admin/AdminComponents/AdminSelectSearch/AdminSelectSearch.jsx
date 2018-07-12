@@ -39,8 +39,6 @@ class AdminSelectSearch extends Component {
         const { selectedOption, addNewOption } = this.state;
         return (
             <div className = "select-component" onChange = {this.getOptions}>
-            <div>
-            <span className = 'select-label'> Источник:</span>
                 <Select                   
                     id = "my-select"
                     value = {this.state.value}
@@ -58,7 +56,6 @@ class AdminSelectSearch extends Component {
                     }
                 })}
                 </Select>
-                </div>
                 {addNewOption ? <div className = 'input-buttom-select' >
                     <TextField
                             onKeyPress = {this.onKeyPress}
@@ -85,7 +82,7 @@ class AdminSelectSearch extends Component {
     }
 
     getNewValue =(str) => {
-        this.setState({newFilterValue : str.value });
+        this.setState({newFilterValue : str.value});
     }
 
     addNewFilter = (e) => {
@@ -96,17 +93,15 @@ class AdminSelectSearch extends Component {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
         },
-        body : JSON.stringify({title:this.state.newFilterValue, type:'events'}),
+        body : JSON.stringify({title:this.state.newFilterValue, type:'news'}),
         })
-        this.setState({newFilterValue: ''});
+        this.setState({newFilterValue: '', value: this.state.newFilterValue });
         let arrayFilter = this.state.filters;
         let lengthArray = arrayFilter.length;
         let lastValue = arrayFilter[lengthArray-1].value;
         let newFilter = this.state.newFilterValue;
         arrayFilter.push({label:newFilter, value: lastValue ++});          
-        this.setState({filters: arrayFilter, addNewOption:false, value:newFilter}, () => {
-            this.props.getFilter(this.state.value);
-        });
+        this.setState({filters: arrayFilter, addNewOption:false});
     }
 }
 
