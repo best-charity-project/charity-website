@@ -12,7 +12,8 @@ class AdminCreateEvent extends Component {
         dateStart:new Date(),
         dateEnd:new Date(),
         text : '',
-        isOpen: false
+        isOpen: false,
+        id:''
     }
     componentDidMount (){
         if(this.props.event){
@@ -100,7 +101,7 @@ class AdminCreateEvent extends Component {
                     <Button 
                         name = "button-admin button-admin-background" 
                         label = 'Отменить' 
-                        clickHandler = {this.props.event ?this.closeInfo: this.cancel}
+                        clickHandler = {this.props.event ? this.closeInfo: this.cancel}
                     /> 
                 </div> 
             </div>
