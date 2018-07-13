@@ -10,16 +10,21 @@ class ModalWindow extends Component {
     state = {
         imageData: '',
         image: '',
-        imageArr: []
+        imageArr: [],
+        deletedImages: []
+
     }
     /* modalRef = React.createRef() */
 
     componentWillReceiveProps(nextProps) {
+        console.log('ModalWindow.componentWillReceiveProps')
         nextProps.isOpen ? null : this.setState({imageArr: []})
-        nextProps.imageArr ? this.setState({imageArr: nextProps.imageArr}) : null
+        nextProps.imageArr ? this.setState({
+            imageArr: nextProps.imageArr}) : null
     }
     
     render() {
+        console.log('ModalWindow.render')
         const SortableItem = SortableElement(({link, sortIndex}) =>
             <div className = 'admin-title-image'>
                 <img src = {link} alt = '' className = 'slider-image' />
@@ -80,14 +85,14 @@ class ModalWindow extends Component {
                     {this.state.imageArr.length ?
                         <Button 
                             name = 'button-admin'
-                            clickHandler = {this.props.addSlider}
+                            clickHandler = {this.saveModalWindow}
                             label = 'Ok'
                         /> :
                         null
                     }
                     <Button 
                         name = 'button-admin close-window'
-                        clickHandler = {this.closeModalWindow}
+                        clickHandler = {this.props.closeModalWindow}
                         label = 'Отмена'
                     />
                 </div>
@@ -113,7 +118,7 @@ class ModalWindow extends Component {
     onSortEnd = ({oldIndex, newIndex}) => {
         this.setState({
             imageArr: arrayMove(this.state.imageArr, oldIndex, newIndex),
-        }, () => this.props.onChangeImageArr(this.state.imageArr));
+        });
     };
     shouldCancelStart = (e) => {
         if (['button', 'span'].indexOf(e.target.tagName.toLowerCase()) !== -1) {
@@ -122,23 +127,23 @@ class ModalWindow extends Component {
     }
 
     deleteGalleryImage = (index) => {
-        console.log(111)
         let imageArr = this.state.imageArr
+        let deletedImages = this.state.deletedImages
         let deletedImage = imageArr.splice(index, 1)
-        axios({
-            method: 'delete',
-            url: `${server}/uploadGalleryImage/`,
-            data: deletedImage,
-            config: {headers: {'Content-Type': 'application/json; charset=UTF-8'}},
-        })
-        .then(response => {
-            this.setState({
-                imageArr: imageArr
-            }/* , () => this.modalRef.current.click() */) 
-        })
-        .catch(function (error) {
-            console.log(error);
-        });     
+        deletedImages.push(deletedImage)
+        this.setState({
+            imageArr: imageArr,
+            deletedImages: deletedImages
+        }, () => {console.log(imageArr, this.state.imageArr)})
+        // axios({
+        //     method: 'delete',
+        //     url: `${server}/uploadGalleryImage/`,
+        //     data: deletedImage,
+        //     config: {headers: {'Content-Type': 'application/json; charset=UTF-8'}},
+        // })
+        // .catch(function (error) {
+        //     console.log(error);
+        // });     
     }
     addImage = () => {
         let formData  = new FormData();
@@ -154,17 +159,16 @@ class ModalWindow extends Component {
             imageArr.push(response.data.link)
             this.setState({
                 imageArr: imageArr
-            }, this.props.getUrl(this.state.imageArr)) 
+            }) 
         })
         .catch(function (error) {
             console.log(error);
         });
     }
-    closeModalWindow = (e) => {
+    saveModalWindow = (e) => {
         e.preventDefault()
-        this.setState({
-            imageArr: []
-        })
+        console.log('save modal window', this.state.imageArr)
+        this.props.onChangeImageArr(this.state.imageArr, () => {this.props.addSlider(e)})
     }
 }
 export default ModalWindow;

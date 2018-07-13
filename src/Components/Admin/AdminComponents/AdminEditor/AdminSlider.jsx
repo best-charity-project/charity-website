@@ -37,9 +37,9 @@ class AdminSlider extends Component {
                     <div className="modal-element">
                         <ModalWindow 
                             isOpen = {this.state.isOpen}
-                            getUrl = {this.getUrl}
                             addSlider = {this.addSlider}
                             onChangeImageArr = {this.onChangeImageArr}
+                            closeModalWindow = {this.closeModalWindow}
                         />
                     </div>
                 </div>
@@ -54,8 +54,7 @@ class AdminSlider extends Component {
             e.preventDefault()
             e.stopPropagation()
             this.setState({
-                isOpen: false,
-                imageArr: []
+                isOpen: false
             })
         } 
     }
@@ -78,12 +77,8 @@ class AdminSlider extends Component {
             imageArr: []
         })
     }
-
-    getUrl = (imageArr) => {
-        this.setState({imageArr: imageArr})
-    }
-    onChangeImageArr = (imageArr) => {
-        this.setState({imageArr: imageArr})
+    onChangeImageArr = (imageArr, callback) => {
+        this.setState({imageArr: imageArr}, callback)
     }
 }
 export default AdminSlider;

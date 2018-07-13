@@ -8,8 +8,9 @@ const rendererFunc = (block, onChange, editorRef, isAdmin) => {
             props: {
                 onChange: onChange,
                 isAdmin: isAdmin ? true : false,
-                editorRef: editorRef
-            }, 
+                editorRef: editorRef,
+                deletedImages: deletedImages
+            },  
         }
     }
     return undefined
