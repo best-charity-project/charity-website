@@ -43,7 +43,7 @@ class AdminEventsList extends Component {
         })
         .then((result) => {
             this.setState({            
-                events: this.state.events.filter(item => item._id !== result.data.news._id)
+                events : this.state.events.filter(item => item._id !== result.data.news._id)
             }) 
         })  
       };
@@ -59,8 +59,7 @@ class AdminEventsList extends Component {
                 pathname: '/admin-panel/events/create',
                 state: { detail: this.state.eventInfo}
             })
-        })
-        
+        })        
     }
     }
 export default withRouter(AdminEventsList);

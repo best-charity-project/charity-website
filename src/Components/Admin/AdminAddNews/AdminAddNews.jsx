@@ -74,7 +74,6 @@ class AdminAddNews extends Component {
                                 name = "title-news"
                                 value = {this.state.title}
                                 onChangeValue = {this.onChangeValue}
-                                required
                             />
                         </div>
                         <hr />

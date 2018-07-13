@@ -76,11 +76,9 @@ class AdminCreateEvent extends Component {
         this.setState({title:obj.value});
       }
       getStartDate = (str) =>{
-          console.log(str)
           this.setState({dateStart:str})
       }
       getEndDate = (str) =>{
-        console.log(str)
         this.setState({timeEnd:str})
     }
       getCurrentText = (str) =>{
@@ -120,7 +118,6 @@ class AdminCreateEvent extends Component {
     }
 
     render() {
-        console.log(this.state)
         return(
             <div className="admin-content"> 
                 <Navigation onLogout={this.onLogout}/>
