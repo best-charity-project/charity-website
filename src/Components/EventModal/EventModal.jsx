@@ -4,7 +4,10 @@ import moment from 'moment';
 import {NavLink} from "react-router-dom";
 import FullNews from '../FullNews/FullNews';
 import '../EventModal/EventModal.css';
-import Button from '../Button/Button'
+import Button from '../Button/Button';
+import {Route} from 'react-router-dom';
+import {withRouter} from "react-router-dom";
+
 class EventModal extends Component {
 
     render() {
@@ -21,12 +24,13 @@ class EventModal extends Component {
                         : <span className = 'time-event-modal'> {`${moment(this.props.event.dateStart).format('LT')}`}</span>}
                         <p className = 'title-event-modal'>{this.props.event.title}</p>
                     </div>
+                    <div className = 'button-close' onClick = {this.closeWindow}/>
                 </div>
                 <div className = 'info-event-modal'>
                 <div className = 'place-tickets-event-modal'>
-                    <p className = 'place-event-modal'> <span>Место проведения:</span> {this.props.event.place} </p>
-                    <p> <span> Организатор:</span>{this.props.event.organizers} </p>
-                    <p className = 'tickets-event-modal'> <span>Билеты: </span>{this.props.event.linkParticipation ? <a href = {this.props.event.linkParticipation } target="_blank" > {this.props.event.participation }</a>: this.props.event.participation }  </p> 
+                    {this.props.event.place ?<p className = 'place-event-modal' onClick = {()=>this.getMap(this.props.event.place)}> <span>Место проведения:</span> <span className = 'event-place'>{this.props.event.place} </span> </p>:null }
+                    {this.props.event.organizers? <p> <span> Организатор:</span>{this.props.event.organizers} </p>:null}
+                    {this.props.event.participation ? <p className = 'tickets-event-modal'> <span>Билеты: </span>{this.props.event.linkParticipation ? <a href = {this.props.event.linkParticipation } target="_blank" > {this.props.event.participation }</a>: this.props.event.participation }  </p> :null}
                 </div>
                 
                 <div className = 'content-event-modal'>
@@ -41,7 +45,7 @@ class EventModal extends Component {
                     })}
                 </ul>
             </div>:null }
-               <div className = 'contacts-event-modal'>
+              {this.props.event.organization ||this.props.event.contactPerson ||this.props.event.contactPhone||this.props.event.website ?  <div className = 'contacts-event-modal'>
                <p className = 'contacts-title-event-modal'> Контакты:</p>
                {this.props.event.organization ? <p>{this.props.event.organization} </p> : null}
                <p>
@@ -51,7 +55,7 @@ class EventModal extends Component {
                 <p className = 'website-event-modal'>
                     {this.props.event.website ? <a href = {this.props.event.website} target="_blank"  > {this.props.event.website}</a> :null} 
                 </p>
-                </div>
+                </div>:null}
                 </div>
                 <div className = 'buttons-event-modal'>
                     {this.props.event.linkParticipation ? <div
@@ -68,6 +72,12 @@ class EventModal extends Component {
     closeWindow = (e) => {
         this.props.closeModalWindow(e);
     }
+    getMap = (place) => {
+        this.props.history.push({
+            pathname: '/events/map',
+            state: { detail: place}
+        })
+    }
 }
 
-export default EventModal;
+export default withRouter(EventModal);

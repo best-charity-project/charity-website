@@ -17,7 +17,6 @@ class AdminEventsContent extends Component {
        this.getList()
     }
     render() {
-        console.log(this.state.events)
         return(
             <div>
             <Navigation onLogout={this.onLogout} />

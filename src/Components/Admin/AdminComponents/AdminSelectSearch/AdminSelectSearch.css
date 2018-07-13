@@ -59,3 +59,12 @@
      width:200px;
     margin-left: 15px;
 }
+#my-select 
+.rc-select-selection__rendered{
+    margin-top: 5px;
+}
+.select-component
+.sourse-select{
+font-weight: 600;
+margin-right: 15px;
+}

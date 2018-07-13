@@ -118,9 +118,6 @@ class AdminAddNews extends Component {
                         </div>
                         <hr />
                         <div className="text-news">
-                            <div className = "news-source">
-                                <label>Источник:</label>
-                            </div>
                             <div>
                                 {this.state.filters? 
                                     <AdminSelectSearch 

@@ -19,7 +19,7 @@ class News extends Component {
         this.setState({isOpen:true})
     }
     closeModalWindow = (e) =>{
-        if(e.target.className === 'overlay' ||e.target.classList.contains('button-event-close' )){
+        if(e.target.className === 'overlay' ||e.target.classList.contains('button-event-close' )||e.target.classList.contains('button-close' )){
         e.stopPropagation();
         this.setState({isOpen:false})
     }        

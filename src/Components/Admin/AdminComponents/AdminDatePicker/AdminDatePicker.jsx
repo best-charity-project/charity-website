@@ -4,18 +4,38 @@ import 'moment/locale/ru';
 import Datetime from 'react-datetime'
 import '../AdminDatePicker/AdminDatePicker.css'
 class AdminDatePicker extends Component {
+    state= {
+        validDate:true,
+        
+    }
+
     onChange = (date) => {
-        this.props.onSelectDate(date)
+        console.log(date)
+        let validDate = moment(date).format('D MMMM YYYY, H : mm');
+        console.log(validDate)
+        validDate!='Invalid date' ? this.setState({validDate:true} , () => {
+            this.props.onSelectDate(date) 
+        }):this.setState({validDate:false}) 
     }
     valid = (current) => {
         var yesterday = Datetime.moment().subtract(1, 'day');
         return current.isAfter( yesterday );
     }
     render() {
+        console.log(this.props.date)
         return (
             <div >
                 <label>{this.props.label}</label>
-                <Datetime value = {moment(this.props.date).format('D MMMM YYYY, H : mm')} dateFormat = 'D MMMM YYYY,' timeFormat = 'H : mm' onChange = {this.onChange} isValidDate = {this.valid}/>
+                <Datetime 
+                    value = {this.props.dateFormat?moment(this.props.date). format('D MMMM YYYY, H : mm'):moment(this.props.date). format('H : mm')}
+                    onChange = {this.onChange} 
+                    isValidDate = {this.valid}
+                    dateFormat={this.props.dateFormat?'D MMMM YYYY,': false}
+                    timeFormat = 'H : mm'
+                />
+                <div> 
+                    {!this.state.validDate ?<span> Неправильно введена дата</span>:null }
+                </div>
             </div>
         ) 
     }

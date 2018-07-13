@@ -16,7 +16,7 @@ class AdminCreateEvent extends Component {
         title: '',
         place:'',
         dateStart:new Date(),
-        dateEnd:new Date(),
+        timeEnd:'',
         participation: '',
         linkParticipation:'',
         organizers:'',
@@ -26,7 +26,9 @@ class AdminCreateEvent extends Component {
         contactPhone:'',
         organization:'',
         website :'',
-        text : '',  
+        text : '',
+        filter:'',
+        getInputTimeEnd : false  
         
     }
     componentDidMount (){
@@ -35,7 +37,7 @@ class AdminCreateEvent extends Component {
             let {title,
                 place,
                 dateStart,
-                dateEnd,
+                timeEnd,
                 participation,
                 linkParticipation,
                 organizers,
@@ -52,7 +54,7 @@ class AdminCreateEvent extends Component {
                this.setState({
                    id:_id,
                    dateStart: dateStart,
-                   dateEnd: dateEnd,
+                   timeEnd: timeEnd,
                    text:text,
                    title:title,
                    getInfo:false,
@@ -74,10 +76,12 @@ class AdminCreateEvent extends Component {
         this.setState({title:obj.value});
       }
       getStartDate = (str) =>{
+          console.log(str)
           this.setState({dateStart:str})
       }
       getEndDate = (str) =>{
-        this.setState({dateEnd:str})
+        console.log(str)
+        this.setState({timeEnd:str})
     }
       getCurrentText = (str) =>{
         this.setState({text:str});
@@ -97,7 +101,7 @@ class AdminCreateEvent extends Component {
                 this.setState({
                     title:'', text:'',
                     dateStart:new Date(),
-                    dateEnd:new Date(), 
+                    timeEnd:'', 
                     contactPerson:'',
                     contactPhone:'',
                     linkParticipation:'',
@@ -116,6 +120,7 @@ class AdminCreateEvent extends Component {
     }
 
     render() {
+        console.log(this.state)
         return(
             <div className="admin-content"> 
                 <Navigation onLogout={this.onLogout}/>
@@ -146,15 +151,21 @@ class AdminCreateEvent extends Component {
                             date = {this.state.dateStart} 
                             onSelectDate = {this.getStartDate} 
                             label = 'Дата начала '
-                    />
+                            dateFormat = {true}
+                            
+                    /><div>
+                        {this.state.getInputTimeEnd || this.state.timeEnd ? 
+                    <AdminDatePicker 
+                    date = {!this.state.timeEnd ? this.state.dateStart:this.state.timeEnd } 
+                    onSelectDate = {this.getEndDate} 
+                    dateFormat = {false}
+            />  :<Button 
+            name = "button-admin button-admin-background" 
+            label = 'Время окончания' 
+            clickHandler = {this.getInputTimeEnd}
+        />}</div>
                     </div>
-                    <div className = 'date-end-event'>
-                        <AdminDatePicker 
-                            date = {this.state.dateEnd} 
-                            onSelectDate = {this.getEndDate} 
-                            label = 'Дата окончания'
-                    />
-                    </div >
+                                  
                     <div className = 'admin-event-tickets'>
                         <TextField 
                             label = 'Билеты'
@@ -286,7 +297,6 @@ class AdminCreateEvent extends Component {
         if (this.props.location.state) {
             id = this.props.location.state.detail._id
         }
-        console.log(this.state)
         axios({
             method: id ? 'put' : 'post',
             url: id ? `${server}/events/` + id : `${server}/events/`,
@@ -326,7 +336,6 @@ class AdminCreateEvent extends Component {
      }
      getOrganizers = (e) => {
          this.setState({organizers:e.target.value});
-         console.log(e.target.value)
      }
      getSpeaker =(str) => {
          this.setState({speaker: str.value})
@@ -370,6 +379,9 @@ class AdminCreateEvent extends Component {
             })
         })
      
+      }
+      getInputTimeEnd = () => {
+          this.setState({getInputTimeEnd : true})
       } 
 }
 export default AdminCreateEvent;

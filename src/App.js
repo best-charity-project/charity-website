@@ -7,6 +7,7 @@ import Navigation from "./Components/Navigation/Navigation";
 import Error from "./Components/Error/Error";
 import Admin from "./Pages/Admin/Admin";
 import Events from './Pages/Events/Events';
+import EventsMap from './Components/EventsMap/EventsMap'
 import PageNews from "./Pages/News/News";
 import FullNews from './Components/FullNews/FullNews';
 import "./App.css"
@@ -31,7 +32,8 @@ class App extends Component {
             <Route path="/" component={Home} exact />
             <Route path="/projects" component={Projects} />
             <Route path="/login" component={Admin} />
-            <Route path="/events" component={Events} />
+            <Route path="/events" component={Events} exact/>
+            <Route path="/events/map" component={EventsMap} />
             <PrivateRoute path="/admin-panel" component={AdminMain} exact/>
             <PrivateRoute path="/admin-panel/dashboard" component={AdminMain} />
             <PrivateRoute path="/admin-panel/events" component={AdminEvents} exact />

@@ -23,7 +23,6 @@ class TextField extends Component {
 		this.setState({error:resultValidation})
 	}
     render() {
-		console.log(this.props.required + this.props.label)
     	return(
  			<div className = 'container-for-input'> 
 			 <form>

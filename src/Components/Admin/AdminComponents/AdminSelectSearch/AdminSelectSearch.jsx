@@ -39,6 +39,7 @@ class AdminSelectSearch extends Component {
         const { selectedOption, addNewOption } = this.state;
         return (
             <div className = "select-component" onChange = {this.getOptions}>
+                <span className = 'sourse-select'> Источник :</span>
                 <Select                   
                     id = "my-select"
                     value = {this.state.value}
