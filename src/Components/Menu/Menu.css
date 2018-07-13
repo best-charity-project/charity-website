@@ -160,8 +160,8 @@
 }
 .menu{
 	width: 100%;
-	background: color #e8e6e2;
+	background-color: #e8e6e2;
 	position: fixed;
 	z-index: 999999;
-	height: 80px;
+	height: 60px;
 }

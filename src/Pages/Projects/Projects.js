@@ -24,6 +24,7 @@ class Projects extends Component {
             filters: [],
             isLastProject: false,
             isFirstProject: true,
+            isButtonShowed: false
         };
         this.nextProject = this.nextProject.bind(this);
         this.previousProject = this.previousProject.bind(this);
@@ -62,15 +63,15 @@ class Projects extends Component {
         return (
             <div className="main-page-client">
                 <Menu name="client-menu" />
-                {this.state.currentDisplayedProject.name ? (
+                {this.state.currentDisplayedProject && this.state.currentDisplayedProject.name ? 
                     <Project content={this.state.currentDisplayedProject} />
-                ) : (
-                    <p>Что-то пошло не так... Команда разработчиков уже решает эту проблему</p>
-                )}
+                 : 
+                    <p>Для текущего фильтра проектов нет </p> 
+                }
                 {this.state.filters ? (
                     <ProjectsFilter filterProjects={this.filterProjects} filters={this.state.filters} />
                 ) : null}
-                <div className="projects-list-action-btns">
+                <div className={`projects-list-action-btns  ${this.state.isButtonShowed ? 'button-hide' : null}`}>
                     <SliderPreviousBtn disabled={this.state.isFirstProject} previousProject={this.previousProject} />
                     <SliderNextBtn disabled={this.state.isLastProject} nextProject={this.nextProject} />
                 </div>
