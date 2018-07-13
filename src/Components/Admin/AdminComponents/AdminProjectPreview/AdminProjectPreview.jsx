@@ -34,18 +34,17 @@ class AdminProjectPreview extends Component {
                             </div>
                             {<ProjectGallery content={this.props} />}
                             <div className="contact-info">
-                                <p>Контактные данные:</p>
-                                {this.props.organization?<p>{this.props.organization}</p>:null}
-                                {this.props.headArray ?
-                                    this.props.headArray.map( (link,index) => 
-                                        <div key={index}>{link},</div>
-                                ):null} 
-                               {this.props.contactsArray ? 
-                                    this.props.contactsArray.map( (link,index) =>
-                                        <div key={index}><p>{link}</p></div>
-                                ):null}
-                                {this.props.site?<p>{this.props.site}</p>:null}
-                            </div>
+                            <p>Контакты:</p>
+                            <p>{this.props.organization}</p>
+                            <p>{this.props.headArray.map((item, i) => {
+                                    return <span key={i}>{item + " "}</span>     
+                                    })
+                                }, {this.props.contactsArray.map((item, i) => {
+                                    return <span className="contact-phone" key={i}>{item + " "}</span>     
+                                    })
+                                }</p>
+                            <a className="contact-link" href={this.props.site} target="_blank">{this.props.site}</a>
+                        </div>
                         </div>
                     </div>
                 </div>
