@@ -11,16 +11,21 @@ class AdminSlider extends Component {
         isOpen: false,
         imageArr: []
     }
+    
     static propTypes = {
         onChange: PropTypes.func,
         editorState: PropTypes.object
     }
+
     componentDidMount(){
         document.addEventListener('keyup', (e) => {
-            if (e.keyCode === 27) this.setState({
-                isOpen: false,
-                imageArr: []
-            });
+            if (e.keyCode === 27) {
+                this.props.setReadOnly(false, () =>
+                this.setState({
+                    isOpen: false,
+                    imageArr: []
+                }));
+            }
         });
     }
  
@@ -46,9 +51,11 @@ class AdminSlider extends Component {
             </div>
         );
     }
+    
     openModalWindow = () => {
         this.setState({isOpen: true})
     }
+
     closeModalWindow = (e) => {
         if (e.target.className === 'overlay' || ~e.target.className.indexOf('close-window')) {
             e.preventDefault()

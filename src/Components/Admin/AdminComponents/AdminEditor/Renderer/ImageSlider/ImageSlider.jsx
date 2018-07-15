@@ -28,14 +28,12 @@ class ImageSlider extends Component {
 
         document.addEventListener('keyup', (e) => {
             if (e.keyCode === 27) this.setState({
-                isOpen: false,
-                imageArr: entity.getData().src,
+                isOpen: false
             });
         });
     }
 
     render() {
-        console.log('fjtvnhfogbnvortnbvogr')
         return (
             <div>
                 <Carousel
@@ -59,14 +57,13 @@ class ImageSlider extends Component {
                         </div>
                     )}
                 </Carousel>
-                <div className = {this.state.isOpen ? 'overlay' : 'overlay hidden'} onClick = {this.closeModalWindow}>
+                <div className = {this.state.isOpen ? 'overlay' : 'overlay hidden'}>
                     <div className="modal-element">
                         <ModalWindow 
                             isOpen = {this.state.isOpen}
                             onChangeImageArr = {this.onChangeImageArr}
                             addSlider = {this.editSlider}
                             imageArr = {this.state.imageArr}
-                            editorRef = {this.props.editorRef}
                             closeModalWindow = {this.closeModalWindow}
                             getDeletedImages = {this.props.getDeletedImages}
                         />
@@ -77,14 +74,16 @@ class ImageSlider extends Component {
     }
     openModalWindow = () => {
         if (this.props.isAdmin) { 
-            this.setState({isOpen: true}) 
-            // this.props.editorRef.focus()
+            this.setState({isOpen: true}, () => this.props.setReadOnly(true))
         }
     }
     closeModalWindow = (e) => {
         if (e.target.className === 'overlay' || ~e.target.className.indexOf('close-window')) {
+            console.log('closeModalWindow')
+            this.props.setReadOnly(false)
             this.setState({
                 isOpen: false,
+                imageArr: []
             })
         } 
     }
@@ -106,7 +105,7 @@ class ImageSlider extends Component {
         this.setState({
             isOpen: false,
             imageArr: []
-        })
+        }, () => this.props.setReadOnly(false))
     }
     deleteSlider = () => {
         const {contentState, onChange} = this.props

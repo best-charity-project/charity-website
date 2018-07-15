@@ -11,8 +11,10 @@ import './AdminEditor.css';
 
 class ControlledEditor extends Component {
     state = {
-        editorState: EditorState.createEmpty()
+        editorState: EditorState.createEmpty(),
+        isReadOnly : false
     }
+
     setEditorReference = (ref) => {
         this.currentEditor = ref
     }
@@ -33,7 +35,7 @@ class ControlledEditor extends Component {
                     wrapperClassName="wrapper"
                     toolbarClassName="toolbar"
                     editorClassName="editor"
-                    toolbarCustomButtons={[<AdminSlider />]}
+                    toolbarCustomButtons={[<AdminSlider setReadOnly={this.setReadOnly}/>]}
                     localization={{
                         locale: 'ru'
                     }}
@@ -53,18 +55,18 @@ class ControlledEditor extends Component {
                     }}
                     onEditorStateChange = {this.onChange}
                     customBlockRenderFunc = {this.customBlockRenderFuncWrap}
+                    readOnly = {this.state.isReadOnly}
                 />
             </div>
         )
     } 
     onChange = (editorState) => {
         console.log(989898989, 'AdminEditor.onChange', convertToRaw(editorState.getCurrentContent()))
-        this.setState({editorState: editorState})
-        this.props.onEditorStateChange(editorState)
+        this.setState({editorState: editorState}, () => this.props.onEditorStateChange(editorState))
     }
 
     customBlockRenderFuncWrap = (block) => {
-        return customBlockRenderFunc(block, this.onChange, this.currentEditor, this.props.getDeletedImages, true)
+        return customBlockRenderFunc(block, this.onChange, this.props.getDeletedImages, this.setReadOnly, true)
     }
 
     uploadImageCallBack = (file) => {
@@ -76,6 +78,12 @@ class ControlledEditor extends Component {
             data: formData,
             config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
         })
+    }
+
+    setReadOnly = (isReadOnly, callback) => {
+        this.setState({
+            isReadOnly : isReadOnly
+        }, () => {if (callback) {callback()}})
     }
 }
 export default ControlledEditor;

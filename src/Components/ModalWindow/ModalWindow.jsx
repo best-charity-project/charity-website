@@ -12,7 +12,6 @@ class ModalWindow extends Component {
         image: '',
         imageArr: [],
         deletedImages: []
-
     }
     /* modalRef = React.createRef() */
 
@@ -28,7 +27,6 @@ class ModalWindow extends Component {
         console.log('ModalWindow.render')
         const SortableItem = SortableElement(({link, sortIndex}) =>
             <div className = 'admin-title-image'>
-            {console.log(666999, link)}
                 <img src = {link} alt = '' className = 'slider-image' />
                 <Button 
                     name = 'button-admin admin-cancel'
@@ -55,7 +53,7 @@ class ModalWindow extends Component {
         });   
 
         return(
-            <div className = 'modal-window-new' ref = {this.modalRef}> 
+            <div className = 'modal-window-new'> 
                  <div className = 'admin-image'>
                     <label htmlFor = {this.props.id}>Фото:</label>
                     <div className = 'admin-button'>
@@ -129,7 +127,7 @@ class ModalWindow extends Component {
     }
 
     deleteGalleryImage = (index) => {
-        let imageArr = this.state.imageArr
+        let imageArr = this.state.imageArr.slice()
         let deletedImages = this.state.deletedImages
         let deletedImage = imageArr.splice(index, 1)
         deletedImages.push(deletedImage)
