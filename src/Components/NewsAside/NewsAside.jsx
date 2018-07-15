@@ -10,7 +10,7 @@ class NewsAside extends Component {
         }
     }
     componentDidMount(){
-        this.setState({activeItem : 'все', filters : this.props.filters});
+        this.setState({activeItem : 'Все', filters : this.props.filters});
     }
     getCurrentFilter = (e) => {
         let currentFilter = e.target;
