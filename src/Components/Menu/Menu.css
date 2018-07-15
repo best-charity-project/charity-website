@@ -163,3 +163,10 @@
     width: 100%;
     min-height: 100px;
 }
+.menu{
+	width: 100%;
+	background-color: #e8e6e2;
+	position: fixed;
+	z-index: 999999;
+	height: 60px;
+}
