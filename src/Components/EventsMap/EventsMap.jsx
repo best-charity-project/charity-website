@@ -10,24 +10,25 @@ class NewsAside extends Component {
     render() {
         return (
             <div >
-                {this.state.coordinates}
-                   <YMaps onApiAvaliable={ymaps => this.geocode(ymaps)}>
-                   {this.state.coordinates? <Map 
-          state= {{center: [this.state.coordinates[0], this.state.coordinates[1]], zoom: 15}}
-        >
-
-          { !this.state.coordinates ? null :
-            <Placemark 
-            geometry={{ coordinates: this.state.coordinates}} 
-            properties={{
-                hintContent: this.props.location.state.detail,
-                balloonContent: this.props.location.state.detail
-              }}/>
-          }
-
-        </Map>:null }
-      
-      </YMaps>
+                <YMaps onApiAvaliable={ymaps => this.geocode(ymaps)}>
+                   {this.state.coordinates? 
+                        <Map 
+                            state= {{
+                                center: [this.state.coordinates[0], this.state.coordinates[1]], 
+                                zoom: 15}
+                            }
+                        >
+                            {!this.state.coordinates ? null :
+                                <Placemark 
+                                    geometry = {{ coordinates : this.state.coordinates}} 
+                                    properties={{
+                                        hintContent : this.props.location.state.detail,
+                                        balloonContent : this.props.location.state.detail
+                                }}/>
+                            }
+                        </Map>:
+                     null}   
+                </YMaps>
             </div>
         ) 
     }

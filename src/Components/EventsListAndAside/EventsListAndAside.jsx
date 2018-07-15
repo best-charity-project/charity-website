@@ -13,18 +13,19 @@ class EventsListAndAside extends Component {
     componentDidMount(){
         this.getEventsList();
         this.getFiltersList();
-    }
+    };
     getCurrentFilter = (str) =>{
-        (str ==='все')? this.filterArray(''): this.filterArray(str);
-    }
+        (str ==='все') ? this.filterArray('') : this.filterArray(str);
+    };
     render() {
         return (
             <div className = 'events-aside-list'>
-                {this.state.filters ? <EventsAside 
-                    filters = {this.state.filters}
-                    getCurrentFilter = {this.getCurrentFilter} 
-                    
-                />: null}
+                {this.state.filters ? 
+                    <EventsAside 
+                        filters = {this.state.filters}
+                        getCurrentFilter = {this.getCurrentFilter} 
+                        
+                    />: null}
                 <EventsList 
                     currentSourse = {this.state.currentSourse} 
                     name = "events-list" 
@@ -34,7 +35,7 @@ class EventsListAndAside extends Component {
         ) 
     }
 
-      getEventsList = () => {
+    getEventsList = () => {
         fetch(`${server}/events`)
         .then(response => response.json())
         .then(data => {
@@ -42,8 +43,8 @@ class EventsListAndAside extends Component {
                 this.filterArray('')
             });
         })
-      }
-      getFiltersList = () => {  
+    };
+    getFiltersList = () => {  
         axios({
             method: 'get',
             url: `${ server }/filters`,
@@ -58,19 +59,18 @@ class EventsListAndAside extends Component {
             this.setState({
               filters:filtersEvents,
             })
-        })
-      
-      }
-      filterArray = (value) =>{
+        }) 
+    };
+    filterArray = (value) =>{
         if(value.length === 0){
             this.setState({filterArray : this.state.events}); 
         }else{
             let filterArray =this.state.events.filter (events => {
                 return (events.filter === value)
            })
-         this.setState({filterArray : filterArray });
+            this.setState({filterArray : filterArray });
         }
-      }
+    }
 }
 
 export default EventsListAndAside;

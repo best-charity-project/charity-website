@@ -11,14 +11,14 @@ class AdminSelectSearch extends Component {
     state = {
         filters : this.props.filtersList,
         addNewOption : false,
-        value:''
+        value : ''
     }
     componentDidMount(){
         (this.props.value) ? this.setState({value:this.props.value}) : this.setState({value:'все'});
         this.createOptions();
         this.props.getFilter(this.state.value);
     }
-    createOptions = () =>{
+    createOptions = () => {
         let array = [];
         if(this.state.filters){
             this.state.filters.forEach(function(item, index){
@@ -68,8 +68,8 @@ class AdminSelectSearch extends Component {
                             name = 'select-button'                     
                             clickHandler = {this.addNewFilter}                        
                             label = 'Добавить'
-                        />
-                        </div> : null}       
+                    />
+                </div> : null}       
             </div>
         )
     }
@@ -82,7 +82,7 @@ class AdminSelectSearch extends Component {
         (!e.target.value.length) ? this.setState({addNewOption : false}) : null;
     }
 
-    getNewValue =(str) => {
+    getNewValue = (str) => {
         this.setState({newFilterValue : str.value});
     }
 

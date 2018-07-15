@@ -11,11 +11,11 @@ import { Route } from 'react-router-dom';
 
 class AdminEventsContent extends Component {
     state= {
-        events:{}
+        events : {}
     }
     componentDidMount(){
-       this.getList()
-    }
+       this.getList();
+    };
     render() {
         return(
             <div>
@@ -30,11 +30,14 @@ class AdminEventsContent extends Component {
                                     label = "Создать" 
                                     clickHandler = {() => { history.push('/admin-panel/events/create') }}
                                 />
-                            )} />
+                               )} 
+                            />
                         </div>     
-                        {(this.state.events.length>0)?<AdminEventsList 
-                        events = {this.state.events} 
-                        getUpdateEventsList = {this.getUpdateEventsList}/> 
+                        {(this.state.events.length > 0)?
+                        <AdminEventsList 
+                            events = {this.state.events} 
+                            getUpdateEventsList = {this.getUpdateEventsList}
+                        /> 
                         : null} 
                     </div>
                 </div>
@@ -48,7 +51,7 @@ class AdminEventsContent extends Component {
               this.setState({ events: data.events }              
             )})
         .catch(error => this.setState({ error, isLoading: false }));
-    }
+    };
     getUpdateEventsList = () => {
         setTimeout(this.getList,100);
     }

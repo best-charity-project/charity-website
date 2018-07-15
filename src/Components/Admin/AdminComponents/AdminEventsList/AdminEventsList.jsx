@@ -8,7 +8,7 @@ import axios from 'axios';
 
 class AdminEventsList extends Component {
     state = {    
-        events:this.props.events
+        events : this.props.events
     };
     render() {
         return (
@@ -26,7 +26,7 @@ class AdminEventsList extends Component {
                             key = {event._id} 
                             deleteHandler = {() => this.deleteEvent(event)} 
                         />                        
-                        )}
+                    )}
                 </div>  
             </div>  
         )

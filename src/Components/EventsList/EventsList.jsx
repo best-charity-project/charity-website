@@ -8,17 +8,15 @@ class EventsList extends Component {
     
     render() {
         return (
-         <div className={this.props.name}>
+         <div className = {this.props.name}>
             <Masonry className = 'masonry-div'> 
                 {(this.props.array)?this.props.array.map(function(event){
                     return <News event = {event} />
-                }):null}
+                }) : null}
             </Masonry>
          </div>
         ) 
-    }
-    
-
+    }  
 }
 
 export default EventsList;
