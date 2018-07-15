@@ -46,7 +46,7 @@ class AdminPreview extends Component {
                             <Button 
                                 label={this.props.isPublic ? "Сохранить" : "Сохранить без публикации"}
                                 name = "button-admin"
-                                clickHandler = {this.props.sendNews}
+                                clickHandler = {this.props.deleteImages}
                             />
                         )} />
                         <Route render={({history}) => (

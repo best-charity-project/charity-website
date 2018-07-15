@@ -11,7 +11,7 @@ import './AdminEditor.css';
 
 class ControlledEditor extends Component {
     state = {
-        editorState: EditorState.createEmpty(),
+        editorState: EditorState.createEmpty()
     }
     setEditorReference = (ref) => {
         this.currentEditor = ref
@@ -51,20 +51,20 @@ class ControlledEditor extends Component {
 							options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'],
 						}
                     }}
-                    onEditorStateChange={this.onChange}
-                    customBlockRenderFunc={this.customBlockRenderFuncWrap}
+                    onEditorStateChange = {this.onChange}
+                    customBlockRenderFunc = {this.customBlockRenderFuncWrap}
                 />
             </div>
         )
     } 
     onChange = (editorState) => {
-        // console.log('AdminEditor.onChange', convertToRaw(editorState.getCurrentContent()))
+        console.log(989898989, 'AdminEditor.onChange', convertToRaw(editorState.getCurrentContent()))
         this.setState({editorState: editorState})
         this.props.onEditorStateChange(editorState)
     }
 
     customBlockRenderFuncWrap = (block) => {
-        return customBlockRenderFunc(block, this.onChange, this.currentEditor, true)
+        return customBlockRenderFunc(block, this.onChange, this.currentEditor, this.props.getDeletedImages, true)
     }
 
     uploadImageCallBack = (file) => {

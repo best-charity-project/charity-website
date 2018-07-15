@@ -20,6 +20,7 @@ class CustomComponent extends Component {
         }
 
         if (entity && entity.type === 'IMAGE_SLIDER') {
+            console.log(545454545, blockProps)
             return(
                 <ImageSlider 
                     contentState = {contentState} 
@@ -27,6 +28,7 @@ class CustomComponent extends Component {
                     onChange = {blockProps.onChange} 
                     isAdmin = {blockProps.isAdmin}
                     editorRef = {blockProps.editorRef}
+                    getDeletedImages = {blockProps.getDeletedImages}
                 />
             )
         }

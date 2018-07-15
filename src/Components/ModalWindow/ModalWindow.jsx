@@ -17,6 +17,7 @@ class ModalWindow extends Component {
     /* modalRef = React.createRef() */
 
     componentWillReceiveProps(nextProps) {
+        console.log(2323232323, nextProps.imageArr)
         console.log('ModalWindow.componentWillReceiveProps')
         nextProps.isOpen ? null : this.setState({imageArr: []})
         nextProps.imageArr ? this.setState({
@@ -27,6 +28,7 @@ class ModalWindow extends Component {
         console.log('ModalWindow.render')
         const SortableItem = SortableElement(({link, sortIndex}) =>
             <div className = 'admin-title-image'>
+            {console.log(666999, link)}
                 <img src = {link} alt = '' className = 'slider-image' />
                 <Button 
                     name = 'button-admin admin-cancel'
@@ -134,16 +136,7 @@ class ModalWindow extends Component {
         this.setState({
             imageArr: imageArr,
             deletedImages: deletedImages
-        }, () => {console.log(imageArr, this.state.imageArr)})
-        // axios({
-        //     method: 'delete',
-        //     url: `${server}/uploadGalleryImage/`,
-        //     data: deletedImage,
-        //     config: {headers: {'Content-Type': 'application/json; charset=UTF-8'}},
-        // })
-        // .catch(function (error) {
-        //     console.log(error);
-        // });     
+        }, () => {this.props.getDeletedImages(this.state.deletedImages)})
     }
     addImage = () => {
         let formData  = new FormData();

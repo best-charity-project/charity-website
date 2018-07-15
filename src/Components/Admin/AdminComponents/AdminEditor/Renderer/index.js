@@ -1,6 +1,6 @@
 import CustomComponent from './CustomComponent/CustomComponent'
 
-const rendererFunc = (block, onChange, editorRef, isAdmin) => {
+const rendererFunc = (block, onChange, editorRef, getDeletedImages, isAdmin) => {
     if (block.getType() === 'atomic') {
         return {
             component: CustomComponent,
@@ -9,7 +9,7 @@ const rendererFunc = (block, onChange, editorRef, isAdmin) => {
                 onChange: onChange,
                 isAdmin: isAdmin ? true : false,
                 editorRef: editorRef,
-                deletedImages: deletedImages
+                getDeletedImages: getDeletedImages
             },  
         }
     }

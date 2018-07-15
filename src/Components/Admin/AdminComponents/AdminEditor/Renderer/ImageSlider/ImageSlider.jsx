@@ -15,21 +15,21 @@ class ImageSlider extends Component {
 
     componentWillReceiveProps(nextProps) {
         // console.log('ImageSlider.componentWillReceiveProps', nextProps)
-        const {block, contentState} = nextProps;   
+        const {block, contentState, deletedImages} = nextProps;   
         const entity = contentState.getEntity(block.getEntityAt(0));
-        this.setState({imageArr: entity.getData().src}, () => console.log(55555555555, this.state.imageArr))
+        this.setState({imageArr: entity.getData().src})
     }
 
     componentDidMount() {
         // console.log('ImageSlider.componentWillMount', this.props)
         const {block, contentState} = this.props;   
         const entity = contentState.getEntity(block.getEntityAt(0));
-        this.setState({imageArr: entity.getData().src}, () => console.log(444444444, this.state.imageArr))
+        this.setState({imageArr: entity.getData().src})
 
         document.addEventListener('keyup', (e) => {
             if (e.keyCode === 27) this.setState({
                 isOpen: false,
-                imageArr: entity.getData().src
+                imageArr: entity.getData().src,
             });
         });
     }
@@ -68,6 +68,7 @@ class ImageSlider extends Component {
                             imageArr = {this.state.imageArr}
                             editorRef = {this.props.editorRef}
                             closeModalWindow = {this.closeModalWindow}
+                            getDeletedImages = {this.props.getDeletedImages}
                         />
                     </div>
                 </div>
@@ -83,7 +84,7 @@ class ImageSlider extends Component {
     closeModalWindow = (e) => {
         if (e.target.className === 'overlay' || ~e.target.className.indexOf('close-window')) {
             this.setState({
-                isOpen: false
+                isOpen: false,
             })
         } 
     }
@@ -98,7 +99,7 @@ class ImageSlider extends Component {
             entityKey,
             {src: this.state.imageArr}
         )
-        console.log('editSlider Content State', convertToRaw(newContentState))
+        console.log(111111111, 'editSlider Content State', convertToRaw(newContentState))
 
         onChange(EditorState.createWithContent(newContentState))
 

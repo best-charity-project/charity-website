@@ -30,7 +30,8 @@ class AdminAddNews extends Component {
         image: '',
         date: '',
         value: 0,
-        filters: []
+        filters: [],
+        deletedImages: []
     }
     cropperRef = React.createRef()
 
@@ -47,13 +48,14 @@ class AdminAddNews extends Component {
                 image: this.props.location.state.detail.image,
                 filter: this.props.location.state.detail.filter,
                 date: this.props.location.state.detail.createdAt,
-                value: this.props.location.state.detail.shortText.length
+                value: this.props.location.state.detail.shortText.length,
             })
         }
     }
 
     render() {
         // console.log('AdminAddNews.render', convertToRaw(this.state.fullTextEditorState.getCurrentContent()))
+        console.log(987678876, this.state.deletedImages)
         return (
             <div className="admin-content">
                 <Navigation onLogout={this.onLogout} />
@@ -117,6 +119,7 @@ class AdminAddNews extends Component {
                             <ControlledEditor 
                                 initialEditorState = {this.state.fullTextEditorState} 
                                 onEditorStateChange = {this.onEditorStateChange}
+                                getDeletedImages = {this.getDeletedImages}
                             />
                         </div>
                         <hr />
@@ -172,7 +175,7 @@ class AdminAddNews extends Component {
                         title = {this.state.title}
                         fullTextEditorState = {this.state.fullTextEditorState}
                         onSaveChangeStatus = {this.onSaveChangeStatus}
-                        sendNews = {this.sendNews}
+                        deleteImages = {this.deleteImages}
                         getNewStatePreview = {this.getNewStatePreview}
                         date = {this.state.date}
                         isPublic = {this.state.isPublic}
@@ -190,6 +193,9 @@ class AdminAddNews extends Component {
     onEditorStateChange = (editorState) => {
         // console.log('AdminAddNews.onEditorStateChange', convertToRaw(editorState.getCurrentContent()))
         this.setState({fullTextEditorState: editorState});
+    }
+    getDeletedImages =  (deletedImages) => {
+        this.setState({deletedImages: deletedImages})
     }
     getCurrentTextShort = (event) => {
         this.setState({
@@ -215,9 +221,9 @@ class AdminAddNews extends Component {
                 } else {
                     newText = newText.replace(/\n/, '')
                 }
-                this.setState({shortText: newText}, this.sendNews)
+                this.setState({shortText: newText}, this.deleteImages)
             } else {
-                this.sendNews()
+                this.deleteImages()
             }
         }
     }
@@ -247,6 +253,22 @@ class AdminAddNews extends Component {
         this.props.history.push({
             pathname: '/admin-panel/news'
         })  
+    }
+    deleteImages = () => {
+        if(this.state.deletedImages.length) {
+            axios({
+                method: 'delete',
+                url: `${server}/uploadGalleryImage/`,
+                data: this.state.deletedImages,
+                config: {headers: {'Content-Type': 'application/json; charset=UTF-8'}},
+            })
+            .then(response => this.sendNews())
+            .catch(function (error) {
+                console.log(error);
+            });  
+        } else {
+            this.sendNews()
+        }
     }
     sendNews = () => {
         let formData  = new FormData();
