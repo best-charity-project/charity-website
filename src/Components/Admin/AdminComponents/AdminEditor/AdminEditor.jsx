@@ -35,25 +35,19 @@ class ControlledEditor extends Component {
                     wrapperClassName="wrapper"
                     toolbarClassName="toolbar"
                     editorClassName="editor"
-                    // {!this.props.isProject ? 
-                        toolbarCustomButtons={[<AdminSlider setReadOnly={this.setReadOnly}/>]} 
-                    //    : null
-                    // }
+                    toolbarCustomButtons={[<AdminSlider setReadOnly={this.setReadOnly}/>]} 
                     localization={{
                         locale: 'ru'
                     }}
                     toolbar={{
-                        // {!this.props.isProject ?
-                            image: {
-                                previewImage: true,
-                                uploadCallback: this.uploadImageCallBack,
-                                defaultSize: {
-                                    height: 'auto',
-                                    width: '100%',
-                                },
-                            }, 
-                            // : null 
-                        // }
+                        image: {
+                            previewImage: true,
+                            uploadCallback: this.uploadImageCallBack,
+                            defaultSize: {
+                                height: 'auto',
+                                width: '100%',
+                            },
+                        }, 
 						blockType: {
 							inDropdown: true,
 							options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'],
