@@ -3,11 +3,30 @@ import '../News/News.css';
 import moment from 'moment';
 import {NavLink} from "react-router-dom";
 import FullNews from '../FullNews/FullNews';
+import EventModal from '../EventModal/EventModal';
 
 class News extends Component {
-    Click = () => {
-        <FullNews />
+    state = {
+        isOpen: false
     }
+    componentDidMount(){
+        document.addEventListener('keyup', (e) => {
+            if (e.keyCode === 27) this.setState({
+                isOpen: false
+            });
+        });
+    }
+    getEventWindow = () => {
+        this.setState({isOpen:true});
+    };
+    closeModalWindow = (e) => {
+        if(e.target.className === 'overlay' 
+        ||e.target.classList.contains('button-event-close' )
+        ||e.target.classList.contains('button-close' )){
+            e.stopPropagation();
+            this.setState({isOpen:false});
+        }        
+    };
     render() {
         moment.lang('ru');
         return (
@@ -19,12 +38,15 @@ class News extends Component {
                             <p className = 'news-title'>{this.props.name} </p>
                             <span className = 'news-text' dangerouslySetInnerHTML={{__html: this.props.text}}/>                
                         </NavLink>):(
-                        <div>
-                             <p className = 'news-date'>{moment(this.props.dateStart).format('DD MMMM YYYY') !== moment(this.props.dateEnd).format('DD MMMM YYYY') ? 
-                             `${moment(this.props.dateStart).format('DD MMMM YYYY, h:mm')} - ${moment(this.props.dateEnd).format('DD MMMM YYYY, h:mm')}` : 
-                             ` ${moment(this.props.dateStart).format('DD MMMM YYYY, h:mm')} - ${moment(this.props.dateEnd).format('h:mm')}`} </p>
-                            <p className = 'news-title'>{this.props.name} </p>
-                            <span className = 'news-text' dangerouslySetInnerHTML={{__html: this.props.text}}/>   
+                        <div onClick = {this.getEventWindow}>
+                            <p className = 'news-date'>{moment(this.props.event.dateStart).format('DD MMMM YYYY')} </p>
+                            <p className = 'news-title'>{this.props.event.title} </p>
+                            <span className = 'news-text' dangerouslySetInnerHTML={{__html: this.props.event.text}}/>
+                            <div className={this.state.isOpen ? 'overlay' : 'overlay hidden'} onClick = {this.closeModalWindow}>
+                                <div className="modal-event-field">
+                                   <EventModal event = {this.props.event} closeModalWindow = {this.closeModalWindow}/>
+                                </div>
+                            </div>   
                         </div>
                  )}
             </div>

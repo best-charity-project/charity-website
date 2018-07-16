@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import ReactPlayer from 'react-player';
 import ProjectGallery from '../../Components/ProjectGallery/ProjectGallery';
+import ProjectDefaultImg from '../../Assets/AssetsSvg/project-default.svg';
 
 
 class Project extends Component {
@@ -11,7 +11,7 @@ class Project extends Component {
             <div className="projects-page-content">
                 <div className="img-container">
                     <div className="img-placeholder">
-                        <img src={`http://localhost:3001/images/${this.props.content.image}`} />
+                         <img className="project-main-img" src={this.props.content.image ? `http://localhost:3001/images/${this.props.content.image}` : ProjectDefaultImg }/>
                     </div>
                 </div>
                 <div className="project-section">
@@ -25,12 +25,18 @@ class Project extends Component {
                                 <span dangerouslySetInnerHTML= {{__html: this.props.content.fullText}}></span>
                             </div>
                         </div>
-                        <ProjectGallery content={this.props.content} />    
+                        {<ProjectGallery content={this.props.content} />}    
                         <div className="contact-info">
-                            <p>Контактны:</p>
+                            <p>Контакты:</p>
                             <p>{this.props.content.organization}</p>
-                            <p>{this.props.content.head}, {this.props.content.contacts}</p>
-                            <p>{this.props.content.site}</p>
+                            <p>{this.props.content.headArray.map((item, i) => {
+                                    return <span key={i}>{item + " "}</span>     
+                                    })
+                                }, {this.props.content.contactsArray.map((item, i) => {
+                                    return <span className="contact-phone" key={i}>{item + " "}</span>     
+                                    })
+                                }</p>
+                            <a className="contact-link" href={this.props.content.site} target="_blank">{this.props.content.site}</a>
                         </div>
                     </div>
                 </div>

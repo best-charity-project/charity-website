@@ -9,11 +9,11 @@ import _ from 'lodash';
 
 class NewsContainer extends Component {
   state = {
-    news: []
+    news: [],
   }
   componentDidMount(){      
     this.getNews(); 
-    this.getFiltersList();             
+    this.getFiltersListByType('news');             
 }  
 
 getFilteredNews  = (str) => {
@@ -29,21 +29,13 @@ getNews= () => {
       });
   })
 }
-getFiltersList = () => {  
+getFiltersListByType = (type) => {  
   axios({
       method: 'get',
-      url: `${ server }/filters`,
+      url: `${ server }/filters?type=${type}`,
   })
   .then(res =>{
-      let filterList = res.data.filterList;
-      let filtersNews = _.filter(filterList , function(el){
-          if(el.type === 'news'){
-              return el
-          }
-      })
-      this.setState({
-        filters:filtersNews,
-      })
+    this.setState({filters:res.data.filterList})
   })
 
 }

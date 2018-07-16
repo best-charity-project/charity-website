@@ -3,20 +3,13 @@ import AdminEvent from '../AdminEvent/AdminEvent';
 import './AdminEventsList.css';
 import AdminCreateEvent from '../AdminCreateEvent/AdminCreateEvent';
 import { server } from '../../../../api';
+import {withRouter} from "react-router-dom";
+import axios from 'axios';
 
 class AdminEventsList extends Component {
     state = {    
-        events:this.props.events,  
-        isLoading: true,
-        error: null,
-        getEventInfo : false,
-        eventInfo:null
+        events : this.props.events
     };
-componentWillReceiveProps(nexprops, nextstate){
-    if(nexprops.length != this.state.events.length){
-        this.setState({events:nexprops.events})
-    }
-}
     render() {
         return (
             <div className="events-list-admin">
@@ -26,54 +19,47 @@ componentWillReceiveProps(nexprops, nextstate){
                     <div>Удалить событие</div>   
                 </div>            
                 <div>                    
-                    {this.state.events.map(item => 
+                    {this.state.events.map(event => 
                         <AdminEvent 
-                            clickHandler = {this. getEventInfo }
-                            event = {item} 
-                            key = {item._id} 
-                            deleteHandler = {() => this.deleteEvent(item)                            
-                            } 
+                            clickHandler = {() => this.getEventInfo(event) }
+                            event = {event} 
+                            key = {event._id} 
+                            deleteHandler = {() => this.deleteEvent(event)} 
                         />                        
-                        )}
-                   {(this.state.eventInfo)?<div className={this.state.eventInfo ? 'overlay' : 'overlay hidden'}>
-                        <div className="modal-new-event-field">
-                            <AdminCreateEvent closeInfo = {this.closeInfo} event = {this.state.eventInfo}  />
-                        </div>
-                    </div>:null}
-
+                    )}
                 </div>  
             </div>  
         )
     }
-    deleteEvent = (item) => {
-        let id = item._id
-        fetch(`${ server }/events`, {
-            method: 'DELETE',
-            headers: {
+    deleteEvent = (event) => {
+        axios({
+            method: 'delete',
+            url: `${server}/events`,
+            data: event,
+            config: { headers: {
                 Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(item),
+                'Content-Type': 'application/json'
+            }}
         })
-        .then(response => response.json())
-        this.setState({events: this.state.events.filter(event => event._id != id)})  
+        .then((result) => {
+            this.setState({            
+                events : this.state.events.filter(item => item._id !== result.data.news._id)
+            }) 
+        })  
       };
 
-    getEventInfo = (e) => {
-        this.setState({getEventInfo: !this.state.getEventInfo});
-        let id = e.target.parentNode.id;
+    getEventInfo = (event) => {
+        let id = event._id
         const URL = `${ server }/events/`+id;
         fetch(URL)
         .then(response => response.json())
         .then(data => {
             this.setState({ eventInfo: data });
-        })
-        .catch(error => this.setState({ error, isLoading: false }));
-        
-    }
-    closeInfo = (str) => {
-        this.setState({getEventInfo : false, eventInfo:null});
-        this.props.getUpdateEventsList();
+            this.props.history.push({
+                pathname: '/admin-panel/events/create',
+                state: { detail: this.state.eventInfo}
+            })
+        })        
     }
     }
-export default AdminEventsList;
+export default withRouter(AdminEventsList);

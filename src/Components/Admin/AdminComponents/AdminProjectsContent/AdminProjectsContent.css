@@ -21,3 +21,18 @@
     padding-left: 300px;
     padding-top: 55px;
 }
+.delete-projects:disabled img {
+    opacity: 0.2;
+}
+.delete-projects > div {
+    display: inline-block;
+    padding-right: 10px;
+    cursor: pointer;
+}
+.delete-projects:disabled > div {
+    cursor: default;
+}
+.delete-projects span {
+    padding-left: 10px;
+    font-size: 14px;
+}

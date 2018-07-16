@@ -11,13 +11,14 @@ class AdminSelectSearch extends Component {
     state = {
         filters : this.props.filtersList,
         addNewOption : false,
+        value : ''
     }
     componentDidMount(){
         (this.props.value) ? this.setState({value:this.props.value}) : this.setState({value:'все'});
         this.createOptions();
         this.props.getFilter(this.state.value);
     }
-    createOptions = () =>{
+    createOptions = () => {
         let array = [];
         if(this.state.filters){
             this.state.filters.forEach(function(item, index){
@@ -27,33 +28,33 @@ class AdminSelectSearch extends Component {
                 array.push(filter);
             })
         }
-         this.setState({filters:array});
+        this.setState({filters:array});
     }
-    onChange = (e) => {
-        (e)? this.setState ({value:e } ,() => {
+    onChange = (value) => {
+        (value) ? this.setState ({value : value } ,() => {
             this.props.getFilter(this.state.value);
-        }) : '';
-        
+        }) : null;        
     }
     render() {
         const { selectedOption, addNewOption } = this.state;
         return (
             <div className = "select-component" onChange = {this.getOptions}>
+                <span className = 'sourse-select'> Источник :</span>
                 <Select                   
                     id = "my-select"
                     value = {this.state.value}
                     dropdownMenuStyle = {{ maxHeight: 250 }}
-                    style = {{ width: 500 }}
-                    onInputKeydown = {this.onSearch}
                     onChange = {this.onChange}
                     notFoundContent = 'Ничего не найдено'
                 >
                 {this.state.filters.map((filter,index) => {
-                    return <Option 
-                                key = {index} 
-                                value = {filter.label}>
-                                {filter.label}
-                            </Option>
+                    if(filter.label != 'все'){
+                        return <Option 
+                                    key = {index} 
+                                    value = {filter.label}>
+                                    {filter.label}
+                                </Option>
+                    }
                 })}
                 </Select>
                 {addNewOption ? <div className = 'input-buttom-select' >
@@ -61,14 +62,14 @@ class AdminSelectSearch extends Component {
                             onKeyPress = {this.onKeyPress}
                             label = 'Добавить фильтр :'
                             value = {this.state.newFilterValue}
-                            onChangeValue = {this.getValue}
+                            onChangeValue = {this.getNewValue}
                     />
                     <Button   
                             name = 'select-button'                     
                             clickHandler = {this.addNewFilter}                        
                             label = 'Добавить'
-                        />
-                        </div> : null}       
+                    />
+                </div> : null}       
             </div>
         )
     }
@@ -81,8 +82,8 @@ class AdminSelectSearch extends Component {
         (!e.target.value.length) ? this.setState({addNewOption : false}) : null;
     }
 
-    getValue =(str) => {
-        this.setState({newFilterValue : str.value });
+    getNewValue = (str) => {
+        this.setState({newFilterValue : str.value});
     }
 
     addNewFilter = (e) => {
@@ -95,7 +96,7 @@ class AdminSelectSearch extends Component {
         },
         body : JSON.stringify({title:this.state.newFilterValue, type:'news'}),
         })
-        this.setState({newFilterValue: ''});
+        this.setState({newFilterValue: '', value: this.state.newFilterValue });
         let arrayFilter = this.state.filters;
         let lengthArray = arrayFilter.length;
         let lastValue = arrayFilter[lengthArray-1].value;

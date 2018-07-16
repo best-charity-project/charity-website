@@ -4,7 +4,6 @@ import {withRouter} from "react-router-dom";
 import axios from 'axios';
 import {EditorState, convertToRaw, convertFromRaw} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import _ from 'lodash';
 
 import {server} from '../../../api';
 import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';
@@ -15,7 +14,6 @@ import Navigation from '../../Navigation/Navigation';
 import NavBar from '../../NavBar/NavBar';
 import AdminPreview from '../AdminComponents/AdminPreview/AdminPreview';
 import AdminSelectSearch from '../../Admin/AdminComponents/AdminSelectSearch/AdminSelectSearch';
-
 import './AdminAddNews.css';
 
 class AdminAddNews extends Component {
@@ -30,13 +28,12 @@ class AdminAddNews extends Component {
         image: '',
         date: '',
         value: 0,
-        filters: [],
         deletedImages: []
     }
-    cropperRef = React.createRef()
+    cropperRef = React.createRef();
 
     componentWillMount() {
-        this.getFiltersList();
+        this.getFiltersListByType('news');
         if (this.props.location.state) {
             let fullTextEditorState = EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.location.state.detail.fullText)));
             // console.log('AdminAddNews.componentWillMount', convertToRaw(fullTextEditorState.getCurrentContent()))
@@ -55,7 +52,6 @@ class AdminAddNews extends Component {
 
     render() {
         // console.log('AdminAddNews.render', convertToRaw(this.state.fullTextEditorState.getCurrentContent()))
-        console.log(987678876, this.state.deletedImages)
         return (
             <div className="admin-content">
                 <Navigation onLogout={this.onLogout} />
@@ -124,17 +120,15 @@ class AdminAddNews extends Component {
                         </div>
                         <hr />
                         <div className="text-news">
-                            <div className = "news-source">
-                                <label>Источник:</label>
-                            </div>
                             <div>
-                                {this.state.filters? 
+                                {this.state.filters ? 
                                     <AdminSelectSearch 
                                         value = {this.state.filter}
                                         filtersList = {this.state.filters}
                                         getFilter = {this.getFilter}
-                                    />:null}
-                              
+                                    />:
+                                    null
+                                }
                             </div>
                         </div>
                         <div className="admin-buttons">
@@ -185,32 +179,41 @@ class AdminAddNews extends Component {
         )
     }
     onCropImage = (image) => {
-        this.setState({imageData: image})
+        this.setState({imageData: image});
     }
+
     onChangeValue = (object) => {
         this.setState({title: object.value});
     }
+
     onEditorStateChange = (editorState) => {
         // console.log('AdminAddNews.onEditorStateChange', convertToRaw(editorState.getCurrentContent()))
         this.setState({fullTextEditorState: editorState});
     }
+
     getDeletedImages =  (deletedImages) => {
         this.setState({deletedImages: deletedImages})
     }
+
     getCurrentTextShort = (event) => {
         this.setState({
             shortText: event.target.value,
             value: event.target.value.length
         })
-    } 
+    }
+
     getNewStatePreview = () => {
         this.setState({
             isPreview: false
-        })
+        });
     }
+
     getFilter = (str) => {
-        this.setState({filter: str});
+        str.length > 0 ? 
+            this.setState({filter: str}):
+            null
     }
+
     checkText = () => {
         if (this.state.fullTextEditorState) {
             if (!this.state.shortText) {
@@ -227,20 +230,25 @@ class AdminAddNews extends Component {
             }
         }
     }
+
     onPreview = () => {
         this.setState({
             isPreview: true
-        })
+        });
     }
+
     onSaveChangeStatus = () => {
         this.setState({isPublic: !this.state.isPublic}, this.checkText)
     }
+
     onPublish = () => {
         this.setState({isPublic: true}, this.checkText)
     }
+
     onDraft = () => {
         this.setState({isPublic: false}, this.checkText)
     }
+
     onCancel = () => {
         this.setState({
             title: '',
@@ -248,12 +256,14 @@ class AdminAddNews extends Component {
             fullTextEditorState: EditorState.createEmpty(),
             isPublic: false,
             imageData: '',
-            image: ''
+            image: '',
+            filter: ''
         }) 
         this.props.history.push({
             pathname: '/admin-panel/news'
-        })  
+        });
     }
+
     deleteImages = () => {
         if(this.state.deletedImages.length) {
             axios({
@@ -270,13 +280,14 @@ class AdminAddNews extends Component {
             this.sendNews()
         }
     }
+
     sendNews = () => {
         let formData  = new FormData();
         Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
         formData.append('fullText', JSON.stringify(convertToRaw(this.state.fullTextEditorState.getCurrentContent())))
         let id = ''
         if (this.props.location.state) {
-            id = this.props.location.state.detail._id
+            id = this.props.location.state.detail._id;
         }
         axios({
             method: id ? 'put' : 'post',
@@ -287,6 +298,7 @@ class AdminAddNews extends Component {
         .then(response => {
             this.setState({
                 title: '',
+                filter:'',
                 shortText: '',
                 fullTextEditorState: EditorState.createEmpty(),
                 isPublic: false,
@@ -301,30 +313,26 @@ class AdminAddNews extends Component {
             console.log(error);
         });
     }
+
     deleteImage = () => {
         this.setState({
             imageData: '',
             image: ''
         })   
     }
-    getFiltersList = () => {  
+
+    getFiltersListByType = (type) => {
         axios({
             method: 'get',
-            url: `${ server }/filters`,
+            url: `${ server }/filters?type=${type}`
+
         })
         .then(res =>{
-            let filterList = res.data.filterList;
-            let filtersNews = _.filter(filterList , function(el){
-                if(el.type === 'news'){
-                    return el
-                }
-            })
             this.setState({
-                filters:filtersNews,
+                filters: res.data.filterList,
             })
-        })
-     
-      }
+        })     
+    }
 }
 
 export default withRouter(AdminAddNews);
