@@ -8,7 +8,7 @@ import _ from 'lodash';
 
 class EventsListAndAside extends Component {
     state = {
-        currentSourse:'вce'
+        currentSource:'вce'
     }
     componentDidMount(){
         this.getEventsList();
@@ -27,7 +27,7 @@ class EventsListAndAside extends Component {
                         
                     />: null}
                 <EventsList 
-                    currentSourse = {this.state.currentSourse} 
+                    currentSource = {this.state.currentSource} 
                     name = "events-list" 
                     array = {this.state.filterArray}
                 /> 

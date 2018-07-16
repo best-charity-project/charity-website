@@ -16,15 +16,14 @@ class ModalWindow extends Component {
     /* modalRef = React.createRef() */
 
     componentWillReceiveProps(nextProps) {
-        console.log(2323232323, nextProps.imageArr)
-        console.log('ModalWindow.componentWillReceiveProps')
+        //console.log('ModalWindow.componentWillReceiveProps')
         nextProps.isOpen ? null : this.setState({imageArr: []})
         nextProps.imageArr ? this.setState({
             imageArr: nextProps.imageArr}) : null
     }
     
     render() {
-        console.log('ModalWindow.render')
+        //console.log('ModalWindow.render')
         const SortableItem = SortableElement(({link, sortIndex}) =>
             <div className = 'admin-title-image'>
                 <img src = {link} alt = '' className = 'slider-image' />
@@ -158,7 +157,7 @@ class ModalWindow extends Component {
     }
     saveModalWindow = (e) => {
         e.preventDefault()
-        console.log('save modal window', this.state.imageArr)
+        //console.log('save modal window', this.state.imageArr)
         this.props.onChangeImageArr(this.state.imageArr, () => {this.props.addSlider(e)})
     }
 }

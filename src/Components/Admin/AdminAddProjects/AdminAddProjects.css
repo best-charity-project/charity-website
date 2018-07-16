@@ -28,7 +28,7 @@ form.form-create-projects {
 .container-for-input label{
     flex-basis: 25%;
 }
-.projects-sourse label {
+.projects-source label {
     font-weight: 600;
 }
 .admin-projects-text-container input {

@@ -120,16 +120,14 @@ class AdminAddNews extends Component {
                         </div>
                         <hr />
                         <div className="text-news">
-                            <div>
-                                {this.state.filters ? 
-                                    <AdminSelectSearch 
-                                        value = {this.state.filter}
-                                        filtersList = {this.state.filters}
-                                        getFilter = {this.getFilter}
-                                    />:
-                                    null
-                                }
-                            </div>
+                            {this.state.filters ? 
+                                <AdminSelectSearch 
+                                    value = {this.state.filter}
+                                    filtersList = {this.state.filters}
+                                    getFilter = {this.getFilter}
+                                />:
+                                null
+                            }
                         </div>
                         <div className="admin-buttons">
                             <Route render={({history}) => (
@@ -325,9 +323,8 @@ class AdminAddNews extends Component {
         axios({
             method: 'get',
             url: `${ server }/filters?type=${type}`
-
         })
-        .then(res =>{
+        .then(res => {
             this.setState({
                 filters: res.data.filterList,
             })

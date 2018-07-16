@@ -10,7 +10,7 @@ import './AdminPreview.css';
 class AdminPreview extends Component {
     render() {
         return (
-            <div className = 'admin-preview'>
+            <div className = 'admin-preview-news'>
                 <div className = 'full-news-list-container'>
                     <div className = 'full-news'>
                         <div><img src = {this.props.imageData ? 

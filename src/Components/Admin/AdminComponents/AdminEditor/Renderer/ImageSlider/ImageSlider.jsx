@@ -79,7 +79,6 @@ class ImageSlider extends Component {
     }
     closeModalWindow = (e) => {
         if (e.target.className === 'overlay' || ~e.target.className.indexOf('close-window')) {
-            console.log('closeModalWindow')
             this.props.setReadOnly(false)
             this.setState({
                 isOpen: false,
@@ -91,14 +90,13 @@ class ImageSlider extends Component {
         this.setState({imageArr: imageArr}, callback)
     }
     editSlider = () => {
-        console.log('editSlider', this.state.imageArr)
+        //console.log('editSlider', this.state.imageArr)
         const {contentState, onChange} = this.props
         let entityKey = this.props.block.getEntityAt(0)
         let newContentState = contentState.mergeEntityData(
             entityKey,
             {src: this.state.imageArr}
         )
-        console.log(111111111, 'editSlider Content State', convertToRaw(newContentState))
 
         onChange(EditorState.createWithContent(newContentState))
 

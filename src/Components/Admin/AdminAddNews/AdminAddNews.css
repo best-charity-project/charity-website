@@ -19,17 +19,17 @@
 .create-news .container-for-input label {
     flex-basis: 25%;
 }
+.create-news .input-buttom-select .container-for-input label {
+    flex-basis: 33%;
+}
 .create-news .container-for-input label,
 .create-news .admin-image label,
-.create-news .news-source {
+.create-news .text-news .select-component .input-buttom-select label {
     padding-right: 60px;
     padding-left: 10px;
     font-weight: 600;
     text-align: right;
     align-self: center;
-}
-.create-news .news-sourse label {
-    font-weight: 600;
 }
 #title-news {
     margin-left: 0;
@@ -38,10 +38,24 @@
     font-size: 16px;
     outline: none;
 }
-.create-news .text-news {
+.create-news .text-news,
+.create-news .text-news .select-component .select-filter {
     display: flex;
 }
-.create-news .text-news > div:first-child {
+.input-buttom-select .container-for-input input {
+    margin: 5px;
+    margin-left: 0;
+    width: 495px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    border: 1px solid #d9d9d9;
+}
+.create-news .text-news .select-component .input-buttom-select .select-button {
+    font-size: 16px;
+    align-self: center;
+}
+.create-news .text-news > div:first-child,
+.create-news .text-news .select-component .select-filter .source-select {
     flex-basis: 25%;
     padding-right: 60px;
     padding-left: 10px;
@@ -52,19 +66,23 @@
 .create-news .text-news > div:last-child {
     flex-basis: 75%;
 }
-.create-news .text-news > div:last-child select {
-    font-family: 'Montserrat', sans-serif;
-    width: 300px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    border-radius: 5px;
-    font-size: 16px;
-    margin-left: 0;
+.create-news .text-news > div.select-component {
+    flex-basis: 100%;
+}
+.create-news .text-news .select-component .source-select {
+    flex-basis: 25%;
+    padding-right: 60px;
+    padding-left: 10px;
+    font-weight: 600;
+    text-align: right;
+    align-self: center;
+    margin-right: 0;
+}
+.create-news .text-news .select-component #my-select {
     height: auto;
     padding: 5px;
+    font-size: 16px;
     outline: none;
-    flex-basis: 75%;
 }
 .create-news .text-news .wrapper {
     margin-left: 0;

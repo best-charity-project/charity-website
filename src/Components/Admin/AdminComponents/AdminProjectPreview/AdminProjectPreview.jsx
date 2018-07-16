@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Route, withRouter} from 'react-router-dom';
 import moment from 'moment';
 import axios from 'axios';
+import {Editor} from 'draft-js';
+import customRendererFn from '../AdminEditor/Renderer';
 
 import Button from '../../../Button/Button';
 import {server} from '../../../../api';
@@ -12,9 +14,8 @@ import ProjectDefaultImg from '../../../../Assets/AssetsSvg/project-default.svg'
 
 class AdminProjectPreview extends Component {
     render() {
-        console.log(this.props)
         return (
-            <div className = 'admin-preview'>
+            <div className = 'admin-preview-project'>
                 <div className="projects-page-content">
                 <div className="img-container">
                     <div className="img-placeholder">
@@ -29,7 +30,11 @@ class AdminProjectPreview extends Component {
                                 </div>
                                 <div className="project-address">{this.props.address}</div>
                                 <div className="project-desc">
-                                    <span dangerouslySetInnerHTML= {{__html: this.props.fullText}}></span>
+                                    <Editor 
+                                        editorState={this.props.fullTextEditorState} 
+                                        readOnly={true} 
+                                        blockRendererFn={customRendererFn}
+                                    />
                                 </div>
                             </div>
                             {<ProjectGallery content={this.props} />}

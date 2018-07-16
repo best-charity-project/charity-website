@@ -35,19 +35,25 @@ class ControlledEditor extends Component {
                     wrapperClassName="wrapper"
                     toolbarClassName="toolbar"
                     editorClassName="editor"
-                    toolbarCustomButtons={[<AdminSlider setReadOnly={this.setReadOnly}/>]}
+                    // {!this.props.isProject ? 
+                        toolbarCustomButtons={[<AdminSlider setReadOnly={this.setReadOnly}/>]} 
+                    //    : null
+                    // }
                     localization={{
                         locale: 'ru'
                     }}
                     toolbar={{
-                        image: {
-                            previewImage: true,
-                            uploadCallback: this.uploadImageCallBack,
-                            defaultSize: {
-                                height: 'auto',
-                                width: '100%',
-                            },
-						},
+                        // {!this.props.isProject ?
+                            image: {
+                                previewImage: true,
+                                uploadCallback: this.uploadImageCallBack,
+                                defaultSize: {
+                                    height: 'auto',
+                                    width: '100%',
+                                },
+                            }, 
+                            // : null 
+                        // }
 						blockType: {
 							inDropdown: true,
 							options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'],
@@ -61,7 +67,6 @@ class ControlledEditor extends Component {
         )
     } 
     onChange = (editorState) => {
-        console.log(989898989, 'AdminEditor.onChange', convertToRaw(editorState.getCurrentContent()))
         this.setState({editorState: editorState}, () => this.props.onEditorStateChange(editorState))
     }
 

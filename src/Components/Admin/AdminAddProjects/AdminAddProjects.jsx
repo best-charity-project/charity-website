@@ -3,6 +3,8 @@ import {Route, withRouter} from 'react-router-dom';
 import axios from 'axios';
 import _ from 'lodash';
 import InputMask from 'react-input-mask';
+import {EditorState, convertToRaw, convertFromRaw} from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
 
 import TextField from '../../TextField/TextField';
 import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';
@@ -36,7 +38,7 @@ class AdminAddProjects extends Component {
         mediaVideoArray:[],
         mediaVideo:'',
         isMediaVideoArray:true,
-        fullText: '',
+        fullTextEditorState: EditorState.createEmpty(),
         filter: '',
         isPublic:false,
         isPreview:false,
@@ -47,6 +49,7 @@ class AdminAddProjects extends Component {
     componentWillMount() {
         this.getFiltersListByType('projects');
         if (this.props.location.state) {
+            let fullTextEditorState = EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.location.state.detail.fullText)));
             this.setState({
                 image: this.props.location.state.detail.image,
                 name: this.props.location.state.detail.name,
@@ -57,7 +60,7 @@ class AdminAddProjects extends Component {
                 site: this.props.location.state.detail.site,
                 mediaImageArray: this.props.location.state.detail.mediaImageArray,
                 mediaVideoArray: this.props.location.state.detail.mediaVideoArray,
-                fullText: this.props.location.state.detail.fullText,
+                fullTextEditorState: fullTextEditorState,
                 filter: this.props.location.state.detail.filter,
                 isPublic: this.props.location.state.detail.isPublic
             })
@@ -77,7 +80,7 @@ class AdminAddProjects extends Component {
     }
     
     render() {
-        let newValue = this.state.fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '').length;
+        let newValue = draftToHtml(convertToRaw(this.state.fullTextEditorState.getCurrentContent())).replace(/<[^>]*>/g, '').replace(/\r\n/g, '').length;
         return (
             <div className="admin-content"> 
             <Navigation onLogout={this.onLogout}/>
@@ -295,10 +298,11 @@ class AdminAddProjects extends Component {
                 <div className="text-projects">
                     <div className="full-text-projects">Описание проекта:</div>
                     <div className="projects-textfield">
-                    <ControlledEditor
-                        text = {this.state.fullText} 
-                        getCurrentText = {this.getCurrentTextFull}
-                    />
+                        <ControlledEditor 
+                            initialEditorState = {this.state.fullTextEditorState} 
+                            onEditorStateChange = {this.onEditorStateChange}
+                            getDeletedImages = {this.getDeletedImages}
+                        />
                     <AdminValidationWindow 
                         className={this.onCorrectFullText() ? "incorrect-value-container hidden" : "incorrect-value-container"}
                         title='Количество символов превышает 1000!'
@@ -373,7 +377,7 @@ class AdminAddProjects extends Component {
             site = {this.state.site}
             mediaImageArray = {this.state.mediaImageArray}
             mediaVideoArray = {this.state.mediaVideoArray}
-            fullText = {this.state.fullText}
+            fullTextEditorState = {this.state.fullTextEditorState}
             onPublish = {this.onPublish}
             onDraft = {this.onDraft}
             getNewStatePreview = {this.getNewStatePreview}
@@ -473,8 +477,8 @@ class AdminAddProjects extends Component {
             mediaVideoArray: mediaVideoArray
         })
     }
-    getCurrentTextFull = (str) => {
-        this.setState({fullText: str});
+    onEditorStateChange = (editorState) => {
+        this.setState({fullTextEditorState: editorState});
     }
     getFilter = (str) => {
         {str.length > 0 ? this.setState({filter : str}): null };
@@ -494,7 +498,8 @@ class AdminAddProjects extends Component {
         return /^((https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\W\.-]*)*\/?)?$/.test(this.state.site)
     }
     onCorrectFullText = () =>{
-        let newText = this.state.fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
+        let fullText = draftToHtml(convertToRaw(this.state.fullTextEditorState.getCurrentContent()))
+        let newText = fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
         return newText.length<=this.state.value
     }
     onRight = ()=>{
@@ -538,7 +543,7 @@ class AdminAddProjects extends Component {
             address:'',
             site:'',
             video:'',
-            fullText: '',
+            fullTextEditorState: EditorState.createEmpty(),
             filter:'',
             isPublic: false,
         }) 
@@ -549,6 +554,7 @@ class AdminAddProjects extends Component {
     sendProjects = () =>{
         let formData  = new FormData();
         Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
+        formData.append('fullText', JSON.stringify(convertToRaw(this.state.fullTextEditorState.getCurrentContent())))
         let id = ''
         if (this.props.location.state) {
             id = this.props.location.state.detail._id
@@ -574,7 +580,7 @@ class AdminAddProjects extends Component {
                 address:'',
                 site:'',
                 video:'',
-                fullText: '',
+                fullTextEditorState: EditorState.createEmpty(),
                 filter:'',
                 isPublic: false,
                 mediaImageArray: []
