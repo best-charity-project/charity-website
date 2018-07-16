@@ -114,7 +114,7 @@ class Projects extends Component {
                 currentDisplayedProject: filteredProjectsList[0],
                 filteredProjects: filteredProjectsList,
                 isFirstProject: true,
-                isLastProject: filteredProjectsList.length === 1,
+                isLastProject: filteredProjectsList.length === 1 || filteredProjectsList.length === 0,
             });
         }
     };
