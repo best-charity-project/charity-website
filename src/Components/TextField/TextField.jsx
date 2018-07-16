@@ -23,21 +23,19 @@ class TextField extends Component {
     render() {
     	return(
  			<div className = 'container-for-input'> 
-				<form>
-					{this.props.label? <label htmlFor = {this.props.id}>{this.props.label}</label>: null}
-					<input
-						onKeyPress = {this.props.onKeyPress}
-						value = {this.props.value}
-						type = {this.props.type} 
-						className = {this.props.nameClass} 
-						id = {this.props.id}  
-						name = {this.props.name} 
-						placeholder = {this.props.placeholder} 
-						onChange = {this.valueChange}
-						onFocus = {this.props.onFocusInput} 
-					/>
-					{((this.props.sendToValidation)&&!(this.state.error))? <Error/> : null}
-				</form>
+				{this.props.label? <label htmlFor = {this.props.id}>{this.props.label}</label>: null}
+				<input
+					onKeyPress = {this.props.onKeyPress}
+					value = {this.props.value}
+					type = {this.props.type} 
+					className = {this.props.nameClass} 
+					id = {this.props.id}  
+					name = {this.props.name} 
+					placeholder = {this.props.placeholder} 
+					onChange = {this.valueChange}
+					onFocus = {this.props.onFocusInput} 
+				/>
+				{((this.props.sendToValidation)&&!(this.state.error))? <Error/> : null}
 			</div>
 		)
 	}

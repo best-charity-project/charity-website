@@ -7,10 +7,6 @@
 .news-admin .news-admin-checkbox {
     display: flex;
 }
-.news-admin-checkbox input {
-    align-self: center;
-    margin-right: 10px;
-}
 .news-admin .news-admin-checkbox div:first-child {
     flex-basis: 10%;
 }

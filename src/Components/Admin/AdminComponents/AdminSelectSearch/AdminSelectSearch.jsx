@@ -39,24 +39,26 @@ class AdminSelectSearch extends Component {
         const { selectedOption, addNewOption } = this.state;
         return (
             <div className = "select-component" onChange = {this.getOptions}>
-                <span className = 'sourse-select'> Источник :</span>
-                <Select                   
-                    id = "my-select"
-                    value = {this.state.value}
-                    dropdownMenuStyle = {{ maxHeight: 250 }}
-                    onChange = {this.onChange}
-                    notFoundContent = 'Ничего не найдено'
-                >
-                {this.state.filters.map((filter,index) => {
-                    if(filter.label != 'все'){
-                        return <Option 
-                                    key = {index} 
-                                    value = {filter.label}>
-                                    {filter.label}
-                                </Option>
-                    }
-                })}
-                </Select>
+                <div className = "select-filter">
+                    <span className = "source-select"> Источник :</span>
+                    <Select                   
+                        id = "my-select"
+                        value = {this.state.value}
+                        dropdownMenuStyle = {{ maxHeight: 250 }}
+                        onChange = {this.onChange}
+                        notFoundContent = 'Ничего не найдено'
+                    >
+                    {this.state.filters.map((filter,index) => {
+                        if(filter.label != 'все'){
+                            return <Option 
+                                        key = {index} 
+                                        value = {filter.label}>
+                                        {filter.label}
+                                    </Option>
+                        }
+                    })}
+                    </Select>
+                </div>
                 {addNewOption ? <div className = 'input-buttom-select' >
                     <TextField
                             onKeyPress = {this.onKeyPress}

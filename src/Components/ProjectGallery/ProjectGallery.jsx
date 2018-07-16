@@ -24,7 +24,6 @@ export default class ProjectGallery extends Component {
 
     };
 
-
     showImageModal = (e) => {
         this.setState({
             show: true,

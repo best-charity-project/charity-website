@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import {Editor, EditorState, convertFromRaw} from 'draft-js';
 import moment from 'moment';
+import customRendererFn from '../Admin/AdminComponents/AdminEditor/Renderer';
 import ProjectGallery from '../../Components/ProjectGallery/ProjectGallery';
 import ProjectDefaultImg from '../../Assets/AssetsSvg/project-default.svg';
 
@@ -22,7 +24,14 @@ class Project extends Component {
                             </div>
                             <div className="project-address">{this.props.content.address}</div>
                             <div className="project-desc">
-                                <span dangerouslySetInnerHTML= {{__html: this.props.content.fullText}}></span>
+                                {this.props.content.fullText ?        
+                                    <Editor 
+                                        editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.content.fullText)))} 
+                                        readOnly={true} 
+                                        blockRendererFn={customRendererFn}
+                                    /> :
+                                    null 
+                                }
                             </div>
                         </div>
                         {<ProjectGallery content={this.props.content} />}    

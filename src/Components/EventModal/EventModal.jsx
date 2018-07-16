@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import '../News/News.css';
 import moment from 'moment';
-import {NavLink} from "react-router-dom";
-import FullNews from '../FullNews/FullNews';
+import {withRouter} from "react-router-dom";
+import {Editor, EditorState, convertFromRaw} from 'draft-js';
+
+import customRendererFn from '../Admin/AdminComponents/AdminEditor/Renderer';
 import '../EventModal/EventModal.css';
 import Button from '../Button/Button';
-import {Route} from 'react-router-dom';
-import {withRouter} from "react-router-dom";
+
 
 class EventModal extends Component {
 
@@ -41,7 +41,14 @@ class EventModal extends Component {
                         {this.props.event.participation ? <p className = 'tickets-event-modal'> <span>Билеты: </span>{this.props.event.linkParticipation ? <a href = {this.props.event.linkParticipation } target="_blank" > {this.props.event.participation }</a>: this.props.event.participation }  </p> :null}
                     </div>                
                     <div className = 'content-event-modal'>
-                        <span dangerouslySetInnerHTML={{__html: this.props.event.text}}/>
+                        {this.state.news.fullText ?         
+                            <Editor 
+                                editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(this.state.news.fullText)))} 
+                                readOnly={true} 
+                                blockRendererFn={customRendererFn}
+                            /> :
+                            null 
+                        }
                     </div>
                     {this.props.event.speakersArray ? 
                     <div className = 'speakers-event-modal'>                

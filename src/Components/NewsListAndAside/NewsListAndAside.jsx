@@ -24,7 +24,7 @@ class NewsListAndAside extends Component {
                     getCurrentFilter= {this.getCurrentFilter} 
                     filters = {this.props.filters}/>: null}                
                 <NewsList 
-                    currentSourse = {this.state.currentSourse} 
+                    currentSource = {this.state.currentSource} 
                     name = "news-list" 
                     array = {this.state.filterArray} 
                 />

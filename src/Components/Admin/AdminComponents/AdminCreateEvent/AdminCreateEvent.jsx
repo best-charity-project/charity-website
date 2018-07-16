@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
+import {EditorState, convertToRaw, convertFromRaw} from 'draft-js';
+import axios from 'axios';
+import _ from 'lodash';
+
 import AdminDatePicker from '../AdminDatePicker/AdminDatePicker';
 import Navigation from '../../../Navigation/Navigation';
 import NavBar from '../../../NavBar/NavBar';
 import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
 import './AdminCreateEvent.css';
-import { server } from '../../../../api';
+import {server} from '../../../../api';
 import Editor from  "../AdminEditor/AdminEditor";
-import axios from 'axios';
 import AdminSelectSearch from '../AdminSelectSearch/AdminSelectSearch';
-import _ from 'lodash';
 
 class AdminCreateEvent extends Component { 
     state = {
@@ -26,12 +28,12 @@ class AdminCreateEvent extends Component {
         contactPhone:'',
         organization:'',
         website :'',
-        text : '',
+        textEditorState: EditorState.createEmpty(),
         filter:'',
-        getInputTimeEnd : false  
-        
+        getInputTimeEnd : false,
+        deletedImages: []  
     }
-    componentDidMount (){
+    componentWillMount (){
         this.getFiltersList();
         if(this.props.location.state){
             let {title,
@@ -51,69 +53,28 @@ class AdminCreateEvent extends Component {
                 text,
                 _id
                } = this.props.location.state.detail;
+               let textEditorState = EditorState.createWithContent(convertFromRaw(JSON.parse(text)));
                this.setState({
-                   id:_id,
+                   id: _id,
                    dateStart: dateStart,
                    timeEnd: timeEnd,
-                   text:text,
-                   title:title,
-                   getInfo:false,
+                   text: textEditorState,
+                   title: title,
+                   getInfo: false,
                    contactPerson: contactPerson,
-                   contactPhone:contactPhone,
+                   contactPhone: contactPhone,
                    linkParticipation: linkParticipation,
-                   organization:organization,
-                   place:place,
+                   organization: organization,
+                   place: place,
                    speakersArray: speakersArray,
                    website : website,
                    participation: participation,
                    organizers: organizers,
-                   filter:filter
+                   filter: filter
                })
         }
-   
     }
-    getValue = (obj) => {
-        this.setState({title:obj.value});
-      };
-    getStartDate = (str) =>{
-        this.setState({dateStart:str});
-    };
-    getEndDate = (str) =>{
-        this.setState({timeEnd:str});
-    };
-    getCurrentText = (str) =>{
-        this.setState({text:str});
-    };
-    sendEvent = () =>{
-        fetch(`${ server }/events`, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(this.state),
-            })
-            .then(response => response.json())
-            .then(data => {
-                this.setState({
-                    title : '',
-                    text : '',
-                    dateStart : new Date(),
-                    timeEnd : '', 
-                    contactPerson : '',
-                    contactPhone : '',
-                    linkParticipation : '',
-                    organization : '',
-                    place : '',
-                    speakersArray : '',
-                    website :'',
-                    participation : ''
-                })
-                this.props.history.push({
-                    pathname : '/admin-panel/events'
-                }) 
-            } )               
-    }
+    
     render() {
         return(
             <div className="admin-content"> 
@@ -145,7 +106,6 @@ class AdminCreateEvent extends Component {
                             onSelectDate = {this.getStartDate} 
                             label = 'Дата начала '
                             dateFormat = {true}
-                            
                         />
                         <div>
                             {this.state.getInputTimeEnd || this.state.timeEnd ? 
@@ -153,11 +113,12 @@ class AdminCreateEvent extends Component {
                                     date = {!this.state.timeEnd ? this.state.dateStart:this.state.timeEnd } 
                                     onSelectDate = {this.getEndDate} 
                                     dateFormat = {false}
-                                /> : <Button 
-                                        name = "button-admin button-admin-background" 
-                                        label = 'Время окончания' 
-                                        clickHandler = {this.getInputTimeEnd}
-                                    />
+                                /> : 
+                                <Button 
+                                    name = "button-admin button-admin-background" 
+                                    label = 'Время окончания' 
+                                    clickHandler = {this.getInputTimeEnd}
+                                />
                             }
                         </div>
                     </div>                                  
@@ -206,67 +167,70 @@ class AdminCreateEvent extends Component {
                             <ul>
                                 {this.state.speakersArray ?
                                     this.state.speakersArray.map((el,index) => {
-                                        return  <li key = {index}>
-                                                    <span> {el} </span>
-                                                    <Button 
-                                                        name = "event-delete-button" 
-                                                        label = '&#215;' 
-                                                        clickHandler = {(e)=> this.deleteSpeaker(e,index)}
-                                                    />
-                                            </li>
+                                        <li key = {index}>
+                                            <span> {el} </span>
+                                            <Button 
+                                                name = "event-delete-button" 
+                                                label = '&#215;' 
+                                                clickHandler = {(e)=> this.deleteSpeaker(e,index)}
+                                            />
+                                        </li>
                                     })
-                                    :null}
+                                    :null
+                                }
                             </ul>
                         </div>
                     </div>
-                        <div className = 'admin-event-contact-person'>
-                            <TextField 
-                                label = 'Введите контактное лицо: '
-                                value = {this.state.contactPerson}
-                                type = 'text' 
-                                name = 'contactPerson' 
-                                onChangeValue = {this.getContactPerson}
-                            />
-                        
-                        </div>
-                        <div className = 'admin-event-contact-phone'>
-                            <TextField 
-                                label = 'Введите контактный телефон: '
-                                value = {this.state.contactPhone}
-                                type = 'text' 
-                                name = 'contactPhone' 
-                                onChangeValue = {this.getContactPhone}
-                            /> 
-                        </div>
-                        <div className = 'admin-event-organization'>
-                            <TextField 
-                                label = 'Введите организацию : '
-                                value = {this.state.organization}
-                                type = 'text' 
-                                name = 'organization' 
-                                onChangeValue = {this.getOrganization}
-                            />
-                        </div>
-                        <div className = 'admin-event-website'>
-                            <TextField 
-                                label = 'Введите адресс сайта : '
-                                value = {this.state.website}
-                                type = 'url' 
-                                name = 'website' 
-                                onChangeValue = {this.getWebsite}
-                            />
-                        </div>
+                    <div className = 'admin-event-contact-person'>
+                        <TextField 
+                            label = 'Введите контактное лицо: '
+                            value = {this.state.contactPerson}
+                            type = 'text' 
+                            name = 'contactPerson' 
+                            onChangeValue = {this.getContactPerson}
+                        />
+                    </div>
+                    <div className = 'admin-event-contact-phone'>
+                        <TextField 
+                            label = 'Введите контактный телефон: '
+                            value = {this.state.contactPhone}
+                            type = 'text' 
+                            name = 'contactPhone' 
+                            onChangeValue = {this.getContactPhone}
+                        /> 
+                    </div>
+                    <div className = 'admin-event-organization'>
+                        <TextField 
+                            label = 'Введите организацию : '
+                            value = {this.state.organization}
+                            type = 'text' 
+                            name = 'organization' 
+                            onChangeValue = {this.getOrganization}
+                        />
+                    </div>
+                    <div className = 'admin-event-website'>
+                        <TextField 
+                            label = 'Введите адресс сайта : '
+                            value = {this.state.website}
+                            type = 'url' 
+                            name = 'website' 
+                            onChangeValue = {this.getWebsite}
+                        />
+                    </div>
                     <Editor 
-                        text = {this.state.text} 
-                        getCurrentText = {this.getCurrentText}
+                        initialEditorState = {this.state.textEditorState} 
+                        onEditorStateChange = {this.onEditorStateChange}
+                        getDeletedImages = {this.getDeletedImages}
                     />
                     <div className = 'select-wrapper-event'>
-                        {this.state.filters? 
+                        {this.state.filters ? 
                             <AdminSelectSearch 
                                 value = {this.state.filter}
                                 filtersList = {this.state.filters}
                                 getFilter = {this.getFilter}
-                             />:null}                              
+                            /> 
+                            :null
+                        }                              
                     </div>
                     <div className="change-state-buttons">  
                         <Button 
@@ -281,44 +245,57 @@ class AdminCreateEvent extends Component {
                         /> 
                     </div>  
                 </div>
-            </div>          
+            </div>
         )
     }
-
+    getValue = (obj) => {
+        this.setState({title: obj.value});
+    }
+    getStartDate = (str) =>{
+        this.setState({dateStart: str})
+    }
+    getEndDate = (str) =>{
+        this.setState({timeEnd: str})
+    }
+    onEditorStateChange = (editorState) => {
+        this.setState({textEditorState: editorState});
+    }
+    getDeletedImages =  (deletedImages) => {
+        this.setState({deletedImages: deletedImages})
+    }
     getFilter = (str) => {
         this.setState({filter: str});
     }
-      sendEvent= () => {
+    sendEvent= () => {
         let id = ''
         if (this.props.location.state) {
             id = this.props.location.state.detail._id;
         }
+        const sendedBody = this.state;
+        sendedBody.text = JSON.stringify(convertToRaw(this.state.textEditorState.getCurrentContent()));
         axios({
             method: id ? 'put' : 'post',
             url: id ? `${server}/events/` + id : `${server}/events/`,
-            data: this.state,
-                config: { headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                }},
+            data: sendedBody,
+            config: { headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }},
         })
         .then(response => {
             this.props.history.push({
                 pathname: '/admin-panel/events'
             })  
-          })
-          .catch(function (error) {
+        })
+        .catch(function (error) {
             console.log(error);
-          });
-    };
+        });       
+    }
     onCancel = (e) => {
         e.preventDefault();
         this.props.history.push({
             pathname: '/admin-panel/events'
         });
-    };
-    updateEvent = () =>{
-        this.sendUpdateEvent();
     };
     getPlace = (str) => {
         this.setState({place:str.value});
@@ -345,7 +322,7 @@ class AdminCreateEvent extends Component {
        speakersArray.splice(index, 1);
        this.setState({speakersArray:speakersArray});
     }
-     getOrganization = (str) => {
+    getOrganization = (str) => {
         this.setState({organization: str.value});
      };
     getContactPerson = (str) => {

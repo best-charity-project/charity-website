@@ -6,7 +6,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import './AdminNews.css';
 import axios from 'axios';
 import {server} from '../../../../api';
-import TextField from '../../../TextField/TextField'
+import Checkbox from '../../../Checkbox/Checkbox';
 
 class AdminNews extends Component {
     state = {
@@ -16,20 +16,15 @@ class AdminNews extends Component {
         this.setState({
             id:this.props.news._id,
             isPublic:this.props.news.isPublic,
-            title:this.props.news.title,
-            shortText:this.props.news.shortText,
-            fullText:this.props.news.fullText,
-            image:this.props.news.image,
             createdAt: this.props.news.createdAt,
-            sourse: this.props.news.sourse
+            title: this.props.news.title
         })
     }
     render() {
        return (
            <div className="news-admin" id = {this.state.id}>
                 <div className = "news-admin-checkbox">
-                    <input 
-                        type = "checkbox" 
+                    <Checkbox 
                         name = "checkbox-id" 
                         onChange = {this.checkId}
                     />
