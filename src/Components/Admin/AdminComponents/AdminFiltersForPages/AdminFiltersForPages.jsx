@@ -13,16 +13,6 @@ class FiltersForPages extends Component {
         title : '',
         isOpen: false
     }
-    // componentWillReceiveProps(nextProps){
-    //      console.log(this.props , nextProps)
-    //     if(this.props.list!= nextProps.list){
-    //         this.setState({
-    //             filters : nextProps.list
-    //         } , () => {
-    //             console.log(this.state)
-    //         });
-    //     }
-    // }
     componentDidMount(){
         this.setState({
             type:this.props.type,
@@ -38,10 +28,7 @@ class FiltersForPages extends Component {
     getValue = (str) => {
         this.setState({title: str.value});    
     }
-    deleteFilter= (filter) => {
-        let id = filter._id; 
-        this.removeFilter(id);
-    }
+  
     showFilterList = () => {
         this.setState({isOpen: !this.state.isOpen});
     }
@@ -49,7 +36,6 @@ class FiltersForPages extends Component {
         (e.charCode === 13)? this.addFilter(): null;
     }
     render() {
-        console.log(this.props)
         return (
             <div className="filters-for-pages">
                <p className = 'filter-title' onClick = {this.showFilterList}> {this.props.title}</p>
@@ -70,10 +56,12 @@ class FiltersForPages extends Component {
                    <div className = 'filters-list'>
                         <ul>
                             {this.state.filters? this.state.filters.map ( (el, index) => {
-                                
                                 return  <AdminFilter 
-                                     filter = {el} key = {index} 
-                                     deleteHandler = {() => this.deleteFilter(el) }/>
+                                            filter = {el.title} 
+                                            id = {el._sid}
+                                            key = {index} 
+                                            deleteHandler = {() => this.deleteFilter(el)}
+                                        />
                             }
                            
                                 ): null} 
@@ -95,17 +83,16 @@ class FiltersForPages extends Component {
                 }},
             })
             .then(res => {
-                let array = this.state.filters;
-                array.push(res.data);
+                let arrayFilters = this.state.filters;
+                arrayFilters.push(res.data);
                 this.setState ({
-                    filters: array
+                    filters: arrayFilters 
                 })
-            })
-           
-        }
-        
-    }
-    removeFilter = (id) => {
+            })           
+        }        
+    };
+    deleteFilter = (filter) => {
+        let id = filter._id; 
         axios({
             method: 'delete',
             url: `${server}/filters/` + id,
@@ -116,8 +103,10 @@ class FiltersForPages extends Component {
         })
         .then((result) => {
             this.setState({           
-                filters: this.state.filters.filter(item => item._id !== result.data.filter._id)
-            })
+                filters : this.state.filters.filter(item => {
+                    return item._id !== id
+                })
+            });
         });
     }
 }

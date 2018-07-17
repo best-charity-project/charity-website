@@ -4,22 +4,18 @@ import '../AdminFilter/AdminFilter.css';
 
 class AdminFilter extends Component {
     state = {
-        title : '',
-        id : ''
+        title: ''
     }
-   componentDidMount(){
-       this.setState({
-        title : this.props.filter.title,
-        id : this.props.filter._id
-       })
-   }
+    componentDidMount(){
+        {this.props.title ? this.setState({title:this.props.title}) : this.setState({title:''})};
+    };
     render() {
-        let defaultFilter = this.state.title.toLowerCase();
+        let defaultFilter = this.state.title;        
         return (
             <div>
                 {defaultFilter !== 'все' ?
-                    <div  id = {this.state.id} className = 'admin-filter-container'>
-                        <span className = 'admin-filter-title'>{this.state.title}</span>
+                    <div  id = {this.props.id} className = 'admin-filter-container'>
+                        <span className = 'admin-filter-title'>{this.props.filter}</span>
                         <Button
                             name = "button-admin"
                             label = {<span aria-hidden="true">&times;</span>}
@@ -27,8 +23,7 @@ class AdminFilter extends Component {
                         />
                     </div> 
                : null}                
-            </div>
-           
+            </div>           
         )
     }
 }
