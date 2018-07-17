@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import customRendererFn from '../Admin/AdminComponents/AdminEditor/Renderer';
 import '../News/News.css';
-import { server } from '../../../src/api';
+import {server} from '../../../src/api';
 import Menu from '../Menu/Menu';
 import '../FullNews/FullNews.css';
 import Footer from '../Footer/Footer';
