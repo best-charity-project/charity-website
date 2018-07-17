@@ -27,6 +27,10 @@ class ControlledEditor extends Component {
     }
     
     render() {
+        let options = ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'embedded', 'emoji', 'remove', 'history']
+        if(!this.props.isProject) {
+            options.push('image')
+        }
         return (
             <div>
                 <Editor
@@ -35,11 +39,13 @@ class ControlledEditor extends Component {
                     wrapperClassName="wrapper"
                     toolbarClassName="toolbar"
                     editorClassName="editor"
-                    toolbarCustomButtons={[<AdminSlider setReadOnly={this.setReadOnly}/>]} 
+                    toolbarCustomButtons={!this.props.isProject ? [<AdminSlider setReadOnly={this.setReadOnly}/>] : []} 
+
                     localization={{
                         locale: 'ru'
                     }}
                     toolbar={{
+                        options: options, 
                         image: {
                             previewImage: true,
                             uploadCallback: this.uploadImageCallBack,

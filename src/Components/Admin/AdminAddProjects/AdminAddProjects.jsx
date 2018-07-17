@@ -302,6 +302,7 @@ class AdminAddProjects extends Component {
                             initialEditorState = {this.state.fullTextEditorState} 
                             onEditorStateChange = {this.onEditorStateChange}
                             getDeletedImages = {this.getDeletedImages}
+                            isProject = {true}
                         />
                     <AdminValidationWindow 
                         className={this.onCorrectFullText() ? "incorrect-value-container hidden" : "incorrect-value-container"}
