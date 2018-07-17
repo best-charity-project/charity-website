@@ -32,7 +32,6 @@ class FiltersForPages extends Component {
     addFilter = () => {
         if(this.state.title){        
             this.createFilter();
-            this.props.getNewFilterList();
             this.setState({title: ''});
         }        
     }
@@ -50,6 +49,7 @@ class FiltersForPages extends Component {
         (e.charCode === 13)? this.addFilter(): null;
     }
     render() {
+        console.log(this.props)
         return (
             <div className="filters-for-pages">
                <p className = 'filter-title' onClick = {this.showFilterList}> {this.props.title}</p>
@@ -94,9 +94,16 @@ class FiltersForPages extends Component {
                     'Content-Type': 'application/json'
                 }},
             })
+            .then(res => {
+                let array = this.state.filters;
+                array.push(res.data);
+                this.setState ({
+                    filters: array
+                })
+            })
+           
         }
-      
-
+        
     }
     removeFilter = (id) => {
         axios({
@@ -111,7 +118,7 @@ class FiltersForPages extends Component {
             this.setState({           
                 filters: this.state.filters.filter(item => item._id !== result.data.filter._id)
             })
-        })
+        });
     }
 }
 

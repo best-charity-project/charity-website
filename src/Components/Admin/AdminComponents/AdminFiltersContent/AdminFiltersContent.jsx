@@ -15,17 +15,6 @@ class AdminFiltersContent extends Component {
     componentDidMount(){
         this.getFiltersList();       
     }
-    shouldComponentUpdate(nextProps, nextState){
-        console.log(this.state)
-        console.log(nextState)
-        if(this.state != nextState){
-            return true;
-        }
-        
-        // if(this.props.list != nextprops.list){
-        //     this.setState ({filters:nextprops.list})
-        // }
-    }
     getFiltersList = () => {  
         axios({
             method: 'get',
@@ -36,30 +25,29 @@ class AdminFiltersContent extends Component {
         })     
       }
     getNewFilterList = () => {
-        this.setState({a:false})
-        setTimeout(this.getFiltersList,10);
+        this.getFiltersList();
       }
     render() {
         console.log(this.state)
         return (
             <div className="filters-content">
-            {this.state.a ? 
-              <FiltersForPages title = 'События' type = 'events' list = {this.state.filtersEvents} getNewFilterList = {this.getNewFilterList} />
-            //  {this.state.filtersNews ? <FiltersForPages title = 'Новости' type = 'news' list = {this.state.filtersNews} getNewFilterList = {this.getNewFilterList} /> : null}
-            //  {this.state.filtersProjects ? <FiltersForPages title = 'Проекты' type = 'projects' list = {this.state.filtersProjects} getNewFilterList = {this.getNewFilterList} /> :null}
-             : null    
-        }
+              {this.state.filtersEvents ?<FiltersForPages title = 'События' type = 'events' list = {this.state.filtersEvents} getNewFilterList = {this.getNewFilterList} />: null}
+            {/* //  {this.state.filtersNews ? <FiltersForPages title = 'Новости' type = 'news' list = {this.state.filtersNews} getNewFilterList = {this.getNewFilterList} /> : null}
+            //  {this.state.filtersProjects ? <FiltersForPages title = 'Проекты' type = 'projects' list = {this.state.filtersProjects} getNewFilterList = {this.getNewFilterList} /> :null} */}
                
             </div>  
         )
     }
     createFiltersLists = (res) => {
+        alert('rfrf')
         let filterList = res.data.filterList;
+        console.log(filterList)
         let filtersEvents = _.filter(filterList , function(el){
             if(el.type === 'events'){
                 return el
             }
         })
+        console.log(filtersEvents)
         let filtersNews = _.filter(filterList , function(el){
             if(el.type === 'news'){
                 return el
