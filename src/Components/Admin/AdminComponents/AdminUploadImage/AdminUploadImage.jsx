@@ -37,7 +37,7 @@ class AdminUploadImage extends Component {
                     </div>
                 </div>  
                 <div className = "position-cropper">
-                    <div>&nbsp;</div>
+                    {<div>&nbsp;</div>}
                     <div>
                         <Cropper 
                             src = {this.state.url}

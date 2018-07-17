@@ -1,41 +1,77 @@
 import React, {Component} from 'react';
-import {Editor} from 'react-draft-wysiwyg';
-import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
-import {ContentState, convertToRaw} from 'draft-js';
+import {Editor} from 'react-draft-wysiwyg'; 
+import {EditorState, convertToRaw} from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import {server} from '../../../../api';
 import axios from 'axios';
+
+import {server} from '../../../../api';
+import AdminSlider from './AdminSlider';
+import customBlockRenderFunc from './Renderer';
 import './AdminEditor.css';
 
 class ControlledEditor extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            editorContent: ''
-        }
+    state = {
+        editorState: EditorState.createEmpty(),
+        isReadOnly : false
+    }
+
+    setEditorReference = (ref) => {
+        this.currentEditor = ref
     }
 
     componentDidMount() {
-        this.props.text ? 
-            this.setState({ editorContent: this.getInitialHTML(this.props.text)}) :
-            this.setState({ editorContent: '' }) 
+        // console.log('AdminEditor.componenDidMount', convertToRaw(this.props.initialEditorState.getCurrentContent()))
+        this.props.initialEditorState ? 
+            this.setState({editorState: this.props.initialEditorState}) :
+            this.setState({editorState: EditorState.createEmpty()}) 
     }
-    componentWillReceiveProps(curprops, nextprops){
-        if(curprops.text!=nextprops.text && !this.state.editorContent){
-            this.setState({ editorContent: this.getInitialHTML(curprops.text)})
+    
+    render() {
+        let options = ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'embedded', 'emoji', 'remove', 'history']
+        if(!this.props.isProject) {
+            options.push('image')
         }
+        return (
+            <div>
+                <Editor
+                    editorRef = {this.setEditorReference}
+					editorState={this.state.editorState}
+                    wrapperClassName="wrapper"
+                    toolbarClassName="toolbar"
+                    editorClassName="editor"
+                    toolbarCustomButtons={!this.props.isProject ? [<AdminSlider setReadOnly={this.setReadOnly}/>] : []} 
+
+                    localization={{
+                        locale: 'ru'
+                    }}
+                    toolbar={{
+                        options: options, 
+                        image: {
+                            previewImage: true,
+                            uploadCallback: this.uploadImageCallBack,
+                            defaultSize: {
+                                height: 'auto',
+                                width: '100%',
+                            },
+                        }, 
+						blockType: {
+							inDropdown: true,
+							options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'],
+						}
+                    }}
+                    onEditorStateChange = {this.onChange}
+                    customBlockRenderFunc = {this.customBlockRenderFuncWrap}
+                    readOnly = {this.state.isReadOnly}
+                />
+            </div>
+        )
+    } 
+    onChange = (editorState) => {
+        this.setState({editorState: editorState}, () => this.props.onEditorStateChange(editorState))
     }
-    getInitialHTML = (str) => {
-        const contentBlock = htmlToDraft(str);
-        if (contentBlock.contentBlocks !== null) {
-            const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks, contentBlock.entityMap);
-            return convertToRaw(contentState);
-        }
-    }
-    onEditorChange =(contentState) => {
-        let text = draftToHtml(contentState)
-        this.props.getCurrentText(text)
+
+    customBlockRenderFuncWrap = (block) => {
+        return customBlockRenderFunc(block, this.onChange, this.props.getDeletedImages, this.setReadOnly, true)
     }
 
     uploadImageCallBack = (file) => {
@@ -49,36 +85,10 @@ class ControlledEditor extends Component {
         })
     }
 
-    render() {
-        const { editorContent } = this.state;
-        return (
-            <div>
-                <Editor
-					contentState={editorContent}
-                    wrapperClassName="wrapper"
-                    toolbarClassName="toolbar"
-                    editorClassName="editor"
-                    localization={{
-                        locale: 'ru'
-                    }}
-                    toolbar={{
-                        image: {
-                            previewImage: true,
-                            uploadCallback: this.uploadImageCallBack,
-                            defaultSize: {
-                                height: 'auto',
-                                width: '100%',
-                            },
-						},
-						blockType: {
-							inDropdown: true,
-							options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'],
-						}
-                    }}
-                    onChange={this.onEditorChange}
-                />
-            </div>
-        )
+    setReadOnly = (isReadOnly, callback) => {
+        this.setState({
+            isReadOnly : isReadOnly
+        }, () => {if (callback) {callback()}})
     }
 }
 export default ControlledEditor;

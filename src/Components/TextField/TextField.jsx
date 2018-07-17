@@ -8,8 +8,6 @@ class TextField extends Component {
 		value:'',
 		error:false,
 	}
-	
-
 	valueChange = (e) => {
 		const newValue = e.target.value;
 		this.setState({value:e.target.value}, () =>{
@@ -20,13 +18,13 @@ class TextField extends Component {
 	}
 	validateField = (newValue) => {
 		let resultValidation = /[0-9a-z_]+@[0-9a-z_]+\.[a-z]{2,5}/i.test(newValue);
-		this.setState({error:resultValidation})
+		this.setState({error:resultValidation});
 	}
     render() {
     	return(
  			<div className = 'container-for-input'> 
- 				{this.props.label? <label htmlFor = {this.props.id}>{this.props.label}</label>: null}
-					<input  
+				{this.props.label? <label htmlFor = {this.props.id}>{this.props.label}</label>: null}
+				<input
 					onKeyPress = {this.props.onKeyPress}
 					value = {this.props.value}
 					type = {this.props.type} 
@@ -36,7 +34,7 @@ class TextField extends Component {
 					placeholder = {this.props.placeholder} 
 					onChange = {this.valueChange}
 					onFocus = {this.props.onFocusInput} 
-					/> 
+				/>
 				{((this.props.sendToValidation)&&!(this.state.error))? <Error/> : null}
 			</div>
 		)

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import {Editor, EditorState, convertFromRaw} from 'draft-js';
 import moment from 'moment';
+import customRendererFn from '../Admin/AdminComponents/AdminEditor/Renderer';
 import ProjectGallery from '../../Components/ProjectGallery/ProjectGallery';
 import ProjectDefaultImg from '../../Assets/AssetsSvg/project-default.svg';
 
@@ -22,21 +24,28 @@ class Project extends Component {
                             </div>
                             <div className="project-address">{this.props.content.address}</div>
                             <div className="project-desc">
-                                <span dangerouslySetInnerHTML= {{__html: this.props.content.fullText}}></span>
+                                {this.props.content.fullText ?        
+                                    <Editor 
+                                        editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.content.fullText)))} 
+                                        readOnly={true} 
+                                        blockRendererFn={customRendererFn}
+                                    /> :
+                                    null 
+                                }
                             </div>
                         </div>
                         {<ProjectGallery content={this.props.content} />}    
                         <div className="contact-info">
-                            <p>Контактны:</p>
+                            <p>Контакты:</p>
                             <p>{this.props.content.organization}</p>
                             <p>{this.props.content.headArray.map((item, i) => {
-                                    return <div><p key={i}>{item}</p></div>     
+                                    return <span key={i}>{item + " "}</span>     
                                     })
                                 }, {this.props.content.contactsArray.map((item, i) => {
-                                    return <p key={i}>{item}</p>     
+                                    return <span className="contact-phone" key={i}>{item + " "}</span>     
                                     })
                                 }</p>
-                            <p>{this.props.content.site}</p>
+                            <a className="contact-link" href={this.props.content.site} target="_blank">{this.props.content.site}</a>
                         </div>
                     </div>
                 </div>

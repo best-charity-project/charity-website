@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
 import {withRouter} from "react-router-dom";
-import moment from 'moment';
 import axios from 'axios';
-import _ from 'lodash';
+import {EditorState, convertToRaw, convertFromRaw} from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+
 import {server} from '../../../api';
 import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';
 import TextField from '../../TextField/TextField';
@@ -13,56 +14,57 @@ import Navigation from '../../Navigation/Navigation';
 import NavBar from '../../NavBar/NavBar';
 import AdminPreview from '../AdminComponents/AdminPreview/AdminPreview';
 import AdminSelectSearch from '../../Admin/AdminComponents/AdminSelectSearch/AdminSelectSearch';
-
 import './AdminAddNews.css';
 
 class AdminAddNews extends Component {
     state = {
         title: '',
         shortText: '',
-        fullText: '',
+        fullTextEditorState: EditorState.createEmpty(),
         filter: '',
         isPublic: false,
         imageData: '',
         isPreview: false,
         image: '',
         date: '',
-        value: ''
+        value: 0,
+        deletedImages: []
     }
     cropperRef = React.createRef();
 
     componentWillMount() {
         this.getFiltersListByType('news');
         if (this.props.location.state) {
-            let infoAboutNews = this.props.location.state.detail;
-
+            let fullTextEditorState = EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.location.state.detail.fullText)));
+            // console.log('AdminAddNews.componentWillMount', convertToRaw(fullTextEditorState.getCurrentContent()))
             this.setState({
                 title: this.props.location.state.detail.title,
                 shortText: this.props.location.state.detail.shortText,
-                fullText: this.props.location.state.detail.fullText,
+                fullTextEditorState: fullTextEditorState,
                 isPublic: this.props.location.state.detail.isPublic,
                 image: this.props.location.state.detail.image,
                 filter: this.props.location.state.detail.filter,
                 date: this.props.location.state.detail.createdAt,
-                value: this.props.location.state.detail.shortText.length
+                value: this.props.location.state.detail.shortText.length,
             })
         }
     }
 
     render() {
+        // console.log('AdminAddNews.render', convertToRaw(this.state.fullTextEditorState.getCurrentContent()))
         return (
             <div className="admin-content">
                 <Navigation onLogout={this.onLogout} />
                 <NavBar />
                 {!this.state.isPreview ? 
-                    <form className = "form-create-news" encType="multipart/form-data" method="post">
+                    <div className = "create-news">
                         <div className = "news-status">
                             <span>Статус новости: {this.state.isPublic ? " опубликована" : " черновик"}</span>
                             <Route render={({history}) => (
                                 <Button 
-                                    label={"Опубликовать"}
+                                    label={this.state.isPublic ? "Отменить публикацию" : "Опубликовать"}
                                     name = "button-admin"
-                                    clickHandler = {this.onPublish}
+                                    clickHandler = {this.onSaveChangeStatus}
                                 />
                             )} />
                         </div>
@@ -111,27 +113,21 @@ class AdminAddNews extends Component {
                         <div className="text-news">
                             <div className="full-text-news">Полное описание:</div>
                             <ControlledEditor 
-                                text = {this.state.fullText} 
-                                getCurrentText = {this.getCurrentTextFull}
-                            /> 
+                                initialEditorState = {this.state.fullTextEditorState} 
+                                onEditorStateChange = {this.onEditorStateChange}
+                                getDeletedImages = {this.getDeletedImages}
+                            />
                         </div>
                         <hr />
                         <div className="text-news">
-                            <div className = "news-source">
-                                <label>Источник:</label>
-                            </div>
-                            <div>
-                                {this.state.filters? 
-                                    <AdminSelectSearch 
-                                        value = {this.state.filter}
-                                        filtersList = {this.state.filters}
-                                        getFilter = {this.getFilter}
-                                    />:null}
-                              
-                            </div>
-                        </div>
-                        <div className = 'button-info'>
-                            <span>* При нажатии на кнопку "Сохранить" новость сохраняется как черновик</span>
+                            {this.state.filters ? 
+                                <AdminSelectSearch 
+                                    value = {this.state.filter}
+                                    filtersList = {this.state.filters}
+                                    getFilter = {this.getFilter}
+                                />:
+                                null
+                            }
                         </div>
                         <div className="admin-buttons">
                             <Route render={({history}) => (
@@ -143,16 +139,16 @@ class AdminAddNews extends Component {
                             )} />
                             <Route render={({history}) => (
                                 <Button 
-                                    label={"Опубликовать"}
+                                    label={this.state.isPublic ? "Отменить публикацию" : "Опубликовать"}
                                     name = "button-admin"
-                                    clickHandler = {this.onPublish}
+                                    clickHandler = {this.onSaveChangeStatus}
                                 />
                             )} />
                             <Route render={({history}) => (
                                 <Button 
-                                    label={"Сохранить"}
+                                    label={this.state.isPublic ? "Сохранить" : "Сохранить без публикации"}
                                     name = "button-admin"
-                                    clickHandler = {this.onDraft}
+                                    clickHandler = {this.checkText}
                                 />
                             )} />
                             <Route render={({history}) => (
@@ -163,17 +159,18 @@ class AdminAddNews extends Component {
                                 />
                             )} />
                         </div>
-                    </form>  : 
+                    </div>  : 
 
                     <AdminPreview 
                         imageData = {this.state.imageData}
                         image = {this.state.image}
                         title = {this.state.title}
-                        fullText = {this.state.fullText}
-                        onPublish = {this.onPublish}
-                        onDraft = {this.onDraft}
+                        fullTextEditorState = {this.state.fullTextEditorState}
+                        onSaveChangeStatus = {this.onSaveChangeStatus}
+                        deleteImages = {this.deleteImages}
                         getNewStatePreview = {this.getNewStatePreview}
                         date = {this.state.date}
+                        isPublic = {this.state.isPublic}
                     />
                 }
             </div>
@@ -182,68 +179,111 @@ class AdminAddNews extends Component {
     onCropImage = (image) => {
         this.setState({imageData: image});
     }
+
     onChangeValue = (object) => {
         this.setState({title: object.value});
     }
-    getCurrentTextFull = (str) => {
-        this.setState({fullText: str});
+
+    onEditorStateChange = (editorState) => {
+        // console.log('AdminAddNews.onEditorStateChange', convertToRaw(editorState.getCurrentContent()))
+        this.setState({fullTextEditorState: editorState});
     }
+
+    getDeletedImages =  (deletedImages) => {
+        this.setState({deletedImages: deletedImages})
+    }
+
     getCurrentTextShort = (event) => {
         this.setState({
             shortText: event.target.value,
             value: event.target.value.length
         })
-    } 
+    }
+
     getNewStatePreview = () => {
         this.setState({
             isPreview: false
         });
     }
+
     getFilter = (str) => {
-        {str.length > 0 ? this.setState({filter : str}): null };
+        str.length > 0 ? 
+            this.setState({filter: str}):
+            null
     }
+
     checkText = () => {
-        if (!this.state.shortText) {
-            let newText = this.state.fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
-            newText = (newText.slice(0, 297) + '...').replace(/\n/, '');
-            this.setState({shortText: newText}, this.sendNews);
-        } else {
-            this.sendNews();
+        if (this.state.fullTextEditorState) {
+            if (!this.state.shortText) {
+                let fullText = draftToHtml(convertToRaw(this.state.fullTextEditorState.getCurrentContent()))
+                let newText = fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
+                if (newText.length > 300) {
+                    newText = (newText.slice(0, 297) + '...').replace(/\n/, '')
+                } else {
+                    newText = newText.replace(/\n/, '')
+                }
+                this.setState({shortText: newText}, this.deleteImages)
+            } else {
+                this.deleteImages()
+            }
         }
     }
-    onPreview = (e) => {
-        e.preventDefault()
+
+    onPreview = () => {
         this.setState({
             isPreview: true
         });
     }
-    onPublish = (e) => {
-        e.preventDefault()
-        this.setState({isPublic: true}, this.checkText);
+
+    onSaveChangeStatus = () => {
+        this.setState({isPublic: !this.state.isPublic}, this.checkText)
     }
-    onDraft = (e) => {
-        e.preventDefault()
-        this.setState({isPublic: false}, this.checkText);
+
+    onPublish = () => {
+        this.setState({isPublic: true}, this.checkText)
     }
-    onCancel = (e) => {
-        e.preventDefault();
+
+    onDraft = () => {
+        this.setState({isPublic: false}, this.checkText)
+    }
+
+    onCancel = () => {
         this.setState({
             title: '',
             shortText: '',
-            fullText: '',
-            filter:'',
+            fullTextEditorState: EditorState.createEmpty(),
             isPublic: false,
             imageData: '',
-            image: ''
+            image: '',
+            filter: ''
         }) 
         this.props.history.push({
             pathname: '/admin-panel/news'
         });
     }
+
+    deleteImages = () => {
+        if(this.state.deletedImages.length) {
+            axios({
+                method: 'delete',
+                url: `${server}/uploadGalleryImage/`,
+                data: this.state.deletedImages,
+                config: {headers: {'Content-Type': 'application/json; charset=UTF-8'}},
+            })
+            .then(response => this.sendNews())
+            .catch(function (error) {
+                console.log(error);
+            });  
+        } else {
+            this.sendNews()
+        }
+    }
+
     sendNews = () => {
         let formData  = new FormData();
         Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
-        let id = '';
+        formData.append('fullText', JSON.stringify(convertToRaw(this.state.fullTextEditorState.getCurrentContent())))
+        let id = ''
         if (this.props.location.state) {
             id = this.props.location.state.detail._id;
         }
@@ -258,7 +298,7 @@ class AdminAddNews extends Component {
                 title: '',
                 filter:'',
                 shortText: '',
-                fullText: '',
+                fullTextEditorState: EditorState.createEmpty(),
                 isPublic: false,
                 imageData: '',
                 image: ''
@@ -266,27 +306,27 @@ class AdminAddNews extends Component {
             this.props.history.push({
                 pathname: '/admin-panel/news'
             })  
-          })
-          .catch(function (error) {
+        })
+        .catch(function (error) {
             console.log(error);
-          });
+        });
     }
+
     deleteImage = () => {
         this.setState({
             imageData: '',
             image: ''
         })   
     }
-    //transfer to another file
+
     getFiltersListByType = (type) => {
         axios({
             method: 'get',
             url: `${ server }/filters?type=${type}`
-
         })
-        .then(res =>{
+        .then(res => {
             this.setState({
-                filters:res.data.filterList,
+                filters: res.data.filterList,
             })
         })     
     }

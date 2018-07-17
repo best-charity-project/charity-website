@@ -70,7 +70,8 @@
     height: 25px;
 }
 
-.button-publish-news {
+.button-publish-news,
+.button-publish-projects {
     cursor: pointer;
     background-color: #e8e6e2;
     border-radius: 15px;
@@ -80,7 +81,8 @@
     border: 1px solid #969696;
     outline: none;
  }
-.button-not-publish-news {
+.button-not-publish-news,
+.button-not-publish-projects {
     cursor: pointer;
     outline: none;
     background-color: #e8e6e2;
@@ -90,34 +92,30 @@
     padding: 5px 10px;
     min-width: 180px;
 }
-.button-publish-projects {
-    cursor: pointer;
-    outline: none;
-    background-color: #e8e6e2;
-    border-radius: 15px;
-    padding: 5px 10px;
-    min-width: 100px;
-    color: #cccccc;
-    border: 1px solid #cccccc;
-}
-.button-not-publish-projects {
-    cursor: pointer;
-    outline: none;
-    background-color: #e8e6e2;
-    color: #4CAF50;
-    border: 1px solid #4CAF50;
-    border-radius: 15px;
-    padding: 5px 10px;
-    min-width: 100px;
-}
-.delete-news {
+
+.delete-news,
+.delete-projects {
     border-bottom: 1px solid #d3d3d3;
     padding-left: 20px;
     align-items: center;
     line-height: 2.5;
     outline: none;
 }
-.delete-news:disabled {
+.delete-news:disabled,
+.delete-projects:disabled {
     background-color: #e8e6e2;
     border-top-color: transparent;
 }
+.carousel .delete-slider {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    height: 40px;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    border: none;
+    position: absolute;
+    top: 0;
+}
+

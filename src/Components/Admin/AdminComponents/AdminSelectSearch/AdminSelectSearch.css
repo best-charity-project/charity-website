@@ -1,4 +1,3 @@
-
 .select-component .container-for-input{
     display: inline-block;
 }
@@ -54,4 +53,18 @@
 }
 #my-select{
     width: 500px;
+}
+.input-buttom-select
+ .container-for-input input{
+     width:200px;
+    margin-left: 15px;
+}
+#my-select 
+.rc-select-selection__rendered{
+    margin-top: 5px;
+}
+.select-component
+.source-select{
+font-weight: 600;
+margin-right: 15px;
 }
