@@ -4,6 +4,9 @@ import moment from 'moment';
 import {NavLink} from "react-router-dom";
 import FullNews from '../FullNews/FullNews';
 import EventModal from '../EventModal/EventModal';
+import {Editor, EditorState, convertFromRaw} from 'draft-js';
+
+import customRendererFn from '../Admin/AdminComponents/AdminEditor/Renderer';
 
 class News extends Component {
     state = {
@@ -41,7 +44,16 @@ class News extends Component {
                         <div onClick = {this.getEventWindow}>
                             <p className = 'news-date'>{moment(this.props.event.dateStart).format('DD MMMM YYYY')} </p>
                             <p className = 'news-title'>{this.props.event.title} </p>
-                            <span className = 'news-text' dangerouslySetInnerHTML={{__html: this.props.event.text}}/>
+                            <div className = 'news-text' >
+                            {this.props.event.text ?         
+                            <Editor 
+                                editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.event.text)))} 
+                                readOnly={true} 
+                                blockRendererFn={customRendererFn}
+                            /> :
+                            null 
+                        }
+                        </div>
                             <div className={this.state.isOpen ? 'overlay' : 'overlay hidden'} onClick = {this.closeModalWindow}>
                                 <div className="modal-event-field">
                                    <EventModal event = {this.props.event} closeModalWindow = {this.closeModalWindow}/>

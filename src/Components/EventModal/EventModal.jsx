@@ -11,6 +11,7 @@ import Button from '../Button/Button';
 class EventModal extends Component {
 
     render() {
+        console.log(this.props)
         let date = moment(this.props.event.dateStart).format('DD MMMM ');
         let month = date.split(' ')[1];
         return (
@@ -41,17 +42,18 @@ class EventModal extends Component {
                         {this.props.event.participation ? <p className = 'tickets-event-modal'> <span>Билеты: </span>{this.props.event.linkParticipation ? <a href = {this.props.event.linkParticipation } target="_blank" > {this.props.event.participation }</a>: this.props.event.participation }  </p> :null}
                     </div>                
                     <div className = 'content-event-modal'>
-                        {this.state.news.fullText ?         
+                        {this.props.event.text ?         
                             <Editor 
-                                editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(this.state.news.fullText)))} 
+                                editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.event.text)))} 
                                 readOnly={true} 
                                 blockRendererFn={customRendererFn}
                             /> :
                             null 
                         }
                     </div>
-                    {this.props.event.speakersArray ? 
-                    <div className = 'speakers-event-modal'>                
+                    {this.props.event.speakersArray.length ? 
+                    <div className = 'speakers-event-modal'> 
+                                   
                         <p> Докладчики:</p>
                         <ul>
                             {this.props.event.speakersArray.map((item,index) => {
@@ -77,7 +79,7 @@ class EventModal extends Component {
                     <div
                         onClick = {this.closeWindow}
                         className = 'button-event button-event-ticket'>
-                        <a href = {this.props.event.linkParticipation} target="_blank" >{(/^[\d]+$/g).test(this.props.event.participation) ? 'Купить': 'Записаться'}</a>
+                        <a href = {this.props.event.linkParticipation} target="_blank" >{this.props.event.participation.match(/[0-9]/) ? 'Купить билет': 'Записаться'}</a>
                      </div>: null}
                     <Button 
                         label = 'Закрыть окно' 

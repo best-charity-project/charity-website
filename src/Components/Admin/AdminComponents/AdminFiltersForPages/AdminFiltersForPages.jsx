@@ -8,21 +8,26 @@ import '../AdminFiltersForPages/AdminFiltersForPages.css';
 
 class FiltersForPages extends Component {
     state = {
-        type:'',
-        filters: {},
-        title:'',
+        type : '',
+        filters : [],
+        title : '',
         isOpen: false
     }
+    // componentWillReceiveProps(nextProps){
+    //      console.log(this.props , nextProps)
+    //     if(this.props.list!= nextProps.list){
+    //         this.setState({
+    //             filters : nextProps.list
+    //         } , () => {
+    //             console.log(this.state)
+    //         });
+    //     }
+    // }
     componentDidMount(){
         this.setState({
             type:this.props.type,
             filters: this.props.list,
         })
-    }
-    componentWillReceiveProps(curprops, nextprops){
-        if( curprops.list != this.state.filters){
-            this.setState({filters:curprops.list })
-        }
     }
     addFilter = () => {
         if(this.state.title){        
@@ -64,10 +69,13 @@ class FiltersForPages extends Component {
                    </div>
                    <div className = 'filters-list'>
                         <ul>
-                            {this.state.filters? this.state.filters.map ( (el, index) =>
-                                <AdminFilter 
-                                    filter = {el} key = {index} 
-                                    deleteHandler = {() => this.deleteFilter(el) }/>
+                            {this.state.filters? this.state.filters.map ( (el, index) => {
+                                
+                                return  <AdminFilter 
+                                     filter = {el} key = {index} 
+                                     deleteHandler = {() => this.deleteFilter(el) }/>
+                            }
+                           
                                 ): null} 
                         </ul>
                     </div>
@@ -100,9 +108,9 @@ class FiltersForPages extends Component {
             }}
         })
         .then((result) => {
-            this.setState({            
+            this.setState({           
                 filters: this.state.filters.filter(item => item._id !== result.data.filter._id)
-            }) 
+            })
         })
     }
 }
