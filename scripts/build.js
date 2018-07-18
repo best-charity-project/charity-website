@@ -103,6 +103,7 @@ measureFileSizesBeforeBuild(paths.appBuild)
 // Create the production build and print the deployment instructions.
 function build(previousFileSizes) {
   console.log('Creating an optimized production build...');
+  console.log(process.env.NODE_ENV)
 
   let compiler = webpack(config);
   return new Promise((resolve, reject) => {
