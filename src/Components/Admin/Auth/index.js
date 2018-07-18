@@ -8,6 +8,8 @@ const getToken = () => window.sessionStorage.getItem('token');
 
 const removeToken = () => window.sessionStorage.removeItem('token');
 
+console.log(process.env.NODE_ENV)
+
 const signInUser = credentials => {
     return fetch(`${ server }/auth`, {
         method: 'POST',
