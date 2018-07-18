@@ -7,31 +7,29 @@ import _ from 'lodash';
 
 class AdminFiltersContent extends Component {
     state = {
-        filtersProjects : [],
+        filtersEvents : [],
         filtersNews : [],
-        filtersProjects: []
+        filtersProjects : []
     }
     componentDidMount(){
         this.getFiltersList();       
-    }
-
+    };
     render() {
-        console.log(this.state)
         return (
-            <div className="filters-content">
-                {this.state.filtersEvents ?
+            <div className = "filters-content">
+                {this.state.filtersEvents.length ?
                     <FiltersForPages
                         title = 'События' 
                         type = 'events' 
                         list = {this.state.filtersEvents} 
-                        /> : null}
-                {this.state.filtersNews ? 
+                    /> : null}
+                {this.state.filtersNews.length  ? 
                     <FiltersForPages 
                         title = 'Новости' 
                         type = 'news' 
                         list = {this.state.filtersNews}
                     /> : null}
-                {this.state.filtersProjects ? 
+                {this.state.filtersProjects.length  ? 
                     <FiltersForPages 
                         title = 'Проекты' 
                         type = 'projects' 
@@ -46,7 +44,7 @@ class AdminFiltersContent extends Component {
             method: 'get',
             url: `${ server }/filters`,
         })
-        .then(res =>this.createFiltersLists(res));     
+        .then(res => this.createFiltersLists(res));     
       };
     createFiltersLists = (res) => {
         let filtersList = res.data.filterList;
@@ -70,6 +68,6 @@ class AdminFiltersContent extends Component {
             filtersNews:filtersNews,
             filtersProjects:filtersProjects
         });
-    }
+    };
 }
 export default AdminFiltersContent;

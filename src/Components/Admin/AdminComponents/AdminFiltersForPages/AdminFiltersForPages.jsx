@@ -14,11 +14,12 @@ class FiltersForPages extends Component {
         isOpen: false
     }
     componentDidMount(){
-        this.setState({
-            type:this.props.type,
-            filters: this.props.list,
-        })
-    }
+        this.props ? 
+            this.setState({
+                type : this.props.type,
+                filters : this.props.list,
+        }): null
+    };
     addFilter = () => {
         if(this.state.title){        
             this.createFilter();
@@ -27,13 +28,12 @@ class FiltersForPages extends Component {
     }
     getValue = (str) => {
         this.setState({title: str.value});    
-    }
-  
+    };  
     showFilterList = () => {
         this.setState({isOpen: !this.state.isOpen});
-    }
+    };
     onKeyPress  = (e) => {
-        (e.charCode === 13)? this.addFilter(): null;
+        (e.charCode === 13) ? this.addFilter(): null;
     }
     render() {
         return (
@@ -55,16 +55,17 @@ class FiltersForPages extends Component {
                    </div>
                    <div className = 'filters-list'>
                         <ul>
-                            {this.state.filters? this.state.filters.map ( (el, index) => {
-                                return  <AdminFilter 
-                                            filter = {el.title} 
-                                            id = {el._sid}
-                                            key = {index} 
-                                            deleteHandler = {() => this.deleteFilter(el)}
-                                        />
-                            }
-                           
-                                ): null} 
+                            {this.state.filters.length? this.state.filters.map( (el, index) => {
+                                if(el.title !== 'все'){
+                                    return  <AdminFilter
+                                                filter = {el.title} 
+                                                id = {el._id}
+                                                key = {index} 
+                                                deleteHandler = {() => this.deleteFilter(el)}
+                                            />
+                                }                                
+                            }                           
+                            ): null} 
                         </ul>
                     </div>
                 </div> : null}               
