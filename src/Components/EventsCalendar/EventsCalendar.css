@@ -1,0 +1,30 @@
+.Calendar{
+    margin-left: 250px;
+    /* width: 40%; */
+    width: 900px; 
+}
+/* #your-custom-ID .fc-widget-content .fc-scroller .fc-day-grid-container{
+    height: 600px;
+} */
+
+#calendar .fc-toolbar {
+    background-color: #fff;
+    padding: 20px;
+}
+.fc-view-container{
+    margin-top: 60px;
+}
+#calendar .fc-state-active, .fc-state-down{
+    background-color: #459369;
+    color: #fff;
+}
+#calendar .fc-state-default {
+    background-color: #459369;
+    padding: 0;
+}
+#calendar .fc-icon .fc-icon-left-single-arrow{
+    background-color: red;
+    display: block;
+    height: 100%;
+    margin: 0;
+}

@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
 import EventsAside from '../EventsAside/EventsAside';
 import EventsList from '../EventsList/EventsList';
+import EventsCalendar from '../EventsCalendar/EventsCalendar'
 import './EventsListAndAside.css'
 import { server } from "../../api";
 import axios from 'axios';
 import _ from 'lodash';
-
+import Button from '../Button/Button';
 class EventsListAndAside extends Component {
     state = {
-        currentSource:'вce'
+        currentSource:'вce',
+        calendarPage : false,
     }
     componentDidMount(){
         this.getEventsList();
@@ -17,20 +19,32 @@ class EventsListAndAside extends Component {
     getCurrentFilter = (str) =>{
         (str ==='все') ? this.filterArray('') : this.filterArray(str);
     };
+    getCalendar = () => {
+        this.setState({calendarPage : !this.state.calendarPage});
+    };
     render() {
         return (
             <div className = 'events-aside-list'>
+                <Button 
+                    label = 'Календарь'
+                    name = 'calendar-event'
+                    clickHandler = {this.getCalendar}
+                />
+                
                 {this.state.filters ? 
                     <EventsAside 
                         filters = {this.state.filters}
                         getCurrentFilter = {this.getCurrentFilter} 
                         
                     />: null}
-                <EventsList 
+                    {!this.state.calendarPage ?   <EventsList 
                     currentSource = {this.state.currentSource} 
                     name = "events-list" 
                     array = {this.state.filterArray}
-                /> 
+                /> :  <EventsCalendar 
+                            array = {this.state.filterArray}
+                        /> }
+              
             </div>
         ) 
     }

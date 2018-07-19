@@ -2,3 +2,6 @@
     flex-grow: 1;
     display: flex;
 }
+.calendar-event{
+    position: absolute;
+}
