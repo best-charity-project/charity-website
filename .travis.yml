@@ -4,6 +4,7 @@ node_js:
 cache:
   -node_modules
 install: npm install
+script: npm build 
 deploy:
   provider: heroku 
   app: "charity-test-app"
