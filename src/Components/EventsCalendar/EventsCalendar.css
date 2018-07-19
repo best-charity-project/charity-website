@@ -1,30 +1,72 @@
 .Calendar{
     margin-left: 250px;
-    /* width: 40%; */
-    width: 900px; 
+    display: flex;
+    justify-content: center;
+    
 }
-/* #your-custom-ID .fc-widget-content .fc-scroller .fc-day-grid-container{
-    height: 600px;
-} */
-
+#calendar{
+width: 80%;
+}
 #calendar .fc-toolbar {
     background-color: #fff;
-    padding: 20px;
+    padding: 25px;
+}
+#calendar .fc-row .fc-widget-header{
+background-color: #f7f7f7;
+color:#9b9b9b;
+}
+.fc-head .fc-head-container {
+    border: none;
+}
+.fc-body{
+    background-color: #ffffff;
+}
+.fc-row .fc-widget-header span {
+    display: block;
+    padding: 15px;
+    text-align: left;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 600;
+} 
+.fc-head-container .fc-widget-header{
+    border: none;
+}
+#calendar .fc-day-header .fc-widget-header span {
+    padding: 10px;
+    display: block;
 }
 .fc-view-container{
-    margin-top: 60px;
+    margin-top: 30px;
 }
 #calendar .fc-state-active, .fc-state-down{
     background-color: #459369;
     color: #fff;
+    text-shadow: 0;
 }
-#calendar .fc-state-default {
-    background-color: #459369;
-    padding: 0;
+#calendar .fc-state-default{
+    text-shadow: 0 0px 0px rgba(255,255,255,.75);
 }
-#calendar .fc-icon .fc-icon-left-single-arrow{
+#calendar .fc button {
+    height: 55px;
+}
+ .fc-state-hover{
     background-color: red;
-    display: block;
-    height: 100%;
-    margin: 0;
+}
+#calendar .fc-prev-button{
+    background-color: #459369;
+    background-image: none;
+}
+#calendar .fc-next-button{
+    background-color: #459369;
+    background-image: none;
+}
+#calendar  .fc-icon-right-single-arrow:after{
+    font-size: 25px;
+    color: white;
+}
+#calendar  .fc-icon-left-single-arrow:after{
+    font-size: 25px;
+    color: white;
+    text-shadow: 0;
 }

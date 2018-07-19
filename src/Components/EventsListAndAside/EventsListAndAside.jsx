@@ -25,14 +25,15 @@ class EventsListAndAside extends Component {
     render() {
         return (
             <div className = 'events-aside-list'>
-                <Button 
-                    label = 'Календарь'
-                    name = 'calendar-event'
-                    clickHandler = {this.getCalendar}
-                />
-                
+                <div
+                    className = 'calendar-event'
+                    onClick = {this.getCalendar}
+                >
+                    <span>{!this.state.calendarPage? 'Календарь' : 'Список'} </span>
+                </div>
                 {this.state.filters ? 
                     <EventsAside 
+                        name = 'events-page-aside'
                         filters = {this.state.filters}
                         getCurrentFilter = {this.getCurrentFilter} 
                         

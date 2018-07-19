@@ -71,6 +71,7 @@
     color: #459369;
     font-family: Montserrat;
     font-size: 16px;
+    text-decoration-line: none;
 }
 .info-event-modal{
     padding: 0 25px;
@@ -92,6 +93,7 @@
 .website-event-modal a{
     font-weight: 500;
   color: #459369;
+  text-decoration-line: none;
 }
 .buttons-event-modal{
     margin-top: 20px;
@@ -116,6 +118,7 @@
 }
 .button-event-ticket a{
     color: #ffffff;
+    text-decoration-line: none;
 }
 .button-event-close{
     background-color: #f0f0f0;
