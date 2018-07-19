@@ -3,7 +3,8 @@ node_js:
   - "8"
 cache:
   -node_modules
-install: npm install 
+install: npm install
+script: npm start 
 deploy:
   provider: heroku 
   app: "charity-test-app"
