@@ -14,7 +14,7 @@ const signInUser = credentials => {
         method: 'POST',
         headers: {
             Accept: 'application/json',
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json; charset=UTF-8',
         },
         // credentials: 'cors', 
         body: JSON.stringify(credentials),
