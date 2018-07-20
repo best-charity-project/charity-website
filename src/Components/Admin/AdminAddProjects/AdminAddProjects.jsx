@@ -153,7 +153,7 @@ class AdminAddProjects extends Component {
                             name = {"admin-button admin-projects-media-buttons"}
                         />
                         </div>
-                        {this.state.headArray ?
+                        {/* {this.state.headArray ?
                             <ul className="video-array">
                                 { this.state.headArray.map( (link,index) =>
                                     <li className="projects-video-container" key = { index }>
@@ -166,7 +166,7 @@ class AdminAddProjects extends Component {
                                     </li>
                                 )}
                             </ul>
-                        :null}
+                        :null} */}
                     </div>
                     <hr />
                     <div className="admin-contacts-projects">
@@ -399,9 +399,11 @@ class AdminAddProjects extends Component {
     }
     addHead = (e)=>{
         e.preventDefault()
+        let object={}
         let headArray = this.state.headArray
         if(this.state.head){
-            headArray.push(this.state.head)
+            object.value=this.state.head
+            headArray.push(object)
             this.setState({
                 headArray:headArray
             })
