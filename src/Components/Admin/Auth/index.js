@@ -1,4 +1,5 @@
 import { server } from "../../../api";
+import axios from 'axios';
 
 const setToken = data => {
     sessionStorage.setItem('token', data.token);
