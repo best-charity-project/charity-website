@@ -2,10 +2,12 @@
     margin-left: 250px;
     display: flex;
     justify-content: center;
+    position: relative;
+    width:70%;
     
 }
 #calendar{
-width: 80%;
+width: 90%;
 }
 #calendar .fc-toolbar {
     background-color: #fff;
@@ -43,6 +45,7 @@ color:#9b9b9b;
     background-color: #459369;
     color: #fff;
     text-shadow: 0;
+    box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
 }
 #calendar .fc-state-default{
     text-shadow: 0 0px 0px rgba(255,255,255,.75);
@@ -69,4 +72,102 @@ color:#9b9b9b;
     font-size: 25px;
     color: white;
     text-shadow: 0;
+}
+.fc-unthemed td.fc-today{
+    background: #fff !important;
+    border-style: double;
+    border: 1px solid #ddd;
+}
+#calendar .fc-today {
+    border-color: #ddd;
+}
+.fc-today:after{
+    content: ''; 
+    position: absolute;
+    border: 10px solid transparent;	
+    border-left: 10px solid #ffc757; 
+    border-top: 10px solid #ffc757;
+} 
+#calendar .fc-day-number{
+    margin-top: 10px;
+    margin-right: 10px;
+    color: #9b9b9b;
+    font-weight: 500;
+}
+#calendar .fc-time{
+    display: none;
+}
+#calendar .fc-event{
+    border-radius: 50px;
+    width: 80%;
+    margin: 0 auto;
+    padding: 2px;
+    margin-bottom: 2px;
+}
+#calendar .fc-content{
+    display: flex;
+    margin-top: 2px;
+    justify-content: center;
+}
+#calendar .fc-title{
+    text-transform: uppercase;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.current-date-calendar{
+    display: flex;
+    text-transform: uppercase;
+    /* display: none; */
+}
+.current-date-calendar div{
+    margin: 5px 0 0 5px;
+}
+.monthName-calendar{
+    font-family: Montserrat;
+    font-size: 42px;
+    color: #3b3f48;
+}
+.monthNumber-calendar{
+    font-size: 16px;
+    font-weight: 600;
+    color: #3b3f48;
+}
+.current-year-calendar{
+    font-size: 16px;
+    font-weight: 600;
+    color: #dcdad7;
+}
+#calendar .fc-state-default{
+    border: 0;
+    border-radius: 0;
+    margin-top: 10px;
+}
+#calendar  .fc-prev-button:after{
+    content: " ";
+    display: inline-block;
+    width: 0px;
+  height: 20px;
+  border: 1px solid #fff;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+#calendar  .fc-icon-left-single-arrow{
+top: -5px;
+}
+#calendar .fc-prev-button{
+padding-right: 0 ;
+
+}
+#calendar .fc-button {
+    outline: none;
+}
+#calendar .fc-state-default{
+    background-color: #459369;
+    background-image: none;
+    color: white;
+}
+.monthNumber-calendar{
+    text-align: left;
 }
