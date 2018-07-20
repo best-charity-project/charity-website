@@ -7,7 +7,5 @@ install: npm install
 deploy:
   provider: heroku 
   app: "charity-test-app"
-  on:
-    repo: "best-charity-project/charity-website" 
   api_key:
-    secure: "994b6285-c32d-4763-89e0-4e7a4114b318"
+    secure: "9df3e061-02c9-473b-b4df-0e0239178a5a"
