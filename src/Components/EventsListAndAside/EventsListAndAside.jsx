@@ -11,6 +11,7 @@ class EventsListAndAside extends Component {
     state = {
         currentSource:'вce',
         calendarPage : false,
+        view:true
     }
     componentDidMount(){
         this.getEventsList();
@@ -43,13 +44,18 @@ class EventsListAndAside extends Component {
                     name = "events-list" 
                     array = {this.state.filterArray}
                 /> :  <EventsCalendar 
+                            view = {this.state.view}
+                            getNewView = {this.getNewView}
                             array = {this.state.filterArray}
                         /> }
               
             </div>
         ) 
     }
-
+    getNewView = () => {
+        alert('rfr');
+        this.setState({view: !this.state.view})
+    }
     getEventsList = () => {
         fetch(`${server}/events`)
         .then(response => response.json())

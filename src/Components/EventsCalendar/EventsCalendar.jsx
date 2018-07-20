@@ -22,7 +22,10 @@ export default class ExampleComponent extends React.Component {
 
       componentWillReceiveProps(nextProps){
           if(this.props!= nextProps){
+              console.log(this.props)
+              console.log(nextProps)
             this.getEventsArray (nextProps.array);
+            this.setState({view:nextProps.view})
           }
       }
     componentDidMount(){
@@ -39,11 +42,10 @@ export default class ExampleComponent extends React.Component {
         
         // this.getDate();
     }
-    shouldComponentUpdate (nextProps, nextState){
-        console.log(this.state)
-        console.log(nextState)
-        return true
-    }
+// componentWillReceiveProps(nextProps){
+//     console.log(this.props)
+//     console.log(nextProps)
+// }
     getEventsArray = (obj) => {
         let array = [];
         if(obj){
@@ -85,7 +87,7 @@ export default class ExampleComponent extends React.Component {
 			  center: 'title',
 			  right: 'month,listWeek'
           }}
-          defaultView = {!this.state.view === 'month'? 'listWeek': 'month'}
+          defaultView = {!this.state.view ? 'listWeek': 'month'}
             views =  {{
                 month: { 
                     titleFormat: 'YYYY: M :MMMM'
@@ -207,6 +209,7 @@ export default class ExampleComponent extends React.Component {
             this.setState({isOpen:false});
             this.setState({view: 'week'} , () => {
                 console.log(this.state)
+                this.props.getNewView();
             })
         };        
     };
