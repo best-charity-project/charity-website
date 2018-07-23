@@ -17,10 +17,11 @@ const signInUser = credentials => {
         method: 'POST',
         headers: {
             Accept: 'application/json',
-            'Content-Type': 'application/json; charset=UTF-8',
+            'Content-Type': 'application/json',
         },
         // credentials: 'cors',
         body: JSON.stringify(credentials),
-    });
+    })
+    .then(res=>console.log(res));
 };
 export { signInUser, setToken, getToken, removeToken };
