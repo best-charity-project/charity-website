@@ -108,7 +108,6 @@
       "mjs"
     ]
   },
-  "homepage": "https://charity-test-app.herokuapp.com/",
   "babel": {
     "presets": [
       "react-app"
