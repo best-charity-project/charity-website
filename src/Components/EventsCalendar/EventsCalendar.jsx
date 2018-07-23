@@ -7,9 +7,6 @@ import FullCalendar from 'fullcalendar-reactwrapper';
 import 'fullcalendar-reactwrapper/dist/css/fullcalendar.min.css';
 import _ from 'lodash';
 import EventModal from '../EventModal/EventModal';
-// import BigCalendar from 'react-big-calendar';
-// import 'react-big-calendar/lib/css/react-big-calendar.css'
-// BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 export default class ExampleComponent extends React.Component {
 
@@ -22,30 +19,19 @@ export default class ExampleComponent extends React.Component {
 
       componentWillReceiveProps(nextProps){
           if(this.props!= nextProps){
-              console.log(this.props)
-              console.log(nextProps)
             this.getEventsArray (nextProps.array);
-            this.setState({view:nextProps.view})
           }
       }
     componentDidMount(){
-        const { FullCalendar} = this
-        console.log(this)
-        // this.props.array ? this.setState({events: this.getEventsArray(this.props.array)	}, () => console.log(this.state.events)):null;
         this.getEventsArray (this.props.array);
         document.addEventListener('keyup', (e) => {
             if (e.keyCode === 27) this.setState({
                 isOpen: false
             });
         });
+      
   
-        
-        // this.getDate();
     }
-// componentWillReceiveProps(nextProps){
-//     console.log(this.props)
-//     console.log(nextProps)
-// }
     getEventsArray = (obj) => {
         let array = [];
         if(obj){
@@ -61,33 +47,19 @@ export default class ExampleComponent extends React.Component {
         }
         array ?this.setState({events : array}):null;
     }
-    
-    // getDate = () => {
-    //     let year = (new Date()).getFullYear();
-    //     console.log((new Date()).getMonth())
-    //     let monthNumber = (new Date()).getMonth();
-    //     monthNumber++
-    //     let  monthName = new Date().toLocaleString('ru', { month: "long" });
-    //     this.setState({
-    //         year : year,
-    //         monthNumber : monthNumber,
-    //         monthName : monthName
-    //     })
-    // }
 	render() {
-       console.log(this.state)
+      
 	  return (
-		<div className="Calendar">
-        
+		<div className="Calendar" onClick = {this.click}>        
 		  <FullCalendar
                id = "calendar"
-               height = {800}
+               height = {600}
 		      header = {{
 			  left: 'prev,next  myCustomButton',
 			  center: 'title',
 			  right: 'month,listWeek'
           }}
-          defaultView = {!this.state.view ? 'listWeek': 'month'}
+          defaultView = {this.state.view==='month' ? 'month':'listWeek'}
             views =  {{
                 month: { 
                     titleFormat: 'YYYY: M :MMMM'
@@ -98,13 +70,6 @@ export default class ExampleComponent extends React.Component {
             }
                 
             }
-            // customButtons = { {
-            //     myCustomButton: {
-            //       text: 'custom!',
-            //       click: function() {
-            //         alert('clicked the custom button!');
-            //       }
-            //     }}}
 		  monthNames ={['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']}
 		  monthNamesShort ={['Янв.','Фев.','Март','Апр.','Май','Июнь','Июль','Авг.','Сент.','Окт.','Ноя.','Дек.']} 
 		  dayNames = {["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"]}
@@ -118,21 +83,18 @@ export default class ExampleComponent extends React.Component {
         }
         
            defaultDate={Date.now()}
+           listDayAltFormat = 'D MMMM YYYY'
+           noEventsMessage = 'На этот день не запланировано событий'
            lang = 'es'
-		//   navLinks= {true} // can click day/week names to navigate views
           editable= {true}
           locale = 'ru'
-         changeView ={this.swith}
-		  eventLimit= {3} // allow "more" link when too many events
+		  eventLimit= {3}
           events = {this.state.events}
-          viewRender = {this.getView}
           timeFormat = {'H(:mm)'}
           eventClick = {this.dayClick}
           weekNumberTitleHtml = 'week'
-          eventAfterAllRender = {this.afterRender}
-
-        //   select = {this.func}
-        //   eventAfterAllRender = {this.govnoTest}
+          viewRender = {this.Render}
+          eventRender = {this.renderTime}
 	        />
             <div 
                                 className={this.state.isOpen ? 'overlay' : 'overlay hidden'} 
@@ -149,15 +111,24 @@ export default class ExampleComponent extends React.Component {
 		</div>
 	  );
     }
-    getView= (view) => {
+    renderTime = (event, element, view) => {
+        if(view.type === 'listWeek'){
+            let time = element[0].childNodes[0];
+             let timeEvent = time.innerText.split(':');
+            time.innerHTML = `<div class = 'time-event-list-week'> 
+                                <span class = 'event-hour'>${timeEvent[0]} </span>
+                                <span class = 'event-minutes'>${timeEvent[1]} </span>
+                                </div>`
+
+       
+        }
+        if(this.state.view!=view.type){
+            this.setState({
+                view: view.type
+            })
+        }
+        let time = document.querySelectorAll('.fc-list-item-time');
         let a = document.getElementsByClassName('fc-center');
-        // a[0].innerHTML = '<div className = "current-date-calendar">'+
-        // '<p className = "monthName-calendar">'+ view.title.split(':')[2] +'</p>'+
-        // '<div>'+
-        // '<p className = "monthNumber-calendar">' `${this.state.monthNumber} месяц` + '</p>'+
-        // '<p className = "current-year-calendar"> {`${this.state.year} год`}  </p>'+
-        // '</div>'+
-        // '</div>'
         if(view.currentRangeUnit === 'month'){
             a[0].innerHTML = `<div class = "current-date-calendar">
             <p class = "monthName-calendar">${view.title.split(':')[2]}</p>
@@ -177,7 +148,7 @@ export default class ExampleComponent extends React.Component {
                 monthNewName = monthName + 'а';
             }else{
                  monthNewName = monthName.substring(0,monthName.length-1)+ 'я';
-            }
+            }             
             let weekNumber = this.weekOfMonth(moment(date));
             a[0].innerHTML = `<div class = "current-date-calendar">
             <p class = "monthName-calendar">${view.title.split(' ')[3]} - ${view.title.split(' ')[5]}</p>
@@ -186,14 +157,22 @@ export default class ExampleComponent extends React.Component {
             <p class = "current-year-calendar">${monthNewName} ${view.title.split(' ')[0]} год</p>
             </div>
             </div>
-            `
+            ` 
+           
         }
+        
+    }
+    Render = ( view, el) => {
+
        
+       
+
+      
     }
      weekOfMonth = (m) => {
         return m.week() - moment(m).startOf('month').week() + 1;
       }
-    dayClick= (calEvent, jsEvent, view) => {
+    dayClick = (calEvent, jsEvent, view) => {
         let infoEvent = _.find(this.props.array,  (el) => {
                 if(el._id === calEvent.className[0]){
                     return el
@@ -207,10 +186,6 @@ export default class ExampleComponent extends React.Component {
         ||e.target.classList.contains('button-close' )){
             e.stopPropagation();
             this.setState({isOpen:false});
-            this.setState({view: 'week'} , () => {
-                console.log(this.state)
-                this.props.getNewView();
-            })
         };        
     };
   }

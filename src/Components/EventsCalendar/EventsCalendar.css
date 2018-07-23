@@ -11,7 +11,7 @@ width: 90%;
 }
 #calendar .fc-toolbar {
     background-color: #fff;
-    padding: 25px;
+    padding: 15px;
 }
 #calendar .fc-row .fc-widget-header{
 background-color: #f7f7f7;
@@ -170,4 +170,49 @@ padding-right: 0 ;
 }
 .monthNumber-calendar{
     text-align: left;
+}
+#calendar .fc-widget-header{
+    border-radius: 3px;
+    background-color: #f7f7f7;
+}
+#calendar .fc-list-heading-main{
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #9b9b9b;
+}
+#calendar .fc-list-heading-alt{
+    font-size: 14px;
+    color: #3b3f48;
+    font-weight: 400;
+}
+.fc-list-item {
+    border-radius: 3px;
+    background-color: #ffffff;
+    cursor: pointer;
+    padding: 15px 0;
+}
+.fc-list-item-marker{
+    display: none;
+}
+#calendar .fc-list-item-time, #calendar .fc-list-item-title{
+    font-weight: 600;
+    font-size: 16px;
+    color: #3b3f48;
+    padding: 20px;
+}
+#calendar .fc-scroller{
+    background-color: #ffffff;
+}
+.event-minutes{
+    font-size: 12px;
+    margin-left: 3px;
+    font-weight: 600;
+}
+.time-event-list-week{
+    display:flex;
+}
+ #calendar .fc-list-heading .fc-widget-header{
+    padding: 15px;
+    border-style: none;
 }
