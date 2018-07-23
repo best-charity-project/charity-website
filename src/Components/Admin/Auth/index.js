@@ -12,6 +12,7 @@ const getToken = () => window.sessionStorage.getItem('token');
 const removeToken = () => window.sessionStorage.removeItem('token');
 
 const signInUser = credentials => {
+    console.log(credentials)
     return fetch(`${ server }/auth`, {
         method: 'POST',
         headers: {
