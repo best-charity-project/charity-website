@@ -36,6 +36,7 @@ export default class Admin extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        console.log(this.state)
         signInUser(this.state)
             .then(response => {
                 console.log(response);
