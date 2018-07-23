@@ -11,6 +11,7 @@ import './AdminProjectPreview.css';
 import '../../../../Pages/Projects/Projects.css'
 import ProjectGallery from '../../../ProjectGallery/ProjectGallery';
 import ProjectDefaultImg from '../../../../Assets/AssetsSvg/project-default.svg';
+import { server } from '../../../../api'
 
 class AdminProjectPreview extends Component {
     render() {
@@ -19,7 +20,7 @@ class AdminProjectPreview extends Component {
                 <div className="projects-page-content">
                 <div className="img-container">
                     <div className="img-placeholder">
-                         <img className="project-main-img" src={this.props.image ? `http://localhost:3001/images/${this.props.image}` : ProjectDefaultImg }/>
+                         <img className="project-main-img" src={this.props.image ? `${ server }/images/${this.props.image}` : ProjectDefaultImg }/>
                     </div>
                 </div>
                     <div className="project-section">

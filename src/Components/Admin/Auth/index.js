@@ -3,6 +3,8 @@ import axios from 'axios';
 
 const setToken = data => {
     sessionStorage.setItem('token', data.token);
+    console.log(data)
+    console.log(data.token)
 };
 
 const getToken = () => window.sessionStorage.getItem('token');
