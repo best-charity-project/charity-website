@@ -16,7 +16,7 @@ const signInUser = credentials => {
             Accept: 'application/json',
             'Content-Type': 'application/json; charset=UTF-8',
         },
-        credentials: 'cors', 
+        // credentials: 'cors',
         body: JSON.stringify(credentials),
     });
 };
