@@ -40,9 +40,8 @@ export default class Admin extends React.Component {
         signInUser(this.state)
             // .then(response => {
             //     response.json()})
-            .then(data => {
-                console.log(data)
-                setToken(data);
+            .then(resp => {
+                setToken(resp.data);
                 this.props.history.push('/admin-panel/dashboard');
             });
     }
