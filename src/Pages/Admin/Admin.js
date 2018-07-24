@@ -38,8 +38,8 @@ export default class Admin extends React.Component {
         e.preventDefault();
         console.log(this.state)
         signInUser(this.state)
-            .then(response => {
-                response.json()})
+            // .then(response => {
+            //     response.json()})
             .then(data => {
                 console.log(data)
                 setToken(data);
