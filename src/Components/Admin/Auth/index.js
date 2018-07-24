@@ -2,7 +2,6 @@ import { server } from "../../../api";
 import axios from 'axios';
 
 const setToken = data => {
-    console.log(data)
     sessionStorage.setItem('token', data.token);
 };
 
@@ -21,14 +20,5 @@ const signInUser = credentials => {
             }
         }
     })
-    // return fetch(`${ server }/auth`, {
-    //     method: 'POST',
-    //     headers: {
-    //         Accept: 'application/json',
-    //         'Content-Type': 'application/json',
-    //     },
-    //     // credentials: 'cors',
-    //     body: JSON.stringify(credentials),
-    // });
 };
 export { signInUser, setToken, getToken, removeToken };
