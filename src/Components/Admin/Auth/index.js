@@ -21,6 +21,6 @@ const signInUser = credentials => {
         },
         // credentials: 'cors',
         body: JSON.stringify(credentials),
-    })
+    });
 };
 export { signInUser, setToken, getToken, removeToken };
