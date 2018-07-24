@@ -39,6 +39,7 @@ export default class Admin extends React.Component {
         console.log(this.state)
         signInUser(this.state)
             .then(response => {
+                console.log('__воробушек',response.json())
                 response.json()})
             .then(data => {
                 console.log(data)
