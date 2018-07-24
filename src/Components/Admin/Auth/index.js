@@ -2,7 +2,7 @@ import { server } from "../../../api";
 import axios from 'axios';
 
 const setToken = data => {
-    console.log(data.token)
+    console.log(data)
     sessionStorage.setItem('token', data.token);
 };
 
