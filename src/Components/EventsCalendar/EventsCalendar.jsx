@@ -45,7 +45,7 @@ export default class ExampleComponent extends React.Component {
 	render() {      
 	  return (
 	    <div className="Calendar" onClick = {this.click}>        
-		  <FullCalendar
+		    <FullCalendar
                 id = "calendar"
                 height = {700}
 		        header = {{
@@ -70,8 +70,7 @@ export default class ExampleComponent extends React.Component {
                     today: "Сегодня",
                     month: "Месяц",
                     listWeek: "Неделя",
-                }}
-        
+                }}        
                 defaultDate={Date.now()}
                 listDayAltFormat = 'D MMMM YYYY'
                 noEventsMessage = 'На этот день не запланировано событий'
@@ -113,8 +112,8 @@ export default class ExampleComponent extends React.Component {
                 <span class = 'event-hour'>${timeEvent[0]} </span>
                 <span class = 'event-minutes'>${timeEvent[1]} </span>
             </div>`
-        }     
-    }
+        };     
+    };
     renderHeader = ( view, el) => {
         let time = document.querySelectorAll('.fc-list-item-time');
         let headerTitle = document.getElementsByClassName('fc-center');
@@ -147,19 +146,19 @@ export default class ExampleComponent extends React.Component {
                     <p class = "current-year-calendar">${monthNewName} ${view.title.split(' ')[0]} год</p>
                 </div>
             </div>`           
-        }      
-    }
+        };      
+    };
     weekOfMonth = (m) => {
         return m.week() - moment(m).startOf('month').week() + 1;
-    }
+    };
     dayClick = (calEvent, jsEvent, view) => {
         let infoEvent = _.find(this.props.array,  (el) => {
                 if(el._id === calEvent.className[0]){
                     return el
                 }
         });
-        this.setState({isOpen:true, infoEvent:infoEvent})
-    }
+        this.setState({isOpen:true, infoEvent:infoEvent});
+    };
     closeModalWindow = (e) => {
         if(e.target.className === 'overlay' 
         ||e.target.classList.contains('button-event-close' )
