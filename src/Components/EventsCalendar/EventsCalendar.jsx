@@ -9,169 +9,149 @@ import _ from 'lodash';
 import EventModal from '../EventModal/EventModal';
 
 export default class ExampleComponent extends React.Component {
-
-	  state = {
-          events : [],
-          isOpen:false,
-          infoEvent: '',
-          view:'month' 
-      }
-
-      componentWillReceiveProps(nextProps){
-          if(this.props!= nextProps){
-            this.getEventsArray (nextProps.array);
-          }
-      }
+	state = {
+        events : [],
+        isOpen:false,
+        infoEvent: '',
+        view:'month' 
+    }
+    componentWillReceiveProps(nextProps){
+        if(this.props !== nextProps){
+           this.getEventsArray (nextProps.array);
+        }
+    }
     componentDidMount(){
         this.getEventsArray (this.props.array);
         document.addEventListener('keyup', (e) => {
             if (e.keyCode === 27) this.setState({
                 isOpen: false
             });
-        });
-      
-  
+        });    
     }
     getEventsArray = (obj) => {
         let array = [];
         if(obj){
             obj.forEach(function(item, index){
                 let event = {};
-                event.title= item.title;
+                event.title = item.title;
                 event.start = item.dateStart;
                 event.color = '#459369';
                 event.className = item._id;
-                event.description = 'This is a cool event'
                 array.push(event);
             })
         }
-        array ?this.setState({events : array}):null;
+        array ? this.setState({events : array}) : null;
     }
-	render() {
-      
+	render() {      
 	  return (
 		<div className="Calendar" onClick = {this.click}>        
 		  <FullCalendar
-               id = "calendar"
-               height = {600}
-		      header = {{
-			  left: 'prev,next  myCustomButton',
-			  center: 'title',
-			  right: 'month,listWeek'
-          }}
-          defaultView = {this.state.view==='month' ? 'month':'listWeek'}
-            views =  {{
-                month: { 
-                    titleFormat: 'YYYY: M :MMMM'
-                },
-                week: {
-                    titleFormat: 'YYYY M MMMM D'
-                }
-            }
-                
-            }
-		  monthNames ={['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']}
-		  monthNamesShort ={['Янв.','Фев.','Март','Апр.','Май','Июнь','Июль','Авг.','Сент.','Окт.','Ноя.','Дек.']} 
-		  dayNames = {["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"]}
-		  dayNamesShort = {["Вск","Пнд","Втр","Срд","Чтв","Птн","Сбт"]} 
-		  buttonText = {{
-			today: "Сегодня",
-			month: "Месяц",
-			listWeek: "Неделя",
-		  }
-			
-        }
+                id = "calendar"
+                height = {700}
+		        header = {{
+                    left: 'prev,next  myCustomButton',
+                    center: 'title',
+                    right: 'month,listWeek'
+                }}
+                defaultView = {this.state.view ==='month' ? 'month':'listWeek'}
+                views =  {{
+                    month : { 
+                        titleFormat: 'YYYY: M :MMMM'
+                    },
+                    week : {
+                        titleFormat: 'YYYY M MMMM D'
+                    }
+                }}
+                monthNames = {['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']}
+                monthNamesShort = {['Янв.','Фев.','Март','Апр.','Май','Июнь','Июль','Авг.','Сент.','Окт.','Ноя.','Дек.']} 
+                dayNames = {["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"]}
+                dayNamesShort = {["Вск","Пнд","Втр","Срд","Чтв","Птн","Сбт"]} 
+                buttonText = {{
+                    today: "Сегодня",
+                    month: "Месяц",
+                    listWeek: "Неделя",
+                }}
         
-           defaultDate={Date.now()}
-           listDayAltFormat = 'D MMMM YYYY'
-           noEventsMessage = 'На этот день не запланировано событий'
-           lang = 'es'
-          editable= {true}
-          locale = 'ru'
-		  eventLimit= {3}
-          events = {this.state.events}
-          timeFormat = {'H(:mm)'}
-          eventClick = {this.dayClick}
-          weekNumberTitleHtml = 'week'
-          viewRender = {this.Render}
-          eventRender = {this.renderTime}
+                defaultDate={Date.now()}
+                listDayAltFormat = 'D MMMM YYYY'
+                noEventsMessage = 'На этот день не запланировано событий'
+                locale = 'ru'
+                eventLimit= {3}
+                events = {this.state.events}
+                timeFormat = {'H(:mm)'}
+                eventClick = {this.dayClick}
+                viewRender = {this.renderHeader}
+                eventRender = {this.renderTime}
 	        />
             <div 
-                                className={this.state.isOpen ? 'overlay' : 'overlay hidden'} 
-                                onClick = {this.closeModalWindow}
-                            >
-                                <div className="modal-event-field">
-                                {this.state.infoEvent ? <EventModal 
-                                        event = {this.state.infoEvent} 
-                                        closeModalWindow = {this.closeModalWindow}
-                                    />:null }
-                                  
-                                </div>
-                            </div>   
+                className={this.state.isOpen ? 'overlay' : 'overlay hidden'} 
+                onClick = {this.closeModalWindow}
+            >
+                <div className="modal-event-field">
+                   {this.state.infoEvent ? 
+                        <EventModal 
+                            event = {this.state.infoEvent} 
+                            closeModalWindow = {this.closeModalWindow}
+                        />:
+                        null }
+                </div>
+            </div>   
 		</div>
 	  );
     }
     renderTime = (event, element, view) => {
-        if(view.type === 'listWeek'){
-            let time = element[0].childNodes[0];
-             let timeEvent = time.innerText.split(':');
-            time.innerHTML = `<div class = 'time-event-list-week'> 
-                                <span class = 'event-hour'>${timeEvent[0]} </span>
-                                <span class = 'event-minutes'>${timeEvent[1]} </span>
-                                </div>`
-
-       
-        }
-        if(this.state.view!=view.type){
+        if(this.state.view !== view.type){
             this.setState({
                 view: view.type
             })
         }
+        if(view.type === 'listWeek'){
+            let time = element[0].childNodes[0];
+            let timeEvent = time.innerText.split(':');
+            time.innerHTML = `
+            <div class = 'time-event-list-week'> 
+                <span class = 'event-hour'>${timeEvent[0]} </span>
+                <span class = 'event-minutes'>${timeEvent[1]} </span>
+            </div>`
+        }     
+    }
+    renderHeader = ( view, el) => {
         let time = document.querySelectorAll('.fc-list-item-time');
-        let a = document.getElementsByClassName('fc-center');
+        let headerTitle = document.getElementsByClassName('fc-center');
         if(view.currentRangeUnit === 'month'){
-            a[0].innerHTML = `<div class = "current-date-calendar">
-            <p class = "monthName-calendar">${view.title.split(':')[2]}</p>
-            <div>
-            <p class = "monthNumber-calendar"> ${view.title.split(':')[1]} месяц</p>
-            <p class = "current-year-calendar">${view.title.split(':')[0]} год</p>
-            </div>
-            </div>
-            `
+            headerTitle[0].innerHTML = `
+            <div class = "current-date-calendar">
+                <p class = "monthName-calendar">${view.title.split(':')[2]}</p>
+                <div>
+                    <p class = "monthNumber-calendar"> ${view.title.split(':')[1]} месяц</p>
+                    <p class = "current-year-calendar">${view.title.split(':')[0]} год</p>
+                </div>
+            </div>`
         }else{
             let date = view.title.split(' ')[1] + '-' + 
             view.title.split(' ')[3] + '-'+ 
             view.title.split(' ')[0];
             let monthName = view.title.split(' ')[2];
             let monthNewName;
-            if(monthName.toLowerCase().includes('март') ||monthName.toLowerCase().includes('август')){
+            if(monthName.toLowerCase().includes('март') || monthName.toLowerCase().includes('август')){
                 monthNewName = monthName + 'а';
             }else{
-                 monthNewName = monthName.substring(0,monthName.length-1)+ 'я';
+                monthNewName = monthName.substring(0,monthName.length-1)+ 'я';
             }             
             let weekNumber = this.weekOfMonth(moment(date));
-            a[0].innerHTML = `<div class = "current-date-calendar">
-            <p class = "monthName-calendar">${view.title.split(' ')[3]} - ${view.title.split(' ')[5]}</p>
-            <div>
-            <p class = "monthNumber-calendar"> ${weekNumber} неделя</p>
-            <p class = "current-year-calendar">${monthNewName} ${view.title.split(' ')[0]} год</p>
-            </div>
-            </div>
-            ` 
-           
-        }
-        
+            headerTitle[0].innerHTML = `
+            <div class = "current-date-calendar">
+                <p class = "monthName-calendar">${view.title.split(' ')[3]} - ${view.title.split(' ')[5]}</p>
+                <div>
+                    <p class = "monthNumber-calendar"> ${weekNumber} неделя</p>
+                    <p class = "current-year-calendar">${monthNewName} ${view.title.split(' ')[0]} год</p>
+                </div>
+            </div>`           
+        }      
     }
-    Render = ( view, el) => {
-
-       
-       
-
-      
-    }
-     weekOfMonth = (m) => {
+    weekOfMonth = (m) => {
         return m.week() - moment(m).startOf('month').week() + 1;
-      }
+    }
     dayClick = (calEvent, jsEvent, view) => {
         let infoEvent = _.find(this.props.array,  (el) => {
                 if(el._id === calEvent.className[0]){

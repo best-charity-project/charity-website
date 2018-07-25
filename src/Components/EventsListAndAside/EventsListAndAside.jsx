@@ -7,6 +7,8 @@ import { server } from "../../api";
 import axios from 'axios';
 import _ from 'lodash';
 import Button from '../Button/Button';
+import switchImg from '../../Assets/AssetsSvg/switch-view.svg';
+
 class EventsListAndAside extends Component {
     state = {
         currentSource:'вce',
@@ -30,6 +32,7 @@ class EventsListAndAside extends Component {
                     className = 'calendar-event'
                     onClick = {this.getCalendar}
                 >
+                    <img src = {switchImg} />
                     <span>{!this.state.calendarPage? 'Календарь' : 'Список'} </span>
                 </div>
                 {this.state.filters ? 
