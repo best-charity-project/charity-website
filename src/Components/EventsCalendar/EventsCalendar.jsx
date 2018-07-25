@@ -56,7 +56,7 @@ export default class Calendar extends React.Component {
                 defaultView = {this.state.view === 'month' ? 'month':'listWeek'}
                 views =  {{
                     month : { 
-                        titleFormat: 'YYYY: M :MMMM'
+                        titleFormat: 'YYYY M MMMM'
                     },
                     week : {
                         titleFormat: 'YYYY M MMMM D'
@@ -117,35 +117,34 @@ export default class Calendar extends React.Component {
     renderHeader = ( view, el) => {
         let time = document.querySelectorAll('.fc-list-item-time');
         let headerTitle = document.getElementsByClassName('fc-center');
+        let dateFromCalendar = view.title.split(' ');
         if(view.currentRangeUnit === 'month'){
             headerTitle[0].innerHTML = `
             <div class = "current-date-calendar">
-                <p class = "monthName-calendar">${view.title.split(':')[2]}</p>
+                <p class = "monthName-calendar">${dateFromCalendar[2]}</p>
                 <div>
-                    <p class = "monthNumber-calendar"> ${view.title.split(':')[1]} месяц</p>
-                    <p class = "current-year-calendar">${view.title.split(':')[0]} год</p>
+                    <p class = "monthNumber-calendar"> ${dateFromCalendar[1]} месяц</p>
+                    <p class = "current-year-calendar">${dateFromCalendar[0]} год</p>
                 </div>
             </div>`
         }else{
-            let date = view.title.split(' ')[1] + '-' + 
-            view.title.split(' ')[3] + '-'+ 
-            view.title.split(' ')[0];
-            let monthName = view.title.split(' ')[2];
+            let correctDate  = `${dateFromCalendar[1]}-${dateFromCalendar[3]}-${dateFromCalendar[0]} `;
+            let monthName = dateFromCalendar[2];
             let monthNewName;
             if(monthName.toLowerCase().includes('март') || monthName.toLowerCase().includes('август')){
                 monthNewName = monthName + 'а';
             }else{
                 monthNewName = monthName.substring(0,monthName.length-1)+ 'я';
             }             
-            let weekNumber = this.weekOfMonth(moment(date));
+            let weekNumber = this.weekOfMonth(moment(correctDate));
             headerTitle[0].innerHTML = `
             <div class = "current-date-calendar">
-                <p class = "monthName-calendar">${view.title.split(' ')[3]} - ${view.title.split(' ')[5]}</p>
+                <p class = "monthName-calendar">${dateFromCalendar[3]} - ${dateFromCalendar[5]}</p>
                 <div>
                     <p class = "monthNumber-calendar"> ${weekNumber} неделя</p>
-                    <p class = "current-year-calendar">${monthNewName} ${view.title.split(' ')[0]} год</p>
+                    <p class = "current-year-calendar">${monthNewName} ${dateFromCalendar[0]} год</p>
                 </div>
-            </div>`           
+            </div>`;        
         };      
     };
     weekOfMonth = (m) => {
