@@ -19,7 +19,7 @@ class AdminNewsContent extends Component {
         checkedIds: []
     }
     componentDidMount() {
-        fetch(`${server}/news?isAdmin=true`, { 
+        fetch(`${server}/api/news?isAdmin=true`, { 
             method: 'GET',
             mode: 'cors'
             })
@@ -78,7 +78,7 @@ class AdminNewsContent extends Component {
         let id = news._id
         axios({
             method: 'delete',
-            url: `${server}/news/` + id,
+            url: `${server}/api/news/` + id,
             data: news,
             config: { headers: {
                 Accept: 'application/json',
@@ -122,7 +122,7 @@ class AdminNewsContent extends Component {
     deleteChosenNews = (news) => {
         axios({
             method: 'delete',
-            url: `${server}/news`,
+            url: `${server}/api/news`,
             data: {'checkedIds': this.state.checkedIds},
             config: { headers: {
                 Accept: 'application/json',
@@ -141,7 +141,7 @@ class AdminNewsContent extends Component {
     } 
     findNews = (title) => {
         if(!title) {
-            fetch(`${server}/news?isAdmin=true`, {
+            fetch(`${server}/api/news?isAdmin=true`, {
                 method: 'GET', 
                 mode: 'cors'
                 })

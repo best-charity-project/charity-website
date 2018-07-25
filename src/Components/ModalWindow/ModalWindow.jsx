@@ -140,7 +140,7 @@ class ModalWindow extends Component {
         formData.append('imageData', this.state.imageData);
         axios({
             method: 'post',
-            url: `${server}/uploadGalleryImage/`,
+            url: `${server}/api/uploadGalleryImage/`,
             data: formData,
             config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
         })

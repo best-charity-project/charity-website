@@ -74,7 +74,7 @@ class AdminAddProjects extends Component {
     getFiltersListByType = (type) => {
         axios({
             method: 'get',
-            url: `${ server }/filters?type=${type}`
+            url: `${ server }/api/filters?type=${type}`
 
         })
         .then(res =>{
@@ -463,7 +463,7 @@ class AdminAddProjects extends Component {
         formData.append('imageData',this.state.mediaImageData);
             axios({
                 method:'post',
-                url: `${server}/uploadGalleryImage/`,
+                url: `${server}/api/uploadGalleryImage/`,
                 data:formData,
                 config:{
                     headers:{
@@ -488,7 +488,7 @@ class AdminAddProjects extends Component {
         let deletedImage = mediaImageArray.splice(index, 1)
         axios({
              method: 'delete',
-             url: `${server}/uploadGalleryImage/`,
+             url: `${server}/api/uploadGalleryImage/`,
              data: deletedImage,
              config: {
                  headers: {
@@ -625,7 +625,7 @@ class AdminAddProjects extends Component {
         }
         axios({
             method: id ? 'put' : 'post',
-            url: id ? `${server}/projects/${id}` : `${server}/projects/`,
+            url: id ? `${server}/api/projects/${id}` : `${server}/api/projects/`,
             data: formData,
             config: {
                 headers: {

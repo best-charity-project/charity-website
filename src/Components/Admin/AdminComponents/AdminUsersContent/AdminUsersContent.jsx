@@ -13,7 +13,7 @@ class AdminUsersContent extends Component {
         error: null
     }
     componentDidMount() {
-        fetch(`${ server }/subscription`, { 
+        fetch(`${ server }/api/subscription`, { 
             method: 'GET',
             mode: 'cors'
             })
@@ -44,7 +44,7 @@ class AdminUsersContent extends Component {
     }
     findUser = (email) => {
         if(!email) {
-            fetch(`${ server }/subscription`, {
+            fetch(`${ server }/api/subscription`, {
                 method: 'GET', 
                 mode: 'cors'
                 })

@@ -21,7 +21,7 @@ getFilteredNews  = (str) => {
 }
 
 getNews= () => {
-  fetch(`${server}/news`)
+  fetch(`${server}/api/news`)
   .then(response => response.json())
   .then(data => {
       this.setState({news: data.news }, () => {
@@ -32,7 +32,7 @@ getNews= () => {
 getFiltersListByType = (type) => {  
   axios({
       method: 'get',
-      url: `${ server }/filters?type=${type}`,
+      url: `${ server }/api/filters?type=${type}`,
   })
   .then(res =>{
     this.setState({filters:res.data.filterList})

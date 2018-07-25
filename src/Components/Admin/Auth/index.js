@@ -12,7 +12,7 @@ const removeToken = () => window.sessionStorage.removeItem('token');
 const signInUser = credentials => {
     return axios({
         method:'post',
-        url:`${ server }/auth`,
+        url:`${ server }/api/auth`,
         data:credentials,
         config:{
             headers:{

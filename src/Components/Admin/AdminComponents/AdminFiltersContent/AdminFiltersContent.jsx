@@ -20,7 +20,7 @@ class AdminFiltersContent extends Component {
     getFiltersList = () => {  
         axios({
             method: 'get',
-            url: `${ server }/filters`,
+            url: `${ server }/api/filters`,
         })
         .then(res =>{
             this.createFiltersLists(res);

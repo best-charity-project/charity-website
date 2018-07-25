@@ -53,7 +53,7 @@ class FullNews extends Component {
     getInfoAboutNews = () => {
         const id = this.props.match.params.id;
 
-        axios.get(`${server}/news/`+id)
+        axios.get(`${server}/api/news/`+id)
         .then(response => {
             this.setState({
                 news: response.data.news

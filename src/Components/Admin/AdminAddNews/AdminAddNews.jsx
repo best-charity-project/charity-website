@@ -266,7 +266,7 @@ class AdminAddNews extends Component {
         if(this.state.deletedImages.length) {
             axios({
                 method: 'delete',
-                url: `${server}/uploadGalleryImage/`,
+                url: `${server}/api/uploadGalleryImage/`,
                 data: this.state.deletedImages,
                 config: {headers: {'Content-Type': 'application/json; charset=UTF-8'}},
             })
@@ -289,7 +289,7 @@ class AdminAddNews extends Component {
         }
         axios({
             method: id ? 'put' : 'post',
-            url: id ? `${server}/news/` + id : `${server}/news/`,
+            url: id ? `${server}/api/news/` + id : `${server}/api/news/`,
             data: formData,
             config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
         })
@@ -322,7 +322,7 @@ class AdminAddNews extends Component {
     getFiltersListByType = (type) => {
         axios({
             method: 'get',
-            url: `${ server }/filters?type=${type}`
+            url: `${ server }/api/filters?type=${type}`
         })
         .then(res => {
             this.setState({

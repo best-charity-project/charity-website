@@ -33,7 +33,7 @@ class AdminNewsList extends Component {
         )
     }
     getInfoNews = (id) => {
-        const URL = `${ server }/news/`+id;
+        const URL = `${ server }/api/news/`+id;
         fetch(URL)
         .then(response => response.json())
         .then(data => {

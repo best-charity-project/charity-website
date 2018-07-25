@@ -90,7 +90,7 @@ class AdminSelectSearch extends Component {
 
     addNewFilter = (e) => {
         e.preventDefault();
-        fetch(`${ server }/filters`, {
+        fetch(`${ server }/api/filters`, {
             method : 'POST',
             headers : {
                 Accept: 'application/json',
