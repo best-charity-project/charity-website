@@ -7,15 +7,15 @@
     
 }
 #calendar{
-width: 70%;
+    width: 70%;
 }
 #calendar .fc-toolbar {
     background-color: #fff;
     padding: 15px;
 }
 #calendar .fc-row .fc-widget-header{
-background-color: #f7f7f7;
-color:#9b9b9b;
+    background-color: #f7f7f7;
+    color:#9b9b9b;
 }
 .fc-head .fc-head-container {
     border: none;
@@ -139,17 +139,16 @@ color:#9b9b9b;
     content: " ";
     display: inline-block;
     width: 0px;
-  height: 20px;
-  border: 1px solid #fff;
-  margin-top: 5px;
-  margin-left: 10px;
+    height: 20px;
+    border: 1px solid #fff;
+    margin-top: 5px;
+    margin-left: 10px;
 }
 #calendar  .fc-icon-left-single-arrow{
-top: -5px;
+    top: -5px;
 }
 #calendar .fc-prev-button{
-padding-right: 0 ;
-
+    padding-right: 0 ;
 }
 #calendar .fc-button {
     outline: none;
@@ -163,7 +162,6 @@ padding-right: 0 ;
     margin-top: 10px;
     text-shadow: 0 0px 0px rgba(255,255,255,.75);
     font-size: 18px;
-
 }
 .monthNumber-calendar{
     text-align: left;

@@ -18,8 +18,8 @@ export default class ExampleComponent extends React.Component {
     componentWillReceiveProps(nextProps){
         if(this.props !== nextProps){
            this.getEventsArray (nextProps.array);
-        }
-    }
+        };
+    };
     componentDidMount(){
         this.getEventsArray (this.props.array);
         document.addEventListener('keyup', (e) => {
@@ -27,7 +27,7 @@ export default class ExampleComponent extends React.Component {
                 isOpen: false
             });
         });    
-    }
+    };
     getEventsArray = (obj) => {
         let array = [];
         if(obj){
@@ -39,12 +39,12 @@ export default class ExampleComponent extends React.Component {
                 event.className = item._id;
                 array.push(event);
             })
-        }
+        };
         array ? this.setState({events : array}) : null;
-    }
+    };
 	render() {      
 	  return (
-		<div className="Calendar" onClick = {this.click}>        
+	    <div className="Calendar" onClick = {this.click}>        
 		  <FullCalendar
                 id = "calendar"
                 height = {700}
@@ -53,7 +53,7 @@ export default class ExampleComponent extends React.Component {
                     center: 'title',
                     right: 'month,listWeek'
                 }}
-                defaultView = {this.state.view ==='month' ? 'month':'listWeek'}
+                defaultView = {this.state.view === 'month' ? 'month':'listWeek'}
                 views =  {{
                     month : { 
                         titleFormat: 'YYYY: M :MMMM'
