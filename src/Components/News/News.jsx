@@ -52,7 +52,7 @@ class News extends Component {
                                 dangerouslySetInnerHTML={{__html: this.props.text}}
                             />                
                         </NavLink>):(
-                        <div onClick = {this.getEventWindow}>
+                        <div onClick = {this.getEventWindow} className = 'wrapper-event'>
                             <p className = 'news-date'>
                                 {moment(this.props.event.dateStart).format('DD MMMM YYYY')} 
                             </p>
