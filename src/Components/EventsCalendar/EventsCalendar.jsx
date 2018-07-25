@@ -47,7 +47,7 @@ export default class Calendar extends React.Component {
 	    <div className="Calendar" onClick = {this.click}>        
 		   <FullCalendar
                 id = "calendar"
-                height = {700}
+                height = {800}
 		        header = {{
                     left: 'prev,next  myCustomButton',
                     center: 'title',
@@ -75,12 +75,14 @@ export default class Calendar extends React.Component {
                 listDayAltFormat = 'D MMMM YYYY'
                 noEventsMessage = 'На этот день не запланировано событий'
                 locale = 'ru'
-                eventLimit= {3}
+                eventLimit= {1}
                 events = {this.state.events}
                 timeFormat = {'H(:mm)'}
                 eventClick = {this.dayClick}
                 viewRender = {this.renderHeader}
                 eventRender = {this.renderTime}
+                eventAfterAllRender = {this.getNumberEvents}
+                windowResize = {this.getNumberEvents}
 	        />
             <div 
                 className={this.state.isOpen ? 'overlay' : 'overlay hidden'} 
@@ -97,6 +99,19 @@ export default class Calendar extends React.Component {
             </div>   
 		 </div>
 	  );
+    }
+    getNumberEvents = () => {
+        let  numberEventsCalendar = document.querySelectorAll('.fc-more');
+        for (let i = 0; i < numberEventsCalendar.length; i++){
+            let numberEvents = numberEventsCalendar[i].innerText.split(' ')[0].split('')[1];
+            numberEvents ? 
+                numberEventsCalendar[i].innerHTML = `
+                    <div class = 'count-events'> 
+                        <span >${numberEvents} события</span> 
+                    </div>`
+                    : null;
+        }
+        
     }
     renderTime = (event, element, view) => {
         if(this.state.view !== view.type){
