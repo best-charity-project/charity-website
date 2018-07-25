@@ -40,14 +40,18 @@ class EventsListAndAside extends Component {
                         filters = {this.state.filters}
                         getCurrentFilter = {this.getCurrentFilter} 
                         
-                    />: null}
-                    {!this.state.calendarPage ?   <EventsList 
-                    currentSource = {this.state.currentSource} 
-                    name = "events-list" 
-                    array = {this.state.filterArray}
-                /> :  <EventsCalendar
+                    />: 
+                    null}
+                    {!this.state.calendarPage ?  
+                         <EventsList 
+                            currentSource = {this.state.currentSource} 
+                            name = "events-list" 
                             array = {this.state.filterArray}
-                        /> }
+                        /> :  
+                        <EventsCalendar
+                            array = {this.state.filterArray}
+                        /> 
+                    }
               
             </div>
         ) 
@@ -59,7 +63,7 @@ class EventsListAndAside extends Component {
             this.setState({events: data.events }, () => {
                 this.filterArray('')
             });
-        })
+        });
     };
     getFiltersList = () => {  
         axios({
@@ -86,8 +90,8 @@ class EventsListAndAside extends Component {
                 return (events.filter === value)
            })
             this.setState({filterArray : filterArray });
-        }
-    }
+        };
+    };
 }
 
 export default EventsListAndAside;

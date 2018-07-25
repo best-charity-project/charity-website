@@ -8,7 +8,7 @@ import 'fullcalendar-reactwrapper/dist/css/fullcalendar.min.css';
 import _ from 'lodash';
 import EventModal from '../EventModal/EventModal';
 
-export default class ExampleComponent extends React.Component {
+export default class Calendar extends React.Component {
 	state = {
         events : [],
         isOpen:false,
@@ -45,7 +45,7 @@ export default class ExampleComponent extends React.Component {
 	render() {      
 	  return (
 	    <div className="Calendar" onClick = {this.click}>        
-		    <FullCalendar
+		   <FullCalendar
                 id = "calendar"
                 height = {700}
 		        header = {{
@@ -95,7 +95,7 @@ export default class ExampleComponent extends React.Component {
                         null }
                 </div>
             </div>   
-		</div>
+		 </div>
 	  );
     }
     renderTime = (event, element, view) => {
