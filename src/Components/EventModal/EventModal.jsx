@@ -9,7 +9,6 @@ import Button from '../Button/Button';
 
 
 class EventModal extends Component {
-
     render() {
         let date = moment(this.props.event.dateStart).format('DD MMMM ');
         let month = date.split(' ')[1];

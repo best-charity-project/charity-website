@@ -16,7 +16,6 @@ class AdminSelectSearch extends Component {
     componentDidMount(){
         (this.props.value) ? this.setState({value:this.props.value}) : this.setState({value:'все'});
         this.createOptions();
-        this.props.getFilter(this.state.value);
     }
     createOptions = () => {
         let array = [];

@@ -73,3 +73,6 @@
       background-color: #ffffff;
       border-radius: 5px;
   } 
+  .news-title, .news-text {
+      cursor: pointer;
+  }

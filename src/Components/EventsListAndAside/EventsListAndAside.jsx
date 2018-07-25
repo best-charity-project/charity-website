@@ -1,14 +1,18 @@
 import React, {Component} from 'react';
 import EventsAside from '../EventsAside/EventsAside';
 import EventsList from '../EventsList/EventsList';
+import EventsCalendar from '../EventsCalendar/EventsCalendar'
 import './EventsListAndAside.css'
 import { server } from "../../api";
 import axios from 'axios';
 import _ from 'lodash';
+import Button from '../Button/Button';
+import switchImg from '../../Assets/AssetsSvg/switch-view.svg';
 
 class EventsListAndAside extends Component {
     state = {
-        currentSource:'вce'
+        currentSource:'вce',
+        calendarPage : false,
     }
     componentDidMount(){
         this.getEventsList();
@@ -17,24 +21,41 @@ class EventsListAndAside extends Component {
     getCurrentFilter = (str) =>{
         (str ==='все') ? this.filterArray('') : this.filterArray(str);
     };
+    getCalendar = () => {
+        this.setState({calendarPage : !this.state.calendarPage});
+    };
     render() {
         return (
             <div className = 'events-aside-list'>
+                <div
+                    className = 'calendar-event'
+                    onClick = {this.getCalendar}
+                >
+                    <img src = {switchImg} />
+                    <span>{!this.state.calendarPage? 'Календарь' : 'Список'} </span>
+                </div>
                 {this.state.filters ? 
                     <EventsAside 
+                        name = 'events-page-aside'
                         filters = {this.state.filters}
                         getCurrentFilter = {this.getCurrentFilter} 
                         
-                    />: null}
-                <EventsList 
-                    currentSource = {this.state.currentSource} 
-                    name = "events-list" 
-                    array = {this.state.filterArray}
-                /> 
+                    />: 
+                    null}
+                    {!this.state.calendarPage ?  
+                         <EventsList 
+                            currentSource = {this.state.currentSource} 
+                            name = "events-list" 
+                            array = {this.state.filterArray}
+                        /> :  
+                        <EventsCalendar
+                            array = {this.state.filterArray}
+                        /> 
+                    }
+              
             </div>
         ) 
     }
-
     getEventsList = () => {
         fetch(`${server}/events`)
         .then(response => response.json())
@@ -42,7 +63,7 @@ class EventsListAndAside extends Component {
             this.setState({events: data.events }, () => {
                 this.filterArray('')
             });
-        })
+        });
     };
     getFiltersList = () => {  
         axios({
@@ -69,8 +90,8 @@ class EventsListAndAside extends Component {
                 return (events.filter === value)
            })
             this.setState({filterArray : filterArray });
-        }
-    }
+        };
+    };
 }
 
 export default EventsListAndAside;
