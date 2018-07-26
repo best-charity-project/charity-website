@@ -89,7 +89,6 @@ choosePort(HOST, DEFAULT_PORT)
         clearConsole();
       }
       console.log(chalk.cyan('Starting the development server...\n'));
-      console.log(process.env.NODE_ENV)
       openBrowser(urls.localUrlForBrowser);
     });
 
