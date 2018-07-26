@@ -235,7 +235,7 @@ class AdminAddProjects extends Component {
                     <div className="admin-media-projects">
                         <div className="admin-image">
                             <label>Изображение:</label>
-                            <div className = {this.state.mediaImageArray.length + this.state.mediaVideoArray.length<4?"admin-button":"button-projects-dislable"}>
+                            <div className = {this.isCorrectArrayLimit()?"admin-button":"button-projects-dislable"}>
                                     <div className = "choose-file">
                                         <span>Выберите файл</span>
                                     </div>
@@ -277,7 +277,7 @@ class AdminAddProjects extends Component {
                             <Button
                                 label = {"Добавить видео"}
                                 clickHandler = {this.addMediaVideo}
-                                name = {this.state.mediaImageArray.length+this.state.mediaVideoArray.length<4?"admin-button admin-projects-media-buttons":"button-projects-dislable"}
+                                name = {this.isCorrectArrayLimit()?"admin-button admin-projects-media-buttons":"button-projects-dislable"}
                             />
                             </div>
                             <AdminValidationWindow
@@ -460,7 +460,8 @@ class AdminAddProjects extends Component {
         let object = {}
         let mediaImageArray = this.state.mediaImageArray
         let formData = new FormData();
-        formData.append('imageData',this.state.mediaImageData);
+        if(this.isCorrectArrayLimit()){
+            formData.append('imageData',this.state.mediaImageData);
             axios({
                 method:'post',
                 url: `${server}/api/uploadGalleryImage/`,
@@ -480,7 +481,9 @@ class AdminAddProjects extends Component {
             })
             .catch(err=>{
                 console.log(err)
-            }) 
+            })
+            console.log(mediaImageArray) 
+        }
     }
     deleteGalleryImage = (e, index) => {  
         e.preventDefault()
@@ -510,7 +513,7 @@ class AdminAddProjects extends Component {
         e.preventDefault()
         let object = {}
         let mediaVideoArray = this.state.mediaVideoArray
-        if(this.state.mediaVideo && /^(https?:\/\/)?([\da-zа-я\.-]+)\.([a-zа-я\.]{2,6})\/([\w\/\-\.]+)([\?].*)?$/igm.test(this.state.mediaVideo)) {
+        if(this.state.mediaVideo && /^(https?:\/\/)?([\da-zа-я\.-]+)\.([a-zа-я\.]{2,6})\/([\w\/\-\.]+)([\?].*)?$/igm.test(this.state.mediaVideo) && this.isCorrectArrayLimit()) {
             object.name = this.state.mediaVideo
             mediaVideoArray.push(object)
             this.setState({
@@ -526,7 +529,7 @@ class AdminAddProjects extends Component {
         } 
     }
     onKeyPress  = (e) => {
-        (e.charCode === 13 && this.state.mediaImageArray.length+this.state.mediaVideoArray.length<4)? this.addMediaVideo(e): null;
+        (e.charCode === 13 && this.isCorrectArrayLimit())? this.addMediaVideo(e): null;
     }
     deleteGalleryVideo = (e,index)=>{
         e.preventDefault()
@@ -535,6 +538,9 @@ class AdminAddProjects extends Component {
         this.setState({
             mediaVideoArray: mediaVideoArray
         })
+    }
+    isCorrectArrayLimit = () => {
+        return this.state.mediaImageArray.length + this.state.mediaVideoArray.length < 4
     }
     onEditorStateChange = (editorState) => {
         this.setState({fullTextEditorState: editorState});

@@ -58,7 +58,7 @@ class AdminCreateEvent extends Component {
                    id: _id,
                    dateStart: dateStart,
                    timeEnd: timeEnd,
-                   text: textEditorState,
+                   textEditorState : textEditorState,
                    title: title,
                    getInfo: false,
                    contactPerson: contactPerson,
@@ -76,6 +76,7 @@ class AdminCreateEvent extends Component {
     }
     
     render() {
+
         return(
             <div className="admin-content"> 
                 <Navigation onLogout={this.onLogout}/>

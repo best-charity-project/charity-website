@@ -5,7 +5,6 @@ import Image from '../Image/Image'
 
 class CustomComponent extends Component {
     render() {
-        // console.log('CustomComponent', this.props)
         const {block, contentState, blockProps} = this.props;    
         const entity = contentState.getEntity(block.getEntityAt(0));
 

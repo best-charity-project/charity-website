@@ -7,59 +7,67 @@ import _ from 'lodash';
 
 class AdminFiltersContent extends Component {
     state = {
-        filters :[]
+        filtersEvents : [],
+        filtersNews : [],
+        filtersProjects : []
     }
     componentDidMount(){
         this.getFiltersList();       
+    };
+    render() {
+        return (
+            <div className = "filters-content">
+                {this.state.filtersEvents.length ?
+                    <FiltersForPages
+                        title = 'События' 
+                        type = 'events' 
+                        list = {this.state.filtersEvents} 
+                    /> : null}
+                {this.state.filtersNews.length  ? 
+                    <FiltersForPages 
+                        title = 'Новости' 
+                        type = 'news' 
+                        list = {this.state.filtersNews}
+                    /> : null}
+                {this.state.filtersProjects.length  ? 
+                    <FiltersForPages 
+                        title = 'Проекты' 
+                        type = 'projects' 
+                        list = {this.state.filtersProjects} 
+                    /> :null}               
+            </div>  
+        )
     }
-    componentWillReceiveProps(curprops, nextprops){
-        if(curprops.list != nextprops.list){
-            this.setState ({filters:nextprops.list})
-        }
-    }
+
     getFiltersList = () => {  
         axios({
             method: 'get',
             url: `${ server }/api/filters`,
         })
-        .then(res =>{
-            this.createFiltersLists(res);
-        })     
-      }
-    getNewFilterList = () => {
-        setTimeout(this.getFiltersList,100);
-      }
-    render() {
-        return (
-            <div className="filters-content">
-                {this.state.filtersEvents ? <FiltersForPages title = 'События' type = 'events' list = {this.state.filtersEvents} getNewFilterList = {this.getNewFilterList} /> : null }
-                {this.state.filtersNews ? <FiltersForPages title = 'Новости' type = 'news' list = {this.state.filtersNews} getNewFilterList = {this.getNewFilterList} /> : null}
-                {this.state.filtersProjects ? <FiltersForPages title = 'Проекты' type = 'projects' list = {this.state.filtersProjects} getNewFilterList = {this.getNewFilterList} /> :null}            
-            </div>  
-        )
-    }
+        .then(res => this.createFiltersLists(res));     
+      };
     createFiltersLists = (res) => {
-        let filterList = res.data.filterList;
-        let filtersEvents = _.filter(filterList , function(el){
+        let filtersList = res.data.filterList;
+        let filtersEvents = _.filter(filtersList , function(el){
             if(el.type === 'events'){
                 return el
             }
-        })
-        let filtersNews = _.filter(filterList , function(el){
+        });
+        let filtersNews = _.filter(filtersList , function(el){
             if(el.type === 'news'){
                 return el
             }
-        })
-        let filtersProjects = _.filter(filterList , function(el){
+        });
+        let filtersProjects = _.filter(filtersList , function(el){
             if(el.type === 'projects'){
                 return el
             }
-        })
+        });
         this.setState({
             filtersEvents:filtersEvents,
             filtersNews:filtersNews,
             filtersProjects:filtersProjects
-        })
-    }
+        });
+    };
 }
 export default AdminFiltersContent;
