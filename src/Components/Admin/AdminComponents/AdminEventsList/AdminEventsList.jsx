@@ -34,7 +34,7 @@ class AdminEventsList extends Component {
     deleteEvent = (event) => {
         axios({
             method: 'delete',
-            url: `${server}/events`,
+            url: `${server}/api/events`,
             data: event,
             config: { headers: {
                 Accept: 'application/json',
@@ -50,7 +50,7 @@ class AdminEventsList extends Component {
 
     getEventInfo = (event) => {
         let id = event._id
-        const URL = `${ server }/events/`+id;
+        const URL = `${ server }/api/events/`+id;
         fetch(URL)
         .then(response => response.json())
         .then(data => {

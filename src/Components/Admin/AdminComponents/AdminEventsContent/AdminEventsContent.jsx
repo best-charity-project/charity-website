@@ -45,7 +45,7 @@ class AdminEventsContent extends Component {
         )
     }
     getList = () => {
-        fetch(`${ server }/events`)
+        fetch(`${ server }/api/events`)
         .then(response => response.json())
         .then(data => {         
               this.setState({ events: data.events }              

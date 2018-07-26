@@ -80,7 +80,7 @@ class ControlledEditor extends Component {
         formData.append('image', file);
         return axios({
             method: 'post',
-            url: `${server}/uploadImages/`,
+            url: `${server}/api/uploadImages/`,
             data: formData,
             config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
         })

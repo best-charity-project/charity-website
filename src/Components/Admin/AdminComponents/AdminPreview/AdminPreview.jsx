@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Route, withRouter} from 'react-router-dom';
 import moment from 'moment';
 import {Editor} from 'draft-js';
-
+import {server} from '../../../../api'
 import customRendererFn from '../AdminEditor/Renderer';
 import Button from '../../../Button/Button';
 import './AdminPreview.css';
@@ -16,7 +16,7 @@ class AdminPreview extends Component {
                         <div><img src = {this.props.imageData ? 
                             this.props.imageData : 
                                 this.props.image ?
-                                'http://localhost:3001/images/' + this.props.image :
+                                `${server}/images/${this.props.image}` :
                                 null} alt = "" />
                         </div> 
                         <p className = 'full-news-date'>

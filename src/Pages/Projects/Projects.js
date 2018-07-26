@@ -31,7 +31,7 @@ class Projects extends Component {
     }
 
     componentDidMount() {
-        axios.get(`${server}/projects`).then(res => {
+        axios.get(`${server}/api/projects`).then(res => {
             this.setState({
                 currentDisplayedProject: res.data.projects[0],
                 projects: res.data.projects,
@@ -45,7 +45,7 @@ class Projects extends Component {
     getFiltersList = () => {
         axios({
             method: 'get',
-            url: `${server}/filters`,
+            url: `${server}/api/filters`,
         }).then(res => {
             let filterList = res.data.filterList;
             let filtersProjects = _.filter(filterList, function(el) {

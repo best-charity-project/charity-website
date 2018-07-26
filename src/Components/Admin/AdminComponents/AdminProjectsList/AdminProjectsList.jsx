@@ -34,7 +34,7 @@ class AdminProjectsList extends Component {
     }
    
       getProjectInfo = (id) => {
-        const URL = `${ server }/projects/${id}`;
+        const URL = `${ server }/api/projects/${id}`;
         fetch(URL)
         .then(response => response.json())
         .then(data => {
