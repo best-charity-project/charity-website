@@ -3,6 +3,7 @@ import './SubscribtionForm.css';
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
 import { server } from '../../api';
+import axios from 'axios';
 
 
 class SubscribtionForm extends Component {
@@ -32,16 +33,17 @@ class SubscribtionForm extends Component {
     
     onSubscribe = () => {
         const newValue = this.state.value;
-        fetch(` ${server}/api/subscription/newsubscription`, {
-            method: 'post',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
+        axios({
+            url:` ${server}/api/subscription/newsubscription`,
+            method:'post',
+            config:{
+                headers:{
+                    'Content-Type': 'application/json'
+                }
             },
-            credentials: 'cors',
-            body: JSON.stringify({email: newValue})
+            mode:'cors',
+            data:{email: newValue}
         })
-            .then(res => res.json())
     }
     render() {
         return (
