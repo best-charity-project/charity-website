@@ -6,6 +6,7 @@ import '../AdminSelectSearch/AdminSelectSearch.css';
 import TextField from '../../../TextField/TextField';
 import Button from '../../../Button/Button';
 import {server} from '../../../../api';
+import axios from 'axios'
 
 class AdminSelectSearch extends Component {
     state = {
@@ -89,13 +90,15 @@ class AdminSelectSearch extends Component {
 
     addNewFilter = (e) => {
         e.preventDefault();
-        fetch(`${ server }/api/filters`, {
-            method : 'POST',
-            headers : {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-        },
-        body : JSON.stringify({title:this.state.newFilterValue, type:'news'}),
+        axios({
+            url:`${ server }/api/filters`,
+            method:'post',
+            data:{
+                title:this.state.newFilterValue, type:'news'
+            },
+            config:{
+                'Content-Type': 'application/json'
+            }
         })
         this.setState({newFilterValue: '', value: this.state.newFilterValue });
         let arrayFilter = this.state.filters;

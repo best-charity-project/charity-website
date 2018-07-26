@@ -17,21 +17,15 @@ class AdminProjectsContent extends Component {
         checkedIds:[]
     }
     componentDidMount(){
-        fetch(`${server}/api/projects?isAdmin=true`,{
-            method: 'GET',
-            mode: 'cors'
+        axios({
+            url:`${server}/api/projects?isAdmin=true`,
+            method:'get',
+            mode:'cors'
         })
-        .then(response => {
-            if (response.ok) {
-                return response.json()
-            } else {
-            throw new Error('Something went wrong ...')
-            }
-        })
-        .then(data => {         
+        .then(res => {        
               this.setState({
-                projects : data.projects,
-                filteredProjects:data.projects,
+                projects : res.data.projects,
+                filteredProjects:res.data.projects,
                 isLoading: false
             })
         })
@@ -127,18 +121,12 @@ class AdminProjectsContent extends Component {
     }
     findProjects = (name) => {
         if(!name) {
-            fetch(`${server}/api/projects?isAdmin=true`, {
-                method: 'GET', 
-                mode: 'cors'
+                axios({
+                    url:`${server}/api/projects?isAdmin=true`,
+                    method:'get',
+                    mode:'cors'
                 })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    } else {
-                        throw new Error('Something went wrong ...')
-                    }
-                })
-                .then(data => this.setState({filteredProjects: data.projects}))
+                .then(res => this.setState({filteredProjects: res.data.projects}))
                 .catch(error => this.setState({error}))
         } else {
             const {projects} = this.state

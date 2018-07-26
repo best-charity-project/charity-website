@@ -50,11 +50,12 @@ class AdminEventsList extends Component {
 
     getEventInfo = (event) => {
         let id = event._id
-        const URL = `${ server }/api/events/`+id;
-        fetch(URL)
-        .then(response => response.json())
-        .then(data => {
-            this.setState({ eventInfo: data });
+        axios({
+            url:`${ server }/api/events/${id}`,
+            method:'get'
+        })
+        .then(res => {
+            this.setState({ eventInfo: res.data });
             this.props.history.push({
                 pathname: '/admin-panel/events/create',
                 state: { detail: this.state.eventInfo}

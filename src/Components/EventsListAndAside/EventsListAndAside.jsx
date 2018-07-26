@@ -57,10 +57,11 @@ class EventsListAndAside extends Component {
         ) 
     }
     getEventsList = () => {
-        fetch(`${server}/api/events`)
-        .then(response => response.json())
-        .then(data => {
-            this.setState({events: data.events }, () => {
+        axios({
+            url:`${server}/api/events`
+        })
+        .then(res => {
+            this.setState({events: res.data.events }, () => {
                 this.filterArray('')
             });
         });

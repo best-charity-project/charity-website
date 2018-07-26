@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Button from '../../../Button/Button';
 import './AdminUser.css';
 import { server } from '../../../../api'
+import axios from 'axios'
 
 class AdminUser extends Component {
     state = {
@@ -29,20 +30,16 @@ class AdminUser extends Component {
         ) 
     }
     handleClick = () => {
-        fetch(`${server}/api/subscription/${this.props.user._id}/subscribe`, {
-            method: 'PUT',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            }})
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                } else {
-                    throw new Error('Something went wrong ...')
+        axios({
+            url:`${server}/api/subscription/${this.props.user._id}/subscribe`,
+            method:'put',
+            config:{
+                headers:{
+                    'Content-Type': 'application/json'
                 }
-            })
-            .then(data => this.setState({isSubscribe: data.subscriber.isSubscribeStatus}))
+            }
+        })
+            .then(res => this.setState({isSubscribe: res.data.subscriber.isSubscribeStatus}))
             .catch(error => this.setState({error}))
     }
 }

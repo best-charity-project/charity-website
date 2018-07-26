@@ -21,10 +21,9 @@ getFilteredNews  = (str) => {
 }
 
 getNews= () => {
-  fetch(`${server}/api/news`)
-  .then(response => response.json())
-  .then(data => {
-      this.setState({news: data.news }, () => {
+  axios({url:`${server}/api/news`})
+  .then(res => {
+      this.setState({news: res.data.news }, () => {
           this.filterArray('');
       });
   })
