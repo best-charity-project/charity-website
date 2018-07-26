@@ -482,7 +482,6 @@ class AdminAddProjects extends Component {
             .catch(err=>{
                 console.log(err)
             })
-            console.log(mediaImageArray) 
         }
     }
     deleteGalleryImage = (e, index) => {  
