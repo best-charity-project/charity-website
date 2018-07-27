@@ -4,6 +4,7 @@ import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
 import { server } from '../../api';
 import axios from 'axios';
+import ToastrContainer, {Toast} from 'react-toastr-basic'
 
 
 class SubscribtionForm extends Component {
@@ -26,11 +27,15 @@ class SubscribtionForm extends Component {
      clickHandler = () => {
         this.setState({sendToValidation:true});
         if(this.state.valid){
+            this.showToast();
             this.onSubscribe();
             this.setState({value:''})
         }
     }
-    
+    showToast(){
+        Toast('Вы подписались на наши уведомления!');
+    }
+
     onSubscribe = () => {
         const newValue = this.state.value;
         axios({
@@ -47,7 +52,8 @@ class SubscribtionForm extends Component {
     }
     render() {
         return (
-            <div className='subscribtion-form'>
+            <div className='subscribtion-form'> 
+                <ToastrContainer />
                 <div className='wrapper-input'>
                     <TextField 
                         value = {this.state.value }
