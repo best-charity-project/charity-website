@@ -12,6 +12,7 @@ import './AdminCreateEvent.css';
 import {server} from '../../../../api';
 import Editor from  "../AdminEditor/AdminEditor";
 import AdminSelectSearch from '../AdminSelectSearch/AdminSelectSearch';
+import jsonpAdapter from 'axios-jsonp';
 
 class AdminCreateEvent extends Component { 
     state = {
@@ -244,7 +245,12 @@ class AdminCreateEvent extends Component {
                             label = 'Отменить' 
                             clickHandler = {this.onCancel}
                         /> 
-                    </div>  
+                    </div> 
+                    <Button 
+                            name = "button-admin button-admin-background" 
+                            label = 'Опубликова вк' 
+                            clickHandler = {this.publish}
+                        />  
                 </div>
             </div>
         )
@@ -355,6 +361,17 @@ class AdminCreateEvent extends Component {
       }
     getInputTimeEnd = () => {
         this.setState({getInputTimeEnd : true});
-    } 
+    };
+    publish= () => {
+        axios({
+            method: 'post',
+            adapter: jsonpAdapter,
+            url: `https://api.vk.com/method/wall.post?owner_id=498884205&friends_only=1&from_group=1&message=ПРОСТИ&&access_token=069420599c42ac7166bddcb10f632e4a77e864c6d755cea583457aa2db0f07b237f512b0e38dcdff70863&v=5.80`,
+            
+        })        
+        .then(res =>{
+           console.log(res.data)
+        })
+    }; 
 }
 export default AdminCreateEvent;
