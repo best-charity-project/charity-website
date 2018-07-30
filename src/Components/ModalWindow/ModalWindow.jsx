@@ -13,24 +13,21 @@ class ModalWindow extends Component {
         imageArr: [],
         deletedImages: []
     }
-    /* modalRef = React.createRef() */
 
     componentWillReceiveProps(nextProps) {
-        //console.log('ModalWindow.componentWillReceiveProps')
         nextProps.isOpen ? null : this.setState({imageArr: []})
         nextProps.imageArr ? this.setState({
             imageArr: nextProps.imageArr}) : null
     }
     
     render() {
-        //console.log('ModalWindow.render')
         const SortableItem = SortableElement(({link, sortIndex}) =>
             <div className = 'admin-title-image'>
                 <img src = {link} alt = '' className = 'slider-image' />
                 <Button 
                     name = 'button-admin admin-cancel'
                     label = {<span aria-hidden='true'>&times;</span>} 
-                    clickHandler =  {() => {this.deleteGalleryImage(sortIndex)} }
+                    clickHandler =  {() => this.deleteGalleryImage(sortIndex)}
                 />
             </div>      
         );
@@ -133,7 +130,7 @@ class ModalWindow extends Component {
         this.setState({
             imageArr: imageArr,
             deletedImages: deletedImages
-        }, () => {this.props.getDeletedImages(this.state.deletedImages)})
+        }, () => this.props.getDeletedImages(this.state.deletedImages))
     }
     addImage = () => {
         let formData  = new FormData();
@@ -157,8 +154,7 @@ class ModalWindow extends Component {
     }
     saveModalWindow = (e) => {
         e.preventDefault()
-        //console.log('save modal window', this.state.imageArr)
-        this.props.onChangeImageArr(this.state.imageArr, () => {this.props.addSlider(e)})
+        this.props.onChangeImageArr(this.state.imageArr, () => this.props.addSlider(e))
     }
 }
 export default ModalWindow;

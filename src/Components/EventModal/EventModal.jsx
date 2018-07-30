@@ -41,9 +41,9 @@ class EventModal extends Component {
                         {this.props.event.participation ? <p className = 'tickets-event-modal'> <span>Билеты: </span>{this.props.event.linkParticipation ? <a href = {this.props.event.linkParticipation } target="_blank" > {this.props.event.participation }</a>: this.props.event.participation }  </p> :null}
                     </div>                
                     <div className = 'content-event-modal'>
-                        {this.state.news.fullText ?         
+                        {this.props.event.text ?         
                             <Editor 
-                                editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(this.state.news.fullText)))} 
+                                editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.event.text)))} 
                                 readOnly={true} 
                                 blockRendererFn={customRendererFn}
                             /> :

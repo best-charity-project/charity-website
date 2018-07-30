@@ -5,8 +5,8 @@ import { server } from '../../../../api';
 import {withRouter} from "react-router-dom";
 class AdminNewsList extends Component {
         state = {
-            showNews:false,
-            newsInfo : ''
+            showNews: false,
+            newsInfo: ''
         }
     render() {
         return (

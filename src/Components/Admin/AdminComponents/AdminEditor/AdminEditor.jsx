@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Editor} from 'react-draft-wysiwyg'; 
-import {EditorState, convertToRaw} from 'draft-js';
+import {EditorState} from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios';
 
@@ -20,7 +20,6 @@ class ControlledEditor extends Component {
     }
 
     componentDidMount() {
-        // console.log('AdminEditor.componenDidMount', convertToRaw(this.props.initialEditorState.getCurrentContent()))
         this.props.initialEditorState ? 
             this.setState({editorState: this.props.initialEditorState}) :
             this.setState({editorState: EditorState.createEmpty()}) 
@@ -35,7 +34,7 @@ class ControlledEditor extends Component {
                     wrapperClassName="wrapper"
                     toolbarClassName="toolbar"
                     editorClassName="editor"
-                    toolbarCustomButtons={[<AdminSlider setReadOnly={this.setReadOnly}/>]} 
+                    toolbarCustomButtons={[<AdminSlider setReadOnly={this.setReadOnly} getDeletedImages = {this.props.getDeletedImages}/>]} 
                     localization={{
                         locale: 'ru'
                     }}

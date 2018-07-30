@@ -33,7 +33,8 @@ class TextField extends Component {
 					name = {this.props.name} 
 					placeholder = {this.props.placeholder} 
 					onChange = {this.valueChange}
-					onFocus = {this.props.onFocusInput} 
+					onFocus = {this.props.onFocusInput}
+					onBlur = {() => console.log('blured')} 
 				/>
 				{((this.props.sendToValidation)&&!(this.state.error))? <Error/> : null}
 			</div>
