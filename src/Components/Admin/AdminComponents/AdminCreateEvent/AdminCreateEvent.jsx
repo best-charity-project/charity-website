@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {EditorState, convertToRaw, convertFromRaw} from 'draft-js';
 import axios from 'axios';
 import _ from 'lodash';
-
+import moment from 'moment';
 import AdminDatePicker from '../AdminDatePicker/AdminDatePicker';
 import Navigation from '../../../Navigation/Navigation';
 import NavBar from '../../../NavBar/NavBar';
@@ -32,7 +32,8 @@ class AdminCreateEvent extends Component {
         textEditorState: EditorState.createEmpty(),
         filter:'',
         getInputTimeEnd : false,
-        deletedImages: []  
+        deletedImages: [],
+        idVK:'',  
     }
     componentWillMount (){
         this.getFiltersList();
@@ -52,7 +53,8 @@ class AdminCreateEvent extends Component {
                 website,
                 filter,
                 text,
-                _id
+                _id,
+                idVK
                } = this.props.location.state.detail;
                let textEditorState = EditorState.createWithContent(convertFromRaw(JSON.parse(text)));
                this.setState({
@@ -71,13 +73,13 @@ class AdminCreateEvent extends Component {
                    website : website,
                    participation: participation,
                    organizers: organizers,
-                   filter: filter
+                   filter: filter,
+                   idVK:idVK
                })
         }
     }
     
     render() {
-
         return(
             <div className="admin-content"> 
                 <Navigation onLogout={this.onLogout}/>
@@ -247,10 +249,10 @@ class AdminCreateEvent extends Component {
                         /> 
                     </div> 
                     <Button 
-                            name = "button-admin button-admin-background" 
-                            label = 'Опубликова вк' 
-                            clickHandler = {this.publish}
-                        />  
+                        name = "button-admin button-admin-background" 
+                        label = {!this.state.idVK?'Опубликова запись вк':'Обновить запись вк' }
+                        clickHandler = {this.publish}
+                    />  
                 </div>
             </div>
         )
@@ -362,16 +364,39 @@ class AdminCreateEvent extends Component {
     getInputTimeEnd = () => {
         this.setState({getInputTimeEnd : true});
     };
-    publish= () => {
-        axios({
-            method: 'post',
-            adapter: jsonpAdapter,
-            url: `https://api.vk.com/method/wall.post?owner_id=498884205&friends_only=1&from_group=1&message=ПРОСТИ&&access_token=069420599c42ac7166bddcb10f632e4a77e864c6d755cea583457aa2db0f07b237f512b0e38dcdff70863&v=5.80`,
-            
-        })        
-        .then(res =>{
-           console.log(res.data)
-        })
+    publish = () => {
+        // let a = document.querySelector('.image-editor')
+        // a? console.log(a.attributes.src):null;
+        let token = '3af1950569018a83d220116bc7b9ae2c1a88abe51862011dd39be884689ea489df2f4c910e7b20f732d0d';
+        let id = '-169499477';
+        let title = `${this.state.title}%0A`;
+        let place = this.state.place?`Место: ${this.state.place}%0A`: '';        
+        let time = this.state.dateStart?this.state.timeEnd? `Время: ${moment(this.state.dateStart).format("D MMMM YYYY, H : mm")}-${moment(this.state.timeEnd).format(" H : mm")}%0A` : `Время: ${moment(this.state.dateStart).format("D MMMM YYYY, H : mm")}%0A`:'';
+        let participation = this.state.participation ? `Участие: ${this.state.participation}%0A`:'';
+        let linkParticipation = this.state.linkParticipation ? this.state.participation.match(/[0-9]/)? `Купить билет: ${this.state.linkParticipation}%0A`: `Зарегистрироваться: ${this.state.linkParticipation}%0A`:'';
+        let contacts = this.state.contactPerson||this.state.contactPhone ? `Контакты: ${this.state.contactPerson}${this.state.contactPhone}%0A`:'';
+        let textfromEditor = convertToRaw(this.state.textEditorState.getCurrentContent()).blocks;
+        let info = '';
+        for (let i = 0; i< textfromEditor.length; i++){
+            info+=textfromEditor[i].text + '%0A';
+        }
+        let text = `${title}${place}${time}${participation}${linkParticipation}${contacts}${info}`;
+        this.state.idVK ? 
+            axios({
+                method: 'get',
+                adapter: jsonpAdapter,
+                url: `https://api.vk.com/method/wall.edit?owner_id=${id}&post_id=${this.state.idVK}&message=${text}&access_token=${token}&v=5.80`            
+            }): 
+            axios({
+                method: 'post',
+                adapter: jsonpAdapter,
+                url: `https://api.vk.com/method/wall.post?owner_id=${id}&from_group=0&message=${text}&access_token=${token}&v=5.80`            
+            })        
+            .then(res =>{
+                this.setState({
+                    idVK : res.data.response.post_id
+                })
+            })
     }; 
 }
 export default AdminCreateEvent;

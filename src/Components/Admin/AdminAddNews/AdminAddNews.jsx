@@ -14,6 +14,7 @@ import Navigation from '../../Navigation/Navigation';
 import NavBar from '../../NavBar/NavBar';
 import AdminPreview from '../AdminComponents/AdminPreview/AdminPreview';
 import AdminSelectSearch from '../../Admin/AdminComponents/AdminSelectSearch/AdminSelectSearch';
+import jsonpAdapter from 'axios-jsonp';
 import './AdminAddNews.css';
 
 class AdminAddNews extends Component {
@@ -28,7 +29,8 @@ class AdminAddNews extends Component {
         image: '',
         date: '',
         value: 0,
-        deletedImages: []
+        deletedImages: [],
+        idVK : ''
     }
     cropperRef = React.createRef();
 
@@ -127,6 +129,13 @@ class AdminAddNews extends Component {
                                 null
                             }
                         </div>
+                        <div>
+                            <Button 
+                                name = "button-admin button-admin-background" 
+                                label = {!this.state.idVK?'Опубликова запись вк':'Обновить запись вк' }
+                                clickHandler = {this.publishVK}
+                            /> 
+                        </div> 
                         <div className="admin-buttons">
                             <Route render={({history}) => (
                                 <Button 
@@ -327,6 +336,34 @@ class AdminAddNews extends Component {
             })
         })     
     }
+    publishVK = () => {
+            let token = '3af1950569018a83d220116bc7b9ae2c1a88abe51862011dd39be884689ea489df2f4c910e7b20f732d0d';
+            let id = '-169499477';
+            let title = `${this.state.title}%0A`;
+            let textfromEditor = convertToRaw(this.state.fullTextEditorState.getCurrentContent()).blocks;
+            let info = '';
+            for (let i = 0; i< textfromEditor.length; i++){
+                info+=textfromEditor[i].text + '%0A';
+            }
+            let text = `${title}${info}`;
+            this.state.idVK ? 
+                axios({
+                    method: 'get',
+                    adapter: jsonpAdapter,
+                    url: `https://api.vk.com/method/wall.edit?owner_id=${id}&post_id=${this.state.idVK}&message=${text}&access_token=${token}&v=5.80`            
+                }): 
+                axios({
+                    method: 'post',
+                    adapter: jsonpAdapter,
+                    url: `https://api.vk.com/method/wall.post?owner_id=${id}&from_group=0&message=${text}&access_token=${token}&v=5.80`            
+                })        
+                .then(res =>{
+                    console.log(res.data)
+                    this.setState({                        
+                        idVK : res.data.response.post_id
+                    })
+                })
+        }; 
 }
 
 export default withRouter(AdminAddNews);

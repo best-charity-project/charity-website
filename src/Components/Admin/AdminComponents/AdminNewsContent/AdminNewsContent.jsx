@@ -6,6 +6,8 @@ import './AdminNewsContent.css';
 import { server } from '../../../../../src/api';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
+import _ from 'lodash';
+import jsonpAdapter from 'axios-jsonp';
 import {confirmAlert} from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
 import rubbishImg from '../../../../Assets/AssetsSvg/mbri-trash.svg';
@@ -93,7 +95,19 @@ class AdminNewsContent extends Component {
         .catch((error) => {
             console.log(error);
         });
+        this.deletePostVK(news);
     } 
+    deletePostVK = (news) => {
+        console.log(news)
+        let token = '3af1950569018a83d220116bc7b9ae2c1a88abe51862011dd39be884689ea489df2f4c910e7b20f732d0d';
+        let id = '-169499477';
+        axios({
+            method: 'delete',
+            adapter: jsonpAdapter,
+            url: `https://api.vk.com/method/wall.delete?owner_id=${id}&post_id=${news.idVK}&access_token=${token}&v=5.80`            
+        })
+        .then(res => console.log(res.data)) 
+      };
     checkId = (id) => {
         let tempId = this.state.checkedIds;
         if (~this.state.checkedIds.indexOf(id)) {
@@ -138,7 +152,21 @@ class AdminNewsContent extends Component {
         .catch(function (error) {
             console.log(error);
         });
+        this.deleteChosenPostsVk();
+        
     } 
+    deleteChosenPostsVk = () => {
+        let newsState = this.state.news;
+        let deletionsNews = [];
+        for (let i = 0; i < this.state.checkedIds.length; i++) {
+            let arrayIds = this.state.checkedIds;
+            let b = _.filter(newsState , (news) => {
+                if(news._id === arrayIds[i]){
+                    this.deletePostVK(news);
+                } 
+            });            
+        }
+    }
     findNews = (title) => {
         if(!title) {
             fetch(`${server}/news?isAdmin=true`, {

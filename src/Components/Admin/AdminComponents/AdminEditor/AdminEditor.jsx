@@ -26,6 +26,7 @@ class ControlledEditor extends Component {
     }
     
     render() {
+        console.log(this.props)
         let options = ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'embedded', 'emoji', 'remove', 'history']
         if(!this.props.isProject) {
             options.push('image')
