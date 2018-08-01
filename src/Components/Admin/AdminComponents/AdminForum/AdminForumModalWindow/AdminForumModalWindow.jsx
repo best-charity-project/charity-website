@@ -108,7 +108,7 @@ class AdminForumModalWindow extends Component {
         if(this.state.topicTitle || this.state.groupTitle){     
             axios({
                 method: 'post',
-                url: this.state.topicTitle ? `${ server }/forumTopic` : `${ server }/forumGroup`,
+                url: this.state.topicTitle ? `${ server }/api/forumTopic` : `${ server }/api/forumGroup`,
                 data: this.state,
                 config: { headers: {
                     Accept: 'application/json',

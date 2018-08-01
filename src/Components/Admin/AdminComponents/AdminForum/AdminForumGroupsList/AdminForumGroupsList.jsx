@@ -102,7 +102,7 @@ class AdminForumGroupsList extends Component {
     getRecords = () => {
         axios({
             method: 'get',
-            url: `${ server }/forumGroup`
+            url: `${ server }/api/forumGroup`
         })
         .then((result) => {
             this.setState({  
@@ -118,7 +118,7 @@ class AdminForumGroupsList extends Component {
     getTopics = () => {
         axios({
             method: 'get',
-            url: `${ server }/forumTopic`
+            url: `${ server }/api/forumTopic`
         })
         .then((result) => {
             this.setState({  
@@ -136,7 +136,7 @@ class AdminForumGroupsList extends Component {
             console.log(title)
             axios({
                 method: 'GET', 
-                url: `${server}/forumSearch?query=${title}`
+                url: `${server}/api/forumSearch?query=${title}`
             })
             .then((result) => {
                 this.setState({
@@ -198,7 +198,7 @@ class AdminForumGroupsList extends Component {
     deleteGroups = () => {
         axios({
             method: 'delete',
-            url: `${server}/forumGroup`,
+            url: `${server}/api/forumGroup`,
             data: {'checkedGroupsIds': this.state.checkedGroupsIds},
             config: { headers: {
                 Accept: 'application/json',
@@ -222,7 +222,7 @@ class AdminForumGroupsList extends Component {
     deleteTopics = () => {
         axios({
             method: 'delete',
-            url: `${server}/forumTopic`,
+            url: `${server}/api/forumTopic`,
             data: {'checkedTopicsIds': this.state.checkedTopicsIds},
             config: { headers: {
                 Accept: 'application/json',
@@ -262,7 +262,7 @@ class AdminForumGroupsList extends Component {
         let id = item._id
         axios({
             method: 'delete',
-            url: `${server}/forumGroup/` + id,
+            url: `${server}/api/forumGroup/` + id,
             data: item,
             config: { headers: {
                 Accept: 'application/json',
@@ -286,7 +286,7 @@ class AdminForumGroupsList extends Component {
         let id = item._id
         axios({
             method: 'delete',
-            url: `${server}/forumTopic/` + id,
+            url: `${server}/api/forumTopic/` + id,
             data: item,
             config: { headers: {
                 Accept: 'application/json',

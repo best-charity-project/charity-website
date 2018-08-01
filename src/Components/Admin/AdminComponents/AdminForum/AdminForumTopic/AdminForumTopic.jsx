@@ -142,7 +142,7 @@ class AdminForumTopic extends Component {
         }, () => {
             axios({
                 method: 'put',
-                url: `${server}/forumTopic/` + this.state.id,
+                url: `${server}/api/forumTopic/` + this.state.id,
                 data: this.state,
                 config: { headers: {
                     Accept: 'application/json',

@@ -134,7 +134,7 @@ class AdminForumGroup extends Component {
         }, () => {
             axios({
                 method: 'put',
-                url: `${server}/forumGroup/` + this.state.id,
+                url: `${server}/api/forumGroup/` + this.state.id,
                 data: this.state,
                 config: { headers: {
                     Accept: 'application/json',
