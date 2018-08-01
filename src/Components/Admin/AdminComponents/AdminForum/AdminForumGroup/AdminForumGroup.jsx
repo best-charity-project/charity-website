@@ -18,21 +18,22 @@ class AdminForumGroup extends Component {
         isTopicsOpen: false,
     }
     componentDidMount (){
-        console.log('AdminForumGroup mount')
         this.setState({
             id: this.props.id,
             groupTitle: this.props.title,
             newTitle: this.props.title,
+            isTopicsOpen: this.props.isTopicsOpen
         })
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('AdminForumGroup props: ', nextProps.filteredTopics, nextProps.isFiltered)
         nextProps.isModalWindowOpen || nextProps.isFiltered ? 
             this.setState({
                 isTopicsOpen: nextProps.isTopicsOpen
             }) :
-            null
+            this.setState({
+                isTopicsOpen: false
+            })
     }
 
     render() {
@@ -49,7 +50,6 @@ class AdminForumGroup extends Component {
                             className = {this.state.isChanging ? 'admin-forum-record-title active' : 'admin-forum-record-title'} 
                             name = 'admin-forum-record-title'
                             readOnly = {!this.state.isChanging ? 'true' : null}
-                            // autoFocus = {this.state.isChanging ? 'true' : 'false'}
                             value = {this.state.newTitle}
                             ref={(input) => {this.nameInput = input}} 
                             onChange = {this.onChange}
@@ -97,7 +97,6 @@ class AdminForumGroup extends Component {
                             getTopics = {this.props.getTopics}
                             checkId = {this.props.checkTopicsId}
                             groups = {this.props.groups}
-                            isFiltered = {this.props.isFiltered}
                         /> 
                     </div> :
                     null

@@ -9,21 +9,17 @@ class AdminForumTopicsList extends Component {
     }
 
     componentDidMount() {
-        this.props.getTopics()
-        console.log(this.props.filteredTopics)
         this.props.filteredTopics.length ?       
             this.setState({
-                filteredTopics: this.state.filteredTopics,
+                filteredTopics: this.props.filteredTopics,
             }) :
         null
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps.filteredTopics, nextProps.isFiltered)
-        nextProps.filteredTopics /* || nextProps.groups */ ?        
+        nextProps.filteredTopics ?        
             this.setState({
                 filteredTopics: nextProps.filteredTopics,
-                // groups: nextProps.groups
             }) 
             :
         null

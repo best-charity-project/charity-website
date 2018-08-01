@@ -38,7 +38,6 @@ class AdminForumTopic extends Component {
                             className = {this.state.isChanging ? 'admin-forum-record-title active' : 'admin-forum-record-title'} 
                             name = 'admin-forum-record-title'
                             readOnly = {!this.state.isChanging ? 'true' : null}
-                            // autoFocus = {this.state.isChanging ? 'true' : 'false'}
                             value = {this.state.newTitle}
                             ref={(input) => {this.nameInput = input}} 
                             onChange = {this.onChange}
@@ -101,12 +100,6 @@ class AdminForumTopic extends Component {
                         />
                     </div> 
                 </div>
-                {/* {this.state.isTopicsOpen ? 
-                    <div className = 'admin-forum-posts-list'>
-                        <AdminForumPostsList /> 
-                    </div> :
-                    null
-                }      */}
            </div>
         )
     }
@@ -130,10 +123,6 @@ class AdminForumTopic extends Component {
         this.setState({
             group_id: event.target.value
         })
-    }
-
-    showPosts = () => {
-        
     }
 
     changeRecord = () => {
@@ -166,7 +155,6 @@ class AdminForumTopic extends Component {
                     isMoving: false
                 })
                 this.props.getTopics()
-                // this.props.showTopics()
             })
             .catch(function (error) {
                 console.log(error);

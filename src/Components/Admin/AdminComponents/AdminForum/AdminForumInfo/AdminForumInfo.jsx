@@ -22,19 +22,19 @@ class AdminForumInfo extends Component {
     render() {
         return(
             <div className = 'forum-info'>
-                <div className = 'forum-info-block' /* onClick = {() => this.props.changeMode('groups')} */>
+                <div className = 'forum-info-block'>
                     <div>Количество групп:</div>
                     <div className = 'forum-info-number'>{this.state.groupsLength}</div>
                 </div>
-                <div className = 'forum-info-block' /* onClick = {() => this.props.changeMode('topics')} */>
+                <div className = 'forum-info-block'>
                     <div>Количество тем:</div>
                     <div className = 'forum-info-number'>{this.state.topicsLength}</div>
                 </div>
-                <div className = 'forum-info-block' /* onClick = {() => this.props.changeMode('posts')} */>
+                <div className = 'forum-info-block'>
                     <div>Количество ответов:</div>
                     <div className = 'forum-info-number'>{this.state.postsLength}</div>
                 </div>
-                <div className = 'forum-info-block'/*  onClick = {() => this.props.changeMode('users')} */>
+                <div className = 'forum-info-block'>
                     <div>Количество пользователей:</div>
                     <div className = 'forum-info-number'>{this.state.usersLength}</div>
                 </div>

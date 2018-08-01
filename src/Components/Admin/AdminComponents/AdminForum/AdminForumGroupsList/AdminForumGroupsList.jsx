@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import _ from 'lodash';
 import {confirmAlert} from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
 
@@ -28,7 +27,6 @@ class AdminForumGroupsList extends Component {
     }
 
     componentDidMount() {
-        console.log('AdminForumGroupList mount')
         this.getRecords()
         this.getTopics()
         document.addEventListener('keyup', (e) => {
@@ -39,7 +37,6 @@ class AdminForumGroupsList extends Component {
     }
 
     render() {
-        console.log("render group list", this.state.filteredTopics)
         return(
             <div className = 'forum-list'>
                 <div key = "search-delete" className = 'search-delete'>
@@ -135,167 +132,32 @@ class AdminForumGroupsList extends Component {
     }
 
     findRecord = (title) => {
-        console.log('findRecord')
-        if(!title) {
-            console.log('axios')
+        if(title) {
+            console.log(title)
             axios({
                 method: 'GET', 
-                url: `${server}/forumSearch`
+                url: `${server}/forumSearch?query=${title}`
             })
             .then((result) => {
                 this.setState({
                     filteredGroups: result.data.groupsList,
                     filteredTopics: result.data.topicsList,
+                    isFiltered: true,
+                    isTopicsOpen: true
                 }) 
             })
             .catch((error) => {
                 console.log(error);
-            });
+            }); 
         } else {
-            console.log('filter')
-            const {groups, topics} = this.state
-            let topicsArr = topics.filter((item) => {
-                return item.topicTitle.toLowerCase().includes(title)
-            })
-            console.log(topicsArr)
-            topics.filter((item) => {
-                item.topicTitle.toLowerCase().includes(title) ? 
-                    this.setState({
-                        filteredTopics: topicsArr,
-                        isFiltered: true,
-                        isTopicsOpen: true
-                        //  topics.filter((item) => {
-                        //     console.log('topic', item)
-                        //     return item.topicTitle.toLowerCase().includes(title) 
-                        
-
-                        
-                        
-                    }, 
-                    
-                    () => this.setState({
-                        filteredGroups: groups.filter(item => {
-                            
-                            return item._id.match(topicsArr.map((el) => {
-                               
-                            return el.group_id._id
-                        }))}), 
-                        isFiltered: true,
-                        isTopicsOpen: true  
-                    }, () =>  console.log('state', this.state))
-                )
-                 : null})
-                }}
-
-                        // groups.filter((item, this.state.filteredTopics.filter((el) => {
-                        //    return el.group_id._id}) => {
-                        //     return item._id
-                        
-                        // _.filter(groups._id, _.filter(this.state.filteredTopics, function(el) {
-                        //     return el.group_id._id
-                        // }))
-                        
-                        
-                        
-                        // groups.filter((item) => {
-                        //     console.log(item._id)
-                        //     return item._id.includes(this.state.filteredTopics.filter((el) => {
-                        //     return this.state.filteredTopics.filter((el) => {
-                        //         console.log(el.group_id._id)
-                        //         return el.group_id._id
-                        //     }))
-                        //     console.log('group', item)
-                        //     return item._id.includes(this.state.filteredTopics.filter((item) => {
-                                
-                        //         return item.group_id._id
-                        //     }))
-                        // }),
-            //         })
-                    
-            //     ) 
-            //         : 
-            //  null
-            // }) 
-            // groups.filter((item) => {
-                // item.groupTitle.toLowerCase().includes(title) ? 
-                    // this.setState({
-                    //     filteredGroups: groups.filter((item) => {
-                    //         return item.groupTitle.toLowerCase().includes(title)
-                    //     }),
-                    //     isFiltered: true
-                    // }) 
-                //     : 
-                // null
-            // }) 
-            // this.setState({
-            //     filteredTopics: topics.filter((item) => {
-            //         return item.topicTitle.toLowerCase().includes(title)
-            //     }),
-            //     isTopicsOpen: true
-            // }) 
-                /* this.setState({
-                    filteredGroups: groups.filter((item) => {
-                        return item.groupTitle.toLowerCase().includes(title)
-                    }),
-                    filteredTopics: topics.filter((item) => {
-                        return item.topicTitle.toLowerCase().includes(title)
-                    }),
-                    isTopicsOpen: true
-                })  */
-                
-        
-    
-
-    // findGroup = (title) => {
-    //     if(!title) {
-    //         fetch(`${server}/forumGroup`, {
-    //             method: 'GET', 
-    //             mode: 'cors'
-    //             })
-    //             .then(response => {
-    //                 if (response.ok) {
-    //                     return response.json()
-    //                 } else {
-    //                     throw new Error('Something went wrong ...')
-    //                 }
-    //             })
-    //             .then(data => this.setState({filteredGroups: data.forumGroups}))
-    //             .catch(error => this.setState({error}))
-    //     } else {
-    //         const {groups} = this.state
-    //         this.setState({
-    //             filteredGroups: groups.filter((item) => {
-    //                 return item.groupTitle.toLowerCase().includes(title)
-    //             })
-    //         })
-    //     }
-    // }
-
-    // findTopic = (title) => {
-    //     if(!title) {
-    //         fetch(`${server}/forumTopic`, {
-    //             method: 'GET', 
-    //             mode: 'cors'
-    //             })
-    //             .then(response => {
-    //                 if (response.ok) {
-    //                     return response.json()
-    //                 } else {
-    //                     throw new Error('Something went wrong ...')
-    //                 }
-    //             })
-    //             .then(data => this.setState({filteredTopics: data.forumTopics}))
-    //             .catch(error => this.setState({error}))
-    //     } else {
-    //         const {topics} = this.state
-    //         this.setState({
-    //             filteredTopics: topics.filter((item) => {
-    //                 return item.topicTitle.toLowerCase().includes(title)
-    //             }),
-    //             // isTopicsOpen: true
-    //         })
-    //     }
-    // }
+            this.setState({
+                filteredGroups: this.state.groups,
+                filteredTopics: this.state.topics,
+                isFiltered: false,
+                isTopicsOpen: false
+            }) 
+        }
+    }
 
     submit = () => {
         confirmAlert({

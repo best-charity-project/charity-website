@@ -49,7 +49,7 @@ class ControlledEditor extends Component {
                         }, 
 						blockType: {
 							inDropdown: true,
-							options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'],
+							options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Blockquote'],
 						}
                     }}
                     onEditorStateChange = {this.onChange}
