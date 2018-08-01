@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {EditorState, SelectionState, Modifier, convertToRaw} from 'draft-js';
+import {EditorState, SelectionState, Modifier} from 'draft-js';
 import {Carousel} from 'react-responsive-carousel';
 
 import ModalWindow from '../../../../../ModalWindow/ModalWindow';
@@ -75,6 +75,7 @@ class ImageSlider extends Component {
             this.setState({isOpen: true}, () => this.props.setReadOnly(true))
         }
     }
+    
     closeModalWindow = (e) => {
         if (e.target.className === 'overlay' || ~e.target.className.indexOf('close-window')) {
             this.props.setReadOnly(false)
@@ -84,9 +85,11 @@ class ImageSlider extends Component {
             })
         } 
     }
+
     onChangeImageArr = (imageArr, callback) => {
         this.setState({imageArr: imageArr}, callback)
     }
+
     editSlider = () => {
         const {contentState, onChange} = this.props
         let entityKey = this.props.block.getEntityAt(0)
@@ -102,6 +105,7 @@ class ImageSlider extends Component {
             imageArr: []
         }, () => this.props.setReadOnly(false))
     }
+
     deleteSlider = () => {
         const {contentState, onChange} = this.props
 

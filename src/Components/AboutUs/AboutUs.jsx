@@ -5,7 +5,7 @@ import "../AboutUs/AboutUs.css";
 class AboutUs extends Component {
   render() {
     return (
-		  <div className= 'about-us with-picture'> 
+		  <div className= 'about-us with-picture'>
 			  <TextAndForm />
   		</div>
     );

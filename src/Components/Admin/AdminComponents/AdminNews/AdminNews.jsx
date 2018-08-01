@@ -62,7 +62,7 @@ class AdminNews extends Component {
     sendStatus = () => {
         axios({
             method: 'put',
-            url: `${server}/news/`+this.state.id,
+            url: `${server}/api/news/`+this.state.id,
             data: {'isPublic': this.state.isPublic},
             config: { headers: {
                 Accept: 'application/json',

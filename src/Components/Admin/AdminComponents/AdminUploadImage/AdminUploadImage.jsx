@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Cropper} from 'react-image-cropper';
 import Button from '../../../Button/Button';
 import './AdminUploadImage.css';
+import {server} from '../../../../api'
 
 class AdminUploadImage extends Component {
     state = {
@@ -16,7 +17,7 @@ class AdminUploadImage extends Component {
         this.props.imageData ?
             this.setState({image: this.props.imageData}) :
             this.props.image ?
-                this.setState({image: 'http://localhost:3001/images/' + this.props.image}) :
+                this.setState({image: `${server}/images/${this.props.image}`}) :
                 null
     }
     render() {

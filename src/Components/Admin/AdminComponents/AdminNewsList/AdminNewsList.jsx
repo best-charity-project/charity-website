@@ -3,6 +3,7 @@ import AdminNews from '../AdminNews/AdminNews';
 import './AdminNewsList.css';
 import { server } from '../../../../api';
 import {withRouter} from "react-router-dom";
+import axios from 'axios';
 class AdminNewsList extends Component {
         state = {
             showNews: false,
@@ -33,11 +34,11 @@ class AdminNewsList extends Component {
         )
     }
     getInfoNews = (id) => {
-        const URL = `${ server }/news/`+id;
-        fetch(URL)
-        .then(response => response.json())
-        .then(data => {
-            this.setState({ newsInfo: data.news });
+        axios({
+            url:`${ server }/api/news/${id}`
+        })
+        .then(res => {
+            this.setState({ newsInfo: res.data.news });
             this.props.history.push({
                 pathname: '/admin-panel/news/create',
                 state: { detail: this.state.newsInfo}

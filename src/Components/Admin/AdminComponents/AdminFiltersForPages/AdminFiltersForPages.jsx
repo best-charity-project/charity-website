@@ -8,41 +8,32 @@ import '../AdminFiltersForPages/AdminFiltersForPages.css';
 
 class FiltersForPages extends Component {
     state = {
-        type:'',
-        filters: {},
-        title:'',
+        type : '',
+        filters : [],
+        title : '',
         isOpen: false
     }
     componentDidMount(){
-        this.setState({
-            type:this.props.type,
-            filters: this.props.list,
-        })
-    }
-    componentWillReceiveProps(curprops, nextprops){
-        if( curprops.list != this.state.filters){
-            this.setState({filters:curprops.list })
-        }
-    }
+        this.props ? 
+            this.setState({
+                type : this.props.type,
+                filters : this.props.list,
+        }): null
+    };
     addFilter = () => {
         if(this.state.title){        
             this.createFilter();
-            this.props.getNewFilterList();
             this.setState({title: ''});
         }        
     }
     getValue = (str) => {
         this.setState({title: str.value});    
-    }
-    deleteFilter= (filter) => {
-        let id = filter._id; 
-        this.removeFilter(id);
-    }
+    };  
     showFilterList = () => {
         this.setState({isOpen: !this.state.isOpen});
-    }
+    };
     onKeyPress  = (e) => {
-        (e.charCode === 13)? this.addFilter(): null;
+        (e.charCode === 13) ? this.addFilter(): null;
     }
     render() {
         return (
@@ -64,11 +55,17 @@ class FiltersForPages extends Component {
                    </div>
                    <div className = 'filters-list'>
                         <ul>
-                            {this.state.filters? this.state.filters.map ( (el, index) =>
-                                <AdminFilter 
-                                    filter = {el} key = {index} 
-                                    deleteHandler = {() => this.deleteFilter(el) }/>
-                                ): null} 
+                            {this.state.filters.length? this.state.filters.map( (el, index) => {
+                                if(el.title !== 'все'){
+                                    return  <AdminFilter
+                                                filter = {el.title} 
+                                                id = {el._id}
+                                                key = {index} 
+                                                deleteHandler = {() => this.deleteFilter(el)}
+                                            />
+                                }                                
+                            }                           
+                            ): null} 
                         </ul>
                     </div>
                 </div> : null}               
@@ -79,31 +76,39 @@ class FiltersForPages extends Component {
         if(this.state.title.toLowerCase() !== 'все'){
             axios({
                 method: 'post',
-                url: `${ server }/filters`,
+                url: `${ server }/api/filters`,
                 data: this.state,
                 config: { headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json'
                 }},
             })
-        }
-      
-
-    }
-    removeFilter = (id) => {
+            .then(res => {
+                let arrayFilters = this.state.filters;
+                arrayFilters.push(res.data);
+                this.setState ({
+                    filters: arrayFilters 
+                })
+            })           
+        }        
+    };
+    deleteFilter = (filter) => {
+        let id = filter._id; 
         axios({
             method: 'delete',
-            url: `${server}/filters/` + id,
+            url: `${server}/api/filters/` + id,
             config: { headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
             }}
         })
         .then((result) => {
-            this.setState({            
-                filters: this.state.filters.filter(item => item._id !== result.data.filter._id)
-            }) 
-        })
+            this.setState({           
+                filters : this.state.filters.filter(item => {
+                    return item._id !== id
+                })
+            });
+        });
     }
 }
 

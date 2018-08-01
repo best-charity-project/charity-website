@@ -111,11 +111,13 @@ class ModalWindow extends Component {
         }
         event.target.value = null
     }
+
     onSortEnd = ({oldIndex, newIndex}) => {
         this.setState({
             imageArr: arrayMove(this.state.imageArr, oldIndex, newIndex),
         });
     };
+
     shouldCancelStart = (e) => {
         if (['button', 'span'].indexOf(e.target.tagName.toLowerCase()) !== -1) {
             return true
@@ -132,12 +134,13 @@ class ModalWindow extends Component {
             deletedImages: deletedImages
         }, () => this.props.getDeletedImages(this.state.deletedImages))
     }
+
     addImage = () => {
         let formData  = new FormData();
         formData.append('imageData', this.state.imageData);
         axios({
             method: 'post',
-            url: `${server}/uploadGalleryImage/`,
+            url: `${server}/api/uploadGalleryImage/`,
             data: formData,
             config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
         })
@@ -152,9 +155,10 @@ class ModalWindow extends Component {
             console.log(error);
         });
     }
+    
     saveModalWindow = (e) => {
         e.preventDefault()
-        this.props.onChangeImageArr(this.state.imageArr, () => this.props.addSlider(e))
+        this.props.onChangeImageArr(this.state.imageArr, () => {this.props.addSlider(e)})
     }
 }
 export default ModalWindow;
