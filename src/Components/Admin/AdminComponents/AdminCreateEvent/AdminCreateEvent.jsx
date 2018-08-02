@@ -251,8 +251,8 @@ class AdminCreateEvent extends Component {
                     </div> 
                     <Button 
                         name = "button-admin button-admin-background" 
-                        label = {!this.state.idVK?'Опубликова запись вк':'Обновить запись вк' }
-                        clickHandler = {this.publish}
+                        label = {!this.state.idVK ? 'Опубликова запись вк' : 'Обновить запись вк' }
+                        clickHandler = {this.publishVK}
                     />  
                 </div>
             </div>
@@ -365,10 +365,8 @@ class AdminCreateEvent extends Component {
     getInputTimeEnd = () => {
         this.setState({getInputTimeEnd : true});
     };
-    publish = () => {
-        // let a = document.querySelector('.image-editor')
-        // a? console.log(a.attributes.src):null;
-        let token = 'fcc1b4c2938042b5c572c7071406fbf8a4fe768c812aa929bd066283afd6923da9ec1f6ed522411027ebc';
+    publishVK = () => {
+        let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';
         let id = '-169499477';
         let title = `${this.state.title}%0A`;
         let place = this.state.place?`Место: ${this.state.place}%0A`: '';        
@@ -381,9 +379,7 @@ class AdminCreateEvent extends Component {
         for (let i = 0; i< textfromEditor.length; i++){
             info+=textfromEditor[i].text + '%0A';
         }
-        let image = 'https://vk.com/id152381737?z=photo152381737_456239426%2Falbum152381737_0%2Frev'
-        let text = `${title}${place}${time}${participation}${linkParticipation}${contacts}${info}${image}`;
-        this.getVkServer(token);
+        let text = `${title}${place}${time}${participation}${linkParticipation}${contacts}${info}`;
         this.state.idVK ? 
             axios({
                 method: 'get',
@@ -402,53 +398,5 @@ class AdminCreateEvent extends Component {
             })
             
     }; 
-    getVkServer = (token) => {
-        let id = '169499477';
-        axios({
-            method: 'get',
-            adapter: jsonpAdapter,
-            url: `https://api.vk.com/method/photos.getWallUploadServer?group_id=${id}&access_token=${token}&v=5.80`            
-        })
-        .then(res => {
-            console.log(res.data.response.upload_url)
-            this.uploadImage(res.data.response.upload_url)
-        //     this.setState({
-        //     upload_url : res.data.response.upload_url
-        // });    
-    })
-   
-
-    }
-    uploadImage = (url) => {
-        alert('rfr')
-        //  let a = document.querySelector('.image-editor')
-        let file = this.state.imageData;
-        let formData  = new FormData();
-        formData.append('image', file);
-        console.log(formData.getAll('image'))
-        axios({
-            method: 'post',
-            url: `${server}/uploadImages/vk`,
-            data: {data:formData.getAll('image')}
-            // config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
-        })
-    //    
-    //     axios({
-    //         method: 'post',
-    //         url: url,
-    //         photo: 'eded',
-    //         adapter: jsonpAdapter,
-    //         // config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
-    //     })
-    //     .then(res => console.log(res.data))
-    }
-    getImageData = (data) => {
-        console.log(data)
-        this.setState({
-            imageData: data
-        }, ()=>{
-            // this.publish();
-        })
-    }
 }
 export default AdminCreateEvent;

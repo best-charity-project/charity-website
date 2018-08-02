@@ -337,7 +337,7 @@ class AdminAddNews extends Component {
         })     
     }
     publishVK = () => {
-            let token = 'fcc1b4c2938042b5c572c7071406fbf8a4fe768c812aa929bd066283afd6923da9ec1f6ed522411027ebc';
+            let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';
             let id = '-169499477';
             let title = `${this.state.title}%0A`;
             let textfromEditor = convertToRaw(this.state.fullTextEditorState.getCurrentContent()).blocks;

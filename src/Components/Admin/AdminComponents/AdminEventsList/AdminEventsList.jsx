@@ -50,7 +50,7 @@ class AdminEventsList extends Component {
         this.deletePostVK(event);
       };
     deletePostVK = (event) => {
-        let token = '3af1950569018a83d220116bc7b9ae2c1a88abe51862011dd39be884689ea489df2f4c910e7b20f732d0d';
+        let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';
         let id = '-169499477';
         axios({
             method: 'delete',
