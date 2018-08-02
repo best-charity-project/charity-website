@@ -337,7 +337,7 @@ class AdminAddNews extends Component {
         })     
     }
     publishVK = () => {
-            let token = '3af1950569018a83d220116bc7b9ae2c1a88abe51862011dd39be884689ea489df2f4c910e7b20f732d0d';
+            let token = 'fcc1b4c2938042b5c572c7071406fbf8a4fe768c812aa929bd066283afd6923da9ec1f6ed522411027ebc';
             let id = '-169499477';
             let title = `${this.state.title}%0A`;
             let textfromEditor = convertToRaw(this.state.fullTextEditorState.getCurrentContent()).blocks;
@@ -358,7 +358,6 @@ class AdminAddNews extends Component {
                     url: `https://api.vk.com/method/wall.post?owner_id=${id}&from_group=0&message=${text}&access_token=${token}&v=5.80`            
                 })        
                 .then(res =>{
-                    console.log(res.data)
                     this.setState({                        
                         idVK : res.data.response.post_id
                     })
