@@ -225,6 +225,7 @@ class AdminCreateEvent extends Component {
                         initialEditorState = {this.state.textEditorState} 
                         onEditorStateChange = {this.onEditorStateChange}
                         getDeletedImages = {this.getDeletedImages}
+                        getImageData = {this.getImageData}
                     />
                     <div className = 'select-wrapper-event'>
                         {this.state.filters ? 
@@ -380,7 +381,9 @@ class AdminCreateEvent extends Component {
         for (let i = 0; i< textfromEditor.length; i++){
             info+=textfromEditor[i].text + '%0A';
         }
-        let text = `${title}${place}${time}${participation}${linkParticipation}${contacts}${info}`;
+        let image = 'https://vk.com/id152381737?z=photo152381737_456239426%2Falbum152381737_0%2Frev'
+        let text = `${title}${place}${time}${participation}${linkParticipation}${contacts}${info}${image}`;
+        this.getVkServer(token);
         this.state.idVK ? 
             axios({
                 method: 'get',
@@ -399,5 +402,53 @@ class AdminCreateEvent extends Component {
             })
             
     }; 
+    getVkServer = (token) => {
+        let id = '169499477';
+        axios({
+            method: 'get',
+            adapter: jsonpAdapter,
+            url: `https://api.vk.com/method/photos.getWallUploadServer?group_id=${id}&access_token=${token}&v=5.80`            
+        })
+        .then(res => {
+            console.log(res.data.response.upload_url)
+            this.uploadImage(res.data.response.upload_url)
+        //     this.setState({
+        //     upload_url : res.data.response.upload_url
+        // });    
+    })
+   
+
+    }
+    uploadImage = (url) => {
+        alert('rfr')
+        //  let a = document.querySelector('.image-editor')
+        let file = this.state.imageData;
+        let formData  = new FormData();
+        formData.append('image', file);
+        console.log(formData.getAll('image'))
+        axios({
+            method: 'post',
+            url: `${server}/uploadImages/vk`,
+            data: {data:formData.getAll('image')}
+            // config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
+        })
+    //    
+    //     axios({
+    //         method: 'post',
+    //         url: url,
+    //         photo: 'eded',
+    //         adapter: jsonpAdapter,
+    //         // config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
+    //     })
+    //     .then(res => console.log(res.data))
+    }
+    getImageData = (data) => {
+        console.log(data)
+        this.setState({
+            imageData: data
+        }, ()=>{
+            // this.publish();
+        })
+    }
 }
 export default AdminCreateEvent;

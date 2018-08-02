@@ -26,7 +26,6 @@ class ControlledEditor extends Component {
     }
     
     render() {
-        console.log(this.props)
         let options = ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'embedded', 'emoji', 'remove', 'history']
         if(!this.props.isProject) {
             options.push('image')
@@ -77,8 +76,11 @@ class ControlledEditor extends Component {
     }
 
     uploadImageCallBack = (file) => {
+        console.log(file)
         let formData  = new FormData();
         formData.append('image', file);
+        console.log(formData)
+        this.props.getImageData(file)
         return axios({
             method: 'post',
             url: `${server}/uploadImages/`,
