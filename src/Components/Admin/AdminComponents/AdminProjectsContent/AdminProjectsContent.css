@@ -21,6 +21,9 @@
     padding-left: 300px;
     padding-top: 55px;
 }
+.delete-projects img {
+    vertical-align: text-top;
+}
 .delete-projects:disabled img {
     opacity: 0.2;
 }

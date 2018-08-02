@@ -45,6 +45,7 @@ class AdminSlider extends Component {
                             addSlider = {this.addSlider}
                             onChangeImageArr = {this.onChangeImageArr}
                             closeModalWindow = {this.closeModalWindow}
+                            getDeletedImages = {this.props.getDeletedImages}
                         />
                     </div>
                 </div>
@@ -65,9 +66,7 @@ class AdminSlider extends Component {
             })
         } 
     }
-    addSlider = (e) => {
-        e.preventDefault()
-        e.stopPropagation() 
+    addSlider = () => {
         const {editorState, onChange} = this.props;
         let entityData = {}
         let newEditorState = editorState

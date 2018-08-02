@@ -27,7 +27,7 @@ class ModalWindow extends Component {
                 <Button 
                     name = 'button-admin admin-cancel'
                     label = {<span aria-hidden='true'>&times;</span>} 
-                    clickHandler =  {() => {this.deleteGalleryImage(sortIndex)} }
+                    clickHandler =  {() => this.deleteGalleryImage(sortIndex)}
                 />
             </div>      
         );
@@ -132,7 +132,7 @@ class ModalWindow extends Component {
         this.setState({
             imageArr: imageArr,
             deletedImages: deletedImages
-        }, () => {this.props.getDeletedImages(this.state.deletedImages)})
+        }, () => this.props.getDeletedImages(this.state.deletedImages))
     }
 
     addImage = () => {

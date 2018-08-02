@@ -6,8 +6,8 @@ import {withRouter} from "react-router-dom";
 import axios from 'axios';
 class AdminNewsList extends Component {
         state = {
-            showNews:false,
-            newsInfo : ''
+            showNews: false,
+            newsInfo: ''
         }
     render() {
         return (
