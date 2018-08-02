@@ -105,7 +105,6 @@ class AdminNewsContent extends Component {
             adapter: jsonpAdapter,
             url: `https://api.vk.com/method/wall.delete?owner_id=${id}&post_id=${news.idVK}&access_token=${token}&v=5.80`            
         })
-        .then(res => console.log(res.data))
       };
     checkId = (id) => {
         let tempId = this.state.checkedIds;
@@ -151,10 +150,10 @@ class AdminNewsContent extends Component {
         .catch(function (error) {
             console.log(error);
         });
-        this.deleteChosenPostsVk();
+        this.deleteChosenPostsVK();
         
     } 
-    deleteChosenPostsVk = () => {
+    deleteChosenPostsVK = () => {
         let newsState = this.state.news;
         let deletionsNews = [];
         for (let i = 0; i < this.state.checkedIds.length; i++) {
@@ -164,8 +163,8 @@ class AdminNewsContent extends Component {
                     this.deletePostVK(news);
                 } 
             });            
-        }
-    }
+        };
+    };
     findNews = (title) => {
         if(!title) {
             fetch(`${server}/news?isAdmin=true`, {
@@ -189,7 +188,7 @@ class AdminNewsContent extends Component {
                 })
             })
         }
-    }
+    };
 }
 
 export default AdminNewsContent;

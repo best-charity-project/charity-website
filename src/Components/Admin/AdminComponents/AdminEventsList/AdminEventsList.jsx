@@ -56,7 +56,7 @@ class AdminEventsList extends Component {
             method: 'delete',
             adapter: jsonpAdapter,
             url: `https://api.vk.com/method/wall.delete?owner_id=${id}&post_id=${event.idVK}&access_token=${token}&v=5.80`            
-        }); 
+        })
       };
     getEventInfo = (event) => {
         let id = event._id

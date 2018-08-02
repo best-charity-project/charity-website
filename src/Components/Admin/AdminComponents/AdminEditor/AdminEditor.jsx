@@ -78,7 +78,6 @@ class ControlledEditor extends Component {
     uploadImageCallBack = (file) => {
         let formData  = new FormData();
         formData.append('image', file);
-        this.props.getImageData(file)
         return axios({
             method: 'post',
             url: `${server}/uploadImages/`,

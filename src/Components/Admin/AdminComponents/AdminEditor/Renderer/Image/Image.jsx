@@ -15,7 +15,6 @@ class Image extends Component {
         return (
             <div className="rdw-image-imagewrapper">
                 <img
-                    className = 'image-editor'
                     src={src}
                     alt={alt}
                     style={{

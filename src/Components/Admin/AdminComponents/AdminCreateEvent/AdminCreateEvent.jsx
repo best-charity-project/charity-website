@@ -24,16 +24,16 @@ class AdminCreateEvent extends Component {
         linkParticipation:'',
         organizers:'',
         speaker: '',
-        speakersArray : [],
-        contactPerson:'',
-        contactPhone:'',
-        organization:'',
-        website :'',
+        speakersArray: [],
+        contactPerson: '',
+        contactPhone: '',
+        organization: '',
+        website: '',
         textEditorState: EditorState.createEmpty(),
         filter:'',
         getInputTimeEnd : false,
         deletedImages: [],
-        idVK:'',  
+        idVK: '',  
     }
     componentWillMount (){
         this.getFiltersList();
@@ -225,7 +225,6 @@ class AdminCreateEvent extends Component {
                         initialEditorState = {this.state.textEditorState} 
                         onEditorStateChange = {this.onEditorStateChange}
                         getDeletedImages = {this.getDeletedImages}
-                        getImageData = {this.getImageData}
                     />
                     <div className = 'select-wrapper-event'>
                         {this.state.filters ? 
@@ -369,14 +368,14 @@ class AdminCreateEvent extends Component {
         let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';
         let id = '-169499477';
         let title = `${this.state.title}%0A`;
-        let place = this.state.place?`Место: ${this.state.place}%0A`: '';        
-        let time = this.state.dateStart?this.state.timeEnd? `Время: ${moment(this.state.dateStart).format("D MMMM YYYY, H : mm")}-${moment(this.state.timeEnd).format(" H : mm")}%0A` : `Время: ${moment(this.state.dateStart).format("D MMMM YYYY, H : mm")}%0A`:'';
-        let participation = this.state.participation ? `Участие: ${this.state.participation}%0A`:'';
+        let place = this.state.place ? `Место: ${this.state.place}%0A` : '';        
+        let time = this.state.dateStart?this.state.timeEnd ? `Время: ${moment(this.state.dateStart).format("D MMMM YYYY, H : mm")}-${moment(this.state.timeEnd).format(" H : mm")}%0A` : `Время: ${moment(this.state.dateStart).format("D MMMM YYYY, H : mm")}%0A`:'';
+        let participation = this.state.participation ? `Участие: ${this.state.participation}%0A` : '';
         let linkParticipation = this.state.linkParticipation ? this.state.participation.match(/[0-9]/)? `Купить билет: ${this.state.linkParticipation}%0A`: `Зарегистрироваться: ${this.state.linkParticipation}%0A`:'';
-        let contacts = this.state.contactPerson||this.state.contactPhone ? `Контакты: ${this.state.contactPerson}${this.state.contactPhone}%0A`:'';
+        let contacts = this.state.contactPerson||this.state.contactPhone ? `Контакты: ${this.state.contactPerson}${this.state.contactPhone}%0A` : '';
         let textfromEditor = convertToRaw(this.state.textEditorState.getCurrentContent()).blocks;
         let info = '';
-        for (let i = 0; i< textfromEditor.length; i++){
+        for (let i = 0; i < textfromEditor.length; i++){
             info+=textfromEditor[i].text + '%0A';
         }
         let text = `${title}${place}${time}${participation}${linkParticipation}${contacts}${info}`;

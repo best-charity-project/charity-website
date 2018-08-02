@@ -132,7 +132,7 @@ class AdminAddNews extends Component {
                         <div>
                             <Button 
                                 name = "button-admin button-admin-background" 
-                                label = {!this.state.idVK?'Опубликова запись вк':'Обновить запись вк' }
+                                label = { !this.state.idVK ? 'Опубликова запись вк' : 'Обновить запись вк' }
                                 clickHandler = {this.publishVK}
                             /> 
                         </div> 
