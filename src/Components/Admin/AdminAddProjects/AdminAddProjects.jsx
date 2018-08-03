@@ -50,7 +50,6 @@ class AdminAddProjects extends Component {
         isRight:false,
         value:1000,
         
-        isValidationGood:false,
         isName:true,
         isSiteCorrect:true,
         isMediaVideoArray:true,
@@ -135,7 +134,7 @@ class AdminAddProjects extends Component {
                         />
                         {!this.state.isName ?
                         <AdminValidationWindow
-                            title='Данное поле необходимо заполнить'
+                            title='Название проекта необходимо заполнить'
                             showToast = {this.showToast.bind(this)}
                         />
                         :null} 

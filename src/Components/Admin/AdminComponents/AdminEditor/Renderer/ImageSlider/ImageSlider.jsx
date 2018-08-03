@@ -14,7 +14,7 @@ class ImageSlider extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const {block, contentState} = nextProps;   
+        const {block, contentState, deletedImages} = nextProps;   
         const entity = contentState.getEntity(block.getEntityAt(0));
         this.setState({imageArr: entity.getData().src})
     }
