@@ -5,6 +5,7 @@ import _ from 'lodash';
 import InputMask from 'react-input-mask';
 import {EditorState, convertToRaw, convertFromRaw} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
+import ToastrContainer, {ToastSuccess,ToastDanger} from 'react-toastr-basic'
 
 import TextField from '../../TextField/TextField';
 import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';
@@ -41,17 +42,23 @@ class AdminAddProjects extends Component {
 
         mediaVideoArray:[],
         mediaVideo:'',
-        isMediaVideoArray:true,
-
+        
         fullTextEditorState: EditorState.createEmpty(),
         filter: '',
         isPublic:false,
         isPreview:false,
+        isRight:false,
         value:1000,
-        isRight:false
+        
+        isValidationGood:false,
+        isName:true,
+        isSiteCorrect:true,
+        isMediaVideoArray:true,
+        isFullTextCorrectValue:true,
     }
     cropperRef = React.createRef()
-    componentWillMount() {
+
+    componentDidMount() {
         this.getFiltersListByType('projects');
         if (this.props.location.state) {
             let fullTextEditorState = EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.location.state.detail.fullText)));
@@ -83,7 +90,9 @@ class AdminAddProjects extends Component {
             })
         })     
     }
-    
+    showToast(e){
+        ToastDanger(e);
+    }
     render() {
         let newValue = draftToHtml(convertToRaw(this.state.fullTextEditorState.getCurrentContent())).replace(/<[^>]*>/g, '').replace(/\r\n/g, '').length;
         return (
@@ -96,9 +105,9 @@ class AdminAddProjects extends Component {
                     <span>Статус проекта: {this.state.isPublic ? " опубликована" : " черновик"}</span>
                     <Route render={({history}) => (
                         <Button 
-                            label={"Опубликовать"}
+                            label={this.state.isPublic ? 'Сохранить черновик':'Опубликовать' }
                             name = "button-admin"
-                            clickHandler = {this.onPublish}
+                            clickHandler = {this.onChangeStatus}
                         />
                     )} />
                 </div>
@@ -124,10 +133,13 @@ class AdminAddProjects extends Component {
                             value = {this.state.name}
                             onChangeValue = {this.getValue}
                         />
+                        {!this.state.isName ?
                         <AdminValidationWindow
-                            className={this.onCorrectTitle()?'hidden':'incorrect-container title-projects-container'}
+                            // className={this.onCorrectTitle()?'hidden':'incorrect-container title-projects-container'}
                             title='Данное поле необходимо заполнить'
+                            showToast = {this.showToast.bind(this)}
                         />
+                        :null} 
                     </div>
                     <hr />
                     <div className="admin-organization-projects">
@@ -182,7 +194,6 @@ class AdminAddProjects extends Component {
                             mask="+375 (99) 999-99-99" 
                             value = {this.state.contacts} 
                             onChange={this.getContacts}
-
                         />
                         </div>
                         <Button
@@ -226,10 +237,13 @@ class AdminAddProjects extends Component {
                             value = {this.state.site}
                             onChangeValue = {this.getSite}
                         />
-                        <AdminValidationWindow
-                            className={this.onCorrectSite()? "hidden" : "incorrect-container site-projects-container"}
-                            title ='Введите корректный сайт!'
-                        />
+                        { !this.state.isSiteCorrect?
+                            <AdminValidationWindow
+                                // className={this.onCorrectSite()? "hidden" : "incorrect-container site-projects-container"}
+                                title ='Введите корректный сайт!'
+                                showToast = {this.showToast.bind(this)}
+                            />
+                        :null}
                     </div>
                     <hr />
                     <div className="admin-media-projects">
@@ -280,10 +294,13 @@ class AdminAddProjects extends Component {
                                 name = {this.isCorrectArrayLimit()?"admin-button admin-projects-media-buttons":"button-projects-dislable"}
                             />
                             </div>
-                            <AdminValidationWindow
-                                className={this.state.isMediaVideoArray?'hidden':'incorrect-container video-projects-container'}
-                                title='Неправильно введена ссылка!' 
-                            />
+                            {!this.state.isMediaVideoArray ?
+                                <AdminValidationWindow
+                                    // className={this.state.isMediaVideoArray?'hidden':'incorrect-container video-projects-container'}
+                                    title='Неправильно введена ссылка!'
+                                    showToast = {this.showToast.bind(this)}
+                                />
+                            :null}
                             {this.state.mediaVideoArray?
                                 <ul className="video-array">
                                     { this.state.mediaVideoArray.map( (link,index) =>
@@ -312,10 +329,13 @@ class AdminAddProjects extends Component {
                             getDeletedImages = {this.getDeletedImages}
                             isProject = {true}
                         />
-                    <AdminValidationWindow 
-                        className={this.onCorrectFullText() ? "incorrect-value-container hidden" : "incorrect-value-container"}
-                        title='Количество символов превышает 1000!'
-                    />
+                    {!this.state.isFullTextCorrectValue ?
+                        <AdminValidationWindow 
+                            // className={this.onCorrectFullText() ? "incorrect-value-container hidden" : "incorrect-value-container"}
+                            title='Количество символов превышает 1000!'
+                            showToast = {this.showToast.bind(this)}
+                        />
+                    : null}
                     <div className = "admin-textarea-description">
                         <span>Краткое описание не должно содержать более 1000 символов</span>
                         <div>
@@ -341,25 +361,37 @@ class AdminAddProjects extends Component {
                 <div className="admin-buttons">
                     <Route render={({history}) => (
                         <Button 
-                            disabled={!this.onRight}
+                            // disabled={!this.state.isValidationGood}
                             label = {"Предпросмотр"} 
-                            name = {this.onRight()? "button-admin":"button-publish-projects"}
+                            name = {
+                                // this.state.isValidationGood? 
+                                "button-admin"
+                                // :"button-publish-projects"
+                            }
                             clickHandler = {this.onPreview}
                         />
                     )} />
                     <Route render={({history}) => (
                         <Button
-                            disabled={!this.onRight()}
+                            // disabled={!this.state.isValidationGood}
                             label={"Опубликовать"}
-                            name = {this.onRight()? "button-admin":"button-publish-projects"}
+                            name = {
+                                // this.state.isValidationGood? 
+                                "button-admin"
+                                // :"button-publish-projects"
+                            }
                             clickHandler = {this.onPublish}
                         />
                     )} />
                     <Route render={({history}) => (
                         <Button 
-                            disabled={!this.onRight()}
+                            // disabled={!this.state.isValidationGood}
                             label={"Сохранить как черновик"}
-                            name = {this.onRight()? "button-admin":"button-publish-projects"}
+                            name = {
+                                // this.state.isValidationGood? 
+                                "button-admin"
+                                // :"button-publish-projects"
+                            }
                             clickHandler = {this.onDraft}
                         />
                     )} />
@@ -556,22 +588,59 @@ class AdminAddProjects extends Component {
         })
     }
     onCorrectTitle = () =>{
-        return /^[\w\W\s]+$/.test(this.state.name)
+        if(/^[\w\W\s]+$/.test(this.state.name)){
+            this.setState({
+                isName:true
+            })
+            return true;
+        }else{
+            this.setState({
+                isName:false
+            })
+            return false; 
+        }
     }
     onCorrectSite = () =>{
-        return /^((https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\W\.-]*)*\/?)?$/.test(this.state.site)
+        if(/^((https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\W\.-]*)*\/?)?$/.test(this.state.site)){
+            this.setState({
+                isSiteCorrect:true
+            })
+            return true;
+        }else{
+            this.setState({
+                isSiteCorrect:false
+            })
+            return false;
+        }
+    }
+    onChangeStatus = () =>{
+        this.setState({isPublic:!this.state.isPublic})
     }
     onCorrectFullText = () =>{
         let fullText = draftToHtml(convertToRaw(this.state.fullTextEditorState.getCurrentContent()))
         let newText = fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
-        return newText.length<=this.state.value
+        if(newText.length<=this.state.value){
+            this.setState({
+                isFullTextCorrectValue:true
+            })
+            return true;
+        }else{
+            this.setState({
+                isFullTextCorrectValue:false
+            })
+            return false;
+        }
     }
-    onRight = ()=>{
-         return this.onCorrectSite() && this.onCorrectFullText() && this.onCorrectTitle()
-    }
+    // onRight = ()=>{
+    //      if(this.onCorrectTitle() && this.onCorrectSite() && this.onCorrectFullText()){
+    //          return true
+    //      }else{
+    //          return false
+    //      }
+         
+    // }
     onPublish = (e) => {
-        this.onRight()
-        if(this.onRight()){
+        if(this.onCorrectTitle() && this.onCorrectSite() && this.onCorrectFullText()){
             this.setState({
                 isPublic: true
             }, this.sendProjects)
@@ -579,8 +648,7 @@ class AdminAddProjects extends Component {
     }
     onDraft = (e) => {
         e.preventDefault()
-        this.onRight()
-        if(this.onRight()){
+        if(this.onCorrectTitle() && this.onCorrectSite() && this.onCorrectFullText()){
             this.setState({
                 isPublic: false
             }, this.sendProjects)
@@ -588,8 +656,7 @@ class AdminAddProjects extends Component {
     }
     onPreview = (e)=>{
         e.preventDefault()
-        this.onRight()
-        if(this.onRight()){
+        if(this.onCorrectTitle() && this.onCorrectSite() && this.onCorrectFullText()){
             this.setState({
                 isPreview:true
             })
