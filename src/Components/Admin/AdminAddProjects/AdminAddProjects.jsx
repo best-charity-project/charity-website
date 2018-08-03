@@ -135,7 +135,6 @@ class AdminAddProjects extends Component {
                         />
                         {!this.state.isName ?
                         <AdminValidationWindow
-                            // className={this.onCorrectTitle()?'hidden':'incorrect-container title-projects-container'}
                             title='Данное поле необходимо заполнить'
                             showToast = {this.showToast.bind(this)}
                         />
@@ -239,7 +238,6 @@ class AdminAddProjects extends Component {
                         />
                         { !this.state.isSiteCorrect?
                             <AdminValidationWindow
-                                // className={this.onCorrectSite()? "hidden" : "incorrect-container site-projects-container"}
                                 title ='Введите корректный сайт!'
                                 showToast = {this.showToast.bind(this)}
                             />
@@ -296,7 +294,6 @@ class AdminAddProjects extends Component {
                             </div>
                             {!this.state.isMediaVideoArray ?
                                 <AdminValidationWindow
-                                    // className={this.state.isMediaVideoArray?'hidden':'incorrect-container video-projects-container'}
                                     title='Неправильно введена ссылка!'
                                     showToast = {this.showToast.bind(this)}
                                 />
@@ -331,7 +328,6 @@ class AdminAddProjects extends Component {
                         />
                     {!this.state.isFullTextCorrectValue ?
                         <AdminValidationWindow 
-                            // className={this.onCorrectFullText() ? "incorrect-value-container hidden" : "incorrect-value-container"}
                             title='Количество символов превышает 1000!'
                             showToast = {this.showToast.bind(this)}
                         />
@@ -361,37 +357,24 @@ class AdminAddProjects extends Component {
                 <div className="admin-buttons">
                     <Route render={({history}) => (
                         <Button 
-                            // disabled={!this.state.isValidationGood}
                             label = {"Предпросмотр"} 
-                            name = {
-                                // this.state.isValidationGood? 
-                                "button-admin"
-                                // :"button-publish-projects"
-                            }
+                            name = {"button-admin"}
                             clickHandler = {this.onPreview}
                         />
                     )} />
                     <Route render={({history}) => (
                         <Button
-                            // disabled={!this.state.isValidationGood}
                             label={"Опубликовать"}
                             name = {
-                                // this.state.isValidationGood? 
                                 "button-admin"
-                                // :"button-publish-projects"
                             }
                             clickHandler = {this.onPublish}
                         />
                     )} />
                     <Route render={({history}) => (
                         <Button 
-                            // disabled={!this.state.isValidationGood}
                             label={"Сохранить как черновик"}
-                            name = {
-                                // this.state.isValidationGood? 
-                                "button-admin"
-                                // :"button-publish-projects"
-                            }
+                            name = {"button-admin"}
                             clickHandler = {this.onDraft}
                         />
                     )} />
@@ -631,14 +614,6 @@ class AdminAddProjects extends Component {
             return false;
         }
     }
-    // onRight = ()=>{
-    //      if(this.onCorrectTitle() && this.onCorrectSite() && this.onCorrectFullText()){
-    //          return true
-    //      }else{
-    //          return false
-    //      }
-         
-    // }
     onPublish = (e) => {
         if(this.onCorrectTitle() && this.onCorrectSite() && this.onCorrectFullText()){
             this.setState({
