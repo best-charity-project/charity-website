@@ -21,18 +21,12 @@ class AdminNewsContent extends Component {
         checkedIds: []
     }
     componentDidMount() {
-        fetch(`${server}/news?isAdmin=true`, { 
-            method: 'GET',
-            mode: 'cors'
+            axios({
+                url:`${server}/api/news?isAdmin=true`,
+                method:'get',
+                mode:'cors'
             })
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                } else {
-                    throw new Error('Something went wrong ...')
-                }
-            })
-        .then(data => this.setState({news: data.news, filteredNews: data.news, isLoading: false}))
+        .then(res => this.setState({news: res.data.news, filteredNews: res.data.news, isLoading: false}))
         .catch(error => this.setState({error, isLoading: false}))
     }
     render() {
@@ -80,7 +74,7 @@ class AdminNewsContent extends Component {
         let id = news._id
         axios({
             method: 'delete',
-            url: `${server}/news/` + id,
+            url: `${server}/api/news/` + id,
             data: news,
             config: { headers: {
                 Accept: 'application/json',
@@ -135,7 +129,7 @@ class AdminNewsContent extends Component {
     deleteChosenNews = (news) => {
         axios({
             method: 'delete',
-            url: `${server}/news`,
+            url: `${server}/api/news`,
             data: {'checkedIds': this.state.checkedIds},
             config: { headers: {
                 Accept: 'application/json',
@@ -169,18 +163,12 @@ class AdminNewsContent extends Component {
     };
     findNews = (title) => {
         if(!title) {
-            fetch(`${server}/news?isAdmin=true`, {
-                method: 'GET', 
-                mode: 'cors'
+                axios({
+                    url:`${server}/api/news?isAdmin=true`,
+                    method:'get',
+                    mode:'cors'
                 })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    } else {
-                        throw new Error('Something went wrong ...')
-                    }
-                })
-                .then(data => this.setState({filteredNews: data.news}))
+                .then(res => this.setState({filteredNews: res.data.news}))
                 .catch(error => this.setState({error}))
         } else {
             const {news} = this.state

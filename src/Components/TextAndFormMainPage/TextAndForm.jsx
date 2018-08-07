@@ -3,9 +3,10 @@ import "../TextAndFormMainPage/TextAndForm.css";
 import SubscribtionForm from "../SubscribtionForm/SubscribtionForm";
 
 class TextAndForm extends Component {
+  
   render() {
     return (
-        <div className = 'text-and-form'> 
+        <div className = 'text-and-form'>
       			<h2>КТО МЫ?</h2>
       			<h3> Мы сообщество людей, которые помогают особенным людям или 
       			людям с особенными детьми. Сейчас сайт находится в разработке, 

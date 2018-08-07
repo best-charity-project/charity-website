@@ -8,6 +8,7 @@ import Navigation from '../../../Navigation/Navigation';
 import NavBar from '../../../NavBar/NavBar';
 import { server } from "../../../../api";
 import { Route } from 'react-router-dom';
+import axios from 'axios';
 
 class AdminEventsContent extends Component {
     state= {
@@ -49,11 +50,9 @@ class AdminEventsContent extends Component {
         )
     }
     getList = () => {
-        console.log(123)
-        fetch(`${ server }/events`)
-        .then(response => response.json())
-        .then(data => {         
-              this.setState({ events: data.events }              
+        axios({url:`${ server }/api/events`})
+        .then(res => {      
+              this.setState({ events: res.data.events }              
             )})
         .catch(error => this.setState({ error, isLoading: false }));
     };

@@ -76,7 +76,7 @@ class FiltersForPages extends Component {
         if(this.state.title.toLowerCase() !== 'все'){
             axios({
                 method: 'post',
-                url: `${ server }/filters`,
+                url: `${ server }/api/filters`,
                 data: this.state,
                 config: { headers: {
                     Accept: 'application/json',
@@ -96,7 +96,7 @@ class FiltersForPages extends Component {
         let id = filter._id; 
         axios({
             method: 'delete',
-            url: `${server}/filters/` + id,
+            url: `${server}/api/filters/` + id,
             config: { headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'

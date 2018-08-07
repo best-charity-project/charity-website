@@ -21,6 +21,9 @@
     padding-left: 300px;
     padding-top: 55px;
 }
+.delete-news img {
+    vertical-align: text-top;
+}
 .delete-news:disabled img {
     opacity: 0.2;
 }

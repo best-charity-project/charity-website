@@ -3,6 +3,8 @@ import './SubscribtionForm.css';
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
 import { server } from '../../api';
+import axios from 'axios';
+import ToastrContainer, {Toast} from 'react-toastr-basic'
 
 
 class SubscribtionForm extends Component {
@@ -25,27 +27,33 @@ class SubscribtionForm extends Component {
      clickHandler = () => {
         this.setState({sendToValidation:true});
         if(this.state.valid){
+            this.showToast();
             this.onSubscribe();
             this.setState({value:''})
         }
     }
-    
+    showToast(){
+        Toast('Вы подписались на наши уведомления!');
+    }
+
     onSubscribe = () => {
         const newValue = this.state.value;
-        fetch(` ${server}/subscription/newsubscription`, {
-            method: 'post',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
+        axios({
+            url:` ${server}/api/subscription/newsubscription`,
+            method:'post',
+            config:{
+                headers:{
+                    'Content-Type': 'application/json'
+                }
             },
-            credentials: 'cors',
-            body: JSON.stringify({email: newValue})
+            mode:'cors',
+            data:{email: newValue}
         })
-            .then(res => res.json())
     }
     render() {
         return (
-            <div className='subscribtion-form'>
+            <div className='subscribtion-form'> 
+                <ToastrContainer />
                 <div className='wrapper-input'>
                     <TextField 
                         value = {this.state.value }

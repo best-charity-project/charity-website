@@ -57,10 +57,11 @@ class EventsListAndAside extends Component {
         ) 
     }
     getEventsList = () => {
-        fetch(`${server}/events`)
-        .then(response => response.json())
-        .then(data => {
-            this.setState({events: data.events }, () => {
+        axios({
+            url:`${server}/api/events`
+        })
+        .then(res => {
+            this.setState({events: res.data.events }, () => {
                 this.filterArray('')
             });
         });
@@ -68,7 +69,7 @@ class EventsListAndAside extends Component {
     getFiltersList = () => {  
         axios({
             method: 'get',
-            url: `${ server }/filters`,
+            url: `${ server }/api/filters`,
         })
         .then(res =>{
             let filterList = res.data.filterList;

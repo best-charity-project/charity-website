@@ -35,7 +35,7 @@ class AdminEventsList extends Component {
     deleteEvent = (event) => {
         axios({
             method: 'delete',
-            url: `${server}/events`,
+            url: `${server}/api/events`,
             data: event,
             config: { headers: {
                 Accept: 'application/json',
@@ -60,11 +60,12 @@ class AdminEventsList extends Component {
       };
     getEventInfo = (event) => {
         let id = event._id
-        const URL = `${ server }/events/`+id;
-        fetch(URL)
-        .then(response => response.json())
-        .then(data => {
-            this.setState({ eventInfo: data });
+        axios({
+            url:`${ server }/api/events/${id}`,
+            method:'get'
+        })
+        .then(res => {
+            this.setState({ eventInfo: res.data });
             this.props.history.push({
                 pathname: '/admin-panel/events/create',
                 state: { detail: this.state.eventInfo}

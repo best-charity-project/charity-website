@@ -38,7 +38,7 @@ class ControlledEditor extends Component {
                     wrapperClassName="wrapper"
                     toolbarClassName="toolbar"
                     editorClassName="editor"
-                    toolbarCustomButtons={!this.props.isProject ? [<AdminSlider setReadOnly={this.setReadOnly}/>] : []} 
+                    toolbarCustomButtons={!this.props.isProject ? [<AdminSlider setReadOnly={this.setReadOnly} getDeletedImages = {this.props.getDeletedImages}/>] : []} 
 
                     localization={{
                         locale: 'ru'
@@ -56,7 +56,7 @@ class ControlledEditor extends Component {
                         }, 
 						blockType: {
 							inDropdown: true,
-							options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'],
+							options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Blockquote'],
 						}
                     }}
                     onEditorStateChange = {this.onChange}
@@ -80,7 +80,7 @@ class ControlledEditor extends Component {
         formData.append('image', file);
         return axios({
             method: 'post',
-            url: `${server}/uploadImages/`,
+            url: `${server}/api/uploadImages/`,
             data: formData,
             config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
         })

@@ -37,9 +37,8 @@ export default class Admin extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         signInUser(this.state)
-            .then(response => response.json())
-            .then(data => {
-                setToken(data);
+            .then(response => {
+                setToken(response.data);
                 this.props.history.push('/admin-panel/dashboard');
             });
     }

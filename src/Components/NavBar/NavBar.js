@@ -12,7 +12,8 @@ const NavBar = ()=>{
                          {name: 'События', url :'/admin-panel/events'},
                          {name: 'Новости', url : '/admin-panel/news'},
                          {name: 'Проекты', url : '/admin-panel/projects'},
-                         {name: 'Фильтры', url : '/admin-panel/filters'}
+                         {name: 'Фильтры', url : '/admin-panel/filters'},
+                         {name: 'Форум', url : '/admin-panel/forum'}
                      ]} 
                      classActive = 'active-link-admin'/>
         </div>       

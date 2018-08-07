@@ -5,6 +5,7 @@ import _ from 'lodash';
 import InputMask from 'react-input-mask';
 import {EditorState, convertToRaw, convertFromRaw} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
+import ToastrContainer, {ToastSuccess,ToastDanger} from 'react-toastr-basic'
 
 import TextField from '../../TextField/TextField';
 import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';
@@ -28,25 +29,35 @@ class AdminAddProjects extends Component {
         organization:'',
         head:'',
         headArray:[],
+
         contacts:'',
         contactsArray:[],
+        
         address:'',
         site:'',
+        
         mediaImageArray:[],
         mediaImageData:'',
         mediaImage:'',
+
         mediaVideoArray:[],
         mediaVideo:'',
-        isMediaVideoArray:true,
+        
         fullTextEditorState: EditorState.createEmpty(),
         filter: '',
         isPublic:false,
         isPreview:false,
+        isRight:false,
         value:1000,
-        isRight:false
+        
+        isName:true,
+        isSiteCorrect:true,
+        isMediaVideoArray:true,
+        isFullTextCorrectValue:true,
     }
     cropperRef = React.createRef()
-    componentWillMount() {
+
+    componentDidMount() {
         this.getFiltersListByType('projects');
         if (this.props.location.state) {
             let fullTextEditorState = EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.location.state.detail.fullText)));
@@ -69,7 +80,7 @@ class AdminAddProjects extends Component {
     getFiltersListByType = (type) => {
         axios({
             method: 'get',
-            url: `${ server }/filters?type=${type}`
+            url: `${ server }/api/filters?type=${type}`
 
         })
         .then(res =>{
@@ -78,7 +89,9 @@ class AdminAddProjects extends Component {
             })
         })     
     }
-    
+    showToast(e){
+        ToastDanger(e);
+    }
     render() {
         let newValue = draftToHtml(convertToRaw(this.state.fullTextEditorState.getCurrentContent())).replace(/<[^>]*>/g, '').replace(/\r\n/g, '').length;
         return (
@@ -91,9 +104,9 @@ class AdminAddProjects extends Component {
                     <span>Статус проекта: {this.state.isPublic ? " опубликована" : " черновик"}</span>
                     <Route render={({history}) => (
                         <Button 
-                            label={"Опубликовать"}
+                            label={this.state.isPublic ? 'Сохранить черновик':'Опубликовать' }
                             name = "button-admin"
-                            clickHandler = {this.onPublish}
+                            clickHandler = {this.onChangeStatus}
                         />
                     )} />
                 </div>
@@ -119,10 +132,12 @@ class AdminAddProjects extends Component {
                             value = {this.state.name}
                             onChangeValue = {this.getValue}
                         />
+                        {!this.state.isName ?
                         <AdminValidationWindow
-                            className={this.onCorrectTitle()?'hidden':'incorrect-container title-projects-container'}
-                            title='Данное поле необходимо заполнить'
+                            title='Название проекта необходимо заполнить'
+                            showToast = {this.showToast.bind(this)}
                         />
+                        :null} 
                     </div>
                     <hr />
                     <div className="admin-organization-projects">
@@ -157,7 +172,7 @@ class AdminAddProjects extends Component {
                             <ul className="video-array">
                                 { this.state.headArray.map( (link,index) =>
                                     <li className="projects-video-container" key = { index }>
-                                        <span> { link } </span>
+                                        <span> { link.name } </span>
                                         <Button 
                                             name = "button-admin admin-cancel"
                                             label = {<span aria-hidden="true">&times;</span>}
@@ -177,7 +192,6 @@ class AdminAddProjects extends Component {
                             mask="+375 (99) 999-99-99" 
                             value = {this.state.contacts} 
                             onChange={this.getContacts}
-
                         />
                         </div>
                         <Button
@@ -190,7 +204,7 @@ class AdminAddProjects extends Component {
                             <ul className="video-array">
                                 { this.state.contactsArray.map( (link,index) =>
                                     <li className="projects-video-container" key = { index }>
-                                        <span> { link } </span>
+                                        <span> { link.name } </span>
                                         <Button 
                                             name = "button-admin admin-cancel"
                                             label = {<span aria-hidden="true">&times;</span>}
@@ -221,16 +235,18 @@ class AdminAddProjects extends Component {
                             value = {this.state.site}
                             onChangeValue = {this.getSite}
                         />
-                        <AdminValidationWindow
-                            className={this.onCorrectSite()? "hidden" : "incorrect-container site-projects-container"}
-                            title ='Введите корректный сайт!'
-                        />
+                        { !this.state.isSiteCorrect?
+                            <AdminValidationWindow
+                                title ='Введите корректный сайт!'
+                                showToast = {this.showToast.bind(this)}
+                            />
+                        :null}
                     </div>
                     <hr />
                     <div className="admin-media-projects">
                         <div className="admin-image">
                             <label>Изображение:</label>
-                            <div className = {this.state.mediaImageArray.length+this.state.mediaVideoArray.length<4?"admin-button":"button-projects-dislable"}>
+                            <div className = {this.isCorrectArrayLimit()?"admin-button":"button-projects-dislable"}>
                                     <div className = "choose-file">
                                         <span>Выберите файл</span>
                                     </div>
@@ -242,10 +258,11 @@ class AdminAddProjects extends Component {
                                         multiple
                                     />
                             </div>
+                            {this.state.mediaImageArray?
                             <div className="image-array">
                                {this.state.mediaImageArray.map( (link,index) =>
                                     <div className="projects-gallery-container" key={index}>
-                                        <img src = { link } className="projects-media-gallery" alt=""/>
+                                        <img src = { link.name } className="projects-media-gallery" alt=""/>
                                         <Button 
                                             name = {"button-admin admin-cancel"}
                                             label = {<span aria-hidden="true">&times;</span>}
@@ -254,6 +271,7 @@ class AdminAddProjects extends Component {
                                     </div>
                                 )}
                             </div>
+                            :null}
                         </div>
                         <div className="admin-media-video-projects">
                             <div className="input-video-container">
@@ -270,18 +288,20 @@ class AdminAddProjects extends Component {
                             <Button
                                 label = {"Добавить видео"}
                                 clickHandler = {this.addMediaVideo}
-                                name = {this.state.mediaImageArray.length+this.state.mediaVideoArray.length<4?"admin-button admin-projects-media-buttons":"button-projects-dislable"}
+                                name = {this.isCorrectArrayLimit()?"admin-button admin-projects-media-buttons":"button-projects-dislable"}
                             />
                             </div>
-                            <AdminValidationWindow
-                                className={this.state.isMediaVideoArray?'hidden':'incorrect-container video-projects-container'}
-                                title='Неправильно введена ссылка!' 
-                            />
-                            
+                            {!this.state.isMediaVideoArray ?
+                                <AdminValidationWindow
+                                    title='Неправильно введена ссылка!'
+                                    showToast = {this.showToast.bind(this)}
+                                />
+                            :null}
+                            {this.state.mediaVideoArray?
                                 <ul className="video-array">
                                     { this.state.mediaVideoArray.map( (link,index) =>
                                         <li className="projects-video-container" key = { index }>
-                                            <span> { link } </span>
+                                            <span> { link.name } </span>
                                             <Button 
                                                 name = "button-admin admin-cancel"
                                                 label = {<span aria-hidden="true">&times;</span>}
@@ -290,6 +310,7 @@ class AdminAddProjects extends Component {
                                         </li>
                                     )}
                                 </ul>
+                                :null}
                             </div>
                         </div>
                     </div>
@@ -304,10 +325,12 @@ class AdminAddProjects extends Component {
                             getDeletedImages = {this.getDeletedImages}
                             isProject = {true}
                         />
-                    <AdminValidationWindow 
-                        className={this.onCorrectFullText() ? "incorrect-value-container hidden" : "incorrect-value-container"}
-                        title='Количество символов превышает 1000!'
-                    />
+                    {!this.state.isFullTextCorrectValue ?
+                        <AdminValidationWindow 
+                            title='Количество символов превышает 1000!'
+                            showToast = {this.showToast.bind(this)}
+                        />
+                    : null}
                     <div className = "admin-textarea-description">
                         <span>Краткое описание не должно содержать более 1000 символов</span>
                         <div>
@@ -319,9 +342,6 @@ class AdminAddProjects extends Component {
                 </div>
                 <hr />
                 <div className="text-projects">
-                    <div className = "projects-source">
-                        <label>Источник:</label>
-                    </div>
                     <div>
                         {this.state.filters? 
                             <AdminSelectSearch 
@@ -336,25 +356,24 @@ class AdminAddProjects extends Component {
                 <div className="admin-buttons">
                     <Route render={({history}) => (
                         <Button 
-                            disabled={!this.onRight}
                             label = {"Предпросмотр"} 
-                            name = {this.onRight()? "button-admin":"button-publish-projects"}
+                            name = {"button-admin"}
                             clickHandler = {this.onPreview}
                         />
                     )} />
                     <Route render={({history}) => (
                         <Button
-                            disabled={!this.onRight()}
                             label={"Опубликовать"}
-                            name = {this.onRight()? "button-admin":"button-publish-projects"}
+                            name = {
+                                "button-admin"
+                            }
                             clickHandler = {this.onPublish}
                         />
                     )} />
                     <Route render={({history}) => (
                         <Button 
-                            disabled={!this.onRight()}
                             label={"Сохранить как черновик"}
-                            name = {this.onRight()? "button-admin":"button-publish-projects"}
+                            name = {"button-admin"}
                             clickHandler = {this.onDraft}
                         />
                     )} />
@@ -399,9 +418,11 @@ class AdminAddProjects extends Component {
     }
     addHead = (e)=>{
         e.preventDefault()
+        let object={}
         let headArray = this.state.headArray
         if(this.state.head){
-            headArray.push(this.state.head)
+            object.name=this.state.head
+            headArray.push(object)
             this.setState({
                 headArray:headArray
             })
@@ -422,9 +443,11 @@ class AdminAddProjects extends Component {
     }
     addContacts = (e) => {
         e.preventDefault()
+        let object={}
         let contactsArray = this.state.contactsArray
         if(this.state.contacts && /^\+375\s\(\d{2}\)\s\d{3}-\d{2}-\d{2}$/.test(this.state.contacts) ) {
-            contactsArray.push(this.state.contacts)
+            object.name=this.state.contacts
+            contactsArray.push(object)
             this.setState({
                 contactsArray:contactsArray
             })
@@ -447,14 +470,65 @@ class AdminAddProjects extends Component {
     getSite = (obj) =>{
         this.setState({site:obj.value})
     }
+    addMediaImage = () => {
+        let object = {}
+        let mediaImageArray = this.state.mediaImageArray
+        let formData = new FormData();
+        if(this.isCorrectArrayLimit()){
+            formData.append('imageData',this.state.mediaImageData);
+            axios({
+                method:'post',
+                url: `${server}/api/uploadGalleryImage/`,
+                data:formData,
+                config:{
+                    headers:{
+                        'Content-Type':'multipart/form-data; charset=UTF-8'
+                    }
+                }
+            })
+            .then(res =>{
+                object.name = res.data.link
+                mediaImageArray.push(object)
+                this.setState({
+                    mediaImageArray:mediaImageArray
+                })
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        }
+    }
+    deleteGalleryImage = (e, index) => {  
+        e.preventDefault()
+        let mediaImageArray = this.state.mediaImageArray
+        let deletedImage = mediaImageArray.splice(index, 1)
+        axios({
+             method: 'delete',
+             url: `${server}/api/uploadGalleryImage/`,
+             data: deletedImage,
+             config: {
+                 headers: {
+                     'Content-Type': 'application/json; charset=UTF-8'
+                    } 
+                },
+         })
+         .catch(err=> {
+             console.log(err);
+         });
+        this.setState({
+            mediaImageArray: mediaImageArray
+        })      
+     }
     getVideo = (obj) =>{
         this.setState({mediaVideo:obj.value})
     }
     addMediaVideo = (e) =>{
         e.preventDefault()
+        let object = {}
         let mediaVideoArray = this.state.mediaVideoArray
-        if(this.state.mediaVideo && /^(https?:\/\/)?([\da-zа-я\.-]+)\.([a-zа-я\.]{2,6})\/([\w\/\-\.]+)([\?].*)?$/igm.test(this.state.mediaVideo)) {
-            mediaVideoArray.push(this.state.mediaVideo)
+        if(this.state.mediaVideo && /^(https?:\/\/)?([\da-zа-я\.-]+)\.([a-zа-я\.]{2,6})\/([\w\/\-\.]+)([\?].*)?$/igm.test(this.state.mediaVideo) && this.isCorrectArrayLimit()) {
+            object.name = this.state.mediaVideo
+            mediaVideoArray.push(object)
             this.setState({
                 mediaVideoArray:mediaVideoArray,
                 mediaVideo:'',
@@ -468,7 +542,7 @@ class AdminAddProjects extends Component {
         } 
     }
     onKeyPress  = (e) => {
-        (e.charCode === 13 && this.state.mediaImageArray.length+this.state.mediaVideoArray.length<4)? this.addMediaVideo(e): null;
+        (e.charCode === 13 && this.isCorrectArrayLimit())? this.addMediaVideo(e): null;
     }
     deleteGalleryVideo = (e,index)=>{
         e.preventDefault()
@@ -477,6 +551,9 @@ class AdminAddProjects extends Component {
         this.setState({
             mediaVideoArray: mediaVideoArray
         })
+    }
+    isCorrectArrayLimit = () => {
+        return this.state.mediaImageArray.length + this.state.mediaVideoArray.length < 4
     }
     onEditorStateChange = (editorState) => {
         this.setState({fullTextEditorState: editorState});
@@ -493,22 +570,51 @@ class AdminAddProjects extends Component {
         })
     }
     onCorrectTitle = () =>{
-        return /^[\w\W\s]+$/.test(this.state.name)
+        if(/^[\w\W\s]+$/.test(this.state.name)){
+            this.setState({
+                isName:true
+            })
+            return true;
+        }else{
+            this.setState({
+                isName:false
+            })
+            return false; 
+        }
     }
     onCorrectSite = () =>{
-        return /^((https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\W\.-]*)*\/?)?$/.test(this.state.site)
+        if(/^((https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\W\.-]*)*\/?)?$/.test(this.state.site)){
+            this.setState({
+                isSiteCorrect:true
+            })
+            return true;
+        }else{
+            this.setState({
+                isSiteCorrect:false
+            })
+            return false;
+        }
+    }
+    onChangeStatus = () =>{
+        this.setState({isPublic:!this.state.isPublic})
     }
     onCorrectFullText = () =>{
         let fullText = draftToHtml(convertToRaw(this.state.fullTextEditorState.getCurrentContent()))
         let newText = fullText.replace(/<[^>]*>/g, '').replace(/\r\n/g, '')
-        return newText.length<=this.state.value
-    }
-    onRight = ()=>{
-         return this.onCorrectSite() && this.onCorrectFullText() && this.onCorrectTitle()
+        if(newText.length<=this.state.value){
+            this.setState({
+                isFullTextCorrectValue:true
+            })
+            return true;
+        }else{
+            this.setState({
+                isFullTextCorrectValue:false
+            })
+            return false;
+        }
     }
     onPublish = (e) => {
-        this.onRight()
-        if(this.onRight()){
+        if(this.onCorrectTitle() && this.onCorrectSite() && this.onCorrectFullText()){
             this.setState({
                 isPublic: true
             }, this.sendProjects)
@@ -516,8 +622,7 @@ class AdminAddProjects extends Component {
     }
     onDraft = (e) => {
         e.preventDefault()
-        this.onRight()
-        if(this.onRight()){
+        if(this.onCorrectTitle() && this.onCorrectSite() && this.onCorrectFullText()){
             this.setState({
                 isPublic: false
             }, this.sendProjects)
@@ -525,8 +630,7 @@ class AdminAddProjects extends Component {
     }
     onPreview = (e)=>{
         e.preventDefault()
-        this.onRight()
-        if(this.onRight()){
+        if(this.onCorrectTitle() && this.onCorrectSite() && this.onCorrectFullText()){
             this.setState({
                 isPreview:true
             })
@@ -556,13 +660,18 @@ class AdminAddProjects extends Component {
         let formData  = new FormData();
         Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
         formData.append('fullText', JSON.stringify(convertToRaw(this.state.fullTextEditorState.getCurrentContent())))
+        formData.set('headArray',JSON.stringify(this.state.headArray))
+        formData.set('contactsArray',JSON.stringify(this.state.contactsArray))
+        formData.set('mediaImageArray',JSON.stringify(this.state.mediaImageArray))
+        formData.set('mediaVideoArray',JSON.stringify(this.state.mediaVideoArray))
+
         let id = ''
         if (this.props.location.state) {
             id = this.props.location.state.detail._id
         }
         axios({
             method: id ? 'put' : 'post',
-            url: id ? `${server}/projects/${id}` : `${server}/projects/`,
+            url: id ? `${server}/api/projects/${id}` : `${server}/api/projects/`,
             data: formData,
             config: {
                 headers: {
@@ -616,53 +725,6 @@ class AdminAddProjects extends Component {
             reader.readAsDataURL(file)
         }
         e.target.value=null;
-    }
-    addMediaImage = () => {
-        let formData = new FormData();
-        formData.append('imageData',this.state.mediaImageData);
-            axios({
-                method:'post',
-                url: `${server}/uploadGalleryImage/`,
-                data:formData,
-                config:{
-                    headers:{
-                        'Content-Type':'multipart/form-data; charset=UTF-8'
-                    }
-                }
-            })
-            .then(res =>{
-                let mediaImageArray = this.state.mediaImageArray
-                mediaImageArray.push(res.data.link)
-                this.setState({
-                    mediaImageArray:mediaImageArray
-                })
-            })
-            .catch(err=>{
-                console.log(err)
-            }) 
-    }
-    deleteGalleryImage = (e, index) => {
-        e.preventDefault()
-        let mediaImageArray = this.state.mediaImageArray
-        let deletedImage = mediaImageArray.splice(index, 1)
-        axios({
-             method: 'delete',
-             url: `${server}/uploadGalleryImage/`,
-             data: deletedImage,
-             config: {
-                 headers: {
-                     'Content-Type': 'application/json; charset=UTF-8'
-                    }
-                },
-         })
-         .catch(err=> {
-             console.log(err);
-         });
-        this.setState({
-            mediaImageArray: mediaImageArray
-        })      
-     }
-    
-     
+    } 
 }
 export default withRouter(AdminAddProjects);

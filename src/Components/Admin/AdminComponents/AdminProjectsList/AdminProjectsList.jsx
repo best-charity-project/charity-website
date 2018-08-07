@@ -3,6 +3,7 @@ import AdminProject from '../AdminProject/AdminProject';
 import './AdminProjectsList.css'
 import { server } from '../../../../api';
 import {withRouter} from "react-router-dom";
+import axios from 'axios';
 
 class AdminProjectsList extends Component {
     state = {
@@ -34,11 +35,11 @@ class AdminProjectsList extends Component {
     }
    
       getProjectInfo = (id) => {
-        const URL = `${ server }/projects/${id}`;
-        fetch(URL)
-        .then(response => response.json())
-        .then(data => {
-            this.setState({ projectInfo: data });
+        axios({
+            url:`${ server }/api/projects/${id}`,
+        })
+        .then(res => {
+            this.setState({ projectInfo: res.data });
             this.props.history.push({
                 pathname: '/admin-panel/projects/create',
                 state: { detail: this.state.projectInfo}

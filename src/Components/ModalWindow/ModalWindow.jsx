@@ -27,7 +27,7 @@ class ModalWindow extends Component {
                 <Button 
                     name = 'button-admin admin-cancel'
                     label = {<span aria-hidden='true'>&times;</span>} 
-                    clickHandler =  {() => {this.deleteGalleryImage(sortIndex)} }
+                    clickHandler =  {() => this.deleteGalleryImage(sortIndex)}
                 />
             </div>      
         );
@@ -132,7 +132,7 @@ class ModalWindow extends Component {
         this.setState({
             imageArr: imageArr,
             deletedImages: deletedImages
-        }, () => {this.props.getDeletedImages(this.state.deletedImages)})
+        }, () => this.props.getDeletedImages(this.state.deletedImages))
     }
 
     addImage = () => {
@@ -140,7 +140,7 @@ class ModalWindow extends Component {
         formData.append('imageData', this.state.imageData);
         axios({
             method: 'post',
-            url: `${server}/uploadGalleryImage/`,
+            url: `${server}/api/uploadGalleryImage/`,
             data: formData,
             config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
         })

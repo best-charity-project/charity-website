@@ -4,6 +4,7 @@ import {withRouter} from "react-router-dom";
 import axios from 'axios';
 import {EditorState, convertToRaw, convertFromRaw} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
+import ToastrContainer, {ToastSuccess,ToastDanger} from 'react-toastr-basic'
 
 import {server} from '../../../api';
 import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';
@@ -16,6 +17,7 @@ import AdminPreview from '../AdminComponents/AdminPreview/AdminPreview';
 import AdminSelectSearch from '../../Admin/AdminComponents/AdminSelectSearch/AdminSelectSearch';
 import jsonpAdapter from 'axios-jsonp';
 import './AdminAddNews.css';
+import AdminValidationWindow from '../AdminComponents/AdminValidationWindow/AdminValidationWindow';
 
 class AdminAddNews extends Component {
     state = {
@@ -54,6 +56,9 @@ class AdminAddNews extends Component {
             })
         }
     }
+    showToast(e){
+        ToastDanger(e);
+    }
 
     render() {
         return (
@@ -81,6 +86,12 @@ class AdminAddNews extends Component {
                                 value = {this.state.title}
                                 onChangeValue = {this.onChangeValue}
                             />
+                            {!this.state.isTitle ?
+                                <AdminValidationWindow
+                                    title='Название новости необходимо заполнить'
+                                    showToast = {this.showToast.bind(this)}
+                                />
+                            :null} 
                         </div>
                         <hr />
                         <div>
@@ -121,6 +132,12 @@ class AdminAddNews extends Component {
                                 onEditorStateChange = {this.onEditorStateChange}
                                 getDeletedImages = {this.getDeletedImages}
                             />
+                            {!this.state.isFullTextCorrect ?
+                            <AdminValidationWindow
+                                title='Название Полного описания необходимо заполнить'
+                                showToast = {this.showToast.bind(this)}
+                            />
+                            :null} 
                         </div>
                         <hr />
                         <div className="text-news">
@@ -259,23 +276,57 @@ class AdminAddNews extends Component {
             }
         }
     }
-
+    onCorrectTitle = () =>{
+        if(this.state.title){
+            this.setState({
+                isTitle:true
+            })
+            return true;
+        }else{
+            this.setState({
+                isTitle:false
+            })
+            return false; 
+        }
+    }
+    onCorrectFullText = () =>{
+        if(convertToRaw(this.state.fullTextEditorState.getCurrentContent()).blocks.text){
+            this.setState({
+                isFullTextCorrect:true
+            })
+            return true
+        }else{
+            this.setState({
+                isFullTextCorrect:false
+            })
+            return false
+        }
+    }
     onPreview = () => {
-        this.setState({
-            isPreview: true
-        });
+        if(this.onCorrectTitle() && this.onCorrectFullText()){
+            this.setState({
+                isPreview: true
+            });
+        }
     }
 
     onSaveChangeStatus = () => {
-        this.setState({isPublic: !this.state.isPublic}, this.checkText)
+        if(this.onCorrectTitle() && this.onCorrectFullText()){
+            this.setState({isPublic: !this.state.isPublic}, this.checkText)
+        }
     }
 
     onPublish = () => {
-        this.setState({isPublic: true}, this.checkText)
+        
+        if(this.onCorrectTitle() && this.onCorrectFullText()){
+            this.setState({isPublic: true}, this.checkText)
+        }
     }
 
     onDraft = () => {
-        this.setState({isPublic: false}, this.checkText)
+        if(this.onCorrectTitle() && this.onCorrectFullText()){
+            this.setState({isPublic: false}, this.checkText)
+        }
     }
 
     onCancel = () => {
@@ -297,7 +348,7 @@ class AdminAddNews extends Component {
         if(this.state.deletedImages.length) {
             axios({
                 method: 'delete',
-                url: `${server}/uploadGalleryImage/`,
+                url: `${server}/api/uploadGalleryImage/`,
                 data: this.state.deletedImages,
                 config: {headers: {'Content-Type': 'application/json; charset=UTF-8'}},
             })
@@ -330,7 +381,7 @@ class AdminAddNews extends Component {
         }
         axios({
             method: id ? 'put' : 'post',
-            url: id ? `${server}/news/` + id : `${server}/news/`,
+            url: id ? `${server}/api/news/` + id : `${server}/api/news/`,
             data: formData,
             config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
         })
@@ -363,7 +414,7 @@ class AdminAddNews extends Component {
     getFiltersListByType = (type) => {
         axios({
             method: 'get',
-            url: `${ server }/filters?type=${type}`
+            url: `${ server }/api/filters?type=${type}`
         })
         .then(res => {
             this.setState({

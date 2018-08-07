@@ -325,7 +325,7 @@ class AdminCreateEvent extends Component {
         sendedBody.text = JSON.stringify(convertToRaw(this.state.textEditorState.getCurrentContent()));
         axios({
             method: id ? 'put' : 'post',
-            url: id ? `${server}/events/` + id : `${server}/events/`,
+            url: id ? `${server}/api/events/` + id : `${server}/api/events/`,
             data: sendedBody,
             config: { headers: {
                 Accept: 'application/json',
@@ -387,7 +387,7 @@ class AdminCreateEvent extends Component {
     getFiltersList = () => {  
         axios({
             method: 'get',
-            url: `${ server }/filters`,
+            url: `${ server }/api/filters`,
         })
         .then(res =>{
             let filterList = res.data.filterList;

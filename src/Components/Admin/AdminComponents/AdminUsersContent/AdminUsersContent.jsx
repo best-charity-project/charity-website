@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import AdminUserSearch from '../AdminUserSearch/AdminUserSearch';
 import AdminUsersList from '../AdminUsersList/AdminUsersList';
 import "../../../../App.css";
+import axios from 'axios'
 
 
 class AdminUsersContent extends Component {
@@ -13,18 +14,12 @@ class AdminUsersContent extends Component {
         error: null
     }
     componentDidMount() {
-        fetch(`${ server }/subscription`, { 
-            method: 'GET',
-            mode: 'cors'
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                } else {
-                    throw new Error('Something went wrong ...')
-                }
-            })
-            .then(data => this.setState({users: data.subscribers, filteredUsers: data.subscribers, isLoading: false}))
+        axios({
+            url:`${ server }/api/subscription`,
+            method:'get',
+            mode:'cors'
+        })
+            .then(res => this.setState({users: res.data.subscribers, filteredUsers: res.data.subscribers, isLoading: false}))
             .catch(error => this.setState({error, isLoading: false}))
     }
     render() {
@@ -44,18 +39,12 @@ class AdminUsersContent extends Component {
     }
     findUser = (email) => {
         if(!email) {
-            fetch(`${ server }/subscription`, {
-                method: 'GET', 
-                mode: 'cors'
-                })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    } else {
-                        throw new Error('Something went wrong ...')
-                    }
-                })
-                .then(data => this.setState({filteredUsers: data.subscribers}))
+            axios({
+                url:`${ server }/api/subscription`,
+                method:'get',
+                mode:'cors'
+            })
+                .then(res => this.setState({filteredUsers: res.data.subscribers}))
                 .catch(error => this.setState({error}))
         } else {
             const {users} = this.state

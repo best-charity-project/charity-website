@@ -24,6 +24,7 @@ div,
 span,
 a, 
 li,
-textarea {
+textarea,
+select {
   font-family: 'Montserrat';
 }
