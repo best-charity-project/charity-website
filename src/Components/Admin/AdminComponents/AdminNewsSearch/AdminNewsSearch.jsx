@@ -9,7 +9,6 @@ class AdminNewsSearch extends Component {
             <div key="news-search" className = 'search-news'>
                 <img src = {searchImg} alt = '' />
                 <TextField 
-                    key = {this.props.inputKey ? this.props.inputKey : "news-search-input"}
                     type = 'search'
                     nameClass = 'admin-search-input' 
                     onChangeValue = {this.onSearch} 

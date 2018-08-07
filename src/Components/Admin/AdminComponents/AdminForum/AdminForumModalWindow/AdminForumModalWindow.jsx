@@ -124,6 +124,7 @@ class AdminForumModalWindow extends Component {
                 }) 
                 this.props.changeState()
                 this.props.getRecords()
+                this.props.getTopics()
             })
             .catch((error) => {
                 console.log(error);

@@ -12,6 +12,7 @@
     background-color: #e8e6e2;
     margin: 0;
     padding-left: 0;
+    cursor: pointer;
 }
 .admin-forum-group-record .admin-forum-record-title.active {
     background-color: #ffffff;
