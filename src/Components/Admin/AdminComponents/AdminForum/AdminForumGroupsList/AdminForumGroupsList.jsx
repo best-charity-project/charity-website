@@ -17,12 +17,12 @@ class AdminForumGroupsList extends Component {
         title: '',
         checkedGroupsIds: [],
         checkedTopicsIds: [],
+        checkedTopics: [],
         groups: [],
         topics: [],
         filteredGroups: [],
         filteredTopics: [],
         isModalWindowOpen: false,
-        isTopicsOpen: false,
         isFiltered: false
     }
 
@@ -39,8 +39,8 @@ class AdminForumGroupsList extends Component {
     render() {
         return(
             <div className = 'forum-list'>
-                <div key = "search-delete" className = 'search-delete'>
-                    <AdminNewsSearch key="news-search" findNews = {this.findRecord} /> 
+                <div className = 'search-delete'>
+                    <AdminNewsSearch findNews = {this.findRecord} /> 
                     <Button
                         name = 'delete-record'
                         clickHandler = {this.submit}
@@ -66,6 +66,7 @@ class AdminForumGroupsList extends Component {
                             closeModalWindow = {this.closeModalWindow}
                             groups = {this.state.filteredGroups}
                             getRecords = {this.getRecords}
+                            getTopics = {this.getTopics}
                             changeState = {this.props.changeState}
                         />
                     </div>
@@ -81,16 +82,15 @@ class AdminForumGroupsList extends Component {
                                 deleteHandler = {() => this.deleteItem(item)} 
                                 checkId = {this.checkId}
                                 checkTopicsId = {this.checkTopicsId}
+                                checkedTopics = {this.state.checkedTopics}
                                 changeState = {this.props.changeState}
-                                getCheckedTopicsIds = {this.getCheckedTopicsIds}
-                                isTopicsOpen = {this.state.isTopicsOpen}
-                                isModalWindowOpen = {this.state.isModalWindowOpen}
+                                changeMode = {this.props.changeMode}
+                                isFiltered = {this.state.isFiltered}
                                 filteredTopics = {this.state.filteredTopics}
                                 deleteChosenRecords = {this.deleteChosenRecords}
                                 deleteTopic = {this.deleteTopic}
                                 getTopics = {this.getTopics}
                                 groups = {this.state.groups}
-                                isFiltered = {this.state.isFiltered}
                             />
                         )}
                     </div>
@@ -124,7 +124,7 @@ class AdminForumGroupsList extends Component {
             this.setState({  
                 topics: result.data.forumTopics,          
                 filteredTopics: result.data.forumTopics,
-            }) 
+            })
         })
         .catch((error) => {
             console.log(error);
@@ -133,7 +133,6 @@ class AdminForumGroupsList extends Component {
 
     findRecord = (title) => {
         if(title) {
-            console.log(title)
             axios({
                 method: 'GET', 
                 url: `${server}/api/forumSearch?query=${title}`
@@ -143,7 +142,6 @@ class AdminForumGroupsList extends Component {
                     filteredGroups: result.data.groupsList,
                     filteredTopics: result.data.topicsList,
                     isFiltered: true,
-                    isTopicsOpen: true
                 }) 
             })
             .catch((error) => {
@@ -154,7 +152,6 @@ class AdminForumGroupsList extends Component {
                 filteredGroups: this.state.groups,
                 filteredTopics: this.state.topics,
                 isFiltered: false,
-                isTopicsOpen: false
             }) 
         }
     }
@@ -246,7 +243,6 @@ class AdminForumGroupsList extends Component {
     openModalWindow = () => {
         this.setState({
             isModalWindowOpen: true,
-            isTopicsOpen: false,
             checkedGroupsIds: [],
             checkedTopicsIds: []
         })
@@ -318,19 +314,22 @@ class AdminForumGroupsList extends Component {
         })
     }
 
-    checkTopicsId = (id) => {
+    checkTopicsId = (topic) => {
+        let id = topic._id
         let tempId = this.state.checkedTopicsIds;
+        let tempTopics = this.state.checkedTopics;
+        let indexToDelete;
         if (~this.state.checkedTopicsIds.indexOf(id)) {
-            tempId.splice(tempId.indexOf(id), 1)
+            indexToDelete = tempId.indexOf(id)
+            tempId.splice(indexToDelete, 1)
+            tempTopics.splice(indexToDelete, 1)
         } else {
             tempId.push(id)
+            tempTopics.push(topic)
         }
-        this.setState({checkedTopicsIds: tempId}, () => this.getCheckedTopicsIds(this.state.checkedTopicsIds))
-    }
-
-    getCheckedTopicsIds = (array) => {
         this.setState({
-            checkedTopicsIds: array
+            checkedTopicsIds: tempId,
+            checkedTopics: tempTopics
         })
     }
 }

@@ -4,7 +4,8 @@ class AdminForumUser extends Component {
     
     render() {
         return(
-            <div>    
+            <div>   
+                Hello user! 
             </div>
         )
     }

@@ -16,24 +16,21 @@ class AdminForumGroup extends Component {
         newTitle: '',
         isChanging: false,
         isTopicsOpen: false,
+        isShown: false
     }
     componentDidMount (){
         this.setState({
             id: this.props.id,
             groupTitle: this.props.title,
             newTitle: this.props.title,
-            isTopicsOpen: this.props.isTopicsOpen
+            isTopicsOpen: this.isTopicsOpened(this.props)
         })
     }
 
     componentWillReceiveProps(nextProps) {
-        nextProps.isModalWindowOpen || nextProps.isFiltered ? 
-            this.setState({
-                isTopicsOpen: nextProps.isTopicsOpen
-            }) :
-            this.setState({
-                isTopicsOpen: false
-            })
+        this.setState({
+            isTopicsOpen: this.isTopicsOpened(nextProps)
+        })
     }
 
     render() {
@@ -89,16 +86,17 @@ class AdminForumGroup extends Component {
                     <div className = 'admin-forum-topics-list'>
                         <AdminForumTopicsList 
                             changeState = {this.props.changeState}
+                            changeMode = {this.props.changeMode}
                             id = {this.state.id}
-                            getCheckedTopicsIds = {this.props.getCheckedTopicsIds}
                             filteredTopics = {this.props.filteredTopics}
                             deleteChosenRecords = {this.props.deleteChosenRecords}
                             deleteTopic = {this.props.deleteTopic}
                             getTopics = {this.props.getTopics}
                             checkId = {this.props.checkTopicsId}
                             groups = {this.props.groups}
+                            showTopics = {this.showTopics}
                         /> 
-                    </div> :
+                    </div> : 
                     null
                 }     
            </div>
@@ -107,16 +105,20 @@ class AdminForumGroup extends Component {
     checkId = () => {
         this.props.checkId(this.state.id)
     }
+
     onChange = (event) => {
         this.setState({
             newTitle: event.target.value
         })
     }
+
     showTopics = () => {
         this.setState({
+            isShown: !this.state.isShown,
             isTopicsOpen: !this.state.isTopicsOpen
         })
     }
+
     changeRecord = () => {
         this.setState({
             isChanging: true
@@ -157,7 +159,6 @@ class AdminForumGroup extends Component {
             isChanging: false,
             newTitle: this.state.groupTitle
         })
-        this.focus()
     }
 
     submit = () => {
@@ -175,6 +176,21 @@ class AdminForumGroup extends Component {
             }
           ]
         })
+    }
+
+    isTopicsOpened = (props) => {
+        if(this.state.isShown) {
+            return true
+        }
+        if (props.isFiltered) {
+            return true
+        }
+        for (let i = 0; i < props.checkedTopics.length; i++) {
+            if(props.checkedTopics[i].group_id._id.toString() === this.props.id.toString()) {
+                return true
+            }
+        }
+        return false
     }
 }
 

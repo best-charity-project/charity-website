@@ -32,6 +32,7 @@ class AdminForumTopicsList extends Component {
                     if(item.group_id._id === this.props.id) {
                         return (
                             <AdminForumTopic 
+                                changeMode = {this.props.changeMode}
                                 title = {item.topicTitle} 
                                 id = {item._id}
                                 key = {item._id}  
@@ -39,6 +40,8 @@ class AdminForumTopicsList extends Component {
                                 checkId = {this.props.checkId}
                                 groups = {this.props.groups}
                                 getTopics = {this.props.getTopics}
+                                topic = {item}
+                                showTopics = {this.props.showTopics}
                             />
                         )
                     }

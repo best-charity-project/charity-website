@@ -5,10 +5,11 @@ class Checkbox extends Component {
     render() {
         return (
             <input 
-                type = "checkbox" 
+                type = 'checkbox' 
                 name = {this.props.name} 
                 onChange = {this.props.onChange}
-                className = {`checkbox-input ${this.props.styles}`}
+                className = 'checkbox-input'
+                checked = {this.props.checked}
             />
         );
     }

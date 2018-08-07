@@ -41,7 +41,7 @@ class AdminForumTopic extends Component {
                             value = {this.state.newTitle}
                             ref={(input) => {this.nameInput = input}} 
                             onChange = {this.onChange}
-                            onClick = {this.showPosts}
+                            onClick = {this.changeMode}
                         />
                     </div>
                     <div className = 'admin-forum-buttons'>
@@ -103,6 +103,9 @@ class AdminForumTopic extends Component {
            </div>
         )
     }
+    changeMode = () => {
+        this.props.changeMode('posts', this.props.topic)
+    }
     moveRecord = () => {
         this.setState({
             isMoving: true
@@ -110,7 +113,7 @@ class AdminForumTopic extends Component {
     }
 
     checkId = () => {
-        this.props.checkId(this.state.id)
+        this.props.checkId(this.props.topic)
     }
 
     onChange = (event) => {
@@ -155,6 +158,7 @@ class AdminForumTopic extends Component {
                     isMoving: false
                 })
                 this.props.getTopics()
+                this.props.showTopics()
             })
             .catch(function (error) {
                 console.log(error);
@@ -168,7 +172,6 @@ class AdminForumTopic extends Component {
             isMoving: false,
             newTitle: this.state.topicTitle
         })
-        this.focus()
     }
 
     submit = () => {
