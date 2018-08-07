@@ -104,7 +104,7 @@ class AdminCreateEvent extends Component {
                             value = {this.state.place}
                             type = 'text' 
                             name = 'place' 
-                            onChangeValue = {this.getPlace}
+                            onChangeValue = {this.getPlace}                            
                         />
                     </div>
                     <div className = 'date-start-event'>
@@ -285,8 +285,8 @@ class AdminCreateEvent extends Component {
         e.target.classList.remove('active-social-networks'):
         e.target.classList.add('active-social-networks');
     }
-    getValue = (obj) => {
-        this.setState({title: obj.value});
+    getValue = (str) => {
+        this.setState({title: str});
     }
     getStartDate = (str) =>{
         this.setState({dateStart: str})
@@ -345,19 +345,19 @@ class AdminCreateEvent extends Component {
         });
     };
     getPlace = (str) => {
-        this.setState({place:str.value});
+        this.setState({place:str});
     };
     getParticipation = (str) => {
-        this.setState({participation:str.value});
+        this.setState({participation:str});
     };
     getLinkParticipation = (str) => {
-        this.setState({linkParticipation:str.value});
+        this.setState({linkParticipation:str});
     };
     getOrganizers = (e) => {
         this.setState({organizers:e.target.value});
     };
     getSpeaker = (str) => {
-        this.setState({speaker: str.value})
+        this.setState({speaker: str})
     };
     addSpeakers = () => {
         let {speakersArray, speaker} = this.state;
@@ -370,16 +370,16 @@ class AdminCreateEvent extends Component {
        this.setState({speakersArray:speakersArray});
     }
     getOrganization = (str) => {
-        this.setState({organization: str.value});
+        this.setState({organization: str});
      };
     getContactPerson = (str) => {
-        this.setState({contactPerson: str.value});
+        this.setState({contactPerson: str});
     };
     getContactPhone =(str) => {
-        this.setState({contactPhone : str.value});
+        this.setState({contactPhone : str});
     };
     getWebsite = (str) => {
-        this.setState({website : str.value});
+        this.setState({website : str});
     }
     getFiltersList = () => {  
         axios({

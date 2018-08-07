@@ -6,20 +6,27 @@ import '../ErrorEmail/ErrorEmail.css';
 class TextField extends Component {
 	state = {
 		value:'',
-		error:false,
+		start: 0,
+		end:0
 	}
 	valueChange = (e) => {
-		const newValue = e.target.value;
-		this.setState({value : e.target.value}, () =>{
-			this.props.onChangeValue(this.state); 
-		});
-		this.validateField(newValue);	
-
-	}
-	validateField = (newValue) => {
-		let resultValidation = /[0-9a-z_]+@[0-9a-z_]+\.[a-z]{2,5}/i.test(newValue);
-		this.setState({error : resultValidation});
-	}
+		let nextValue = e.target.value;
+		this.setState({
+		  value: nextValue,
+		  start: this.ref.selectionStart ,
+		  end: this.ref.selectionEnd,
+		}, () =>{
+			this.props.onChangeValue(this.state.value); 
+		})
+	};
+	componentDidMount() {
+		this.ref.focus();
+	};
+	componentDidUpdate(prevProps, prevState) {
+		if (this.state.value === prevState.value) {
+		  this.ref.setSelectionRange(this.state.start, this.state.end)
+		}
+	};
     render() {
     	return(
  			<div className = 'container-for-input'> 
@@ -33,9 +40,10 @@ class TextField extends Component {
 					name = {this.props.name} 
 					placeholder = {this.props.placeholder} 
 					onChange = {this.valueChange}
-					onFocus = {this.props.onFocusInput}
+					ref={ref => {
+						this.ref = ref
+					}}
 				/>
-				{((this.props.sendToValidation)&&!(this.state.error)) ? <Error/> : null}
 			</div>
 		)
 	}

@@ -11,8 +11,7 @@ class SubscribtionForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value:'',                      
-            valid:false,
+            value:'',      
             sendToValidation :false
         }
     }
@@ -21,8 +20,8 @@ class SubscribtionForm extends Component {
         this.setState({sendToValidation:false})
     }
  
-    getValidation = (obj) => {
-       this.setState({value:obj.value, valid:obj.error});
+    getEmail = (str) => {
+       this.setState({value:str});
      }
      clickHandler = () => {
         this.setState({sendToValidation:true});
@@ -62,7 +61,7 @@ class SubscribtionForm extends Component {
                         nameClass='input-email'
                         placeholder="Введите адрес электронной почты"
                         name='email'
-                        onChangeValue={this.getValidation}
+                        onChangeValue={this.getEmail}
                         onFocusInput={this.onFocusInput}
                         onSubscribe={this.onSubscribe}
                     />

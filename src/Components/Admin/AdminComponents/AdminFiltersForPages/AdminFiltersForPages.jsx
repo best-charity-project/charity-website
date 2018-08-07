@@ -27,7 +27,7 @@ class FiltersForPages extends Component {
         }        
     }
     getValue = (str) => {
-        this.setState({title: str.value});    
+        this.setState({title: str});    
     };  
     showFilterList = () => {
         this.setState({isOpen: !this.state.isOpen});
