@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import {server} from '../../../../../api';
-import Button from '../../../../Button/Button';
 import AdminNewsSearch from '../../AdminNewsSearch/AdminNewsSearch';
 import AdminForumPost from '../AdminForumPost/AdminForumPost';
 import './AdminForumPostsList.css';

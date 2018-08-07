@@ -7,7 +7,7 @@ import './AdminNews.css';
 import axios from 'axios';
 import {server} from '../../../../api';
 import Checkbox from '../../../Checkbox/Checkbox';
-
+import jsonpAdapter from 'axios-jsonp';
 class AdminNews extends Component {
     state = {
         id: ''
@@ -17,7 +17,8 @@ class AdminNews extends Component {
             id:this.props.news._id,
             isPublic:this.props.news.isPublic,
             createdAt: this.props.news.createdAt,
-            title: this.props.news.title
+            title: this.props.news.title,
+            idVk:this.props.news.idVK
         })
     }
     render() {
@@ -58,7 +59,26 @@ class AdminNews extends Component {
     }
     handleClick = () => {
         this.setState({isPublic: !this.state.isPublic}, this.sendStatus)
+        this.state.isPublic ? this.deletePostVK(this.props.news) : this.restorePostVK(this.props.news);
     }
+    deletePostVK = (news) => {
+        let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';
+        let id = '-169499477';
+        axios({
+            method: 'delete',
+            adapter: jsonpAdapter,
+            url: `https://api.vk.com/method/wall.delete?owner_id=${id}&post_id=${news.idVK}&access_token=${token}&v=5.80`            
+        })
+      };
+      restorePostVK = (news) => {
+        let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';
+        let id = '-169499477';
+        axios({
+            method: 'delete',
+            adapter: jsonpAdapter,
+            url: `https://api.vk.com/method/wall.restore?owner_id=${id}&post_id=${news.idVK}&access_token=${token}&v=5.80`            
+        })
+      };
     sendStatus = () => {
         axios({
             method: 'put',

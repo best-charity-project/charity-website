@@ -105,7 +105,6 @@ class AdminForumGroup extends Component {
     checkId = () => {
         this.props.checkId(this.state.id)
     }
-
     onChange = (event) => {
         this.setState({
             newTitle: event.target.value
