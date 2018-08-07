@@ -15,14 +15,21 @@ Use `npm install` for installing new devDependencies
 Use `npm start` to deploy the project
 
 ## How to use?
-### Link to admin page:
 
-To go on admin's page you should write in path line 
+### Link to main page:
+
 ```
  - Production link : https://charity-test-app.herokuapp.com/ 
  - Development link: https://localhost:3000/ 
 ```
-  `login/` , where 
+
+### Link to admin page:
+To go on admin's page you should write in path line 
+```
+ - Production link : https://charity-test-app.herokuapp.com/login 
+ - Development link: https://localhost:3000/login 
+```
+  ,where 
 
 ```
   login: foo@bar.com
@@ -35,8 +42,8 @@ To go on admin's page you should write in path line
 Database is locating on [https://mlab.com/](https://mlab.com/)
 
 ```
- - production DB: mongodb://charity:charity_godel717@ds241121.mlab.com:41121/charity-database
- - development DB:mongodb://vadim:qwerty@ds219100.mlab.com:19100/charity-project
+ - Production DB: mongodb://charity:charity_godel717@ds241121.mlab.com:41121/charity-database
+ - Development DB:mongodb://vadim:qwerty@ds219100.mlab.com:19100/charity-project
 ```
 #### To create a new database:
 1. Go to [https://mlab.com/home](https://mlab.com/home) and sign up a new account and verifie your email
