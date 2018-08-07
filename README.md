@@ -61,7 +61,7 @@ Database is locating on [https://mlab.com/](https://mlab.com/)
  login: charitywebtest@gmail.com
  password: charity_godel717 
  ```
-### Git & Travis CI link:
+### Gmail , Git & Travis CI link:
 ```
 username: charitywebtest@gmail.com
 pass : charity12345
