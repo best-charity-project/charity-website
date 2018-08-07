@@ -17,10 +17,12 @@ class AdminNews extends Component {
             id:this.props.news._id,
             isPublic:this.props.news.isPublic,
             createdAt: this.props.news.createdAt,
-            title: this.props.news.title
+            title: this.props.news.title,
+            idVk:this.props.news.idVK
         })
     }
     render() {
+        console.log(this.props.news)
        return (
            <div className="news-admin" id = {this.state.id}>
                 <div className = "news-admin-checkbox">
@@ -68,6 +70,7 @@ class AdminNews extends Component {
             adapter: jsonpAdapter,
             url: `https://api.vk.com/method/wall.delete?owner_id=${id}&post_id=${news.idVK}&access_token=${token}&v=5.80`            
         })
+        .then(res => console.log(res.data))
       };
       restorePostVK = (news) => {
         let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';

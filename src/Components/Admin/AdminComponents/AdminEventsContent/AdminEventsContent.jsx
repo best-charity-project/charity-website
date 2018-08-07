@@ -11,12 +11,16 @@ import { Route } from 'react-router-dom';
 
 class AdminEventsContent extends Component {
     state= {
-        events : {}
+        events : []
     }
     componentDidMount(){
        this.getList();
     };
+    // componentWillUpdate(nextProps, nextState) {
+    //    nextState.events.length === this.state.events.length? this.getList () : null;
+    //   }
     render() {
+        console.log(this.state)
         return(
             <div>
                 <Navigation onLogout={this.onLogout} />
@@ -36,7 +40,7 @@ class AdminEventsContent extends Component {
                         {(this.state.events.length > 0)?
                         <AdminEventsList 
                             events = {this.state.events} 
-                            getUpdateEventsList = {this.getUpdateEventsList}
+                            
                         /> 
                         : null} 
                     </div>
@@ -45,6 +49,7 @@ class AdminEventsContent extends Component {
         )
     }
     getList = () => {
+        console.log(123)
         fetch(`${ server }/events`)
         .then(response => response.json())
         .then(data => {         
@@ -52,14 +57,8 @@ class AdminEventsContent extends Component {
             )})
         .catch(error => this.setState({ error, isLoading: false }));
     };
-    getUpdateEventsList = () => {
-        setTimeout(this.getList,100);
-    }
     addEvent = () => {
         this.setState({isOpen: true});        
-    }
-    saveEvent = () => {
-        setTimeout(this.getList,0);
     }
 }
 

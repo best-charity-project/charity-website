@@ -30,11 +30,14 @@ class AdminAddNews extends Component {
         date: '',
         value: 0,
         deletedImages: [],
-        idVK : ''
+        idVK: '', 
+        socialNetworksModal: false,
+        idVK:'' 
     }
     cropperRef = React.createRef();
 
     componentWillMount() {
+        this.props.location.state? console.log(this.props.location.state.detail):null;
         this.getFiltersListByType('news');
         if (this.props.location.state) {
             let fullTextEditorState = EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.location.state.detail.fullText)));
@@ -47,6 +50,7 @@ class AdminAddNews extends Component {
                 filter: this.props.location.state.detail.filter,
                 date: this.props.location.state.detail.createdAt,
                 value: this.props.location.state.detail.shortText.length,
+                idVK : this.props.location.state.detail.idVK
             })
         }
     }
@@ -129,13 +133,6 @@ class AdminAddNews extends Component {
                                 null
                             }
                         </div>
-                        <div>
-                            <Button 
-                                name = "button-admin button-admin-background" 
-                                label = { !this.state.idVK ? 'Опубликова запись вк' : 'Обновить запись вк' }
-                                clickHandler = {this.publishVK}
-                            /> 
-                        </div> 
                         <div className="admin-buttons">
                             <Route render={({history}) => (
                                 <Button 
@@ -166,6 +163,33 @@ class AdminAddNews extends Component {
                                 />
                             )} />
                         </div>
+                        <div 
+                        className={(this.state.socialNetworksModal &&!this.props.location.state) ? 'overlay' : 'overlay hidden'} 
+                    >
+                        <div className="modal-event-field modal-social-event">
+                            <div>
+                            <p>Поделиться в социальных сетях?</p>
+                            <ul className = 'social-networks-event-modal' onClick = {this.getActiveSocialNetworks}>
+                                <li className = 'vkontakte-social-network'>
+                                    
+                                </li>
+                                <li className = 'facebook-social-network'></li>
+                            </ul>
+                            </div>
+                            <div className = 'button-wrapper-event-modal'>
+                            <Button 
+                                name = "button-admin button-admin-background" 
+                                label = 'Поделиться' 
+                                clickHandler = {this.publish}
+                            />
+                            <Button 
+                                name = "button-admin button-admin-background" 
+                                label = 'Нет, спасибо' 
+                                clickHandler = {this.closeModalWindow}
+                            />
+                            </div>
+                        </div>
+                    </div> 
                     </div>  : 
 
                     <AdminPreview 
@@ -179,6 +203,7 @@ class AdminAddNews extends Component {
                         date = {this.state.date}
                         isPublic = {this.state.isPublic}
                     />
+                    
                 }
             </div>
         )
@@ -276,18 +301,28 @@ class AdminAddNews extends Component {
                 data: this.state.deletedImages,
                 config: {headers: {'Content-Type': 'application/json; charset=UTF-8'}},
             })
-            .then(response => this.sendNews())
+            .then(response => this.saveNews())
             .catch(function (error) {
                 console.log(error);
             });  
         } else {
-            this.sendNews()
+            this.saveNews()
         }
     }
-
-    sendNews = () => {
+    saveNews = () => {
+        if(this.props.location.state){
+            this.updatePostVk();
+            this.sendNews();
+            
+        }else{
+            this.setState({socialNetworksModal: true});
+        }
+    }
+    sendNews = (idVK) => {
         let formData  = new FormData();
-        Object.keys(this.state).forEach(key => formData.append(key, this.state[key]));
+        let sendedBody = this.state;
+        sendedBody.idVK = idVK;
+        Object.keys(sendedBody).forEach(key => formData.append(key, this.state[key]));
         formData.append('fullText', JSON.stringify(convertToRaw(this.state.fullTextEditorState.getCurrentContent())))
         let id = ''
         if (this.props.location.state) {
@@ -316,7 +351,7 @@ class AdminAddNews extends Component {
         .catch(function (error) {
             console.log(error);
         });
-    }
+    };
 
     deleteImage = () => {
         this.setState({
@@ -336,7 +371,7 @@ class AdminAddNews extends Component {
             })
         })     
     }
-    publishVK = () => {
+    getTextofPost = () => {
             let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';
             let id = '-169499477';
             let title = `${this.state.title}%0A`;
@@ -346,23 +381,49 @@ class AdminAddNews extends Component {
                 info+=textfromEditor[i].text + '%0A';
             }
             let text = `${title}${info}`;
-            this.state.idVK ? 
-                axios({
-                    method: 'get',
-                    adapter: jsonpAdapter,
-                    url: `https://api.vk.com/method/wall.edit?owner_id=${id}&post_id=${this.state.idVK}&message=${text}&access_token=${token}&v=5.80`            
-                }): 
-                axios({
-                    method: 'post',
-                    adapter: jsonpAdapter,
-                    url: `https://api.vk.com/method/wall.post?owner_id=${id}&from_group=0&message=${text}&access_token=${token}&v=5.80`            
-                })        
-                .then(res =>{
-                    this.setState({                        
-                        idVK : res.data.response.post_id
-                    })
-                })
-        }; 
+            return text;
+        };
+        getActiveSocialNetworks = (e) => {
+            e.target.classList.contains('active-social-networks')?
+            e.target.classList.remove('active-social-networks'):
+            e.target.classList.add('active-social-networks');
+        }
+        closeModalWindow = () => {
+            this.sendNews();
+            this.setState({
+                socialNetworksModal: false
+            });
+        };
+        publish = () => {
+            let vkIcon = document.querySelector('.vkontakte-social-network');
+            if(vkIcon.classList.contains('active-social-networks')){
+             this.publishVk();        
+            };
+         };
+         publishVk = () => {
+            let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';
+            let id = '-169499477';
+            let text = this.getTextofPost();
+            axios({
+                method: 'post',
+                adapter: jsonpAdapter,
+                url: `https://api.vk.com/method/wall.post?owner_id=${id}&from_group=0&message=${text}&access_token=${token}&v=5.80`            
+            })        
+            .then(res =>{
+                this.sendNews(res.data.response.post_id)                   
+            })
+        };
+        updatePostVk = () => {
+            let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';
+            let id = '-169499477';
+            let text = this.getTextofPost();
+            axios({
+                method: 'get',
+                adapter: jsonpAdapter,
+                url: `https://api.vk.com/method/wall.edit?owner_id=${id}&post_id=${this.state.idVK}&message=${text}&access_token=${token}&v=5.80`            
+            })
+            .then(res =>  console.log(res.data))
+        };  
 }
 
 export default withRouter(AdminAddNews);

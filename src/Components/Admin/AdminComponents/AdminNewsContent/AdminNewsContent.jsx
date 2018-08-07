@@ -98,6 +98,7 @@ class AdminNewsContent extends Component {
         this.deletePostVK(news);
     } 
     deletePostVK = (news) => {
+        alert(2)
         let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';
         let id = '-169499477';
         axios({
@@ -154,6 +155,7 @@ class AdminNewsContent extends Component {
         
     } 
     deleteChosenPostsVK = () => {
+        alert(1)
         let newsState = this.state.news;
         let deletionsNews = [];
         for (let i = 0; i < this.state.checkedIds.length; i++) {
