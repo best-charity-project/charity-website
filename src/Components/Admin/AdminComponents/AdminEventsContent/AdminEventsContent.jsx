@@ -12,7 +12,7 @@ import axios from 'axios';
 
 class AdminEventsContent extends Component {
     state= {
-        events : {}
+        events : []
     }
     componentDidMount(){
        this.getList();
@@ -35,11 +35,11 @@ class AdminEventsContent extends Component {
                             />
                         </div>     
                         {(this.state.events.length > 0)?
-                        <AdminEventsList 
-                            events = {this.state.events} 
-                            getUpdateEventsList = {this.getUpdateEventsList}
-                        /> 
-                        : null} 
+                            <AdminEventsList 
+                                events = {this.state.events}                            
+                            /> 
+                            : null
+                        } 
                     </div>
                 </div>
             </div>
@@ -52,14 +52,8 @@ class AdminEventsContent extends Component {
             )})
         .catch(error => this.setState({ error, isLoading: false }));
     };
-    getUpdateEventsList = () => {
-        setTimeout(this.getList,100);
-    }
     addEvent = () => {
         this.setState({isOpen: true});        
-    }
-    saveEvent = () => {
-        setTimeout(this.getList,0);
     }
 }
 

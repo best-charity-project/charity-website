@@ -2,16 +2,19 @@ import React, {Component} from 'react';
 import {EditorState, convertToRaw, convertFromRaw} from 'draft-js';
 import axios from 'axios';
 import _ from 'lodash';
-
+import moment from 'moment';
 import AdminDatePicker from '../AdminDatePicker/AdminDatePicker';
 import Navigation from '../../../Navigation/Navigation';
 import NavBar from '../../../NavBar/NavBar';
 import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
+import EventModal from '../../../EventModal/EventModal';
 import './AdminCreateEvent.css';
 import {server} from '../../../../api';
 import Editor from  "../AdminEditor/AdminEditor";
 import AdminSelectSearch from '../AdminSelectSearch/AdminSelectSearch';
+import jsonpAdapter from 'axios-jsonp';
+import vkIcon from '../../../../Assets/AssetsSvg/vk_icon.svg';
 
 class AdminCreateEvent extends Component { 
     state = {
@@ -23,17 +26,19 @@ class AdminCreateEvent extends Component {
         linkParticipation:'',
         organizers:'',
         speaker: '',
-        speakersArray : [],
-        contactPerson:'',
-        contactPhone:'',
-        organization:'',
-        website :'',
+        speakersArray: [],
+        contactPerson: '',
+        contactPhone: '',
+        organization: '',
+        website: '',
         textEditorState: EditorState.createEmpty(),
         filter:'',
         getInputTimeEnd : false,
-        deletedImages: []  
+        deletedImages: [],
+        idVK: '', 
+        socialNetworksModal: false 
     }
-    componentWillMount (){
+    componentDidMount (){
         this.getFiltersList();
         if(this.props.location.state){
             let {title,
@@ -51,7 +56,8 @@ class AdminCreateEvent extends Component {
                 website,
                 filter,
                 text,
-                _id
+                _id,
+                idVK
                } = this.props.location.state.detail;
                let textEditorState = EditorState.createWithContent(convertFromRaw(JSON.parse(text)));
                this.setState({
@@ -70,13 +76,13 @@ class AdminCreateEvent extends Component {
                    website : website,
                    participation: participation,
                    organizers: organizers,
-                   filter: filter
+                   filter: filter,
+                   idVK:idVK
                })
         }
     }
     
     render() {
-
         return(
             <div className="admin-content"> 
                 <Navigation onLogout={this.onLogout}/>
@@ -237,17 +243,47 @@ class AdminCreateEvent extends Component {
                         <Button 
                             name = "button-admin button-admin-background" 
                             label = {this.props.location.state ? 'Обновить': 'Сохранить'} 
-                            clickHandler = {this.sendEvent}
+                            clickHandler = {this.saveEvent}
                         />
                         <Button 
                             name = "button-admin button-admin-background" 
                             label = 'Отменить' 
                             clickHandler = {this.onCancel}
                         /> 
-                    </div>  
+                    </div> 
+                    <div 
+                        className={(this.state.socialNetworksModal &&!this.props.location.state) ? 'overlay' : 'overlay hidden'} 
+                    >
+                        <div className="modal-event-field modal-social-event">
+                            <div>
+                                <p>Поделиться в социальных сетях?</p>
+                                <ul className = 'social-networks-event-modal' onClick = {this.getActiveSocialNetworks}>
+                                    <li className = 'vkontakte-social-network'></li>
+                                    <li className = 'facebook-social-network'></li>
+                                </ul>
+                            </div>
+                            <div className = 'button-wrapper-event-modal'>
+                                <Button 
+                                    name = "button-admin button-admin-background" 
+                                    label = 'Поделиться' 
+                                    clickHandler = {this.publish}
+                                />
+                                <Button 
+                                    name = "button-admin button-admin-background" 
+                                    label = 'Нет, спасибо' 
+                                    clickHandler = {this.closeModalWindow}
+                                />
+                            </div>
+                        </div>
+                    </div> 
                 </div>
             </div>
         )
+    }
+    getActiveSocialNetworks = (e) => {
+        e.target.classList.contains('active-social-networks')?
+        e.target.classList.remove('active-social-networks'):
+        e.target.classList.add('active-social-networks');
     }
     getValue = (obj) => {
         this.setState({title: obj.value});
@@ -267,12 +303,22 @@ class AdminCreateEvent extends Component {
     getFilter = (str) => {
         this.setState({filter: str});
     }
-    sendEvent= () => {
+    saveEvent = () => {
+        if(this.props.location.state){
+            this.updatePostVk();
+            this.sendEvent();
+            
+        }else{
+            this.setState({socialNetworksModal: true});
+        }
+    }
+    sendEvent = (idVK) => {        
         let id = ''
         if (this.props.location.state) {
             id = this.props.location.state.detail._id;
         }
         const sendedBody = this.state;
+        sendedBody.idVK = idVK;
         sendedBody.text = JSON.stringify(convertToRaw(this.state.textEditorState.getCurrentContent()));
         axios({
             method: id ? 'put' : 'post',
@@ -290,7 +336,7 @@ class AdminCreateEvent extends Component {
         })
         .catch(function (error) {
             console.log(error);
-        });       
+        });
     }
     onCancel = (e) => {
         e.preventDefault();
@@ -355,6 +401,56 @@ class AdminCreateEvent extends Component {
       }
     getInputTimeEnd = () => {
         this.setState({getInputTimeEnd : true});
+    };
+    publish = () => {
+       let vkIcon = document.querySelector('.vkontakte-social-network');
+       if(vkIcon.classList.contains('active-social-networks')){
+        this.publishVk();        
+       };
+    };
+    getTextofPost = () => {
+        let title = `${this.state.title}%0A`;
+        let place = this.state.place ? `Место: ${this.state.place}%0A` : '';        
+        let time = this.state.dateStart?this.state.timeEnd ? `Время: ${moment(this.state.dateStart).format("D MMMM YYYY, H : mm")}-${moment(this.state.timeEnd).format(" H : mm")}%0A` : `Время: ${moment(this.state.dateStart).format("D MMMM YYYY, H : mm")}%0A`:'';
+        let participation = this.state.participation ? `Участие: ${this.state.participation}%0A` : '';
+        let linkParticipation = this.state.linkParticipation ? this.state.participation.match(/[0-9]/)? `Купить билет: ${this.state.linkParticipation}%0A`: `Зарегистрироваться: ${this.state.linkParticipation}%0A`:'';
+        let contacts = this.state.contactPerson||this.state.contactPhone ? `Контакты: ${this.state.contactPerson}${this.state.contactPhone}%0A` : '';
+        let textfromEditor = convertToRaw(this.state.textEditorState.getCurrentContent()).blocks;
+        let info = '';
+        for (let i = 0; i < textfromEditor.length; i++){
+            info+=textfromEditor[i].text + '%0A';
+        }
+        let text = `${title}${place}${time}${participation}${linkParticipation}${contacts}${info}`;
+        return text;
+    }
+    updatePostVk = () => {
+        let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';
+        let id = '-169499477';
+        let text = this.getTextofPost();
+        axios({
+            method: 'get',
+            adapter: jsonpAdapter,
+            url: `https://api.vk.com/method/wall.edit?owner_id=${id}&post_id=${this.state.idVK}&message=${text}&access_token=${token}&v=5.80`            
+        })
+    };
+    publishVk = () => {
+        let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';
+        let id = '-169499477';
+        let text = this.getTextofPost();
+        axios({
+            method: 'post',
+            adapter: jsonpAdapter,
+            url: `https://api.vk.com/method/wall.post?owner_id=${id}&from_group=0&message=${text}&access_token=${token}&v=5.80`            
+        })        
+        .then(res =>{
+            this.sendEvent(res.data.response.post_id)                   
+        })
+    }
+    closeModalWindow = () => {
+        this.sendEvent();
+        this.setState({
+            socialNetworksModal: false
+        });
     } 
 }
 export default AdminCreateEvent;
