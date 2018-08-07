@@ -53,3 +53,15 @@ Database is locating on [https://mlab.com/](https://mlab.com/)
 2. Download mongoDB Community Server from [https://www.mongodb.com](https://www.mongodb.com)
  - Choose "All Version Binaries" and download the mongoDB Community Server with version which you have on mongoLab (you can see it via clicking on your Dbname)
  - For example ---mongod version: 3.4.13---
+
+## Technical links
+### Heroku:
+ ```
+ login: charitywebtest@gmail.com
+ password: charity_godel717 
+ ```
+### Git & Travis CI link:
+```
+username: charitywebtest@gmail.com
+pass : charity12345
+``` 
