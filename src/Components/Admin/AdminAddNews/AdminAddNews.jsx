@@ -34,12 +34,13 @@ class AdminAddNews extends Component {
         deletedImages: [],
         idVK: '', 
         socialNetworksModal: false,
-        idVK:'' 
+        idVK:'',
+        isTitle: true,
+        isFullTextCorrect: true
     }
     cropperRef = React.createRef();
 
     componentWillMount() {
-        this.props.location.state? console.log(this.props.location.state.detail):null;
         this.getFiltersListByType('news');
         if (this.props.location.state) {
             let fullTextEditorState = EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.location.state.detail.fullText)));
@@ -59,7 +60,6 @@ class AdminAddNews extends Component {
     showToast(e){
         ToastDanger(e);
     }
-
     render() {
         return (
             <div className="admin-content">
@@ -181,34 +181,31 @@ class AdminAddNews extends Component {
                             )} />
                         </div>
                         <div 
-                        className={(this.state.socialNetworksModal &&!this.props.location.state) ? 'overlay' : 'overlay hidden'} 
-                    >
-                        <div className="modal-event-field modal-social-event">
-                            <div>
-                            <p>Поделиться в социальных сетях?</p>
-                            <ul className = 'social-networks-event-modal' onClick = {this.getActiveSocialNetworks}>
-                                <li className = 'vkontakte-social-network'>
-                                    
-                                </li>
-                                <li className = 'facebook-social-network'></li>
-                            </ul>
+                            className = {(this.state.socialNetworksModal && !this.props.location.state) ? 'overlay' : 'overlay hidden'} 
+                        >
+                            <div className = "modal-event-field modal-social-event">
+                                <div>
+                                    <p>Поделиться в социальных сетях?</p>
+                                    <ul className = 'social-networks-event-modal' onClick = {this.getActiveSocialNetworks}>
+                                        <li className = 'vkontakte-social-network'></li>
+                                        <li className = 'facebook-social-network'></li>
+                                    </ul>
+                                </div>
+                                <div className = 'button-wrapper-event-modal'>
+                                <Button 
+                                    name = "button-admin button-admin-background" 
+                                    label = 'Поделиться' 
+                                    clickHandler = {this.publish}
+                                />
+                                <Button 
+                                    name = "button-admin button-admin-background" 
+                                    label = 'Нет, спасибо' 
+                                    clickHandler = {this.closeModalWindow}
+                                />
+                                </div>
                             </div>
-                            <div className = 'button-wrapper-event-modal'>
-                            <Button 
-                                name = "button-admin button-admin-background" 
-                                label = 'Поделиться' 
-                                clickHandler = {this.publish}
-                            />
-                            <Button 
-                                name = "button-admin button-admin-background" 
-                                label = 'Нет, спасибо' 
-                                clickHandler = {this.closeModalWindow}
-                            />
-                            </div>
-                        </div>
-                    </div> 
-                    </div>  : 
-
+                        </div> 
+                    </div> : 
                     <AdminPreview 
                         imageData = {this.state.imageData}
                         image = {this.state.image}
@@ -219,46 +216,45 @@ class AdminAddNews extends Component {
                         getNewStatePreview = {this.getNewStatePreview}
                         date = {this.state.date}
                         isPublic = {this.state.isPublic}
-                    />
-                    
+                    />                    
                 }
             </div>
         )
     }
     onCropImage = (image) => {
         this.setState({imageData: image});
-    }
+    };
 
     onChangeValue = (object) => {
         this.setState({title: object.value});
-    }
+    };
 
     onEditorStateChange = (editorState) => {
         this.setState({fullTextEditorState: editorState});
-    }
+    };
 
     getDeletedImages =  (deletedImages) => {
         this.setState({deletedImages: deletedImages})
-    }
+    };
 
     getCurrentTextShort = (event) => {
         this.setState({
             shortText: event.target.value,
             value: event.target.value.length
-        })
-    }
+        });
+    };
 
     getNewStatePreview = () => {
         this.setState({
             isPreview: false
         });
-    }
+    };
 
     getFilter = (str) => {
         str.length > 0 ? 
             this.setState({filter: str}):
             null
-    }
+    };
 
     checkText = () => {
         if (this.state.fullTextEditorState) {
@@ -275,74 +271,63 @@ class AdminAddNews extends Component {
                 this.deleteImages()
             }
         }
-    }
+    };
     onCorrectTitle = () =>{
         if(this.state.title){
             this.setState({
                 isTitle:true
-            })
+            });
             return true;
         }else{
             this.setState({
                 isTitle:false
-            })
+            });
             return false; 
         }
     }
-    onCorrectFullText = () =>{
-        if(convertToRaw(this.state.fullTextEditorState.getCurrentContent()).blocks.text){
+    onCorrectFullText = () => {
+        if(convertToRaw(this.state.fullTextEditorState.getCurrentContent()).blocks[0].text){
             this.setState({
                 isFullTextCorrect:true
-            })
-            return true
+            });
+            return true;
         }else{
             this.setState({
                 isFullTextCorrect:false
-            })
-            return false
+            });
+            return false;
         }
-    }
+    };
     onPreview = () => {
         if(this.onCorrectTitle() && this.onCorrectFullText()){
             this.setState({
                 isPreview: true
             });
         }
-    }
+    };
 
     onSaveChangeStatus = () => {
         if(this.onCorrectTitle() && this.onCorrectFullText()){
             this.setState({isPublic: !this.state.isPublic}, this.checkText)
         }
-    }
+    };
 
-    onPublish = () => {
-        
+    onPublish = () => {        
         if(this.onCorrectTitle() && this.onCorrectFullText()){
             this.setState({isPublic: true}, this.checkText)
         }
-    }
+    };
 
     onDraft = () => {
         if(this.onCorrectTitle() && this.onCorrectFullText()){
             this.setState({isPublic: false}, this.checkText)
         }
-    }
-
+    };
     onCancel = () => {
-        this.setState({
-            title: '',
-            shortText: '',
-            fullTextEditorState: EditorState.createEmpty(),
-            isPublic: false,
-            imageData: '',
-            image: '',
-            filter: ''
-        }) 
         this.props.history.push({
             pathname: '/admin-panel/news'
         });
-    }
+    };
 
     deleteImages = () => {
         if(this.state.deletedImages.length) {
@@ -357,7 +342,7 @@ class AdminAddNews extends Component {
                 console.log(error);
             });  
         } else {
-            this.saveNews()
+            this.saveNews();
         }
     }
     saveNews = () => {
@@ -368,14 +353,14 @@ class AdminAddNews extends Component {
         }else{
             this.setState({socialNetworksModal: true});
         }
-    }
+    };
     sendNews = (idVK) => {
         let formData  = new FormData();
         let sendedBody = this.state;
         sendedBody.idVK = idVK;
         Object.keys(sendedBody).forEach(key => formData.append(key, this.state[key]));
-        formData.append('fullText', JSON.stringify(convertToRaw(this.state.fullTextEditorState.getCurrentContent())))
-        let id = ''
+        formData.append('fullText', JSON.stringify(convertToRaw(this.state.fullTextEditorState.getCurrentContent())));
+        let id = '';
         if (this.props.location.state) {
             id = this.props.location.state.detail._id;
         }
@@ -386,15 +371,6 @@ class AdminAddNews extends Component {
             config: {headers: {'Content-Type': 'multipart/form-data; charset=UTF-8'}},
         })
         .then(response => {
-            this.setState({
-                title: '',
-                filter:'',
-                shortText: '',
-                fullTextEditorState: EditorState.createEmpty(),
-                isPublic: false,
-                imageData: '',
-                image: ''
-            }) 
             this.props.history.push({
                 pathname: '/admin-panel/news'
             })  
@@ -473,7 +449,6 @@ class AdminAddNews extends Component {
                 adapter: jsonpAdapter,
                 url: `https://api.vk.com/method/wall.edit?owner_id=${id}&post_id=${this.state.idVK}&message=${text}&access_token=${token}&v=5.80`            
             })
-            .then(res =>  console.log(res.data))
         };  
 }
 

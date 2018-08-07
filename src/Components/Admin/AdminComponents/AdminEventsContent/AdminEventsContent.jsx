@@ -17,11 +17,7 @@ class AdminEventsContent extends Component {
     componentDidMount(){
        this.getList();
     };
-    // componentWillUpdate(nextProps, nextState) {
-    //    nextState.events.length === this.state.events.length? this.getList () : null;
-    //   }
     render() {
-        console.log(this.state)
         return(
             <div>
                 <Navigation onLogout={this.onLogout} />
@@ -39,11 +35,11 @@ class AdminEventsContent extends Component {
                             />
                         </div>     
                         {(this.state.events.length > 0)?
-                        <AdminEventsList 
-                            events = {this.state.events} 
-                            
-                        /> 
-                        : null} 
+                            <AdminEventsList 
+                                events = {this.state.events}                            
+                            /> 
+                            : null
+                        } 
                     </div>
                 </div>
             </div>

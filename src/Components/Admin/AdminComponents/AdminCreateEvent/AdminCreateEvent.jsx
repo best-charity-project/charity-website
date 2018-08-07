@@ -83,7 +83,6 @@ class AdminCreateEvent extends Component {
     }
     
     render() {
-        this.props.location.state ? console.log(this.state):null;
         return(
             <div className="admin-content"> 
                 <Navigation onLogout={this.onLogout}/>
@@ -257,25 +256,23 @@ class AdminCreateEvent extends Component {
                     >
                         <div className="modal-event-field modal-social-event">
                             <div>
-                            <p>Поделиться в социальных сетях?</p>
-                            <ul className = 'social-networks-event-modal' onClick = {this.getActiveSocialNetworks}>
-                                <li className = 'vkontakte-social-network'>
-                                    
-                                </li>
-                                <li className = 'facebook-social-network'></li>
-                            </ul>
+                                <p>Поделиться в социальных сетях?</p>
+                                <ul className = 'social-networks-event-modal' onClick = {this.getActiveSocialNetworks}>
+                                    <li className = 'vkontakte-social-network'></li>
+                                    <li className = 'facebook-social-network'></li>
+                                </ul>
                             </div>
                             <div className = 'button-wrapper-event-modal'>
-                            <Button 
-                                name = "button-admin button-admin-background" 
-                                label = 'Поделиться' 
-                                clickHandler = {this.publish}
-                            />
-                            <Button 
-                                name = "button-admin button-admin-background" 
-                                label = 'Нет, спасибо' 
-                                clickHandler = {this.closeModalWindow}
-                            />
+                                <Button 
+                                    name = "button-admin button-admin-background" 
+                                    label = 'Поделиться' 
+                                    clickHandler = {this.publish}
+                                />
+                                <Button 
+                                    name = "button-admin button-admin-background" 
+                                    label = 'Нет, спасибо' 
+                                    clickHandler = {this.closeModalWindow}
+                                />
                             </div>
                         </div>
                     </div> 
@@ -427,7 +424,6 @@ class AdminCreateEvent extends Component {
         return text;
     }
     updatePostVk = () => {
-        console.log(this.state)
         let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';
         let id = '-169499477';
         let text = this.getTextofPost();
@@ -436,7 +432,6 @@ class AdminCreateEvent extends Component {
             adapter: jsonpAdapter,
             url: `https://api.vk.com/method/wall.edit?owner_id=${id}&post_id=${this.state.idVK}&message=${text}&access_token=${token}&v=5.80`            
         })
-        .then(res =>  console.log(res.data))
     };
     publishVk = () => {
         let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';
