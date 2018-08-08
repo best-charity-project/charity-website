@@ -58,4 +58,4 @@ Database is locating on [https://mlab.com/](https://mlab.com/)
  ### Links
 
 ##### VK.COM:
-  [https://vk.com/club169499477/](https://vk.com/club169499477/)
+  [https://vk.com/club169499477](https://vk.com/club169499477)
