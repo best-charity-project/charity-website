@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import {Route} from 'react-router-dom';
-import {withRouter} from "react-router-dom";
+import {Route,withRouter} from 'react-router-dom';
 import axios from 'axios';
 import {EditorState, convertToRaw, convertFromRaw} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import ToastrContainer, {ToastSuccess,ToastDanger} from 'react-toastr-basic'
+import {ToastDanger} from 'react-toastr-basic'
 
 import {server} from '../../../api';
 import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';

@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import {Route, withRouter} from 'react-router-dom';
 import axios from 'axios';
-import _ from 'lodash';
 import InputMask from 'react-input-mask';
 import {EditorState, convertToRaw, convertFromRaw} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import ToastrContainer, {ToastSuccess,ToastDanger} from 'react-toastr-basic'
+import {ToastDanger} from 'react-toastr-basic'
 
 import TextField from '../../TextField/TextField';
 import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';
