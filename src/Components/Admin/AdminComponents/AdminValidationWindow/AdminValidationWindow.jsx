@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ToastrContainer, {ToastSuccess,ToastDanger} from 'react-toastr-basic'
+import ToastrContainer from 'react-toastr-basic'
 
 class AdminValidationWindow extends React.Component {
     componentDidMount(){
