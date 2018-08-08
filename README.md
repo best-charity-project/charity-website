@@ -29,12 +29,7 @@ To go on admin's page you should write in path line
  - Production link : https://charity-test-app.herokuapp.com/login 
  - Development link: https://localhost:3000/login 
 ```
-  ,where 
 
-```
-  login: foo@bar.com
-  password: Test1234
-```
 ### Adding new admin on the project
 If you want to add new admin on the project ,you should go to `charity-server/scripts/initialize.db.js` file, where located function `createUser()` , and change fields (name,email.password) to another. Then you should run this file with a command `node initialize.db.js` 
 ### Database 
