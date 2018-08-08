@@ -132,11 +132,11 @@ class AdminForumModalWindow extends Component {
         }
     }
 
-    onChangeValueGroup = (object) => {
-        this.setState({groupTitle: object.value});
+    onChangeValueGroup = (str) => {
+        this.setState({groupTitle: str});
     }
-    onChangeValueTopic = (object) => {
-        this.setState({topicTitle: object.value});
+    onChangeValueTopic = (str) => {
+        this.setState({topicTitle: str});
     }
 
     clearTitle = () => {

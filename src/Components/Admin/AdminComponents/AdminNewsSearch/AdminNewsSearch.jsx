@@ -17,8 +17,8 @@ class AdminNewsSearch extends Component {
             </div>
         )
     }
-    onSearch = (v) => {
-        this.props.findNews(v.value.toLowerCase());
+    onSearch = (str) => {
+        this.props.findNews(str.toLowerCase());
     }
 
 
