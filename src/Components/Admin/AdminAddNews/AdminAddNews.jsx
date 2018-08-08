@@ -3,7 +3,7 @@ import {Route,withRouter} from 'react-router-dom';
 import axios from 'axios';
 import {EditorState, convertToRaw, convertFromRaw} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import {ToastDanger} from 'react-toastr-basic'
+import {ToastDanger} from 'react-toastr-basic';
 
 import {server} from '../../../api';
 import AdminUploadImage from '../AdminComponents/AdminUploadImage/AdminUploadImage';
