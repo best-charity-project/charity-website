@@ -407,14 +407,14 @@ class AdminAddProjects extends Component {
         )
         
     }
-    getValue = (obj) => {
-        this.setState({name: obj.value});
+    getValue = (str) => {
+        this.setState({name: str});
     }
-    getOrganization = (obj) =>{
-        this.setState({organization:obj.value})
+    getOrganization = (str) =>{
+        this.setState({organization:str})
     }
-    getHead = (obj) =>{
-        this.setState({head:obj.value})
+    getHead = (str) =>{
+        this.setState({head:str})
     }
     addHead = (e)=>{
         e.preventDefault()
@@ -464,11 +464,11 @@ class AdminAddProjects extends Component {
             contactsArray: contactsArray
         })
     }
-    getAddress = (obj) =>{
-        this.setState({address:obj.value})
+    getAddress = (str) =>{
+        this.setState({address:str})
     }
-    getSite = (obj) =>{
-        this.setState({site:obj.value})
+    getSite = (str) =>{
+        this.setState({site:str})
     }
     addMediaImage = () => {
         let object = {}
@@ -519,8 +519,8 @@ class AdminAddProjects extends Component {
             mediaImageArray: mediaImageArray
         })      
      }
-    getVideo = (obj) =>{
-        this.setState({mediaVideo:obj.value})
+    getVideo = (str) =>{
+        this.setState({mediaVideo:str})
     }
     addMediaVideo = (e) =>{
         e.preventDefault()

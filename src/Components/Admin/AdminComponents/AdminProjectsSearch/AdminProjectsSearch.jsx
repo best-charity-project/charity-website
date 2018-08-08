@@ -17,8 +17,8 @@ class AdminProjectsSearch extends Component {
             </div>
         )
     }
-    onSearch = (v) => {
-        this.props.findProjects(v.value.toLowerCase());
+    onSearch = (str) => {
+        this.props.findProjects(str.toLowerCase());
     }
 }
 

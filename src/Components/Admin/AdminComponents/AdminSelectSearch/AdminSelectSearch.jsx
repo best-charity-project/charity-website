@@ -85,7 +85,7 @@ class AdminSelectSearch extends Component {
     }
 
     getNewValue = (str) => {
-        this.setState({newFilterValue : str.value});
+        this.setState({newFilterValue : str});
     }
 
     addNewFilter = (e) => {

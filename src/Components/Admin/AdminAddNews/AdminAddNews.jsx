@@ -225,8 +225,8 @@ class AdminAddNews extends Component {
         this.setState({imageData: image});
     };
 
-    onChangeValue = (object) => {
-        this.setState({title: object.value});
+    onChangeValue = (str) => {
+        this.setState({title: str});
     };
 
     onEditorStateChange = (editorState) => {

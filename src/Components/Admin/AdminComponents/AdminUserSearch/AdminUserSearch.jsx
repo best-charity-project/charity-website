@@ -17,8 +17,8 @@ class AdminUserSearch extends Component {
             </div>
         )
     }
-    onSearch = (v) => {
-        this.props.findUser(v.value.toLowerCase());
+    onSearch = (str) => {
+        this.props.findUser(str.toLowerCase());
     }
 }
 
