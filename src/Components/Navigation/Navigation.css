@@ -1,18 +1,6 @@
-.main-logo{
-    margin: 10px 0 10px 25px;
+.main-logo {
+  margin: 10px 0 10px 25px;
 }
-<<<<<<< HEAD
-.container-min{
-    display: flex;
-    width: 100%;
-    position: fixed;
-    justify-content: space-between;
-    background-color: #dbd8d8;
-    line-height: 2.5;
-    z-index: 999;
-    top: 0;
-}
-=======
 
 .navigation--menu-wrapper {
   display: flex;
@@ -37,8 +25,7 @@
   top: 0;
   right: 0;
   transform: rotate(0deg);
-  transition: 0.5s transform ease, 0.5s margin-right ease,
-    0.5s background-color ease;
+  transition: 0.5s transform ease, 0.5s margin-right ease, 0.5s background-color ease;
 }
 
 .navigation--button.navigation--button-open {
@@ -194,4 +181,3 @@
     margin-right: calc(60% + 5em);
   }
 }
->>>>>>> master
