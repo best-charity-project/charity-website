@@ -1,6 +1,6 @@
-import axios from 'axios';
-import { baseURL } from './configs/config.json';
+import { baseURLDev } from './Configs/dev.json';
+import { baseURLProd } from './Configs/prod.json';
 
-export default axios.create({
-  baseURL: baseURL || process.env.BASEURL,
-});
+let dev = process.env.NODE_ENV !== 'production';
+
+export let server = dev ? baseURLDev : baseURLProd;

@@ -1,8 +1,11 @@
 language: node_js
-node_js:
+node_js: 
   - "8"
-
+cache:
+  -node_modules
 install: npm install
-script: npm test
-git:
-  depth: 3
+deploy:
+  provider: heroku 
+  app: "charity-test-app"
+  api_key:
+    secure: "9df3e061-02c9-473b-b4df-0e0239178a5a"

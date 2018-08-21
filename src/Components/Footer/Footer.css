@@ -1,27 +1,26 @@
-.footer {
-  background-color: #f8f8f8;
-  line-height: 22px;
-  letter-spacing: 0.4px;
-  height: 4em;
-  display: flex;
-  justify-content: space-between;
+.footer{
+  bottom: 20px;
+  position: fixed;
+  font-family: Montserrat;
+  font-size: 16px;
+  text-align:top;  
+  padding-left: 20px;
 }
-
-.footer--content {
+.link-on-main-page{
+  color: #3b3f48; 
+  display: inline-block;
+  font-weight: 500;
   text-decoration: none;
-  color: rgb(51, 51, 51);
-  text-align: right;
-  padding-right: 1em;
 }
-
-.footer-about {
-  margin: 1em;
-  padding: 0.25em;
-  display: block;
-  font-size: 1.2em;
-  color: inherit;
+.footer span{
+  font-weight: 500;
+  color: #3b3f48;
 }
-
-.footer-about:hover {
-  color: black;
+.copyright{
+  color: #3b3f48;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  padding-top: 10px;
 }

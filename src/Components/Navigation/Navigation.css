@@ -1,11 +1,18 @@
-.navigation {
-  background-color: white;
-  height: 4em;
-  width: 100%;
-  z-index: 4;
-  top: 0;
-  position: fixed;
+.main-logo{
+    margin: 10px 0 10px 25px;
 }
+<<<<<<< HEAD
+.container-min{
+    display: flex;
+    width: 100%;
+    position: fixed;
+    justify-content: space-between;
+    background-color: #dbd8d8;
+    line-height: 2.5;
+    z-index: 999;
+    top: 0;
+}
+=======
 
 .navigation--menu-wrapper {
   display: flex;
@@ -187,3 +194,4 @@
     margin-right: calc(60% + 5em);
   }
 }
+>>>>>>> master
