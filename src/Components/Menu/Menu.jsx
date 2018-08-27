@@ -7,44 +7,51 @@ class Menu extends Component {
   state = {
     links: [
       {
-        "name": "о нас",
-        "url": "/"
+        name: 'о нас',
+        url: '/',
       },
       {
-        "name": "новости",
-        "url": "/news"
+        name: 'новости',
+        url: '/news',
       },
       {
-        "name": "активности",
-        "child": [
+        name: 'активности',
+        child: [
           {
-            "name": "проекты",
-            "icon": "idea.svg",
-            "url": "/projects"
+            name: 'проекты',
+            icon: 'idea.svg',
+            url: '/projects',
           },
           {
-            "name": "события",
-            "url": "/events",
-            "icon": "event.svg"
-          }
-        ]
-      }
-    ]
+            name: 'события',
+            url: '/events',
+            icon: 'event.svg',
+          },
+        ],
+      },
+      {
+        name: 'сообщества',
+        child: [
+          {
+            name: 'образовательный маршрут',
+            icon: 'idea.svg',
+            url: '/education-way',
+          },
+        ],
+      },
+    ],
+  };
+  render() {
+    return (
+      <div className="menu-wrapper">
+        <div className={'menu ' + this.props.name}>
+          <Logo client="true" />
+          <MenuLinks list={this.state.links} className="menu-links-client" />
+          <SocialLinks />
+        </div>
+      </div>
+    );
   }
-    render() {
-        return (
-          <div className = 'menu-wrapper'>
-              <div className = {'menu ' + this.props.name}>
-                  <Logo client ="true" />
-                  <MenuLinks
-                      list = {this.state.links}
-                      className = "menu-links-client"
-                  />
-                  <SocialLinks />
-              </div>
-            </div>
-        );
-    }
 }
 
 export default Menu;
