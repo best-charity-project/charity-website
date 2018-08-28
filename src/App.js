@@ -23,6 +23,7 @@ import AdminForumBlock from './Components/Admin/AdminForumBlock/AdminForumBlock'
 // import { fakeAuth } from './Components/Admin/Auth/PrivateRoute';
 import PrivateRoute from '../src/Components/Admin/Auth/PrivateRoute';
 // import { getToken } from './Components/Admin/Auth';
+import AdminEduWay from './Components/Admin/AdminEduWay/AdminEduWay';
 
 class App extends Component {
   render() {
@@ -46,6 +47,7 @@ class App extends Component {
             <PrivateRoute path="/admin-panel/projects/create" component={AdminAddProjects} />
             <PrivateRoute path="/admin-panel/filters" component={AdminFiltersBlock} exact />
             <PrivateRoute path="/admin-panel/forum" component={AdminForumBlock} exact />
+            <PrivateRoute path="/admin-panel/eduway" component={AdminEduWay} exact />
             <Route path="/news/:id" component={FullNews} />
             <Route path="/news" component={PageNews} />
             {/* <Route path="/events" component={Events} /> */}
