@@ -22,8 +22,43 @@ class MarkersList extends Component {
       });
   }
 
-  changeStatus = id => {
-    console.log(id);
+  changeStatus = (id, status) => {
+    axios({
+      method: 'put',
+      url: `${server}/api/eduway/${id}`,
+      data: { isPublic: status },
+      config: { headers: { 'Content-Type': 'application/json; charset=UTF-8' } },
+    })
+      .then(response => {
+        let updatedMarker = response.data;
+        let index = _.findIndex(this.state.markers, function(marker) {
+          return marker._id == updatedMarker._id;
+        });
+        this.state.markers[index].isPublic = updatedMarker.isPublic;
+        this.forceUpdate();
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
+  deleteMarker = id => {
+    axios({
+      method: 'delete',
+      url: `${server}/api/eduway/${id}`,
+      config: { headers: { 'Content-Type': 'application/json; charset=UTF-8' } },
+    })
+      .then(response => {
+        let deletedMarker = response.data;
+        var array = [...this.state.markers];
+        let index = _.findIndex(this.state.markers, function(marker) {
+          return marker._id == deletedMarker._id;
+        });
+        array.splice(index, 1);
+        this.setState({ markers: array });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   };
   render() {
     return (
@@ -36,9 +71,10 @@ class MarkersList extends Component {
                   <div className="cell">{marker.type === 'kindergarten' ? 'Сад' : 'Школа'}</div>
                   <div className="cell">{marker.description}</div>
                   <div className="cell action">
-                    <button onClick={e => this.changeStatus(marker._id)}>
+                    <button onClick={e => this.changeStatus(marker._id, marker.isPublic)}>
                       {marker.isPublic ? 'Убрать' : 'Опубликовать'}
                     </button>
+                    <button onClick={e => this.deleteMarker(marker._id)}>Удалить</button>
                   </div>
                 </div>
               ))
