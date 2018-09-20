@@ -5,6 +5,7 @@ import Map from '../../Components/Map/map';
 import { debounce } from 'lodash';
 import './EducationWay.css';
 import ymaps from 'ymaps';
+import Menu from '../../Components/Menu/Menu';
 
 class App extends Component {
   state = {
@@ -130,22 +131,24 @@ class App extends Component {
 
   render() {
     return (
+      <div className="main-page-client">
+                <Menu name="client-menu" />
       <div className="app">
         <aside className="app__sidebar">
-          <input type="button" value="Добавить" onClick={this.showAddPointModal} />
+          <input className="add-marker-btn" type="button" value="Добавить" onClick={this.showAddPointModal} />
         </aside>
         <Map coords={this.state.selectedCoords} />
         {this.state.isModalWindowShow ? (
           <div>
             <div className="modal-window-overlay" />
             <div className="modal-window">
-              <div className="modal-window-head">
-                <a onClick={this.hideAddPointModal}>close</a>
+              <div className="modal-window-head" onClick={this.hideAddPointModal}>
+                <a className="close-icon"></a>
               </div>
               <div className="modal-window-body">
                 {this.state.displayedStep === 1 ? (
                   <div className="first-step">
-                    <label>
+                    <label className="search-label">
                       Адрес учереждения:
                       <input type="text" ref={this.inputRef} onChange={e => this.findAddress(e.target.value)} />
                     </label>
@@ -153,7 +156,7 @@ class App extends Component {
                       <ul>
                         {this.state.suggestionList.length !== 0
                           ? this.state.suggestionList.map((item, index) => (
-                              <li key={index} onClick={this.getCoordinates}>
+                              <li className="search-result" key={index} onClick={this.getCoordinates}>
                                 {item.displayName}
                               </li>
                             ))
@@ -163,26 +166,29 @@ class App extends Component {
                   </div>
                 ) : (
                   <div className="secondStep">
-                    <label>
+                    <label className="place-type">
                       Тип учереждения:
                       <select ref={this.typeRef}>
                         <option value="school">Школа</option>
                         <option value="kindergarten">Сад</option>
                       </select>
                     </label>
-                    <label>
+                    <br/>
+                    <label className="place-desc">
                       Описание:
+                      <br/>
                       <textarea cols="30" rows="10" ref={this.descRef} />
-                      <button className="btn_finish" onClick={this.addingPoint}>
-                        Отправить запрос на добавление
-                      </button>
                     </label>
+                    <button className="btn_finish" onClick={this.addingPoint}>
+                      Отправить запрос на добавление
+                    </button>
                   </div>
                 )}
               </div>
             </div>
           </div>
         ) : null}
+      </div>
       </div>
     );
   }
