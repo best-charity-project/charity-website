@@ -41,7 +41,6 @@
     border: 1px solid #4CAF50;
     border-radius: 15px;
     padding: 5px 10px;
-    min-width: 100px;
 }
 .button-admin.button-admin-background {
     background-color: #ffffff;
@@ -59,7 +58,8 @@
     border-color: #4CAF50;
 }
 .admin-cancel {
-    min-width: auto;
+    width: 30px;
+    height: 30px;
     border-radius: 5px;
 }
 .admin-info-button{
@@ -71,17 +71,19 @@
 }
 .button-publish-news,
 .button-publish-projects {
+    height:30px;
     cursor: pointer;
     background-color: #e8e6e2;
     border-radius: 15px;
     padding: 5px 10px;
-    min-width: 180px;
+    min-width: 185px;
     color: #969696;
     border: 1px solid #969696;
     outline: none;
  }
 .button-not-publish-news,
 .button-not-publish-projects {
+    height:30px;
     cursor: pointer;
     outline: none;
     background-color: #e8e6e2;
@@ -120,3 +122,12 @@
     top: 0;
 }
 
+.button-add-marker {
+    background-color: #4CAF50;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}

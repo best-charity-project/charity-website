@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { server } from '../../api';
 import axios from 'axios';
+import Select, {Option, OptGroup} from 'rc-select';
+import 'rc-select/assets/index.css';
 import Map from '../../Components/Map/map';
 import { debounce } from 'lodash';
 import './EducationWay.css';
 import ymaps from 'ymaps';
 import Menu from '../../Components/Menu/Menu';
+import Button from '../../Components/Button/Button';
 
 class App extends Component {
   state = {
@@ -13,6 +16,7 @@ class App extends Component {
     suggestionList: [],
     displayedStep: 1,
     isModalWindowShow: false,
+    typeValue: '',
     pointDetails: {
       coords: [],
       location: '',
@@ -23,7 +27,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.inputRef = React.createRef();
-    this.typeRef = React.createRef();
     this.descRef = React.createRef();
   }
   async componentDidMount() {
@@ -44,7 +47,6 @@ class App extends Component {
   resetData = () => {
     this.setState({ suggestionList: [] });
     if (this.inputRef.current && this.inputRef.current.value !== '') this.inputRef.current.value = '';
-    if (this.typeRef.current && this.typeRef.current.value !== null) this.typeRef.current.value = '';
     if (this.descRef.current && this.descRef.current.value !== '') this.descRef.current.value = '';
   };
 
@@ -90,7 +92,7 @@ class App extends Component {
       prevState => ({
         pointDetails: {
           ...prevState.pointDetails,
-          type: this.typeRef.current.value,
+          type: this.state.typeValue,
           description: this.descRef.current.value,
         },
       }),
@@ -129,6 +131,12 @@ class App extends Component {
     this.resetData();
   };
 
+  onChange = (typeValue) => {
+    this.setState({
+      typeValue,
+    });
+  };
+
   render() {
     return (
       <div className="main-page-client">
@@ -165,23 +173,31 @@ class App extends Component {
                     </div>
                   </div>
                 ) : (
-                  <div className="secondStep">
+                  <div className="second-step">
                     <label className="place-type">
                       Тип учереждения:
-                      <select ref={this.typeRef}>
-                        <option value="school">Школа</option>
-                        <option value="kindergarten">Сад</option>
-                      </select>
+                      <Select 
+                        value={this.state.typeValue}
+                        onChange={this.onChange}
+                        placeholder="Выберите:"
+                        className="place-type-select"
+                        notFoundContent="Адрес не найден"
+                        optionLabelProp="title"
+                      >
+                        <Option title="Школа" value="school">Школа</Option>
+                        <Option title="Сад" value="kindergarten">Сад</Option>
+                      </Select>
                     </label>
-                    <br/>
                     <label className="place-desc">
                       Описание:
                       <br/>
                       <textarea cols="30" rows="10" ref={this.descRef} />
                     </label>
-                    <button className="btn_finish" onClick={this.addingPoint}>
-                      Отправить запрос на добавление
-                    </button>
+                    <Button 
+                      name="button-add-marker"
+                      clickHandler={this.addingPoint}
+                      label="Отправить запрос на добавление"
+                    />
                   </div>
                 )}
               </div>
