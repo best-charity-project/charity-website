@@ -14,6 +14,8 @@ class App extends Component {
   state = {
     selectedCoords: [],
     suggestionList: [],
+    kindergartenArray: [],
+    schoolArray: [],
     displayedStep: 1,
     isModalWindowShow: false,
     typeValue: '',
@@ -30,6 +32,9 @@ class App extends Component {
     this.descRef = React.createRef();
   }
   async componentDidMount() {
+    const kindergartenData = {markers:[]},
+          schoolData = {markers:[]};
+
     this.api = await ymaps.load();
     axios({
       method: 'get',
@@ -37,7 +42,19 @@ class App extends Component {
       config: { headers: { 'Content-Type': 'application/json; charset=UTF-8' } },
     })
       .then(response => {
-        this.setState({ selectedCoords: response.data });
+        response.data.markers.map((el,index) => {
+          if(el.type === 'school'){
+            schoolData.markers.push(el);
+          }
+          if(el.type === 'kindergarten'){
+            kindergartenData.markers.push(el);
+          }
+        });
+        this.setState({
+          selectedCoords: response.data,
+          kindergartenArray: kindergartenData,
+          schoolArray: schoolData
+        });
       })
       .catch(function(error) {
         console.log(error);
@@ -131,6 +148,18 @@ class App extends Component {
     this.resetData();
   };
 
+  showSchoolMarkers = () => {
+    this.setState({
+      selectedCoords: this.state.schoolArray
+    });
+  }
+
+  showKindergartenMarkers = () => {
+    this.setState({
+      selectedCoords: this.state.kindergartenArray
+    });
+  }
+
   onChange = (typeValue) => {
     this.setState({
       typeValue,
@@ -140,11 +169,18 @@ class App extends Component {
   render() {
     return (
       <div className="main-page-client">
-                <Menu name="client-menu" />
+      <Menu name="client-menu" />
       <div className="app">
-        <aside className="app__sidebar">
-          <input className="add-marker-btn" type="button" value="Добавить" onClick={this.showAddPointModal} />
-        </aside>
+        <ul className="app__sidebar">
+          <li><input className="add-marker-btn" type="button" value="+" onClick={this.showAddPointModal} /></li>
+          <li>
+            <input className="add-filter-btn" type="button" />
+            <ul className="filter-submenu">
+              <li><input className="filter-school-btn" type="button" onClick={this.showSchoolMarkers} /></li>
+              <li><input className="filter-kindergarten-btn" type="button" onClick={this.showKindergartenMarkers} /></li>
+            </ul>
+          </li>
+        </ul>
         <Map coords={this.state.selectedCoords} />
         {this.state.isModalWindowShow ? (
           <div>

@@ -29,7 +29,12 @@ export default class Map extends Component {
       this.yMap.geoObjects.removeAll();
       this.props.coords.markers.forEach((marker, idx) => {
         const point = new this.api.Placemark(marker.coords, {
-          hintContent: marker.description,
+          hintContent: `
+            <h2>${marker.type === 'school' ? `Школа` : `Детский садик`}</h2>
+            <h3>${marker.location}</h3><br>
+            <p>${marker.description}</p>`  
+        },{
+          preset: marker.type === 'school' ? 'islands#darkOrangeDotIcon' : 'islands#redDotIcon'
         });
         this.yMap.geoObjects.add(point);
       });
