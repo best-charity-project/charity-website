@@ -19,6 +19,7 @@ class App extends Component {
     displayedStep: 1,
     isModalWindowShow: false,
     typeValue: '',
+    symbolsCounter: 0,
     pointDetails: {
       coords: [],
       location: '',
@@ -166,6 +167,12 @@ class App extends Component {
     });
   };
 
+  getCurrentText = (event) => {
+    this.setState({
+        symbolsCounter: event.target.value.length
+    });
+};
+
   render() {
     return (
       <div className="main-page-client">
@@ -227,7 +234,14 @@ class App extends Component {
                     <label className="place-desc">
                       Описание:
                       <br/>
-                      <textarea cols="30" rows="10" ref={this.descRef} />
+                      <textarea
+                        cols="30"
+                        rows="10"
+                        ref={this.descRef}
+                        maxLength="100"
+                        onChange={this.getCurrentText}
+                      />
+                      <span>Количество оставшихся символов: <b>{100-this.state.symbolsCounter}</b></span>
                     </label>
                     <Button 
                       name="button-add-marker"
