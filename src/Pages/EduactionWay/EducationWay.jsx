@@ -15,6 +15,7 @@ class App extends Component {
     selectedCoords: [],
     suggestionList: [],
     kindergartenArray: [],
+    allArray:[],
     schoolArray: [],
     displayedStep: 1,
     isModalWindowShow: false,
@@ -34,7 +35,8 @@ class App extends Component {
   }
   async componentDidMount() {
     const kindergartenData = {markers:[]},
-          schoolData = {markers:[]};
+          schoolData = {markers:[]},
+          allData = {markers:[]};
 
     this.api = await ymaps.load();
     axios({
@@ -52,6 +54,7 @@ class App extends Component {
           }
         });
         this.setState({
+          allArray: response.data,
           selectedCoords: response.data,
           kindergartenArray: kindergartenData,
           schoolArray: schoolData
@@ -161,6 +164,12 @@ class App extends Component {
     });
   }
 
+  showAllMarkers = () => {
+    this.setState({
+      selectedCoords: this.state.allArray
+    });
+  }
+
   onChange = (typeValue) => {
     this.setState({
       typeValue,
@@ -185,6 +194,7 @@ class App extends Component {
             <ul className="filter-submenu">
               <li><input className="filter-school-btn" type="button" onClick={this.showSchoolMarkers} /></li>
               <li><input className="filter-kindergarten-btn" type="button" onClick={this.showKindergartenMarkers} /></li>
+              <li><input className="filter-all-btn" type="button" onClick={this.showAllMarkers} /></li>
             </ul>
           </li>
         </ul>
