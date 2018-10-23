@@ -39,6 +39,10 @@ class Menu extends Component {
           },
         ],
       },
+      {
+        name: 'контакты',
+        url: '/contacts',
+      },
     ],
   };
   render() {

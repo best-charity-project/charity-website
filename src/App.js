@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import Home from './Pages/Home/MainPage';
+import Contacts from './Pages/Contacts/Contacts';
 import Projects from './Pages/Projects/Projects';
 // import Navigation from './Components/Navigation/Navigation';
 import Error from './Components/Error/Error';
@@ -50,6 +51,7 @@ class App extends Component {
             <PrivateRoute path="/admin-panel/eduway" component={AdminEduWay} exact />
             <Route path="/news/:id" component={FullNews} />
             <Route path="/news" component={PageNews} />
+            <Route path="/contacts" component={Contacts} />
             {/* <Route path="/events" component={Events} /> */}
             <Route component={Error} />
           </Switch>

@@ -1,0 +1,25 @@
+.container {
+	height: 100%;
+	display: flex;
+	flex-grow: 1;
+}
+
+.wrapper-image {
+	width: 500px;
+}
+
+.with-picture {	
+	background: url(../../Assets/AssetsImg/main.png) no-repeat;
+	background-size: cover;
+}
+
+.wrapper-info {
+	box-sizing: border-box;
+margin: 0 200px 0 100px;
+}
+
+.name {
+	font-size: 20px;
+	text-transform: uppercase;
+	font-weight: 600;
+}
