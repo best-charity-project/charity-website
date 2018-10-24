@@ -173,3 +173,16 @@
   z-index: 19999;
   height: 60px;
 }
+
+.user-name {
+  margin-top: 20px;
+}
+
+.user-name > a,
+.user-name > p {
+  color: #9b9b9b;
+  font-weight: 600;
+  font-size: 18px;
+  text-transform: uppercase;
+  text-decoration: none;
+}

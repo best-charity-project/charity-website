@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import Home from './Pages/Home/MainPage';
 import UserLogin from './Pages/UserLogin/UserLogin';
+import UserRegistration from './Pages/UserRegistration/UserRegistration';
 import Projects from './Pages/Projects/Projects';
 // import Navigation from './Components/Navigation/Navigation';
 import Error from './Components/Error/Error';
@@ -35,6 +36,7 @@ class App extends Component {
             <Route path="/" component={Home} exact />
             <Route path="/projects" component={Projects} />
             <Route path="/user-login" component={UserLogin} />
+            <Route path="/user-registration" component={UserRegistration} />
             <Route path="/login" component={Admin} />
             <Route path="/events" component={Events} exact />
             <Route path="/events/map" component={EventsMap} />

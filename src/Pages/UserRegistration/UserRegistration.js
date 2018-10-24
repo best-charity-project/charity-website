@@ -3,9 +3,9 @@ import { BrowserRouter, Route, Switch, NavLink, Link } from 'react-router-dom';
 
 import Button from '../../Components/Button/Button';
 import { signInUser, setToken, getToken } from '../../Components/Admin/Auth';
-import './UserLogin.css';
+import './UserRegistration.css';
 
-export default class UserLogin extends React.Component {
+export default class UserRegistration extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,32 +15,6 @@ export default class UserLogin extends React.Component {
         this.handleLogin = this.handleLogin.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    // componentDidMount() {
-    //     if (getToken() && getToken() !== 'undefined') {
-    //         this.props.history.push('/admin-panel/dashboard');
-    //     }
-    // }
-
-    handleLogin(event) {
-        this.setState({
-            email: event.target.value,
-        });
-    }
-
-    handlePassword(event) {
-        this.setState({
-            password: event.target.value,
-        });
-    }
-
-    handleSubmit(e) {
-        e.preventDefault();
-        signInUser(this.state)
-            .then(response => {
-                setToken(response.data);
-                this.props.history.goBack();
-            });
     }
 
     render() {
@@ -69,7 +43,7 @@ export default class UserLogin extends React.Component {
                                 onChange={this.handlePassword}
                             />
                         </div>
-                        <NavLink to={'/user-registration'} className='login-registration-form'>Регистрация</NavLink>
+
                         <Button type="submit" name="button-admin-login" label="Войти" />
                     </div>
                 </form>
