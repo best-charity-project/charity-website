@@ -1,10 +1,13 @@
 .footer{
+  width: 100%;
   bottom: 20px;
   position: fixed;
   font-family: Montserrat;
   font-size: 16px;
-  text-align:top;  
   padding-left: 20px;
+  display: flex;
+  justify-content: space-between;
+
 }
 .link-on-main-page{
   color: #3b3f48; 
@@ -24,3 +27,4 @@
   text-align: center;
   padding-top: 10px;
 }
+

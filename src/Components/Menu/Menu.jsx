@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Logo from '../Menu/Logo';
 import MenuLinks from '../Menu/MenuLinks';
-import SocialLinks from '../Menu/SocialLinks';
 
 class Menu extends Component {
   state = {
@@ -39,6 +38,10 @@ class Menu extends Component {
           },
         ],
       },
+      {
+        name: 'контакты',
+        url: '/contacts',
+      },
     ],
   };
   render() {
@@ -47,7 +50,6 @@ class Menu extends Component {
         <div className={'menu ' + this.props.name}>
           <Logo client="true" />
           <MenuLinks list={this.state.links} className="menu-links-client" />
-          <SocialLinks />
         </div>
       </div>
     );
