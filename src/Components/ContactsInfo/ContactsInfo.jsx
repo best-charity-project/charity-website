@@ -17,10 +17,6 @@ function ContactsInfo() {
             </ul>
             <span>e-mail: logoved_info@mail.ru</span>
           </div>
-          <div className='wrapper-buttons'>
-            <button className='button'>Связаться с нами</button>
-            <button className='button'>Помочь проекту</button>
-          </div>
         </div>
   		</div>
     );

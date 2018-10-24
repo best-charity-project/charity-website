@@ -42,14 +42,3 @@
 .wrapper-buttons {
 	margin-top: 50px;
 }
-
-.button {
-	font-size: 11px;
-	margin-right: 50px;
-	text-transform: uppercase;
-	padding: 15px 40px;
-	border-radius: 50px;
-	border: 2px solid #dcdad7;
-	background-color: #f0f0f0; 
-	box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.3);
-}
