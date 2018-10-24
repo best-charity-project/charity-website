@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, NavLink, Link } from 'react-router-dom';
 
 import Button from '../../Components/Button/Button';
-import { signInAdmin, setToken, getToken } from '../../Components/Admin/Auth';
-import './Admin.css';
+import { signInUser, setToken, getToken } from '../../Components/Admin/Auth';
+import './UserLogin.css';
 
-export default class Admin extends React.Component {
+export default class UserLogin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,11 +16,11 @@ export default class Admin extends React.Component {
         this.handlePassword = this.handlePassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    componentDidMount() {
-        if (getToken() && getToken() !== 'undefined') {
-            this.props.history.push('/admin-panel/dashboard');
-        }
-    }
+    // componentDidMount() {
+    //     if (getToken() && getToken() !== 'undefined') {
+    //         this.props.history.push('/admin-panel/dashboard');
+    //     }
+    // }
 
     handleLogin(event) {
         this.setState({
@@ -36,18 +36,18 @@ export default class Admin extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        signInAdmin(this.state)
+        signInUser(this.state)
             .then(response => {
                 setToken(response.data);
-                this.props.history.push('/admin-panel/dashboard');
+                this.props.history.goBack();
             });
     }
 
     render() {
         return (
-            <div className="wrapper-admin auth-form">
+            <div className="wrapper-user auth-form">
                 <form className="user-form" onSubmit={this.handleSubmit}>
-                    <div className="container-admin">
+                    <div className="container-user">
                         <div className="username-div">
                             <input
                                 type="text"
@@ -70,7 +70,7 @@ export default class Admin extends React.Component {
                             />
                         </div>
 
-                        <Button type="submit" name="button-admin-login" label="Sign In" />
+                        <Button type="submit" name="button-admin-login" label="Войти" />
                     </div>
                 </form>
             </div>
