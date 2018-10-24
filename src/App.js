@@ -10,6 +10,7 @@ import Events from './Pages/Events/Events';
 import EventsMap from './Components/EventsMap/EventsMap';
 import PageNews from './Pages/News/News';
 import EducationWay from './Pages/EduactionWay/EducationWay';
+import EducationWayPeopleList from './Pages/EducationWayPeopleList/EducationWayPeopleList';
 import FullNews from './Components/FullNews/FullNews';
 import AdminMain from './Components/Admin/AdminMain/AdminMain';
 import AdminEvents from './Components/Admin/AdminEvents/AdminEvents';
@@ -37,6 +38,7 @@ class App extends Component {
             <Route path="/events" component={Events} exact />
             <Route path="/events/map" component={EventsMap} />
             <Route path="/education-way" component={EducationWay} />
+            <Route path="/education-way-people-list" component={EducationWayPeopleList} />
             <PrivateRoute path="/admin-panel" component={AdminMain} exact />
             <PrivateRoute path="/admin-panel/dashboard" component={AdminMain} />
             <PrivateRoute path="/admin-panel/events" component={AdminEvents} exact />
