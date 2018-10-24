@@ -24,14 +24,14 @@
 .menu-links-client li {
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: 16px;
   color: #9b9b9b;
   cursor: pointer;
-  margin-right: 40px;
+  margin-right: 20px;
   float: left;
 }
 .menu-links-client a {
-  padding: 25px 15px 20px 20px;
+  padding:15px;
   text-decoration: none;
   color: #9b9b9b;
 }
@@ -43,11 +43,13 @@
 .social-icons {
   padding-top: 20px;
   margin-right: 40px;
+}
+.social-icons ul {
   list-style: none;
 }
+
 .social-icons li {
-  display: inline-block;
-  margin-left: 10px;
+  margin-top: 5px;
 }
 .social-icons a {
   background-repeat: no-repeat;
