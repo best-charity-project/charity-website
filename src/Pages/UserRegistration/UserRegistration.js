@@ -127,17 +127,17 @@ export default class UserRegistration extends React.Component {
                   />
                   <TextField 
                     label = "Ваш E-mail:"
-                    id = "user-years" 
+                    id = "user-email" 
                     type = "text"
-                    name = "user-years"
+                    name = "user-email"
                     value = {this.state.email}
                     onChangeValue = {this.onChangeEmail}
                   />
                   <TextField 
                     label = "Пароль:"
-                    id = "user-years" 
+                    id = "user-password" 
                     type = "password"
-                    name = "user-years"
+                    name = "user-password"
                     value = {this.state.password}
                     onChangeValue = {this.onChangePassword}
                   />
