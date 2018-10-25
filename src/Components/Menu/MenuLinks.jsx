@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Switch, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 class MenuLinks extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +23,7 @@ class MenuLinks extends Component {
                   return (
                     <li key={index}>
                       <NavLink to={el.url}>
-                        <img src={images(`./${el.icon}`)} alt = 'image' />
+                        <img src={images(`./${el.icon}`)} alt = 'img' />
                         <p>{el.name}</p>
                       </NavLink>
                     </li>

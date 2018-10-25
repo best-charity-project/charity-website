@@ -75,7 +75,6 @@ class Menu extends Component {
               : <NavLink to={'/user-login'}>Войти</NavLink>
             }
           </div>
-          {/* <SocialLinks /> */}
         </div>
       </div>
     );
