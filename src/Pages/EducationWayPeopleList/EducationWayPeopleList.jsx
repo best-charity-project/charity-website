@@ -12,9 +12,7 @@ class EducationWayPeopleList extends Component {
     peopleList: [],
     currentPeopleList: [],
     page: 1,
-    itemsCountOnPage: 10,
-    minPage: 1,
-    maxPage: 1
+    pageSize: 10,
   };
 
   async componentDidMount() {
@@ -28,27 +26,16 @@ class EducationWayPeopleList extends Component {
 
     this.setState({ peopleList });
     this.setState({
-      maxPage: Math.ceil(peopleList.length / this.state.itemsCountOnPage)
-    });
-    this.setState({
       currentPeopleList: this.state.peopleList.slice(
         this.state.page - 1,
-        this.state.itemsCountOnPage
+        this.state.pageSize
       )
     });
   }
 
-  handleGoBackPage = () => {
-    // if (this.state.page === this.state.minPage) {
-    //     return;
-    // }
-
-    console.log("handleGoBackPage");
-  };
-
-  handleGoNextPage = () => {
-    console.log("handleGoNextPage");
-  };
+  handlePageChange = page => {
+      console.log(page);
+  }
 
   render() {
     return (
@@ -58,9 +45,9 @@ class EducationWayPeopleList extends Component {
           <EduWayPeopleFilter />
           <div className="column">
             <EduWayPeopleControlBar
-              countOfPages={this.state.maxPage}
-              onGoBackPage={this.handleGoBackPage}
-              onGoNextPage={this.handleGoNextPage}
+              itemsCount={this.state.peopleList.length}
+              pageSize={this.state.pageSize}
+              onPageChange={this.handlePageChange}
             />
             <EduWayPeopleTable peopleList={this.state.currentPeopleList} />
           </div>

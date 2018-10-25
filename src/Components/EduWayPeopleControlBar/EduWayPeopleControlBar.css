@@ -20,20 +20,6 @@
   flex: none;
 }
 
-.edu-way-people-bar .edu-way-bar-row {
-  display: flex;
-  align-items: center;
-}
-
-.edu-way-people-bar .edu-way-bar-row .edu-way-bar-text {
-  color: #9b9b9b;
-  margin-right: 16px;
-}
-
-.edu-way-people-bar .edu-way-bar-row .edu-way-bar-text span {
-  color: #3b3f48;
-}
-
 .edu-way-people-bar .edu-way-bar-column .edu-way-bar-btn {
   font-size: 16px;
   height: 37px;
@@ -52,42 +38,4 @@
 .edu-way-people-bar .edu-way-bar-column .edu-way-bar-btn.btn-new {
   max-width: 157.6px;
   width: 100%;
-}
-
-.edu-way-people-bar .edu-way-bar-column .edu-way-bar-btn.btn-arrow {
-  width: 30.1px;
-  height: 30px;
-  position: relative;
-  text-align: center;
-  line-height: 30px;
-}
-
-.edu-way-bar-btn.btn-arrow .arrow-wrapper {
-  position: absolute;
-  display: flex;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-  right: 0;
-  justify-content: center;
-  align-items: center;
-}
-
-.edu-way-bar-btn.btn-arrow .arrow-divider {
-  height: 9px;
-  width: 9px;
-  transform: rotate(-45deg);
-  border-right: 1px solid white;
-  border-bottom: 1px solid white;
-  margin-right: 5px;
-}
-
-.edu-way-bar-btn.edu-way-bar-btn-left {
-  border-right: 1px solid rgba(255, 255, 255, 0.39) !important;
-}
-
-.edu-way-bar-btn.edu-way-bar-btn-left .arrow-divider {
-  margin-left: 5px;
-  margin-right: 0;
-  transform: rotate(135deg);
 }
