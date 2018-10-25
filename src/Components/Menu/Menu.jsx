@@ -8,6 +8,9 @@ import Logo from '../Menu/Logo';
 import MenuLinks from '../Menu/MenuLinks';
 
 class Menu extends Component {
+  constructor(props) {
+    super(props);
+  }
   state = {
     links: [
       {
@@ -60,10 +63,14 @@ class Menu extends Component {
   componentDidMount() {
     if (getToken() && getToken() !== 'undefined') {
       this.setState({
-        isUserAuth: true
+        isUserAuth: true,
       });
     }
   }
+  logOut = () => {
+    window.localStorage.removeItem('token');
+    window.location.replace('/');
+  };
 
   render() {
     const { /* username, */ isUserAuth } = this.state;
@@ -73,12 +80,8 @@ class Menu extends Component {
         <div className={'menu ' + this.props.name}>
           <Logo client="true" />
           <MenuLinks list={this.state.links} className="menu-links-client" />
-          <div className="user-name">  
-            {
-              isUserAuth ?
-                <p>Вы успешно вошли</p>
-              : <NavLink to={'/user-login'}>Войти</NavLink>
-            }
+          <div className="user-name">
+            {isUserAuth ? <a onClick={e => this.logOut()}>Выйти</a> : <NavLink to={'/user-login'}>Войти</NavLink>}
           </div>
         </div>
       </div>
