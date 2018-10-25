@@ -12,6 +12,8 @@
   background-color: #e8e6e2;
   height: 80px;
   position: fixed;
+  justify-content: space-between;
+  align-items: start;
 }
 
 .menu-links-client {
@@ -132,4 +134,16 @@
   display: block;
   display: flex;
   flex-direction: column;
+}
+
+.user-name  { 
+  padding: 15px;
+}
+.user-name > a,
+.user-name > p {
+  color: #9b9b9b;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  text-decoration: none;
 }
