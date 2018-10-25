@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {BrowserRouter , Route , Switch, Redirect } from "react-router-dom";
 import { getToken } from "../Auth";
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ component: Component,protectLink, ...rest }) => {
     return (
         <Route
             {...rest}
@@ -12,7 +12,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                 ) : (
                     <Redirect
                         to={{
-                            pathname: '/login',
+                            pathname: protectLink ? protectLink :'/login',
                             state: { from: props.location },
                         }}
                     />
