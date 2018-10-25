@@ -6,7 +6,6 @@ import { server } from '../../api';
 import { getToken } from '../../Components/Admin/Auth';
 import Logo from '../Menu/Logo';
 import MenuLinks from '../Menu/MenuLinks';
-import SocialLinks from '../Menu/SocialLinks';
 
 class Menu extends Component {
   state = {
@@ -44,6 +43,10 @@ class Menu extends Component {
           },
         ],
       },
+      {
+        name: 'контакты',
+        url: '/contacts',
+      },
     ],
     // username: '',
     isUserAuth: false,
@@ -72,7 +75,6 @@ class Menu extends Component {
               : <NavLink to={'/user-login'}>Войти</NavLink>
             }
           </div>
-          <SocialLinks />
         </div>
       </div>
     );
