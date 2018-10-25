@@ -16,25 +16,27 @@ class MenuLinks extends Component {
           {this.state.list.map(function(el, index) {
             if (el.child) {
               return <li class="dropdown">
-              <button class="dropbtn">{el.name}</button>
-              <ul class="dropdown-content">
-                {el.child.map(function(el, index) {
-                  const images = require.context('../../Assets/AssetsSvg', true);
-                  return (
-                    <li key={index}>
-                      <NavLink to={el.url}>
-                        <img src={images(`./${el.icon}`)} alt = 'img' />
-                        <p>{el.name}</p>
-                      </NavLink>
-                    </li>
-                  );
+                <button class="dropbtn">{el.name}</button>
+                <ul class="dropdown-content">
+                  {el.child.map(function(el, index) {
+                    const images = require.context('../../Assets/AssetsSvg', true);
+                    return (
+                      <li key={index}>
+                        <NavLink to={el.url}>
+                          <img src={images(`./${el.icon}`)} alt = 'img' />
+                          <p>{el.name}</p>
+                        </NavLink>
+                      </li>
+                    );
                   })}
-              </ul>
+                </ul>
             </li> 
           } else {
-            return <li key={index}>
-              <NavLink to={el.url}>{el.name}</NavLink>
-          </li>
+            return (
+              <li key={index}>
+                <NavLink to={el.url}>{el.name}</NavLink>
+            </li>
+            )
           }
         })}
       </ul>

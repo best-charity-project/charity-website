@@ -22,11 +22,11 @@ class TextField extends Component {
 	componentDidMount() {
 		this.ref.focus();
 	};
-	// componentDidUpdate(prevProps, prevState) {
-	// 	if (this.state.value === prevState.value) {
-	// 	  this.ref.setSelectionRange(this.state.start, this.state.end)
-	// 	}
-	// };
+	componentDidUpdate(prevProps, prevState) {
+		if (this.state.value === prevState.value) {
+		  this.ref.setSelectionRange(this.state.start, this.state.end)
+		}
+	};
 
     render() {
     	return(
