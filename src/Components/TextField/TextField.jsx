@@ -27,6 +27,7 @@ class TextField extends Component {
 		  this.ref.setSelectionRange(this.state.start, this.state.end)
 		}
 	};
+
     render() {
     	return(
  			<div className = 'container-for-input'> 
