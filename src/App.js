@@ -38,7 +38,7 @@ class App extends Component {
             <Route path="/events" component={Events} exact />
             <Route path="/events/map" component={EventsMap} />
             <Route path="/education-way" component={EducationWay} />
-            <Route path="/education-way-people-list" component={EducationWayPeopleList} />
+            <PrivateRoute protectLink='/user-auth' path="/education-way-people-list" component={EducationWayPeopleList} />
             <PrivateRoute path="/admin-panel" component={AdminMain} exact />
             <PrivateRoute path="/admin-panel/dashboard" component={AdminMain} />
             <PrivateRoute path="/admin-panel/events" component={AdminEvents} exact />
