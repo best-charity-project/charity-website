@@ -22,8 +22,6 @@ class EducationWayPeopleList extends Component {
     });
 
     this.setState({ peopleList });
-    console.log("this.state.peopleList");
-    console.log(this.state.peopleList);
   }
   render() {
     return (
@@ -33,7 +31,7 @@ class EducationWayPeopleList extends Component {
           <EduWayPeopleFilter/>
           <div className="column">
             <EduWayPeopleControlBar />
-            <EduWayPeopleTable />
+            <EduWayPeopleTable peopleList={this.state.peopleList} />
           </div>
         </div>
       </div>

@@ -16,7 +16,7 @@ class EduWayPeopleFilter extends Component {
                 <EduWayPeopleInput/>
                 <EduWayPeopleInput/>
 
-                <buttton className="edu-people-list-btn">Подобрать</buttton>
+                <button className="edu-people-list-btn">Подобрать</button>
             </div>
          );
     }
