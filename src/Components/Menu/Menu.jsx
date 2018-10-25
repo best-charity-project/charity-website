@@ -41,6 +41,11 @@ class Menu extends Component {
             icon: 'idea.svg',
             url: '/education-way',
           },
+          {
+            name: 'найти контактное лицо',
+            icon: 'idea.svg',
+            url: '/education-way-people-list',
+          },
         ],
       },
       {

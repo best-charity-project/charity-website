@@ -1,0 +1,9 @@
+.edu-people-list-page {
+    display: flex;
+    flex-direction: row;
+    padding: 25px;
+}
+
+.edu-people-list-page .column {
+    flex: 1 auto;
+}
