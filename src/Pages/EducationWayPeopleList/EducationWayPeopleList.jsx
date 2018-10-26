@@ -4,40 +4,32 @@ import Menu from "../../Components/Menu/Menu";
 import EduWayPeopleFilter from "../../Components/EduWayPeopleFilter/EduWayPeopleFilter";
 import EduWayPeopleControlBar from "../../Components/EduWayPeopleControlBar/EduWayPeopleControlBar";
 import EduWayPeopleTable from "../../Components/EduWayPeopleTable/EduWayPeopleTable";
-import { server } from "../../api";
-import axios from "axios";
+import { paginate } from "../../Utils/charityPaginate";
+import { getPeopleList } from "../../Services/EducationWayPeopleService";
 
 class EducationWayPeopleList extends Component {
   state = {
     peopleList: [],
-    currentPeopleList: [],
-    page: 1,
     pageSize: 10,
+    currentPage: 0
   };
 
   async componentDidMount() {
     const {
       data: { persons: peopleList }
-    } = await axios({
-      method: "get",
-      url: `${server}/api/edulist`,
-      config: { headers: { "Content-Type": "application/json; charset=UTF-8" } }
-    });
-
+    } = await getPeopleList();
     this.setState({ peopleList });
-    this.setState({
-      currentPeopleList: this.state.peopleList.slice(
-        this.state.page - 1,
-        this.state.pageSize
-      )
-    });
+    this.handlePageChange(1);
   }
 
-  handlePageChange = page => {
-      console.log(page);
-  }
+  handlePageChange = currentPage => {
+    this.setState({ currentPage });
+  };
 
   render() {
+    const { peopleList, currentPage, pageSize } = this.state;
+    const currentPeopleList = paginate(peopleList, currentPage, pageSize);
+
     return (
       <div className="main-page-client">
         <Menu name="client-menu" />
@@ -45,11 +37,12 @@ class EducationWayPeopleList extends Component {
           <EduWayPeopleFilter />
           <div className="column">
             <EduWayPeopleControlBar
-              itemsCount={this.state.peopleList.length}
-              pageSize={this.state.pageSize}
+              itemsCount={peopleList.length}
+              currentPage={currentPage}
+              pageSize={pageSize}
               onPageChange={this.handlePageChange}
             />
-            <EduWayPeopleTable peopleList={this.state.currentPeopleList} />
+            <EduWayPeopleTable peopleList={currentPeopleList} />
           </div>
         </div>
       </div>

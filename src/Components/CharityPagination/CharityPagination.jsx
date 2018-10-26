@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./CharityPagination.css";
+import PropTypes from 'prop-types';
 
 class CharityPagination extends Component {
   state = {
-    currentPage: 1,
     pagesCount: 1
   };
 
@@ -16,29 +16,26 @@ class CharityPagination extends Component {
     };
   }
 
-  handlePageChange = pageStep => {
-    const tempPage = this.state.currentPage + pageStep;
-    if (tempPage < 1 || tempPage > this.state.pagesCount) {
+  handlePageChange = nextPage => {
+    if (nextPage < 1 || nextPage > this.state.pagesCount) {
       return;
     }
 
-    this.setState(
-      { currentPage: tempPage },
-      () =>this.props.onPageChange(this.state.currentPage)
-    );
+    this.props.onPageChange(nextPage);
   };
   render() {
+    const {className, currentPage} = this.props;
     return (
-      <div className={this.props.className + " charity-pagination"}>
+      <div className={className + " charity-pagination"}>
         <div className="charity-pagination-row">
           <span className="charity-pagination-text">
-            Вы находитесь на <span>1</span> странице из {this.state.pagesCount}
+            Вы находитесь на <span>{currentPage}</span> странице из {this.state.pagesCount}
           </span>
         </div>
         <div className="charity-pagination-row">
           <button
             className="charity-pagination-btn btn-arrow charity-pagination-btn-left"
-            onClick={() => this.handlePageChange(-1)}
+            onClick={() => this.handlePageChange(currentPage-1)}
           >
             <div className="arrow-wrapper">
               <div className="arrow-divider" />
@@ -46,7 +43,7 @@ class CharityPagination extends Component {
           </button>
           <button
             className="charity-pagination-btn btn-arrow charity-pagination-btn-right"
-            onClick={() => this.handlePageChange(1)}
+            onClick={() => this.handlePageChange(currentPage+1)}
           >
             <div className="arrow-wrapper">
               <div className="arrow-divider" />
@@ -56,6 +53,14 @@ class CharityPagination extends Component {
       </div>
     );
   }
+};
+
+CharityPagination.propTypes = {
+    className: PropTypes.string,
+    itemsCount: PropTypes.number.isRequired,
+    pageSize: PropTypes.number.isRequired,
+    currentPage: PropTypes.number.isRequired,
+    onPageChange: PropTypes.func.isRequired
 }
 
 export default CharityPagination;
