@@ -6,29 +6,59 @@ import EduWayPeopleControlBar from "../../Components/EduWayPeopleControlBar/EduW
 import EduWayPeopleTable from "../../Components/EduWayPeopleTable/EduWayPeopleTable";
 import { paginate } from "../../Utils/charityPaginate";
 import { getPeopleList } from "../../Services/EducationWayPeopleService";
+import _ from "lodash";
 
 class EducationWayPeopleList extends Component {
   state = {
     peopleList: [],
+    selectedTab: null,
+    peopleListTabs: [
+      { _id: "allTab", name: "Все" },
+      {
+        _id: "newTab",
+        name: "Новые запросы",
+        handleFunction: this.sortByNewRequests
+      }
+    ],
     pageSize: 10,
-    currentPage: 0
+    currentPage: 1
   };
 
   async componentDidMount() {
     const {
       data: { persons: peopleList }
     } = await getPeopleList();
-    this.setState({ peopleList });
-    this.handlePageChange(1);
+    this.setState({ peopleList, selectedTab: this.state.peopleListTabs[0] });
+  }
+
+  sortByNewRequests(peopleList) {
+    return _.sortBy(peopleList, 'createdAt').reverse();
   }
 
   handlePageChange = currentPage => {
     this.setState({ currentPage });
   };
 
+  handleTabSelect = tab => {
+    if (tab._id === this.state.selectedTab._id) return;
+    this.setState({ selectedTab: tab, currentPage: 1 });
+  };
+
   render() {
-    const { peopleList, currentPage, pageSize } = this.state;
-    const currentPeopleList = paginate(peopleList, currentPage, pageSize);
+    const {
+      peopleList,
+      currentPage,
+      pageSize,
+      peopleListTabs,
+      selectedTab
+    } = this.state;
+
+    const sortedPeopleList =
+      selectedTab && selectedTab._id && selectedTab.handleFunction
+        ? selectedTab.handleFunction(peopleList)
+        : peopleList;
+
+    const currentPeopleList = paginate(sortedPeopleList, currentPage, pageSize);
 
     return (
       <div className="main-page-client">
@@ -37,7 +67,10 @@ class EducationWayPeopleList extends Component {
           <EduWayPeopleFilter />
           <div className="column">
             <EduWayPeopleControlBar
-              itemsCount={peopleList.length}
+              tabList={peopleListTabs}
+              selectedTab={selectedTab}
+              onTabSelect={this.handleTabSelect}
+              itemsCount={sortedPeopleList.length}
               currentPage={currentPage}
               pageSize={pageSize}
               onPageChange={this.handlePageChange}
