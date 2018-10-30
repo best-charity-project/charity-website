@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class TableHeader extends Component {
+class CharityTableHeader extends Component {
   state = {};
   render() {
     const { headerClassName, columnsClassName, columns } = this.props;
@@ -21,4 +21,4 @@ class TableHeader extends Component {
   }
 }
 
-export default TableHeader;
+export default CharityTableHeader;

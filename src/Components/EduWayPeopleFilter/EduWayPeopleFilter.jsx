@@ -8,13 +8,13 @@ class EduWayPeopleFilter extends Component {
     render() { 
         return ( 
             <div className="edu-people-list-filter">
-                <EduWayPeopleInput/>
-                <EduWayPeopleInput/>
-                <EduWayPeopleInput/>
-                <EduWayPeopleInput/>
-                <EduWayPeopleInput/>
-                <EduWayPeopleInput/>
-                <EduWayPeopleInput/>
+                <EduWayPeopleInput label="Диагноз"/>
+                <EduWayPeopleInput label="Ищу"/>
+                <EduWayPeopleInput label="Область"/>
+                <EduWayPeopleInput label="Район"/>
+                <EduWayPeopleInput label="Населенный пункт"/>
+                <EduWayPeopleInput label="Микрорайон"/>
+                <EduWayPeopleInput label="Годы поступления"/>
 
                 <button className="edu-people-list-btn">Подобрать</button>
             </div>

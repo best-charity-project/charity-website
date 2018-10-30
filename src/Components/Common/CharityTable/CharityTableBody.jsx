@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class TableBody extends Component {
+class CharityTableBody extends Component {
   render() {
     const {
       bodyClassName,
@@ -25,4 +25,4 @@ class TableBody extends Component {
   }
 }
 
-export default TableBody;
+export default CharityTableBody;

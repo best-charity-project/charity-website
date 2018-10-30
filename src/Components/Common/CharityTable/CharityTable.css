@@ -1,0 +1,28 @@
+.charity-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.charity-table .charity-table-header {
+  font-size: 14px;
+  font-weight: 600;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+.charity-table .charity-table-body {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.charity-table .charity-table-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.charity-table .charity-table-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1 auto;
+}

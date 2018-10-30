@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./EduWayPeopleControlBar.css";
-import CharityPagination from "../CharityPagination/CharityPagination";
+import CharityPagination from "../Common/CharityPagination/CharityPagination";
 import TabsBar from "../TabsBar/TabsBar";
 
 class EduWayPeopleControlBar extends Component {

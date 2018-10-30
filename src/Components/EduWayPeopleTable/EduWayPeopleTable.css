@@ -1,16 +1,10 @@
 .edu-way-people-table {
-  display: flex;
-  flex-direction: column;
   border-radius: 3px;
   background-color: white;
 }
 
 .edu-way-people-table .edu-way-people-row {
-  display: flex;
-  flex-direction: row;
   height: 55px;
-  font-size: 12px;
-  font-weight: 500;
 }
 
 .edu-way-people-table .edu-way-people-row:not(:last-of-type) {
@@ -18,16 +12,11 @@
 }
 
 .edu-way-people-table .edu-way-people-row.edu-way-header {
-  font-size: 14px;
-  font-weight: 600;
   color: #9b9b9b;
   background-color: #f7f7f7;
 }
 
 .edu-way-people-table .edu-way-people-column {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   padding-left: 13px;
 }
 

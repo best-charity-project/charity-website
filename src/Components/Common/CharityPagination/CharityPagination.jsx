@@ -16,6 +16,14 @@ class CharityPagination extends Component {
     };
   }
 
+  onGoBackPage = () => {
+    this.handlePageChange(this.props.currentPage - 1);
+  }
+  
+  onGoNextPage = () => {
+    this.handlePageChange(this.props.currentPage + 1);
+  }
+
   handlePageChange = nextPage => {
     if (nextPage < 1 || nextPage > this.state.pagesCount) {
       return;
@@ -35,7 +43,7 @@ class CharityPagination extends Component {
         <div className="charity-pagination-row">
           <button
             className="charity-pagination-btn btn-arrow charity-pagination-btn-left"
-            onClick={() => this.handlePageChange(currentPage-1)}
+            onClick={this.onGoBackPage}
           >
             <div className="arrow-wrapper">
               <div className="arrow-divider" />
@@ -43,7 +51,7 @@ class CharityPagination extends Component {
           </button>
           <button
             className="charity-pagination-btn btn-arrow charity-pagination-btn-right"
-            onClick={() => this.handlePageChange(currentPage+1)}
+            onClick={this.onGoNextPage}
           >
             <div className="arrow-wrapper">
               <div className="arrow-divider" />
