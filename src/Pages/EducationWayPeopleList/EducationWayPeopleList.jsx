@@ -32,7 +32,7 @@ class EducationWayPeopleList extends Component {
   }
 
   sortByNewRequests(peopleList) {
-    return _.sortBy(peopleList, 'createdAt').reverse();
+    return _.sortBy(peopleList, "createdAt").reverse();
   }
 
   handlePageChange = currentPage => {
@@ -44,21 +44,22 @@ class EducationWayPeopleList extends Component {
     this.setState({ selectedTab: tab, currentPage: 1 });
   };
 
-  render() {
-    const {
-      peopleList,
-      currentPage,
-      pageSize,
-      peopleListTabs,
-      selectedTab
-    } = this.state;
+  getPagedData = () => {
+    const { peopleList, currentPage, pageSize, selectedTab } = this.state;
 
-    const sortedPeopleList =
+    const sortedData =
       selectedTab && selectedTab._id && selectedTab.handleFunction
         ? selectedTab.handleFunction(peopleList)
         : peopleList;
 
-    const currentPeopleList = paginate(sortedPeopleList, currentPage, pageSize);
+    const currentData = paginate(sortedData, currentPage, pageSize);
+
+    return { totalCount: sortedData.length, data: currentData };
+  };
+
+  render() {
+    const { currentPage, pageSize, peopleListTabs, selectedTab } = this.state;
+    const { totalCount, data: currentPeopleList } = this.getPagedData();
 
     return (
       <div className="main-page-client">
@@ -70,7 +71,7 @@ class EducationWayPeopleList extends Component {
               tabList={peopleListTabs}
               selectedTab={selectedTab}
               onTabSelect={this.handleTabSelect}
-              itemsCount={sortedPeopleList.length}
+              itemsCount={totalCount}
               currentPage={currentPage}
               pageSize={pageSize}
               onPageChange={this.handlePageChange}

@@ -1,39 +1,36 @@
-import React, { Component } from "react";
+import React from "react";
 import "./EduWayPeopleControlBar.css";
 import CharityPagination from "../Common/CharityPagination/CharityPagination";
 import TabsBar from "../TabsBar/TabsBar";
 
-class EduWayPeopleControlBar extends Component {
-  render() {
-    const {
-      itemsCount,
-      pageSize,
-      onPageChange,
-      currentPage,
-      onTabSelect,
-      tabList,
-      selectedTab
-    } = this.props;
-    return (
-      <div className="edu-way-people-bar">
-        <TabsBar
-          className="edu-way-bar-column"
-          tabList={tabList}
-          onTabSelect={onTabSelect}
-          selectedTab={selectedTab}
+const EduWayPeopleControlBar = ({
+  itemsCount,
+  pageSize,
+  onPageChange,
+  currentPage,
+  onTabSelect,
+  tabList,
+  selectedTab
+}) => {
+  return (
+    <div className="edu-way-people-bar">
+      <TabsBar
+        className="edu-way-bar-column"
+        tabList={tabList}
+        onTabSelect={onTabSelect}
+        selectedTab={selectedTab}
+      />
+      {itemsCount > 0 && (
+        <CharityPagination
+          className="edu-way-bar-column second"
+          itemsCount={itemsCount}
+          currentPage={currentPage}
+          pageSize={pageSize}
+          onPageChange={onPageChange}
         />
-        {itemsCount > 0 && (
-          <CharityPagination
-            className="edu-way-bar-column second"
-            itemsCount={itemsCount}
-            currentPage={currentPage}
-            pageSize={pageSize}
-            onPageChange={onPageChange}
-          />
-        )}
-      </div>
-    );
-  }
-}
+      )}
+    </div>
+  );
+};
 
 export default EduWayPeopleControlBar;
