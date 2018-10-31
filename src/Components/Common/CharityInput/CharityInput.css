@@ -1,0 +1,46 @@
+:root {
+  --edu-way-label-color: #3b3f48;
+  --edu-way-input-border-color: #dcdad7;
+  --edu-way-input-bgrd-color: #fafafa;
+}
+
+.charity-input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.charity-input-container .charity-label {
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--edu-way-label-color);
+  margin-left: 10px;
+}
+
+.charity-input-container .charity-input {
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  max-width: 211px;
+  max-height: 35px;
+  padding: 12px 20px;
+  padding-left: 12px;
+  margin: 6px 0 0 0;
+  border: 1px solid var(--edu-way-input-border-color);
+  border-radius: 3px;
+  background-color: var(--edu-way-input-bgrd-color);
+}
+
+.charity-input-container .charity-alert {
+    font-size: 12px;
+  position: relative;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+.charity-input-container .charity-alert.charity-alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}

@@ -58,14 +58,14 @@ class EducationWayPeopleList extends Component {
   };
 
   render() {
-    const { currentPage, pageSize, peopleListTabs, selectedTab } = this.state;
+    const { peopleList, currentPage, pageSize, peopleListTabs, selectedTab } = this.state;
     const { totalCount, data: currentPeopleList } = this.getPagedData();
 
     return (
       <div className="main-page-client">
         <Menu name="client-menu" />
         <div className="edu-people-list-page">
-          <EduWayPeopleFilter />
+          <EduWayPeopleFilter data={peopleList}/>
           <div className="column">
             <EduWayPeopleControlBar
               tabList={peopleListTabs}
