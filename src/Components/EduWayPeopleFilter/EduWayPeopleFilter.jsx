@@ -5,13 +5,13 @@ import Joi from "joi-browser";
 class EduWayPeopleFilter extends CharityForm {
   state = {
     data: {
-      diagnose: '',
-      name: '',
-      region: '',
-      district: '',
-      city: '',
-      microdistrict: '',
-      years: ''
+      diagnose: "",
+      name: "",
+      region: "",
+      district: "",
+      city: "",
+      microdistrict: "",
+      years: ""
     },
     names: [],
     regions: [],
@@ -22,16 +22,17 @@ class EduWayPeopleFilter extends CharityForm {
   };
 
   schema = {
-    diagnose: Joi.string().allow(''),
-    name: Joi.string().allow(''),
-    region: Joi.string().allow(''),
-    district: Joi.string().allow(''),
-    city: Joi.string().allow(''),
-    microdistrict: Joi.string().allow(''),
+    diagnose: Joi.string().allow(""),
+    name: Joi.string().allow(""),
+    region: Joi.string().allow(""),
+    district: Joi.string().allow(""),
+    city: Joi.string().allow(""),
+    microdistrict: Joi.string().allow(""),
     years: Joi.number()
       .integer()
       .min(1900)
-      .max(2018).allow('')
+      .max(2018)
+      .allow("")
   };
 
   componentDidUpdate(prevProps) {
@@ -50,8 +51,32 @@ class EduWayPeopleFilter extends CharityForm {
   }
 
   doSubmit = () => {
-    // searchPeople(this.state.data);
-    console.log("Submitted");
+    const {
+      data: {
+        diagnose: diagnosis,
+        name,
+        years,
+        region,
+        district,
+        city,
+        microdistrict
+      }
+    } = this.state;
+    const { data: peopleList } = this.props;
+    const location = [region, district, city, microdistrict]
+      .filter(p => p)
+      .join(",");
+
+    const result = peopleList.filter((value, index) => {
+      return (
+        value.diagnosis.includes(diagnosis) &&
+        value.name.includes(name) &&
+        value.location.includes(location) &&
+        value.years.includes(years)
+      );
+    });
+
+    this.props.onSubmit(result);
   };
 
   render() {

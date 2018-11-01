@@ -44,6 +44,10 @@ class EducationWayPeopleList extends Component {
     this.setState({ selectedTab: tab, currentPage: 1 });
   };
 
+  handleFilterSubmit = filteredData => {
+    console.log("handleFilterSubmit", filteredData);
+  };
+
   getPagedData = () => {
     const { peopleList, currentPage, pageSize, selectedTab } = this.state;
 
@@ -58,14 +62,23 @@ class EducationWayPeopleList extends Component {
   };
 
   render() {
-    const { peopleList, currentPage, pageSize, peopleListTabs, selectedTab } = this.state;
+    const {
+      peopleList,
+      currentPage,
+      pageSize,
+      peopleListTabs,
+      selectedTab
+    } = this.state;
     const { totalCount, data: currentPeopleList } = this.getPagedData();
 
     return (
       <div className="main-page-client">
         <Menu name="client-menu" />
         <div className="edu-people-list-page">
-          <EduWayPeopleFilter data={peopleList}/>
+          <EduWayPeopleFilter
+            data={peopleList}
+            onSubmit={this.handleFilterSubmit}
+          />
           <div className="column">
             <EduWayPeopleControlBar
               tabList={peopleListTabs}
