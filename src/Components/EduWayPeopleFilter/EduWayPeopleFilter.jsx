@@ -3,47 +3,15 @@ import "./EduWayPeopleFilter.css";
 import CharityForm from "./../Common/CharityForm/CharityForm";
 import Joi from "joi-browser";
 class EduWayPeopleFilter extends CharityForm {
-  columns = [
-    {
-      className: "diagnose-column",
-      propertyName: "diagnosis",
-      label: "Диагноз"
-    },
-    {
-      className: "name-of-child-column",
-      propertyName: "name",
-      label: "Имя ребенка"
-    },
-    {
-      className: "contact-person-column",
-      propertyName: "contactPerson",
-      label: "Контактное лицо"
-    },
-    {
-      className: "contacts-column",
-      propertyName: "contacts",
-      label: "Контакты"
-    },
-    {
-      className: "address-column",
-      propertyName: "location",
-      label: "Адрес (без дома и кв)"
-    },
-    {
-      className: "years-column",
-      propertyName: "years",
-      label: "Годы (поступления)"
-    }
-  ];
   state = {
     data: {
-      diagnose: "",
-      name: "",
-      region: "",
-      district: "",
-      city: "",
-      microdistrict: "",
-      years: ""
+      diagnose: '',
+      name: '',
+      region: '',
+      district: '',
+      city: '',
+      microdistrict: '',
+      years: ''
     },
     names: [],
     regions: [],
@@ -54,44 +22,48 @@ class EduWayPeopleFilter extends CharityForm {
   };
 
   schema = {
-    diagnose: Joi.string(),
-    name: Joi.string(),
-    region: Joi.string(),
-    district: Joi.string(),
-    city: Joi.string(),
-    microdistrict: Joi.string(),
+    diagnose: Joi.string().allow(''),
+    name: Joi.string().allow(''),
+    region: Joi.string().allow(''),
+    district: Joi.string().allow(''),
+    city: Joi.string().allow(''),
+    microdistrict: Joi.string().allow(''),
     years: Joi.number()
       .integer()
       .min(1900)
-      .max(2018)
+      .max(2018).allow('')
   };
 
-  componentDidMount() {
-    const names = [...new Set(this.props.data.map(obj => obj.name))];
-    const adresses = [...new Set(this.props.data.map(obj => obj.location))];
+  componentDidUpdate(prevProps) {
+    if (this.props.data !== prevProps.data) {
+      const names = [...new Set(this.props.data.map(obj => obj.name))];
+      const adresses = [...new Set(this.props.data.map(obj => obj.location))];
 
-    this.setState({
-      names,
-      regions: adresses,
-      districts: adresses,
-      cities: adresses,
-      microdistricts: adresses
-    });
+      this.setState({
+        names,
+        regions: adresses,
+        districts: adresses,
+        cities: adresses,
+        microdistricts: adresses
+      });
+    }
   }
 
   doSubmit = () => {
+    // searchPeople(this.state.data);
     console.log("Submitted");
   };
 
   render() {
+    const { names, regions, districts, cities, microdistricts } = this.state;
     return (
       <form onSubmit={this.handleSubmit} className="edu-people-list-filter">
         {this.renderInput("diagnose", "Диагноз")}
-        {this.renderInput("name", "Ищу")}
-        {this.renderInput("region", "Область")}
-        {this.renderInput("district", "Район")}
-        {this.renderInput("city", "Населенный пункт")}
-        {this.renderInput("microdistrict", "Микрорайон")}
+        {this.renderSelect("name", "Ищу", names)}
+        {this.renderSelect("region", "Область", regions)}
+        {this.renderSelect("district", "Район", districts)}
+        {this.renderSelect("city", "Населенный пункт", cities)}
+        {this.renderSelect("microdistrict", "Микрорайон", microdistricts)}
         {this.renderInput("years", "Годы поступления")}
 
         {this.renderButton("Подобрать")}

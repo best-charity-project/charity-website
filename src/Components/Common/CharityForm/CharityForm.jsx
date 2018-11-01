@@ -28,6 +28,7 @@ class CharityForm extends Component {
   validateProperty = ({ name, value }) => {
     const obj = { [name]: value };
     const schema = { [name]: this.schema[name] };
+
     const { error } = Joi.validate(obj, schema);
 
     return error ? error.details[0].message : null;
@@ -73,6 +74,21 @@ class CharityForm extends Component {
         name={name}
         value={data[name]}
         label={label}
+        onChange={this.handleChange}
+        error={errors[name]}
+      />
+    );
+  }
+
+  renderSelect(name, label, options) {
+    const { data, errors } = this.state;
+    return (
+      <CharityInput
+        name={name}
+        value={data[name]}
+        label={label}
+        options={options}
+        isSelect={true}
         onChange={this.handleChange}
         error={errors[name]}
       />
