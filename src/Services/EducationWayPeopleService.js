@@ -1,31 +1,13 @@
 import { server } from "../api";
 import http from "./httpService";
 
-const people = [
-  {
-    _id: "5b21ca3eeb7f6fbccd471815",
-    contactPerson: "Александра",
-    contacts: "+375(44)123-45-67",
-    createdAt: "2018-10-24T14:49:14.046Z",
-    diagnosis: "Аутизм",
-    isPublic: true,
-    region: "г.Минск",
-    district: "",
-    city: "",
-    microdistrict: "",
-    name: "abc",
-    updatedAt: "2018-10-24T14:49:14.046Z",
-    years: "abc"
-  }
-];
-
 const regions = [
   { id: "obl1", name: "Брестская область" },
   { id: "obl2", name: "Витебская область" },
   { id: "obl3", name: "Гомельская область" },
   { id: "obl4", name: "Гродненская область" },
-  { id: "obl5", name: "Минская область область" },
-  { id: "obl6", name: "Могилевская область область" }
+  { id: "obl5", name: "Минская область" },
+  { id: "obl6", name: "Могилевская область" }
 ];
 
 const districts = [
@@ -149,6 +131,97 @@ const microdistricts = [
   { id: "mdis18", foreignId: "ct11", name: "Клины" }
 ];
 
+const addresses = makeAddressList();
+
+const contactPersons = [
+  { name: "Александра" },
+  { name: "Виктор" },
+  { name: "Мария" },
+  { name: "Владислав" },
+  { name: "Алексей" },
+  { name: "Екатерина" },
+  { name: "Ярослав" },
+  { name: "Ярослав" },
+  { name: "Борис" },
+  { name: "Григорий" },
+  { name: "Георгий" },
+  { name: "Диана" },
+  { name: "Дмитрий" },
+  { name: "Евгения" },
+  { name: "Елена" },
+  { name: "Зинаида" },
+  { name: "Игорь" },
+  { name: "Ирина" },
+  { name: "Кристина" },
+  { name: "Кирилл" },
+  { name: "Людмила" },
+  { name: "Лев" },
+  { name: "Лев" },
+  { name: "Николай" },
+  { name: "Наталья" },
+  { name: "Олег" },
+  { name: "Ольга" },
+  { name: "Петр" },
+  { name: "Полина" },
+  { name: "Рената" },
+  { name: "Роман" },
+  { name: "Роман" },
+  { name: "Сергей" },
+  { name: "София" },
+  { name: "Татьяна" },
+  { name: "Тимофей" },
+  { name: "Ульяна" },
+  { name: "Федор" },
+  { name: "Эдуард" },
+  { name: "Михаил" }
+];
+
+const diagnoses = [
+  { name: "Аутизм" },
+  { name: "Cиндром Аспергера" },
+  { name: "Умственная отсталость" },
+  { name: "Шизофрения" },
+  { name: "Слепоглухота" },
+  { name: "Трахеостома" },
+  { name: "Низкорослость" },
+  { name: "Травмы позвоночника" },
+  { name: "Склероз" },
+  { name: "Иммунодефициты" },
+  { name: "Атеросклероз" },
+  { name: "болезнь Крона" },
+  { name: "Цирроз печени" },
+  { name: "Остеогенез" },
+  { name: "Лейциноз" },
+  { name: "синдром Дауна" },
+  { name: "Эпилепсия" },
+  { name: "ВИЧ" }
+];
+
+const years = [
+  { name: 2000 },
+  { name: 2001 },
+  { name: 2002 },
+  { name: 2003 },
+  { name: 2004 },
+  { name: 2005 },
+  { name: 2006 },
+  { name: 2007 },
+  { name: 2008 },
+  { name: 2009 },
+  { name: 2010 },
+  { name: 2011 },
+  { name: 2012 },
+  { name: 2013 },
+  { name: 2014 },
+  { name: 2015 },
+  { name: 2016 },
+  { name: 2017 },
+  { name: 2018 }
+];
+
+const defaultContact = "+375(44)123-45-67 charity@godeltech.com";
+const defaultStreet = "ул.Советская";
+
 function makeAddressList() {
   return regions.map(region => {
     region.districts = districts.filter(
@@ -170,16 +243,76 @@ function makeAddressList() {
   });
 }
 
-function doFakePeople() {
-  const addresses = makeAddressList();
+function getRandomElement(items) {
+  return items[Math.floor(Math.random() * items.length)]["name"];
+}
 
-  
-  return addresses;
+function getRandomAddress() {
+  const randomRegion = addresses[Math.floor(Math.random() * addresses.length)];
+  const randomDistrict =
+    randomRegion.districts[
+      Math.floor(Math.random() * randomRegion.districts.length)
+    ];
+  const randomCity =
+    randomDistrict.cities[
+      Math.floor(Math.random() * randomDistrict.cities.length)
+    ];
+  let randomMicrodistrict = "";
+  if (randomCity.microdistricts) {
+    randomMicrodistrict =
+      randomCity.microdistricts[
+        Math.floor(Math.random() * randomCity.microdistricts.length)
+      ].name;
+  }
+
+  return {
+    region: randomRegion.name,
+    district: randomDistrict.name,
+    city: randomCity.name,
+    microdistrict: randomMicrodistrict,
+    street: defaultStreet
+  };
+}
+
+function getRandomDate(start, end) {
+  const randomDate = new Date(
+    start.getTime() + Math.random() * (end.getTime() - start.getTime())
+  );
+
+  return randomDate.toISOString().toString();
+}
+
+function makeFakePeople(count) {
+  const arrayOfPeople = [];
+
+  for (let i = 0; i < count; i++) {
+    const person = {};
+    person._id = `person${i}`;
+    person.contactPerson = getRandomElement(contactPersons);
+    person.contacts = defaultContact;
+    person.updatedAt = getRandomDate(new Date(2018, 3, 1), new Date());
+    person.createdAt = getRandomDate(
+      new Date(2018, 0, 1),
+      new Date(person.updatedAt)
+    );
+    person.diagnosis = getRandomElement(diagnoses);
+    person.isPublic = true;
+    person.years = getRandomElement(years);
+    person.name = getRandomElement(contactPersons);
+    const randomAddress = getRandomAddress();
+    const personWithAddress = { ...person, ...randomAddress };
+
+    arrayOfPeople.push(personWithAddress);
+  }
+
+  return arrayOfPeople;
+}
+
+function doFakePeople(count = 2) {
+  return makeFakePeople(count);
 }
 
 export function getPeopleList() {
-  const fakePeople = doFakePeople();
-  console.log(fakePeople);
   return http.get(`${server}/api/edulist`, {
     headers: { "Content-Type": "application/json; charset=UTF-8" }
   });
@@ -187,5 +320,8 @@ export function getPeopleList() {
 
 export function getFakePeopleList() {
   const fakePeople = doFakePeople();
-  return people;
+
+  return new Promise((resolve, reject) => {
+    resolve({ data: { persons: fakePeople}});
+  });
 }

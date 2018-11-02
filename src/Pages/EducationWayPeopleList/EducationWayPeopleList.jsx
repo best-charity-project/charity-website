@@ -5,7 +5,7 @@ import EduWayPeopleFilter from "../../Components/EduWayPeopleFilter/EduWayPeople
 import EduWayPeopleControlBar from "../../Components/EduWayPeopleControlBar/EduWayPeopleControlBar";
 import EduWayPeopleTable from "../../Components/EduWayPeopleTable/EduWayPeopleTable";
 import { paginate } from "../../Utils/charityPaginate";
-import { getPeopleList } from "../../Services/EducationWayPeopleService";
+import { getPeopleList, getFakePeopleList } from "../../Services/EducationWayPeopleService";
 import _ from "lodash";
 
 class EducationWayPeopleList extends Component {
@@ -27,7 +27,11 @@ class EducationWayPeopleList extends Component {
   async componentDidMount() {
     const {
       data: { persons: peopleList }
-    } = await getPeopleList();
+    } = await getFakePeopleList();
+
+    peopleList.forEach(person => {
+      person.location = [person.region, person.district, person.city, person.microdistrict, person.street].filter(p => p).join(', ');
+    });
     this.setState({ peopleList, selectedTab: this.state.peopleListTabs[0] });
   }
 

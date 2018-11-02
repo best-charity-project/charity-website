@@ -27,6 +27,7 @@
 .edu-way-people-table .edu-way-people-column.diagnose-column {
   width: 9%;
   align-items: center;
+  text-align: center;
   padding: 0;
 }
 
@@ -49,5 +50,6 @@
 .edu-way-people-table .edu-way-people-column.years-column {
   width: 12%;
   align-items: center;
+  text-align: center;
   padding: 0;
 }

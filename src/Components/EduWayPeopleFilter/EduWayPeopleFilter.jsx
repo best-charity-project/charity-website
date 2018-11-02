@@ -35,17 +35,53 @@ class EduWayPeopleFilter extends CharityForm {
       .allow("")
   };
 
+  makeNewAddress(obj, optionalProperty) {
+      const newObj = { region: { name: obj.region }, district: { name: obj.district }, city: { name: obj.city }, microdistrict: { name: obj.microdistrict }  };
+        const { region, district, city, microdistrict} = newObj;
+      city.microdistricts = [microdistrict];
+      district.cities = [city];
+      region.districts = [district];
+
+      return optionalProperty ? newObj[optionalProperty] : region;
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.data !== prevProps.data) {
       const names = [...new Set(this.props.data.map(obj => obj.name))];
-      const adresses = [...new Set(this.props.data.map(obj => obj.location))];
+
+      const addresses = [];
+
+      this.props.data.forEach(obj => {
+          const indexOfRegion = addresses.findIndex(region => region.name === obj.region);
+
+          if (indexOfRegion === -1) {
+            addresses.push(this.makeNewAddress(obj));
+          } else {
+              const indexOfDistrict = addresses[indexOfRegion].districts.findIndex(district => district.name === obj.district);
+              if (indexOfDistrict === -1) {
+                addresses[indexOfRegion].districts.push(this.makeNewAddress(obj, 'district'));
+              } else {
+                const indexOfCity = addresses[indexOfRegion].districts[indexOfDistrict].cities.findIndex(city => city.name === obj.city);
+                if (indexOfCity === -1) {
+                    addresses[indexOfRegion].districts[indexOfDistrict].cities.push(this.makeNewAddress(obj, 'city'));
+                } else {
+                    const indexOfMicrodistrict = addresses[indexOfRegion].districts[indexOfDistrict].cities[indexOfCity].microdistricts.findIndex(microdistrict => microdistrict.name === obj.microdistrict);
+                    if (indexOfMicrodistrict === -1) {
+                        addresses[indexOfRegion].districts[indexOfDistrict].cities[indexOfCity].microdistricts.push(this.makeNewAddress(obj, 'city'));
+                    }
+                }
+              }
+          }
+      });
+
+    console.log('addresses', addresses)
 
       this.setState({
         names,
-        regions: adresses,
-        districts: adresses,
-        cities: adresses,
-        microdistricts: adresses
+        regions: addresses,
+        districts: addresses,
+        cities: addresses,
+        microdistricts: addresses
       });
     }
   }
