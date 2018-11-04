@@ -131,3 +131,23 @@
     cursor: pointer;
     border-radius: 5px;
 }
+
+.button-user-registration {
+    flex: 1;
+    height: 40px;
+    padding: 5px 10px;
+    border: 0;
+    cursor: pointer;
+    margin: 0 5px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.button-user-registration-done {
+    background-color:#4CAF50;
+}
+
+
+.button-user-registration-cancel {
+    background-color: #DE6461;
+}

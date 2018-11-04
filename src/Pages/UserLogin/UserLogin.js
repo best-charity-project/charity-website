@@ -1,79 +1,213 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, NavLink, Link } from 'react-router-dom';
+import axios from 'axios';
+import ToastrContainer, { ToastDanger } from 'react-toastr-basic'
 
+import { server } from '../../api';
+
+import TextField from '../../Components/TextField/TextField';
 import Button from '../../Components/Button/Button';
 import { signInUser, setToken, getToken } from '../../Components/Admin/Auth';
 import './UserLogin.css';
 
 export default class UserLogin extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password: '',
-        };
-        this.handleLogin = this.handleLogin.bind(this);
-        this.handlePassword = this.handlePassword.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      registrationForm: {
+        email: '',
+        password: '',
+        repeatedPassword: ''
+      },
+      showModalWindow: false
+    };
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitRegistration = this.handleSubmitRegistration.bind(this);
+  }
     // componentDidMount() {
     //     if (getToken() && getToken() !== 'undefined') {
     //         this.props.history.push('/admin-panel/dashboard');
     //     }
     // }
 
-    handleLogin(event) {
+  handleLogin(event) {
+    this.setState({
+      email: event.target.value,
+    });
+  }
+
+  handlePassword(event) {
+    this.setState({
+      password: event.target.value,
+    });
+  }
+
+  onChangeEmail = (str) => {
+    this.setState({
+      registrationForm: {
+        ...this.state.registrationForm,
+        email: str.target.value
+      }
+    })
+  }
+
+  onChangePassword = (str) => {
+    this.setState({
+      registrationForm: {
+        ...this.state.registrationForm,
+        password: str.target.value
+      }
+    })
+  }
+
+  onChangeRepeatedPassword = (str) => {
+    this.setState({
+      registrationForm: {
+        ...this.state.registrationForm,
+        repeatedPassword: str.target.value
+      }
+    })
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    signInUser(this.state)
+      .then(response => {
+        setToken(response.data);
+        this.props.history.goBack();
+      });
+  }
+
+  handleSubmitRegistration = () => {
+    const { registrationForm } = this.state;
+
+    if (registrationForm.password === registrationForm.repeatedPassword) {
+      axios({
+        method: 'post',
+        url: `${ server }/api/user-auth/p`,
+        data: registrationForm,
+        config: { headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        }}
+      }) 
+      .then(res => {
         this.setState({
-            email: event.target.value,
+          showModalWindow: false
         });
-    }
+      })
+    } else this.showToast()
+  }
 
-    handlePassword(event) {
-        this.setState({
-            password: event.target.value,
-        });
-    }
+  showRegistrationModalWindow = () => {
+    this.setState({
+      showModalWindow: true
+    });
+  }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        signInUser(this.state)
-            .then(response => {
-                setToken(response.data);
-                this.props.history.goBack();
-            });
-    }
+  hideAddPointModal = () => {
+    this.setState({
+      showModalWindow: false
+    });
+  } 
 
-    render() {
-        return (
-            <div className="wrapper-user auth-form">
-                <form className="user-form" onSubmit={this.handleSubmit}>
-                    <div className="container-user">
-                        <div className="username-div">
-                            <input
-                                type="text"
-                                placeholder="Enter Username"
-                                name="username"
-                                required
-                                className="username-input"
-                                onChange={this.handleLogin}
-                            />
-                        </div>
+  showToast = () => {
+    ToastDanger('Пароли не совпадают между собой!');
+  }
 
-                        <div className="password-div">
-                            <input
-                                type="password"
-                                placeholder="Enter Password"
-                                name="password"
-                                required
-                                className="password-input"
-                                onChange={this.handlePassword}
-                            />
-                        </div>
-                        <NavLink to={'/user-registration'} className='login-registration-form'>Регистрация</NavLink>
-                        <Button type="submit" name="button-admin-login" label="Войти" />
-                    </div>
-                </form>
+  render() {
+    const { showModalWindow, registrationForm } = this.state;
+
+    return (
+      <div className="wrapper-user auth-form">
+        {
+          showModalWindow ? (
+            <div>
+              <div className="user-registration-overlay" />
+              <div className="user-registration-modal-window">
+                <div className="modal-window-head" onClick={this.hideAddPointModal}>
+                  <a className="close-icon"/>
+                </div>
+                <div className="modal-window-body">
+                  <input
+                    type="text"
+                    placeholder="Введите e-mail"
+                    name="registration-email"
+                    required
+                    className="registration-email"
+                    onChange={this.onChangeEmail}
+                  />
+                  <input
+                    type="password"
+                    placeholder="Введите пароль"
+                    name="registration-password"
+                    required
+                    className="registration-password"
+                    onChange={this.onChangePassword}
+                  />
+                  <input
+                    type="password"
+                    placeholder="Введите повторно пароль"
+                    name="registration-repeated-password"
+                    required
+                    className="registration-repeated-password"
+                    onChange={this.onChangeRepeatedPassword}
+                  />
+                  <div className="registration-button-container">
+                    <Button
+                      name = "button-user-registration button-user-registration-cancel" 
+                      label = 'Отменить' 
+                      clickHandler = {this.hideAddPointModal}
+                    />
+                    <Button
+                      name = "button-user-registration button-user-registration-done" 
+                      label = 'Подтвердить' 
+                      clickHandler = {this.handleSubmitRegistration}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-        );
-    }
+          ) 
+          : null
+        }    
+        <ToastrContainer />    
+        <form className="user-form" onSubmit={this.handleSubmit}>
+          <div className="container-user">
+            <div className="username-div">
+              <input
+                type="text"
+                placeholder="Введите e-mail"
+                name="username"
+                required
+                className="username-input"
+                onChange={this.handleLogin}
+              />
+            </div>
+
+            <div className="password-div">
+              <input
+                type="password"
+                placeholder="Введите пароль"
+                name="password"
+                required
+                className="password-input"
+                onChange={this.handlePassword}
+              />
+            </div>
+            {/* <NavLink to={'/user-registration'} className='login-registration-form'>Регистрация</NavLink> */}          
+            <Button type="submit" name="button-admin-login" label="Войти" />
+            <div className="login-registration-form">
+              <label>Нет аккаунта?</label>
+              <input className="login-registration-button" type="button" value="Регистрация" onClick={this.showRegistrationModalWindow} />
+            </div>
+          </div>
+        </form>
+      </div>
+    );
+  }
 }
