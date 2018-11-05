@@ -1,7 +1,7 @@
 import React from "react";
 import "./CharityInput.css";
 
-const CharityInput = ({ name, label, isSelect, options, error, ...rest }) => {
+const CharityInput = ({ name, label, isSelect, options, disabled, error, ...rest }) => {
   return (
     <div className="charity-input-container">
       <label className="charity-label" htmlFor={name}>
@@ -11,11 +11,11 @@ const CharityInput = ({ name, label, isSelect, options, error, ...rest }) => {
         <input {...rest} name={name} id={name} className="charity-input" />
       )}
       {isSelect && (
-        <select name={name} id={name} {...rest} className="charity-input">
+        <select name={name} id={name} disabled={disabled} {...rest} className="charity-input">
           <option value="" />
           {options.map((option, index) => (
-            <option key={index} value={index}>
-              {option}
+            <option key={index} value={option.name || ''}>
+              {option.name}
             </option>
           ))}
         </select>

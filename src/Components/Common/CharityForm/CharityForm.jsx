@@ -54,8 +54,9 @@ class CharityForm extends Component {
     }
 
     const data = { ...this.state.data };
+
     data[input.name] = input.value;
-    this.setState({ data, errors });
+    this.setState({ data, errors }, () => this.handleSelect(input.name));
   };
 
   renderButton(label) {
@@ -80,7 +81,7 @@ class CharityForm extends Component {
     );
   }
 
-  renderSelect(name, label, options) {
+  renderSelect(name, label, options, disabled) {
     const { data, errors } = this.state;
     return (
       <CharityInput
@@ -88,6 +89,7 @@ class CharityForm extends Component {
         value={data[name]}
         label={label}
         options={options}
+        disabled={disabled}
         isSelect={true}
         onChange={this.handleChange}
         error={errors[name]}

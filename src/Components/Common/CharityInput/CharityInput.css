@@ -29,6 +29,7 @@
   border: 1px solid var(--edu-way-input-border-color);
   border-radius: 3px;
   background-color: var(--edu-way-input-bgrd-color);
+  outline: none;
 }
 
 .charity-input-container .charity-alert {

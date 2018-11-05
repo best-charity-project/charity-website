@@ -308,7 +308,7 @@ function makeFakePeople(count) {
   return arrayOfPeople;
 }
 
-function doFakePeople(count = 2) {
+function doFakePeople(count = 100) {
   return makeFakePeople(count);
 }
 
