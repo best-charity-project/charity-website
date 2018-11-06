@@ -10,7 +10,9 @@ import _ from "lodash";
 
 class EducationWayPeopleList extends Component {
   state = {
-    peopleList: [],
+    initialPeopleList: [],
+    searchedPeopleList: [],
+    filterFormIsSubmitted: false,
     selectedTab: null,
     peopleListTabs: [
       { _id: "allTab", name: "Все" },
@@ -26,13 +28,13 @@ class EducationWayPeopleList extends Component {
 
   async componentDidMount() {
     const {
-      data: { persons: peopleList }
+      data: { persons: initialPeopleList }
     } = await getFakePeopleList();
 
-    peopleList.forEach(person => {
+    initialPeopleList.forEach(person => {
       person.location = [person.region, person.district, person.city, person.microdistrict, person.street].filter(p => p).join(', ');
     });
-    this.setState({ peopleList, selectedTab: this.state.peopleListTabs[0] });
+    this.setState({ initialPeopleList, selectedTab: this.state.peopleListTabs[0] });
   }
 
   sortByNewRequests(peopleList) {
@@ -48,12 +50,15 @@ class EducationWayPeopleList extends Component {
     this.setState({ selectedTab: tab, currentPage: 1 });
   };
 
-  handleFilterSubmit = filteredData => {
-    console.log("handleFilterSubmit", filteredData);
+  handleFilterSubmit = searchedPeopleList => {
+    console.log("handleFilterSubmit", searchedPeopleList);
+    this.setState({ searchedPeopleList, selectedTab: this.state.peopleListTabs[0], filterFormIsSubmitted: true });
   };
 
   getPagedData = () => {
-    const { peopleList, currentPage, pageSize, selectedTab } = this.state;
+    const { initialPeopleList, searchedPeopleList, filterFormIsSubmitted, currentPage, pageSize, selectedTab } = this.state;
+
+    const peopleList = filterFormIsSubmitted ? searchedPeopleList : initialPeopleList;
 
     const sortedData =
       selectedTab && selectedTab._id && selectedTab.handleFunction
@@ -67,7 +72,7 @@ class EducationWayPeopleList extends Component {
 
   render() {
     const {
-      peopleList,
+      initialPeopleList,
       currentPage,
       pageSize,
       peopleListTabs,
@@ -80,7 +85,7 @@ class EducationWayPeopleList extends Component {
         <Menu name="client-menu" />
         <div className="edu-people-list-page">
           <EduWayPeopleFilter
-            data={peopleList}
+            data={initialPeopleList}
             onSubmit={this.handleFilterSubmit}
           />
           <div className="column">

@@ -21,12 +21,6 @@ class EduWayPeopleFilter extends CharityForm {
     errors: {}
   };
 
-  addressPropLinkToNext = {
-    region: "districts",
-    district: "cities",
-    city: "microdistricts"
-  };
-
   schema = {
     diagnose: Joi.string().allow(""),
     name: Joi.string().allow(""),
@@ -56,63 +50,85 @@ class EduWayPeopleFilter extends CharityForm {
     return optionalProperty ? newObj[optionalProperty] : region;
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.data !== prevProps.data) {
-      const names = [
-        ...new Set(this.props.data.map(obj => ({ name: obj.name })))
-      ];
+  getIndexOfLocationType(tempDataList, locationData) {
+    return tempDataList.findIndex(tempData => tempData.name === locationData);
+  }
 
-      const addresses = [];
-
-      this.props.data.forEach(obj => {
-        const indexOfRegion = addresses.findIndex(
-          region => region.name === obj.region
-        );
-
-        if (indexOfRegion === -1) {
-          addresses.push(this.makeNewAddress(obj));
-        } else {
-          const indexOfDistrict = addresses[indexOfRegion].districts.findIndex(
-            district => district.name === obj.district
-          );
-          if (indexOfDistrict === -1) {
-            addresses[indexOfRegion].districts.push(
-              this.makeNewAddress(obj, "district")
-            );
-          } else {
-            const indexOfCity = addresses[indexOfRegion].districts[
-              indexOfDistrict
-            ].cities.findIndex(city => city.name === obj.city);
-            if (indexOfCity === -1) {
-              addresses[indexOfRegion].districts[indexOfDistrict].cities.push(
-                this.makeNewAddress(obj, "city")
-              );
-            } else {
-              const indexOfMicrodistrict = addresses[indexOfRegion].districts[
-                indexOfDistrict
-              ].cities[indexOfCity].microdistricts.findIndex(
-                microdistrict => microdistrict.name === obj.microdistrict
-              );
-              if (indexOfMicrodistrict === -1 && obj.microdistrict) {
-                addresses[indexOfRegion].districts[indexOfDistrict].cities[
-                  indexOfCity
-                ].microdistricts.push(this.makeNewAddress(obj, "microdistrict"));
-              }
-            }
-          }
-        }
-      });
-
-      this.setState({
-        names,
-        regions: addresses,
-        districts: [],
-        cities: [],
-        microdistricts: []
-      });
+  blapow(array, obj, initialIndex, proplist, propsList) {
+    const type = obj[proplist[initialIndex]];
+    const currentIndex = this.getIndexOfLocationType(array, type);
+    if (currentIndex === -1) {
+      array.push(this.makeNewAddress(obj, proplist[initialIndex]));
+    } else {
+      const aa =  array[currentIndex];
+      const bb = aa[proplist[initialIndex+1]];
+      const nextArray = bb;
+      this.blapow(nextArray, obj, initialIndex+1, proplist);
     }
   }
 
+  getAddressesByLocationType() {
+    const addresses = [];
+    const locationTypes = ['region', 'district', 'city', 'microdistrict'];
+    const locationTypess = ['regions', 'districts', 'cities', 'microdistricts'];
+    this.props.data.forEach(obj => {
+      // const { region, district, city, microdistrict } = obj;
+
+      this.blapow(addresses, obj, 0, locationTypes, locationTypess);
+
+      // const indexOfRegion = this.getIndexOfLocationType(addresses, region);
+
+      // if (indexOfRegion === -1) {
+      //   addresses.push(this.makeNewAddress(obj));
+      // } else {
+      //   const districts = addresses[indexOfRegion].districts;
+      //   const indexOfDistrict = this.getIndexOfLocationType(
+      //     districts,
+      //     district
+      //   );
+
+      //   if (indexOfDistrict === -1) {
+      //     districts.push(this.makeNewAddress(obj, "district"));
+      //   } else {
+      //     const cities = districts[indexOfDistrict].cities;
+      //     const indexOfCity = this.getIndexOfLocationType(cities, city);
+
+      //     if (indexOfCity === -1) {
+      //       cities.push(this.makeNewAddress(obj, "city"));
+      //     } else {
+      //       const microdistricts = cities[indexOfCity].microdistricts;
+      //       const indexOfMicrodistrict = this.getIndexOfLocationType(
+      //         microdistricts,
+      //         microdistrict
+      //       );
+
+      //       if (indexOfMicrodistrict === -1 && obj.microdistrict) {
+      //         microdistricts.push(this.makeNewAddress(obj, "microdistrict"));
+      //       }
+      //     }
+      //   }
+      // }
+    });
+
+    debugger;
+
+    return addresses;
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.data === prevProps.data) {
+      return;
+    }
+
+    const names = [...new Set(this.props.data.map(obj => obj.contactPerson))]
+      .sort()
+      .map(name => ({ name }));
+
+    this.setState({
+      names,
+      regions: this.getAddressesByLocationType()
+    });
+  }
 
   rerender = () => {
     const { regions, data } = this.state;
@@ -139,30 +155,36 @@ class EduWayPeopleFilter extends CharityForm {
           );
 
           if (searchedCity.microdistricts.length) {
-            console.log(searchedCity.microdistricts)
+            console.log(searchedCity.microdistricts);
             this.setState({ microdistricts: searchedCity.microdistricts });
           }
         }
       }
     }
-  }
+  };
 
   handleSelect = propName => {
     const { data } = this.state;
-    const tempData = {...data};
-    if (propName === 'region') {
-      tempData.district = '';
-      tempData.city = '';
-      tempData.microdistrict = '';
-      this.setState({data: tempData, districts: [], cities: [], microdistricts: []}, this.rerender);
-    } else if (propName === 'district') {
-      tempData.city = '';
-      tempData.microdistrict = '';
-      this.setState({data: tempData, cities: [], microdistricts: []}, this.rerender);
-    } else if (propName === 'city') {
-      tempData.microdistrict = '';
+    const tempData = { ...data };
+    if (propName === "region") {
+      tempData.district = "";
+      tempData.city = "";
+      tempData.microdistrict = "";
+      this.setState(
+        { data: tempData, districts: [], cities: [], microdistricts: [] },
+        this.rerender
+      );
+    } else if (propName === "district") {
+      tempData.city = "";
+      tempData.microdistrict = "";
+      this.setState(
+        { data: tempData, cities: [], microdistricts: [] },
+        this.rerender
+      );
+    } else if (propName === "city") {
+      tempData.microdistrict = "";
 
-      this.setState({data: tempData, microdistricts: []}, this.rerender);
+      this.setState({ data: tempData, microdistricts: [] }, this.rerender);
     } else {
       this.rerender();
     }
@@ -181,16 +203,16 @@ class EduWayPeopleFilter extends CharityForm {
       }
     } = this.state;
     const { data: peopleList } = this.props;
-    const location = [region, district, city, microdistrict]
-      .filter(p => p)
-      .join(",");
 
     const result = peopleList.filter((value, index) => {
       return (
         value.diagnosis.includes(diagnosis) &&
-        value.name.includes(name) &&
-        value.location.includes(location) &&
-        value.years.includes(years)
+        value.contactPerson.includes(name) &&
+        value.region.includes(region) &&
+        value.district.includes(district) &&
+        value.city.includes(city) &&
+        value.microdistrict.includes(microdistrict) &&
+        value.years.toString().includes(years)
       );
     });
 
