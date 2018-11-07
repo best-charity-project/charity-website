@@ -1,0 +1,29 @@
+.edulist-registration-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.edulist-registration-container {
+    padding-top: 40px;
+}
+
+.edulist-registration-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.edulist-registration-form > input {
+    margin-left: 0;
+}
+
+.place-type-select-edulist {
+    margin: 10px 0;
+    width: 100%;
+}
+
+.edulist-registration-button {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}

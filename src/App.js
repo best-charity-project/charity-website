@@ -28,6 +28,7 @@ import PrivateRoute from '../src/Components/Admin/Auth/PrivateRoute';
 // import { getToken } from './Components/Admin/Auth';
 import AdminEduWay from './Components/Admin/AdminEduWay/AdminEduWay';
 import EduWayPeoples from './Components/Admin/EduWayPeople/EduWayPeoples';
+import EduListRegistration from './Pages/EducationWayPeopleList/EduListRegistration/EduListRegistration';
 
 class App extends Component {
   render() {
@@ -43,6 +44,7 @@ class App extends Component {
             <Route path="/events/map" component={EventsMap} />
             <Route path="/education-way" component={EducationWay} />
             <PrivateRoute protectLink='/user-login' path="/education-way-people-list" component={EducationWayPeopleList} />
+            <PrivateRoute protectLink='/user-login' path="/education-way-people-list-registration" component={EduListRegistration} />
             <PrivateRoute path="/admin-panel" component={AdminMain} exact />
             <PrivateRoute path="/admin-panel/dashboard" component={AdminMain} />
             <PrivateRoute path="/admin-panel/events" component={AdminEvents} exact />

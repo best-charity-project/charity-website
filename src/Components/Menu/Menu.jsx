@@ -56,7 +56,7 @@ class Menu extends Component {
         url: '/contacts',
       },
     ],
-    // username: '',
+    // email: '',
     isUserAuth: false,
   };
 
@@ -73,7 +73,7 @@ class Menu extends Component {
   };
 
   render() {
-    const { /* username, */ isUserAuth } = this.state;
+    const { /* email, */ isUserAuth } = this.state;
 
     return (
       <div className="menu-wrapper">
@@ -81,7 +81,11 @@ class Menu extends Component {
           <Logo client="true" />
           <MenuLinks list={this.state.links} className="menu-links-client" />
           <div className="user-name">
-            {isUserAuth ? <a onClick={e => this.logOut()}>Выйти</a> : <NavLink to={'/user-login'}>Войти</NavLink>}
+            {
+              isUserAuth ?
+                <a onClick={e => this.logOut()}>Выйти</a>
+              : <NavLink to={'/user-login'}>Войти</NavLink>
+            }
           </div>
         </div>
       </div>

@@ -15,9 +15,9 @@ class MenuLinks extends Component {
         <ul>
           {this.state.list.map(function(el, index) {
             if (el.child) {
-              return <li class="dropdown">
-                <button class="dropbtn">{el.name}</button>
-                <ul class="dropdown-content">
+              return <li className="dropdown" key={index}>
+                <button className="dropbtn">{el.name}</button>
+                <ul className="dropdown-content">
                   {el.child.map(function(el, index) {
                     const images = require.context('../../Assets/AssetsSvg', true);
                     return (

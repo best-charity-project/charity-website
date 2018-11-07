@@ -28,11 +28,6 @@ export default class UserLogin extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitRegistration = this.handleSubmitRegistration.bind(this);
   }
-    // componentDidMount() {
-    //     if (getToken() && getToken() !== 'undefined') {
-    //         this.props.history.push('/admin-panel/dashboard');
-    //     }
-    // }
 
   handleLogin(event) {
     this.setState({
@@ -78,8 +73,11 @@ export default class UserLogin extends React.Component {
     signInUser(this.state)
       .then(response => {
         setToken(response.data);
-        this.props.history.goBack();
-      });
+        this.props.history.length === 0 ?
+          this.props.history.push('/')
+        : this.props.history.goBack();
+      })
+      .catch(err => console.log(err));
   }
 
   handleSubmitRegistration = () => {
