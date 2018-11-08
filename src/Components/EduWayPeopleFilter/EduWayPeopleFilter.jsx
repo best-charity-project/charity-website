@@ -18,6 +18,7 @@ class EduWayPeopleFilter extends CharityForm {
     districts: [],
     cities: [],
     microdistricts: [],
+    yearList: [],
     errors: {}
   };
 
@@ -34,6 +35,39 @@ class EduWayPeopleFilter extends CharityForm {
       .max(2018)
       .allow("")
   };
+
+  ageLimit = 18;
+
+  componentDidUpdate(prevProps) {
+    if (this.props.data === prevProps.data) {
+      return;
+    }
+
+    const names = [...new Set(this.props.data.map(obj => obj.contactPerson))]
+      .sort()
+      .map(name => ({ name }));
+
+    const yearList = this.genearateYearList();
+
+    this.setState({
+      names,
+      regions: this.getAddressesByLocationType(),
+      yearList
+    });
+  }
+
+  genearateYearList(startYear) {
+    const currentYear = new Date().getFullYear();
+    const defaultStartYear = new Date().getFullYear() - this.ageLimit;
+    const years = [];
+    startYear = startYear || defaultStartYear;
+
+    while (startYear <= currentYear) {
+      years.push({ name: startYear++ });
+    }
+
+    return years;
+  }
 
   makeNewAddress(obj, optionalProperty) {
     const newObj = {
@@ -54,80 +88,52 @@ class EduWayPeopleFilter extends CharityForm {
     return tempDataList.findIndex(tempData => tempData.name === locationData);
   }
 
-  blapow(array, obj, initialIndex, proplist, propsList) {
-    const type = obj[proplist[initialIndex]];
+  structureLocationData(
+    array,
+    obj,
+    initialIndex,
+    locationTypeNames,
+    locationTypeListNames
+  ) {
+    const type = obj[locationTypeNames[initialIndex]];
+    if (!type) return;
+
     const currentIndex = this.getIndexOfLocationType(array, type);
     if (currentIndex === -1) {
-      array.push(this.makeNewAddress(obj, proplist[initialIndex]));
+      array.push(this.makeNewAddress(obj, locationTypeNames[initialIndex]));
     } else {
-      const aa =  array[currentIndex];
-      const bb = aa[proplist[initialIndex+1]];
-      const nextArray = bb;
-      this.blapow(nextArray, obj, initialIndex+1, proplist);
+      const nextArray =
+        array[currentIndex][locationTypeListNames[initialIndex + 1]];
+      this.structureLocationData(
+        nextArray,
+        obj,
+        initialIndex + 1,
+        locationTypeNames,
+        locationTypeListNames
+      );
     }
   }
 
   getAddressesByLocationType() {
     const addresses = [];
-    const locationTypes = ['region', 'district', 'city', 'microdistrict'];
-    const locationTypess = ['regions', 'districts', 'cities', 'microdistricts'];
+    const locationTypeNames = ["region", "district", "city", "microdistrict"];
+    const locationTypeListNames = [
+      "regions",
+      "districts",
+      "cities",
+      "microdistricts"
+    ];
     this.props.data.forEach(obj => {
-      // const { region, district, city, microdistrict } = obj;
-
-      this.blapow(addresses, obj, 0, locationTypes, locationTypess);
-
-      // const indexOfRegion = this.getIndexOfLocationType(addresses, region);
-
-      // if (indexOfRegion === -1) {
-      //   addresses.push(this.makeNewAddress(obj));
-      // } else {
-      //   const districts = addresses[indexOfRegion].districts;
-      //   const indexOfDistrict = this.getIndexOfLocationType(
-      //     districts,
-      //     district
-      //   );
-
-      //   if (indexOfDistrict === -1) {
-      //     districts.push(this.makeNewAddress(obj, "district"));
-      //   } else {
-      //     const cities = districts[indexOfDistrict].cities;
-      //     const indexOfCity = this.getIndexOfLocationType(cities, city);
-
-      //     if (indexOfCity === -1) {
-      //       cities.push(this.makeNewAddress(obj, "city"));
-      //     } else {
-      //       const microdistricts = cities[indexOfCity].microdistricts;
-      //       const indexOfMicrodistrict = this.getIndexOfLocationType(
-      //         microdistricts,
-      //         microdistrict
-      //       );
-
-      //       if (indexOfMicrodistrict === -1 && obj.microdistrict) {
-      //         microdistricts.push(this.makeNewAddress(obj, "microdistrict"));
-      //       }
-      //     }
-      //   }
-      // }
+      this.structureLocationData(
+        addresses,
+        obj,
+        0,
+        locationTypeNames,
+        locationTypeListNames
+      );
     });
-
-    debugger;
 
     return addresses;
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.data === prevProps.data) {
-      return;
-    }
-
-    const names = [...new Set(this.props.data.map(obj => obj.contactPerson))]
-      .sort()
-      .map(name => ({ name }));
-
-    this.setState({
-      names,
-      regions: this.getAddressesByLocationType()
-    });
   }
 
   rerender = () => {
@@ -226,6 +232,7 @@ class EduWayPeopleFilter extends CharityForm {
       districts,
       cities,
       microdistricts,
+      yearList,
       data
     } = this.state;
 
@@ -242,7 +249,7 @@ class EduWayPeopleFilter extends CharityForm {
           microdistricts,
           !data.city || !microdistricts.length
         )}
-        {this.renderInput("years", "Годы поступления")}
+        {this.renderSelect("years", "Годы поступления", yearList)}
 
         {this.renderButton("Подобрать")}
       </form>

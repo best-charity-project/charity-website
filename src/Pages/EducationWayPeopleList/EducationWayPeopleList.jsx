@@ -51,7 +51,6 @@ class EducationWayPeopleList extends Component {
   };
 
   handleFilterSubmit = searchedPeopleList => {
-    console.log("handleFilterSubmit", searchedPeopleList);
     this.setState({ searchedPeopleList, selectedTab: this.state.peopleListTabs[0], filterFormIsSubmitted: true });
   };
 
