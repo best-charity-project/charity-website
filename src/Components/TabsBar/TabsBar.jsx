@@ -9,12 +9,14 @@ class TabsBar extends Component {
       tabList,
       textProperty,
       keyProperty,
-      selectedTab
+      selectedTab,
+      disabled
     } = this.props;
     return (
       <div className={className + " tabs-bar"}>
         {tabList.map(tab => (
           <button
+            disabled={disabled}
             className={
               tab === selectedTab
                 ? "tabs-bar-btn btn-all active"

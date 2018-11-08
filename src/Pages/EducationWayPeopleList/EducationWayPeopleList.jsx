@@ -5,7 +5,10 @@ import EduWayPeopleFilter from "../../Components/EduWayPeopleFilter/EduWayPeople
 import EduWayPeopleControlBar from "../../Components/EduWayPeopleControlBar/EduWayPeopleControlBar";
 import EduWayPeopleTable from "../../Components/EduWayPeopleTable/EduWayPeopleTable";
 import { paginate } from "../../Utils/charityPaginate";
-import { getPeopleList, getFakePeopleList } from "../../Services/EducationWayPeopleService";
+import {
+  getPeopleList,
+  getFakePeopleList
+} from "../../Services/EducationWayPeopleService";
 import _ from "lodash";
 
 class EducationWayPeopleList extends Component {
@@ -32,9 +35,20 @@ class EducationWayPeopleList extends Component {
     } = await getFakePeopleList();
 
     initialPeopleList.forEach(person => {
-      person.location = [person.region, person.district, person.city, person.microdistrict, person.street].filter(p => p).join(', ');
+      person.location = [
+        person.region,
+        person.district,
+        person.city,
+        person.microdistrict,
+        person.street
+      ]
+        .filter(p => p)
+        .join(", ");
     });
-    this.setState({ initialPeopleList, selectedTab: this.state.peopleListTabs[0] });
+    this.setState({
+      initialPeopleList,
+      selectedTab: this.state.peopleListTabs[0]
+    });
   }
 
   sortByNewRequests(peopleList) {
@@ -51,13 +65,27 @@ class EducationWayPeopleList extends Component {
   };
 
   handleFilterSubmit = searchedPeopleList => {
-    this.setState({ searchedPeopleList, selectedTab: this.state.peopleListTabs[0], filterFormIsSubmitted: true });
+    this.setState({
+      searchedPeopleList,
+      selectedTab: this.state.peopleListTabs[0],
+      currentPage: 1,
+      filterFormIsSubmitted: true
+    });
   };
 
   getPagedData = () => {
-    const { initialPeopleList, searchedPeopleList, filterFormIsSubmitted, currentPage, pageSize, selectedTab } = this.state;
+    const {
+      initialPeopleList,
+      searchedPeopleList,
+      filterFormIsSubmitted,
+      currentPage,
+      pageSize,
+      selectedTab
+    } = this.state;
 
-    const peopleList = filterFormIsSubmitted ? searchedPeopleList : initialPeopleList;
+    const peopleList = filterFormIsSubmitted
+      ? searchedPeopleList
+      : initialPeopleList;
 
     const sortedData =
       selectedTab && selectedTab._id && selectedTab.handleFunction

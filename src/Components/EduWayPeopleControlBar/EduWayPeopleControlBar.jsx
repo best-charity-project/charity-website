@@ -19,6 +19,7 @@ const EduWayPeopleControlBar = ({
         tabList={tabList}
         onTabSelect={onTabSelect}
         selectedTab={selectedTab}
+        disabled={itemsCount === 0}
       />
       {itemsCount > 0 && (
         <CharityPagination

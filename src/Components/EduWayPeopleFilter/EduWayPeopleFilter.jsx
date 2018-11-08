@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./EduWayPeopleFilter.css";
 import CharityForm from "./../Common/CharityForm/CharityForm";
 import Joi from "joi-browser";
@@ -31,34 +31,29 @@ class EduWayPeopleFilter extends CharityForm {
     microdistrict: Joi.string().allow(""),
     years: Joi.number()
       .integer()
-      .min(1900)
-      .max(2018)
       .allow("")
   };
 
-  ageLimit = 18;
+  locationTypeNames = ["region", "district", "city", "microdistrict"];
+  locationTypeListNames = ["regions", "districts", "cities", "microdistricts"];
 
   componentDidUpdate(prevProps) {
     if (this.props.data === prevProps.data) {
       return;
     }
 
-    const names = [...new Set(this.props.data.map(obj => obj.contactPerson))]
-      .sort()
-      .map(name => ({ name }));
-
-    const yearList = this.genearateYearList();
-
     this.setState({
-      names,
+      names: [...new Set(this.props.data.map(obj => obj.contactPerson))]
+        .sort()
+        .map(name => ({ name })),
       regions: this.getAddressesByLocationType(),
-      yearList
+      yearList: this.genearateYearList()
     });
   }
 
-  genearateYearList(startYear) {
+  genearateYearList(startYear, ageLimit = 18) {
     const currentYear = new Date().getFullYear();
-    const defaultStartYear = new Date().getFullYear() - this.ageLimit;
+    const defaultStartYear = currentYear - ageLimit;
     const years = [];
     startYear = startYear || defaultStartYear;
 
@@ -88,115 +83,98 @@ class EduWayPeopleFilter extends CharityForm {
     return tempDataList.findIndex(tempData => tempData.name === locationData);
   }
 
-  structureLocationData(
-    array,
-    obj,
-    initialIndex,
-    locationTypeNames,
-    locationTypeListNames
-  ) {
-    const type = obj[locationTypeNames[initialIndex]];
+  structureLocationData(locationList, personData, initialIndex = 0) {
+    const type = personData[this.locationTypeNames[initialIndex]];
     if (!type) return;
 
-    const currentIndex = this.getIndexOfLocationType(array, type);
+    const currentIndex = this.getIndexOfLocationType(locationList, type);
+
     if (currentIndex === -1) {
-      array.push(this.makeNewAddress(obj, locationTypeNames[initialIndex]));
-    } else {
-      const nextArray =
-        array[currentIndex][locationTypeListNames[initialIndex + 1]];
-      this.structureLocationData(
-        nextArray,
-        obj,
-        initialIndex + 1,
-        locationTypeNames,
-        locationTypeListNames
+      locationList.push(
+        this.makeNewAddress(personData, this.locationTypeNames[initialIndex])
       );
+    } else {
+      const nextIndex = initialIndex + 1;
+      const nextLocationList =
+        locationList[currentIndex][this.locationTypeListNames[nextIndex]];
+
+      this.structureLocationData(nextLocationList, personData, nextIndex);
     }
   }
 
   getAddressesByLocationType() {
     const addresses = [];
-    const locationTypeNames = ["region", "district", "city", "microdistrict"];
-    const locationTypeListNames = [
-      "regions",
-      "districts",
-      "cities",
-      "microdistricts"
-    ];
+
     this.props.data.forEach(obj => {
-      this.structureLocationData(
-        addresses,
-        obj,
-        0,
-        locationTypeNames,
-        locationTypeListNames
-      );
+      this.structureLocationData(addresses, obj);
     });
 
     return addresses;
   }
 
-  rerender = () => {
-    const { regions, data } = this.state;
+  rerenderSelectData(
+    locationData = this.state.regions,
+    indexOfLocationType = 0
+  ) {
+    const { data } = this.state;
+    const indexOfLocationTypeList = indexOfLocationType + 1;
 
-    if (data.region) {
-      const searchedRegion = regions.find(
-        region => region.name === data.region
+    const locationTypeName = this.locationTypeNames[indexOfLocationType];
+    const locationTypeListName = this.locationTypeListNames[
+      indexOfLocationTypeList
+    ];
+    if (!data[locationTypeName]) return;
+
+    const searchedLocation = locationData.find(
+      location => location.name === data[locationTypeName]
+    );
+    if (locationTypeListName && searchedLocation[locationTypeListName].length) {
+      this.setState({
+        [locationTypeListName]: searchedLocation[locationTypeListName]
+      });
+      this.rerenderSelectData(
+        searchedLocation[locationTypeListName],
+        indexOfLocationTypeList
       );
-      if (searchedRegion.districts.length) {
-        this.setState({ districts: searchedRegion.districts });
-      }
-      if (data.district) {
-        const searchedDistrict = searchedRegion.districts.find(
-          district => district.name === data.district
-        );
-
-        if (searchedDistrict.cities.length) {
-          this.setState({ cities: searchedDistrict.cities });
-        }
-
-        if (data.city) {
-          const searchedCity = searchedDistrict.cities.find(
-            city => city.name === data.city
-          );
-
-          if (searchedCity.microdistricts.length) {
-            console.log(searchedCity.microdistricts);
-            this.setState({ microdistricts: searchedCity.microdistricts });
-          }
-        }
-      }
     }
-  };
+  }
 
-  handleSelect = propName => {
+  updateLocationData(currentLocationNameIndex) {
     const { data } = this.state;
     const tempData = { ...data };
-    if (propName === "region") {
-      tempData.district = "";
-      tempData.city = "";
-      tempData.microdistrict = "";
-      this.setState(
-        { data: tempData, districts: [], cities: [], microdistricts: [] },
-        this.rerender
-      );
-    } else if (propName === "district") {
-      tempData.city = "";
-      tempData.microdistrict = "";
-      this.setState(
-        { data: tempData, cities: [], microdistricts: [] },
-        this.rerender
-      );
-    } else if (propName === "city") {
-      tempData.microdistrict = "";
+    const tempClearedLocationData = {};
 
-      this.setState({ data: tempData, microdistricts: [] }, this.rerender);
-    } else {
-      this.rerender();
+    for (
+      let i = currentLocationNameIndex + 1;
+      i < this.locationTypeNames.length;
+      i++
+    ) {
+      const tempLocationName = this.locationTypeNames[i];
+      const tempLocationListName = this.locationTypeListNames[i];
+      tempData[tempLocationName] = "";
+      tempClearedLocationData[tempLocationListName] = [];
     }
-  };
 
-  doSubmit = () => {
+    this.setState(
+      { data: tempData, ...tempClearedLocationData },
+      this.rerenderSelectData
+    );
+  }
+
+  handleSelect(propName) {
+    const currentLocationNameIndex = this.locationTypeNames.indexOf(propName);
+
+    if (
+      currentLocationNameIndex === this.locationTypeNames.length - 1 ||
+      currentLocationNameIndex === -1
+    ) {
+      this.rerenderSelectData();
+    } else {
+      this.updateLocationData(currentLocationNameIndex);
+    }
+  }
+
+  doSubmit() {
     const {
       data: {
         diagnose: diagnosis,
@@ -212,7 +190,7 @@ class EduWayPeopleFilter extends CharityForm {
 
     const result = peopleList.filter((value, index) => {
       return (
-        value.diagnosis.includes(diagnosis) &&
+        value.diagnosis.toLowerCase().includes(diagnosis.toLowerCase()) &&
         value.contactPerson.includes(name) &&
         value.region.includes(region) &&
         value.district.includes(district) &&
@@ -223,7 +201,7 @@ class EduWayPeopleFilter extends CharityForm {
     });
 
     this.props.onSubmit(result);
-  };
+  }
 
   render() {
     const {

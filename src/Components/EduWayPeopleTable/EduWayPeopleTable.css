@@ -25,26 +25,22 @@
 }
 
 .edu-way-people-table .edu-way-people-column.diagnose-column {
-  width: 9%;
+  width: 15%;
   align-items: center;
   text-align: center;
   padding: 0;
 }
 
-.edu-way-people-table .edu-way-people-column.name-of-child-column {
-  width: 11%;
-}
-
 .edu-way-people-table .edu-way-people-column.contact-person-column {
-  width: 20%;
+  width: 15%;
 }
 
 .edu-way-people-table .edu-way-people-column.contacts-column {
-  width: 24%;
+  width: 28%;
 }
 
 .edu-way-people-table .edu-way-people-column.address-column {
-  width: 24%;
+  width: 30%;
 }
 
 .edu-way-people-table .edu-way-people-column.years-column {

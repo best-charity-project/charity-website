@@ -24,7 +24,24 @@
   color: white;
   background-color: #459369;
   border: none;
+  cursor: pointer;
+  outline: none;
 }
+
+.charity-pagination .charity-pagination-btn.btn-arrow:active {
+  width: 30.1px;
+  height: 30px;
+  position: relative;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+  background-color: #4fa376;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
 
 .charity-pagination-btn.btn-arrow .arrow-wrapper {
   position: absolute;
