@@ -49,3 +49,27 @@
   text-align: center;
   padding: 0;
 }
+
+.edu-way-people-add {
+  display: flex;
+  font-size: 16px;
+  height: 37px;
+  min-width: 85.4px;
+  margin: 0 0 20px auto;
+  padding: 0 15px;
+  color: white;
+  background-color: #459369;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.edu-way-people-add:active {
+  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+  background-color: #4fa376;
+}
+
+.edu-way-people-add a {
+  color: inherit;
+  text-decoration: none;
+}

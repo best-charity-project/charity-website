@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./EduWayPeopleTable.css";
 import CharityTable from "../Common/CharityTable/CharityTable";
 import CharityNotFoundData from "../Common/CharityNotFoundData/CharityNotFoundData";
+import { Link } from 'react-router-dom';
 
 class EduWayPeopleTable extends Component {
   columns = [
@@ -31,10 +32,13 @@ class EduWayPeopleTable extends Component {
       label: "Годы (поступления)"
     }
   ];
+
+  linkToRegistrationCurrentUser = '/education-way-people-list-registration';
   render() {
     const { peopleList } = this.props;
     return (
       <React.Fragment>
+        <button className="edu-way-people-add"><Link to={this.linkToRegistrationCurrentUser}>Добавиться в список</Link></button>
         {peopleList.length ? (
           <CharityTable
             tableClassName="edu-way-people-table"
