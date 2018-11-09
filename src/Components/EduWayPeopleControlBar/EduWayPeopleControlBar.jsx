@@ -1,43 +1,37 @@
-import React, { Component } from "react";
+import React from "react";
 import "./EduWayPeopleControlBar.css";
+import CharityPagination from "../Common/CharityPagination/CharityPagination";
+import TabsBar from "../TabsBar/TabsBar";
 
-class EduWayPeopleControlBar extends Component {
-  render() {
-    const { countOfPages, onGoBackPage, onGoNextPage } = this.props;
-    return (
-      <div className="edu-way-people-bar">
-        <div className="edu-way-bar-column">
-          <button className="edu-way-bar-btn btn-all">Все</button>
-          <button className="edu-way-bar-btn btn-new">Новые запросы</button>
-        </div>
-        <div className="edu-way-bar-column second">
-          <div className="edu-way-bar-row">
-            <span className="edu-way-bar-text">
-              Вы находитесь на <span>1</span> странице из {countOfPages}
-            </span>
-          </div>
-          <div className="edu-way-bar-row">
-            <button
-              className="edu-way-bar-btn btn-arrow edu-way-bar-btn-left"
-              onClick={onGoBackPage}
-            >
-              <div className="arrow-wrapper">
-                <div className="arrow-divider" />
-              </div>
-            </button>
-            <button
-              className="edu-way-bar-btn btn-arrow edu-way-bar-btn-right"
-              onClick={onGoNextPage}
-            >
-              <div className="arrow-wrapper">
-                <div className="arrow-divider" />
-              </div>
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+const EduWayPeopleControlBar = ({
+  itemsCount,
+  pageSize,
+  onPageChange,
+  currentPage,
+  onTabSelect,
+  tabList,
+  selectedTab
+}) => {
+  return (
+    <div className="edu-way-people-bar">
+      <TabsBar
+        className="edu-way-bar-column"
+        tabList={tabList}
+        onTabSelect={onTabSelect}
+        selectedTab={selectedTab}
+        disabled={itemsCount === 0}
+      />
+      {itemsCount > 0 && (
+        <CharityPagination
+          className="edu-way-bar-column second"
+          itemsCount={itemsCount}
+          currentPage={currentPage}
+          pageSize={pageSize}
+          onPageChange={onPageChange}
+        />
+      )}
+    </div>
+  );
+};
 
 export default EduWayPeopleControlBar;

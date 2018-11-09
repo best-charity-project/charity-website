@@ -1,0 +1,74 @@
+.charity-pagination {
+}
+
+.charity-pagination .charity-pagination-row {
+  display: flex;
+  align-items: center;
+}
+
+.charity-pagination .charity-pagination-row .charity-pagination-text {
+  color: #9b9b9b;
+  margin-right: 16px;
+}
+
+.charity-pagination .charity-pagination-row .charity-pagination-text span {
+  color: #3b3f48;
+}
+
+.charity-pagination .charity-pagination-btn.btn-arrow {
+  width: 30.1px;
+  height: 30px;
+  position: relative;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  background-color: #459369;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.charity-pagination .charity-pagination-btn.btn-arrow:active {
+  width: 30.1px;
+  height: 30px;
+  position: relative;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+  background-color: #4fa376;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+
+.charity-pagination-btn.btn-arrow .arrow-wrapper {
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.charity-pagination-btn.btn-arrow .arrow-divider {
+  height: 9px;
+  width: 9px;
+  transform: rotate(-45deg);
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+  margin-right: 5px;
+}
+
+.charity-pagination-btn.charity-pagination-btn-left {
+  border-right: 1px solid rgba(255, 255, 255, 0.39) !important;
+}
+
+.charity-pagination-btn.charity-pagination-btn-left .arrow-divider {
+  margin-left: 5px;
+  margin-right: 0;
+  transform: rotate(135deg);
+}

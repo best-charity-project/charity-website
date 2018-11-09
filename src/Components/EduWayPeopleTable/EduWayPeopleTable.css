@@ -1,16 +1,10 @@
 .edu-way-people-table {
-  display: flex;
-  flex-direction: column;
   border-radius: 3px;
   background-color: white;
 }
 
 .edu-way-people-table .edu-way-people-row {
-  display: flex;
-  flex-direction: row;
   height: 55px;
-  font-size: 12px;
-  font-weight: 500;
 }
 
 .edu-way-people-table .edu-way-people-row:not(:last-of-type) {
@@ -18,16 +12,11 @@
 }
 
 .edu-way-people-table .edu-way-people-row.edu-way-header {
-  font-size: 14px;
-  font-weight: 600;
   color: #9b9b9b;
   background-color: #f7f7f7;
 }
 
 .edu-way-people-table .edu-way-people-column {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   padding-left: 13px;
 }
 
@@ -36,29 +25,51 @@
 }
 
 .edu-way-people-table .edu-way-people-column.diagnose-column {
-  width: 9%;
+  width: 15%;
   align-items: center;
+  text-align: center;
   padding: 0;
 }
 
-.edu-way-people-table .edu-way-people-column.name-of-child-column {
-  width: 11%;
-}
-
 .edu-way-people-table .edu-way-people-column.contact-person-column {
-  width: 20%;
+  width: 15%;
 }
 
 .edu-way-people-table .edu-way-people-column.contacts-column {
-  width: 24%;
+  width: 28%;
 }
 
 .edu-way-people-table .edu-way-people-column.address-column {
-  width: 24%;
+  width: 30%;
 }
 
 .edu-way-people-table .edu-way-people-column.years-column {
   width: 12%;
   align-items: center;
+  text-align: center;
   padding: 0;
+}
+
+.edu-way-people-add {
+  display: flex;
+  font-size: 16px;
+  height: 37px;
+  min-width: 85.4px;
+  margin: 0 0 20px auto;
+  padding: 0 15px;
+  color: white;
+  background-color: #459369;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.edu-way-people-add:active {
+  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+  background-color: #4fa376;
+}
+
+.edu-way-people-add a {
+  color: inherit;
+  text-decoration: none;
 }
