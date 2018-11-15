@@ -44,9 +44,9 @@ class App extends Component {
           <Switch>
             <PublicLayout path="/" component={Home} exact />
             <PublicLayout path="/projects" component={Projects} />
-            <PublicLayout path="/user-login" component={UserLogin} />
-            <PublicLayout path="/user-registration" component={UserRegistration} />
-            <PublicLayout path="/login" component={Admin} />
+            <Route path="/user-login" component={UserLogin} />
+            <Route path="/user-registration" component={UserRegistration} />
+            <Route path="/login" component={Admin} />
             <PublicLayout path="/events" component={Events} exact />
             <PublicLayout path="/events/map" component={EventsMap} />
             <PublicLayout path="/education-way" component={EducationWay} />
