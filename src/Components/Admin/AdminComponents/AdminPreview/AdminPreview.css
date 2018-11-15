@@ -52,11 +52,6 @@
     margin-left: 250px;
     margin-right: 30px;
 }
-.admin-preview-news .full-news-footer {
-    padding-left: 25px;
-    position:fixed;
-    bottom: 0;
-}
 .admin-preview-news .full-news-menu-container {
     position: fixed;
     overlow-y: scroll;

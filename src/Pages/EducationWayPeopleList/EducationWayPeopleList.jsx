@@ -108,25 +108,22 @@ class EducationWayPeopleList extends Component {
     const { totalCount, data: currentPeopleList } = this.getPagedData();
 
     return (
-      <div className="main-page-client">
-        <Menu name="client-menu" />
-        <div className="edu-people-list-page">
-          <EduWayPeopleFilter
-            data={initialPeopleList}
-            onSubmit={this.handleFilterSubmit}
+      <div className="edu-people-list-page">
+        <EduWayPeopleFilter
+          data={initialPeopleList}
+          onSubmit={this.handleFilterSubmit}
+        />
+        <div className="column">
+          <EduWayPeopleControlBar
+            tabList={peopleListTabs}
+            selectedTab={selectedTab}
+            onTabSelect={this.handleTabSelect}
+            itemsCount={totalCount}
+            currentPage={currentPage}
+            pageSize={pageSize}
+            onPageChange={this.handlePageChange}
           />
-          <div className="column">
-            <EduWayPeopleControlBar
-              tabList={peopleListTabs}
-              selectedTab={selectedTab}
-              onTabSelect={this.handleTabSelect}
-              itemsCount={totalCount}
-              currentPage={currentPage}
-              pageSize={pageSize}
-              onPageChange={this.handlePageChange}
-            />
-            <EduWayPeopleTable peopleList={currentPeopleList} />
-          </div>
+          <EduWayPeopleTable peopleList={currentPeopleList} />
         </div>
       </div>
     );

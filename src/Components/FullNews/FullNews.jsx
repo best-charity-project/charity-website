@@ -22,7 +22,6 @@ class FullNews extends Component {
         return (
             <div className = 'client-news'>
                 <div className = 'full-news-container'>
-                    <Menu name = 'full-news-menu'/>
                     <div className = 'aside-and-text-full-news'>
                         <div className = 'aside-full-news'>
                             <p><NavLink to = '/news'> Новости </NavLink></p>    
@@ -45,7 +44,6 @@ class FullNews extends Component {
                         </div>): null }
                         </div>
                     </div>
-                    <Footer name = 'full-news-footer'/>
                 </div>
             </div>
         ) 

@@ -61,11 +61,10 @@ class Projects extends Component {
 
     render() {
         return (
-            <div className="main-page-client">
-                <Menu name="client-menu" />
+            <React.Fragment>
                 {this.state.currentDisplayedProject && this.state.currentDisplayedProject.name ? 
                     <Project content={this.state.currentDisplayedProject} />
-                 : 
+                : 
                     <p>Для текущего фильтра проектов нет </p> 
                 }
                 {this.state.filters ? (
@@ -75,8 +74,7 @@ class Projects extends Component {
                     <SliderPreviousBtn disabled={this.state.isFirstProject} previousProject={this.previousProject} />
                     <SliderNextBtn disabled={this.state.isLastProject} nextProject={this.nextProject} />
                 </div>
-                <Footer />
-            </div>
+            </React.Fragment>
         );
     }
 

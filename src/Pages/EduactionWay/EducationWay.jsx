@@ -184,8 +184,6 @@ class App extends Component {
 
   render() {
     return (
-      <div className="main-page-client">
-      <Menu name="client-menu" />
       <div className="app">
         <ul className="app__sidebar">
           <li><input className="add-marker-btn" type="button" value="+" onClick={this.showAddPointModal} /></li>
@@ -264,7 +262,6 @@ class App extends Component {
             </div>
           </div>
         ) : null}
-      </div>
       </div>
     );
   }

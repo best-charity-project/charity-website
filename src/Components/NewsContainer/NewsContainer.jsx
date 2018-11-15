@@ -52,13 +52,11 @@ filterArray = (value) =>{
   render() {
     return (
       <div className = 'news-container'> 
-        <Menu name = 'client-menu'/>
         <NewsListAndAside 
           array = {this.state.filterArray} 
           filters = {this.state.filters} 
           getNewFilter = {this.getFilteredNews}
         />
-        <Footer name = ' footer footer-news'/>
       </div>
     );
   }
