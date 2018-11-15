@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, NavLink, Link } from 'react-router-dom';
 import axios from 'axios';
 
-import { signInUser, setToken, getToken } from '../../Components/Admin/Auth';
 import {server} from '../../api';
 
 import TextField from '../../Components/TextField/TextField';
 import Button from '../../Components/Button/Button';
 import './UserRegistration.css';
 
-export default class UserRegistration extends React.Component {
+export default class UserRegistration extends Component {
     constructor(props) {
         super(props);
         this.state = {

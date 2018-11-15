@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './TextField.css';
-import Error from "../ErrorEmail/ErrorEmail";
 import '../ErrorEmail/ErrorEmail.css';
 
 class TextField extends Component {

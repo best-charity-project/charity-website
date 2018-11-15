@@ -4,19 +4,16 @@ import axios from 'axios';
 import _ from 'lodash';
 import moment from 'moment';
 import AdminDatePicker from '../AdminDatePicker/AdminDatePicker';
-import Navigation from '../../../Navigation/Navigation';
-import NavBar from '../../../NavBar/NavBar';
 import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
-import EventModal from '../../../EventModal/EventModal';
 import './AdminCreateEvent.css';
 import {server} from '../../../../api';
 import Editor from  "../AdminEditor/AdminEditor";
 import AdminSelectSearch from '../AdminSelectSearch/AdminSelectSearch';
 import jsonpAdapter from 'axios-jsonp';
-import vkIcon from '../../../../Assets/AssetsSvg/vk_icon.svg';
+// import vkIcon from '../../../../Assets/AssetsSvg/vk_icon.svg';
 
-class AdminCreateEvent extends Component { 
+class AdminCreateEvent extends Component {
     state = {
         title: '',
         place:'',
@@ -35,8 +32,8 @@ class AdminCreateEvent extends Component {
         filter:'',
         getInputTimeEnd : false,
         deletedImages: [],
-        idVK: '', 
-        socialNetworksModal: false 
+        idVK: '',
+        socialNetworksModal: false
     }
     componentDidMount (){
         this.getFiltersList();
@@ -48,7 +45,7 @@ class AdminCreateEvent extends Component {
                 participation,
                 linkParticipation,
                 organizers,
-                speaker,
+                // speaker,
                 speakersArray,
                 contactPerson,
                 contactPhone,
@@ -81,73 +78,73 @@ class AdminCreateEvent extends Component {
                })
         }
     }
-    
+
     render() {
         return(
-            <React.Fragment> 
+            <React.Fragment>
                 <div className = 'admin-create-event'>
                     <div className = 'admin-event-title'>
-                        <TextField 
+                        <TextField
                             label = 'Название события'
                             value = {this.state.title}
-                            id = "title" 
-                            type = 'text' 
-                            name = 'title' 
+                            id = "title"
+                            type = 'text'
+                            name = 'title'
                             onChangeValue = {this.getValue}
                         />
                     </div>
                     <div className = 'admin-event-place'>
-                        <TextField 
+                        <TextField
                             label = 'Место проведения'
                             value = {this.state.place}
-                            type = 'text' 
-                            name = 'place' 
-                            onChangeValue = {this.getPlace}                            
+                            type = 'text'
+                            name = 'place'
+                            onChangeValue = {this.getPlace}
                         />
                     </div>
                     <div className = 'date-start-event'>
-                        <AdminDatePicker 
-                            date = {this.state.dateStart} 
-                            onSelectDate = {this.getStartDate} 
+                        <AdminDatePicker
+                            date = {this.state.dateStart}
+                            onSelectDate = {this.getStartDate}
                             label = 'Дата начала '
                             dateFormat = {true}
                         />
                         <div>
-                            {this.state.getInputTimeEnd || this.state.timeEnd ? 
-                                <AdminDatePicker 
-                                    date = {!this.state.timeEnd ? this.state.dateStart:this.state.timeEnd } 
-                                    onSelectDate = {this.getEndDate} 
+                            {this.state.getInputTimeEnd || this.state.timeEnd ?
+                                <AdminDatePicker
+                                    date = {!this.state.timeEnd ? this.state.dateStart:this.state.timeEnd }
+                                    onSelectDate = {this.getEndDate}
                                     dateFormat = {false}
-                                /> : 
-                                <Button 
-                                    name = "button-admin button-admin-background" 
-                                    label = 'Время окончания' 
+                                /> :
+                                <Button
+                                    name = "button-admin button-admin-background"
+                                    label = 'Время окончания'
                                     clickHandler = {this.getInputTimeEnd}
                                 />
                             }
                         </div>
-                    </div>                                  
+                    </div>
                     <div className = 'admin-event-tickets'>
-                        <TextField 
+                        <TextField
                             label = 'Билеты'
                             value = {this.state.participation}
-                            type = 'text' 
-                            name = 'tickets' 
+                            type = 'text'
+                            name = 'tickets'
                             onChangeValue = {this.getParticipation}
                         />
                     </div>
                     <div className = 'event-link-participation'>
-                        <TextField 
+                        <TextField
                             label = 'Ссылка на регистрацию/покупку билетов'
                             value = {this.state.linkParticipation}
-                            type = 'url' 
-                            name = 'linkTickets' 
+                            type = 'url'
+                            name = 'linkTickets'
                             onChangeValue = {this.getLinkParticipation}
                         />
                     </div>
                     <div className = 'admin-event-organizers'>
                         <p> Введите организаторов </p>
-                        <textarea                             
+                        <textarea
                             value= {this.state.organizers}
                             onChange = {this.getOrganizers}
                             placeholder = 'Введите организаторов'
@@ -155,102 +152,102 @@ class AdminCreateEvent extends Component {
                     </div>
                     <div>
                         <div className = 'speakers-button-event'>
-                            <TextField 
+                            <TextField
                                 label = 'Докладчики : '
                                 value = {this.state.speaker}
-                                type = 'text' 
-                                name = 'speakers' 
+                                type = 'text'
+                                name = 'speakers'
                                 onChangeValue = {this.getSpeaker}
                             />
-                            <Button 
-                                name = "button-admin button-admin-background" 
-                                label = 'Добавить' 
+                            <Button
+                                name = "button-admin button-admin-background"
+                                label = 'Добавить'
                                 clickHandler = {this.addSpeakers}
                             />
                         </div>
-                        <div className = 'speakers-list-event'> 
+                        <div className = 'speakers-list-event'>
                             <ul>
                                 {this.state.speakersArray ?
-                                    this.state.speakersArray.map((el,index) => {
+                                    this.state.speakersArray.map((el,index) => (
                                         <li key = {index}>
                                             <span> {el} </span>
-                                            <Button 
-                                                name = "event-delete-button" 
-                                                label = '&#215;' 
+                                            <Button
+                                                name = "event-delete-button"
+                                                label = '&#215;'
                                                 clickHandler = {(e)=> this.deleteSpeaker(e,index)}
                                             />
                                         </li>
-                                    })
+                                    ))
                                     :null
                                 }
                             </ul>
                         </div>
                     </div>
                     <div className = 'admin-event-contact-person'>
-                        <TextField 
+                        <TextField
                             label = 'Введите контактное лицо: '
                             value = {this.state.contactPerson}
-                            type = 'text' 
-                            name = 'contactPerson' 
+                            type = 'text'
+                            name = 'contactPerson'
                             onChangeValue = {this.getContactPerson}
                         />
                     </div>
                     <div className = 'admin-event-contact-phone'>
-                        <TextField 
+                        <TextField
                             label = 'Введите контактный телефон: '
                             value = {this.state.contactPhone}
-                            type = 'text' 
-                            name = 'contactPhone' 
+                            type = 'text'
+                            name = 'contactPhone'
                             onChangeValue = {this.getContactPhone}
-                        /> 
+                        />
                     </div>
                     <div className = 'admin-event-organization'>
-                        <TextField 
+                        <TextField
                             label = 'Введите организацию : '
                             value = {this.state.organization}
-                            type = 'text' 
-                            name = 'organization' 
+                            type = 'text'
+                            name = 'organization'
                             onChangeValue = {this.getOrganization}
                         />
                     </div>
                     <div className = 'admin-event-website'>
-                        <TextField 
+                        <TextField
                             label = 'Введите адресс сайта : '
                             value = {this.state.website}
-                            type = 'url' 
-                            name = 'website' 
+                            type = 'url'
+                            name = 'website'
                             onChangeValue = {this.getWebsite}
                         />
                     </div>
-                    <Editor 
-                        initialEditorState = {this.state.textEditorState} 
+                    <Editor
+                        initialEditorState = {this.state.textEditorState}
                         onEditorStateChange = {this.onEditorStateChange}
                         getDeletedImages = {this.getDeletedImages}
                     />
                     <div className = 'select-wrapper-event'>
-                        {this.state.filters ? 
-                            <AdminSelectSearch 
+                        {this.state.filters ?
+                            <AdminSelectSearch
                                 value = {this.state.filter}
                                 filtersList = {this.state.filters}
                                 getFilter = {this.getFilter}
-                            /> 
+                            />
                             :null
-                        }                              
+                        }
                     </div>
-                    <div className="change-state-buttons">  
-                        <Button 
-                            name = "button-admin button-admin-background" 
-                            label = {this.props.location.state ? 'Обновить': 'Сохранить'} 
+                    <div className="change-state-buttons">
+                        <Button
+                            name = "button-admin button-admin-background"
+                            label = {this.props.location.state ? 'Обновить': 'Сохранить'}
                             clickHandler = {this.saveEvent}
                         />
-                        <Button 
-                            name = "button-admin button-admin-background" 
-                            label = 'Отменить' 
+                        <Button
+                            name = "button-admin button-admin-background"
+                            label = 'Отменить'
                             clickHandler = {this.onCancel}
-                        /> 
-                    </div> 
-                    <div 
-                        className={(this.state.socialNetworksModal &&!this.props.location.state) ? 'overlay' : 'overlay hidden'} 
+                        />
+                    </div>
+                    <div
+                        className={(this.state.socialNetworksModal &&!this.props.location.state) ? 'overlay' : 'overlay hidden'}
                     >
                         <div className="modal-event-field modal-social-event">
                             <div>
@@ -261,19 +258,19 @@ class AdminCreateEvent extends Component {
                                 </ul>
                             </div>
                             <div className = 'button-wrapper-event-modal'>
-                                <Button 
-                                    name = "button-admin button-admin-background" 
-                                    label = 'Поделиться' 
+                                <Button
+                                    name = "button-admin button-admin-background"
+                                    label = 'Поделиться'
                                     clickHandler = {this.publish}
                                 />
-                                <Button 
-                                    name = "button-admin button-admin-background" 
-                                    label = 'Нет, спасибо' 
+                                <Button
+                                    name = "button-admin button-admin-background"
+                                    label = 'Нет, спасибо'
                                     clickHandler = {this.closeModalWindow}
                                 />
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </React.Fragment>
         )
@@ -305,12 +302,12 @@ class AdminCreateEvent extends Component {
         if(this.props.location.state){
             this.updatePostVk();
             this.sendEvent();
-            
+
         }else{
             this.setState({socialNetworksModal: true});
         }
     }
-    sendEvent = (idVK) => {        
+    sendEvent = (idVK) => {
         let id = ''
         if (this.props.location.state) {
             id = this.props.location.state.detail._id;
@@ -330,7 +327,7 @@ class AdminCreateEvent extends Component {
         .then(response => {
             this.props.history.push({
                 pathname: '/admin-panel/events'
-            })  
+            })
         })
         .catch(function (error) {
             console.log(error);
@@ -360,7 +357,7 @@ class AdminCreateEvent extends Component {
     addSpeakers = () => {
         let {speakersArray, speaker} = this.state;
         speakersArray.push(speaker);
-        this.setState({speakersArray:speakersArray, speaker:''});        
+        this.setState({speakersArray:speakersArray, speaker:''});
     }
     deleteSpeaker = (e,index) => {
        let {speakersArray} = this.state;
@@ -379,7 +376,7 @@ class AdminCreateEvent extends Component {
     getWebsite = (str) => {
         this.setState({website : str});
     }
-    getFiltersList = () => {  
+    getFiltersList = () => {
         axios({
             method: 'get',
             url: `${ server }/api/filters`,
@@ -395,7 +392,7 @@ class AdminCreateEvent extends Component {
                 filters:filtersEvents,
             })
         })
-     
+
       }
     getInputTimeEnd = () => {
         this.setState({getInputTimeEnd : true});
@@ -403,12 +400,12 @@ class AdminCreateEvent extends Component {
     publish = () => {
        let vkIcon = document.querySelector('.vkontakte-social-network');
        if(vkIcon.classList.contains('active-social-networks')){
-        this.publishVk();        
+        this.publishVk();
        };
     };
     getTextofPost = () => {
         let title = `${this.state.title}%0A`;
-        let place = this.state.place ? `Место: ${this.state.place}%0A` : '';        
+        let place = this.state.place ? `Место: ${this.state.place}%0A` : '';
         let time = this.state.dateStart?this.state.timeEnd ? `Время: ${moment(this.state.dateStart).format("D MMMM YYYY, H : mm")}-${moment(this.state.timeEnd).format(" H : mm")}%0A` : `Время: ${moment(this.state.dateStart).format("D MMMM YYYY, H : mm")}%0A`:'';
         let participation = this.state.participation ? `Участие: ${this.state.participation}%0A` : '';
         let linkParticipation = this.state.linkParticipation ? this.state.participation.match(/[0-9]/)? `Купить билет: ${this.state.linkParticipation}%0A`: `Зарегистрироваться: ${this.state.linkParticipation}%0A`:'';
@@ -428,7 +425,7 @@ class AdminCreateEvent extends Component {
         axios({
             method: 'get',
             adapter: jsonpAdapter,
-            url: `https://api.vk.com/method/wall.edit?owner_id=${id}&post_id=${this.state.idVK}&message=${text}&access_token=${token}&v=5.80`            
+            url: `https://api.vk.com/method/wall.edit?owner_id=${id}&post_id=${this.state.idVK}&message=${text}&access_token=${token}&v=5.80`
         })
     };
     publishVk = () => {
@@ -438,10 +435,10 @@ class AdminCreateEvent extends Component {
         axios({
             method: 'post',
             adapter: jsonpAdapter,
-            url: `https://api.vk.com/method/wall.post?owner_id=${id}&from_group=0&message=${text}&access_token=${token}&v=5.80`            
-        })        
+            url: `https://api.vk.com/method/wall.post?owner_id=${id}&from_group=0&message=${text}&access_token=${token}&v=5.80`
+        })
         .then(res =>{
-            this.sendEvent(res.data.response.post_id)                   
+            this.sendEvent(res.data.response.post_id)
         })
     }
     closeModalWindow = () => {
@@ -449,6 +446,6 @@ class AdminCreateEvent extends Component {
         this.setState({
             socialNetworksModal: false
         });
-    } 
+    }
 }
 export default AdminCreateEvent;

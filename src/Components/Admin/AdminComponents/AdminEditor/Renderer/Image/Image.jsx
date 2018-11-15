@@ -11,7 +11,7 @@ class Image extends Component {
     render() {
         const { block, contentState } = this.props;
         const entity = contentState.getEntity(block.getEntityAt(0));
-        const { src, alignment, height, width, alt } = entity.getData();
+        const { src, height, width, alt } = entity.getData();
         return (
             <div className="rdw-image-imagewrapper">
                 <img

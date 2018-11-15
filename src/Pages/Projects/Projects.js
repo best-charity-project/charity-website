@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { server } from '../../api';
 import axios from 'axios';
 import _ from 'lodash';
-import Footer from '../../Components/Footer/Footer';
-import Menu from '../../Components/Menu/Menu';
 import '../Home/MainPage.css';
 import '../Projects/Projects.css';
 import Project from '../../Components/Project/Project';

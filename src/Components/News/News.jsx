@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import '../News/News.css';
 import moment from 'moment';
 import {NavLink} from "react-router-dom";
-import FullNews from '../FullNews/FullNews';
 import EventModal from '../EventModal/EventModal';
 import {Editor, EditorState, convertFromRaw} from 'draft-js';
 
@@ -31,7 +30,7 @@ class News extends Component {
         };        
     };
     render() {
-        moment.lang('ru');
+        moment.locale('ru');
         return (
             <div id = {this.props.id} className = 'news' onClick = {this.Click}>
                 {(!this.props.event)?(
@@ -42,7 +41,7 @@ class News extends Component {
                             {this.props.img?
                                 <img 
                                     src = {`http://localhost:3001/images/${this.props.img}`} 
-                                    alt = 'image for news' />: 
+                                    alt = 'news' />: 
                                 null}
                             <p className = 'news-title'>
                                 {this.props.name} 

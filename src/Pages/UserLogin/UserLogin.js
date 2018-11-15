@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import Button from '../../Components/Button/Button';
-import { signInUser, setToken, getToken } from '../../Components/Admin/Auth';
+import { signInUser, setToken } from '../../Components/Admin/Auth';
 import './UserLogin.css';
 
-export default class UserLogin extends React.Component {
+export default class UserLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {

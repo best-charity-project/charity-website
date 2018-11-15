@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import {BrowserRouter , Route , Switch, Redirect } from "react-router-dom";
+import React from 'react';
+import { Route , Redirect } from "react-router-dom";
 import { getToken } from "../Auth";
 
 const PrivateRoute = ({ component: Component,protectLink, ...rest }) => {

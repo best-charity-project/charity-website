@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import "./EducationWayPeopleList.css";
-import Menu from "../../Components/Menu/Menu";
 import EduWayPeopleFilter from "../../Components/EduWayPeopleFilter/EduWayPeopleFilter";
 import EduWayPeopleControlBar from "../../Components/EduWayPeopleControlBar/EduWayPeopleControlBar";
 import EduWayPeopleTable from "../../Components/EduWayPeopleTable/EduWayPeopleTable";
 import { paginate } from "../../Utils/charityPaginate";
 import {
-  getPeopleList,
+  // getPeopleList,
   getFakePeopleList
 } from "../../Services/EducationWayPeopleService";
 import _ from "lodash";

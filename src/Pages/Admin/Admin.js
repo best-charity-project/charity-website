@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, NavLink, Link } from 'react-router-dom';
 
 import Button from '../../Components/Button/Button';
 import { signInAdmin, setToken, getToken } from '../../Components/Admin/Auth';
 import './Admin.css';
 
-export default class Admin extends React.Component {
+export default class Admin extends Component {
     constructor(props) {
         super(props);
         this.state = {

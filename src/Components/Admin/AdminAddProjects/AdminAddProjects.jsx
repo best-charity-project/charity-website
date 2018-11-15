@@ -8,8 +8,6 @@ import { ToastDanger } from "react-toastr-basic";
 
 import TextField from "../../TextField/TextField";
 import AdminUploadImage from "../AdminComponents/AdminUploadImage/AdminUploadImage";
-import NavBar from "../../NavBar/NavBar";
-import Navigation from "../../Navigation/Navigation";
 import ControlledEditor from "../AdminComponents/AdminEditor/AdminEditor";
 import Button from "../../Button/Button";
 import AdminProjectPreview from "../AdminComponents/AdminProjectPreview/AdminProjectPreview";
@@ -472,7 +470,7 @@ class AdminAddProjects extends Component {
   };
   deleteHead = (e, index) => {
     let headArray = this.state.headArray;
-    let deletedHead = headArray.splice(index, 1);
+    // let deletedHead = headArray.splice(index, 1);
     this.setState({
       headArray: headArray
     });
@@ -501,7 +499,7 @@ class AdminAddProjects extends Component {
   deleteContact = (e, index) => {
     e.preventDefault();
     let contactsArray = this.state.contactsArray;
-    let deletedContacts = contactsArray.splice(index, 1);
+    // let deletedContacts = contactsArray.splice(index, 1);
     this.setState({
       contactsArray: contactsArray
     });
@@ -569,6 +567,7 @@ class AdminAddProjects extends Component {
     let mediaVideoArray = this.state.mediaVideoArray;
     if (
       this.state.mediaVideo &&
+      // eslint-disable-next-line no-useless-escape
       /^(https?:\/\/)?([\da-zа-я\.-]+)\.([a-zа-я\.]{2,6})\/([\w\/\-\.]+)([\?].*)?$/gim.test(
         this.state.mediaVideo
       ) &&
@@ -587,15 +586,15 @@ class AdminAddProjects extends Component {
       });
     }
   };
+
   onKeyPress = e => {
-    e.charCode === 13 && this.isCorrectArrayLimit()
-      ? this.addMediaVideo(e)
-      : null;
+    if (e.charCode === 13 && this.isCorrectArrayLimit()) this.addMediaVideo(e);
   };
+
   deleteGalleryVideo = (e, index) => {
     e.preventDefault();
     let mediaVideoArray = this.state.mediaVideoArray;
-    let deletedVideo = mediaVideoArray.splice(index, 1);
+    // let deletedVideo = mediaVideoArray.splice(index, 1);
     this.setState({
       mediaVideoArray: mediaVideoArray
     });
@@ -609,9 +608,7 @@ class AdminAddProjects extends Component {
     this.setState({ fullTextEditorState: editorState });
   };
   getFilter = str => {
-    {
-      str.length > 0 ? this.setState({ filter: str }) : null;
-    }
+    if (str.length) this.setState({ filter: str })
   };
   onCropImage = image => {
     this.setState({ imageData: image });
@@ -636,6 +633,7 @@ class AdminAddProjects extends Component {
   };
   onCorrectSite = () => {
     if (
+      // eslint-disable-next-line no-useless-escape
       /^((https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\W\.-]*)*\/?)?$/.test(
         this.state.site
       )
