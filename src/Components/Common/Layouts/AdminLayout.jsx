@@ -7,7 +7,7 @@ const AdminLayout = ({ component: Component, ...rest }) => {
   return (
     <PrivateRoute
       {...rest}
-      render={matchProps => (
+      component={matchProps => (
         <div className="admin-content">
           <Navigation onLogout={this.onLogout} />
           <Component {...matchProps} />
