@@ -84,9 +84,7 @@ class AdminCreateEvent extends Component {
     
     render() {
         return(
-            <div className="admin-content"> 
-                <Navigation onLogout={this.onLogout}/>
-                <NavBar />
+            <React.Fragment> 
                 <div className = 'admin-create-event'>
                     <div className = 'admin-event-title'>
                         <TextField 
@@ -277,7 +275,7 @@ class AdminCreateEvent extends Component {
                         </div>
                     </div> 
                 </div>
-            </div>
+            </React.Fragment>
         )
     }
     getActiveSocialNetworks = (e) => {

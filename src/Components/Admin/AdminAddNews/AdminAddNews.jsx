@@ -61,9 +61,7 @@ class AdminAddNews extends Component {
     }
     render() {
         return (
-            <div className="admin-content">
-                <Navigation onLogout={this.onLogout} />
-                <NavBar />
+            <React.Fragment>
                 {!this.state.isPreview ? 
                     <div className = "create-news">
                         <div className = "news-status">
@@ -217,7 +215,7 @@ class AdminAddNews extends Component {
                         isPublic = {this.state.isPublic}
                     />                    
                 }
-            </div>
+            </React.Fragment>
         )
     }
     onCropImage = (image) => {
