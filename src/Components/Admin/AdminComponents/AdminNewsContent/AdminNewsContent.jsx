@@ -153,10 +153,13 @@ class AdminNewsContent extends Component {
         for (let i = 0; i < this.state.checkedIds.length; i++) {
             let arrayIds = this.state.checkedIds;
             let b = _.filter(newsState , (news) => {
-                if(news._id === arrayIds[i]){
+                if (news._id === arrayIds[i]) {
                     this.deletePostVK(news);
-                } 
-            });            
+                    return true;
+                }
+            });
+
+            deletionsNews.push(b);
         };
     };
     findNews = (title) => {

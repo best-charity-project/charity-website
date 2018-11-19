@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import Button from '../Button/Button';
 import AdminNewsSearch from '../Admin/AdminComponents/AdminNewsSearch/AdminNewsSearch';
-import rubbishImg from '../../Assets/AssetsSvg/mbri-trash.svg';
+
 class MarkersList extends Component {
   state = {
     markers: [],
@@ -40,9 +40,12 @@ class MarkersList extends Component {
       .then(response => {
         let updatedMarker = response.data;
         let index = _.findIndex(this.state.markers, function(marker) {
-          return marker._id == updatedMarker._id;
+          return marker._id === updatedMarker._id;
         });
-        this.state.markers[index].isPublic = updatedMarker.isPublic;
+        const markers = [...this.state.markers];
+        markers[index].isPublic = updatedMarker.isPublic;
+
+        this.setState({markers})
         this.forceUpdate();
       })
       .catch(function(error) {
@@ -59,7 +62,7 @@ class MarkersList extends Component {
         let deletedMarker = response.data;
         var array = [...this.state.markers];
         let index = _.findIndex(this.state.markers, function(marker) {
-          return marker._id == deletedMarker._id;
+          return marker._id === deletedMarker._id;
         });
         array.splice(index, 1);
         this.setState({ markers: array });

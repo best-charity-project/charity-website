@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './Pages/Home/MainPage';
 import Contacts from './Pages/Contacts/Contacts';
@@ -25,42 +25,47 @@ import AdminAddProjects from './Components/Admin/AdminAddProjects/AdminAddProjec
 import AdminFiltersBlock from './Components/Admin/AdminFiltersBlock/AdminFiltersBlock';
 import AdminForumBlock from './Components/Admin/AdminForumBlock/AdminForumBlock';
 // import { fakeAuth } from './Components/Admin/Auth/PrivateRoute';
-import PrivateRoute from '../src/Components/Admin/Auth/PrivateRoute';
 // import { getToken } from './Components/Admin/Auth';
 import AdminEduWay from './Components/Admin/AdminEduWay/AdminEduWay';
 import EduWayPeoples from './Components/Admin/EduWayPeople/EduWayPeoples';
+import { PublicLayout, PrivateLayout } from './Components/Common/Layouts/MainLayout';
+import AdminLayout from './Components/Common/Layouts/AdminLayout';
 
 class App extends Component {
+
+  renderWithLayout(Layout, Component) {
+    return <Layout><Component /></Layout>;
+  }
+
   render() {
     return (
       <BrowserRouter>
         <div className="container-main">
           <Switch>
-            <Route path="/" component={Home} exact />
-            <Route path="/projects" component={Projects} />
+            <PublicLayout path="/" component={Home} exact />
+            <PublicLayout path="/projects" component={Projects} />
             <Route path="/user-login" component={UserLogin} />
             <Route path="/user-registration" component={UserRegistration} />
             <Route path="/login" component={Admin} />
-            <Route path="/events" component={Events} exact />
-            <Route path="/events/map" component={EventsMap} />
-            <Route path="/education-way" component={EducationWay} />
-            <PrivateRoute protectLink='/user-auth' path="/education-way-people-list" component={EducationWayPeopleList} />
-            <PrivateRoute path="/admin-panel" component={AdminMain} exact />
-            <PrivateRoute path="/admin-panel/dashboard" component={AdminMain} />
-            <PrivateRoute path="/admin-panel/events" component={AdminEvents} exact />
-            <PrivateRoute path="/admin-panel/events/create" component={AdminCreateEvent} />
-            <PrivateRoute path="/admin-panel/news" component={AdminNewsBlock} exact />
-            <PrivateRoute path="/admin-panel/news/create" component={AdminAddNews} />
-            <PrivateRoute path="/admin-panel/projects" component={AdminProjectsBlock} exact />
-            <PrivateRoute path="/admin-panel/projects/create" component={AdminAddProjects} />
-            <PrivateRoute path="/admin-panel/filters" component={AdminFiltersBlock} exact />
-            <PrivateRoute path="/admin-panel/forum" component={AdminForumBlock} exact />
-            <PrivateRoute path="/admin-panel/eduway" component={AdminEduWay} exact />
-            <PrivateRoute path="/admin-panel/eduwaypeoples" component={EduWayPeoples} exact />
-            <Route path="/news/:id" component={FullNews} />
-            <Route path="/news" component={PageNews} />
-            <Route path="/contacts" component={Contacts} />
-            {/* <Route path="/events" component={Events} /> */}
+            <PublicLayout path="/events" component={Events} exact />
+            <PublicLayout path="/events/map" component={EventsMap} />
+            <PublicLayout path="/education-way" component={EducationWay} />
+            <PrivateLayout protectLink='/user-login' path="/education-way-people-list" component={EducationWayPeopleList} />
+            <AdminLayout path="/admin-panel" component={AdminMain} exact />
+            <AdminLayout path="/admin-panel/dashboard" component={AdminMain} />
+            <AdminLayout path="/admin-panel/events" component={AdminEvents} exact />
+            <AdminLayout path="/admin-panel/events/create" component={AdminCreateEvent} />
+            <AdminLayout path="/admin-panel/news" component={AdminNewsBlock} exact />
+            <AdminLayout path="/admin-panel/news/create" component={AdminAddNews} />
+            <AdminLayout path="/admin-panel/projects" component={AdminProjectsBlock} exact />
+            <AdminLayout path="/admin-panel/projects/create" component={AdminAddProjects} />
+            <AdminLayout path="/admin-panel/filters" component={AdminFiltersBlock} exact />
+            <AdminLayout path="/admin-panel/forum" component={AdminForumBlock} exact />
+            <AdminLayout path="/admin-panel/eduway" component={AdminEduWay} exact />
+            <AdminLayout path="/admin-panel/eduwaypeoples" component={EduWayPeoples} exact />
+            <PublicLayout path="/news/:id" component={FullNews} />
+            <PublicLayout path="/news" component={PageNews} />
+            <PublicLayout path="/contacts" component={Contacts} />
             <Route component={Error} />
           </Switch>
         </div>

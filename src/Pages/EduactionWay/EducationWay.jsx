@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { server } from '../../api';
 import axios from 'axios';
-import Select, {Option, OptGroup} from 'rc-select';
+import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
 import Map from '../../Components/Map/map';
 import { debounce } from 'lodash';
 import './EducationWay.css';
 import ymaps from 'ymaps';
-import Menu from '../../Components/Menu/Menu';
 import Button from '../../Components/Button/Button';
 
-class App extends Component {
+class EducationWay extends Component {
   state = {
     selectedCoords: [],
     suggestionList: [],
@@ -34,9 +33,8 @@ class App extends Component {
     this.descRef = React.createRef();
   }
   async componentDidMount() {
-    const kindergartenData = {markers:[]},
-          schoolData = {markers:[]},
-          allData = {markers:[]};
+    const kindergartenData = {markers:[]};
+    const schoolData = {markers:[]};
 
     this.api = await ymaps.load();
     axios({
@@ -45,11 +43,12 @@ class App extends Component {
       config: { headers: { 'Content-Type': 'application/json; charset=UTF-8' } },
     })
       .then(response => {
-        response.data.markers.map((el,index) => {
-          if(el.type === 'school'){
+        response.data.markers.forEach((el,index) => {
+          if (el.type === 'school') {
             schoolData.markers.push(el);
           }
-          if(el.type === 'kindergarten'){
+
+          if (el.type === 'kindergarten') {
             kindergartenData.markers.push(el);
           }
         });
@@ -184,8 +183,6 @@ class App extends Component {
 
   render() {
     return (
-      <div className="main-page-client">
-      <Menu name="client-menu" />
       <div className="app">
         <ul className="app__sidebar">
           <li><input className="add-marker-btn" type="button" value="+" onClick={this.showAddPointModal} /></li>
@@ -204,7 +201,7 @@ class App extends Component {
             <div className="modal-window-overlay" />
             <div className="modal-window">
               <div className="modal-window-head" onClick={this.hideAddPointModal}>
-                <a className="close-icon"></a>
+                <i className="close-icon"></i>
               </div>
               <div className="modal-window-body">
                 {this.state.displayedStep === 1 ? (
@@ -265,9 +262,8 @@ class App extends Component {
           </div>
         ) : null}
       </div>
-      </div>
     );
   }
 }
 
-export default App;
+export default EducationWay;

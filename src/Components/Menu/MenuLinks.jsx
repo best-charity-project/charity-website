@@ -13,11 +13,11 @@ class MenuLinks extends Component {
     return (
       <div className={this.props.className}>
         <ul>
-          {this.state.list.map(function(el, index) {
+          {this.state.list.map(function(el, stateListIndex) {
             if (el.child) {
-              return <li class="dropdown">
-                <button class="dropbtn">{el.name}</button>
-                <ul class="dropdown-content">
+              return <li className="dropdown" key={stateListIndex}>
+                <button className="dropbtn">{el.name}</button>
+                <ul className="dropdown-content">
                   {el.child.map(function(el, index) {
                     const images = require.context('../../Assets/AssetsSvg', true);
                     return (
@@ -33,7 +33,7 @@ class MenuLinks extends Component {
             </li> 
           } else {
             return (
-              <li key={index}>
+              <li key={stateListIndex}>
                 <NavLink to={el.url}>{el.name}</NavLink>
             </li>
             )

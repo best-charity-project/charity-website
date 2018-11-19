@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ToastrContainer from 'react-toastr-basic'
 
-class AdminValidationWindow extends React.Component {
+class AdminValidationWindow extends Component {
     componentDidMount(){
         this.props.showToast(this.props.title)
     }

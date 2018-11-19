@@ -10,7 +10,7 @@ class AdminDatePicker extends Component {
     }
     onChange = (date) => {
         let validDate = moment(date).format('D MMMM YYYY, H : mm');
-        validDate!='Invalid date' && validDate.split(',')[1] != ' 0 : 00' ? 
+        validDate !== 'Invalid date' && validDate.split(',')[1] !== ' 0 : 00' ? 
             this.setState({validDate:true}, () => { this.props.onSelectDate(date)}):
             this.setState({validDate:false}); 
     };
@@ -23,7 +23,7 @@ class AdminDatePicker extends Component {
             <div>
                 <label>{this.props.label}</label>
                 <Datetime 
-                    value = {this.props.dateFormat ? moment(this.props.date).format('D MMMM YYYY, H : mm') : moment(this.props.date). format('H : mm')}
+                    value = {this.props.dateFormat ? moment(this.props.date).format('D MMMM YYYY, H : mm') : moment(this.props.date).format('H : mm')}
                     onChange = {this.onChange} 
                     isValidDate = {this.validation}
                     dateFormat={this.props.dateFormat ? 'D MMMM YYYY,' : false}

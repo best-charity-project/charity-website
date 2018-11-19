@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import AdminEvent from '../AdminEvent/AdminEvent';
 import './AdminEventsList.css';
-import AdminCreateEvent from '../AdminCreateEvent/AdminCreateEvent';
 import { server } from '../../../../api';
 import {withRouter} from "react-router-dom";
 import axios from 'axios';

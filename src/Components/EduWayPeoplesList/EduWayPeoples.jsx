@@ -5,8 +5,7 @@ import { server } from '../../api';
 import _ from 'lodash';
 
 import Button from '../Button/Button';
-import AdminNewsSearch from '../Admin/AdminComponents/AdminNewsSearch/AdminNewsSearch';
-import rubbishImg from '../../Assets/AssetsSvg/mbri-trash.svg';
+
 class EduWayPeoples extends Component {
   state = {
     peoples: [],
@@ -37,9 +36,11 @@ class EduWayPeoples extends Component {
       .then(response => {
         let updatedPerson = response.data;
         let index = _.findIndex(this.state.peoples, function(person) {
-          return person._id == updatedPerson._id;
+          return person._id === updatedPerson._id;
         });
-        this.state.peoples[index].isPublic = updatedPerson.isPublic;
+        const peoples = [...this.state.peoples];
+        peoples[index].isPublic = updatedPerson.isPublic;
+        this.setState({peoples});
         this.forceUpdate();
       })
       .catch(function(error) {
@@ -56,7 +57,7 @@ class EduWayPeoples extends Component {
         let deletedPerson = response.data;
         var array = [...this.state.peoples];
         let index = _.findIndex(this.state.peoples, function(person) {
-          return person._id == deletedPerson._id;
+          return person._id === deletedPerson._id;
         });
         array.splice(index, 1);
         this.setState({ peoples: array });

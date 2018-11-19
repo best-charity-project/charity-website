@@ -127,6 +127,7 @@
 .modal-window-head {
   height: 30px;
   width: 55px;
+  margin-left: auto;
 }
 
 .search-label {

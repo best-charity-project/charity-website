@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import "./EducationWayPeopleList.css";
-import Menu from "../../Components/Menu/Menu";
 import EduWayPeopleFilter from "../../Components/EduWayPeopleFilter/EduWayPeopleFilter";
 import EduWayPeopleControlBar from "../../Components/EduWayPeopleControlBar/EduWayPeopleControlBar";
 import EduWayPeopleTable from "../../Components/EduWayPeopleTable/EduWayPeopleTable";
 import { paginate } from "../../Utils/charityPaginate";
 import {
-  getPeopleList,
+  // getPeopleList,
   getFakePeopleList
 } from "../../Services/EducationWayPeopleService";
 import _ from "lodash";
@@ -108,25 +107,22 @@ class EducationWayPeopleList extends Component {
     const { totalCount, data: currentPeopleList } = this.getPagedData();
 
     return (
-      <div className="main-page-client">
-        <Menu name="client-menu" />
-        <div className="edu-people-list-page">
-          <EduWayPeopleFilter
-            data={initialPeopleList}
-            onSubmit={this.handleFilterSubmit}
+      <div className="edu-people-list-page">
+        <EduWayPeopleFilter
+          data={initialPeopleList}
+          onSubmit={this.handleFilterSubmit}
+        />
+        <div className="column">
+          <EduWayPeopleControlBar
+            tabList={peopleListTabs}
+            selectedTab={selectedTab}
+            onTabSelect={this.handleTabSelect}
+            itemsCount={totalCount}
+            currentPage={currentPage}
+            pageSize={pageSize}
+            onPageChange={this.handlePageChange}
           />
-          <div className="column">
-            <EduWayPeopleControlBar
-              tabList={peopleListTabs}
-              selectedTab={selectedTab}
-              onTabSelect={this.handleTabSelect}
-              itemsCount={totalCount}
-              currentPage={currentPage}
-              pageSize={pageSize}
-              onPageChange={this.handlePageChange}
-            />
-            <EduWayPeopleTable peopleList={currentPeopleList} />
-          </div>
+          <EduWayPeopleTable peopleList={currentPeopleList} />
         </div>
       </div>
     );

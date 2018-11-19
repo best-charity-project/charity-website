@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Editor, EditorState, convertFromRaw} from 'draft-js';
-import moment from 'moment';
 import customRendererFn from '../Admin/AdminComponents/AdminEditor/Renderer';
 import ProjectGallery from '../../Components/ProjectGallery/ProjectGallery';
 import ProjectDefaultImg from '../../Assets/AssetsSvg/project-default.svg';
@@ -13,7 +12,9 @@ class Project extends Component {
             <div className="projects-page-content">
                 <div className="img-container">
                     <div className="img-placeholder">
-                         <img className="project-main-img" src={this.props.content.image ? `http://localhost:3001/images/${this.props.content.image}` : ProjectDefaultImg }/>
+                         <img className="project-main-img" alt="" src={this.props.content.image
+                            ? `http://localhost:3001/images/${this.props.content.image}`
+                            : ProjectDefaultImg }/>
                     </div>
                 </div>
                 <div className="project-section">
