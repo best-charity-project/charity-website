@@ -1,13 +1,15 @@
-import React, {Component} from 'react';
-import {Route, withRouter} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Route, withRouter } from 'react-router-dom';
 import axios from 'axios';
-import Select, {Option, OptGroup} from 'rc-select';
+import Select, { Option, OptGroup } from 'rc-select';
 import 'rc-select/assets/index.css';
+import { map, filter, find } from 'lodash';
 
+import geoDB from '../../../Configs/geo';
 import { server } from "../../../api";
-import { getRegions } from "../Services/geoServices";
 import Button from '../../../Components/Button/Button';
 import './EduListRegistration.css';
+import { finished } from 'stream';
 
 export default class EduListRegistration extends Component {
   state = {
@@ -20,14 +22,9 @@ export default class EduListRegistration extends Component {
       city: ''
     },
     years: '',
-    regionArray: [],
+    districtArray: [],
     cityArray: []
   };
-
-  componentDidMount = () => {
-    console.log('qq');
-    getRegions();
-  }
 
   getDiagnosis = (str) => {
     this.setState({ diagnosis: str });
@@ -51,7 +48,15 @@ export default class EduListRegistration extends Component {
         ...this.state.location,
         region: str
       }
-    });
+    }, () => {
+      map(geoDB, el => {
+        if(el.region === str ) {
+          this.setState({
+            districtArray: el.districts
+          })
+        }
+      })
+    })
   }
 
   onDistrictChange = (str) => {
@@ -60,6 +65,11 @@ export default class EduListRegistration extends Component {
         ...this.state.location,
         district: str
       }
+    }, () => {
+      const areaValue = find(this.state.districtArray, { name: str })
+      this.setState({
+        cityArray: areaValue.cities
+      })
     });
   }
 
@@ -117,7 +127,9 @@ export default class EduListRegistration extends Component {
     });
   }
   render() {
-    return(
+    const { districtArray, cityArray } = this.state;
+
+    return (
       <div className="edulist-registration-wrapper">
         <div className="edulist-registration-container">
           <div className="edulist-registration-form">
@@ -155,55 +167,51 @@ export default class EduListRegistration extends Component {
             />
             <label className="place-type"> Ваш примерный адрес: </label>
             <div>
-                <Select
-                  onChange={this.onRegionChange}
-                  placeholder="Область:"
-                  className="place-type-select-edulist"
-                  notFoundContent="Область не найдена"
-                  optionLabelProp="children"
-                >
-                  {/* {
-                    Object.keys(this.state.region).map(key => (
-                      <Option key={key} value={key}>{this.state.region[key].name}</Option>
-                    ))
-                  } */}
-                  <Option title="Школа" value="school">Школа</Option>
-                  <Option title="Сад" value="kindergarten">Сад</Option>
-                </Select>     
+              <Select
+                onChange={this.onRegionChange}
+                placeholder="Область:"
+                className="place-type-select-edulist"
+                notFoundContent="Область не найдена"
+                optionLabelProp="children"
+              >
+                {
+                  map(geoDB, (element, index) => {
+                    return <Option key={index} value={element.region}>{element.region}</Option>
+                  })
+                }
+              </Select>     
             </div>
             <div>
-                <Select
-                  onChange={this.onDistrictChange}
-                  placeholder="Регион:"
-                  className="place-type-select-edulist"
-                  notFoundContent="Регион не найден"
-                  optionLabelProp="children"
-                >
-                  {/* {
-                    Object.keys(cases).map(key => (
-                      <Option key={key} value={key}>{cases[key].name}</Option>
-                    ))
-                  } */}
-                  <Option title="Школа" value="school">Школа</Option>
-                  <Option title="Сад" value="kindergarten">Сад</Option>
-                </Select>     
+              <Select
+                onChange={this.onDistrictChange}
+                placeholder="Регион:"
+                className="place-type-select-edulist"
+                notFoundContent="Регион не найден"
+                optionLabelProp="children"
+                dropdownMenuStyle = {{ maxHeight: 250 }}
+              >
+                {
+                  map(districtArray, (item, id) => {
+                    return <Option key={id} value={item.name}>{item.name}</Option>
+                  })
+                }
+              </Select>     
             </div>
             <div>
-                <Select
-                  onChange={this.onCityChange}
-                  placeholder="Город:"
-                  className="place-type-select-edulist"
-                  notFoundContent="Город не найден"
-                  optionLabelProp="children"
-                >
-                  {/* {
-                    Object.keys(cases).map(key => (
-                      <Option key={key} value={key}>{cases[key].name}</Option>
-                    ))
-                  } */}
-                  <Option title="Школа" value="school">Школа</Option>
-                  <Option title="Сад" value="kindergarten">Сад</Option>
-                </Select>     
+              <Select
+                onChange={this.onCityChange}
+                placeholder="Город:"
+                className="place-type-select-edulist"
+                notFoundContent="Город не найден"
+                optionLabelProp="children"
+                dropdownMenuStyle = {{ maxHeight: 250 }}
+              >
+                {
+                  map(cityArray, (item, id) => {
+                    return <Option key={id} value={item}>{item}</Option>
+                  })
+                }
+              </Select>     
             </div>
             
           </div>
