@@ -4,7 +4,6 @@ import './App.css';
 import Home from './Pages/Home/MainPage';
 import Contacts from './Pages/Contacts/Contacts';
 import UserLogin from './Pages/UserLogin/UserLogin';
-import UserRegistration from './Pages/UserRegistration/UserRegistration';
 import Projects from './Pages/Projects/Projects';
 // import Navigation from './Components/Navigation/Navigation';
 import Error from './Components/Error/Error';
@@ -28,6 +27,7 @@ import AdminForumBlock from './Components/Admin/AdminForumBlock/AdminForumBlock'
 // import { getToken } from './Components/Admin/Auth';
 import AdminEduWay from './Components/Admin/AdminEduWay/AdminEduWay';
 import EduWayPeoples from './Components/Admin/EduWayPeople/EduWayPeoples';
+import EduListRegistration from './Pages/EducationWayPeopleList/EduListRegistration/EduListRegistration';
 import { PublicLayout, PrivateLayout } from './Components/Common/Layouts/MainLayout';
 import AdminLayout from './Components/Common/Layouts/AdminLayout';
 
@@ -45,12 +45,12 @@ class App extends Component {
             <PublicLayout path="/" component={Home} exact />
             <PublicLayout path="/projects" component={Projects} />
             <Route path="/user-login" component={UserLogin} />
-            <Route path="/user-registration" component={UserRegistration} />
             <Route path="/login" component={Admin} />
             <PublicLayout path="/events" component={Events} exact />
             <PublicLayout path="/events/map" component={EventsMap} />
             <PublicLayout path="/education-way" component={EducationWay} />
             <PrivateLayout protectLink='/user-login' path="/education-way-people-list" component={EducationWayPeopleList} />
+            <PrivateLayout protectLink='/user-login' path="/education-way-people-list-registration" component={EduListRegistration} />
             <AdminLayout path="/admin-panel" component={AdminMain} exact />
             <AdminLayout path="/admin-panel/dashboard" component={AdminMain} />
             <AdminLayout path="/admin-panel/events" component={AdminEvents} exact />
