@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import axios from 'axios';
+import InputMask from 'react-input-mask';
 import Select, { Option, OptGroup } from 'rc-select';
 import 'rc-select/assets/index.css';
 import { map, filter, find } from 'lodash';
@@ -9,13 +10,15 @@ import geoDB from '../../../Configs/geo';
 import { server } from "../../../api";
 import Button from '../../../Components/Button/Button';
 import './EduListRegistration.css';
-import { finished } from 'stream';
 
 export default class EduListRegistration extends Component {
   state = {
     diagnosis: '',
     contactPerson: '',
-    contacts: '',
+    contacts: {
+      email: '',
+      phone: ''
+    },
     location: {
       region: '',
       district: '',
@@ -26,20 +29,34 @@ export default class EduListRegistration extends Component {
     cityArray: []
   };
 
-  getDiagnosis = (str) => {
-    this.setState({ diagnosis: str });
+  getDiagnosis = (e) => {
+    this.setState({ diagnosis: e.target.value });
   };
 
-  getContactPerson = (str) => {
-    this.setState({ contactPerson: str });
+  getContactPerson = (e) => {
+    this.setState({ contactPerson: e.target.value });
   };
 
-  getContacts = (str) => {
-    this.setState({ contacts: str });
+  getEmail = (e) => {
+    this.setState({ 
+      contacts: {
+        ...this.state.contacts,
+        email: e.target.value
+      }
+     });
   };
 
-  getYears = (str) => {
-    this.setState({ years: str });
+  getPhone = (e) => {
+    this.setState({ 
+      contacts: {
+        ...this.state.contacts,
+        phone: e.target.value
+      }
+     });
+  };
+
+  getYears = (e) => {
+    this.setState({ years: e.target.value });
   };
 
   onRegionChange = (str) => {
@@ -87,7 +104,10 @@ export default class EduListRegistration extends Component {
     this.setState({
       diagnosis: '',
       contactPerson: '',
-      contacts: '',
+      contacts: {
+        email: '',
+        phone: ''
+      },
       location: {
         region: '',
         district: '',
@@ -110,7 +130,10 @@ export default class EduListRegistration extends Component {
       this.setState({
         diagnosis: '',
         contactPerson: '',
-        contacts: '',
+        contacts: {
+          email: '',
+          phone: ''
+        },
         location: {
           region: '',
           district: '',
@@ -151,23 +174,38 @@ export default class EduListRegistration extends Component {
             />
             <input
               type="text"
-              placeholder="Контакты"
-              name="edulist-registration-contacts"
+              placeholder="e-mail"
+              name="edulist-registration-email"
               required
-              className="edulist-registration-contacts"
-              onChange={this.getContacts}
+              className="edulist-registration-email"
+              onChange={this.getEmail}
             />
-            <input
-              type="text"
-              placeholder="Годы поступления"
-              name="edulist-registration-years"
+            <InputMask 
               required
-              className="edulist-registration-years"
+              placeholder="Телефон"
+              mask="+375 (99) 999-99-99"
+              onChange={this.getPhone}
+              name="edulist-registration-phone"
+              className="edulist-registration-phone"
+            />
+            <InputMask 
+              required
+              placeholder="Годы поступления"
+              formatChars={{
+                '1': '[0-1]',
+                '2': '[1-2]',
+                '3': '[0-3]',
+                '9': '[0-9]'
+              }}
+              mask="39-19-2999"
               onChange={this.getYears}
+              name="edulist-registration-years"
+              className="edulist-registration-phone"
             />
             <label className="place-type"> Ваш примерный адрес: </label>
             <div>
               <Select
+                combobox
                 onChange={this.onRegionChange}
                 placeholder="Область:"
                 className="place-type-select-edulist"
