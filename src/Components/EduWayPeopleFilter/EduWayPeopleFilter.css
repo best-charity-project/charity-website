@@ -17,8 +17,17 @@
     border: solid 2px #dcdad7;
     background-color: #f0f0f0;
     margin-top: 15px;
+    outline: none;
 }
 
-.edu-people-list-filter .edu-people-list-btn:focus {
-    box-shadow: none;
+.edu-people-list-filter .edu-people-list-btn:active {
+    box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.3);
+
+
+}
+
+.edu-people-list-filter .edu-people-list-btn[disabled] {
+    color:#9b9b9b;
+    box-shadow: 0px 0px 4px 0 rgba(0, 0, 0, 0.3);
+
 }

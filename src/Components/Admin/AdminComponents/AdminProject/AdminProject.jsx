@@ -3,7 +3,6 @@ import Button from '../../../Button/Button';
 
 import {confirmAlert} from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
-import moment from 'moment';
 import './AdminProject.css';
 import axios from 'axios';
 import {server} from '../../../../api';

@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
 
-import { server } from '../../api';
 import { getToken } from '../../Components/Admin/Auth';
 import Logo from '../Menu/Logo';
 import MenuLinks from '../Menu/MenuLinks';
 
 class Menu extends Component {
-  constructor(props) {
-    super(props);
-  }
+
   state = {
     links: [
       {

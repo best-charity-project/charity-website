@@ -13,9 +13,9 @@ class MenuLinks extends Component {
     return (
       <div className={this.props.className}>
         <ul>
-          {this.state.list.map(function(el, index) {
+          {this.state.list.map(function(el, stateListIndex) {
             if (el.child) {
-              return <li className="dropdown" key={index}>
+              return <li className="dropdown" key={stateListIndex}>
                 <button className="dropbtn">{el.name}</button>
                 <ul className="dropdown-content">
                   {el.child.map(function(el, index) {
@@ -33,7 +33,7 @@ class MenuLinks extends Component {
             </li> 
           } else {
             return (
-              <li key={index}>
+              <li key={stateListIndex}>
                 <NavLink to={el.url}>{el.name}</NavLink>
             </li>
             )

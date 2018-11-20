@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, NavLink, Link } from 'react-router-dom';
 import axios from 'axios';
 import ToastrContainer, { ToastDanger } from 'react-toastr-basic'
 
 import { server } from '../../api';
 
-import TextField from '../../Components/TextField/TextField';
 import Button from '../../Components/Button/Button';
-import { signInUser, setToken, getToken } from '../../Components/Admin/Auth';
+import { signInUser, setToken } from '../../Components/Admin/Auth';
 import './UserLogin.css';
 
-export default class UserLogin extends React.Component {
+export default class UserLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -118,7 +116,7 @@ export default class UserLogin extends React.Component {
   }
 
   render() {
-    const { showModalWindow, registrationForm } = this.state;
+    const { showModalWindow } = this.state;
 
     return (
       <div className="wrapper-user auth-form">
@@ -196,8 +194,7 @@ export default class UserLogin extends React.Component {
                 className="password-input"
                 onChange={this.handlePassword}
               />
-            </div>
-            {/* <NavLink to={'/user-registration'} className='login-registration-form'>Регистрация</NavLink> */}          
+            </div>         
             <Button type="submit" name="button-admin-login" label="Войти" />
             <div className="login-registration-form">
               <label>Нет аккаунта?</label>

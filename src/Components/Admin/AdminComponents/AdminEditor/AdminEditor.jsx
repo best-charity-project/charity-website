@@ -43,7 +43,6 @@ class ControlledEditor extends Component {
                     localization={{
                         locale: 'ru'
                     }}
-                    stripPastedStyles = {true}
                     toolbar={{
                         options: options, 
                         image: {
