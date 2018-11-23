@@ -312,8 +312,27 @@ function doFakePeople(count = 100) {
   return makeFakePeople(count);
 }
 
+export function addPerson() {
+  return http.post(`${server}/api/edulist`, {
+    isPublic: true,
+    diagnosis: 'Болезнь',
+    contactPerson: 'Артем',
+    name: 'Миша',
+    contacts: {
+      email: 'email@email.com',
+      phone: '+375 (29) 292-92-99' 
+    },
+    location: {
+      region: 'Брестская область',
+      district: 'Березовский район',
+      city: 'Березино'
+    },
+    years: '10-10-2002'
+  });
+}
+
 export function getPeopleList() {
-  return http.get(`${server}/api/edulist`, {
+  return http.get(`${server}/api/edulist  `, {
     headers: { "Content-Type": "application/json; charset=UTF-8" }
   });
 }

@@ -73,7 +73,6 @@ class EduWayPeoples extends Component {
         <div className="markers-list">
           <div className="markers-list-header">
             <span>Диагноз</span>
-            <span>Имя</span>
             <span>Контактное лицо</span>
             <span>Контакты</span>
             <span>Адрес</span>
@@ -85,10 +84,9 @@ class EduWayPeoples extends Component {
             ? this.state.peoples.map((person, index) => (
                 <div className="row" key={index}>
                   <span className="cell">{person.diagnosis}</span>
-                  <span className="cell">{person.name}</span>
                   <span className="cell"> {person.contactPerson}</span>
-                  <span className="cell"> {person.contacts}</span>
-                  <span className="cell"> {person.location}</span>
+                  <span className="cell"> {person.contacts.email} <br/> {person.contacts.phone}</span>
+                  <span className="cell"> {person.location.region} <br/> {person.location.district}<br/> {person.location.city}</span>
                   <span className="cell"> {person.years}</span>
                   <div className="cell">
                     <Button
