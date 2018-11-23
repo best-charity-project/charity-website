@@ -18,12 +18,13 @@ class EduWayPeopleTable extends Component {
     },
     {
       className: "contacts-column",
-      propertyName: "contacts",
-      label: "Контакты"
+      propertyName: "contactList",
+      label: "Контакты",
+      isArray: true
     },
     {
       className: "address-column",
-      propertyName: "location",
+      propertyName: "address",
       label: "Адрес (без дома и кв)"
     },
     {

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import axios from 'axios';
 import InputMask from 'react-input-mask';
-import Select, { Option, OptGroup } from 'rc-select';
+import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
-import { map, filter, find } from 'lodash';
+import { map, find } from 'lodash';
 
 import geoDB from '../../../Configs/geo';
 import { server } from "../../../api";
@@ -197,7 +197,7 @@ export default class EduListRegistration extends Component {
                 '3': '[0-3]',
                 '9': '[0-9]'
               }}
-              mask="39-19-2999"
+              mask="2999"
               onChange={this.getYears}
               name="edulist-registration-years"
               className="edulist-registration-phone"

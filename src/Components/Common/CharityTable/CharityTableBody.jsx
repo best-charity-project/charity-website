@@ -15,7 +15,9 @@ class CharityTableBody extends Component {
           <div className={bodyClassName} key={index}>
             {columns.map((column, columnIndex) => (
               <div key={columnIndex} className={columnsClassName + " " + column.className}>
-                {item[column.propertyName]}
+                { column.isArray ? (item[column.propertyName].map((subItem, subIndex) => (
+                  <div key={subIndex}>{subItem}</div>
+                ))) : (item[column.propertyName])}
               </div>
             ))}
           </div>

@@ -71,6 +71,7 @@ class EduWayPeopleFilter extends CharityForm {
       city: { name: obj.city },
       microdistrict: { name: obj.microdistrict }
     };
+
     const { region, district, city, microdistrict } = newObj;
     city.microdistricts = microdistrict.name ? [microdistrict] : [];
     district.cities = [city];
@@ -106,7 +107,7 @@ class EduWayPeopleFilter extends CharityForm {
     const addresses = [];
 
     this.props.data.forEach(obj => {
-      this.structureLocationData(addresses, obj);
+      this.structureLocationData(addresses, obj.location);
     });
 
     return addresses;
@@ -192,10 +193,10 @@ class EduWayPeopleFilter extends CharityForm {
       return (
         value.diagnosis.toLowerCase().includes(diagnosis.toLowerCase()) &&
         value.contactPerson.includes(name) &&
-        value.region.includes(region) &&
-        value.district.includes(district) &&
-        value.city.includes(city) &&
-        value.microdistrict.includes(microdistrict) &&
+        value.location.region.includes(region) &&
+        value.location.district.includes(district) &&
+        value.location.city.includes(city) &&
+        (value.location.microdistrict ? value.location.microdistrict.includes(microdistrict) : true) &&
         value.years.toString().includes(years)
       );
     });

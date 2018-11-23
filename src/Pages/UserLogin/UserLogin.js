@@ -126,7 +126,7 @@ export default class UserLogin extends Component {
               <div className="user-registration-overlay" />
               <div className="user-registration-modal-window">
                 <div className="modal-window-head" onClick={this.hideAddPointModal}>
-                  <a className="close-icon"/>
+                  <i className="close-icon"/>
                 </div>
                 <div className="modal-window-body">
                   <input

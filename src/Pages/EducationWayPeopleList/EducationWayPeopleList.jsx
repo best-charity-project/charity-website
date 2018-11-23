@@ -1,132 +1,130 @@
-import React, { Component } from "react";
-import "./EducationWayPeopleList.css";
-import EduWayPeopleFilter from "../../Components/EduWayPeopleFilter/EduWayPeopleFilter";
-import EduWayPeopleControlBar from "../../Components/EduWayPeopleControlBar/EduWayPeopleControlBar";
-import EduWayPeopleTable from "../../Components/EduWayPeopleTable/EduWayPeopleTable";
-import { paginate } from "../../Utils/charityPaginate";
-import {
-  // getPeopleList,
-  getFakePeopleList
-} from "../../Services/EducationWayPeopleService";
-import _ from "lodash";
+import React, { Component } from 'react';
+import './EducationWayPeopleList.css';
+import EduWayPeopleFilter from '../../Components/EduWayPeopleFilter/EduWayPeopleFilter';
+import EduWayPeopleControlBar from '../../Components/EduWayPeopleControlBar/EduWayPeopleControlBar';
+import EduWayPeopleTable from '../../Components/EduWayPeopleTable/EduWayPeopleTable';
+import { paginate } from '../../Utils/charityPaginate';
+import { getPeopleList } from '../../Services/EducationWayPeopleService';
+import _ from 'lodash';
 
 class EducationWayPeopleList extends Component {
-  state = {
-    initialPeopleList: [],
-    searchedPeopleList: [],
-    filterFormIsSubmitted: false,
-    selectedTab: null,
-    peopleListTabs: [
-      { _id: "allTab", name: "Все" },
-      {
-        _id: "newTab",
-        name: "Новые запросы",
-        handleFunction: this.sortByNewRequests
-      }
-    ],
-    pageSize: 10,
-    currentPage: 1
-  };
+    state = {
+        initialPeopleList: [],
+        searchedPeopleList: [],
+        filterFormIsSubmitted: false,
+        selectedTab: null,
+        peopleListTabs: [
+            { _id: 'allTab', name: 'Все' },
+            {
+                _id: 'newTab',
+                name: 'Новые запросы',
+                handleFunction: this.sortByNewRequests
+            }
+        ],
+        pageSize: 10,
+        currentPage: 1
+    };
 
-  async componentDidMount() {
-    const {
-      data: { persons: initialPeopleList }
-    } = await getFakePeopleList();
+    async componentDidMount() {
+        const {
+            data: { persons: initialPeopleList }
+        } = await getPeopleList();
 
-    initialPeopleList.forEach(person => {
-      person.location = [
-        person.region,
-        person.district,
-        person.city,
-        person.microdistrict,
-        person.street
-      ]
-        .filter(p => p)
-        .join(", ");
-    });
-    this.setState({
-      initialPeopleList,
-      selectedTab: this.state.peopleListTabs[0]
-    });
-  }
+        initialPeopleList.forEach(person => {
+            person.address = [
+                person.location.region,
+                person.location.district,
+                person.location.city
+            ]
+                .filter(p => p)
+                .join(', ');
 
-  sortByNewRequests(peopleList) {
-    return _.sortBy(peopleList, "createdAt").reverse();
-  }
+            person.contactList = [person.contacts.email, person.contacts.phone];
+        });
 
-  handlePageChange = currentPage => {
-    this.setState({ currentPage });
-  };
+        this.setState({
+            initialPeopleList,
+            selectedTab: this.state.peopleListTabs[0]
+        });
+    }
 
-  handleTabSelect = tab => {
-    if (tab._id === this.state.selectedTab._id) return;
-    this.setState({ selectedTab: tab, currentPage: 1 });
-  };
+    sortByNewRequests(peopleList) {
+        return _.sortBy(peopleList, 'createdAt').reverse();
+    }
 
-  handleFilterSubmit = searchedPeopleList => {
-    this.setState({
-      searchedPeopleList,
-      selectedTab: this.state.peopleListTabs[0],
-      currentPage: 1,
-      filterFormIsSubmitted: true
-    });
-  };
+    handlePageChange = currentPage => {
+        this.setState({ currentPage });
+    };
 
-  getPagedData = () => {
-    const {
-      initialPeopleList,
-      searchedPeopleList,
-      filterFormIsSubmitted,
-      currentPage,
-      pageSize,
-      selectedTab
-    } = this.state;
+    handleTabSelect = tab => {
+        if (tab._id === this.state.selectedTab._id) return;
+        this.setState({ selectedTab: tab, currentPage: 1 });
+    };
 
-    const peopleList = filterFormIsSubmitted
-      ? searchedPeopleList
-      : initialPeopleList;
+    handleFilterSubmit = searchedPeopleList => {
+        this.setState({
+            searchedPeopleList,
+            selectedTab: this.state.peopleListTabs[0],
+            currentPage: 1,
+            filterFormIsSubmitted: true
+        });
+    };
 
-    const sortedData =
-      selectedTab && selectedTab._id && selectedTab.handleFunction
-        ? selectedTab.handleFunction(peopleList)
-        : peopleList;
+    getPagedData = () => {
+        const {
+            initialPeopleList,
+            searchedPeopleList,
+            filterFormIsSubmitted,
+            currentPage,
+            pageSize,
+            selectedTab
+        } = this.state;
 
-    const currentData = paginate(sortedData, currentPage, pageSize);
+        const peopleList = filterFormIsSubmitted
+            ? searchedPeopleList
+            : initialPeopleList;
 
-    return { totalCount: sortedData.length, data: currentData };
-  };
+        const sortedData =
+            selectedTab && selectedTab._id && selectedTab.handleFunction
+                ? selectedTab.handleFunction(peopleList)
+                : peopleList;
 
-  render() {
-    const {
-      initialPeopleList,
-      currentPage,
-      pageSize,
-      peopleListTabs,
-      selectedTab
-    } = this.state;
-    const { totalCount, data: currentPeopleList } = this.getPagedData();
+        const currentData = paginate(sortedData, currentPage, pageSize);
 
-    return (
-      <div className="edu-people-list-page">
-        <EduWayPeopleFilter
-          data={initialPeopleList}
-          onSubmit={this.handleFilterSubmit}
-        />
-        <div className="column">
-          <EduWayPeopleControlBar
-            tabList={peopleListTabs}
-            selectedTab={selectedTab}
-            onTabSelect={this.handleTabSelect}
-            itemsCount={totalCount}
-            currentPage={currentPage}
-            pageSize={pageSize}
-            onPageChange={this.handlePageChange}
-          />
-          <EduWayPeopleTable peopleList={currentPeopleList} />
-        </div>
-      </div>
-    );
-  }
+        return { totalCount: sortedData.length, data: currentData };
+    };
+
+    render() {
+        const {
+            initialPeopleList,
+            currentPage,
+            pageSize,
+            peopleListTabs,
+            selectedTab
+        } = this.state;
+        const { totalCount, data: currentPeopleList } = this.getPagedData();
+
+        return (
+            <div className="edu-people-list-page">
+                <EduWayPeopleFilter
+                    data={initialPeopleList}
+                    onSubmit={this.handleFilterSubmit}
+                />
+                <div className="column">
+                    <EduWayPeopleControlBar
+                        tabList={peopleListTabs}
+                        selectedTab={selectedTab}
+                        onTabSelect={this.handleTabSelect}
+                        itemsCount={totalCount}
+                        currentPage={currentPage}
+                        pageSize={pageSize}
+                        onPageChange={this.handlePageChange}
+                    />
+                    <EduWayPeopleTable peopleList={currentPeopleList} />
+                </div>
+            </div>
+        );
+    }
 }
 
 export default EducationWayPeopleList;
