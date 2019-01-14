@@ -8,7 +8,7 @@ class NewsListAndAside extends Component {
         filterArray:this.props.array
     }
     componentWillReceiveProps(nextprops){
-        if(nextprops.array!=this.props.array){
+        if(nextprops.array !== this.props.array){
             this.setState({filterArray:nextprops.array});
         }
     }

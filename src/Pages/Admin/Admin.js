@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, NavLink, Link } from 'react-router-dom';
+import React from 'react';
 
 import Button from '../../Components/Button/Button';
 import { signInUser, setToken, getToken } from '../../Components/Admin/Auth';

@@ -8,13 +8,11 @@ import Navigation from '../../../Navigation/Navigation';
 import NavBar from '../../../NavBar/NavBar';
 import Button from '../../../Button/Button';
 import TextField from '../../../TextField/TextField';
-import EventModal from '../../../EventModal/EventModal';
 import './AdminCreateEvent.css';
 import {server} from '../../../../api';
 import Editor from  "../AdminEditor/AdminEditor";
 import AdminSelectSearch from '../AdminSelectSearch/AdminSelectSearch';
 import jsonpAdapter from 'axios-jsonp';
-import vkIcon from '../../../../Assets/AssetsSvg/vk_icon.svg';
 
 class AdminCreateEvent extends Component { 
     state = {
@@ -48,7 +46,6 @@ class AdminCreateEvent extends Component {
                 participation,
                 linkParticipation,
                 organizers,
-                speaker,
                 speakersArray,
                 contactPerson,
                 contactPhone,
@@ -173,7 +170,7 @@ class AdminCreateEvent extends Component {
                         <div className = 'speakers-list-event'> 
                             <ul>
                                 {this.state.speakersArray ?
-                                    this.state.speakersArray.map((el,index) => {
+                                    this.state.speakersArray.map((el,index) => (
                                         <li key = {index}>
                                             <span> {el} </span>
                                             <Button 
@@ -182,8 +179,8 @@ class AdminCreateEvent extends Component {
                                                 clickHandler = {(e)=> this.deleteSpeaker(e,index)}
                                             />
                                         </li>
-                                    })
-                                    :null
+                                    ))
+                                    : null
                                 }
                             </ul>
                         </div>

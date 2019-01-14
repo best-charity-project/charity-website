@@ -13,7 +13,7 @@ class AdminUser extends Component {
         this.setState({isSubscribe: this.props.user.isSubscribeStatus})
     }
     render() {
-        const {isSubscribe, error} = this.state;
+        const {error} = this.state;
         if (error) {
             return <p>{error.message}</p>
         }

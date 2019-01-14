@@ -1,26 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class SocialLinks extends Component {
-    render() {
-        return (
-            <div className="social-icons">
-                <ul>
-                    <li>
-                        <a href="https://www.facebook.com/" />
-                    </li>
-                    <li>
-                        <a href="https://www.youtube.com/" />
-                    </li>
-                    <li>
-                        <a href="https://www.instagram.com/?hl=ru" />
-                    </li>
-                    <li>
-                        <a href="https://vk.com/" />
-                    </li>
-                </ul>
-            </div>
-        );
-    }
-}
+const SocialLinks = () => {
+    return (
+            <ul className="social-icons">
+                <li>
+                    <a href="https://www.facebook.com/">Facebook</a>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/">YouTube</a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/?hl=ru">Instagram</a>
+                </li>
+                <li>
+                    <a href="https://vk.com/">VK</a>
+                </li>
+            </ul>
+    );
+};
 
 export default SocialLinks;

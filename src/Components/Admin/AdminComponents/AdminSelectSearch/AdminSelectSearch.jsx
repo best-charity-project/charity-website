@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Select, {Option, OptGroup} from 'rc-select';
+import Select, {Option} from 'rc-select';
 import 'rc-select/assets/index.css';
 import _ from 'lodash';
 import '../AdminSelectSearch/AdminSelectSearch.css';
@@ -31,12 +31,12 @@ class AdminSelectSearch extends Component {
         this.setState({filters:array});
     }
     onChange = (value) => {
-        (value) ? this.setState ({value : value } ,() => {
+        if(value) this.setState ({value : value } ,() => {
             this.props.getFilter(this.state.value);
-        }) : null;        
+        });        
     }
     render() {
-        const { selectedOption, addNewOption } = this.state;
+        const { addNewOption } = this.state;
         return (
             <div className = "select-component" onChange = {this.getOptions}>
                 <div className = "select-filter">
@@ -48,15 +48,13 @@ class AdminSelectSearch extends Component {
                         onChange = {this.onChange}
                         notFoundContent = 'Ничего не найдено'
                     >
-                    {this.state.filters.map((filter,index) => {
-                        if(filter.label != 'все'){
-                            return <Option 
-                                        key = {index} 
-                                        value = {filter.label}>
-                                        {filter.label}
-                                    </Option>
+                        {this.state.filters.filter(filter => filter.label !== 'все')
+                            .map((filter, index) => <Option
+                                key={index}
+                                value={filter.label}>
+                                {filter.label}
+                            </Option>)
                         }
-                    })}
                     </Select>
                 </div>
                 {addNewOption ? <div className = 'input-buttom-select' >
@@ -80,8 +78,8 @@ class AdminSelectSearch extends Component {
         let value = e.target.value;
         let addNewOption = _.filter(this.state.filters, function(o) { 
         return o.label.includes(value)});   
-        (!addNewOption.length) ? this.setState({addNewOption : true}) : null;
-        (!e.target.value.length) ? this.setState({addNewOption : false}) : null;
+        if(!addNewOption.length) this.setState({addNewOption : true});
+        if(!e.target.value.length) this.setState({addNewOption : false});
     }
 
     getNewValue = (str) => {

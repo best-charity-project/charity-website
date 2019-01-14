@@ -5,7 +5,6 @@ import Footer from '../Footer/Footer';
 import '../NewsContainer/NewsContainer.css';
 import { server } from '../../api';
 import axios from 'axios';
-import _ from 'lodash';
 
 class NewsContainer extends Component {
   state = {

@@ -44,17 +44,19 @@
 	padding-top: 20px;
 	margin-right: 40px;
 	list-style: none;
+	display: flex;
 }
-.social-icons li{	
-	display: inline-block;
+.social-icons li {
 	margin-left: 10px;
 }
 .social-icons a{
 	background-repeat: no-repeat;
 	width: 33px;
 	height: 20px;
-	background-position: bottom;
-	display: inline-block;
+	background-position: center top;
+	background-size: contain;
+	display: block;
+	font-size: 0;
 }
 .social-icons li:first-child a{
 	background-image:url(../../Assets/AssetsSvg/Facebook.svg);

@@ -13,102 +13,101 @@ class FiltersForPages extends Component {
         title : '',
         isOpen: false
     }
-    componentDidMount(){
-        this.props ? 
-            this.setState({
-                type : this.props.type,
-                filters : this.props.list,
-        }): null
+    componentDidMount() {
+        if (this.props) this.setState({
+            type: this.props.type,
+            filters: this.props.list,
+        })
     };
     addFilter = () => {
-        if(this.state.title){        
+        if (this.state.title) {
             this.createFilter();
-            this.setState({title: ''});
-        }        
+            this.setState({ title: '' });
+        }
     }
     getValue = (str) => {
-        this.setState({title: str});    
-    };  
-    showFilterList = () => {
-        this.setState({isOpen: !this.state.isOpen});
+        this.setState({ title: str });
     };
-    onKeyPress  = (e) => {
-        (e.charCode === 13) ? this.addFilter(): null;
+    showFilterList = () => {
+        this.setState({ isOpen: !this.state.isOpen });
+    };
+    onKeyPress = (e) => {
+        if(e.charCode === 13) this.addFilter();
     }
     render() {
         return (
             <div className="filters-for-pages">
-               <p className = 'filter-title' onClick = {this.showFilterList}> {this.props.title}</p>
-               {this.state.isOpen ? 
-                 <div>
-                    <div className = 'input-button-filters-page'>
-                        <TextField
-                            onKeyPress = {this.onKeyPress}
-                            label = 'Добавить фильтр :'
-                            value = {this.state.title}
-                            onChangeValue = {this.getValue}
-                        />
-                        <Button                        
-                            clickHandler = {this.addFilter}                        
-                            label = 'Добавить'
-                        />
-                   </div>
-                   <div className = 'filters-list'>
-                        <ul>
-                            {this.state.filters.length? this.state.filters.map( (el, index) => {
-                                if(el.title !== 'все'){
-                                    return  <AdminFilter
-                                                filter = {el.title} 
-                                                id = {el._id}
-                                                key = {index} 
-                                                deleteHandler = {() => this.deleteFilter(el)}
-                                            />
-                                }                                
-                            }                           
-                            ): null} 
-                        </ul>
-                    </div>
-                </div> : null}               
-            </div>  
+                <p className='filter-title' onClick={this.showFilterList}> {this.props.title}</p>
+                {this.state.isOpen ?
+                    <div>
+                        <div className='input-button-filters-page'>
+                            <TextField
+                                onKeyPress={this.onKeyPress}
+                                label='Добавить фильтр :'
+                                value={this.state.title}
+                                onChangeValue={this.getValue}
+                            />
+                            <Button
+                                clickHandler={this.addFilter}
+                                label='Добавить'
+                            />
+                        </div>
+                        <div className='filters-list'>
+                            <ul>
+                                {this.state.filters.length ? this.state.filters.filter(el => el.title !== 'все')
+                                    .map((el, index) => <AdminFilter
+                                        filter={el.title}
+                                        id={el._id}
+                                        key={index}
+                                        deleteHandler={() => this.deleteFilter(el)}
+                                    />) : null}
+                            </ul>
+                        </div>
+                    </div> : null}
+            </div>
         )
     }
     createFilter = () => {
-        if(this.state.title.toLowerCase() !== 'все'){
+        if (this.state.title.toLowerCase() !== 'все') {
             axios({
                 method: 'post',
-                url: `${ server }/api/filters`,
+                url: `${server}/api/filters`,
                 data: this.state,
-                config: { headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                }},
+                config: {
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                },
             })
-            .then(res => {
-                let arrayFilters = this.state.filters;
-                arrayFilters.push(res.data);
-                this.setState ({
-                    filters: arrayFilters 
+                .then(res => {
+                    let arrayFilters = this.state.filters;
+                    arrayFilters.push(res.data);
+                    this.setState({
+                        filters: arrayFilters
+                    })
                 })
-            })           
-        }        
+        }
     };
     deleteFilter = (filter) => {
-        let id = filter._id; 
+        let id = filter._id;
         axios({
             method: 'delete',
             url: `${server}/api/filters/` + id,
-            config: { headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            }}
+            config: {
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }
         })
-        .then((result) => {
-            this.setState({           
-                filters : this.state.filters.filter(item => {
-                    return item._id !== id
-                })
+            .then((result) => {
+                this.setState({
+                    filters: this.state.filters.filter(item => {
+                        return item._id !== id
+                    })
+                });
             });
-        });
     }
 }
 

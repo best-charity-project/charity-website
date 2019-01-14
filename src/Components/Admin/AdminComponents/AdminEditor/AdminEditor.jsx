@@ -60,7 +60,6 @@ class ControlledEditor extends Component {
 						}
                     }}
                     onEditorStateChange = {this.onChange}
-                    stripPastedStyles = {true}
                     customBlockRenderFunc = {this.customBlockRenderFuncWrap}
                     readOnly = {this.state.isReadOnly}
                 />

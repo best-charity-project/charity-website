@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
-import logo from '../../Assets/AssetsSvg/on-info-logo.svg';
+import { withRouter } from 'react-router-dom';
 import './Navigation.css';
 import Button from '../Button/Button';
 import { removeToken } from '../Admin/Auth/';

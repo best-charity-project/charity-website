@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import ReactPlayer from 'react-player';
-import Cross from '../../Assets/AssetsSvg/cross.svg';
-
 
 export default class ProjectGallery extends Component {
     constructor() {
@@ -53,7 +51,7 @@ export default class ProjectGallery extends Component {
                 </Modal> : null}
                 <div className="gallery">
                     {totalArray.map((item, i) => {
-                    return item.includes('png') ? <img className="image-items" key={i} src={item} onClick={()=>this.showImageModal(item)}></img>
+                    return item.includes('png') ? <img className="image-items" key={i} src={item} onClick={()=>this.showImageModal(item)} alt=""></img>
                             : <div className="video-items" key={i} onClick={() => this.showVideoModal(item)}></div>    
                     })}
                 </div>

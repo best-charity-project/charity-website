@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ToastrContainer from 'react-toastr-basic'
 
 class AdminValidationWindow extends React.Component {

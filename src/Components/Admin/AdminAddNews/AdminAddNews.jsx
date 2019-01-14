@@ -33,7 +33,6 @@ class AdminAddNews extends Component {
         deletedImages: [],
         idVK: '', 
         socialNetworksModal: false,
-        idVK:'',
         isTitle: true,
         isFullTextCorrect: true
     }
@@ -250,9 +249,7 @@ class AdminAddNews extends Component {
     };
 
     getFilter = (str) => {
-        str.length > 0 ? 
-            this.setState({filter: str}):
-            null
+        if(str.length > 0) this.setState({filter: str});
     };
 
     checkText = () => {
@@ -398,8 +395,6 @@ class AdminAddNews extends Component {
         })     
     }
     getTextofPost = () => {
-            let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';
-            let id = '-169499477';
             let title = `${this.state.title}%0A`;
             let textfromEditor = convertToRaw(this.state.fullTextEditorState.getCurrentContent()).blocks;
             let info = '';

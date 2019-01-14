@@ -30,7 +30,7 @@ class FullNews extends Component {
                         <div className = 'full-news-list-container'>
                         {(this.state.news)? (<div className = 'full-news'>
                             {this.state.news.image ? 
-                                <img src = {'http://localhost:3001/images/' + this.state.news.image} alt = 'image for news' /> :
+                                <img src = {'http://localhost:3001/images/' + this.state.news.image} alt = 'news' /> :
                                 null}
                             <p className = 'full-news-date'>{moment(this.state.news.createdAt).format('DD MMMM YYYY')} </p>
                             <p className = 'full-news-title'> {this.state.news.title}</p>                           

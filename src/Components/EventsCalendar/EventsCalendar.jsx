@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import moment from 'moment';
 import '../EventsCalendar/EventsCalendar.css';
 import '../News/News.css';
@@ -40,7 +40,7 @@ export default class Calendar extends React.Component {
                 array.push(event);
             })
         };
-        array ? this.setState({events : array}) : null;
+        if(array.length) this.setState({events : array});
     };
 	render() {      
 	  return (
@@ -104,12 +104,11 @@ export default class Calendar extends React.Component {
         let  numberEventsCalendar = document.querySelectorAll('.fc-more');
         for (let i = 0; i < numberEventsCalendar.length; i++){
             let numberEvents = numberEventsCalendar[i].innerText.split(' ')[0].split('')[1];
-            numberEvents ? 
-                numberEventsCalendar[i].innerHTML = `
-                    <div class = 'count-events'> 
+            if(numberEvents) 
+                numberEventsCalendar[i].innerHTML = 
+                    `<div class = 'count-events'> 
                         <span >${numberEvents} события</span> 
-                    </div>`
-                    : null;
+                    </div>`;
         }
         
     }
@@ -129,8 +128,7 @@ export default class Calendar extends React.Component {
             </div>`
         };     
     };
-    renderHeader = ( view, el) => {
-        let time = document.querySelectorAll('.fc-list-item-time');
+    renderHeader = ( view) => {
         let headerTitle = document.getElementsByClassName('fc-center');
         let dateFromCalendar = view.title.split(' ');
         if(view.currentRangeUnit === 'month'){

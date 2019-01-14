@@ -149,10 +149,9 @@ class AdminNewsContent extends Component {
     } 
     deleteChosenPostsVK = () => {
         let newsState = this.state.news;
-        let deletionsNews = [];
         for (let i = 0; i < this.state.checkedIds.length; i++) {
             let arrayIds = this.state.checkedIds;
-            let b = _.filter(newsState , (news) => {
+            _.filter(newsState , (news) => {
                 if(news._id === arrayIds[i]){
                     this.deletePostVK(news);
                 } 

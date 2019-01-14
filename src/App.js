@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import {BrowserRouter , Route , Switch, Redirect } from "react-router-dom";
+import {BrowserRouter , Route , Switch } from "react-router-dom";
 import './App.css';
 import Home from "./Pages/Home/MainPage";
 import Projects from "./Pages/Projects/Projects";
-import Navigation from "./Components/Navigation/Navigation";
 import Error from "./Components/Error/Error";
 import Admin from "./Pages/Admin/Admin";
 import Events from './Pages/Events/Events';
@@ -20,9 +19,7 @@ import AdminProjectsBlock from './Components/Admin/AdminProjectsBlock/AdminProje
 import AdminAddProjects from './Components/Admin/AdminAddProjects/AdminAddProjects';
 import AdminFiltersBlock from './Components/Admin/AdminFiltersBlock/AdminFiltersBlock';
 import AdminForumBlock from './Components/Admin/AdminForumBlock/AdminForumBlock';
-import { fakeAuth } from './Components/Admin/Auth/PrivateRoute';
 import PrivateRoute from "../src/Components/Admin/Auth/PrivateRoute";
-import { getToken } from './Components/Admin/Auth';
 
 class App extends Component {
   render() {

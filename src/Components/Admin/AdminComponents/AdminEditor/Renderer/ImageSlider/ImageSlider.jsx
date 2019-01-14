@@ -14,7 +14,7 @@ class ImageSlider extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const {block, contentState, deletedImages} = nextProps;   
+        const {block, contentState} = nextProps;   
         const entity = contentState.getEntity(block.getEntityAt(0));
         this.setState({imageArr: entity.getData().src})
     }
@@ -50,7 +50,7 @@ class ImageSlider extends Component {
                                 null
                             }
                             <div onClick = {this.openModalWindow}>
-                                <img style = {{backgroundImage: `url(${item})`}} />
+                                <img style = {{backgroundImage: `url(${item})`}} alt="" />
                             </div>
                         </div>
                     )}

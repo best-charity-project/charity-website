@@ -15,9 +15,9 @@ class ModalWindow extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        nextProps.isOpen ? null : this.setState({imageArr: []})
-        nextProps.imageArr ? this.setState({
-            imageArr: nextProps.imageArr}) : null
+        if(nextProps.isOpen) this.setState({imageArr: []});
+        if(nextProps.imageArr) this.setState({
+            imageArr: nextProps.imageArr});
     }
     
     render() {

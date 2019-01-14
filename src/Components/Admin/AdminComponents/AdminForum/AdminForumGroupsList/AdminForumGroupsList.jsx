@@ -181,15 +181,12 @@ class AdminForumGroupsList extends Component {
     }
 
     deleteChosenRecords = (records) => {
-        this.state.checkedGroupsIds.length && this.state.checkedGroupsIds.length ? 
-            (this.deleteTopics(),
-            this.deleteGroups()
-            ) :
-
-            (this.state.checkedGroupsIds.length ?
-                this.deleteGroups() :
-                this.deleteTopics()
-            )
+        if(this.state.checkedGroupsIds.length) {
+            this.deleteGroups();
+        }
+        if(this.state.checkedTopicsIds.length) {
+            this.deleteTopics();
+        }
     }
 
     deleteGroups = () => {

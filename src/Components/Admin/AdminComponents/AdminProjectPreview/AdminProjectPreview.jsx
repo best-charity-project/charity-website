@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
 import {Route, withRouter} from 'react-router-dom';
-import moment from 'moment';
-import axios from 'axios';
 import {Editor} from 'draft-js';
 import customRendererFn from '../AdminEditor/Renderer';
-
 import Button from '../../../Button/Button';
-import {server} from '../../../../api';
 import './AdminProjectPreview.css';
 import '../../../../Pages/Projects/Projects.css'
 import ProjectGallery from '../../../ProjectGallery/ProjectGallery';
@@ -19,7 +15,7 @@ class AdminProjectPreview extends Component {
                 <div className="projects-page-content">
                 <div className="img-container">
                     <div className="img-placeholder">
-                         <img className="project-main-img" src={this.props.image ? `http://localhost:3001/images/${this.props.image}` : ProjectDefaultImg }/>
+                         <img className="project-main-img" src={this.props.image ? `http://localhost:3001/images/${this.props.image}` : ProjectDefaultImg } alt="project"/>
                     </div>
                 </div>
                     <div className="project-section">

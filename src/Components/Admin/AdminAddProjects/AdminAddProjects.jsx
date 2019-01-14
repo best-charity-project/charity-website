@@ -432,7 +432,6 @@ class AdminAddProjects extends Component {
     }
     deleteHead = (e,index) => {
         let headArray = this.state.headArray
-        let deletedHead = headArray.splice(index, 1)
         this.setState({
             headArray: headArray
         })
@@ -455,10 +454,9 @@ class AdminAddProjects extends Component {
             })
         }
     }
-    deleteContact = (e,index) =>{
+    deleteContact = (e) =>{
         e.preventDefault()
         let contactsArray = this.state.contactsArray
-        let deletedContacts = contactsArray.splice(index, 1)
         this.setState({
             contactsArray: contactsArray
         })
@@ -525,7 +523,7 @@ class AdminAddProjects extends Component {
         e.preventDefault()
         let object = {}
         let mediaVideoArray = this.state.mediaVideoArray
-        if(this.state.mediaVideo && /^(https?:\/\/)?([\da-zа-я\.-]+)\.([a-zа-я\.]{2,6})\/([\w\/\-\.]+)([\?].*)?$/igm.test(this.state.mediaVideo) && this.isCorrectArrayLimit()) {
+        if(this.state.mediaVideo && /^(https?:\/\/)?([\da-zа-я.-]+)\.([a-zа-я.]{2,6})\/([\w/\-.]+)([?].*)?$/igm.test(this.state.mediaVideo) && this.isCorrectArrayLimit()) {
             object.name = this.state.mediaVideo
             mediaVideoArray.push(object)
             this.setState({
@@ -541,12 +539,11 @@ class AdminAddProjects extends Component {
         } 
     }
     onKeyPress  = (e) => {
-        (e.charCode === 13 && this.isCorrectArrayLimit())? this.addMediaVideo(e): null;
+        if(e.charCode === 13 && this.isCorrectArrayLimit()) this.addMediaVideo(e);
     }
     deleteGalleryVideo = (e,index)=>{
         e.preventDefault()
-        let mediaVideoArray = this.state.mediaVideoArray
-        let deletedVideo = mediaVideoArray.splice(index, 1)
+        let mediaVideoArray = this.state.mediaVideoArray;
         this.setState({
             mediaVideoArray: mediaVideoArray
         })
@@ -558,7 +555,7 @@ class AdminAddProjects extends Component {
         this.setState({fullTextEditorState: editorState});
     }
     getFilter = (str) => {
-        {str.length > 0 ? this.setState({filter : str}): null };
+        if(str.length > 0) this.setState({filter : str});
     }
     onCropImage = (image) => {
         this.setState({imageData: image})
@@ -582,7 +579,7 @@ class AdminAddProjects extends Component {
         }
     }
     onCorrectSite = () =>{
-        if(/^((https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\W\.-]*)*\/?)?$/.test(this.state.site)){
+        if(/^((https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w\W.-]*)*\/?)?$/.test(this.state.site)){
             this.setState({
                 isSiteCorrect:true
             })

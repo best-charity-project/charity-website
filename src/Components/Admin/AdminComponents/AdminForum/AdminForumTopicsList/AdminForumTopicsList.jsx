@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import AdminForumTopic from '../AdminForumTopic/AdminForumTopic';
 import './AdminForumTopicsList.css';
@@ -9,43 +9,40 @@ class AdminForumTopicsList extends Component {
     }
 
     componentDidMount() {
-        this.props.filteredTopics.length ?       
-            this.setState({
-                filteredTopics: this.props.filteredTopics,
-            }) :
-        null
+        const { filteredTopics } = this.props;
+        if (filteredTopics.length) {
+            this.setState({ filteredTopics });
+        }
     }
 
     componentWillReceiveProps(nextProps) {
-        nextProps.filteredTopics ?        
-            this.setState({
-                filteredTopics: nextProps.filteredTopics,
-            }) 
-            :
-        null
+        const { filteredTopics } = nextProps;
+        if (filteredTopics.length) {
+            this.setState({ filteredTopics });
+        }
+    }
+
+    showTopics() {
+        return this.state.filteredTopics
+            .filter(item => item.group_id._id === this.props.id)
+            .map(item => <AdminForumTopic
+                changeMode={this.props.changeMode}
+                title={item.topicTitle}
+                id={item._id}
+                key={item._id}
+                deleteHandler={() => this.props.deleteTopic(item)}
+                checkId={this.props.checkId}
+                groups={this.props.groups}
+                getTopics={this.props.getTopics}
+                topic={item}
+                showTopics={this.props.showTopics}
+            />)
     }
 
     render() {
-        return(
-            <div className = 'forum-group-list'>
-                {this.state.filteredTopics.map(item => {
-                    if(item.group_id._id === this.props.id) {
-                        return (
-                            <AdminForumTopic 
-                                changeMode = {this.props.changeMode}
-                                title = {item.topicTitle} 
-                                id = {item._id}
-                                key = {item._id}  
-                                deleteHandler = {() => this.props.deleteTopic(item)} 
-                                checkId = {this.props.checkId}
-                                groups = {this.props.groups}
-                                getTopics = {this.props.getTopics}
-                                topic = {item}
-                                showTopics = {this.props.showTopics}
-                            />
-                        )
-                    }
-                })}
+        return (
+            <div className='forum-group-list'>
+                {this.showTopics()}
             </div>
         )
     }
