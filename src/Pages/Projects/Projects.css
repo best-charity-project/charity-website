@@ -5,6 +5,10 @@
     padding-top: 20px;
 }
 
+.projects-page-content .DraftEditor-editorContainer {
+    z-index: 0;
+}
+
 .img-container {
     width: 35%;
     max-width: 500px;
