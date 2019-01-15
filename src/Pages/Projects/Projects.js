@@ -21,8 +21,7 @@ class Projects extends Component {
             filterValue: 'все',
             filters: [],
             isLastProject: false,
-            isFirstProject: true,
-            isButtonShowed: false
+            isFirstProject: true
         };
         this.nextProject = this.nextProject.bind(this);
         this.previousProject = this.previousProject.bind(this);
@@ -38,6 +37,10 @@ class Projects extends Component {
             });
         });
         this.getFiltersList();
+    }
+
+    isButtonsShowed() {
+        return this.state.filteredProjects.length > 1;
     }
 
     getFiltersList = () => {
@@ -63,12 +66,12 @@ class Projects extends Component {
                 {this.state.currentDisplayedProject && this.state.currentDisplayedProject.name ? 
                     <Project content={this.state.currentDisplayedProject} />
                 : 
-                    <p>Для текущего фильтра проектов нет </p> 
+                    <p className="projects-list__message">Для текущего фильтра проектов нет</p> 
                 }
                 {this.state.filters ? (
                     <ProjectsFilter filterProjects={this.filterProjects} filters={this.state.filters} />
                 ) : null}
-                <div className={`projects-list-action-btns  ${this.state.isButtonShowed ? 'button-hide' : null}`}>
+                <div className={this.isButtonsShowed() ? "projects-list-action-btns" : "projects-list-action-btns projects-list-action-btns_status_hide"}>
                     <SliderPreviousBtn disabled={this.state.isFirstProject} previousProject={this.previousProject} />
                     <SliderNextBtn disabled={this.state.isLastProject} nextProject={this.nextProject} />
                 </div>

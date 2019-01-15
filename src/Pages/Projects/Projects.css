@@ -2,6 +2,7 @@
 	flex-grow: 1;
 	flex-direction: row;
     display: flex;
+    padding-top: 20px;
 }
 
 .img-container {
@@ -37,7 +38,7 @@
     align-self: flex-end;
     position: absolute;
     right: 45px;
-    top: 70px;
+    top: 80px;
 }
 
 .gallery {
@@ -46,7 +47,6 @@
 }
 
 .text-container {
-    padding-top: 20px;
     padding: 10px 20px 30px 20px;
 }
 
@@ -75,6 +75,7 @@
 
 .contact-info p {
     margin: 5px;
+    padding: 10px 20px 30px 20px;
 }
 
 .contact-info p:first-child {
@@ -146,10 +147,15 @@
     align-self: flex-end;
     position: relative;
     right: 45px;
-    bottom: 30px;
+    bottom: 60px;
 }
 
-.button-hide {
+.projects-list__message {
+    margin-top: 50px;
+    padding-left: 20px;
+}
+
+.projects-list-action-btns_status_hide {
     display: none;
 }
 
@@ -265,7 +271,7 @@
     background-image: url('../../../src/Assets/AssetsSvg/filter-results-button.svg');
     background-repeat: no-repeat;
     background-position: right center;
-    background-color: #e8e6e2;
+    background-color: transparent;
     border: none;
     padding-right: 25px;
     font-size: 15px;
@@ -287,6 +293,7 @@
 
 .project-filter {
     margin-right: 20px;
+    z-index: 100;
 }
 
 .project-filter ul {
