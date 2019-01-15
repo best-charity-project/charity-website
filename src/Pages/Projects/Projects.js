@@ -71,7 +71,7 @@ class Projects extends Component {
                 {this.state.filters ? (
                     <ProjectsFilter filterProjects={this.filterProjects} filters={this.state.filters} />
                 ) : null}
-                <div className={this.isButtonsShowed() ? "projects-list-action-btns" : "projects-list-action-btns projects-list-action-btns_status_hide"}>
+                <div className={this.isButtonsShowed() ? "projects-list-action-btns" : "projects-list-action-btns projects-list-action-btns_visibility_hide"}>
                     <SliderPreviousBtn disabled={this.state.isFirstProject} previousProject={this.previousProject} />
                     <SliderNextBtn disabled={this.state.isLastProject} nextProject={this.nextProject} />
                 </div>

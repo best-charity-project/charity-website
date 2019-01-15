@@ -1,6 +1,6 @@
 .projects-page-content {
-	flex-grow: 1;
-	flex-direction: row;
+    flex-grow: 1;
+    flex-direction: row;
     display: flex;
     padding-top: 20px;
 }
@@ -23,9 +23,10 @@
 
 .player-wrapper {
     position: relative;
-    padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+    padding-top: 56.25%;
+    /* Player ratio: 100 / (1280 / 720) */
 }
-  
+
 .react-player {
     position: absolute;
     top: 0;
@@ -56,7 +57,7 @@
     overflow-y: auto;
 }
 
-.project-date { 
+.project-date {
     font-size: 18px;
     margin-bottom: 40px
 }
@@ -138,7 +139,7 @@
 }
 
 .project-show-more-btn:focus {
-    outline:0;
+    outline: 0;
 }
 
 .projects-list-action-btns {
@@ -155,7 +156,7 @@
     padding-left: 20px;
 }
 
-.projects-list-action-btns_status_hide {
+.projects-list-action-btns_visibility_hide {
     display: none;
 }
 
@@ -164,7 +165,7 @@
 }
 
 .projects-list-action-btns button:focus {
-    outline:0;
+    outline: 0;
 }
 
 .projects-list-action-btns button:disabled {
@@ -207,30 +208,30 @@
     position: fixed;
     top: 0;
     left: 0;
-    width:100%;
+    width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.6);
     z-index: 1000000;
-  }
-  
-  .modal-main {
-    position:fixed;
+}
+
+.modal-main {
+    position: fixed;
     background: #fff;
     height: auto;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-  }
-  
-  .display-block {
-    display: block;
-  }
-  
-  .display-none {
-    display: none;
-  }
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
-  .close-modal-btn {
+.display-block {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}
+
+.close-modal-btn {
     position: absolute;
     right: 50px;
     top: 50px;
@@ -239,18 +240,19 @@
     opacity: 0.7;
     border: none;
     background-color: transparent;
-  }
-
-  .close-modal-btn:hover {
-    opacity: 1;
-    cursor: pointer;
-  }
-
-.close-modal-btn:focus {
-    outline:0;
 }
 
-  .close-modal-btn:before, .close-modal-btn:after {
+.close-modal-btn:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.close-modal-btn:focus {
+    outline: 0;
+}
+
+.close-modal-btn:before,
+.close-modal-btn:after {
     position: absolute;
     top: 0;
     left: 25px;
@@ -258,14 +260,16 @@
     height: 55px;
     width: 5px;
     background-color: #D3D3D3;
-  }
-  .close-modal-btn:before {
+}
+
+.close-modal-btn:before {
     transform: rotate(45deg);
-  }
-  .close-modal-btn:after {
+}
+
+.close-modal-btn:after {
     transform: rotate(-45deg);
-  }
-  
+}
+
 
 .select-filter-button {
     background-image: url('../../../src/Assets/AssetsSvg/filter-results-button.svg');
@@ -288,7 +292,7 @@
 }
 
 .select-filter-button:focus {
-    outline:0;
+    outline: 0;
 }
 
 .project-filter {
