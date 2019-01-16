@@ -51,8 +51,8 @@ export default class ProjectGallery extends Component {
                 </Modal> : null}
                 <div className="gallery">
                     {totalArray.length ? totalArray.map((item, i) => {
-                    return (item.length && item.includes('png')) ? <img className="image-items" alt="" key={i} src={item} onClick={()=>this.showImageModal(item)}></img>
-                            : <div className="video-items" key={i} onClick={() => this.showVideoModal(item)}></div>    
+                    return (item.name.includes('png')) ? <img className="image-items" alt="project" key={i} src={item.name} onClick={() => this.showImageModal(item.name)}></img>
+                            : <div className="video-items" key={i} onClick={() => this.showVideoModal(item.name)}></div>    
                     }) : null}
                 </div>
             </div>
