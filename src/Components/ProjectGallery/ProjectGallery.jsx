@@ -50,10 +50,10 @@ export default class ProjectGallery extends Component {
                 {this.state.showVideo ? <ReactPlayer className="test" url={this.state.link} controls /> : <img src={this.state.link} alt=""/>}
                 </Modal> : null}
                 <div className="gallery">
-                    {totalArray.map((item, i) => {
-                    return item.includes('png') ? <img className="image-items" alt="" key={i} src={item} onClick={()=>this.showImageModal(item)}></img>
+                    {totalArray.length ? totalArray.map((item, i) => {
+                    return (item.length && item.includes('png')) ? <img className="image-items" alt="" key={i} src={item} onClick={()=>this.showImageModal(item)}></img>
                             : <div className="video-items" key={i} onClick={() => this.showVideoModal(item)}></div>    
-                    })}
+                    }) : null}
                 </div>
             </div>
         );
