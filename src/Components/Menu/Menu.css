@@ -61,6 +61,7 @@
   height: 20px;
   background-position: bottom;
   display: inline-block;
+  font-size: 0;
 }
 .social-icons li:first-child a {
   background-image: url(../../Assets/AssetsSvg/Facebook.svg);
