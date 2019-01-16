@@ -41,7 +41,7 @@ class Project extends Component {
                             <p>Контакты:</p>
                             <p>{this.props.content.organization}</p>
                             <p>{this.props.content.headArray.map((item, i) => {
-                                    return <span key={i}>{item + " "}</span>     
+                                    return <span key={i}>{item.name + " "}</span>     
                                     })
                                 }, {this.props.content.contactsArray.map((item, i) => {
                                     return <span className="contact-phone" key={i}>{item.name + " "}</span>     
