@@ -9,8 +9,8 @@ class EventsList extends Component {
         return (
          <div className = {this.props.name}>
             <Masonry className = 'masonry-div'> 
-                {(this.props.array)?this.props.array.map(function(event){
-                    return <News event = {event} />
+                {(this.props.array)?this.props.array.map(function(event, index){
+                    return <News event = {event} key={event.title + index} />
                 }) : null}
             </Masonry>
          </div>

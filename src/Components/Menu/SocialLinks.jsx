@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 class SocialLinks extends Component {
     render() {
@@ -7,16 +6,16 @@ class SocialLinks extends Component {
             <div className="social-icons">
                 <ul>
                     <li>
-                        <Link to="https://www.facebook.com/" />
+                        <a href="https://www.facebook.com/groups/oninfo/">Facebook</a>
                     </li>
                     <li>
-                        <Link to="https://www.youtube.com/" />
+                        <a href="https://www.youtube.com/channel/UCAtmfV0MOxmCYxtBM9dNvdA">YouTube</a>
                     </li>
                     <li>
-                        <Link to="https://www.instagram.com/?hl=ru" />
+                        <a href="https://www.instagram.com/on_info_online/">Instagram</a>
                     </li>
                     <li>
-                        <Link to="https://vk.com/" />
+                        <a href="https://vk.com/osobye_belarus">VK</a>
                     </li>
                 </ul>
             </div>

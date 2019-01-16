@@ -83,7 +83,6 @@ class AdminUploadImage extends Component {
 
     reader.onload = e => {
       this.setState({ url: e.target.result });
-      this.props.onCropImage(e.target.result)
     };
     reader.readAsDataURL(file);
   };

@@ -73,3 +73,7 @@
 .client-news .DraftEditor-root {
     padding: 0 30px;
 }
+
+.client-news .DraftEditor-editorContainer {
+   z-index: 0;
+}
