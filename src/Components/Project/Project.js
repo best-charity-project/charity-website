@@ -3,6 +3,7 @@ import {Editor, EditorState, convertFromRaw} from 'draft-js';
 import customRendererFn from '../Admin/AdminComponents/AdminEditor/Renderer';
 import ProjectGallery from '../../Components/ProjectGallery/ProjectGallery';
 import ProjectDefaultImg from '../../Assets/AssetsSvg/project-default.svg';
+import { server } from "../../api";
 
 
 class Project extends Component {
@@ -13,7 +14,7 @@ class Project extends Component {
                 <div className="img-container">
                     <div className="img-placeholder">
                          <img className="project-main-img" alt="" src={this.props.content.image
-                            ? `http://localhost:3001/images/${this.props.content.image}`
+                            ? `${server}/images/${this.props.content.image}`
                             : ProjectDefaultImg }/>
                     </div>
                 </div>

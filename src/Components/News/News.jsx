@@ -4,6 +4,7 @@ import moment from 'moment';
 import {NavLink} from "react-router-dom";
 import EventModal from '../EventModal/EventModal';
 import {Editor, EditorState, convertFromRaw} from 'draft-js';
+import { server } from "../../api";
 
 import customRendererFn from '../Admin/AdminComponents/AdminEditor/Renderer';
 
@@ -40,7 +41,7 @@ class News extends Component {
                             </p>
                             {this.props.img?
                                 <img 
-                                    src = {`http://localhost:3001/images/${this.props.img}`} 
+                                    src = {`${server}/images/${this.props.img}`} 
                                     alt = 'news' />: 
                                 null}
                             <p className = 'news-title'>

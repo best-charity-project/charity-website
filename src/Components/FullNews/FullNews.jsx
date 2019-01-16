@@ -32,7 +32,7 @@ class FullNews extends Component {
                   {this.state.news.image ? (
                     <img
                       src={
-                        "http://localhost:3001/images/" + this.state.news.image
+                        `${server}/images/` + this.state.news.image
                       }
                       alt="news"
                     />
