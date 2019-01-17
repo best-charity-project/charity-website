@@ -26,16 +26,11 @@ class EventsAside extends Component {
           className={"link-news " + this.props.name}
           onClick={this.getCurrentFilter}
         >
-          {this.props.filters.map((el, index) => {
-            if (activeItem === el.title) {
-              return (
-                <li className="active-link-news" key={el.title + index}>
-                  {el.title}
-                </li>
-              );
-            }
-            return <li key={index}>{el.title}</li>;
-          })}
+          {this.props.filters.map((el, index) => (
+            <li className={activeItem === el.title ? "active-link-news" : null} key={el.title + index}>
+              {el.title}
+            </li>
+          ))}
         </ul>
       </div>
     );
