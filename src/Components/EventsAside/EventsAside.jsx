@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./EventsAside.css";
 
-class NewsAside extends Component {
+class EventsAside extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,7 +29,7 @@ class NewsAside extends Component {
           {this.props.filters.map((el, index) => {
             if (activeItem === el.title) {
               return (
-                <li className="active-link-news" key={index}>
+                <li className="active-link-news" key={el.title + index}>
                   {el.title}
                 </li>
               );
@@ -42,4 +42,4 @@ class NewsAside extends Component {
   }
 }
 
-export default NewsAside;
+export default EventsAside;
