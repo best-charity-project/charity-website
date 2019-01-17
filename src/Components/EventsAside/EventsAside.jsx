@@ -27,7 +27,7 @@ class EventsAside extends Component {
           onClick={this.getCurrentFilter}
         >
           {this.props.filters.map((el, index) => (
-            <li className={activeItem === el.title ? "active-link-news" : null} key={el.title + index}>
+            <li className={activeItem === el.title.toLowerCase() ? "active-link-news" : null} key={el.title + index}>
               {el.title}
             </li>
           ))}
