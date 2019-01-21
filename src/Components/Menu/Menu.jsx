@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-
 import { getToken } from '../../Components/Admin/Auth';
 import Logo from '../Menu/Logo';
 import MenuLinks from '../Menu/MenuLinks';
+import jwt_decode from "jwt-decode";
 
 class Menu extends Component {
 
@@ -59,7 +59,7 @@ class Menu extends Component {
   componentDidMount() {
     if (getToken() && getToken() !== 'undefined') {
       this.setState({
-        isUserAuth: true,
+        isUserAuth: true
       });
     }
   }
@@ -68,8 +68,17 @@ class Menu extends Component {
     window.location.replace('/');
   };
 
+  showAdminLink() {
+    if(!this.state.isUserAuth) return;
+    const token = window.localStorage.getItem('token');
+    const parsedToken = jwt_decode(token) || {};
+
+    if(!parsedToken.admin) return;
+    return <NavLink to={'/admin-panel/dashboard'}>Панель администратора</NavLink>
+  }
+
   render() {
-    const { /* email, */ isUserAuth } = this.state;
+    const { isUserAuth } = this.state;
 
     return (
       <div className="menu-wrapper">
@@ -77,6 +86,7 @@ class Menu extends Component {
           <Logo client="true" />
           <MenuLinks list={this.state.links} className="menu-links-client" />
           <div className="user-name">
+            {this.showAdminLink()}
             {
               isUserAuth ?
                 <a onClick={e => this.logOut()}>Выйти</a>

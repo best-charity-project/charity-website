@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-// import logo from '../../Assets/AssetsSvg/on-info-logo.svg';
+import { withRouter, NavLink } from 'react-router-dom';
 import './Navigation.css';
 import Button from '../Button/Button';
 import { removeToken } from '../Admin/Auth/';
@@ -22,7 +21,10 @@ class Navigation extends Component {
         return (
             <div className="container-min">
                 <Logo />
+                <div className="buttons-container">
+                <NavLink className="button-admin-to-main" to="/">На главную</NavLink>
                 <Button label="Выйти" name="button-admin-exit" clickHandler={this.handleLogout} />
+                </div>
             </div>
         );
     }
