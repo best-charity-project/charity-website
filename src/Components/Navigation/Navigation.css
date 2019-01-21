@@ -11,3 +11,17 @@
   z-index: 999;
   top: 0;
 }
+
+.button-admin-to-main {
+  color: #9b9b9b;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+}
