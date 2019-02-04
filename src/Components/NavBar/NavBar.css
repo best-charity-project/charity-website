@@ -28,6 +28,11 @@ body {
     color: #fff;
     text-decoration: none;
 }
+
+.menu-list-admin li a:hover {
+    background: transparent;
+    color: #4CAF50;
+}
 .menu-list-admin a:first-child li:before {
     content: '';
     background-image: url(../../Assets/AssetsSvg/mbri-users.svg);

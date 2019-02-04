@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import './EduWayMarkerList.css';
 import { server } from '../../api';
 import _ from 'lodash';
 
@@ -67,12 +66,22 @@ class EduWayPeoples extends Component {
       });
   };
 
+  decorateYears(person) {
+    let years;
+      if(person.yearEnd) {
+        years = `${person.yearStart} - ${person.yearEnd}`;
+      } else {
+        years = person.yearStart;
+      }
+      return years;
+  }
+
   render() {
     return (
       <div className="markers-content">
         <div className="markers-list">
           <div className="markers-list-header">
-            <span>Диагноз</span>
+            <span>Рекомендованная программа</span>
             <span>Контактное лицо</span>
             <span>Контакты</span>
             <span>Адрес</span>
@@ -87,7 +96,7 @@ class EduWayPeoples extends Component {
                   <span className="cell"> {person.contactPerson}</span>
                   <span className="cell"> {person.contacts.email} <br/> {person.contacts.phone}</span>
                   <span className="cell"> {person.location.region} <br/> {person.location.district}<br/> {person.location.city}</span>
-                  <span className="cell"> {person.years}</span>
+                  <span className="cell"> {this.decorateYears(person)}</span>
                   <div className="cell">
                     <Button
                       name="button-admin admin-cancel"

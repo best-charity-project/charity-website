@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 import SocialLinks from '../Menu/SocialLinks'
 function Footer (props){
     return (
-			<div className = {props.name +' footer'}>
+			<div className = {props.name +' page-footer'}>
 				<div>
 					<span className ='copyright'>&#169; </span>
 					<NavLink to="/" className = 'link-on-main-page'>on-info</NavLink>
