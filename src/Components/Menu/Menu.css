@@ -10,10 +10,9 @@
   flex-grow: 0;
   width: 100%;
   background-color: #e8e6e2;
-  height: 80px;
   position: fixed;
   justify-content: space-between;
-  align-items: start;
+  align-items: center;
 }
 
 .menu-links-client {
