@@ -5,15 +5,24 @@ import InputMask from 'react-input-mask';
 import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
 import { map, find } from 'lodash';
-
 import geoDB from '../../../Configs/geo';
 import { server } from "../../../api";
 import Button from '../../../Components/Button/Button';
+import YearPicker from "react-year-picker";
 import './EduListRegistration.css';
+const programs = [
+  "Вспомогательная 1 отделение",
+  "Вспомогательная 2 отделение",
+  "Трудности в обучении",
+  "Тяжелые нарушения речи",
+  "Общеобразовательная программа",
+  "Свой вариант",
+]
 
 export default class EduListRegistration extends Component {
   state = {
-    diagnosis: '',
+    program: '',
+    customProgram: "",
     contactPerson: '',
     contacts: {
       email: '',
@@ -24,39 +33,48 @@ export default class EduListRegistration extends Component {
       district: '',
       city: ''
     },
-    years: '',
+    yearStart: '',
+    yearEnd: '',
     districtArray: [],
     cityArray: []
-  };
-
-  getDiagnosis = (e) => {
-    this.setState({ diagnosis: e.target.value });
   };
 
   getContactPerson = (e) => {
     this.setState({ contactPerson: e.target.value });
   };
 
+  onProgramChange = (program) => {
+    this.setState({ program });
+  };
+
+  onCustomProgramChange = (e) => {
+    this.setState({ customProgram: e.target.value });
+  };
+
   getEmail = (e) => {
-    this.setState({ 
+    this.setState({
       contacts: {
         ...this.state.contacts,
         email: e.target.value
       }
-     });
+    });
   };
 
   getPhone = (e) => {
-    this.setState({ 
+    this.setState({
       contacts: {
         ...this.state.contacts,
         phone: e.target.value
       }
-     });
+    });
   };
 
-  getYears = (e) => {
-    this.setState({ years: e.target.value });
+  getYearStart = (year) => {
+    this.setState({ yearStart: year.toString() });
+  };
+
+  getYearEnd = (year) => {
+    this.setState({ yearEnd: year.toString() });
   };
 
   onRegionChange = (str) => {
@@ -67,7 +85,7 @@ export default class EduListRegistration extends Component {
       }
     }, () => {
       map(geoDB, el => {
-        if(el.region === str ) {
+        if (el.region === str) {
           this.setState({
             districtArray: el.districts
           })
@@ -102,7 +120,8 @@ export default class EduListRegistration extends Component {
   onCancel = (e) => {
     e.preventDefault();
     this.setState({
-      diagnosis: '',
+      program: '',
+      customProgram: "",
       contactPerson: '',
       contacts: {
         email: '',
@@ -113,7 +132,8 @@ export default class EduListRegistration extends Component {
         district: '',
         city: ''
       },
-      years: ''
+      yearStart: '',
+      yearEnd: ""
     })
     this.props.history.push({
       pathname: '/education-way-people-list'
@@ -121,34 +141,54 @@ export default class EduListRegistration extends Component {
   }
 
   onPublish = (e) => {
+    const body = this.state;
+    body.diagnosis = this.state.program === "Свой вариант" ? this.state.customProgram : this.state.program;
+
     axios({
       method: 'post',
       url: `${server}/api/edulist/`,
-      data: this.state
+      data: body
     })
-    .then(respose => {
-      this.setState({
-        diagnosis: '',
-        contactPerson: '',
-        contacts: {
-          email: '',
-          phone: ''
-        },
-        location: {
-          region: '',
-          district: '',
-          city: ''
-        },
-        years: ''
+      .then(respose => {
+        this.setState({
+          program: '',
+          customProgram: "",
+          contactPerson: '',
+          contacts: {
+            email: '',
+            phone: ''
+          },
+          location: {
+            region: '',
+            district: '',
+            city: ''
+          },
+          yearStart: '',
+          yearEnd: ""
+        })
+        this.props.history.push({
+          pathname: '/education-way-people-list'
+        });
       })
-      this.props.history.push({
-        pathname: '/education-way-people-list'
+      .catch(err => {
+        console.log(err);
       });
-    })
-    .catch(err => {
-      console.log(err);
-    });
   }
+
+  showAdditionalInput() {
+    if (this.state.program !== "Свой вариант") return;
+    return (
+      <input
+        type="text"
+        placeholder="Введите программу"
+        name="edulist-registration-program"
+        required
+        className="edulist-registration-program"
+        onChange={this.onCustomProgramChange}
+      />
+    )
+  }
+
   render() {
     const { districtArray, cityArray } = this.state;
 
@@ -156,14 +196,20 @@ export default class EduListRegistration extends Component {
       <div className="edulist-registration-wrapper">
         <div className="edulist-registration-container">
           <div className="edulist-registration-form">
-            <input
-              type="text"
-              placeholder="Название болезни"
-              name="edulist-registration-diagnosis"
-              required
-              className="edulist-registration-diagnosis"
-              onChange={this.getDiagnosis}
-            />
+            <Select
+              onChange={this.onProgramChange}
+              placeholder="Рекомендованная программа образования"
+              className="place-type-select-edulist"
+              notFoundContent="Программа не найдена"
+              optionLabelProp="children"
+            >
+              {
+                map(programs, item => {
+                  return <Option key={item} value={item}>{item}</Option>
+                })
+              }
+            </Select>
+            {this.showAdditionalInput()}
             <input
               type="text"
               placeholder="Контактное лицо"
@@ -180,26 +226,12 @@ export default class EduListRegistration extends Component {
               className="edulist-registration-email"
               onChange={this.getEmail}
             />
-            <InputMask 
+            <InputMask
               required
               placeholder="Телефон"
               mask="+375 (99) 999-99-99"
               onChange={this.getPhone}
               name="edulist-registration-phone"
-              className="edulist-registration-phone"
-            />
-            <InputMask 
-              required
-              placeholder="Годы поступления"
-              formatChars={{
-                '1': '[0-1]',
-                '2': '[1-2]',
-                '3': '[0-3]',
-                '9': '[0-9]'
-              }}
-              mask="2999"
-              onChange={this.getYears}
-              name="edulist-registration-years"
               className="edulist-registration-phone"
             />
             <label className="place-type"> Ваш примерный адрес: </label>
@@ -217,7 +249,7 @@ export default class EduListRegistration extends Component {
                     return <Option key={index} value={element.region}>{element.region}</Option>
                   })
                 }
-              </Select>     
+              </Select>
             </div>
             <div>
               <Select
@@ -226,14 +258,14 @@ export default class EduListRegistration extends Component {
                 className="place-type-select-edulist"
                 notFoundContent="Регион не найден"
                 optionLabelProp="children"
-                dropdownMenuStyle = {{ maxHeight: 250 }}
+                dropdownMenuStyle={{ maxHeight: 400 }}
               >
                 {
                   map(districtArray, (item, id) => {
                     return <Option key={id} value={item.name}>{item.name}</Option>
                   })
                 }
-              </Select>     
+              </Select>
             </div>
             <div>
               <Select
@@ -242,30 +274,36 @@ export default class EduListRegistration extends Component {
                 className="place-type-select-edulist"
                 notFoundContent="Город не найден"
                 optionLabelProp="children"
-                dropdownMenuStyle = {{ maxHeight: 250 }}
+                dropdownMenuStyle={{ maxHeight: 400 }}
               >
                 {
                   map(cityArray, (item, id) => {
                     return <Option key={id} value={item}>{item}</Option>
                   })
                 }
-              </Select>     
+              </Select>
+              <label className="place-type">Предполагаемые годы зачисления в учреждение:</label>
+              <div className="years-container">
+                {"c"}<YearPicker onChange={this.getYearStart} />
+                {"до"}<YearPicker onChange={this.getYearEnd} />
+              </div>
+
             </div>
-            
+
           </div>
           <div className="edulist-registration-button">
             <Route render={({ history }) => (
-              <Button 
+              <Button
                 label={"Отменить"}
-                name = "button-user-registration button-user-registration-cancel"
-                clickHandler = {this.onCancel}
+                name="button-user-registration button-user-registration-cancel"
+                clickHandler={this.onCancel}
               />
             )} />
             <Route render={({ history }) => (
-              <Button 
+              <Button
                 label={"Подать заявку"}
-                name = "button-user-registration button-user-registration-done"
-                clickHandler = {this.onPublish}
+                name="button-user-registration button-user-registration-done"
+                clickHandler={this.onPublish}
               />
             )} />
           </div>

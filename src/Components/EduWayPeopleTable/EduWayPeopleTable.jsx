@@ -9,7 +9,7 @@ class EduWayPeopleTable extends Component {
     {
       className: "diagnose-column",
       propertyName: "diagnosis",
-      label: "Диагноз"
+      label: "Рекомендованная программа образования"
     },
     {
       className: "contact-person-column",
@@ -35,8 +35,20 @@ class EduWayPeopleTable extends Component {
   ];
 
   linkToRegistrationCurrentUser = '/education-way-people-list-registration';
+
+  decorateList() {
+    return this.props.peopleList.map(item => {
+      if(item.yearEnd) {
+        item.years = `${item.yearStart} - ${item.yearEnd}`;
+      } else {
+        item.years = item.yearStart;
+      }
+      return item;
+    })
+  }
+
   render() {
-    const { peopleList } = this.props;
+    const peopleList = this.decorateList();
     return (
       <React.Fragment>
         <button className="edu-way-people-add"><Link to={this.linkToRegistrationCurrentUser}>Добавиться в список</Link></button>

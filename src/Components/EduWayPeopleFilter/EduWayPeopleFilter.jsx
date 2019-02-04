@@ -2,10 +2,20 @@ import React from "react";
 import "./EduWayPeopleFilter.css";
 import CharityForm from "./../Common/CharityForm/CharityForm";
 import Joi from "joi-browser";
+const programs = [
+  {name: "Вспомогательная 1 отделение"},
+  {name: "Вспомогательная 2 отделение"},
+  {name: "Трудности в обучении"},
+  {name: "Тяжелые нарушения речи"},
+  {name: "Общеобразовательная программа"},
+  {name: "Свой вариант"},
+]
+
 class EduWayPeopleFilter extends CharityForm {
   state = {
     data: {
       diagnose: "",
+      customProgram: "",
       name: "",
       region: "",
       district: "",
@@ -24,6 +34,7 @@ class EduWayPeopleFilter extends CharityForm {
 
   schema = {
     diagnose: Joi.string().allow(""),
+    customProgram: Joi.string().allow(""),
     name: Joi.string().allow(""),
     region: Joi.string().allow(""),
     district: Joi.string().allow(""),
@@ -176,9 +187,10 @@ class EduWayPeopleFilter extends CharityForm {
   }
 
   doSubmit() {
+    const diagnosis = this.state.data.diagnose === "Свой вариант" ? this.state.data.customProgram : this.state.data.diagnose;
+    
     const {
       data: {
-        diagnose: diagnosis,
         name,
         years,
         region,
@@ -190,6 +202,12 @@ class EduWayPeopleFilter extends CharityForm {
     const { data: peopleList } = this.props;
 
     const result = peopleList.filter((value, index) => {
+      const valueYears = value.years.match(/\d\d\d\d/gi, "");
+      const yearStart = Number(valueYears[0]);
+      const yearEnd = valueYears[1] ? Number(valueYears[1]) : null;
+      const currentYear = years ? Number(years) : null;
+      const yearFilter = yearEnd ? (currentYear <= yearEnd && currentYear >= yearStart) : (currentYear >= yearStart);
+
       return (
         value.diagnosis.toLowerCase().includes(diagnosis.toLowerCase()) &&
         value.contactPerson.includes(name) &&
@@ -197,11 +215,16 @@ class EduWayPeopleFilter extends CharityForm {
         value.location.district.includes(district) &&
         value.location.city.includes(city) &&
         (value.location.microdistrict ? value.location.microdistrict.includes(microdistrict) : true) &&
-        value.years.toString().includes(years)
+        (currentYear ? yearFilter : true)
       );
     });
 
     this.props.onSubmit(result);
+  }
+
+  showAdditionalInput() {
+    if (this.state.data.diagnose !== "Свой вариант") return;
+    return this.renderInput("customProgram", "Введите программу")
   }
 
   render() {
@@ -217,7 +240,8 @@ class EduWayPeopleFilter extends CharityForm {
 
     return (
       <form onSubmit={this.handleSubmit} className="edu-people-list-filter">
-        {this.renderInput("diagnose", "Диагноз")}
+        {this.renderSelect("diagnose", "Программа", programs)}
+        {this.showAdditionalInput()}
         {this.renderSelect("name", "Ищу", names)}
         {this.renderSelect("region", "Область", regions)}
         {this.renderSelect("district", "Район", districts, !data.region)}

@@ -79,7 +79,6 @@
 }
 
 .contact-info p {
-    margin: 5px;
     padding: 10px 20px 30px 20px;
 }
 
@@ -330,5 +329,5 @@
 .contact-link {
     color: #459369;
     text-decoration: none;
-    padding-left: 5px;
+    padding-left: 20px;
 }
