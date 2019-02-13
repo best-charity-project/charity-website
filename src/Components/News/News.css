@@ -33,7 +33,7 @@
 }
 .news-text {
     font-family: Montserrat;
-    display: inline-block;
+    display: block;
     padding: 0 20px;
     font-size: 16px;
     text-overflow:clip;
@@ -45,6 +45,11 @@
 .news-text ol {
     padding: 0 20px;
     margin: 5px 0;
+}
+
+.news-category {
+    display: block;
+    padding: 10px 20px;
 }
 
 .news-text .DraftEditor-editorContainer {

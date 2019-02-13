@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { server } from "../../../src/api";
 import "../FullNews/FullNews.css";
+import "./LibraryCard.css";
 
 class LibraryCard extends Component {
     state = {
@@ -29,14 +30,14 @@ class LibraryCard extends Component {
         const { data } = this.state;
         if (!data.title) return;
 
-        return <div className="full-news">
-            <h3 className="full-news-title">{data.title}</h3>
-            <a href={data.url}>{data.category.toLowerCase() === "видео" ? "Смотреть" : "Скачать"}</a>
+        return <div className="full-news library-card">
+            <h3 className="full-news-title library-card-title">{data.title}</h3>
+            <a className="library-card-source" href={data.source ? data.source : `https://drive.google.com/uc?id=${data.fileId}&export=download`} target="_blank">{data.source ?  "Источник" : "Скачать"}</a>
             <span
-                className='full-news-author'>
+                className='library-card-author'>
                 Автор: {data.author}
             </span>
-           <p>{data.description}</p>
+           <p className="library-card-description">{data.description}</p>
         </div>
     }
 

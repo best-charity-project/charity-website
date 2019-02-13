@@ -56,8 +56,7 @@ class AdminLibraryAdd extends Component {
   };
 
   changeFile = e => {
-    const file = e.target.files.item(0);
-    if (!file) return;
+    const file = e.target.files.item(0) || "";
     this.setState({ file });
   };
 
@@ -100,7 +99,8 @@ class AdminLibraryAdd extends Component {
 
     if (file ) {
       formData.append("file", file, file.fileName);
-    } else {
+    }
+    if(source) {
       formData.append("source", source);
     }
 
