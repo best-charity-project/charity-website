@@ -42,8 +42,8 @@ class AdminLibraryItem extends Component {
 
   showSource() {
     const { fileId, source } = this.state;
-    return fileId ? <a href={`https://drive.google.com/uc?id=${fileId}&export=download`}>{`https://drive.google.com/uc?id=${fileId}&export=download`}</a> :
-      <a href={source}>{source}</a>
+    return fileId ? <a href={`https://drive.google.com/uc?id=${fileId}&export=download`} target="_blank">Загруженный файл</a> :
+      <a href={source} target="_blank">Ссылка</a>
   }
 
   render() {

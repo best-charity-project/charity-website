@@ -1,0 +1,20 @@
+.library-card {
+  padding: 20px;
+}
+
+.library-card-title {
+  margin-bottom: 20px;
+}
+
+.library-card-source {
+  color: #459369;
+}
+
+.library-card-author {
+  display: block;
+  margin-top: 20px;
+}
+
+.client-news .full-news .library-card-description {
+  padding: 0;
+}
