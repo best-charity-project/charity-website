@@ -101,7 +101,7 @@ class AdminAddProjects extends Component {
             <div className="projects-status">
               <span>
                 Статус проекта:{" "}
-                {this.state.isPublic ? " опубликована" : " черновик"}
+                {this.state.isPublic ? " опубликован" : " черновик"}
               </span>
               <Route
                 render={({ history }) => (

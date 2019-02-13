@@ -12,12 +12,16 @@ class AdminSelectSearch extends Component {
     state = {
         filters : this.props.filtersList,
         addNewOption : false,
-        value : ''
+        value : this.props.value || 'все'
     }
     componentDidMount(){
-        (this.props.value) ? this.setState({value:this.props.value}) : this.setState({value:'все'});
         this.createOptions();
     }
+
+    componentWillReceiveProps(props) {
+        if(props.value) this.setState({value: props.value})
+    }
+
     createOptions = () => {
         let array = [];
         if(this.state.filters){
@@ -42,7 +46,7 @@ class AdminSelectSearch extends Component {
         return (
             <div className = "select-component" onChange = {this.getOptions}>
                 <div className = "select-filter">
-                    <span className = "source-select"> Источник :</span>
+                    <span className = "source-select">{this.props.label || "Источник:"}</span>
                     <Select                   
                         id = "my-select"
                         value = {this.state.value}

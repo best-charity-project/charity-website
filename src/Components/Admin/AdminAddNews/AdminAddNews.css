@@ -15,14 +15,26 @@
 }
 .create-news .container-for-input {
     display: flex;
+    align-items: center;
 }
 .create-news .container-for-input label {
     flex-basis: 25%;
 }
 .create-news .input-buttom-select {
     display: flex;
-
 }
+.create-news #file-news:disabled {
+    cursor: not-allowed;
+}
+
+.create-news .admin-buttons_library {
+    width: 30%;
+}
+
+.create-news .library-url {
+    margin-right: 30px;
+}
+
 .create-news .input-buttom-select .container-for-input label {
     flex-basis: 33%;
 }
@@ -104,13 +116,14 @@
 .create-news hr {
     margin: 30px 40px;
 }
-.create-news hr:nth-of-type(2) {
-    margin-top: 0;
-}
 .create-news .admin-buttons {
     margin: 60px auto 0px;
     display: flex;
     justify-content: space-evenly
+}
+.create-news ≈ {
+    width: 700px;
+
 }
 .create-news .admin-buttons > button {
     margin: 0 10px;
@@ -122,6 +135,10 @@
 }
 .create-news .choose-file {
     line-height: 1;
+}
+.create-news .library-label {
+    margin-left: 30px;
+    margin-right: 30px;
 }
 .create-news .admin-textarea {
     display: flex;
@@ -143,6 +160,9 @@
     display: flex;
     flex-direction: column;
     padding: 5px;
+}
+.create-news textarea.news-description {
+    width: 50%;
 }
 .create-news .admin-textarea-description span,
 .create-news .admin-textarea-description div {

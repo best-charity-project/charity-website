@@ -48,11 +48,14 @@ class Menu extends Component {
         ],
       },
       {
+        name: 'библиотека',
+        url: '/library',
+      },
+      {
         name: 'контакты',
         url: '/contacts',
       },
     ],
-    // email: '',
     isUserAuth: false,
   };
 
@@ -74,7 +77,7 @@ class Menu extends Component {
     const parsedToken = jwt_decode(token) || {};
 
     if(!parsedToken.admin) return;
-    return <NavLink to={'/admin-panel/dashboard'}>Панель администратора</NavLink>
+    return <NavLink to={'/admin-panel/dashboard'}>Админпанель</NavLink>
   }
 
   render() {

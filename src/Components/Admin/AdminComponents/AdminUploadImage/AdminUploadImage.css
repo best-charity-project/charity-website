@@ -20,8 +20,15 @@
     background-color: #4CAF50;
     color: #e8e6e2;
     border-color: #4CAF50;
+    cursor: pointer;
 }
-.admin-image input {
+
+.admin-button_library {
+    width: 100px;
+}
+
+.admin-image input,
+.file-news {
     cursor: pointer;
     height: 28px;
     position: absolute;
@@ -29,10 +36,25 @@
     left: 0px;
     margin: 0px;
     opacity: 0;
-    width: 200px;
 }
 .choose-file {
     text-align: center;
+    cursor: pointer;
+}
+.admin-button_disabled {
+    color: #313131;
+    border-color: #313131;
+}
+
+.admin-button_disabled:hover {
+    cursor: not-allowed;
+    color: #313131;
+    border-color: #313131;
+    background-color: #e8e6e2;
+}
+
+.admin-button_disabled:hover .choose-file {
+    cursor: not-allowed;
 }
 .preview-image {
     margin: 20px 0;

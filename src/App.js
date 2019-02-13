@@ -3,9 +3,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './Pages/Home/MainPage';
 import Contacts from './Pages/Contacts/Contacts';
+import Library from './Pages/Library/Library';
+import LibraryCard from './Components/LibraryCard/LibraryCard';
 import UserLogin from './Pages/UserLogin/UserLogin';
 import Projects from './Pages/Projects/Projects';
-// import Navigation from './Components/Navigation/Navigation';
 import Error from './Components/Error/Error';
 import Admin from './Pages/Admin/Admin';
 import Events from './Pages/Events/Events';
@@ -19,12 +20,12 @@ import AdminEvents from './Components/Admin/AdminEvents/AdminEvents';
 import AdminCreateEvent from './Components/Admin/AdminComponents/AdminCreateEvent/AdminCreateEvent';
 import AdminNewsBlock from './Components/Admin/AdminNewsBlock/AdminNewsBlock';
 import AdminAddNews from './Components/Admin/AdminAddNews/AdminAddNews';
+import AdminLibrary from './Components/Admin/AdminLibrary/AdminLibrary';
+import AdminLibraryAdd from './Components/Admin/AdminComponents/AdminLibraryAdd/AdminLibraryAdd';
 import AdminProjectsBlock from './Components/Admin/AdminProjectsBlock/AdminProjectsBlock';
 import AdminAddProjects from './Components/Admin/AdminAddProjects/AdminAddProjects';
 import AdminFiltersBlock from './Components/Admin/AdminFiltersBlock/AdminFiltersBlock';
 import AdminForumBlock from './Components/Admin/AdminForumBlock/AdminForumBlock';
-// import { fakeAuth } from './Components/Admin/Auth/PrivateRoute';
-// import { getToken } from './Components/Admin/Auth';
 import AdminEduWay from './Components/Admin/AdminEduWay/AdminEduWay';
 import EduWayPeoples from './Components/Admin/EduWayPeople/EduWayPeoples';
 import EduListRegistration from './Pages/EducationWayPeopleList/EduListRegistration/EduListRegistration';
@@ -32,10 +33,6 @@ import { PublicLayout, PrivateLayout } from './Components/Common/Layouts/MainLay
 import AdminLayout from './Components/Common/Layouts/AdminLayout';
 
 class App extends Component {
-
-  renderWithLayout(Layout, Component) {
-    return <Layout><Component /></Layout>;
-  }
 
   render() {
     return (
@@ -55,6 +52,8 @@ class App extends Component {
             <AdminLayout path="/admin-panel/dashboard" component={AdminMain} />
             <AdminLayout path="/admin-panel/events" component={AdminEvents} exact />
             <AdminLayout path="/admin-panel/events/create" component={AdminCreateEvent} />
+            <AdminLayout path="/admin-panel/library" component={AdminLibrary} exact />
+            <AdminLayout path="/admin-panel/library/create" component={AdminLibraryAdd} />
             <AdminLayout path="/admin-panel/news" component={AdminNewsBlock} exact />
             <AdminLayout path="/admin-panel/news/create" component={AdminAddNews} />
             <AdminLayout path="/admin-panel/projects" component={AdminProjectsBlock} exact />
@@ -65,6 +64,8 @@ class App extends Component {
             <AdminLayout path="/admin-panel/eduwaypeoples" component={EduWayPeoples} exact />
             <PublicLayout path="/news/:id" component={FullNews} />
             <PublicLayout path="/news" component={PageNews} />
+            <PublicLayout path="/library" component={Library} exact />
+            <PublicLayout path="/library/:id" component={LibraryCard} />            
             <PublicLayout path="/contacts" component={Contacts} />
             <Route component={Error} />
           </Switch>
