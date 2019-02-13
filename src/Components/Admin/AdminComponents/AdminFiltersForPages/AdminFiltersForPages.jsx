@@ -8,18 +8,16 @@ import "../AdminFiltersForPages/AdminFiltersForPages.css";
 
 class FiltersForPages extends Component {
   state = {
-    type: "",
-    filters: [],
+    type: this.props.type || "",
+    filters: this.props.list || [],
     title: "",
     isOpen: false
   };
-  componentDidMount() {
-    if (this.props) {
+  componentWillReceiveProps(props) {
       this.setState({
-        type: this.props.type,
-        filters: this.props.list
+        type: props.type,
+        filters: props.list
       });
-    }
   }
   addFilter = () => {
     if (this.state.title) {
@@ -110,9 +108,7 @@ class FiltersForPages extends Component {
       }
     }).then(result => {
       this.setState({
-        filters: this.state.filters.filter(item => {
-          return item._id !== id;
-        })
+        filters: this.props.list.filter(item => item._id !== id)
       });
     });
   };

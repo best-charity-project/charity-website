@@ -16,6 +16,7 @@ const NavBar = () => {
           { name: 'Форум', url: '/admin-panel/forum' },
           { name: 'Учереждения', url: '/admin-panel/eduway' },
           { name: 'Люди', url: '/admin-panel/eduwaypeoples' },
+          { name: 'Библиотека', url: '/admin-panel/library' },
         ]}
         classActive="active-link-admin"
       />

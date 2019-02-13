@@ -10,7 +10,7 @@ class NewsAside extends Component {
     };
   }
   componentDidMount() {
-    this.setState({ activeItem: "Все", filters: this.props.filters });
+    this.setState({ activeItem: "все", filters: this.props.filters });
   }
   getCurrentFilter = e => {
     let currentFilter = e.target;
@@ -26,7 +26,7 @@ class NewsAside extends Component {
           <ul className="link-news" onClick={this.getCurrentFilter}>
             {this.state.filters
               ? this.state.filters.map((el, index) => {
-                  if (activeItem === el.title) {
+                  if (activeItem === el.title.toLowerCase()) {
                     return (
                       <li className="active-link-news" key={index}>
                         {el.title}
