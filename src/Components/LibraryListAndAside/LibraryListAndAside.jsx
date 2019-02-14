@@ -62,7 +62,7 @@ class LibraryListAndAside extends Component {
 
     render() {
         return (
-            <div className='events-aside-list'>
+            <div className='events-aside-list library-aside-list'>
                 {this.showFilters()}
                 <LibraryList
                     name="events-list"
