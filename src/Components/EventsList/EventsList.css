@@ -1,5 +1,9 @@
-.events-list{
-    margin-left: 150px;
+.events-list {
+    margin-left: 300px;
     width: 100%; 
+  }
+
+  .library-aside-list .events-list {
+    margin-left: 150px;
   }
   

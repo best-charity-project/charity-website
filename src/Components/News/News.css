@@ -5,9 +5,10 @@
     height: auto;
     border-radius: 3px;
     padding: 15px 0;
-    margin:15px;
-    background-color:#ffffff;
+    margin: 15px;
+    background-color: #ffffff;
 }
+
 .news-date {
     color: #ffc757;
     display: inline-block;
@@ -16,31 +17,36 @@
     font-weight: 600;
     margin-bottom: 5px;
 }
+
 .news img {
-    display:block;
-    width:100%;
+    display: block;
+    width: 100%;
     margin-top: 10px;
 }
+
 .news a {
     text-decoration: none;
     color: #3b3f48;
 }
+
 .news-title {
     padding: 5px 20px 5px 20px;
     font-size: 18px;
     font-weight: 600;
     color: #3b3f48;
 }
+
 .news-text {
     font-family: Montserrat;
     display: block;
     padding: 0 20px;
     font-size: 16px;
-    text-overflow:clip;
+    text-overflow: clip;
     overflow: hidden;
     max-height: 230px;
     color: #3b3f48;
 }
+
 .news-text ul,
 .news-text ol {
     padding: 0 20px;
@@ -69,16 +75,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  .hidden {
-      display: none; 
-  }
-  .modal-event-field {
-      position: relative;
-      width: 1000px;
-      background-color: #ffffff;
-      border-radius: 5px;
-  } 
-  .news-title, .news-text {
-      cursor: pointer;
-  }
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-event-field {
+    position: relative;
+    width: 1000px;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+.news-title,
+.news-text {
+    cursor: pointer;
+}
+
+.news-admin-source {
+    color: #4CAF50
+}

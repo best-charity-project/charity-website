@@ -6,27 +6,32 @@ import { server } from "../../../../api";
 import TextField from "../../../TextField/TextField";
 import Button from "../../../Button/Button";
 import AdminSelectSearch from "../AdminSelectSearch/AdminSelectSearch";
-const categories = [
+const CATEGORIES = [
   { title: "видео", id: "видео" },
   { title: "статьи", id: "статьи" },
   { title: "литература", id: "литература" },
   { title: "учебный материал", id: "учебный материал" },
   { title: "другое", id: "другое" }
 ];
+const FILE_SIZE = 5242880;
+
 
 class AdminLibraryAdd extends Component {
-  state = {
-    title: "",
-    source: "",
-    description: "",
-    filter: "",
-    category: "",
-    author: "",
-    file: "",
-    fileId: "",
-    isTitleCorrect: true,
-    isDescriptionCorrect: true,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: "",
+      source: "",
+      description: "",
+      filter: "",
+      category: "",
+      author: "",
+      file: "",
+      fileId: "",
+      isTitleCorrect: true,
+      isDescriptionCorrect: true,
+    };
+  }
 
   componentDidMount() {
     this.getFiltersListByType("library");
@@ -84,8 +89,16 @@ class AdminLibraryAdd extends Component {
 
   validate() {
     const { source, file, title, description, fileId } = this.state;
-    if (title && (fileId || source || file) && description) { return true }
-    else { this.props.alert.error('Заполните все необходимые поля') }
+    const isFileValid = file ? file.size < FILE_SIZE : true;
+    if (!title || (!fileId && !source && !file) || !description) {
+      this.props.alert.error('Заполните все необходимые поля');
+      return false;
+    }
+    if (!isFileValid) {
+      this.props.alert.error('Файл слишком большой');
+      return false
+    }
+    return true;
   }
 
   sendMaterials = async () => {
@@ -97,10 +110,10 @@ class AdminLibraryAdd extends Component {
     Object.keys(sendedBody).forEach(key =>
       formData.append(key, this.state[key]));
 
-    if (file ) {
+    if (file) {
       formData.append("file", file, file.fileName);
     }
-    if(source) {
+    if (source) {
       formData.append("source", source);
     }
 
@@ -155,7 +168,7 @@ class AdminLibraryAdd extends Component {
         id="title-news"
         type="text"
         name="title-news"
-        value={this.state.source}
+        value={this.state.source || ''}
         onChange={this.changeSource}
         disabled={this.state.file}
       /></React.Fragment>
@@ -185,8 +198,9 @@ class AdminLibraryAdd extends Component {
         <hr />
         <div className="admin-title-news">
           <div className="container-for-input">
-            <label htmlFor="source-news">Источник*</label>
+            <label htmlFor="source-news">Источник (до 5 МБ)*
             {this.showUrl()}
+            </label>
             <div className={this.state.source ? "admin-button admin-button_file admin-button_disabled" : "admin-button admin-button_file"} >
               <div className="choose-file">Выберите файл</div>
               <input
@@ -241,7 +255,7 @@ class AdminLibraryAdd extends Component {
         <div className="text-news">
           <AdminSelectSearch
             value={this.state.category}
-            filtersList={categories}
+            filtersList={CATEGORIES}
             getFilter={this.getCategory}
             label={"Категория"}
           />

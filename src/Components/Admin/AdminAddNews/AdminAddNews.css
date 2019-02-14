@@ -32,7 +32,9 @@
 }
 
 .create-news .library-url {
-    margin-right: 30px;
+    margin-top: 20px;
+    color: #4CAF50;
+    display: block;
 }
 
 .create-news .input-buttom-select .container-for-input label {
