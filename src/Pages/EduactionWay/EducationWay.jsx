@@ -8,6 +8,7 @@ import { debounce } from 'lodash';
 import './EducationWay.css';
 import ymaps from 'ymaps';
 import Button from '../../Components/Button/Button';
+import { withAlert } from 'react-alert';
 
 class EducationWay extends Component {
   state = {
@@ -117,6 +118,7 @@ class EducationWay extends Component {
         },
       }),
       () => {
+        if(!this.state.pointDetails.description || !this.state.pointDetails.type) return this.props.alert.error('Заполните все необходимые поля');
         axios({
           method: 'post',
           url: `${server}/api/eduway`,
@@ -132,7 +134,7 @@ class EducationWay extends Component {
             this.hideAddPointModal();
           })
           .catch(err => {
-            console.log(err);
+            this.props.alert.error("Ошибка базы данных");
           });
       }
     );
@@ -189,9 +191,9 @@ class EducationWay extends Component {
           <li>
             <input className="add-filter-btn" type="button" />
             <ul className="filter-submenu">
-              <li><input className="filter-school-btn" type="button" onClick={this.showSchoolMarkers} /></li>
-              <li><input className="filter-kindergarten-btn" type="button" onClick={this.showKindergartenMarkers} /></li>
-              <li><input className="filter-all-btn" type="button" onClick={this.showAllMarkers} /></li>
+              <li title="Школы"><input className="filter-school-btn" type="button" onClick={this.showSchoolMarkers} /></li>
+              <li title="Детсады"><input className="filter-kindergarten-btn" type="button" onClick={this.showKindergartenMarkers} /></li>
+              <li title="Все"><input className="filter-all-btn" type="button" onClick={this.showAllMarkers} /></li>
             </ul>
           </li>
         </ul>
@@ -207,7 +209,7 @@ class EducationWay extends Component {
                 {this.state.displayedStep === 1 ? (
                   <div className="first-step">
                     <label className="search-label">
-                      Адрес учереждения:
+                      Адрес учереждения*
                       <input type="text" ref={this.inputRef} onChange={e => this.findAddress(e.target.value)} />
                     </label>
                     <div className="suggestions-list">
@@ -225,7 +227,7 @@ class EducationWay extends Component {
                 ) : (
                   <div className="second-step">
                     <label className="place-type">
-                      Тип учереждения:
+                      Тип учереждения*
                       <Select 
                         value={this.state.typeValue}
                         onChange={this.onChange}
@@ -239,7 +241,7 @@ class EducationWay extends Component {
                       </Select>
                     </label>
                     <label className="place-desc">
-                      Описание:
+                      Описание*
                       <br/>
                       <textarea
                         cols="30"
@@ -266,4 +268,4 @@ class EducationWay extends Component {
   }
 }
 
-export default EducationWay;
+export default withAlert(EducationWay);

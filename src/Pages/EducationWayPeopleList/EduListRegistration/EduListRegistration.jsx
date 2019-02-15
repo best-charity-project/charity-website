@@ -9,6 +9,7 @@ import geoDB from '../../../Configs/geo';
 import { server } from "../../../api";
 import Button from '../../../Components/Button/Button';
 import YearPicker from "react-year-picker";
+import { withAlert } from 'react-alert';
 import './EduListRegistration.css';
 const programs = [
   "Вспомогательная 1 отделение",
@@ -19,7 +20,7 @@ const programs = [
   "Свой вариант",
 ]
 
-export default class EduListRegistration extends Component {
+class EduListRegistration extends Component {
   state = {
     program: '',
     customProgram: "",
@@ -143,6 +144,16 @@ export default class EduListRegistration extends Component {
   onPublish = (e) => {
     const body = this.state;
     body.diagnosis = this.state.program === "Свой вариант" ? this.state.customProgram : this.state.program;
+    if(
+      !body.diagnosis ||
+      !body.contactPerson ||
+      !body.contacts.email ||
+      !body.contacts.phone ||
+      !body.location.region ||
+      !body.location.district ||
+      !body.location.city ||
+      !body.yearStart
+    ) return this.props.alert.error('Заполните все необходимые поля');
 
     axios({
       method: 'post',
@@ -171,7 +182,7 @@ export default class EduListRegistration extends Component {
         });
       })
       .catch(err => {
-        console.log(err);
+        this.props.alert.error("Ошибка базы данных");
       });
   }
 
@@ -198,7 +209,7 @@ export default class EduListRegistration extends Component {
           <div className="edulist-registration-form">
             <Select
               onChange={this.onProgramChange}
-              placeholder="Рекомендованная программа образования"
+              placeholder="Рекомендованная программа образования*"
               className="place-type-select-edulist"
               notFoundContent="Программа не найдена"
               optionLabelProp="children"
@@ -212,7 +223,7 @@ export default class EduListRegistration extends Component {
             {this.showAdditionalInput()}
             <input
               type="text"
-              placeholder="Контактное лицо"
+              placeholder="Контактное лицо*"
               name="edulist-registration-contact-person"
               required
               className="edulist-registration-contact-person"
@@ -220,7 +231,7 @@ export default class EduListRegistration extends Component {
             />
             <input
               type="text"
-              placeholder="e-mail"
+              placeholder="e-mail*"
               name="edulist-registration-email"
               required
               className="edulist-registration-email"
@@ -228,18 +239,18 @@ export default class EduListRegistration extends Component {
             />
             <InputMask
               required
-              placeholder="Телефон"
+              placeholder="Телефон*"
               mask="+375 (99) 999-99-99"
               onChange={this.getPhone}
               name="edulist-registration-phone"
               className="edulist-registration-phone"
             />
-            <label className="place-type"> Ваш примерный адрес: </label>
+            <label className="place-type">Ваш примерный адрес:</label>
             <div>
               <Select
                 combobox
                 onChange={this.onRegionChange}
-                placeholder="Область:"
+                placeholder="Область*"
                 className="place-type-select-edulist"
                 notFoundContent="Область не найдена"
                 optionLabelProp="children"
@@ -254,7 +265,7 @@ export default class EduListRegistration extends Component {
             <div>
               <Select
                 onChange={this.onDistrictChange}
-                placeholder="Регион:"
+                placeholder="Регион*"
                 className="place-type-select-edulist"
                 notFoundContent="Регион не найден"
                 optionLabelProp="children"
@@ -270,7 +281,7 @@ export default class EduListRegistration extends Component {
             <div>
               <Select
                 onChange={this.onCityChange}
-                placeholder="Город:"
+                placeholder="Город*"
                 className="place-type-select-edulist"
                 notFoundContent="Город не найден"
                 optionLabelProp="children"
@@ -284,7 +295,7 @@ export default class EduListRegistration extends Component {
               </Select>
               <label className="place-type">Предполагаемые годы зачисления в учреждение:</label>
               <div className="years-container">
-                {"c"}<YearPicker onChange={this.getYearStart} />
+                {"c*"}<YearPicker onChange={this.getYearStart} />
                 {"до"}<YearPicker onChange={this.getYearEnd} />
               </div>
 
@@ -312,3 +323,5 @@ export default class EduListRegistration extends Component {
     );
   }
 };
+
+export default withAlert(EduListRegistration);
