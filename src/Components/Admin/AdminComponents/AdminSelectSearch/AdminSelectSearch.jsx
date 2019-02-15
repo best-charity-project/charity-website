@@ -46,7 +46,7 @@ class AdminSelectSearch extends Component {
         return (
             <div className = "select-component" onChange = {this.getOptions}>
                 <div className = "select-filter">
-                    <span className = "source-select">{this.props.label || "Источник:"}</span>
+                    <label className = "source-select">{this.props.label || "Источник:"}</label>
                     <Select                   
                         id = "my-select"
                         value = {this.state.value}

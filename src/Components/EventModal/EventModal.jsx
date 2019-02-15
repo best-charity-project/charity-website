@@ -74,8 +74,8 @@ class EventModal extends Component {
                     <div className = 'speakers-event-modal'>                                    
                         <p> Докладчики:</p>
                         <ul>
-                            {this.props.event.speakersArray.map((item,index) => {
-                                return <li><span> {item}</span></li>
+                            {this.props.event.speakersArray.map((item) => {
+                                return <li key={item}><span>{item}</span></li>
                             })}
                         </ul>
                     </div>:null }

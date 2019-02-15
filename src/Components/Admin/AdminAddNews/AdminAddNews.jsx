@@ -137,9 +137,9 @@ class AdminAddNews extends Component {
             <div className="text-news">
               <div className="full-text-news">Полное описание:</div>
               <ControlledEditor
-                initialEditorState={this.state.fullTextEditorState}
                 onEditorStateChange={this.onEditorStateChange}
                 getDeletedImages={this.getDeletedImages}
+                editorState={this.state.fullTextEditorState}
               />
               {!this.state.isFullTextCorrect ? (
                 <AdminValidationWindow

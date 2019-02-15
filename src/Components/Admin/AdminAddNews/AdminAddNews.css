@@ -109,7 +109,8 @@
     margin-left: 0;
     max-width: 85%;
 }
-.create-news .text-news .wrapper .editor {
+.create-news .text-news .wrapper .editor,
+.admin-create-event .editor {
     background-color: #ffffff;
 }
 .create-news .text-news .wrapper .rdw-option-wrapper {
