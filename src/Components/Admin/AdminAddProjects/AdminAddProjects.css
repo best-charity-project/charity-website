@@ -25,9 +25,6 @@ form.form-create-projects {
     text-align: right;
     align-self: center;
 }
-.container-for-input label{
-    flex-basis: 25%;
-}
 .projects-source label {
     font-weight: 600;
 }

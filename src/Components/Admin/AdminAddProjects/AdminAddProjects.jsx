@@ -347,7 +347,7 @@ class AdminAddProjects extends Component {
               <div className="full-text-projects">Описание проекта:</div>
               <div className="projects-textfield">
                 <ControlledEditor
-                  initialEditorState={this.state.fullTextEditorState}
+                  editorState={this.state.fullTextEditorState}
                   onEditorStateChange={this.onEditorStateChange}
                   getDeletedImages={this.getDeletedImages}
                   isProject={true}
