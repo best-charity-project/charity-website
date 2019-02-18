@@ -71,7 +71,7 @@ class AdminProject extends Component {
     publishProjects = (e) => {
         axios({
                 method: 'put',
-                url: `${server}/api/projects/${this.state.id}`,
+                url: `${server}/api/projects/publish/${this.state.id}`,
                 data: {'isPublic':this.state.isPublic},
                 config: {
                     headers: {

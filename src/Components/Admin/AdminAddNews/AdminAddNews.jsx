@@ -152,6 +152,7 @@ class AdminAddNews extends Component {
             <div className="text-news">
               {this.state.filters ? (
                 <AdminSelectSearch
+                label={"Фильтр"}
                   value={this.state.filter}
                   filtersList={this.state.filters}
                   getFilter={this.getFilter}

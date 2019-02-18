@@ -11,13 +11,19 @@ import ProjectGallery from '../../../ProjectGallery/ProjectGallery';
 import ProjectDefaultImg from '../../../../Assets/AssetsSvg/project-default.svg';
 
 class AdminProjectPreview extends Component {
+    getSrc() {
+        if(this.props.imageData) return this.props.imageData;
+        if(this.props.image) return `${server}/images/${this.props.image}`;
+        return ProjectDefaultImg;
+    }
+
     render() {
         return (
             <div className = 'admin-preview-project'>
                 <div className="projects-page-content">
                 <div className="img-container">
                     <div className="img-placeholder">
-                         <img className="project-main-img" alt="" src={this.props.image || this.props.imageData ? `${server}/images/${this.props.image || this.props.imageData}` : ProjectDefaultImg }/>
+                         <img className="project-main-img" alt="" src={this.getSrc()}/>
                     </div>
                 </div>
                     <div className="project-section">
