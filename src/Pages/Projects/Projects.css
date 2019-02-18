@@ -79,11 +79,7 @@
 }
 
 .contact-info p {
-    padding: 10px 20px 30px 20px;
-}
-
-.contact-info p:first-child {
-    margin-bottom: 15px;
+    padding: 10px 20px 10px 20px;
 }
 
 .test {

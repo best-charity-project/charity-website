@@ -17,7 +17,7 @@ class AdminProjectPreview extends Component {
                 <div className="projects-page-content">
                 <div className="img-container">
                     <div className="img-placeholder">
-                         <img className="project-main-img" alt="" src={this.props.image ? `${server}/images/${this.props.image}` : ProjectDefaultImg }/>
+                         <img className="project-main-img" alt="" src={this.props.image || this.props.imageData ? `${server}/images/${this.props.image || this.props.imageData}` : ProjectDefaultImg }/>
                     </div>
                 </div>
                     <div className="project-section">
