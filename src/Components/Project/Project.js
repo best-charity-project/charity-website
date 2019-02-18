@@ -4,7 +4,7 @@ import customRendererFn from '../Admin/AdminComponents/AdminEditor/Renderer';
 import ProjectGallery from '../../Components/ProjectGallery/ProjectGallery';
 import ProjectDefaultImg from '../../Assets/AssetsSvg/project-default.svg';
 import { server } from "../../api";
-
+import "./Project.css";
 
 class Project extends Component {
 

@@ -53,7 +53,7 @@ class AdminAddProjects extends Component {
   };
   cropperRef = React.createRef();
 
-  componentDidMount() {
+  componentWillMount() {
     this.getFiltersListByType("projects");
     if (this.props.location.state) {
       let fullTextEditorState = EditorState.createWithContent(
@@ -125,6 +125,7 @@ class AdminAddProjects extends Component {
                 imageData={this.state.imageData}
                 image={this.state.image}
                 onCropImage={this.onCropImage}
+                ratio={1 / 2}
                 deleteImage={this.deleteImage}
               />
             </div>
