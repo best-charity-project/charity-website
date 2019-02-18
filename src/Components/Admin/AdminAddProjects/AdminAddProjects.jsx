@@ -377,6 +377,7 @@ class AdminAddProjects extends Component {
               <div>
                 {this.state.filters ? (
                   <AdminSelectSearch
+                  label="Фильтр"
                     value={this.state.filter}
                     filtersList={this.state.filters}
                     getFilter={this.getFilter}
@@ -470,10 +471,10 @@ class AdminAddProjects extends Component {
     }
   };
   deleteHead = (e, index) => {
-    let headArray = this.state.headArray;
-    // let deletedHead = headArray.splice(index, 1);
+    const headArray = this.state.headArray;
+    headArray.splice(index, 1);
     this.setState({
-      headArray: headArray
+      headArray
     });
   };
   getContacts = e => {
@@ -499,10 +500,10 @@ class AdminAddProjects extends Component {
   };
   deleteContact = (e, index) => {
     e.preventDefault();
-    let contactsArray = this.state.contactsArray;
-    // let deletedContacts = contactsArray.splice(index, 1);
+    const contactsArray = this.state.contactsArray;
+    contactsArray.splice(index, 1);
     this.setState({
-      contactsArray: contactsArray
+      contactsArray
     });
   };
   getAddress = str => {
@@ -595,9 +596,9 @@ class AdminAddProjects extends Component {
   deleteGalleryVideo = (e, index) => {
     e.preventDefault();
     let mediaVideoArray = this.state.mediaVideoArray;
-    // let deletedVideo = mediaVideoArray.splice(index, 1);
+    mediaVideoArray.splice(index, 1);
     this.setState({
-      mediaVideoArray: mediaVideoArray
+      mediaVideoArray
     });
   };
   isCorrectArrayLimit = () => {
