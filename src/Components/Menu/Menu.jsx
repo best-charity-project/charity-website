@@ -33,10 +33,10 @@ class Menu extends Component {
         ],
       },
       {
-        name: 'сообщества',
+        name: 'образовательный маршрут',
         child: [
           {
-            name: 'образовательный маршрут',
+            name: 'карта учреждений',
             icon: 'idea.svg',
             url: '/education-way',
           },

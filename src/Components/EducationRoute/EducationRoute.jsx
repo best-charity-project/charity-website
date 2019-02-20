@@ -11,6 +11,7 @@ import { redirectTime } from '../../configs/config.json';
 import cancelablePromise from '../../utils/cancelablePromise';
 import './EducationRoute.css';
 import './SelectStyles.css';
+import { withAlert } from 'react-alert';
 
 const defaultValues = {
   locations: [],
@@ -74,7 +75,7 @@ class EducationRoute extends React.Component {
         this.setState({ locations });
       })
       .catch((err) => {
-        window.console.log(err);
+        this.props.alert.error("Ошибка сервера");
       });
   }
 
@@ -387,7 +388,7 @@ class EducationRoute extends React.Component {
   }
 }
 
-export default withRouter(EducationRoute);
+export default withRouter(withAlert(EducationRoute));
 
 EducationRoute.propTypes = {
   userId: PropTypes.string.isRequired,

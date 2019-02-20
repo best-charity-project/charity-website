@@ -12,6 +12,7 @@ import ControlledEditor from "../../AdminComponents/AdminEditor/AdminEditor";
 import AdminSelectSearch from '../AdminSelectSearch/AdminSelectSearch';
 import jsonpAdapter from 'axios-jsonp';
 import { withAlert } from 'react-alert';
+import { vkToken, vkId } from '../../../../Configs/vk';
 
 class AdminCreateEvent extends Component {
     state = {
@@ -443,23 +444,19 @@ class AdminCreateEvent extends Component {
         return text;
     }
     updatePostVk = () => {
-        let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';
-        let id = '-169499477';
         let text = this.getTextofPost();
         axios({
             method: 'get',
             adapter: jsonpAdapter,
-            url: `https://api.vk.com/method/wall.edit?owner_id=${id}&post_id=${this.state.idVK}&message=${text}&access_token=${token}&v=5.80`
+            url: `https://api.vk.com/method/wall.edit?owner_id=${vkId}&post_id=${this.state.idVK}&message=${text}&access_token=${vkToken}&v=5.80`
         })
     };
     publishVk = () => {
-        let token = '37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679';
-        let id = '-169499477';
         let text = this.getTextofPost();
         axios({
             method: 'post',
             adapter: jsonpAdapter,
-            url: `https://api.vk.com/method/wall.post?owner_id=${id}&from_group=0&message=${text}&access_token=${token}&v=5.80`
+            url: `https://api.vk.com/method/wall.post?owner_id=${vkId}&from_group=0&message=${text}&access_token=${vkToken}&v=5.80`
         })
             .then(res => {
                 this.sendEvent(res.data.response.post_id)

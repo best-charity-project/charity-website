@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { getOrganizations } from '../../../organizationsCalls';
 import AcceptedItem from './AcceptedItem';
 import cancelablePromise from '../../../utils/cancelablePromise';
+import { withAlert } from 'react-alert';
 
 class AcceptedOrganizations extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class AcceptedOrganizations extends React.Component {
     this.cancelablePromise.promise
       .then(organizations => this.setState({ organizations }))
       .catch((err) => {
-        window.console.log(err);
+        this.props.alert.error("Ошибка сервера");
       });
   }
 
@@ -47,4 +48,4 @@ class AcceptedOrganizations extends React.Component {
   }
 }
 
-export default withRouter(AcceptedOrganizations);
+export default withRouter(withAlert(AcceptedOrganizations));

@@ -34,7 +34,8 @@ class EducationWayPeopleList extends Component {
             person.address = [
                 person.location.region,
                 person.location.district,
-                person.location.city
+                person.location.city,
+                person.location.subdistrict
             ]
                 .filter(p => p)
                 .join(', ');

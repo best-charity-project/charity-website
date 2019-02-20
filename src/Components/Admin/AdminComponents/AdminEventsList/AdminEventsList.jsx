@@ -5,6 +5,7 @@ import { server } from '../../../../api';
 import {withRouter} from "react-router-dom";
 import axios from 'axios';
 import jsonpAdapter from 'axios-jsonp';
+import { withAlert } from 'react-alert';
 
 class AdminEventsList extends Component {
     state = {    
@@ -43,9 +44,10 @@ class AdminEventsList extends Component {
         })
         .then((result) => {
             this.setState({            
-                events : this.state.events.filter(item => item._id !== result.data.news._id)
-            }) 
+                events: this.state.events.filter(item => item._id !== result.data.news._id)
+            })
         })
+        .catch(err => this.props.alert.error('Ошибка сервера'))
         this.deletePostVK(event);
       };
     deletePostVK = (event) => {
@@ -72,4 +74,4 @@ class AdminEventsList extends Component {
         })        
     }
     }
-export default withRouter(AdminEventsList);
+export default withRouter(withAlert(AdminEventsList));

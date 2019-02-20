@@ -7,6 +7,7 @@ import { Route } from 'react-router-dom';
 import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import rubbishImg from '../../../../Assets/AssetsSvg/mbri-trash.svg';
+import { withAlert } from 'react-alert';
 
 class AdminLibraryContent extends Component {
     state = {
@@ -71,7 +72,7 @@ class AdminLibraryContent extends Component {
                 })
             })
             .catch(error => {
-                console.log(error);
+                this.props.alert.error('Ошибка сервера')
             });
     }
 
@@ -127,4 +128,4 @@ class AdminLibraryContent extends Component {
     }
 }
 
-export default AdminLibraryContent;
+export default withAlert(AdminLibraryContent);

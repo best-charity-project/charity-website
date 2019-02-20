@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { server } from '../../api';
 import _ from 'lodash';
-
+import { withAlert } from 'react-alert';
 import Button from '../Button/Button';
 
 class EduWayPeoples extends Component {
@@ -20,8 +20,8 @@ class EduWayPeoples extends Component {
           peoples: response.data.persons,
         });
       })
-      .catch(function(error) {
-        console.log(error);
+      .catch(error => {
+        this.props.alert.error("Ошибка сервера");
       });
   }
 
@@ -42,8 +42,8 @@ class EduWayPeoples extends Component {
         this.setState({peoples});
         this.forceUpdate();
       })
-      .catch(function(error) {
-        console.log(error);
+      .catch(error => {
+        this.props.alert.error("Ошибка сервера");
       });
   };
   deleteUser = id => {
@@ -61,8 +61,8 @@ class EduWayPeoples extends Component {
         array.splice(index, 1);
         this.setState({ peoples: array });
       })
-      .catch(function(error) {
-        console.log(error);
+      .catch(error => {
+        this.props.alert.error("Ошибка сервера");
       });
   };
 
@@ -95,7 +95,7 @@ class EduWayPeoples extends Component {
                   <span className="cell">{person.diagnosis}</span>
                   <span className="cell"> {person.contactPerson}</span>
                   <span className="cell"> {person.contacts.email} <br/> {person.contacts.phone}</span>
-                  <span className="cell"> {person.location.region} <br/> {person.location.district}<br/> {person.location.city}</span>
+                  <span className="cell"> {person.location.region} <br/> {person.location.district}<br/> {person.location.city}<br/> {person.location.subdistrict} </span>
                   <span className="cell"> {this.decorateYears(person)}</span>
                   <div className="cell">
                     <Button
@@ -119,4 +119,4 @@ class EduWayPeoples extends Component {
     );
   }
 }
-export default EduWayPeoples;
+export default withAlert(EduWayPeoples);

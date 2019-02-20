@@ -25,7 +25,6 @@ const PublicLayout = ({ component: Component, ...rest }) => {
 };
 
 const PrivateLayout = ({ component: Component, ...rest }) => {
-  console.log(...rest)
   return (
     <PrivateRoute
       {...rest}

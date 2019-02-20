@@ -18,11 +18,17 @@ const programs = [
   "Тяжелые нарушения речи",
   "Общеобразовательная программа",
   "Свой вариант",
-]
+];
+
+const steps = [
+  "Дошкольное образование",
+  "Среднее образование"
+];
 
 class EduListRegistration extends Component {
   state = {
     program: '',
+    step: '',
     customProgram: "",
     contactPerson: '',
     contacts: {
@@ -32,12 +38,14 @@ class EduListRegistration extends Component {
     location: {
       region: '',
       district: '',
-      city: ''
+      city: '',
+      subdistrict: ''
     },
     yearStart: '',
     yearEnd: '',
     districtArray: [],
-    cityArray: []
+    cityArray: [],
+    subdistrictArray: []
   };
 
   getContactPerson = (e) => {
@@ -46,6 +54,10 @@ class EduListRegistration extends Component {
 
   onProgramChange = (program) => {
     this.setState({ program });
+  };
+
+  onStepChange = (step) => {
+    this.setState({ step });
   };
 
   onCustomProgramChange = (e) => {
@@ -115,13 +127,30 @@ class EduListRegistration extends Component {
         ...this.state.location,
         city: str
       }
-    });
+    }, () => {
+      const city = this.state.cityArray.find(city => city.name === str);
+      let subdistrictArray;
+      (city && city.subdistricts) ? subdistrictArray = city.subdistricts : subdistrictArray = [];
+      this.setState({
+        subdistrictArray
+      })
+    })
+  }
+
+  onSubdistrictChange = (str) => {
+    this.setState({
+      location: {
+        ...this.state.location,
+        subdistrict: str
+      }
+    })
   }
 
   onCancel = (e) => {
     e.preventDefault();
     this.setState({
       program: '',
+      step: '',
       customProgram: "",
       contactPerson: '',
       contacts: {
@@ -131,7 +160,8 @@ class EduListRegistration extends Component {
       location: {
         region: '',
         district: '',
-        city: ''
+        city: '',
+        subdistrict: ''
       },
       yearStart: '',
       yearEnd: ""
@@ -144,11 +174,11 @@ class EduListRegistration extends Component {
   onPublish = (e) => {
     const body = this.state;
     body.diagnosis = this.state.program === "Свой вариант" ? this.state.customProgram : this.state.program;
-    if(
+    if (
       !body.diagnosis ||
+      !body.step ||
       !body.contactPerson ||
       !body.contacts.email ||
-      !body.contacts.phone ||
       !body.location.region ||
       !body.location.district ||
       !body.location.city ||
@@ -163,6 +193,7 @@ class EduListRegistration extends Component {
       .then(respose => {
         this.setState({
           program: '',
+          step: '',
           customProgram: "",
           contactPerson: '',
           contacts: {
@@ -172,7 +203,8 @@ class EduListRegistration extends Component {
           location: {
             region: '',
             district: '',
-            city: ''
+            city: '',
+            subdistrict: ''
           },
           yearStart: '',
           yearEnd: ""
@@ -201,7 +233,7 @@ class EduListRegistration extends Component {
   }
 
   render() {
-    const { districtArray, cityArray } = this.state;
+    const { districtArray, cityArray, subdistrictArray } = this.state;
 
     return (
       <div className="edulist-registration-wrapper">
@@ -216,6 +248,19 @@ class EduListRegistration extends Component {
             >
               {
                 map(programs, item => {
+                  return <Option key={item} value={item}>{item}</Option>
+                })
+              }
+            </Select>
+            <Select
+              onChange={this.onStepChange}
+              placeholder="Ступень образования*"
+              className="place-type-select-edulist"
+              notFoundContent="Ступень не найдена"
+              optionLabelProp="children"
+            >
+              {
+                map(steps, item => {
                   return <Option key={item} value={item}>{item}</Option>
                 })
               }
@@ -239,7 +284,7 @@ class EduListRegistration extends Component {
             />
             <InputMask
               required
-              placeholder="Телефон*"
+              placeholder="Телефон"
               mask="+375 (99) 999-99-99"
               onChange={this.getPhone}
               name="edulist-registration-phone"
@@ -289,10 +334,24 @@ class EduListRegistration extends Component {
               >
                 {
                   map(cityArray, (item, id) => {
-                    return <Option key={id} value={item}>{item}</Option>
+                    return <Option key={id} value={item.name || item}>{item.name || item}</Option>
                   })
                 }
               </Select>
+              {subdistrictArray.length ? <Select
+                onChange={this.onSubdistrictChange}
+                placeholder="Район города"
+                className="place-type-select-edulist"
+                notFoundContent="Район города не найден"
+                optionLabelProp="children"
+                dropdownMenuStyle={{ maxHeight: 400 }}
+              >
+                {
+                  map(subdistrictArray, (item, id) => {
+                    return <Option key={id} value={item}>{item}</Option>
+                  })
+                }
+              </Select> : null}
               <label className="place-type">Предполагаемые годы зачисления в учреждение:</label>
               <div className="years-container">
                 {"c*"}<YearPicker onChange={this.getYearStart} />

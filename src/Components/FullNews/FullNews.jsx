@@ -3,7 +3,7 @@ import { Editor, EditorState, convertFromRaw } from "draft-js";
 import moment from "moment";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
-
+import { withAlert } from 'react-alert';
 import customRendererFn from "../Admin/AdminComponents/AdminEditor/Renderer";
 import "../News/News.css";
 import { server } from "../../../src/api";
@@ -69,9 +69,9 @@ class FullNews extends Component {
         });
       })
       .catch(error => {
-        console.log(error);
+        this.props.alert.error("Ошибка сервера");
       });
   };
 }
 
-export default FullNews;
+export default withAlert(FullNews);

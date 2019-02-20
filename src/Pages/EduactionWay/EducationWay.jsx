@@ -15,17 +15,26 @@ class EducationWay extends Component {
     selectedCoords: [],
     suggestionList: [],
     kindergartenArray: [],
-    allArray:[],
+    allArray: [],
     schoolArray: [],
     displayedStep: 1,
     isModalWindowShow: false,
     typeValue: '',
     symbolsCounter: 0,
+    size: null,
+    shift: null,
+    expertise: false,
+    transportation: false,
+    parking: false,
+    entrance: false,
+    wc: false,
+    elevator: false,
+    relaxRoom: false,
     pointDetails: {
       coords: [],
       location: '',
       type: '',
-      description: '',
+      description: ''
     },
   };
   constructor(props) {
@@ -34,8 +43,8 @@ class EducationWay extends Component {
     this.descRef = React.createRef();
   }
   async componentDidMount() {
-    const kindergartenData = {markers:[]};
-    const schoolData = {markers:[]};
+    const kindergartenData = { markers: [] };
+    const schoolData = { markers: [] };
 
     this.api = await ymaps.load();
     axios({
@@ -44,7 +53,7 @@ class EducationWay extends Component {
       config: { headers: { 'Content-Type': 'application/json; charset=UTF-8' } },
     })
       .then(response => {
-        response.data.markers.forEach((el,index) => {
+        response.data.markers.forEach((el, index) => {
           if (el.type === 'school') {
             schoolData.markers.push(el);
           }
@@ -60,8 +69,8 @@ class EducationWay extends Component {
           schoolArray: schoolData
         });
       })
-      .catch(function(error) {
-        console.log(error);
+      .catch(error => {
+        this.props.alert.error('Ошибка сервера')
       });
   }
 
@@ -85,7 +94,7 @@ class EducationWay extends Component {
           pointDetails: {
             ...prevState.pointDetails,
             coords: res.geoObjects.get(0).geometry.getCoordinates(),
-            location: location,
+            location: location
           },
         }));
       },
@@ -109,16 +118,26 @@ class EducationWay extends Component {
   }
 
   addingPoint = () => {
+    const { size, shift, expertise, transportation, parking, entrance, wc, elevator, relaxRoom } = this.state;
     this.setState(
       prevState => ({
         pointDetails: {
           ...prevState.pointDetails,
           type: this.state.typeValue,
           description: this.descRef.current.value,
+          size,
+          shift,
+          expertise,
+          transportation,
+          parking,
+          entrance,
+          wc,
+          elevator,
+          relaxRoom
         },
       }),
       () => {
-        if(!this.state.pointDetails.description || !this.state.pointDetails.type) return this.props.alert.error('Заполните все необходимые поля');
+        if (!this.state.pointDetails.type) return this.props.alert.error('Заполните все необходимые поля');
         axios({
           method: 'post',
           url: `${server}/api/eduway`,
@@ -132,9 +151,10 @@ class EducationWay extends Component {
         })
           .then(res => {
             this.hideAddPointModal();
+            this.props.alert.success('Учреждение добавлено')
           })
           .catch(err => {
-            this.props.alert.error("Ошибка базы данных");
+            this.props.alert.error("Ошибка сервера");
           });
       }
     );
@@ -179,9 +199,27 @@ class EducationWay extends Component {
 
   getCurrentText = (event) => {
     this.setState({
-        symbolsCounter: event.target.value.length
+      symbolsCounter: event.target.value.length
     });
-};
+  };
+
+  toggle(e, category) {
+    this.setState({
+      [category]: e.target.checked
+    })
+  }
+
+  changeShift(e) {
+    this.setState({
+      shift: Number(e.target.value)
+    })
+  }
+
+  changeSize(e) {
+    this.setState({
+      size: Number(e.target.value)
+    })
+  }
 
   render() {
     return (
@@ -199,7 +237,7 @@ class EducationWay extends Component {
         </ul>
         <Map coords={this.state.selectedCoords} />
         {this.state.isModalWindowShow ? (
-          <div>
+          <div className="modal-window-wrap">
             <div className="modal-window-overlay" />
             <div className="modal-window">
               <div className="modal-window-head" onClick={this.hideAddPointModal}>
@@ -216,49 +254,108 @@ class EducationWay extends Component {
                       <ul>
                         {this.state.suggestionList.length !== 0
                           ? this.state.suggestionList.map((item, index) => (
-                              <li className="search-result" key={index} onClick={this.getCoordinates}>
-                                {item.displayName}
-                              </li>
-                            ))
+                            <li className="search-result" key={index} onClick={this.getCoordinates}>
+                              {item.displayName}
+                            </li>
+                          ))
                           : null}
                       </ul>
                     </div>
                   </div>
                 ) : (
-                  <div className="second-step">
-                    <label className="place-type">
-                      Тип учереждения*
-                      <Select 
-                        value={this.state.typeValue}
-                        onChange={this.onChange}
-                        placeholder="Выберите:"
-                        className="place-type-select"
-                        notFoundContent="Адрес не найден"
-                        optionLabelProp="title"
-                      >
-                        <Option title="Школа" value="school">Школа</Option>
-                        <Option title="Сад" value="kindergarten">Сад</Option>
-                      </Select>
-                    </label>
-                    <label className="place-desc">
-                      Описание*
-                      <br/>
-                      <textarea
-                        cols="30"
-                        rows="10"
-                        ref={this.descRef}
-                        maxLength="100"
-                        onChange={this.getCurrentText}
+                    <div className="second-step">
+                      <label className="place-type">
+                        Тип учереждения*
+                      <Select
+                          value={this.state.typeValue}
+                          onChange={this.onChange}
+                          placeholder="Выберите:"
+                          className="place-type-select"
+                          notFoundContent="Адрес не найден"
+                          optionLabelProp="title"
+                        >
+                          <Option title="Школа" value="school">Школа</Option>
+                          <Option title="Сад" value="kindergarten">Сад</Option>
+                        </Select>
+                      </label>
+                      <label className="place-desc">
+                        Описание
+                      <br />
+                        <textarea
+                          cols="30"
+                          rows="10"
+                          ref={this.descRef}
+                          maxLength="100"
+                          onChange={this.getCurrentText}
+                        />
+                        <span>Количество оставшихся символов: <b>{100 - this.state.symbolsCounter}</b></span>
+                      </label>
+                      <h4 className="place-subtitle">Общая характеристика</h4>
+                      <label className="place-input">
+                        Наполняемость (количество мест)
+                        <input type="number" name="place-size" min={1} onChange={e => this.changeSize(e)} />
+                      </label>
+                      <label className="place-input">
+                        Режим работы(количество смен)
+                      <input type="number" name="place-shift" min={1} max={2} onChange={e => this.changeShift(e)} />
+                      </label>
+                      <label className="place-checkbox">
+                        <input type="checkbox"
+                          name='place-expertise'
+                          onChange={e => this.toggle(e, "expertise")}
+                        />
+                        Наличие опыта обучения детей с особыми образовательными потребностями
+                      </label>
+                      <label className="place-checkbox">
+                        <input type="checkbox"
+                          name='place-transportation'
+                          onChange={e => this.toggle(e, "transportation")}
+                        />
+                        Организован подвоз учеников с особыми потребностями
+                      </label>
+                      <h4 className="place-subtitle">Специальные условия</h4>
+                      <label className="place-checkbox">
+                        <input type="checkbox"
+                          name='place-parking'
+                          onChange={e => this.toggle(e, "parking")}
+                        />
+                        Парковка
+                      </label>
+                      <label className="place-checkbox">
+                        <input type="checkbox"
+                          name='place-entrance'
+                          onChange={e => this.toggle(e, "entrance")}
+                        />
+                        Оборудованный вход (пандус, подъемник)
+                      </label>
+                      <label className="place-checkbox">
+                        <input type="checkbox"
+                          name='place-wc'
+                          onChange={e => this.toggle(e, "wc")}
+                        />
+                        Туалет
+                      </label>
+                      <label className="place-checkbox">
+                        <input type="checkbox"
+                          name='place-elevator'
+                          onChange={e => this.toggle(e, "elevator")}
+                        />
+                        Лифт
+                      </label>
+                      <label className="place-checkbox">
+                        <input type="checkbox"
+                          name='place-relax'
+                          onChange={e => this.toggle(e, "relaxRoom")}
+                        />
+                        Комната психологической и сенсорной разгрузки
+                      </label>
+                      <Button
+                        name="button-add-marker"
+                        clickHandler={this.addingPoint}
+                        label="Отправить запрос на добавление"
                       />
-                      <span>Количество оставшихся символов: <b>{100-this.state.symbolsCounter}</b></span>
-                    </label>
-                    <Button 
-                      name="button-add-marker"
-                      clickHandler={this.addingPoint}
-                      label="Отправить запрос на добавление"
-                    />
-                  </div>
-                )}
+                    </div>
+                  )}
               </div>
             </div>
           </div>

@@ -7,6 +7,7 @@ import { Route } from 'react-router-dom';
 import Button from '../../../Button/Button';
 import axios from 'axios';
 import rubbishImg from '../../../../Assets/AssetsSvg/mbri-trash.svg';
+import { withAlert } from 'react-alert';
 
 class AdminProjectsContent extends Component {
     state = {
@@ -87,8 +88,8 @@ class AdminProjectsContent extends Component {
                 filteredProjects: this.state.filteredProjects.filter(item => item._id !== result.data.projects._id)
             })
         })
-        .catch(error=>{
-            console.log(error);
+        .catch(error => {
+            this.props.alert.error("Ошибка сервера");
         })    
     };
     checkId = (id) => {
@@ -116,7 +117,7 @@ class AdminProjectsContent extends Component {
             })
         })
         .catch(err=>{
-            console.log(err)
+            this.props.alert.error("Ошибка сервера");
         });
     }
     findProjects = (name) => {
@@ -139,4 +140,4 @@ class AdminProjectsContent extends Component {
     }
 }
 
-export default AdminProjectsContent;
+export default withAlert(AdminProjectsContent);
