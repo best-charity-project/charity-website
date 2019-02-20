@@ -4,6 +4,7 @@ import axios from "axios";
 import { server } from "../../../src/api";
 import "../FullNews/FullNews.css";
 import "./LibraryCard.css";
+import { withAlert } from 'react-alert';
 
 class LibraryCard extends Component {
     state = {
@@ -22,7 +23,7 @@ class LibraryCard extends Component {
                 });
             })
             .catch(error => {
-                console.log(error);
+                this.props.alert.error("Ошибка сервера");
             });
     };
 
@@ -59,4 +60,4 @@ class LibraryCard extends Component {
     }
 }
 
-export default LibraryCard;
+export default withAlert(LibraryCard);

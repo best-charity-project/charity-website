@@ -4,8 +4,9 @@ import { getEducation, deleteEducation, updateEducation } from '../../educationC
 import EducationRouteCard from './EducationRouteCard/EducationRouteCard';
 import cancelablePromise from '../../utils/cancelablePromise';
 import './CompletedEducationRouteForm.css';
+import { withAlert } from 'react-alert';
 
-export default class CompletedEducationRouteForm extends React.Component {
+class CompletedEducationRouteForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -49,7 +50,7 @@ export default class CompletedEducationRouteForm extends React.Component {
     this.cancelablePromise = cancelablePromise(getEducation(this.props.userId));
     this.cancelablePromise.promise.then(usersCards => this.setState({ usersCards }))
       .catch((err) => {
-        window.console.log(err);
+        this.props.alert.error("Ошибка сервера");
       });
   }
 
@@ -77,3 +78,5 @@ CompletedEducationRouteForm.propTypes = {
   userId: PropTypes.string.isRequired,
   showMessage: PropTypes.func.isRequired,
 };
+
+export default withAlert(CompletedEducationRouteForm);

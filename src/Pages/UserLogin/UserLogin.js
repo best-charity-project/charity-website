@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ToastrContainer, { ToastDanger } from 'react-toastr-basic'
-
+import { withAlert } from 'react-alert';
 import { server } from '../../api';
-
 import Button from '../../Components/Button/Button';
 import { signInUser, setToken } from '../../Components/Admin/Auth';
 import './UserLogin.css';
 
-export default class UserLogin extends Component {
+class UserLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,7 +74,7 @@ export default class UserLogin extends Component {
           this.props.history.push('/')
         : this.props.history.goBack();
       })
-      .catch(err => console.log(err));
+      .catch(err => this.props.alert.error('Ошибка сервера'));
   }
 
   handleSubmitRegistration = () => {
@@ -206,3 +205,5 @@ export default class UserLogin extends Component {
     );
   }
 }
+
+export default withAlert(UserLogin);

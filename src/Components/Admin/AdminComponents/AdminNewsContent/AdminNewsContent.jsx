@@ -11,6 +11,7 @@ import jsonpAdapter from 'axios-jsonp';
 import {confirmAlert} from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
 import rubbishImg from '../../../../Assets/AssetsSvg/mbri-trash.svg';
+import { withAlert } from 'react-alert';
 
 class AdminNewsContent extends Component {
     state = {
@@ -87,7 +88,7 @@ class AdminNewsContent extends Component {
             }) 
         })
         .catch((error) => {
-            console.log(error);
+            this.props.alert.error("Ошибка сервера");
         });
         this.deletePostVK(news);
     } 
@@ -141,8 +142,8 @@ class AdminNewsContent extends Component {
                 checkedIds: []
             }) 
         })
-        .catch(function (error) {
-            console.log(error);
+        .catch(error => {
+            this.props.alert.error("Ошибка сервера");
         });
         this.deleteChosenPostsVK();
         
@@ -182,4 +183,4 @@ class AdminNewsContent extends Component {
     };
 }
 
-export default AdminNewsContent;
+export default withAlert(AdminNewsContent);

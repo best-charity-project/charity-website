@@ -3,7 +3,7 @@ import axios from 'axios';
 import './EduWayMarkerList.css';
 import { server } from '../../api';
 import _ from 'lodash';
-
+import { withAlert } from 'react-alert';
 import Button from '../Button/Button';
 import AdminNewsSearch from '../Admin/AdminComponents/AdminNewsSearch/AdminNewsSearch';
 
@@ -25,8 +25,8 @@ class MarkersList extends Component {
           filteredMarkers: response.data.markers 
         });
       })
-      .catch(function(error) {
-        console.log(error);
+      .catch(error => {
+        this.props.alert.error("Ошибка сервера");
       });
   }
 
@@ -48,8 +48,8 @@ class MarkersList extends Component {
         this.setState({markers})
         this.forceUpdate();
       })
-      .catch(function(error) {
-        console.log(error);
+      .catch(error => {
+        this.props.alert.error("Ошибка сервера");
       });
   };
   deleteMarker = id => {
@@ -67,8 +67,8 @@ class MarkersList extends Component {
         array.splice(index, 1);
         this.setState({ markers: array });
       })
-      .catch(function(error) {
-        console.log(error);
+      .catch(error => {
+        this.props.alert.error("Ошибка сервера");
       });
   };
 
@@ -132,4 +132,4 @@ class MarkersList extends Component {
     );
   }
 }
-export default MarkersList;
+export default withAlert(MarkersList);

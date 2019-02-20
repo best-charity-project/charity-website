@@ -2,8 +2,9 @@ import React from 'react';
 import AdminNewsItem from './AdminNewsItem';
 import { getNews } from '../../newsCalls';
 import cancelablePromise from '../../utils/cancelablePromise';
+import { withAlert } from 'react-alert';
 
-export default class AdminNews extends React.Component {
+class AdminNews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +24,7 @@ export default class AdminNews extends React.Component {
   setNews() {
     this.cancelablePromise = cancelablePromise(getNews());
     this.cancelablePromise.promise.then(news => this.setState({ news })).catch((err) => {
-      window.console.log(err);
+      this.props.alert.error("Ошибка сервера");
     });
   }
 
@@ -42,3 +43,5 @@ export default class AdminNews extends React.Component {
     );
   }
 }
+
+export default withAlert(AdminNews);

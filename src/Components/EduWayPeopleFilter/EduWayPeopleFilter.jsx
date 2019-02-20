@@ -20,14 +20,14 @@ class EduWayPeopleFilter extends CharityForm {
       region: "",
       district: "",
       city: "",
-      microdistrict: "",
+      subdistrict: "",
       years: ""
     },
     names: [],
     regions: [],
     districts: [],
     cities: [],
-    microdistricts: [],
+    subdistricts: [],
     yearList: [],
     errors: {}
   };
@@ -39,14 +39,14 @@ class EduWayPeopleFilter extends CharityForm {
     region: Joi.string().allow(""),
     district: Joi.string().allow(""),
     city: Joi.string().allow(""),
-    microdistrict: Joi.string().allow(""),
+    subdistrict: Joi.string().allow(""),
     years: Joi.number()
       .integer()
       .allow("")
   };
 
-  locationTypeNames = ["region", "district", "city", "microdistrict"];
-  locationTypeListNames = ["regions", "districts", "cities", "microdistricts"];
+  locationTypeNames = ["region", "district", "city", "subdistrict"];
+  locationTypeListNames = ["regions", "districts", "cities", "subdistricts"];
 
   componentDidUpdate(prevProps) {
     if (this.props.data === prevProps.data) {
@@ -80,11 +80,11 @@ class EduWayPeopleFilter extends CharityForm {
       region: { name: obj.region },
       district: { name: obj.district },
       city: { name: obj.city },
-      microdistrict: { name: obj.microdistrict }
+      subdistrict: { name: obj.subdistrict }
     };
 
-    const { region, district, city, microdistrict } = newObj;
-    city.microdistricts = microdistrict.name ? [microdistrict] : [];
+    const { region, district, city, subdistrict } = newObj;
+    city.subdistricts = subdistrict.name ? [subdistrict] : [];
     district.cities = [city];
     region.districts = [district];
 
@@ -196,15 +196,14 @@ class EduWayPeopleFilter extends CharityForm {
         region,
         district,
         city,
-        microdistrict
+        subdistrict
       }
     } = this.state;
     const { data: peopleList } = this.props;
 
-    const result = peopleList.filter((value, index) => {
-      const valueYears = value.years.match(/\d\d\d\d/gi, "");
-      const yearStart = Number(valueYears[0]);
-      const yearEnd = valueYears[1] ? Number(valueYears[1]) : null;
+    const result = peopleList.filter(value => {
+      const yearStart = Number(value.yearStart);
+      const yearEnd = value.yearEnd ? Number(value.yearEnd) : null;
       const currentYear = years ? Number(years) : null;
       const yearFilter = yearEnd ? (currentYear <= yearEnd && currentYear >= yearStart) : (currentYear >= yearStart);
 
@@ -214,7 +213,7 @@ class EduWayPeopleFilter extends CharityForm {
         value.location.region.includes(region) &&
         value.location.district.includes(district) &&
         value.location.city.includes(city) &&
-        (value.location.microdistrict ? value.location.microdistrict.includes(microdistrict) : true) &&
+        value.location.subdistrict.includes(subdistrict) &&
         (currentYear ? yearFilter : true)
       );
     });
@@ -233,7 +232,7 @@ class EduWayPeopleFilter extends CharityForm {
       regions,
       districts,
       cities,
-      microdistricts,
+      subdistricts,
       yearList,
       data
     } = this.state;
@@ -247,10 +246,10 @@ class EduWayPeopleFilter extends CharityForm {
         {this.renderSelect("district", "Район", districts, !data.region)}
         {this.renderSelect("city", "Населенный пункт", cities, !data.district)}
         {this.renderSelect(
-          "microdistrict",
-          "Микрорайон",
-          microdistricts,
-          !data.city || !microdistricts.length
+          "subdistrict",
+          "Район города",
+          subdistricts,
+          !data.city || !subdistricts.length
         )}
         {this.renderSelect("years", "Годы поступления", yearList)}
 

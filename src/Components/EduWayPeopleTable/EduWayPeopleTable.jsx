@@ -25,7 +25,7 @@ class EduWayPeopleTable extends Component {
     {
       className: "address-column",
       propertyName: "address",
-      label: "Адрес (без дома и кв)"
+      label: "Адрес"
     },
     {
       className: "years-column",

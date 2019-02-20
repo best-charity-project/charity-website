@@ -4,7 +4,6 @@ import axios from "axios";
 import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import { ToastDanger } from "react-toastr-basic";
-
 import { server } from "../../../api";
 import AdminUploadImage from "../AdminComponents/AdminUploadImage/AdminUploadImage";
 import TextField from "../../TextField/TextField";
@@ -15,6 +14,8 @@ import AdminSelectSearch from "../../Admin/AdminComponents/AdminSelectSearch/Adm
 import jsonpAdapter from "axios-jsonp";
 import "./AdminAddNews.css";
 import AdminValidationWindow from "../AdminComponents/AdminValidationWindow/AdminValidationWindow";
+import { withAlert } from 'react-alert';
+import { vkToken, vkId } from '../../../Configs/vk';
 
 class AdminAddNews extends Component {
   state = {
@@ -421,9 +422,7 @@ class AdminAddNews extends Component {
           pathname: "/admin-panel/news"
         });
       })
-      .catch(function(error) {
-        console.log(error);
-      });
+      .catch(error => this.props.alert.error('Ошибка сервера'));
   };
 
   deleteImage = () => {
@@ -473,31 +472,25 @@ class AdminAddNews extends Component {
     }
   };
   publishVk = () => {
-    let token =
-      "37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679";
-    let id = "-169499477";
     let text = this.getTextofPost();
     axios({
       method: "post",
       adapter: jsonpAdapter,
-      url: `https://api.vk.com/method/wall.post?owner_id=${id}&from_group=0&message=${text}&access_token=${token}&v=5.80`
+      url: `https://api.vk.com/method/wall.post?owner_id=${vkId}&from_group=0&message=${text}&access_token=${vkToken}&v=5.80`
     }).then(res => {
       this.sendNews(res.data.response.post_id);
     });
   };
   updatePostVk = () => {
-    let token =
-      "37ad70cb0eaf87ba4a7c79f6ade8668740959edbe1f09250664e6ac748ea496a5a305b8efad4cfe29b679";
-    let id = "-169499477";
     let text = this.getTextofPost();
     axios({
       method: "get",
       adapter: jsonpAdapter,
-      url: `https://api.vk.com/method/wall.edit?owner_id=${id}&post_id=${
+      url: `https://api.vk.com/method/wall.edit?owner_id=${vkId}&post_id=${
         this.state.idVK
-      }&message=${text}&access_token=${token}&v=5.80`
+      }&message=${text}&access_token=${vkToken}&v=5.80`
     });
   };
 }
 
-export default withRouter(AdminAddNews);
+export default withRouter(withAlert(AdminAddNews));

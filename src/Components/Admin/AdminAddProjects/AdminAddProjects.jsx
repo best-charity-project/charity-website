@@ -13,6 +13,7 @@ import Button from "../../Button/Button";
 import AdminProjectPreview from "../AdminComponents/AdminProjectPreview/AdminProjectPreview";
 import AdminSelectSearch from "../../Admin/AdminComponents/AdminSelectSearch/AdminSelectSearch";
 import AdminValidationWindow from "../AdminComponents/AdminValidationWindow/AdminValidationWindow";
+import { withAlert } from 'react-alert';
 
 import "./AdminAddProjects.css";
 import { server } from "../../../api";
@@ -782,9 +783,9 @@ class AdminAddProjects extends Component {
           pathname: "/admin-panel/projects"
         });
       })
-      .catch(function(error) {
-        console.log(error);
-      });
+      .catch(error => 
+        this.props.alert.error('Ошибка сервера')
+      );
   };
   deleteImage = () => {
     this.setState({
@@ -813,4 +814,4 @@ class AdminAddProjects extends Component {
     e.target.value = null;
   };
 }
-export default withRouter(AdminAddProjects);
+export default withRouter(withAlert(AdminAddProjects));

@@ -5,6 +5,7 @@ import PendingItem from './PendingItem';
 import cancelablePromise from '../../../utils/cancelablePromise';
 import './PendingOrganizations.css';
 import '../../Tabs/Tabs.css';
+import { withAlert } from 'react-alert';
 
 class PendingOrganizations extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class PendingOrganizations extends React.Component {
     this.cancelablePromise.promise
       .then(pendingItems => this.setState({ pendingItems }))
       .catch((err) => {
-        window.console.log(err);
+        this.props.alert.error("Ошибка сервера");
       });
   }
 
@@ -49,4 +50,4 @@ class PendingOrganizations extends React.Component {
   }
 }
 
-export default withRouter(PendingOrganizations);
+export default withRouter(withAlert(PendingOrganizations));
