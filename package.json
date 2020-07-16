@@ -37,7 +37,7 @@
     "jest": "20.0.4",
     "joi-browser": "^13.4.0",
     "jwt-decode": "^2.2.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.19",
     "moment": "^2.22.1",
     "moment-timezone": "^0.5.20",
     "object-assign": "4.1.1",
